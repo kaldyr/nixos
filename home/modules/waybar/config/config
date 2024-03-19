@@ -1,0 +1,98 @@
+// vim:ft=jsonc
+
+{
+    "layer": "top",
+    "position": "top",
+    // "mode": "dock",
+    "exclusive": false,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "height": 24,
+    "modules-center": [
+        "hyprland/workspaces",
+        "temperature",
+        "battery",
+        "pulseaudio#output",
+        "pulseaudio#input",
+        "clock",
+        "tray"
+    ],
+    "hyprland/window": {
+        "format": "{}"
+    },
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "all-outputs": true,
+        "sort-by-number": true,
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e-1",
+        "on-scroll-down": "hyprctl dispatch workspace e+1",
+        "format-icons": {
+            "urgent": "",
+            "active": "",
+            "default": ""
+        },
+    },
+
+    "temperature": {
+        "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+        "format": " ",
+        "critical-threshold": 75,
+    },
+
+    "battery": {
+        "format": "<span font='Font Awesome 5 Free 11'>{icon}</span>  ",
+        "tooltip-format": "{capacity}% - {time}",
+        "format-icons": [ "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹" ], 
+        "format-time": "{H}h {M}m",
+        "format-charging": "<span font='Font Awesome 5 Free'></span>  <span font='Font Awesome 5 Free 11'>{icon}</span>  ",
+        "interval": 30,
+        "states": {
+            "warning": 25,
+            "critical": 10
+        },
+        "tooltip": true,
+        "on-click": "2"
+    },
+
+    "pulseaudio#output": {
+        "format": "{volume}% {icon} ",
+        "format-muted": " ",
+        "on-click": "pamixer -t",
+        "on-click-right": "pavucontrol --tab=3",
+        "on-scroll-up": "pamixer -i 1",
+        "on-scroll-down": "pamixer -d 1",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        }
+    },
+
+    "pulseaudio#input": {
+        "format": "{format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": " ",
+        "tooltip": false,
+        "on-click": "pamixer --default-source -t",
+        "on-click-right": "pavucontrol --tab=4",
+        "on-scroll-up": "pamixer --default-source -i 1",
+        "on-scroll-down": "pamixer --default-source -d 1"
+    },
+
+    "clock": {
+        "format": "{:  %H:%M  %a, %b %e  }",
+        "tooltip-format": "<tt>{calendar}</tt>"
+    },
+
+    "tray": {
+        "icon-size": 14,
+        "spacing": 8,
+    },
+
+}
