@@ -2,13 +2,11 @@
 
     home = {
 
-        packages = [
-            inputs.neovim.packages.${pkgs.system}.default
-        ] ++ (with pkgs; [
+        packages = with pkgs; [
             lua-language-server
             marksman
             nil
-        ]);
+        ] ++ [ inputs.neovim.packages.${pkgs.system}.default ];
 
         sessionVariables.EDITOR = "nvim";
         sessionVariables.VISUAL = "nvim";
