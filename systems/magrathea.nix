@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: {
 
     imports = [
-        ./disko/magrathea.nix
+        # ./disko/magrathea.nix
         ./modules/kodi.nix
         # ./containers/nextcloud.nix
     ];

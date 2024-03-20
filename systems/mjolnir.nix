@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: {
 
     imports = [
-        ./disko/mjolnir.nix
+        # ./disko/mjolnir.nix
         ./modules/desktop.nix
         ./modules/plymouth.nix
         ./modules/steam.nix

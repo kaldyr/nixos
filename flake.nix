@@ -131,7 +131,7 @@
             "mjolnir" = let
                 sysConfig = {
                     arch = "x86_64-linux";
-                    hostname = "magrathea";
+                    hostname = "mjolnir";
                     instalVersion = "23.05"; # Update this only on a fresh format/install
                     user = "matt";
                     extraHomeModules = [

@@ -86,7 +86,8 @@
     },
 
     "clock": {
-        "format": "{:  %H:%M  %a, %b %e  }",
+        "timezone": "America/Los_Angeles",
+        "format": "  {:%H:%M - %a, %b %e} 󰸗",
         "tooltip-format": "<tt>{calendar}</tt>"
     },
 
