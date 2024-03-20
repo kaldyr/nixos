@@ -6,10 +6,12 @@
 
         enableFishIntegration = true;
 
-        # keymap.manager.keymap = [
-        #     { on = [ "<C-j>" ]; exec = "peek 5"; desc = "Peek down 5 units in the preview"; }
-        #     { on = [ "<C-k>" ]; exec = "peek -5"; desc = "Peek up 5 units in the preview"; }
-        # ];
+        keymap = {
+            manager.prepend_keymap = [
+                { on = [ "<C-j>" ]; exec = "peek 5"; desc = "Peek down 5 units in the preview"; }
+                { on = [ "<C-k>" ]; exec = "peek -5"; desc = "Peek up 5 units in the preview"; }
+            ];
+        };
 
         settings = {
 

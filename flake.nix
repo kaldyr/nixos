@@ -3,7 +3,7 @@
     inputs = {
 
         # Set nixpkgs to NixOS Unstable
-        nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+        nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
         # Disko - Declarative partition management
         disko.url = "github:nix-community/disko";
