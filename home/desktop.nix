@@ -1,9 +1,9 @@
 { pkgs, ... }: {
 
     imports = [
-        ./modules/cava.nix
-        ./modules/mpv.nix
-        ./modules/zathura.nix
+        ./programs/cava.nix
+        ./programs/mpv.nix
+        ./programs/zathura.nix
     ];
 
     fonts.fontconfig.enable = true;

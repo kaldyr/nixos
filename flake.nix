@@ -77,7 +77,6 @@
             #         instalVersion = ""; # Update this only on a fresh format/install
             #         user = "matshkas";
             #         extraHomeModules = [
-            #             ./home/desktop.nix
             #             ./home/budgie.nix
             #         ];
             #     };
@@ -91,11 +90,10 @@
                     instalVersion = "24.05"; # Update this only on a fresh format/install
                     user = "matt";
                     extraHomeModules = [
-                        ./home/desktop.nix
                         ./home/hyprland.nix
-                        ./home/modules/firefox.nix
-                        ./home/modules/librewolf.nix
-                        ./home/modules/mpd.nix
+                        ./home/programs/firefox.nix
+                        ./home/programs/librewolf.nix
+                        ./home/programs/mpd.nix
                     ];
                 };
             in buildSystem ( sysConfig );
@@ -108,9 +106,8 @@
                     instalVersion = "24.05"; # Update this only on a fresh format/install
                     user = "nixos";
                     extraHomeModules = [
-                        ./home/desktop.nix
                         ./home/hyprland.nix
-                        ./home/modules/librewolf.nix
+                        ./home/programs/librewolf.nix
                     ];
                 };
             in buildSystem ( sysConfig );
@@ -135,11 +132,10 @@
                     instalVersion = "23.05"; # Update this only on a fresh format/install
                     user = "matt";
                     extraHomeModules = [
-                        ./home/desktop.nix
                         ./home/hyprland.nix
-                        ./home/modules/firefox.nix
-                        ./home/modules/librewolf.nix
-                        ./home/modules/mpd.nix
+                        ./home/programs/firefox.nix
+                        ./home/programs/librewolf.nix
+                        ./home/programs/mpd.nix
                     ];
                 };
             in buildSystem ( sysConfig );
@@ -152,7 +148,6 @@
             #         instalVersion = ""; # Update this only on a fresh format/install
             #         user = "matshkas";
             #         extraHomeModules = [
-            #             ./home/desktop.nix
             #             ./home/budgie.nix
             #         ];
             #     };

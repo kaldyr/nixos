@@ -2,7 +2,7 @@
 
     imports = [
         # ./disko/magrathea.nix
-        ./modules/kodi.nix
+        ./modules/programs/kodi.nix
         # ./containers/nextcloud.nix
     ];
 

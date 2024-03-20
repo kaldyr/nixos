@@ -3,8 +3,8 @@
     imports = [
         ./disko/hofud.nix
         ./modules/desktop.nix
-        ./modules/plymouth.nix
-        ./modules/steam.nix
+        ./modules/programs/plymouth.nix
+        ./modules/programs/steam.nix
     ];
 
     boot = {

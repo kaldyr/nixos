@@ -1,14 +1,15 @@
 { pkgs, ... }: {
 
     imports = [
-        ./modules/dunst.nix
-        ./modules/feh.nix
-        ./modules/foot.nix
-        ./modules/fuzzel.nix
-        ./modules/gammastep.nix
-        ./modules/swappy.nix
-        ./modules/udiskie.nix
-        ./modules/waybar
+        ./desktop.nix
+        ./programs/dunst.nix
+        ./programs/feh.nix
+        ./programs/foot.nix
+        ./programs/fuzzel.nix
+        ./programs/gammastep.nix
+        ./programs/swappy.nix
+        ./programs/udiskie.nix
+        ./programs/waybar.nix
     ];
 
     home.packages = with pkgs; [

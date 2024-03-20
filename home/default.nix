@@ -1,18 +1,18 @@
 { pkgs, ... }: {
 
     imports = [
-        ./modules/bat.nix
-        ./modules/btop.nix
-        ./modules/eza.nix
-        ./modules/fish.nix
-        ./modules/fzf.nix
-        ./modules/git.nix
-        ./modules/lazygit.nix
-        ./modules/neovim.nix
-        ./modules/starship.nix
-        ./modules/yazi.nix
-        ./modules/zellij.nix
-        ./modules/zoxide.nix
+        ./programs/bat.nix
+        ./programs/btop.nix
+        ./programs/eza.nix
+        ./programs/fish.nix
+        ./programs/fzf.nix
+        ./programs/git.nix
+        ./programs/lazygit.nix
+        ./programs/neovim.nix
+        ./programs/starship.nix
+        ./programs/yazi.nix
+        ./programs/zellij.nix
+        ./programs/zoxide.nix
     ];
 
     home.packages = with pkgs; [
