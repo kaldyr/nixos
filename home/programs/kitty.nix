@@ -2,13 +2,10 @@
 
     programs.kitty = {
         enable = true;
-        font.name = "InteoneMono Nerd Font";
+        font.name = "IntoneMono NFM";
         font.size = 9;
+        shellIntegration.enableFishIntegration = true;
         theme = "Catppuccin-Frappe";
-        extraConfig = ''
-            italic_font IntoneMono Nerd Font Italic
-            bold_italic_font IntoneMono Nerd Font Bold Italic
-        '';
     };
 
 }
