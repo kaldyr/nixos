@@ -26,10 +26,11 @@
 
             grub = {
                 enable = true;
+                default = 2;
                 device = "nodev";
                 efiInstallAsRemovable = true;
                 efiSupport = true;
-                gfxmodeEfi = "3440x1440,1920x1200,1920x1080";
+                gfxmodeEfi = "1920x1200,1920x1080";
                 theme = pkgs.fetchFromGitHub {
                     owner = "catppuccin";
                     repo = "grub";
