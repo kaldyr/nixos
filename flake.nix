@@ -3,7 +3,7 @@
     inputs = {
 
         # Set nixpkgs to NixOS Unstable
-        nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+        nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
         # Disko - Declarative partition management
         disko.url = "github:nix-community/disko";
@@ -28,12 +28,17 @@
 
         nixosConfigurations = let 
 
+            overlays = import ./overlays;
+
             buildSystem = sysConfig: nixpkgs.lib.nixosSystem {
 
                 system = sysConfig.arch;
                 specialArgs = { inherit inputs sysConfig; };
 
                 modules = [
+
+                    # Load overlays
+                    { nixpkgs.overlays = [ overlays.modifications ]; }
 
                     # Load in Modules from Libraries
                     disko.nixosModules.disko
@@ -91,7 +96,6 @@
                     user = "matt";
                     extraHomeModules = [
                         ./home/hyprland.nix
-                        ./home/programs/firefox.nix
                         ./home/programs/librewolf.nix
                         ./home/programs/mpd.nix
                     ];
@@ -133,7 +137,6 @@
                     user = "matt";
                     extraHomeModules = [
                         ./home/hyprland.nix
-                        ./home/programs/firefox.nix
                         ./home/programs/librewolf.nix
                         ./home/programs/mpd.nix
                     ];
@@ -153,7 +156,7 @@
             #     };
             # in buildSystem ( sysConfig );
 
-            # Serenity: Ryzen 5 2500g Kodi with media storage and off-site backup of snapshots
+            # Serenity: Ryzen 5 2400g Kodi with media storage and off-site backup of snapshots
             # "serenity" = let
             #     sysConfig = {
             #         arch = "x86_64-linux";

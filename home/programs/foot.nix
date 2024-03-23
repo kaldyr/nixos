@@ -37,7 +37,7 @@
 
             main = {
                 box-drawings-uses-font-glyphs = "yes";
-                font = "IntoneMono Nerd Font:size=9";
+                font = "IntoneMono Nerd Font:size=9, Noto Color Emoji:size=9, Symbols Nerd Font:size=9";
                 font-bold = "IntoneMono Nerd Font:size=9:style=Bold";
                 font-italic = "IntoneMono Nerd Font:size=9:style=Italic";
                 font-bold-italic = "IntoneMono Nerd Font:size=9:style=Bold Italic";

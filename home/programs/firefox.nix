@@ -88,9 +88,6 @@
                 # Disable DRM content
                 "media.eme.enabled" = false;
 
-                # Hide the tab bar
-                # "browser.tabs.tabmanager.enabled" = false;
-
                 # Remove the full screen warning
                 "full-screen-api.warning.timeout" = 0;
 

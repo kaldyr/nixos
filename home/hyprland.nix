@@ -154,7 +154,7 @@
                     new_optimizations = true;
                     noise = 0.03;
                     passes = 3;
-                    size = 8;
+                    size = 12;
                     xray = true;
                 };
 
@@ -198,9 +198,9 @@
                 "blur, notifications"
                 "blur, launcher"
                 "blur, overlay"
-                "ignorealpha 0.8, notifications"
-                "ignorealpha 0.8, launcher"
-                "ignorealpha 0.8, overlay"
+                "ignorealpha 0.90, notifications"
+                "ignorealpha 0.90, launcher"
+                "ignorealpha 0.90, overlay"
             ];
 
             misc = {
@@ -214,14 +214,15 @@
             ];
 
             windowrulev2 = [
-                "opacity 0.8 override 0.8 override, class:($terminal)$"
-                "opacity 0.8 override 0.8 override, class:firefox"
-                "opacity 0.8 override 0.8 override, class:org.telegram.desktop"
-                "opacity 0.8 override 0.8 override, class:discord"
-                "opacity 0.8 override 0.8 override, class:steam$"
+                "opacity 0.90 override 0.90 override, class:($terminal)$"
+                "opacity 0.90 override 0.90 override, class:librewolf"
+                "opacity 0.90 override 0.90 override, class:org.telegram.desktop"
+                "opacity 0.90 override 0.90 override, class:discord"
+                "opacity 0.90 override 0.90 override, class:steam$"
                 "noshadow, class:steam_app_"
                 "noblur, class:steam_app_"
                 "noborder, class:steam_app_"
+                "pseudo, class:($terminal)$"
                 "pseudo, class:(mpv)"
                 "pseudo, class:(feh)"
             ];
@@ -242,12 +243,12 @@
         } + "/themes/frappe.conf";
 
         mimeApps.defaultApplications = {
-            "default-web-browser" = [ "firefox.desktop" ];
-            "text/html" = [ "firefox.desktop" ];
-            "x-scheme-handler/ftp" = [ "firefox.desktop" ];
-            "x-scheme-handler/http" = [ "firefox.desktop" ];
-            "x-scheme-handler/https" = [ "firefox.desktop" ];
-            "application/md" = [ "firefox.desktop" ];
+            "default-web-browser" = [ "librewolf.desktop" ];
+            "text/html" = [ "librewolf.desktop" ];
+            "x-scheme-handler/ftp" = [ "librewolf.desktop" ];
+            "x-scheme-handler/http" = [ "librewolf.desktop" ];
+            "x-scheme-handler/https" = [ "librewolf.desktop" ];
+            "application/md" = [ "librewolf.desktop" ];
             "application/pdf" = [ "org.pwmt.zathura.desktop" ];
             "application/image" = [ "feh.desktop" ];
             "application/video" = [ "mpv.desktop" ];

@@ -1,13 +1,14 @@
 # Todo list for the nix config
 
 ## Basic Changes
+- Go all in on Librewolf
+- Browser Profile sync to RAM
 - Syncthing
 - Move all "FetchFromGithub" to flake inputs?
+- Convert theming to nix-colors
 - Add in hyprlock / hypridle
 - Get nextcloud running on Magrathea
 - Samba Server on Magrathea
-- Browser Profile sync to RAM
-- Convert theming to nix-colors
 - Toggle laptop keyboard on Air60 (dis)connect
 
 ## Things to look into
