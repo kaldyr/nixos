@@ -38,7 +38,7 @@
                 modules = [
 
                     # Load overlays
-                    { nixpkgs.overlays = [ overlays.modifications ]; }
+                    { nixpkgs.overlays = [ overlays.fixes ]; }
 
                     # Load in Modules from Libraries
                     disko.nixosModules.disko
@@ -116,7 +116,6 @@
                 };
             in buildSystem ( sysConfig );
                 
-
             # Magrathea: Intel i5-2500k Nextcloud server with Kodi and media storage
             "magrathea" = let
                 sysConfig = {

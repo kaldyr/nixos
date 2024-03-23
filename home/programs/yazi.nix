@@ -8,8 +8,8 @@
 
         keymap = {
             manager.prepend_keymap = [
-                { on = [ "<C-k>" ]; exec = "seek -5"; desc = "Seek up 5 units in the preview"; }
-                { on = [ "<C-j>" ]; exec = "seek 5"; desc = "Seek down 5 units in the preview"; }
+                { on = [ "<C-k>" ]; run = "seek -5"; desc = "Seek up 5 units in the preview"; }
+                { on = [ "<C-j>" ]; run = "seek 5"; desc = "Seek down 5 units in the preview"; }
             ];
         };
 

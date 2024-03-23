@@ -1,7 +1,9 @@
 {
 
-    modifications = final: prev: {
+    fixes = final: prev: {
 
+        # Catppuccin-gtk is failing to build right now, this overlay gets the correct version of python
+        # Remove when cattpuccin-gtk is updated to use the latest python version
         pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [ (
 
             python-final: python-prev: {
