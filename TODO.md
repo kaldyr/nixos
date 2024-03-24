@@ -2,6 +2,7 @@
 
 ## Basic Changes
 - Go all in on Librewolf
+- Fix media keys in hyprland
 - Browser Profile sync to RAM
 - Syncthing
 - Move all "FetchFromGithub" to flake inputs?
