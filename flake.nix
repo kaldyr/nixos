@@ -75,17 +75,18 @@
         in {
 
             # Espresso: Ryzen 5700g Desktop
-            # "espresso" = let
-            #     sysConfig = {
-            #         arch = "x86_64-linux";
-            #         hostname = "espresso";
-            #         instalVersion = ""; # Update this only on a fresh format/install
-            #         user = "matshkas";
-            #         extraHomeModules = [
-            #             ./home/budgie.nix
-            #         ];
-            #     };
-            # in buildSystem ( sysConfig );
+            "espresso" = let
+                sysConfig = {
+                    arch = "x86_64-linux";
+                    hostname = "espresso";
+                    instalVersion = ""; # Update this only on a fresh format/install
+                    user = "matshkas";
+                    extraHomeModules = [
+                        ./home/budgie.nix
+                        ./home/librewolf.nix
+                    ];
+                };
+            in buildSystem ( sysConfig );
 
             # Hofud: Dell Inspiron 7425 Shared Laptop
             "hofud" = let
@@ -143,28 +144,29 @@
             in buildSystem ( sysConfig );
 
             # Oolong: Dell Inspiron (Get Model Number)
-            # "oolong" = let
-            #     sysConfig = {
-            #         arch = "x86_64-linux";
-            #         hostname = "oolong";
-            #         instalVersion = ""; # Update this only on a fresh format/install
-            #         user = "matshkas";
-            #         extraHomeModules = [
-            #             ./home/budgie.nix
-            #         ];
-            #     };
-            # in buildSystem ( sysConfig );
+            "oolong" = let
+                sysConfig = {
+                    arch = "x86_64-linux";
+                    hostname = "oolong";
+                    instalVersion = ""; # Update this only on a fresh format/install
+                    user = "matshkas";
+                    extraHomeModules = [
+                        ./home/budgie.nix
+                        ./home/librewolf.nix
+                    ];
+                };
+            in buildSystem ( sysConfig );
 
             # Serenity: Ryzen 5 2400g Kodi with media storage and off-site backup of snapshots
-            # "serenity" = let
-            #     sysConfig = {
-            #         arch = "x86_64-linux";
-            #         hostname = "serenity";
-            #         instalVersion = ""; # Update this only on a fresh format/install
-            #         user = "matt";
-            #         extraHomeModules = [ ];
-            #     };
-            # in buildSystem ( sysConfig );
+            "serenity" = let
+                sysConfig = {
+                    arch = "x86_64-linux";
+                    hostname = "serenity";
+                    instalVersion = ""; # Update this only on a fresh format/install
+                    user = "matt";
+                    extraHomeModules = [ ];
+                };
+            in buildSystem ( sysConfig );
 
         };
 

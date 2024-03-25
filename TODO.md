@@ -2,6 +2,7 @@
 
 ## Basic Changes
 - Go all in on Librewolf
+- Do a fresh install for mjolnir to incorporate disko
 - Fix media keys in hyprland
 - Browser Profile sync to RAM
 - Syncthing

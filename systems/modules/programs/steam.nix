@@ -1,9 +1,20 @@
 { pkgs, ... }: {
 
-    environment.systemPackages = with pkgs; [ SDL2 ];
+    hardware.opengl = {
 
-    hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
-    hardware.opengl.setLdLibraryPath = true;
+        extraPackages = with pkgs; [
+            amdvlk
+            SDL2
+        ];
+
+        extraPackages32 = with pkgs; [
+            driversi686Linux.amdvlk
+            pkgsi686Linux.libva
+        ];
+
+        setLdLibraryPath = true;
+
+    };
 
     programs = {
 
