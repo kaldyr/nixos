@@ -7,7 +7,7 @@
         settings = {
 
             colors = {
-                background = "303446cc";
+                background = "303446e6";
                 text = "c6d0f5ff";
                 match = "81c8beff";
                 selection = "626880ff";

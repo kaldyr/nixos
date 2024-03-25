@@ -25,8 +25,8 @@
         slurp
         swww
         tesseract
-        xdg-desktop-portal-hyprland
         wl-clipboard
+        xdg-desktop-portal-hyprland
     ];
 
     services.cliphist.enable = true;
@@ -194,14 +194,7 @@
                 touchpad.natural_scroll = "no";
             };
 
-            layerrule = [
-                "blur, notifications"
-                "blur, launcher"
-                "blur, overlay"
-                "ignorealpha 0.90, notifications"
-                "ignorealpha 0.90, launcher"
-                "ignorealpha 0.90, overlay"
-            ];
+            layerrule = [ "blur, launcher" ];
 
             misc = {
                 disable_hyprland_logo = "yes";
