@@ -1,6 +1,5 @@
 { ... }: {
 # Manual interventions required!!!
-# Disko cannot apply chattr settings
 # Disko cannot yet handle multiple device btrfs
 # The storage array should not be managed by Disko to preserve data
 # Read the comments in this file.
@@ -20,7 +19,7 @@
                     name = "ESP";
                     type = "EF00";
                     start = "1MiB";
-                    size = "256M";
+                    size = "512M";
                     content = {
                         type = "filesystem";
                         format = "vfat";
@@ -49,19 +48,8 @@
                             "@snaps" = { mountpoint = "/snaps"; mountOptions = driveOptions; };
                             # Swapfile
                             "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "8G"; };
-                            # ---
-                            # Subvolumes for managing the nextcloud container
-                            # Nextcloud - schedule snapshots
-                            "@nextcloud" = { mountpoint = "/srv/nextcloud"; mountOptions = driveOptions; };
-                            # Mysql
-                            # Databases should not be stored with CoW property
-                            # This will disable CoW, checksums, and compression for the database
-                            # Do not snapshot this subvolume!
-                            # Instead, setup cron job to mysqldump to @nextcloud for snapshots
-                            # For restoration, first restore @nextcloud from snapshot, then source the most recent backup.dump
-                            # After Disko does its thing, and before installing nixos, run the following:
-                            #   chattr +C /srv/nextcloud/mysql
-                            "@mysql" = { mountpoint = "/srv/nextcloud/mysql"; mountOptions = driveOptions; };
+                            # Syncthing storage
+                            "@sync" = { mountpoint = "/sync"; mountOptions = driveOptions; };
                         };
                     };
                 };
@@ -73,21 +61,26 @@
     };
 
     fileSystems = {
+
         "/" = {
             device = "none";
             fsType = "tmpfs";
             neededForBoot = true;
             options = [ "defaults" "size=1G" "mode=755" ];
         };
+
         "/etc/ssh".neededForBoot = true;
+
         "/home" = {
             device = "none";
             fsType = "tmpfs";
             neededForBoot = true;
             options = [ "defaults" "size=256M" "mode=755" ];
         };
+
         "/nix".neededForBoot = true;
         "/state".neededForBoot = true;
+
         # To manually create the raid array:
         #    mkfs.btrfs -m raid10 -d raid10 /dev/sdW /dev/sdX /dev/sdY /dev/sdZ
         #    mkdir -p /storage
@@ -97,16 +90,19 @@
         #    btrfs subvolume create @snaps
         #    cd ..
         #    umount /storage
+
         "/storage/media" = {
             device = ""; # Put the uuid of one of the disks in the array
             fsType = "btrfs";
             options = [ "subvol=@media" "noatime" "compress-force=zstd:8" ];
         };
+
         "/storage/snaps" = {
             device = ""; # Put the uuid of one of the disks in the array
             fsType = "btrfs";
             options = [ "subvol=@snaps" "noatime" "compress-force=zstd:8" ];
         };
+
     };
 
 }

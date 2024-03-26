@@ -9,7 +9,7 @@
 - Move all "FetchFromGithub" to flake inputs?
 - Convert theming to nix-colors
 - Add in hyprlock / hypridle
-- Get nextcloud running on Magrathea
+- Get radicale running on Magrathea
 - Samba Server on Magrathea
 - Toggle laptop keyboard on Air60 (dis)connect
 
@@ -19,9 +19,6 @@
 ## Disk layout
 
 ### Magrathea
-
-"nextcloud" : btrfs subvolume : /var/lib/nextcloud
-"mysql" : xfs partition : /var/lib/mysql
 
 raid10 subvolumes:
 "media": /media
@@ -33,6 +30,7 @@ btrfs raid10 array subvolume "media"
 - Books
 - Movies
 - Music
+- Sync
 - TVShows
 - Videos
 High Compression
