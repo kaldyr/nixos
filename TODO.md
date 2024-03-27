@@ -1,17 +1,18 @@
 # Todo list for the nix config
 
 ## Basic Changes
+- Syncthing
 - Go all in on Librewolf
+- Browser Profile sync to RAM
 - Do a fresh install for mjolnir to incorporate disko
 - Fix media keys in hyprland
-- Browser Profile sync to RAM
-- Syncthing
-- Move all "FetchFromGithub" to flake inputs?
-- Convert theming to nix-colors
 - Add in hyprlock / hypridle
+- Convert theming to nix-colors
 - Get radicale running on Magrathea
 - Samba Server on Magrathea
+- Move all "FetchFromGithub" to flake inputs?
 - Toggle laptop keyboard on Air60 (dis)connect
+- Nix-serve, hydra, binary cache
 
 ## Things to look into
 - Fnott Notifications
@@ -25,7 +26,7 @@ raid10 subvolumes:
 "snapshots": /media/snaps
 
 #### /media
-btrfs raid10 array subvolume "media"
+btrfs raid10 array subvolume "media" zstd:8
 - Audiobooks
 - Books
 - Movies
@@ -33,7 +34,6 @@ btrfs raid10 array subvolume "media"
 - Sync
 - TVShows
 - Videos
-High Compression
 
 #### /media/snapshots
 btrfs raid10 array subvolme "backups"

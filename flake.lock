@@ -63,11 +63,11 @@
         "plugin_yazi-nvim": "plugin_yazi-nvim"
       },
       "locked": {
-        "lastModified": 1711405050,
-        "narHash": "sha256-R2XXJrEVS82k5o1CquDFxB2ALdr2L1R9fFU4Gb9f6/M=",
+        "lastModified": 1711523197,
+        "narHash": "sha256-rC1Q8DmZQg+ISRQtfPDD8aKU8qWJs0FXD5GC7PzoCpc=",
         "owner": "kaldyr",
         "repo": "neovim",
-        "rev": "a761f3adf63db45dccaa0aca5f10496062e8bae6",
+        "rev": "cc70cedc3eeec239b62d6478320610e20293cae4",
         "type": "github"
       },
       "original": {
@@ -78,11 +78,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1711231723,
-        "narHash": "sha256-dARJQ8AJOv6U+sdRePkbcVyVbXJTi1tReCrkkOeusiA=",
+        "lastModified": 1711401922,
+        "narHash": "sha256-QoQqXoj8ClGo0sqD/qWKFWezgEwUL0SUh37/vY2jNhc=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e1d501922fd7351da4200e1275dfcf5faaad1220",
+        "rev": "07262b18b97000d16a4bdb003418bd2fb067a932",
         "type": "github"
       },
       "original": {
