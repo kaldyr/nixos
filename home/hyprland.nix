@@ -4,12 +4,13 @@
         ./desktop.nix
         ./programs/dunst.nix
         ./programs/feh.nix
-        ./programs/foot.nix
+        # ./programs/foot.nix
         ./programs/fuzzel.nix
         ./programs/gammastep.nix
         ./programs/swappy.nix
         ./programs/udiskie.nix
         ./programs/waybar.nix
+        ./programs/wezterm
     ];
 
     home.packages = with pkgs; [
@@ -38,7 +39,7 @@
 
         settings = {
             "$mainMod" = "SUPER";
-            "$terminal" = "foot";
+            "$terminal" = "wezterm";
 
             source = [ "~/.config/hypr/frappe.conf" ];
 
@@ -208,6 +209,7 @@
 
             windowrulev2 = [
                 "opacity 0.90 override 0.90 override, class:($terminal)$"
+                "opacity 0.90 override 0.90 override, class:(neovide)$"
                 "opacity 0.90 override 0.90 override, class:librewolf"
                 "opacity 0.90 override 0.90 override, class:org.telegram.desktop"
                 "opacity 0.90 override 0.90 override, class:discord"

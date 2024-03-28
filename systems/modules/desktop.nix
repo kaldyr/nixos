@@ -34,7 +34,6 @@
         opengl = {
             enable = true;
             driSupport = true;
-            driSupport32Bit = true;
             extraPackages = with pkgs; [
                 libdrm
                 libva
@@ -54,10 +53,9 @@
 
         greetd = {
             enable = true;
-            settings = {
-                default_session.command = "Hyprland 1>/dev/null";
-                default_session.user = sysConfig.user;
-                initial_session.command = "Hyprland 1>/dev/null";
+            settings = rec {
+                default_session = initial_session;
+                initial_session.command = "${pkgs.hyprland}/bin/Hyprland 1>/dev/null";
                 initial_session.user = sysConfig.user;
             };
         };
@@ -68,7 +66,6 @@
         pipewire = {
             enable = true;
             alsa.enable = true;
-            alsa.support32Bit = true;
             pulse.enable = true;
             wireplumber.enable = true;
         };

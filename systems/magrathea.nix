@@ -3,7 +3,6 @@
     imports = [
         # ./disko/magrathea.nix
         ./modules/programs/kodi.nix
-        # ./containers/nextcloud.nix
     ];
 
     boot = {

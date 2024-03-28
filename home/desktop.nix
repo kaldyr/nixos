@@ -51,6 +51,7 @@
             discord
             gimp
             libreoffice
+            neovide
             obsidian
             telegram-desktop
             yt-dlp

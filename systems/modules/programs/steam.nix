@@ -2,9 +2,11 @@
 
     hardware.opengl = {
 
+        driSupport32Bit = true;
+
         extraPackages = with pkgs; [
             amdvlk
-            SDL2
+            # SDL2
         ];
 
         extraPackages32 = with pkgs; [
@@ -27,5 +29,7 @@
         };
 
     };
+
+    services.pipewire.alsa.support32Bit = true;
 
 }

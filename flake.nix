@@ -88,6 +88,20 @@
                 };
             in buildSystem ( sysConfig );
 
+            # Gram: Dell Inspiron 3185
+            "gram" = let
+                sysConfig = {
+                    arch = "x86_64-linux";
+                    hostname = "gram";
+                    instalVersion = "24.05"; # Update this only on a fresh format/install
+                    user = "matt";
+                    extraHomeModules = [
+                        ./home/hyprland.nix
+                        ./home/programs/librewolf.nix
+                    ];
+                };
+            in buildSystem ( sysConfig );
+
             # Hofud: Dell Inspiron 7425 Shared Laptop
             "hofud" = let
                 sysConfig = {

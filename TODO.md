@@ -31,7 +31,6 @@ btrfs raid10 array subvolume "media" zstd:8
 - Books
 - Movies
 - Music
-- Sync
 - TVShows
 - Videos
 
@@ -53,10 +52,10 @@ Snapshot daily to magrathea-raid10
     - Phone
 
 ### Syncthing
-Saved on laptop, desktop, and magrathea-raid10
+
+#### Public Shares
 - ~/Books ==> magrathea:/media/Books
 - ~/Music ==> magrathea:/media/Music
-- ~/Videos/Saved ==> magrathea:/media/Videos
 
 ### Git
 Saved on laptop, desktop, magrathea-ssd, magrathea-raid10
