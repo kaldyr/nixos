@@ -39,16 +39,20 @@
 
     programs.fuse.userAllowOther = true;
     programs.nano.enable = false;
-    security.sudo.execWheelOnly = true;
-    security.sudo.extraConfig = ''
-        Defaults lecture = never
-    '';
+
+    security.sudo = {
+        execWheelOnly = true;
+        extraConfig = ''
+            Defaults lecture = never
+        '';
+    };
 
     services = {
 
         openssh = {
             enable = true;
             knownHosts = {
+                "garm".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJId64RiXTZvY0oHr75V2TFURT6Qg8D6mgTCGVr59B7l root@gram";
                 "hofud".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGYN+zwhYvBqGaKgxSPEVLj6KE2uGdbPUR1se1hN+1NG root@hofud";
                 "magrathea".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKymXBmxO/Yb9lFRyW+w1O3mZ7I6iLgnxW0kgI/4e1O3 root@magrathea";
                 "mjolnir".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEsWi8zGLMuMJM+2wawmRFEE6Qmnabq3kA4Rj3bLBBJ6 root@mjolnir";
