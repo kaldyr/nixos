@@ -10,7 +10,6 @@
 
         users.matt = {
 
-            createHome = false;
             description = "Matt";
             extraGroups = [ "wheel" "networkmanager" "video" ];
             hashedPasswordFile = config.sops.secrets.matt-password.path;

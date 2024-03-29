@@ -8,7 +8,6 @@
 
         users.nixos = {
 
-            createHome = true;
             description = "NixOS";
             extraGroups = [ "wheel" "networkmanager" "video" ];
             isNormalUser = true;

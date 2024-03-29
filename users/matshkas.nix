@@ -10,7 +10,6 @@
 
         users.matshkas = {
 
-            createHome = false;
             description = "Matshkas";
             extraGroups = [ "wheel" "networkmanager" "video" ];
             hashedPasswordFile = config.sops.secrets.matshkas-password.path;
