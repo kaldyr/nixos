@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, sysConfig, ... }: {
 
     imports = [
         # ./disko/mjolnir.nix
@@ -78,7 +78,7 @@
     };
 
     nixpkgs.config.allowUnfree = true;
-    networking.hostName = "mjolnir";
+    networking.hostName = sysConfig.hostname;
     time.timeZone = "America/Los_Angeles";
 
     services = {

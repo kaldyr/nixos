@@ -14,10 +14,9 @@
     ];
 
     hardware.pulseaudio.enable = lib.mkForce false;
-    networking.hostName = "installer";
+    networking.hostName = sysConfig.hostname;
     networking.wireless.enable = false;
     nixpkgs.config.allowUnfree = true;
     nixpkgs.hostPlatform = sysConfig.arch;
-
 
 }

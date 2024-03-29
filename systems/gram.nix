@@ -49,7 +49,7 @@
         enableAllFirmware = true;
     };
 
-    networking.hostName = "hofud";
+    networking.hostName = sysConfig.hostname;
     nixpkgs.config.allowUnfree = true;
     time.timeZone = "America/Los_Angeles";
 

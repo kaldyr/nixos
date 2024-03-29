@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, sysConfig, ... }: {
 
     imports = [
         # ./disko/magrathea.nix
@@ -61,18 +61,6 @@
             fsType = "btrfs";
             options = [ "subvol=nextcloud" "ssd" "compress-force=zstd:3" "space_cache=v2" ];
         };
-        # Create a new subvolume for mysql
-        # "/var/lib/mysql" = {
-        #   device = "/dev/disk/by-uuid/84f4315e-e003-4269-8565-bfbac7cf2c06";
-        #   fsType = "btrfs";
-        #   options = [ "subvol=mysql" "ssd" "compress-force=zstd:3" "space_cache=v2" ];
-        # };
-        # Create raid volume
-        # "/storage" = {
-        #    device = "/dev/disk/by-uuid/";
-        #    fsType = "btrfs";
-        #    options = [ ];
-        #  };
     };
 
     swapDevices = [ { # Change to UUID
@@ -86,7 +74,7 @@
     };
 
     nixpkgs.config.allowUnfree = true;
-    networking.hostName = "magrathea";
+    networking.hostName = sysConfig.hostname;
     time.timeZone = "America/Los_Angeles";
 
     services = {

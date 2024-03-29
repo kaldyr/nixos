@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, sysConfig, ... }: {
 
     imports = [ ../disko/serenity.nix ];
 
@@ -50,7 +50,7 @@
     };
 
     nixpkgs.config.allowUnfree = true;
-    networking.hostName = "serenity";
+    networking.hostName = sysConfig.hostname;
     time.timeZone = "America/Los_Angeles";
 
     services = {
