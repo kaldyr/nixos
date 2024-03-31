@@ -28,7 +28,7 @@
 
         nixosConfigurations = let 
 
-            overlays = import ./overlays;
+            overlays = import ./overlays.nix { inherit inputs; };
 
             buildSystem = sysConfig: nixpkgs.lib.nixosSystem {
 
