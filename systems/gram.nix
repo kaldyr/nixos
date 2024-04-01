@@ -1,6 +1,7 @@
 { config, lib, pkgs, sysConfig, ... }: {
 
     imports = [
+        ./default.nix
         ./disko/gram.nix
         ./modules/desktop.nix
     ];
@@ -42,6 +43,68 @@
     };
 
     environment.systemPackages = with pkgs; [ tailscale ];
+
+    # Split this off into default/desktop once testing is done
+    environment.persistence = {
+
+        # System files that aren't declarative and need to be preserved
+        # Snapshots will back up state
+        "/state/system" = {
+            directories = [
+                { directory = "/etc/NetworkManager/system-connections"; mode = "0700"; }
+                { directory = "/var/lib/bluetooth"; mode = "0700"; }
+                "/var/lib/nixos"
+                "/var/lib/systemd/coredump"
+                { directory = "/var/lib/tailscale"; mode = "0700"; }
+                "/var/log"
+            ];
+            files = [ "/etc/machine-id" ];
+        };
+
+        # Home files that aren't declarative and need to be preserved
+        # Snapshots will back up state
+        "/state" = {
+            hideMounts = true;
+            users.${sysConfig.user} = {
+                directories = [
+                    ".config/BetterDiscord"
+                    ".config/discord"
+                    ".config/fish"
+                    ".config/libreoffice"
+                    ".config/sops/age"
+                    { directory = ".config/obsidian"; mode = "0700"; }
+                    { directory = ".gnupg"; mode = "0700"; }
+                    ".local/share/applications"
+                    ".local/share/fish"
+                    { directory = ".local/share/keyrings"; mode = "0700"; }
+                    ".local/share/zoxide"
+                    ".local/state/nvim"
+                    { directory = ".librewolf"; mode = "0700"; }
+                    { directory = ".ssh"; mode = "0700"; }
+                ];
+            };
+        };
+
+        # Home files that need to be preserved between boots
+        #  These files do not need to be backed up
+        # Syncthing and Nextcloud handle the personal files
+        # Steam and Telegram can just re-download data on drive restore
+        "/nix" = {
+            hideMounts = true;
+            users.${sysConfig.user} = {
+                directories = [
+                    "Documents"
+                    "Downloads"
+                    "Music"
+                    "Notes"
+                    "Pictures"
+                    "Projects"
+                    ".local/share/TelegramDesktop"
+                ];
+            };
+        };
+
+    };
 
     hardware = {
         cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

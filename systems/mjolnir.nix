@@ -1,6 +1,7 @@
 { config, lib, pkgs, sysConfig, ... }: {
 
     imports = [
+        ./default.nix
         # ./disko/mjolnir.nix
         ./modules/desktop.nix
         ./modules/programs/plymouth.nix
@@ -12,6 +13,7 @@
         extraModprobeConfig = ''
             options iwlwifi bt_coex_active=0
         '';
+
         extraModulePackages = with pkgs; [ btrfs-progs ];
 
         initrd = {

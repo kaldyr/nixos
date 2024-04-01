@@ -1,6 +1,7 @@
 { lib, pkgs, modulesPath, sysConfig, ... }: {
 
     imports = [
+        ./default.nix
         "${modulesPath}/installer/cd-dvd/installation-cd-graphical-gnome.nix"
         ./modules/desktop.nix
     ];

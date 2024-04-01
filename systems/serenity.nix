@@ -1,6 +1,9 @@
 { config, lib, pkgs, sysConfig, ... }: {
 
-    imports = [ ../disko/serenity.nix ];
+    imports = [
+        ./default.nix
+        ../disko/serenity.nix
+    ];
 
     boot = {
 

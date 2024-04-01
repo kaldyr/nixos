@@ -1,6 +1,7 @@
 { config, lib, pkgs, sysConfig, ... }: {
 
     imports = [
+        ./default.nix
         # ./disko/magrathea.nix
         ./modules/programs/kodi.nix
     ];

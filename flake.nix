@@ -44,29 +44,27 @@
                     disko.nixosModules.disko
                     impermanence.nixosModules.impermanence
                     sops-nix.nixosModules.sops
+                    home-manager.nixosModules.home-manager
                     
                     # System configs
                     { system.stateVersion = sysConfig.instalVersion; }
-                    ./systems/default.nix               # Common to all machines
                     ./systems/${sysConfig.hostname}.nix # Specific for this machine
                     ./users/${sysConfig.user}.nix       # User definition
 
                     # Manage those user dots
-                    home-manager.nixosModules.home-manager {
-                        home-manager = {
-                            extraSpecialArgs = { inherit inputs sysConfig; };
-                            useGlobalPkgs = true;
-                            useUserPackages = true;
-                            users.${sysConfig.user} = {
-                                home = {
-                                    username = sysConfig.user;
-                                    homeDirectory = "/home/${sysConfig.user}";
-                                    stateVersion = sysConfig.instalVersion;
-                                };
-                                imports = [ ./home ] ++ sysConfig.extraHomeModules;
+                    { home-manager = {
+                        extraSpecialArgs = { inherit inputs sysConfig; };
+                        useGlobalPkgs = true;
+                        useUserPackages = true;
+                        users.${sysConfig.user} = {
+                            home = {
+                                username = sysConfig.user;
+                                homeDirectory = "/home/${sysConfig.user}";
+                                stateVersion = sysConfig.instalVersion;
                             };
+                            imports = [ ./home ] ++ sysConfig.extraHomeModules;
                         };
-                    }
+                    }; }
 
                 ];
 

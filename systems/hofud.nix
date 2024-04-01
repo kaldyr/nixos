@@ -1,6 +1,7 @@
 { config, lib, pkgs, sysConfig, ... }: {
 
     imports = [
+        ./default.nix
         ./disko/hofud.nix
         ./modules/desktop.nix
         ./modules/programs/plymouth.nix
@@ -77,7 +78,6 @@
                     ".config/discord"
                     ".config/fish"
                     ".config/libreoffice"
-                    ".config/Nextcloud"
                     ".config/sops/age"
                     { directory = ".config/obsidian"; mode = "0700"; }
                     { directory = ".gnupg"; mode = "0700"; }
@@ -85,9 +85,8 @@
                     ".local/share/fish"
                     { directory = ".local/share/keyrings"; mode = "0700"; }
                     ".local/share/zoxide"
-                    ".local/share/Nextcloud"
                     ".local/state/nvim"
-                    { directory = ".mozilla"; mode = "0700"; }
+                    { directory = ".librewolf"; mode = "0700"; }
                     { directory = ".ssh"; mode = "0700"; }
                 ];
             };
