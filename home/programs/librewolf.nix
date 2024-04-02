@@ -68,6 +68,7 @@
             "browser.startup.page" = 3;
             "extensions.unifiedExtensions.enabled" = false;
             "general.useragent.override" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.";
+            "identity.fxaccounts.enabled" = true;
             "media.ffmpeg.vaapi.enabled" = true;
             "network.cookie.lifetimePolicy" = 0;
             "privacy.clearOnShutdown.cookies" = false;
