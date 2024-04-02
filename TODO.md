@@ -40,22 +40,51 @@ btrfs raid10 array subvolme "backups"
 
 ## Syncing
 
-### Nextcloud
-Saved on laptop, desktop, magrathea-ssd
-Snapshot daily to magrathea-raid10
-- Documents
-- Notes
-- Pictures
-- Videos
-    - Canon
-    - Brightwheel
-    - Phone
-
 ### Syncthing
 
-#### Public Shares
-- ~/Books ==> magrathea:/media/Books
-- ~/Music ==> magrathea:/media/Music
+#### Phone <-> Magrathea
+Notes
+Pictures/Brightwheel
+Pictures/Phone
+Videos/Brightwheel
+Videos/Phone
+
+#### Gram <-> Magrathea
+Documents
+Notes
+Pictures
+- Saved
+- Screenshots
+- Wallpapers
+
+#### Hofud <-> Magrathea
+Documents
+Notes
+Pictures
+- Brightwheel
+- Phone
+- Saved
+- Screenshots
+- Wallpapers
+Videos
+- Brightwheel
+- Phone
+
+#### Mjolnir <-> Magrathea
+Documents
+Notes
+Pictures
+- Brightwheel
+- Phone
+- Saved
+- Screenshots
+- Wallpapers
+Videos
+- Brightwheel
+- Phone
+- Saved
+
+#### Magrathea <-> Serenity
 
 ### Git
 Saved on laptop, desktop, magrathea-ssd, magrathea-raid10

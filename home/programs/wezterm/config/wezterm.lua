@@ -9,9 +9,13 @@ config.adjust_window_size_when_changing_font_size = true
 
 config.color_scheme = "Catppuccin Frappe"
 
+config.disable_default_key_bindings = true
+
 config.enable_kitty_graphics = true
 config.enable_scroll_bar = false
-config.enable_wayland = false -- Temporary fix while Wez rebuilds wayland support
+
+-- Temporary fix while Wez rebuilds wayland support
+config.enable_wayland = false
 
 config.font = wezterm.font { family = 'IntoneMono Nerd Font' }
 config.font_size = 9.0

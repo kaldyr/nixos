@@ -77,7 +77,7 @@
                 sysConfig = {
                     arch = "x86_64-linux";
                     hostname = "espresso";
-                    instalVersion = ""; # Update this only on a fresh format/install
+                    instalVersion = ""; 
                     user = "matshkas";
                     extraHomeModules = [
                         ./home/budgie.nix
@@ -91,7 +91,7 @@
                 sysConfig = {
                     arch = "x86_64-linux";
                     hostname = "gram";
-                    instalVersion = "24.05"; # Update this only on a fresh format/install
+                    instalVersion = "24.05"; 
                     user = "matt";
                     extraHomeModules = [
                         ./home/hyprland.nix
@@ -105,7 +105,7 @@
                 sysConfig = {
                     arch = "x86_64-linux";
                     hostname = "hofud";
-                    instalVersion = "24.05"; # Update this only on a fresh format/install
+                    instalVersion = "24.05"; 
                     user = "matt";
                     extraHomeModules = [
                         ./home/hyprland.nix
@@ -120,7 +120,7 @@
                 sysConfig = {
                     arch = "x86_64-linux";
                     hostname = "installer";
-                    instalVersion = "24.05"; # Update this only on a fresh format/install
+                    instalVersion = "24.05"; 
                     user = "nixos";
                     extraHomeModules = [
                         ./home/hyprland.nix
@@ -134,7 +134,7 @@
                 sysConfig = {
                     arch = "x86_64-linux";
                     hostname = "magrathea";
-                    instalVersion = "24.05"; # Update this only on a fresh format/install
+                    instalVersion = "24.05"; 
                     user = "matt";
                     extraHomeModules = [ ];
                 };
@@ -145,7 +145,7 @@
                 sysConfig = {
                     arch = "x86_64-linux";
                     hostname = "mjolnir";
-                    instalVersion = "23.05"; # Update this only on a fresh format/install
+                    instalVersion = "23.05"; 
                     user = "matt";
                     extraHomeModules = [
                         ./home/hyprland.nix
@@ -160,7 +160,7 @@
                 sysConfig = {
                     arch = "x86_64-linux";
                     hostname = "oolong";
-                    instalVersion = ""; # Update this only on a fresh format/install
+                    instalVersion = ""; 
                     user = "matshkas";
                     extraHomeModules = [
                         ./home/budgie.nix
@@ -174,7 +174,7 @@
                 sysConfig = {
                     arch = "x86_64-linux";
                     hostname = "serenity";
-                    instalVersion = ""; # Update this only on a fresh format/install
+                    instalVersion = ""; 
                     user = "matt";
                     extraHomeModules = [ ];
                 };
