@@ -1,5 +1,7 @@
 { pkgs, ...}: {
 
+    import = [ ../home ];
+
     programs.fish.enable = true;
 
     users = {

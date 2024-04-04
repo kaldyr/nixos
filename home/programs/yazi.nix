@@ -25,19 +25,22 @@
             };
 
             open.rules = [
+                { mime = "*"; use = [ "text" "play" ]; }
                 { mime = "application/pdf"; use = "pdf"; }
-                { mime = "audio/*"; use = "audio"; }
+                { mime = "audio/*"; use = "play"; }
                 { mime = "image/*"; use = "image"; }
                 { mime = "text/*"; use = "text"; }
-                { mime = "video/*"; use = "video"; }
+                { mime = "video/*"; use = "play"; }
             ];
 
             opener = {
-                audio = [{ run = "mpv \"$@\""; desc = "Play with mpv"; orphan = true; }];
-                video = [{ run = "mpv \"$@\""; desc = "Play with mpv"; orphan = true; }];
+                play = [{ run = "mpv \"$@\""; desc = "Play with mpv"; orphan = true; }];
                 image = [{ run = "feh -. -Z \"$@\""; desc = "Open with feh"; orphan = true; }];
                 pdf = [{ run = "zathura \"$@\""; desc = "Open with Zathura"; orphan = true; }];
-                folder = [{ run = "nvim \"$@\""; desc = "Edit with NeoVim"; block = true; }];
+                folder = [
+                    { run = "mpv \"$@\""; desc = "Play with mpv"; orphan = true; }
+                    { run = "nvim \"$@\""; desc = "Edit with NeoVim"; block = true; }
+                ];
                 text = [{ run = "nvim \"$@\""; desc = "Edit with NeoVim"; block = true; }];
                 fallback = [
                     { run = "xdg-open \"$@\""; desc = "XDG Open"; orphan = true; }

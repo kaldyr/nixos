@@ -1,4 +1,4 @@
-{ config, inputs, lib, ... }: {
+{ config, inputs, lib, sysConfig, ... }: {
 
     environment.defaultPackages = lib.mkForce [];
 
@@ -70,6 +70,8 @@
 
     sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     sops.defaultSopsFile = ../secrets.yaml;
+
+    system.stateVersion = sysConfig.instalVersion;
 
     systemd.extraConfig = ''
         DefaultTimeoutStopSec=10s

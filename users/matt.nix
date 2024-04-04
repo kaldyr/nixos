@@ -1,5 +1,7 @@
 { config, pkgs, ...}: {
 
+    imports = [ ../home ];
+
     programs.fish.enable = true;
 
     sops.secrets.matt-password.neededForUsers = true;

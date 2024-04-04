@@ -36,36 +36,16 @@
                 specialArgs = { inherit inputs sysConfig; };
 
                 modules = [
-
                     # Load overlays
-                    { nixpkgs.overlays = [ overlays.fixes ]; }
-
+                    { nixpkgs.overlays = with overlays; [ modifications ]; }
                     # Load in Modules from Libraries
                     disko.nixosModules.disko
+                    home-manager.nixosModules.home-manager
                     impermanence.nixosModules.impermanence
                     sops-nix.nixosModules.sops
-                    home-manager.nixosModules.home-manager
-                    
-                    # System configs
-                    { system.stateVersion = sysConfig.instalVersion; }
+                    # Configurations
                     ./systems/${sysConfig.hostname}.nix # Specific for this machine
-                    ./users/${sysConfig.user}.nix       # User definition
-
-                    # Manage those user dots
-                    { home-manager = {
-                        extraSpecialArgs = { inherit inputs sysConfig; };
-                        useGlobalPkgs = true;
-                        useUserPackages = true;
-                        users.${sysConfig.user} = {
-                            home = {
-                                username = sysConfig.user;
-                                homeDirectory = "/home/${sysConfig.user}";
-                                stateVersion = sysConfig.instalVersion;
-                            };
-                            imports = [ ./home ] ++ sysConfig.extraHomeModules;
-                        };
-                    }; }
-
+                    ./users/${sysConfig.user}.nix       # User config
                 ];
 
             };
@@ -81,7 +61,7 @@
                     user = "matshkas";
                     extraHomeModules = [
                         ./home/budgie.nix
-                        ./home/librewolf.nix
+                        ./home/programs/librewolf.nix
                     ];
                 };
             in buildSystem ( sysConfig );
@@ -164,7 +144,7 @@
                     user = "matshkas";
                     extraHomeModules = [
                         ./home/budgie.nix
-                        ./home/librewolf.nix
+                        ./home/programs/librewolf.nix
                     ];
                 };
             in buildSystem ( sysConfig );
