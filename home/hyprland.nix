@@ -174,7 +174,7 @@
             };
 
             exec-once = [
-                "swww init && swww img $HOME/Pictures/Wallpapers/.wallpaper"
+                # "swww init && swww img $HOME/Pictures/Wallpapers/.wallpaper"
                 "wl-paste --type text --watch cliphist store"
                 "wl-paste --type image --watch cliphist store"
                 "waybar"
