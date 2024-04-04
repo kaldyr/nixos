@@ -73,7 +73,7 @@
                 "$mainMod, y, exec, ln -sf $(command ls $HOME/Pictures/Wallpapers | fuzzel --dmenu) $HOME/Pictures/Wallpapers/.wallpaper && swww img $HOME/Pictures/Wallpapers/.wallpaper"
                 "$mainMod, u, exec, hyprpicker -a"
                 # Play url from clipboard in mpv
-                "$mainMod, g, exec, yt-dlp -o - $(wl-paste) | mpv -"
+                "$mainMod, g, exec, mpv $(wl-paste)"
                 # Monitor flipping for laptop in tent mode
                 "$mainMod, t, exec, hyprctl keyword monitor eDP-1,preferred,auto,1,transform,2"
                 "$mainMod SHIFT, t, exec, hyprctl keyword monitor eDP-1,preferred,auto,1,transform,0"

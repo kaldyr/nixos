@@ -24,6 +24,7 @@
             screenshot-directory = "${config.xdg.userDirs.pictures}/Screenshots/mpv";
             vo = "gpu";
             volume-max = 100;
+            ytdl-format = "bestvideo[height<=?480]+bestaudio/best";
         };
 
         scripts = with pkgs.mpvScripts; [
@@ -36,10 +37,6 @@
         ];
 
     };
-
-    xdg.configFile."mpv/script-opts/modernx.conf".text = ''
-        osc_color=232634;
-    '';
 
     xdg.mimeApps.associations.added = {
         "application/audio" = [ "mpv.desktop" ];
