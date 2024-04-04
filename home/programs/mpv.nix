@@ -17,7 +17,7 @@
             osc = false;
             osd-border-color = "#232634";
             osd-color = "#85c1dc";
-            osd-font = "Ubuntu Nerd Font";
+            osd-font = "IntoneMono Nerd Font";
             osd-font-size = 24;
             osd-shadow-color = "#303446";
             profile = "gpu-hq";
