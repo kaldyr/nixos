@@ -4,7 +4,6 @@
         ./desktop.nix
         ./programs/dunst.nix
         ./programs/feh.nix
-        # ./programs/foot.nix
         ./programs/fuzzel.nix
         ./programs/gammastep.nix
         ./programs/swappy.nix
@@ -174,7 +173,7 @@
             };
 
             exec-once = [
-                # "swww init && swww img $HOME/Pictures/Wallpapers/.wallpaper"
+                "swww-daemon --format xrgb"
                 "wl-paste --type text --watch cliphist store"
                 "wl-paste --type image --watch cliphist store"
                 "waybar"

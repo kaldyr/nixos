@@ -25,7 +25,7 @@
             };
 
             open.rules = [
-                { mime = "*"; use = [ "text" "play" ]; }
+                { mime = "inode/directory"; use = [ "text" "play" ]; }
                 { mime = "application/pdf"; use = "pdf"; }
                 { mime = "audio/*"; use = "play"; }
                 { mime = "image/*"; use = "image"; }
