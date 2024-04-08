@@ -3,6 +3,7 @@
     imports = [
         ./programs/cava.nix
         ./programs/mpv.nix
+        ./programs/newsboat.nix
         ./programs/zathura.nix
     ];
 

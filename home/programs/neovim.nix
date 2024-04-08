@@ -8,9 +8,6 @@
             nil
         ] ++ [ inputs.neovim.packages.${pkgs.system}.default ];
 
-        sessionVariables.EDITOR = "nvim";
-        sessionVariables.VISUAL = "nvim";
-
     };
 
     xdg.desktopEntries.nvim = { name = "Neovim Wrapper"; noDisplay = true; };

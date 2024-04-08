@@ -1,6 +1,11 @@
-{ config, pkgs, ...}: {
+{ config , pkgs , ... }: {
 
     imports = [ ../home ];
+
+    home-manager.home.sessionVariables = {
+        EDITOR = "nano";
+        VISUAL = "nano";
+    };
 
     programs.fish.enable = true;
 

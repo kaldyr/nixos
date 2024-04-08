@@ -36,16 +36,20 @@
                 specialArgs = { inherit inputs sysConfig; };
 
                 modules = [
+
                     # Load overlays
                     { nixpkgs.overlays = with overlays; [ modifications ]; }
+
                     # Load in Modules from Libraries
                     disko.nixosModules.disko
                     home-manager.nixosModules.home-manager
                     impermanence.nixosModules.impermanence
                     sops-nix.nixosModules.sops
+
                     # Configurations
                     ./systems/${sysConfig.hostname}.nix # Specific for this machine
                     ./users/${sysConfig.user}.nix       # User config
+
                 ];
 
             };
@@ -60,8 +64,7 @@
                     instalVersion = ""; 
                     user = "matshkas";
                     extraHomeModules = [
-                        ./home/budgie.nix
-                        ./home/programs/librewolf.nix
+                        ./home/programs/floorp.nix
                     ];
                 };
             in buildSystem ( sysConfig );
@@ -143,8 +146,7 @@
                     instalVersion = ""; 
                     user = "matshkas";
                     extraHomeModules = [
-                        ./home/budgie.nix
-                        ./home/programs/librewolf.nix
+                        ./home/programs/floorp.nix
                     ];
                 };
             in buildSystem ( sysConfig );

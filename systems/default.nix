@@ -38,7 +38,6 @@
     };
 
     programs.fuse.userAllowOther = true;
-    programs.nano.enable = false;
 
     security.sudo = {
         execWheelOnly = true;

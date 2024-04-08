@@ -63,11 +63,11 @@
         "plugin_yazi-nvim": "plugin_yazi-nvim"
       },
       "locked": {
-        "lastModified": 1712429527,
-        "narHash": "sha256-BhAT/feWUoNvvZdjsWpOGZkKqYJMkhEZnxuoxJx9zk4=",
+        "lastModified": 1712437526,
+        "narHash": "sha256-hWOkDOBPefwfbA5rLzGVGs7zPVZQRvcitnL9mMwMhN4=",
         "owner": "kaldyr",
         "repo": "neovim",
-        "rev": "aa11a913fa3010714ac5727902e06eae182a0f53",
+        "rev": "b9a3fad48fbc87ff710728629ff22587366eba22",
         "type": "github"
       },
       "original": {

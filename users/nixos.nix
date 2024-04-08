@@ -2,6 +2,11 @@
 
     import = [ ../home ];
 
+    home-manager.home.sessionVariables = {
+        EDITOR = "nvim";
+        VISUAL = "nvim";
+    };
+
     programs.fish.enable = true;
 
     users = {

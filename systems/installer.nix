@@ -4,6 +4,7 @@
         ./default.nix
         "${modulesPath}/installer/cd-dvd/installation-cd-graphical-gnome.nix"
         ./modules/desktop.nix
+        ./modules/hyprland.nix
     ];
 
     environment.systemPackages = with pkgs; [

@@ -2,7 +2,7 @@
 
     disko.devices.disk.main = {
 
-        device = "/dev/disk/by-id/"; # Fill out when installing
+        device = "/dev/disk/by-id/nvme-SPCC_M.2_PCIe_SSD_230165515150004";
         type = "disk";
 
         content = {
@@ -35,15 +35,16 @@
                             type = "btrfs";
                             extraArgs = [ "-f" ];
                             # btrfs subvolumes must all have the same mount options for now.
-                            subvolumes = let
+                            subvolumes =
+                            let
                                 driveOptions = [ "noatime" "discard=async" "compress-force=zstd:1" ];
                             in {
-                                # SSH subvolume.  Race condition when symlinking and/or persisting with sops-nix
+                                # SSH subvolume. Race condition when symlinking and/or persisting with sops-nix
                                 "@etc_ssh" = { mountpoint = "/etc/ssh"; mountOptions = driveOptions; };
-                                # Files to be preserved between boots that can be regenerated easily
+                                # Home folder. Keeping everything for now.
+                                "@home" = { mountpoint = "/home"; mountOptions = driveOptions; };
+                                # Files to be preserved between boots
                                 "@nix" = { mountpoint = "/nix"; mountOptions = driveOptions; };
-                                # Files to be preserved between boots and be backed up to restore machine state
-                                "@state" = { mountpoint = "/state"; mountOptions = driveOptions; };
                                 # Snapshot storage
                                 "@snaps" = { mountpoint = "/snaps"; mountOptions = driveOptions; };
                                 # Swapfile
@@ -67,14 +68,8 @@
             options = [ "defaults" "size=2G" "mode=755" ];
         };
         "/etc/ssh".neededForBoot = true;
-        "/home" = {
-            device = "none";
-            fsType = "tmpfs";
-            neededForBoot = true;
-            options = [ "defaults" "size=2G" "mode=755" ];
-        };
+        "/home".neededForBoot = true;
         "/nix".neededForBoot = true;
-        "/state".neededForBoot = true;
     };
 
 }

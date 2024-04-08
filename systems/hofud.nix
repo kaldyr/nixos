@@ -4,6 +4,7 @@
         ./default.nix
         ./disko/hofud.nix
         ./modules/desktop.nix
+        ./modules/hyprland.nix
         ./modules/programs/plymouth.nix
         ./modules/programs/steam.nix
     ];

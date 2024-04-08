@@ -4,6 +4,7 @@
         ./default.nix
         ./disko/gram.nix
         ./modules/desktop.nix
+        ./modules/hyprland.nix
     ];
 
     boot = {

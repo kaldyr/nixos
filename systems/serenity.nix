@@ -2,7 +2,7 @@
 
     imports = [
         ./default.nix
-        ../disko/serenity.nix
+        # ./disko/serenity.nix
     ];
 
     boot = {
