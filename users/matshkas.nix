@@ -2,7 +2,7 @@
 
     imports = [ ../home ];
 
-    home-manager.home.sessionVariables = {
+    home-manager.users.matshkas.home.sessionVariables = {
         EDITOR = "nano";
         VISUAL = "nano";
     };

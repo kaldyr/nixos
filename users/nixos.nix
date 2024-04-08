@@ -2,7 +2,7 @@
 
     import = [ ../home ];
 
-    home-manager.home.sessionVariables = {
+    home-manager.users.nixos.home.sessionVariables = {
         EDITOR = "nvim";
         VISUAL = "nvim";
     };

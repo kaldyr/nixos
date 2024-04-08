@@ -2,7 +2,7 @@
 
     imports = [ ../home ];
 
-    home-manager.home.sessionVariables = {
+    home-manager.users.matt.home.sessionVariables = {
         EDITOR = "nvim";
         VISUAL = "nvim";
     };
