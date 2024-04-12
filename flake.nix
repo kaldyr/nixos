@@ -24,7 +24,7 @@
 
     };
 
-    outputs = { disko, home-manager, impermanence, neovim, nixpkgs, nixpkgs-electron-fix, sops-nix, ... }@inputs: {
+    outputs = { disko, home-manager, impermanence, neovim, nixpkgs, sops-nix, ... }@inputs: {
 
         nixosConfigurations = let 
 

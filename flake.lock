@@ -92,19 +92,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-electron-fix": {
-      "locked": {
-        "lastModified": 1712703215,
-        "narHash": "sha256-kOQEMH+xCSYttVrRjMjMEaChhqatZp56fCOEmRrOQ+Y=",
-        "path": "/nix/store/r0piaby02i93jcq78dqkdl8hmxvk96zc-source",
-        "rev": "76b199e34be37ca7c807c6bd19872a9de0efc15b",
-        "type": "path"
-      },
-      "original": {
-        "id": "nixpkgs-electron-fix",
-        "type": "indirect"
-      }
-    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1712437997,
@@ -208,7 +195,6 @@
         "impermanence": "impermanence",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs_2",
-        "nixpkgs-electron-fix": "nixpkgs-electron-fix",
         "sops-nix": "sops-nix"
       }
     },
