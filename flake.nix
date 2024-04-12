@@ -5,9 +5,6 @@
         # Set nixpkgs to NixOS Unstable
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-        # Commit that fixes electron-unwrapped build
-        nixpkgs-electron-fix.url = "github:NixOS/nixpkgs/76b199e34be37ca7c807c6bd19872a9de0efc15b";
-
         # Disko - Declarative partition management
         disko.url = "github:nix-community/disko";
         disko.inputs.nixpkgs.follows = "nixpkgs";
