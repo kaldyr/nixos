@@ -89,6 +89,7 @@
                     extraHomeModules = [
                         ./home/hyprland.nix
                         ./home/programs/librewolf.nix
+                        ./home/programs/mpd.nix
                     ];
                 };
             in buildSystem ( sysConfig );

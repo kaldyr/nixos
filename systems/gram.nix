@@ -1,4 +1,4 @@
-{ config, lib, nixos-hardware, pkgs, sysConfig, ... }: {
+{ config, inputs, lib, pkgs, sysConfig, ... }: {
 
     imports = [
         ./default.nix
@@ -7,17 +7,15 @@
         ./modules/hyprland.nix
         ./modules/programs/plymouth.nix
         ./modules/programs/steam.nix
-        (nixos-hardware.framework-11th-gen-intel)
+        inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
     ];
 
     boot = {
 
         extraModulePackages = with pkgs; [ btrfs-progs ];
 
-        initrd = {
-            availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ]; # Fill out when installing
-            kernelModules = [ ];
-        };
+        initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ]; # Fill out when installing
+        initrd.kernelModules = [ ];
 
         kernelModules = [ "kvm-intel" ];
         kernelPackages = pkgs.linuxKernel.packages.linux_zen;
@@ -108,6 +106,7 @@
                     "Pictures"
                     "Projects"
                     "Videos"
+                    ".local/share/Steam"
                     ".local/share/TelegramDesktop"
                 ];
             };
@@ -119,10 +118,6 @@
         cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
         enableRedistributableFirmware = true;
         enableAllFirmware = true;
-    };
-    
-    home-manager.users.${sysConfig.user}.home.file = {
-        ".local/share/Steam".source = config.lib.file.mkOutOfStoreSymlink "/nix/home/Steam";
     };
 
     networking.hostName = sysConfig.hostname;

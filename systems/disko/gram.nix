@@ -2,7 +2,7 @@
 
     disko.devices.disk.main = {
 
-        device = ""; # FIXME
+        device = "/dev/disk/by-id/nvme-CT500P3PSSD8_240746F1F0AC";
         type = "disk";
 
         content = {
