@@ -5,6 +5,9 @@
         # Set nixpkgs to NixOS Unstable
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+        # NixOS Hardware
+        nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
         # Disko - Declarative partition management
         disko.url = "github:nix-community/disko";
         disko.inputs.nixpkgs.follows = "nixpkgs";
@@ -24,7 +27,14 @@
 
     };
 
-    outputs = { disko, home-manager, impermanence, neovim, nixpkgs, sops-nix, ... }@inputs: {
+    outputs = { disko
+              , home-manager
+              , impermanence
+              , neovim
+              , nixos-hardware
+              , nixpkgs
+              , sops-nix
+              , ... }@inputs: {
 
         nixosConfigurations = let 
 
