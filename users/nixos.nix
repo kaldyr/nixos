@@ -1,6 +1,6 @@
 { pkgs, ...}: {
 
-    import = [ ../home ];
+    imports = [ ../home ];
 
     home-manager.users.nixos.home.sessionVariables = {
         EDITOR = "nvim";
