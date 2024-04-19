@@ -7,17 +7,22 @@
         settings = [{
             layer = "top";
             position = "top";
+            mode = "dock";
             exclusive = false;
             passthrough = false;
             gtk-layer-shell = true;
             height = 24;
-            modules-center = [
+            modules-left = [
                 "hyprland/workspaces"
+            ];
+            modules-center = [
+                "clock"
+            ];
+            modules-right = [
                 "temperature"
-                "battery"
                 "pulseaudio#output"
                 "pulseaudio#input"
-                "clock"
+                "battery"
                 "tray"
             ];
             "hyprland/window" = {
@@ -32,15 +37,15 @@
                 on-scroll-up = "hyprctl dispatch workspace e-1";
                 on-scroll-down = "hyprctl dispatch workspace e+1";
                 format-icons = {
-                    urgent = "";
-                    active = "";
-                    default = "";
+                    urgent = " ";
+                    active = " ";
+                    default = " ";
                 };
             };
 
             temperature = {
                 hwmon-path = "/sys/class/hwmon/hwmon3/temp1_input";
-                format = " ";
+                format = "";
                 critical-threshold = 75;
             };
 
@@ -67,12 +72,12 @@
                 on-scroll-up = "pamixer -i 1";
                 on-scroll-down = "pamixer -d 1";
                 format-icons = {
-                    headphone = "";
-                    hands-free = "";
-                    headset = "";
-                    phone = "";
-                    portable = "";
-                    car = "";
+                    headphone = " ";
+                    hands-free = " ";
+                    headset = " ";
+                    phone = " ";
+                    portable = " ";
+                    car = " ";
                     default = ["" "" ""];
                 };
             };
@@ -89,13 +94,13 @@
             };
 
             clock = {
-                format = "   {:%H:%M    -    %a, %b %e}   󰸗";
+                format = "  {:%H:%M  -  %a, %b %e}  󰸗";
                 tooltip-format = "<tt>{calendar}</tt>";
             };
 
             tray = {
-                icon-size = 14;
-                spacing = 8;
+                icon-size = 12;
+                spacing = 12;
             };
 
         }];
@@ -134,7 +139,7 @@
 
             * {
                 font-size: 10px;
-                font-family: "Ubuntu Nerd Font", "Font Awesome 6 Free";
+                font-family: "IntoneMono Nerd Font", "Font Awesome 6 Free";
             }
 
             window#waybar {
@@ -148,8 +153,8 @@
 
             #workspaces {
                 background: @mantle;
-                padding: 0 8px;
-                border-radius: 0 0 0 10px;
+                padding: 0 10px;
+                border-radius: 0 0 10px 0;
             }
 
             #workspaces button {
@@ -179,9 +184,10 @@
             }
 
             #temperature {
-                padding: 0 6px 0 0;
                 background: @mantle;
                 color: @sapphire;
+                border-radius: 0 0 0 10px;
+                padding: 0 10px 0 10px;
             }
 
             #temperature.critical {
@@ -189,9 +195,9 @@
             }
 
             #battery {
-                padding: 0 6px 0 0;
                 background: @mantle;
                 color: @sapphire;
+                padding: 0 0 0 5px;
             }
 
             #battery.critical {
@@ -199,8 +205,8 @@
             }
 
             #pulseaudio {
-                padding: 0 6px;
                 background: @mantle;
+                padding: 0 5px;
             }
 
             #pulseaudio.output {
@@ -224,16 +230,16 @@
             }
 
             #clock {
-                padding: 0 6px 0 0;
                 font-weight: bold;
                 background: @mantle;
                 color: @blue;
+                padding: 0 12px 0 10px;
+                border-radius: 0 0 12px 12px;
             }
 
             #tray {
                 background: @crust;
                 padding: 0 8px;
-                border-radius: 0 0 10px 0;
             }
         '';
 
