@@ -73,9 +73,7 @@
                     hostname = "espresso";
                     instalVersion = ""; 
                     user = "matshkas";
-                    extraHomeModules = [
-                        ./home/programs/floorp.nix
-                    ];
+                    extraHomeModules = [ ];
                 };
             in buildSystem ( sysConfig );
 
@@ -156,9 +154,7 @@
                     hostname = "oolong";
                     instalVersion = ""; 
                     user = "matshkas";
-                    extraHomeModules = [
-                        ./home/programs/floorp.nix
-                    ];
+                    extraHomeModules = [ ];
                 };
             in buildSystem ( sysConfig );
 

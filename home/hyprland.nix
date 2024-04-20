@@ -174,6 +174,7 @@
 
             exec-once = [
                 "swww-daemon --format xrgb"
+                "swww img $HOME/Pictures/Wallpapers/.wallpaper"
                 "wl-paste --type text --watch cliphist store"
                 "wl-paste --type image --watch cliphist store"
                 "waybar"

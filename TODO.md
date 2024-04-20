@@ -1,8 +1,8 @@
 # Todo list for the nix config
 
-## Basic Changes
+## Changes
+- Locality of Behavior rewrite
 - Syncthing
-- Go all in on Librewolf
 - Browser Profile sync to RAM
 - Do a fresh install for mjolnir to incorporate disko
 - Fix media keys in hyprland
@@ -12,6 +12,7 @@
 - Samba Server on Magrathea
 - Move all "FetchFromGithub" to flake inputs?
 - Toggle laptop keyboard on Air60 (dis)connect
+- nixos-hardware modules for everything
 - Nix-serve, hydra, binary cache
 
 ## Things to look into
