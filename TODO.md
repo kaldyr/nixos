@@ -1,6 +1,7 @@
 # Todo list for the nix config
 
 ## Changes
+- nh nix helper
 - Locality of Behavior rewrite
 - Syncthing
 - Browser Profile sync to RAM
