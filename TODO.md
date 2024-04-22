@@ -3,6 +3,7 @@
 ## Changes
 - nh nix helper
 - Locality of Behavior rewrite
+- nixos-hardware modules for everything
 - Syncthing
 - Browser Profile sync to RAM
 - Do a fresh install for mjolnir to incorporate disko
@@ -13,7 +14,6 @@
 - Samba Server on Magrathea
 - Move all "FetchFromGithub" to flake inputs?
 - Toggle laptop keyboard on Air60 (dis)connect
-- nixos-hardware modules for everything
 - Nix-serve, hydra, binary cache
 
 ## Things to look into
