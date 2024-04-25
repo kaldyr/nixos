@@ -10,15 +10,6 @@
 
 ## Boot Install Media
 
-## Configure the Shell
-```bash
-sudo -Es
-mkdir /usb
-mount /dev/[usb] /usb
-mkdir -p ~/.config/sops/age
-cryptsetup open /usb/locked.img keys
-mount /dev/mapper/keys ~/.config/sops/age
-```
 ## Partition the Drive  
 ```bash
 disko -- --mode disko /usb/disko/[system].nix
@@ -42,7 +33,7 @@ git clone https://github.com/kaldyr/nixos /mnt/nix/config
 ### Install or Generate Private Keys
 - Drop the keys in the /mnt system for system and user
 - Generate public keys and user sops key
-- If generating new keys, add them into the .sops.yaml and sops updatekeys secrets.yaml
+- If generating new keys, add them into the .sops.yaml and ```sops updatekeys secrets.yaml```
 
 ## Build the Base System
 ```bash
