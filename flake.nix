@@ -25,6 +25,9 @@
         # Custom Neovim
         neovim.url = "github:kaldyr/neovim";
 
+        # Yazi file manager
+        yazi.url = "github:sxyazi/yazi";
+
     };
 
     outputs = { disko
@@ -34,6 +37,7 @@
               , nixos-hardware
               , nixpkgs
               , sops-nix
+              , yazi
               , ... }@inputs: {
 
         nixosConfigurations = let 
