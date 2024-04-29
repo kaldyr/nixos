@@ -141,17 +141,16 @@
         };
 
         fwupd.enable = true;
+
+        libinput = {
+            enable = true;
+            touchpad.scrollMethod = "twofinger";
+            touchpad.accelSpeed = "-0.5";
+        };
+
         tailscale.enable = true;
         thermald.enable = true;
-
-        xserver = {
-            videoDrivers = [ "amdgpu" ];
-            libinput = {
-                enable = true;
-                touchpad.scrollMethod = "twofinger";
-                touchpad.accelSpeed = "-0.5";
-            };
-        };
+        xserver.videoDrivers = [ "amdgpu" ];
 
     };
 

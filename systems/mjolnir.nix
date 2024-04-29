@@ -86,11 +86,9 @@
 
     services = {
         fwupd.enable = true;
+        libinput.enable = true;
         tailscale.enable = true;
-        xserver = {
-            videoDrivers = [ "amdgpu" ];
-            libinput.enable = true;
-        };
+        xserver.videoDrivers = [ "amdgpu" ];
     };
 
 }

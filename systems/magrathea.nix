@@ -80,11 +80,9 @@
 
     services = {
         fwupd.enable = true;
+        libinput.enable = true;
         tailscale.enable = true;
-        xserver = {
-            videoDrivers = [ "i915" ];
-            libinput.enable = true;
-        };
+        xserver.videoDrivers = [ "i915" ];
     };
 
 }
