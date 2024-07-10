@@ -8,12 +8,13 @@
         #     amdvlk
         # ];
 
+        enable32Bit = true;
+
         extraPackages32 = with pkgs; [
             # driversi686Linux.amdvlk
             pkgsi686Linux.libva
         ];
 
-        # setLdLibraryPath = true;
 
     };
 

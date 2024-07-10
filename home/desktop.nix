@@ -56,6 +56,7 @@
             obsidian
             telegram-desktop
             yt-dlp
+            vesktop
         ];
 
         pointerCursor = {

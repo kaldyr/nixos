@@ -204,7 +204,8 @@
             };
 
             monitor = [
-                ", preferred, 0x0, 1"
+                "DP-3, 1920x1080@60, -1920x0, 1"
+                "eDP-1, 2256x1504@60, 0x0, 1"
             ];
 
             windowrulev2 = [
