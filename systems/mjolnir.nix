@@ -1,19 +1,22 @@
-{ config, lib, pkgs, sysConfig, ... }: {
+{ config, inputs, lib, pkgs, sysConfig, ... }: {
 
     imports = [
         ./default.nix
-        # ./disko/mjolnir.nix
+        ./disko/mjolnir.nix
         ./modules/desktop.nix
         ./modules/hyprland.nix
         ./modules/programs/plymouth.nix
         ./modules/programs/steam.nix
+        inputs.nixos-hardware.nixosModules.common-cpu-amd-raphael-igpu
+        inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
+        inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
     ];
 
     boot = {
 
-        extraModprobeConfig = ''
-            options iwlwifi bt_coex_active=0
-        '';
+        # extraModprobeConfig = ''
+        #     options iwlwifi bt_coex_active=0
+        # '';
 
         extraModulePackages = with pkgs; [ btrfs-progs ];
 
@@ -22,9 +25,9 @@
             kernelModules = [ "amdgpu" ];
         };
 
-        kernelModules = [ "kvm-amd" "amd-pstate" ];
+        kernelModules = [ "kvm-amd" ];
         kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-        kernelParams = [ "amd-pstate=guided" "btrfs" "initcall_blacklist=acpi_cpufreq_init" "quiet" ];
+        kernelParams = [ "btrfs" "quiet" ];
 
         loader = {
 
@@ -55,25 +58,74 @@
 
     environment.systemPackages = with pkgs; [ tailscale ];
 
-    fileSystems = {
-        "/" = {
-            device = "/dev/disk/by-uuid/3091f642-88da-43ed-9cb8-0ae191b9b534";
-            fsType = "btrfs";
-            options = [ "noatime" "ssd" "discard" "compress-force=zstd:1" "space_cache=v2" ];
+    # Split this off into default/desktop once testing is done
+    environment.persistence = {
+
+        # System files that aren't declarative and need to be preserved
+        # Snapshots will back up state
+        "/state/system" = {
+            directories = [
+                { directory = "/etc/NetworkManager/system-connections"; mode = "0700"; }
+                { directory = "/var/lib/bluetooth"; mode = "0700"; }
+                "/var/lib/nixos"
+                "/var/lib/systemd/coredump"
+                { directory = "/var/lib/tailscale"; mode = "0700"; }
+                "/var/log"
+            ];
+            files = [
+                "/etc/machine-id"
+            ];
         };
-        "/boot/grub/efi" = {
-            device = "/dev/disk/by-uuid/BD34-641A";
-            fsType = "vfat";
+
+        # Home files that aren't declarative and need to be preserved
+        # Snapshots will back up state
+        "/state" = {
+            hideMounts = true;
+            users.${sysConfig.user} = {
+                directories = [
+                    ".config/BetterDiscord"
+                    ".config/discord"
+                    ".config/fish"
+                    ".config/libreoffice"
+                    ".config/newsboat"
+                    ".config/sops/age"
+                    { directory = ".config/obsidian"; mode = "0700"; }
+                    { directory = ".gnupg"; mode = "0700"; }
+                    ".local/share/applications"
+                    ".local/share/fish"
+                    { directory = ".local/share/keyrings"; mode = "0700"; }
+                    ".local/share/zoxide"
+                    ".local/state/nvim"
+                    { directory = ".librewolf"; mode = "0700"; }
+                    { directory = ".ssh"; mode = "0700"; }
+                ];
+            };
         };
-        "/windows" = {
-            device = "/dev/disk/by-uuid/D2D4EB7BD4EB5FE9";
-            fsType = "ntfs-3g";
-            options = [ "rw" "uid=1000" "gid=100" ];
+
+        # Home files that need to be preserved between boots
+        #  These files do not need to be backed up
+        # Syncthing and Nextcloud handle the personal files
+        # Steam and Telegram can just re-download data on drive restore
+        "/nix" = {
+            hideMounts = true;
+            users.${sysConfig.user} = {
+                directories = [
+                    "Audiobooks"
+                    "Books"
+                    "Documents"
+                    "Downloads"
+                    "Music"
+                    "Notes"
+                    "Pictures"
+                    "Projects"
+                    "Videos"
+                    ".local/share/Steam"
+                    ".local/share/TelegramDesktop"
+                ];
+            };
         };
+
     };
-
-    swapDevices = [ { device = "/dev/disk/by-uuid/0ae7a9ac-72e8-4491-9391-cc9104c73ddd"; } ];
-
     hardware = {
         cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
         enableRedistributableFirmware = true;

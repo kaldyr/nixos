@@ -15,7 +15,7 @@
                     name = "ESP";
                     type = "EF00";
                     start = "1MiB";
-                    size = "512M";
+                    size = "2G";
                     content = {
                         type = "filesystem";
                         format = "vfat";
@@ -24,8 +24,6 @@
                         mountOptions = [ "defaults" ];
                     };
                 };
-
-                windows.size = "256G";
 
                 luks = {
                     size = "100%";
@@ -66,7 +64,7 @@
             device = "none";
             fsType = "tmpfs";
             neededForBoot = true;
-            options = [ "defaults" "size=4G" "mode=755" ];
+            options = [ "defaults" "size=6G" "mode=755" ];
         };
         "/etc/ssh".neededForBoot = true;
         "/home" = {
@@ -77,11 +75,6 @@
         };
         "/nix".neededForBoot = true;
         "/state".neededForBoot = true;
-        "/windows" = {
-            device = "/dev/disk/by-uuid/";
-            fsType = "ntfs-3g";
-            options = [ "rw" "uid=1000" "gid=100" ];
-        };
     };
 
 }
