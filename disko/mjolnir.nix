@@ -15,7 +15,7 @@
                     name = "ESP";
                     type = "EF00";
                     start = "1MiB";
-                    size = "512M";
+                    size = "2G";
                     content = {
                         type = "filesystem";
                         format = "vfat";
@@ -24,8 +24,6 @@
                         mountOptions = [ "defaults" ];
                     };
                 };
-
-                windows.size = "256G";
 
                 luks = {
                     size = "100%";
@@ -49,7 +47,7 @@
                                 # Snapshot storage
                                 "@snaps" = { mountpoint = "/snaps"; mountOptions = driveOptions; };
                                 # Swapfile
-                                "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "512M"; };
+                                "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "8G"; };
                             };
                         };
                     };
@@ -77,11 +75,6 @@
         };
         "/nix".neededForBoot = true;
         "/state".neededForBoot = true;
-        "/windows" = {
-            device = "/dev/disk/by-uuid/";
-            fsType = "ntfs-3g";
-            options = [ "rw" "uid=1000" "gid=100" ];
-        };
     };
 
 }
