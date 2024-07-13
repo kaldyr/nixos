@@ -64,7 +64,7 @@
             device = "none";
             fsType = "tmpfs";
             neededForBoot = true;
-            options = [ "defaults" "size=4G" "mode=755" ];
+            options = [ "defaults" "size=6G" "mode=755" ];
         };
         "/etc/ssh".neededForBoot = true;
         "/home" = {
