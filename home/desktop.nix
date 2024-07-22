@@ -13,21 +13,37 @@
 
         enable = true;
 
-        cursorTheme.name = "Catppuccin-Frappe-Sapphire-Cursors";
-        cursorTheme.size = 24;
-        font.name = "Ubuntu Nerd Font";
-        font.size = 10;
+        cursorTheme = {
+            name = "catppuccin-frappe-sapphire-cursors";
+            package = pkgs.catppuccin-cursors.frappeSapphire;
+            size = 24;
+        };
 
-        gtk3.extraConfig.Settings = ''
-            gtk-application-prefer-dark-theme = 1
-        '';
+        font = {
+            name = "Inter";
+            package = pkgs.inter;
+            size = 11;
+        };
 
-        gtk4.extraConfig.Settings = ''
-            gtk-applications-prefer-dark-theme = 1
-        '';
+        gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+        gtk4.extraConfig.gtk-applications-prefer-dark-theme = true;
 
-        iconTheme.name = "Papirus";
-        theme.name = "Catppuccin-Frappe-Standard-Sapphire-Dark";
+        iconTheme = {
+            name = "Papirus";
+            package = pkgs.catppuccin-papirus-folders.override {
+                accent = "sapphire";
+                flavor = "frappe";
+            };
+        };
+
+        theme = {
+            name = "catppuccin-frappe-sapphire-standard";
+            package = pkgs.catppuccin-gtk.override {
+                accents = [ "sapphire" ];
+                size = "standard";
+                variant = "frappe";
+            };
+        };
 
     };
 
@@ -35,9 +51,6 @@
 
         packages = with pkgs; [
             # Base desktop
-            catppuccin-cursors.frappeSapphire
-            (catppuccin-gtk.override { accents = [ "sapphire" ]; variant = "frappe"; })
-            (catppuccin-papirus-folders.override { accent = "sapphire"; flavor = "frappe"; })
             ffmpegthumbnailer
             hunspell
             hunspellDicts.en_US
@@ -56,20 +69,20 @@
             obsidian
             telegram-desktop
             yt-dlp
-            vesktop
         ];
 
         pointerCursor = {
-            name = "Catppuccin-Frappe-Sapphire-Cursors";
+            name = "catppuccin-frappe-sapphire-cursors";
             package = pkgs.catppuccin-cursors.frappeSapphire;
+            size = 24;
             gtk.enable = true;
             x11.enable = true;
         };
 
         sessionVariables = {
-            GTK_THEME = "Catppuccin-Frappe-Standard-Sapphire-Dark";
+            GTK_THEME = "catppuccin-frappe-sapphire-standard";
+            XCURSOR_THEME = "catppuccin-frappe-sapphire-cursors";
             XCURSOR_SIZE = 24;
-            XCURSOR_THEME = "Catppuccin-Frappe-Teal-Cursors";
         };
 
     };

@@ -91,6 +91,7 @@
                     ".local/share/applications"
                     ".local/share/fish"
                     { directory = ".local/share/keyrings"; mode = "0700"; }
+                    ".local/share/newsboat"
                     ".local/share/zoxide"
                     ".local/state/nvim"
                     { directory = ".librewolf"; mode = "0700"; }

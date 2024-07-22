@@ -16,7 +16,7 @@
 
             global = {
                 corner_radius = 10;
-                font = "Ubuntu Nerd Font 10";
+                font = "Inter 10";
                 frame_color = "#8CAAEE";
                 mouse_left_click = "close_current";
                 mouse_middle_click = "do_action";

@@ -5,7 +5,7 @@
         enable = true;
 
         options = {
-            font = "Ubuntu Nerd Font 12";
+            font = "Inter 12";
             selection-clipboard = "clipboard";
             completion-bg = "#414559";
             completion-fg = "#C6D0F5";

@@ -17,7 +17,7 @@ config.enable_scroll_bar = false
 -- Temporary fix while Wez rebuilds wayland support
 config.enable_wayland = false
 
-config.font = wezterm.font { family = 'IntoneMono Nerd Font' }
+config.font = wezterm.font { family = 'Recursive Mn Csl St' }
 config.font_size = 9.0
 
 config.hide_mouse_cursor_when_typing = false

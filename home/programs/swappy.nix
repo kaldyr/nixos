@@ -9,7 +9,7 @@
         show_panel=false
         line_size=4
         text_size=16
-        text_font=Ubuntu Nerd Font
+        text_font=Inter
         paint_mode=brush
         early_exit=false
         fill_shape=false

@@ -18,7 +18,7 @@
 
             main = {
                 filter-desktop = true;
-                font = "Ubuntu Nerd Font:size=8";
+                font = "Inter:size=8";
                 fuzzy = "yes";
                 icon-theme = "Papirus";
                 icons-enabled = "yes";
