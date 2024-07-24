@@ -1,5 +1,4 @@
 { pkgs, ... }: {
-
     home.packages = with pkgs; [ libsixel ];
 
     programs.foot = {
@@ -37,11 +36,10 @@
 
             main = {
                 box-drawings-uses-font-glyphs = "yes";
-                font = "IntoneMono Nerd Font:size=9, Noto Color Emoji:size=9, Symbols Nerd Font:size=9";
-                font-bold = "IntoneMono Nerd Font:size=9:style=Bold";
-                font-italic = "IntoneMono Nerd Font:size=9:style=Italic";
-                font-bold-italic = "IntoneMono Nerd Font:size=9:style=Bold Italic";
-                line-height = "16px";
+                font = "Recursive Mn Csl St:size=10, Noto Color Emoji:size=10, Symbols Nerd Font:size=10";
+                font-bold = "Recursive Mn Csl St:size=10:style=Bold";
+                font-italic = "Recursive Mn Csl St:size=10:style=Italic";
+                font-bold-italic = "Recursive Mn Csl St:size=10:style=Bold Italic";
                 selection-target = "primary";
             };
 

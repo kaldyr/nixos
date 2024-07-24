@@ -9,7 +9,7 @@
         ./programs/swappy.nix
         ./programs/udiskie.nix
         ./programs/waybar.nix
-        ./programs/wezterm
+        ./programs/foot.nix
     ];
 
     home.packages = with pkgs; [
@@ -38,7 +38,7 @@
 
         settings = {
             "$mainMod" = "SUPER";
-            "$terminal" = "wezterm";
+            "$terminal" = "foot";
 
             source = [ "~/.config/hypr/frappe.conf" ];
 

@@ -1,4 +1,4 @@
-{ pkgs, sysConfig,... }: {
+{ pkgs, ... }: {
 
     fonts = {
 
@@ -6,21 +6,19 @@
 
         fontconfig = {
             defaultFonts = {
-                # monospace = [ "IntoneMono Nerd Font" "Noto Color Emoji" ];
                 monospace = [ "Recursive Mn Csl St" "Noto Color Emoji" ];
-                # sansSerif = [ "Ubuntu Nerd Font" "Noto Color Emoji" ];
                 sansSerif = [ "Inter" "Liberation Sans" "Noto Color Emoji" ];
                 serif = [ "Liberation Serif" "Noto Color Emoji" ];
                 emoji = [ "Noto Color Emoji" ];
             };
             localConf = /* xml */ ''
                 <?xml version="1.0"?>
-                <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+                <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
                 <fontconfig>
                     <match target="font">
-                        <test qual="any" name="family"><string>Inter</string></test>
+                        <test qual="any" name="family" compare="contains"><string>Inter</string></test>
                         <!-- https://rsms.me/inter/#features -->
-                        <edit name="fontfeatures" mode="prepend">
+                        <edit name="fontfeatures" mode="assign_replace">
                             <!-- Contextural alternatives -->
                             <string>calt</string>
                             <!-- Tabular numbers -->
@@ -37,7 +35,7 @@
                             <!-- <string>dnom</string> -->
                             <!-- Numerators -->
                             <!-- <string>numr</string> -->
-                            <!-- Alternative one -->
+                            <!-- Alternativee -->
                             <string>cv01</string>
                             <!-- Open four -->
                             <string>cv02</string>
@@ -58,21 +56,35 @@
                         </edit>
                     </match>
                     <match target="font">
-                        <test qual="any" name="family"><string>Recursive</string></test>
+                        <test qual="any" name="family" compare="contains"><string>Recursive</string></test>
                         <!-- https://github.com/arrowtype/recursive#opentype-features -->
-                        <edit name="fontfeatures" mode="prepend">
+                        <edit name="fontfeatures" mode="assign_replace">
                             <!-- Code ligatures -->
                             <string>dlig on</string>
-                            <!-- Single-story 'a' -->
-                            <!-- <string>ss01</string> --> 
-                            <!-- Single-story 'g' -->
-                            <string>ss02</string>
+                            <!-- Simplified f -->
+                            <string>ss03</string>
+                            <!-- Simplified i -->
+                            <string>ss04</string>
+                            <!-- Simplified l -->
+                            <string>ss05</string>
+                            <!-- Simplified r -->
+                            <string>ss06</string>
+                            <!-- Simplified italic Diagonals -->
+                            <string>ss07</string>
+                            <!-- No-serif L & Z -->
+                            <string>ss08</string>
+                            <!-- Simplified 6 & 9 -->
+                            <string>ss09</string>
+                            <!-- Dotted 0 -->
+                            <string>ss10</string>
+                            <!-- Simplified 1 -->
+                            <string>ss11</string>
                             <!-- Simplified mono 'at'@ -->
-                            <!-- <string>ss12</string> -->
+                            <string>ss12</string>
                             <!-- Uppercase punctuation -->
                             <string>case</string>
-                            <!-- Slashed zero -->
-                            <string>ss20</string>
+                            <!-- Italic ligatures -->
+                            <string>liga</string>
                         </edit>
                     </match>
                 </fontconfig>
@@ -81,17 +93,13 @@
 
         packages = with pkgs; [
             font-awesome # Symbols
-            inter
+            inter # System Sans Font
             liberation_ttf # Open versions of MS fonts
-            (nerdfonts.override { fonts = [
-                "IntelOneMono" # Main system mono font
-                "NerdFontsSymbolsOnly" # Nerd Font Symbols
-                "Ubuntu" # Main system font
-            ]; })
+            (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
             noto-fonts-cjk-sans # Display of Chinese/Japanese/Korean characters
             noto-fonts-cjk-serif # Display of Chinese/Japanese/Korean characters
             noto-fonts-emoji # Symbols
-            recursive
+            recursive # System Mono Font
         ];
 
     };
