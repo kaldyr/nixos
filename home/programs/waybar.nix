@@ -139,7 +139,7 @@
 
             * {
                 font-size: 10px;
-                font-family: "IntoneMono Nerd Font", "Font Awesome 6 Free";
+                font-family: "Inter", "Font Awesome 6 Free";
             }
 
             window#waybar {

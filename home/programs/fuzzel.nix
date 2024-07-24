@@ -18,7 +18,7 @@
 
             main = {
                 filter-desktop = true;
-                font = "Inter:size=8";
+                font = "Inter:size=10";
                 fuzzy = "yes";
                 icon-theme = "Papirus";
                 icons-enabled = "yes";

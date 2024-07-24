@@ -42,7 +42,7 @@
 
         nixosConfigurations = let 
 
-            # overlays = import ./overlays.nix { inherit inputs; };
+            overlays = import ./overlays.nix { inherit inputs; };
 
             buildSystem = sysConfig: nixpkgs.lib.nixosSystem {
 
@@ -52,7 +52,7 @@
                 modules = [
 
                     # Load overlays
-                    # { nixpkgs.overlays = with overlays; [ modifications ]; }
+                    { nixpkgs.overlays = with overlays; [ modifications ]; }
 
                     # Load in Modules from Libraries
                     disko.nixosModules.disko
