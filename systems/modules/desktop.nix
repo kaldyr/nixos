@@ -8,7 +8,7 @@
             defaultFonts = {
                 monospace = [ "Recursive Mn Csl St" "Noto Color Emoji" ];
                 sansSerif = [ "Inter" "Liberation Sans" "Noto Color Emoji" ];
-                serif = [ "Liberation Serif" "Noto Color Emoji" ];
+                serif = [ "Inter" "Liberation Serif" "Noto Color Emoji" ];
                 emoji = [ "Noto Color Emoji" ];
             };
             localConf = /* xml */ ''
@@ -27,16 +27,6 @@
                             <string>case</string>
                             <!-- Compositions -->
                             <string>ccmp</string>
-                            <!-- Superscript -->
-                            <!-- <string>sups</string> -->
-                            <!-- Subscript -->
-                            <!-- <string>subs</string> -->
-                            <!-- Denominators -->
-                            <!-- <string>dnom</string> -->
-                            <!-- Numerators -->
-                            <!-- <string>numr</string> -->
-                            <!-- Alternativee -->
-                            <string>cv01</string>
                             <!-- Open four -->
                             <string>cv02</string>
                             <!-- Open six -->

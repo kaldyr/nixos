@@ -29,7 +29,7 @@
                 line-height = 24;
                 lines = 10;
                 prompt = ''"❄️ ❯ "'';
-                terminal = "foot";
+                terminal = "wezterm";
                 width = 60;
             };
 
