@@ -41,6 +41,7 @@
                 font-bold = "Recursive Mn Csl St:size=10:style=Bold";
                 font-italic = "Recursive Mn Csl St:size=10:style=Italic";
                 font-bold-italic = "Recursive Mn Csl St:size=10:style=Bold Italic";
+                line-height = 11.6;
                 selection-target = "primary";
             };
 

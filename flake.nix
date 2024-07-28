@@ -25,6 +25,9 @@
         # Custom Neovim
         neovim.url = "github:kaldyr/neovim";
 
+        # Wezterm
+        wezterm.url = "github:wez/wezterm?dir=nix";
+
         # Yazi file manager
         yazi.url = "github:sxyazi/yazi";
 

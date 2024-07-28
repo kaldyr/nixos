@@ -1,6 +1,7 @@
-{ lib, ... }: {
+{ inputs, lib, pkgs, ... }: {
 
     programs.wezterm.enable = true;
+    programs.wezterm.package = inputs.wezterm.packages.${pkgs.system}.default;
 
     xdg.configFile."wezterm/wezterm.lua".text = lib.mkForce /* lua */ ''
         local wezterm = require "wezterm"
@@ -20,7 +21,7 @@
         config.enable_scroll_bar = false
 
         -- Temporary fix while Wez rebuilds wayland support
-        config.enable_wayland = false
+        config.enable_wayland = true
 
         config.font = wezterm.font { family = 'Recursive Mn Csl St' }
         config.font_size = 10.0
@@ -28,9 +29,11 @@
         config.hide_mouse_cursor_when_typing = false
         config.hide_tab_bar_if_only_one_tab = true
 
+        config.hyperlink_rules = wezterm.default_hyperlink_rules()
+
         config.keys = {
-            { key = '-', mod = 'CTRL', action = wezterm.action.DecreaseFontSize, }
-            { key = '=', mod = 'CTRL', action = wezterm.action.IncreaseFontSize, }
+            { key = '-', mods = 'CTRL', action = wezterm.action.DecreaseFontSize };
+            { key = '=', mods = 'CTRL', action = wezterm.action.IncreaseFontSize };
         }
 
         config.scrollback_lines = 10000
