@@ -4,14 +4,16 @@
 - nh nix helper
 - Locality of Behavior rewrite
 - nixos-hardware modules for everything
+- Nextcloud on Magrathea
+- Samba Server on Magrathea
 - Syncthing
 - Browser Profile sync to RAM
-- Do a fresh install for mjolnir to incorporate disko
 - Fix media keys in hyprland
-- Add in hyprlock / hypridle
+- Hyprlock
+- Hypridle
+- Hyprcursor
+- Hyprpaper?
 - Convert theming to nix-colors
-- Get radicale running on Magrathea
-- Samba Server on Magrathea
 - Move all "FetchFromGithub" to flake inputs?
 - Toggle laptop keyboard on Air60 (dis)connect
 - Nix-serve, hydra, binary cache
@@ -42,51 +44,40 @@ btrfs raid10 array subvolme "backups"
 
 ## Syncing
 
-### Syncthing
+### Nextcloud
 
-#### Phone <-> Magrathea
+#### Phone
 Notes
 Pictures/Brightwheel
+Pictures/Messages
 Pictures/Phone
 Videos/Brightwheel
+Videos/Messages
 Videos/Phone
 
-#### Gram <-> Magrathea
-Documents
-Notes
-Pictures
-- Saved
-- Screenshots
-- Wallpapers
-
-#### Hofud <-> Magrathea
+#### Laptop/Desktop
 Documents
 Notes
 Pictures
 - Brightwheel
+- Messages
 - Phone
 - Saved
 - Screenshots
 - Wallpapers
 Videos
 - Brightwheel
-- Phone
-
-#### Mjolnir <-> Magrathea
-Documents
-Notes
-Pictures
-- Brightwheel
-- Phone
-- Saved
-- Screenshots
-- Wallpapers
-Videos
-- Brightwheel
+- Messages
 - Phone
 - Saved
 
-#### Magrathea <-> Serenity
+
+### Syncthing
+
+- Audiobooks
+- Books
+- Music
+- Videos/Saved
 
 ### Git
 Saved on laptop, desktop, magrathea-ssd, magrathea-raid10

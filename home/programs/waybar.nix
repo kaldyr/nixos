@@ -105,7 +105,7 @@
 
         }];
 
-        style = ''
+        style = /* css */ ''
             @define-color base   #303446;
             @define-color mantle #292c3c;
             @define-color crust  #232634;

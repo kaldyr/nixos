@@ -2,28 +2,28 @@
 
     inputs = {
 
-        # Set nixpkgs to NixOS Unstable
-        nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-        # NixOS Hardware
-        nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
         # Disko - Declarative partition management
         disko.url = "github:nix-community/disko";
         disko.inputs.nixpkgs.follows = "nixpkgs";
-
-        # Impermanence - come back to truth at every boot
-        impermanence.url = "github:nix-community/impermanence";
-
-        # Sops - secret management
-        sops-nix.url = "github:Mic92/sops-nix";
 
         # Manage the home folder and user applications
         home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+        # Impermanence - come back to truth at every boot
+        impermanence.url = "github:nix-community/impermanence";
+
         # Custom Neovim
         neovim.url = "github:kaldyr/neovim";
+
+        # NixOS Hardware
+        nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+        # Set nixpkgs to NixOS Unstable
+        nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+        # Sops - secret management
+        sops-nix.url = "github:Mic92/sops-nix";
 
         # Wezterm
         wezterm.url = "github:wez/wezterm?dir=nix";
@@ -40,6 +40,7 @@
               , nixos-hardware
               , nixpkgs
               , sops-nix
+              , wezterm
               , yazi
               , ... }@inputs: {
 
@@ -73,18 +74,7 @@
 
         in {
 
-            # Espresso: Ryzen 5700g Desktop
-            "espresso" = let
-                sysConfig = {
-                    arch = "x86_64-linux";
-                    hostname = "espresso";
-                    instalVersion = ""; 
-                    user = "matshkas";
-                    extraHomeModules = [ ];
-                };
-            in buildSystem ( sysConfig );
-
-            # Gram: Dell Inspiron 3185
+            # Gram: Framework 11th Gen i5-1135G7
             "gram" = let
                 sysConfig = {
                     arch = "x86_64-linux";
@@ -139,7 +129,7 @@
                 };
             in buildSystem ( sysConfig );
 
-            # Mjolnir: MinisForum UM790 Pro - Desktop
+            # Mjolnir: MinisForum UM790 Pro
             "mjolnir" = let
                 sysConfig = {
                     arch = "x86_64-linux";
@@ -151,17 +141,6 @@
                         ./home/programs/librewolf.nix
                         ./home/programs/mpd.nix
                     ];
-                };
-            in buildSystem ( sysConfig );
-
-            # Oolong: Dell Inspiron (Get Model Number)
-            "oolong" = let
-                sysConfig = {
-                    arch = "x86_64-linux";
-                    hostname = "oolong";
-                    instalVersion = ""; 
-                    user = "matshkas";
-                    extraHomeModules = [ ];
                 };
             in buildSystem ( sysConfig );
 
