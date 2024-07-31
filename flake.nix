@@ -28,12 +28,6 @@
         # Sops - secret management
         sops-nix.url = "github:Mic92/sops-nix";
 
-        # Wezterm
-        wezterm.url = "github:wez/wezterm?dir=nix";
-
-        # Yazi file manager
-        yazi.url = "github:sxyazi/yazi";
-
     };
 
     outputs = { disko
@@ -43,8 +37,6 @@
               , nixos-hardware
               , nixpkgs
               , sops-nix
-              , wezterm
-              , yazi
               , ... }@inputs: {
 
         nixosConfigurations = let 

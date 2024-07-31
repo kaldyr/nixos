@@ -1,7 +1,6 @@
-{ inputs, lib, pkgs, ... }: {
+{ lib, ... }: {
 
     programs.wezterm.enable = true;
-    programs.wezterm.package = inputs.wezterm.packages.${pkgs.system}.default;
 
     xdg.configFile."wezterm/wezterm.lua".text = lib.mkForce /* lua */ ''
         local wezterm = require "wezterm"

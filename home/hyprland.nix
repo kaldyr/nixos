@@ -10,7 +10,6 @@
         ./programs/udiskie.nix
         ./programs/waybar.nix
         ./programs/foot.nix
-        ./programs/wezterm.nix
     ];
 
     home.packages = with pkgs; [
