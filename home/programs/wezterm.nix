@@ -20,8 +20,7 @@
         config.enable_kitty_graphics = true
         config.enable_scroll_bar = false
 
-        -- Temporary fix while Wez rebuilds wayland support
-        config.enable_wayland = true
+        -- config.enable_wayland = true
 
         config.font = wezterm.font { family = 'Recursive Mn Csl St' }
         config.font_size = 10.0

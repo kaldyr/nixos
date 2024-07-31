@@ -39,7 +39,7 @@
 
         settings = {
             "$mainMod" = "SUPER";
-            "$terminal" = "wezterm";
+            "$terminal" = "foot";
 
             source = [ "~/.config/hypr/frappe.conf" ];
 

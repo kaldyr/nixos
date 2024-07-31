@@ -18,7 +18,7 @@
 
             main = {
                 filter-desktop = true;
-                font = "Inter:size=10";
+                font = "Recursive Sn Csl St:size=10";
                 fuzzy = "yes";
                 icon-theme = "Papirus";
                 icons-enabled = "yes";
@@ -29,7 +29,7 @@
                 line-height = 24;
                 lines = 10;
                 prompt = ''"❄️ ❯ "'';
-                terminal = "wezterm";
+                terminal = "foot";
                 width = 60;
             };
 
