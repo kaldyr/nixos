@@ -6,9 +6,6 @@
         disko.url = "github:nix-community/disko";
         disko.inputs.nixpkgs.follows = "nixpkgs";
 
-        # Flake utils
-        flake-utils.url = "github:numtide/flake-utils";
-
         # Manage the home folder and user applications
         home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
