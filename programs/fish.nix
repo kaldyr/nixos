@@ -1,6 +1,7 @@
 { pkgs, sysConfig, ... }: {
 
     environment.persistence."/state".users.${sysConfig.user}.directories = [
+        ".config/fish"
         ".local/share/fish"
     ];
 
