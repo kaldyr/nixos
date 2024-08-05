@@ -1,5 +1,9 @@
 { pkgs, sysConfig, ... }: {
 
+    environment.persistence."/state".users.${sysConfig.user}.directories = [
+        ".local/share/fish"
+    ];
+
     home-manager.users.${sysConfig.user} = {
 
         programs.fish = {
@@ -48,5 +52,7 @@
         };
 
     };
+
+    programs.fish.enable = true;
 
 }

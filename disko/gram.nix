@@ -15,7 +15,7 @@
                     name = "ESP";
                     type = "EF00";
                     start = "1MiB";
-                    size = "512M";
+                    size = "512M"; # Change to 2G next install
                     content = {
                         type = "filesystem";
                         format = "vfat";

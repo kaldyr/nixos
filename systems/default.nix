@@ -2,6 +2,23 @@
 
     environment.defaultPackages = lib.mkForce [];
 
+    # System files that aren't declarative and need to be preserved
+    # Snapshots will back up state
+    environment.persistence."/state/system" = {
+
+        directories = [
+            { directory = "/etc/NetworkManager/system-connections"; mode = "0700"; }
+            { directory = "/var/lib/bluetooth"; mode = "0700"; }
+            "/var/lib/nixos"
+            "/var/lib/systemd/coredump"
+            { directory = "/var/lib/tailscale"; mode = "0700"; }
+            "/var/log"
+        ];
+
+        files = [ "/etc/machine-id" ];
+
+    };
+
     networking = {
         enableIPv6 = false;
         firewall.checkReversePath = "loose";

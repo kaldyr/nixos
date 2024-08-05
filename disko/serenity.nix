@@ -20,13 +20,13 @@
                     name = "ESP";
                     type = "EF00";
                     start = "1MiB";
-                    size = "256M";
+                    size = "2G";
                     content = {
-                    type = "filesystem";
-                    format = "vfat";
-                    extraArgs = [ "-F" "32" ];
-                    mountpoint = "/boot";
-                    mountOptions = [ "defaults" ];
+                        type = "filesystem";
+                        format = "vfat";
+                        extraArgs = [ "-F" "32" ];
+                        mountpoint = "/boot";
+                        mountOptions = [ "defaults" ];
                     };
                 };
 
