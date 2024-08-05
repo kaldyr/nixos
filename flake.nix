@@ -48,7 +48,7 @@
                 modules = [
 
                     # Load overlays
-                    { nixpkgs.overlays = with overlays; [ additions modifications ]; }
+                    { nixpkgs.overlays = with overlays; [ modifications ]; }
 
                     # Load in Modules from Libraries
                     disko.nixosModules.disko

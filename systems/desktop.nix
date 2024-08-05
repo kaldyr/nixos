@@ -40,7 +40,7 @@
             users.${sysConfig.user} = {
                 directories = [
                     ".config/fish"
-                    ".config/sops/age"
+                    { directory = ".config/sops/age"; mode = "0700"; }
                     { directory = ".gnupg"; mode = "0700"; }
                     ".local/share/applications"
                     ".local/share/fish"
