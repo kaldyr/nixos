@@ -13,7 +13,6 @@
 
     home-manager.users.${sysConfig.user} = {
 
-
         home.packages = with pkgs; [
             brightnessctl
             cliphist
