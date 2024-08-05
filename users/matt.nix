@@ -2,8 +2,10 @@
 
     imports = [ ./default.nix ];
 
-    home-manager.users.${sysConfig.user}.home.sessionVariables.EDITOR = "nvim";
-    home-manager.users.${sysConfig.user}.home.sessionVariables.VISUAL = "nvim";
+    home-manager.users.${sysConfig.user}.home.sessionVariables = {
+        EDITOR = "nvim";
+        VISUAL = "nvim";
+    };
 
     programs.nano.enable = false;
 
