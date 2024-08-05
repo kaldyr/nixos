@@ -49,7 +49,7 @@
                                 # Snapshot storage
                                 "@snaps" = { mountpoint = "/snaps"; mountOptions = driveOptions; };
                                 # Swapfile
-                                "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "512M"; };
+                                "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "8G"; };
                             };
                         };
                     };
