@@ -2,8 +2,6 @@
 
 ## Changes
 - nh nix helper
-- Locality of Behavior rewrite
-- nixos-hardware modules for everything
 - Nextcloud on Magrathea
 - Samba Server on Magrathea
 - Syncthing

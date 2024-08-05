@@ -56,9 +56,11 @@
                     impermanence.nixosModules.impermanence
                     sops-nix.nixosModules.sops
 
-                    # Configurations
+                    # System Config
+                    ./disko/${sysConfig.hostname}.nix # Disk configuration
+                    ./systems/default.nix # Defaults for all systems
                     ./systems/${sysConfig.hostname}.nix # Specific for this machine
-                    ./users/${sysConfig.user}.nix       # User config
+                    ./users/${sysConfig.user}.nix # User configuration
 
                 ];
 
@@ -73,11 +75,6 @@
                     hostname = "gram";
                     instalVersion = "24.05"; 
                     user = "matt";
-                    extraHomeModules = [
-                        ./home/hyprland.nix
-                        ./home/programs/librewolf.nix
-                        ./home/programs/mpd.nix
-                    ];
                 };
             in buildSystem ( sysConfig );
 
@@ -88,11 +85,6 @@
                     hostname = "hofud";
                     instalVersion = "24.05"; 
                     user = "matt";
-                    extraHomeModules = [
-                        ./home/hyprland.nix
-                        ./home/programs/librewolf.nix
-                        ./home/programs/mpd.nix
-                    ];
                 };
             in buildSystem ( sysConfig );
 
@@ -103,10 +95,6 @@
                     hostname = "installer";
                     instalVersion = "24.05"; 
                     user = "nixos";
-                    extraHomeModules = [
-                        ./home/hyprland.nix
-                        ./home/programs/librewolf.nix
-                    ];
                 };
             in buildSystem ( sysConfig );
                 
@@ -117,7 +105,6 @@
                     hostname = "magrathea";
                     instalVersion = "24.05"; 
                     user = "matt";
-                    extraHomeModules = [ ];
                 };
             in buildSystem ( sysConfig );
 
@@ -128,11 +115,6 @@
                     hostname = "mjolnir";
                     instalVersion = "23.05"; 
                     user = "matt";
-                    extraHomeModules = [
-                        ./home/hyprland.nix
-                        ./home/programs/librewolf.nix
-                        ./home/programs/mpd.nix
-                    ];
                 };
             in buildSystem ( sysConfig );
 
@@ -143,7 +125,6 @@
                     hostname = "serenity";
                     instalVersion = ""; 
                     user = "matt";
-                    extraHomeModules = [ ];
                 };
             in buildSystem ( sysConfig );
 

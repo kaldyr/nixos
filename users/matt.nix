@@ -1,11 +1,62 @@
-{ config, pkgs, ...}: {
+{ config, inputs, pkgs, sysConfig, ...}: {
 
-    imports = [ ../home ];
+    imports = [
+        ../programs/bat.nix
+        ../programs/btop.nix
+        ../programs/eza.nix
+        ../programs/fish.nix
+        ../programs/fzf.nix
+        ../programs/git.nix
+        ../programs/lazygit.nix
+        ../programs/neovim.nix
+        ../programs/starship.nix
+        ../programs/yazi.nix
+        ../programs/zellij.nix
+        ../programs/zoxide.nix
+    ];
 
-    home-manager.users.matt.home.sessionVariables = {
-        EDITOR = "nvim";
-        VISUAL = "nvim";
+    home-manager = {
+
+        extraSpecialArgs = { inherit inputs sysConfig; };
+        useGlobalPkgs = true;
+        useUserPackages = true;
+
+        users.${sysConfig.user} = {
+
+            home = {
+
+                homeDirectory = "/home/${sysConfig.user}";
+
+                packages = with pkgs; [
+                    age
+                    bc
+                    duf
+                    fd
+                    gdu
+                    jq
+                    ripgrep
+                    sops
+                    ssh-to-age
+                ];
+
+                stateVersion = sysConfig.instalVersion;
+                sessionVariables.EDITOR = "nvim";
+                sessionVariables.VISUAL = "nvim";
+                username = sysConfig.user;
+
+            };
+
+            programs.home-manager.enable = true;
+
+            # Nicely reload system units when changing configs
+            systemd.user.startServices = "sd-switch";
+
+            xdg.enable = true;
+
+        };
+
     };
+
 
     programs.fish.enable = true;
     programs.nano.enable = false;
@@ -16,7 +67,7 @@
 
         mutableUsers = false;
 
-        users.matt = {
+        users.${sysConfig.user} = {
 
             description = "Matt";
             extraGroups = [ "wheel" "networkmanager" "video" ];

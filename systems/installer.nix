@@ -1,10 +1,9 @@
-{ lib, pkgs, modulesPath, sysConfig, ... }: {
+{ lib, modulesPath, pkgs, sysConfig, ... }: {
 
     imports = [
-        ./default.nix
         "${modulesPath}/installer/cd-dvd/installation-cd-graphical-gnome.nix"
-        ./modules/desktop.nix
-        ./modules/hyprland.nix
+        ./desktop.nix
+        ../programs/hyprland.nix
     ];
 
     environment.systemPackages = with pkgs; [
