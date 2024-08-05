@@ -1,25 +1,19 @@
-{ pkgs, ...}: {
+{ pkgs, sysConfig, ...}: {
 
-    imports = [ ../home ];
-
-    home-manager.users.nixos.home.sessionVariables = {
+    home-manager.users.${sysConfig.user}.home.sessionVariables = {
         EDITOR = "nvim";
         VISUAL = "nvim";
     };
-
-    programs.fish.enable = true;
 
     users = {
 
         mutableUsers = false;
 
         users.nixos = {
-
             description = "NixOS";
             extraGroups = [ "wheel" "networkmanager" "video" ];
             isNormalUser = true;
             shell = pkgs.fish;
-
         };
 
     };

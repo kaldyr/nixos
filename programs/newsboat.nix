@@ -1,9 +1,11 @@
-{ sysConfig, ... }: {
+{ lib, sysConfig, ... }: {
 
-    environment.persistence."/state".users.${sysConfig.user}.directories = [
-        ".config/newsboat"
-        ".local/share/newsboat"
-    ];
+    environment.persistence = lib.mkIf sysConfig.impermanence {
+        "/state".users.${sysConfig.user}.directories = [
+            ".config/newsboat"
+            ".local/share/newsboat"
+        ];
+    };
 
     home-manager.users.${sysConfig.user}.programs.newsboat = {
 

@@ -60,6 +60,7 @@
                     ./disko/${sysConfig.hostname}.nix # Disk configuration
                     ./systems/default.nix # Defaults for all systems
                     ./systems/${sysConfig.hostname}.nix # Specific for this machine
+                    ./users/default.nix # Defaults for all users
                     ./users/${sysConfig.user}.nix # User configuration
 
                 ];
@@ -74,6 +75,7 @@
                     arch = "x86_64-linux";
                     hostname = "gram";
                     instalVersion = "24.05"; 
+                    impermanence = true;
                     user = "matt";
                 };
             in buildSystem ( sysConfig );
@@ -84,6 +86,7 @@
                     arch = "x86_64-linux";
                     hostname = "hofud";
                     instalVersion = "24.05"; 
+                    impermanence = true;
                     user = "matt";
                 };
             in buildSystem ( sysConfig );
@@ -94,16 +97,18 @@
                     arch = "x86_64-linux";
                     hostname = "installer";
                     instalVersion = "24.05"; 
+                    impermanence = false;
                     user = "nixos";
                 };
             in buildSystem ( sysConfig );
                 
-            # Magrathea: Intel i5-2500k Nextcloud server with Kodi and media storage
+            # Magrathea: Intel i5-2500K Nextcloud server with Kodi, media storage, and snapshot backups
             "magrathea" = let
                 sysConfig = {
                     arch = "x86_64-linux";
                     hostname = "magrathea";
                     instalVersion = "24.05"; 
+                    impermanence = true;
                     user = "matt";
                 };
             in buildSystem ( sysConfig );
@@ -114,19 +119,21 @@
                     arch = "x86_64-linux";
                     hostname = "mjolnir";
                     instalVersion = "23.05"; 
+                    impermanence = true;
                     user = "matt";
                 };
             in buildSystem ( sysConfig );
 
-            # Serenity: Ryzen 5 2400g Kodi with media storage and off-site backup of snapshots
-            "serenity" = let
-                sysConfig = {
-                    arch = "x86_64-linux";
-                    hostname = "serenity";
-                    instalVersion = ""; 
-                    user = "matt";
-                };
-            in buildSystem ( sysConfig );
+            # Serenity: Ryzen 5 2400g Kodi, media storage, and off-site snapshot backups
+            # "serenity" = let
+            #     sysConfig = {
+            #         arch = "x86_64-linux";
+            #         hostname = "serenity";
+            #         instalVersion = ""; 
+            #         impermanence = true;
+            #         user = "matt";
+            #     };
+            # in buildSystem ( sysConfig );
 
         };
 

@@ -1,6 +1,8 @@
-{ pkgs, sysConfig, ... }: {
+{ lib, pkgs, sysConfig, ... }: {
 
-    environment.persistence."/state".users.${sysConfig.user}.directories = [ ".config/libreoffice" ];
+    environment.persistence = lib.mkIf sysConfig.impermanence {
+        "/state".users.${sysConfig.user}.directories = [ ".config/libreoffice" ];
+    };
 
     home-manager.users.${sysConfig.user}.home.packages = with pkgs; [ libreoffice ];
 

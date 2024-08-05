@@ -1,4 +1,4 @@
-{ inputs, pkgs, sysConfig, ...}: {
+{ inputs, lib, pkgs, sysConfig, ...}: {
 
     imports = [
         ../programs/bat.nix
@@ -15,7 +15,7 @@
         ../programs/zoxide.nix
     ];
 
-    environment.persistence = {
+    environment.persistence = lib.mkIf sysConfig.impermanence {
 
         # Home files that aren't declarative and need to be preserved
         # Snapshots will back up state
