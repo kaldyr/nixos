@@ -50,6 +50,20 @@
     #                         "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "8G"; };
     #                         # Syncthing storage
     #                         "@sync" = { mountpoint = "/sync"; mountOptions = driveOptions; };
+    #
+    #
+    #                         # Subvolumes for managing nextcloud
+    #                         # Nextcloud - schedule snapshots
+    #                         "@nextcloud" = { mountpoint = "/srv/nextcloud"; mountOptions = driveOptions; };
+    #                         # Mysql
+    #                         # Databases should not be stored with CoW property
+    #                         # This will disable CoW, checksums, and compression for the database
+    #                         # Do not snapshot this subvolume!
+    #                         # Instead, setup cron job to mysqldump to @nextcloud for snapshots
+    #                         # For restoration, first restore @nextcloud from snapshot, then source the most recent backup.dump
+    #                         # After Disko does its thing, and before installing nixos, run the following:
+    #                         #   chattr +C /srv/nextcloud/mysql
+    #                         "@mysql" = { mountpoint = "/srv/nextcloud/mysql"; mountOptions = driveOptions; };  
     #                     };
     #                 };
     #             };
@@ -111,7 +125,7 @@
             fsType = "btrfs";
             options = [ "subvol=root" "ssd" "compress-force=zstd:3" "space_cache=v2" ];
         };
-        "/boot/efi" = { # Change to UUID
+        "/boot/efi" = {
             device = "/dev/disk/by-label/BOOTEFI";
             fsType = "vfat";
         };
@@ -122,7 +136,7 @@
         };
     };
 
-    swapDevices = [ { # Change to UUID
+    swapDevices = [ {
         device = "/dev/disk/by-label/NIXSWAP"; }
     ];
 
