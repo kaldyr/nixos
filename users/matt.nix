@@ -1,7 +1,5 @@
 { config, pkgs, sysConfig, ...}: {
 
-    imports = [ ./default.nix ];
-
     home-manager.users.${sysConfig.user}.home.sessionVariables = {
         EDITOR = "nvim";
         VISUAL = "nvim";
