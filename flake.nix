@@ -80,17 +80,6 @@
                 };
             in buildSystem ( sysConfig );
 
-            # Hofud: Dell Inspiron 7425 Shared Laptop
-            # "hofud" = let
-            #     sysConfig = {
-            #         arch = "x86_64-linux";
-            #         hostname = "hofud";
-            #         instalVersion = "24.05"; 
-            #         impermanence = true;
-            #         user = "matt";
-            #     };
-            # in buildSystem ( sysConfig );
-
             # Installer: Custom ISO image for installing NixOS
             "installer" = let
                 sysConfig = {
