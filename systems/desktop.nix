@@ -12,6 +12,10 @@
         ../programs/zathura.nix
     ];
 
+    environment.etc."fuse.conf".text = ''
+        user_allow_other
+    '';
+
     home-manager.users.${sysConfig.user} = {
 
         fonts.fontconfig.enable = true;
@@ -57,8 +61,10 @@
         home = {
 
             packages = with pkgs; [
+                android-tools
                 ffmpegthumbnailer
                 gimp
+                go-mtpfs
                 hunspell
                 hunspellDicts.en_US
                 imagemagick
@@ -248,6 +254,12 @@
             pulse.enable = true;
             wireplumber.enable = true;
         };
+
+        udev.packages = with pkgs; [
+            android-udev-rules
+            libmtp
+            media-player-info
+        ];
 
         udisks2.enable = true;
 
