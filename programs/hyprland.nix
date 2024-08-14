@@ -235,8 +235,8 @@
             configFile."hypr/frappe.conf".source = pkgs.fetchFromGitHub {
                 owner = "catppuccin";
                 repo = "hyprland";
-                rev = "99a88fd21fac270bd999d4a26cf0f4a4222c58be";
-                sha256 = "sha256-07B5QmQmsUKYf38oWU3+2C6KO4JvinuTwmW1Pfk8CT8=";
+                rev = "c388ac55563ddeea0afe9df79d4bfff0096b146b";
+                sha256 = "sha256-xSa/z0Pu+ioZ0gFH9qSo9P94NPkEMovstm1avJ7rvzM=";
             } + "/themes/frappe.conf";
 
             mimeApps.defaultApplications = {

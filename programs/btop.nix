@@ -21,8 +21,8 @@
             configFile."btop/themes/catppuccin_frappe.theme".source = pkgs.fetchFromGitHub {
                 owner = "catppuccin";
                 repo = "btop";
-                rev = "c6469190f2ecf25f017d6120bf4e050e6b1d17af";
-                sha256 = "sha256-jodJl4f2T9ViNqsY9fk8IV62CrpC5hy7WK3aRpu70Cs=";
+                rev = "21b8d5956a8b07fa52519e3267fb3a2d2e693d17";
+                sha256 = "sha256-UXeTypc15MhjgGUiCrDUZ40m32yH2o1N+rcrEgY6sME=";
             } + "/themes/catppuccin_frappe.theme";
 
             desktopEntries.btop = { name = "btop++"; noDisplay = true; };

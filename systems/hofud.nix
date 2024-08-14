@@ -1,4 +1,4 @@
-{ inputs, pkgs, sysConfig, ... }: {
+{ inputs, lib, pkgs, sysConfig, ... }: {
 
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-amd
@@ -23,31 +23,10 @@
         kernelPackages = pkgs.linuxKernel.packages.linux_zen;
         kernelParams = [ "btrfs" "quiet" ];
 
-        loader = {
-
-            efi.efiSysMountPoint = "/boot";
-
-            grub = {
-                
-                enable = true;
-
-                default = 2;
-                device = "nodev";
-                efiInstallAsRemovable = true;
-                efiSupport = true;
-                gfxmodeEfi = "1920x1200,1920x1080";
-
-                theme = pkgs.fetchFromGitHub {
-                    owner = "catppuccin";
-                    repo = "grub";
-                    rev = "803c5df0e83aba61668777bb96d90ab8f6847106";
-                    sha256 = "sha256-/bSolCta8GCZ4lP0u5NVqYQ9Y3ZooYCNdTwORNvR7M0=";
-                } + "/src/catppuccin-frappe-grub-theme";
-
-                useOSProber = true;
-
-            };
-
+        loader.grub = {
+            default = 2;
+            gfxmodeEfi = "1920x1200,1920x1080";
+            useOSProber = lib.mkForce true;
         };
 
         supportedFilesystems = [ "ntfs" ];

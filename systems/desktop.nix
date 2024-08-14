@@ -103,16 +103,7 @@
 
         xdg = {
 
-            configFile = {
-                "BetterDiscord/themes/frappe.theme.css".source = pkgs.fetchFromGitHub {
-                    owner = "catppuccin";
-                    repo = "discord";
-                    rev = "b9f42df1b9b38957a4d8b7e74637a5480be9be57";
-                    sha256 = "sha256-ArhHQSuXc04Tti7pd5EfScm7szhBmS1hcEOE9q+wj/E=";
-                } + "/themes/frappe.theme.css";
-                "mimeapps.list".force = true;
-            };
-
+            configFile."mimeapps.list".force = true;
             mimeApps.enable = true;
 
             userDirs = {

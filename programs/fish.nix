@@ -46,8 +46,8 @@
             configFile."fish/themes/Catppuccin Frappe.theme".source = pkgs.fetchFromGitHub {
                 owner = "catppuccin";
                 repo = "fish";
-                rev = "0ce27b518e8ead555dec34dd8be3df5bd75cff8e";
-                sha256 = "sha256-Dc/zdxfzAUM5NX8PxzfljRbYvO9f9syuLO8yBr+R3qg=";
+                rev = "a3b9eb5eaf2171ba1359fe98f20d226c016568cf";
+                sha256 = "sha256-shQxlyoauXJACoZWtRUbRMxmm10R8vOigXwjxBhG8ng=";
             } + "/themes/Catppuccin Frappe.theme";
 
             desktopEntries.fish = { name = "Fish Shell"; noDisplay = true; };

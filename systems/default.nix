@@ -1,4 +1,29 @@
-{ config, inputs, lib, sysConfig, ... }: {
+{ config, inputs, lib, pkgs, sysConfig, ... }: {
+
+    boot.loader = {
+
+        efi.efiSysMountPoint = "/boot";
+
+        grub = {
+
+            enable = true;
+
+            device = "nodev";
+            efiInstallAsRemovable = true;
+            efiSupport = true;
+
+            theme = pkgs.fetchFromGitHub {
+                owner = "catppuccin";
+                repo = "grub";
+                rev = "88f6124757331fd3a37c8a69473021389b7663ad";
+                sha256 = "sha256-e8XFWebd/GyX44WQI06Cx6sOduCZc5z7/YhweVQGMGY=";
+            } + "/src/catppuccin-frappe-grub-theme";
+
+            useOSProber = false;
+
+        };
+
+    };
 
     environment.defaultPackages = lib.mkForce [];
 

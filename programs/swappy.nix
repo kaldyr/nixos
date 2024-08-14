@@ -1,6 +1,7 @@
 { pkgs, sysConfig, ... }: {
 
     home-manager.users.${sysConfig.user} = {
+
         home.packages = with pkgs; [ swappy ];
 
         xdg.configFile."swappy/config".text = /* ini */ ''
@@ -17,4 +18,5 @@
         '';
 
     };
+
 }
