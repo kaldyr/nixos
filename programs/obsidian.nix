@@ -1,7 +1,7 @@
 { lib, pkgs, sysConfig, ... }: {
 
     environment.persistence = lib.mkIf sysConfig.impermanence {
-        "/state".users.${sysConfig.user}.directories = [
+        "/nix".users.${sysConfig.user}.directories = [
             { directory = ".config/obsidian"; mode = "0700"; }
         ];
     };

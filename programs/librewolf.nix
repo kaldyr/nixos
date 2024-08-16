@@ -88,14 +88,6 @@
                 "webgl.disabled" = false;
             };
 
-            #     userChrome = ''
-            #         #TabsToolbar {
-            #             visibility: collapse;
-            #         }
-            #     '';
-            #
-            # };
-
         };
 
         xdg.mimeApps.associations.added = {

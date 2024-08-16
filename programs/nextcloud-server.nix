@@ -1,9 +1,7 @@
 { config, pkgs, ... }: {
 
-    networking.firewall = {
-        allowedTCPPorts = [ 9000 ];
-        allowedUDPPorts = [ 9000 ];
-    };
+    networking.firewall.allowedTCPPorts = [ 9000 ];
+    networking.firewall.allowedUDPPorts = [ 9000 ];
 
     services = {
 
@@ -31,18 +29,21 @@
             enableImagemagick = false;
 
             extraApps = with config.services.nextcloud.package.packages.apps; {
+
                 inherit calendar contacts mail news notes onlyoffice tasks;
+
                 socialsharing_telegram = pkgs.fetchNextcloudApp {
                     url = "https://github.com/nextcloud-releases/socialsharing/releases/download/v3.1.0/socialsharing_telegram-v3.1.0.tar.gz";
                     license = "agpl3";
                     sha256 = "";
                 };
+
             };
 
             extraAppsEnable = true;
             extraOptions.mail_sendmailmode = "pipe";
             extraOptions.mail_smtpmode = "sendmail";
-            hostname = "nextcloud.brill-godzilla.ts.net";
+            hostname = "magrathea.brill-godzilla.ts.net";
             logLevel = 3;
             maxUploadSize = "16G";
             nginx.recommendedHttpHeaders = true;
@@ -65,18 +66,21 @@
                 "pm.max_requests" = 500;
             };
 
-            settings.trusted_domains = [ "nextcloud.brill-godzilla.ts.net" ];
+            settings.trusted_domains = [ "magrathea.brill-godzilla.ts.net" ];
             settings.dbtableprefix = "nc_";
 
         };
 
         postgresql = {
+
             enable = true;
             package = pkgs.postgresql_16;
+
             ensureDatabases = [ "nextcloud" ];
             ensureUsers = [ "admin" "nextcloud" ];
             settings.max_connections = "300";
             settings.shared_buffers = "80MB";
+
         };
 
         postgresqlBackup = {

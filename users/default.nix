@@ -27,7 +27,6 @@
                 directories = [
                     { directory = ".config/sops/age"; mode = "0700"; }
                     { directory = ".gnupg"; mode = "0700"; }
-                    ".local/share/applications"
                     { directory = ".local/share/keyrings"; mode = "0700"; }
                     { directory = ".ssh"; mode = "0700"; }
                 ];
@@ -44,6 +43,7 @@
 
             users.${sysConfig.user} = {
                 directories = [
+                    ".local/share/applications"
                     "Audiobooks"
                     "Books"
                     "Documents"
