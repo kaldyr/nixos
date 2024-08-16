@@ -4,8 +4,6 @@
 
 in {
 
-    environment.systemPackages = with pkgs; [ mariadb ];
-
     networking.firewall = {
         allowedTCPPorts = [ 9000 ];
         allowedUDPPorts = [ 9000 ];
@@ -13,38 +11,37 @@ in {
 
     services = {
 
-        mysql = {
-            enable = true;
-            dataDir = "${nextcloudHome}/mysql";
-            package = pkgs.mariadb;
-        };
-
         nextcloud = {
+
             enable = true;
             package = pkgs.nextcloud29;
 
             appstoreEnable = true;
             autoUpdateApps = true;
-            caching.redis = true;
+            caching.apcu = true;
 
             config = {
+                adminpassFile = config.sops.secrets.magrathea.nextcloud.admin.path;
                 adminuser = "admin";
-                # adminpassFile = ""; # Replace with sops-nix
-                dbhost = "localhost";
+                dbhost = "/run/postgresql";
                 dbname = "nextcloud";
-                dbtype = "mysql";
+                dbtype = "pgsql";
                 dbuser = "nextcloud";
                 defaultPhoneRegion = "US";
                 trustedProxies = "";
             };
 
-            configureRedis = true;
             database.createLocally = true;
             datadir = "${nextcloudHome}";
             enableImagemagick = false;
 
             extraApps = with config.services.nextcloud.package.packages.apps; {
-                inherit calendar contacts mail news notes tasks;
+                inherit calendar contacts mail news notes onlyoffice tasks;
+                socialsharing_telegram = pkgs.fetchNextcloudApp {
+                    url = "https://github.com/nextcloud-releases/socialsharing/releases/download/v3.1.0/socialsharing_telegram-v3.1.0.tar.gz";
+                    license = "agpl3";
+                    sha256 = "";
+                };
             };
 
             extraAppsEnable = true;
@@ -54,30 +51,55 @@ in {
                 mail_smtpmode = "sendmail";
             };
 
-            hostname = "";
+            hostname = "nextcloud.brill-godzilla.ts.net";
             logLevel = 3;
-            maxUploadSize = "4G";
+            maxUploadSize = "16G";
             nginx.recommendedHttpHeaders = true;
 
-            # phpOptions = {
-                # "opcache.enable" = "1";
-                # "opcache.enable_cli" = "1";
-                # "opcache.interned_strings_buffer" = "10";
-                # "opcache.max_accelerated_files" = "10000";
-                # "opcache.revalidate_freq" = "1";
-                # "opcache.save_comments" = "1";
-                # "opcache.memory_consumption" = "512";
-                # "opcache.jit" = "1255";
-                # "opcache.jit_buffer_size" = "128M";
-            # };
+            phpOptions = {
+                "opcache.enable" = "1";
+                "opcache.enable_cli" = "1";
+                "opcache.fast_shutdown" = "1";
+                "opcache.interned_strings_buffer" = "16";
+                "opcache.max_accelerated_files" = "10000";
+                "opcache.memory_consumption" = "512";
+                "opcache.revalidate_freq" = "1";
+                "opcache.save_comments" = "1";
+            };
+
+            poolSettings = {
+                "pm" = "ondemand";
+                "pm.max_children" = 32;
+                "pm.process_idle_timeout" = "10s";
+                "pm.max_requests" = 500;
+            };
+
+            settings.trusted_domains = [ "nextcloud.brill-godzilla.ts.net" ];
+            settings.dbtableprefix = "nc_";
 
         };
 
-    };
+        postgresql = {
 
-    systemd.services."nextcloud-setup" = {
-        requires = [ "mariadb.service" ];
-        after = [ "mariadb.service" ];
+            enable = true;
+            package = pkgs.postgresql_16;
+
+            ensureDatabases = [ "nextcloud" ];
+            ensureUsers = [ "admin" "nextcloud" ];
+            settings = {
+                max_connections = "300";
+                shared_buffers = "80MB";
+            };
+
+        };
+
+        postgresqlBackup = {
+            enable = true;
+            databases = [ "nextcloud" ];
+            location = "${nextcloudHome}/dbbackup";
+            startAt = "*-*-* 01:15:00";
+        };
+
     };
 
 }
