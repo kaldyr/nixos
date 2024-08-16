@@ -57,7 +57,6 @@
                     sops-nix.nixosModules.sops
 
                     # System Config
-                    ./disko/${sysConfig.hostname}.nix # Disk configuration
                     ./systems/default.nix # Defaults for all systems
                     ./systems/${sysConfig.hostname}.nix # Specific for this machine
                     ./users/default.nix # Defaults for all users

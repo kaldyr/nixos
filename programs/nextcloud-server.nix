@@ -1,8 +1,4 @@
-{ config, pkgs, ... }: let
-
-    nextcloudHome = "/srv/nextcloud";
-
-in {
+{ config, pkgs, ... }: {
 
     networking.firewall = {
         allowedTCPPorts = [ 9000 ];
@@ -21,7 +17,7 @@ in {
             caching.apcu = true;
 
             config = {
-                adminpassFile = config.sops.secrets.magrathea.nextcloud.admin.path;
+                adminpassFile = config.sops.secrets.nextcloud-admin.path;
                 adminuser = "admin";
                 dbhost = "/run/postgresql";
                 dbname = "nextcloud";
@@ -32,7 +28,6 @@ in {
             };
 
             database.createLocally = true;
-            datadir = "${nextcloudHome}";
             enableImagemagick = false;
 
             extraApps = with config.services.nextcloud.package.packages.apps; {
@@ -45,12 +40,8 @@ in {
             };
 
             extraAppsEnable = true;
-
-            extraOptions = {
-                mail_sendmailmode = "pipe";
-                mail_smtpmode = "sendmail";
-            };
-
+            extraOptions.mail_sendmailmode = "pipe";
+            extraOptions.mail_smtpmode = "sendmail";
             hostname = "nextcloud.brill-godzilla.ts.net";
             logLevel = 3;
             maxUploadSize = "16G";
@@ -80,23 +71,18 @@ in {
         };
 
         postgresql = {
-
             enable = true;
             package = pkgs.postgresql_16;
-
             ensureDatabases = [ "nextcloud" ];
             ensureUsers = [ "admin" "nextcloud" ];
-            settings = {
-                max_connections = "300";
-                shared_buffers = "80MB";
-            };
-
+            settings.max_connections = "300";
+            settings.shared_buffers = "80MB";
         };
 
         postgresqlBackup = {
             enable = true;
             databases = [ "nextcloud" ];
-            location = "${nextcloudHome}/dbbackup";
+            location = "/var/lib/nextcloud/dbbackup";
             startAt = "*-*-* 01:15:00";
         };
 
