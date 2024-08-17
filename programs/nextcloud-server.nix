@@ -46,7 +46,7 @@
             };
 
             extraAppsEnable = true;
-            hostName = "nextcloud";
+            hostName = "localhost";
             maxUploadSize = "16G";
             nginx.recommendedHttpHeaders = true;
 
@@ -76,12 +76,11 @@
                 mail_sendmailmode = "pipe";
                 mail_smtpmode = "sendmail";
                 trusted_domains = [ "magrathea.brill-godzilla.ts.net" ];
-                trusted_proxies = [ "magrathea.brill-godzilla.ts.net" ];
             };
 
         };
 
-        nginx.virtualHosts."nextcloud".listen = [ { addr = "127.0.0.1"; port = 9000; } ];
+        nginx.virtualHosts."localhost".listen = [ { addr = "127.0.0.1"; port = 9000; } ];
 
         postgresql = {
 
