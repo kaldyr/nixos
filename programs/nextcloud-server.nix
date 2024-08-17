@@ -81,7 +81,7 @@
 
         };
 
-        nginx."localhost".listen = [ { addr = "127.0.0.1"; port = 9000; } ];
+        nginx.virtualHosts."localhost".listen = [ { addr = "127.0.0.1"; port = 9000; } ];
 
         postgresql = {
 
