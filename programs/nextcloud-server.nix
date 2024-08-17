@@ -77,7 +77,9 @@
             package = pkgs.postgresql_16;
 
             ensureDatabases = [ "nextcloud" ];
-            ensureUsers = [ "admin" "nextcloud" ];
+            ensureUsers = [
+                { name = "nextcloud"; ensureDBOwnership = true; }
+            ];
             settings.max_connections = "300";
             settings.shared_buffers = "80MB";
 
@@ -90,6 +92,11 @@
             startAt = "*-*-* 01:15:00";
         };
 
+    };
+
+    systemd.services.nextcloud-setup = {
+        requires = [ "postgresql.service" ];
+        after = [ "postgresql.service" ];
     };
 
 }
