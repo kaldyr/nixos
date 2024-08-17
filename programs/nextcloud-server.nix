@@ -15,7 +15,7 @@
             caching.apcu = true;
 
             config = {
-                adminpassFile = config.sops.secrets.nextcloud-admin.path;
+                adminpassFile = config.sops.secrets."nextcloud-admin".path;
                 adminuser = "admin";
                 dbhost = "/run/postgresql";
                 dbname = "nextcloud";
