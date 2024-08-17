@@ -46,7 +46,7 @@
             };
 
             extraAppsEnable = true;
-            hostName = "magrathea.brill-godzilla.ts.net";
+            hostName = "localhost";
             https = true;
             maxUploadSize = "16G";
             nginx.recommendedHttpHeaders = true;
@@ -81,8 +81,8 @@
 
         };
 
-        nginx.virtualHosts."magrathea.brill-godzilla.ts.net" = {
-            forceSSL = true;
+        nginx.virtualHosts."localhost" = {
+            forceSSL = false;
             listen = [ { addr = "127.0.0.1"; port = 9000; } ];
             sslCertificate = "/var/lib/tailscale/certs/magrathea.brill-godzilla.ts.net.crt";
             sslCertificateKey = "/var/lib/tailscale/certs/magrathea.brill-godzilla.ts.net.key";
