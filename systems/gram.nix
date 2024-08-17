@@ -144,7 +144,6 @@
             touchpad.accelSpeed = "-0.5";
         };
 
-        tailscale.enable = true;
         thermald.enable = true;
 
     };

@@ -115,6 +115,7 @@
             };
         };
 
+        tailscale.enable = true;
         timesyncd.enable = true;
 
     };

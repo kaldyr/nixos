@@ -123,10 +123,7 @@
     networking.hostName = sysConfig.hostname;
     time.timeZone = "America/Los_Angeles";
 
-    services = {
-        fwupd.enable = true;
-        libinput.enable = true;
-        tailscale.enable = true;
-    };
+    services.fwupd.enable = true;
+    services.libinput.enable = true;
 
 }

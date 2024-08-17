@@ -151,7 +151,7 @@
     services = {
         fwupd.enable = true;
         libinput.enable = true;
-        tailscale.enable = true;
+        tailscale.useRoutingFeatures = "server";
     };
 
 }
