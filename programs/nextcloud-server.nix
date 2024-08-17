@@ -39,7 +39,7 @@
                 socialsharing_telegram = pkgs.fetchNextcloudApp {
                     url = "https://github.com/nextcloud-releases/socialsharing/releases/download/v3.1.0/socialsharing_telegram-v3.1.0.tar.gz";
                     license = "agpl3Plus";
-                    sha256 = "";
+                    sha256 = "sha256-qcjce8GOEPvb6v8hQQ0AuVf3dbcX3twjSZU0bQdOl3U=";
                 };
 
             };
