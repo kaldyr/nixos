@@ -70,11 +70,12 @@
             settings = {
                 dbtableprefix = "oc_";
                 default_phone_region = "US";
+                default_locale = "en_US";
                 loglevel = 3;
                 mail_sendmailmode = "pipe";
                 mail_smtpmode = "sendmail";
                 trusted_domains = [ "magrathea.brill-godzilla.ts.net" ];
-                trusted_proxies = [ "magrathea" "nextcloud" ];
+                trusted_proxies = [ "magrathea.brill-godzilla.ts.net" ];
             };
 
         };
@@ -85,9 +86,7 @@
             package = pkgs.postgresql_16;
 
             ensureDatabases = [ "nextcloud" ];
-            ensureUsers = [
-                { name = "nextcloud"; ensureDBOwnership = true; }
-            ];
+            ensureUsers = [ { name = "nextcloud"; ensureDBOwnership = true; } ];
             settings.max_connections = "300";
             settings.shared_buffers = "80MB";
 
