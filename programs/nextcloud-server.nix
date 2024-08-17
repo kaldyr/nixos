@@ -30,7 +30,13 @@
 
             extraApps = with config.services.nextcloud.package.packages.apps; {
 
-                inherit calendar contacts mail news notes onlyoffice tasks;
+                inherit calendar contacts mail notes onlyoffice tasks;
+
+                news = pkgs.fetchNextcloudApp {
+                    url = "https://github.com/nextcloud/news/releases/download/25.0.0-alpha8/news.tar.gz";
+                    license = "agpl3";
+                    sha256 = "";
+                };
 
                 socialsharing_telegram = pkgs.fetchNextcloudApp {
                     url = "https://github.com/nextcloud-releases/socialsharing/releases/download/v3.1.0/socialsharing_telegram-v3.1.0.tar.gz";
