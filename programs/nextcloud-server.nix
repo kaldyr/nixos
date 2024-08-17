@@ -11,7 +11,7 @@
             package = pkgs.nextcloud29;
 
             appstoreEnable = true;
-            autoUpdateApps = true;
+            autoUpdateApps.enable = true;
             caching.apcu = true;
 
             config = {
