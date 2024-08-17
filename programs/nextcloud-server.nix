@@ -46,7 +46,8 @@
             };
 
             extraAppsEnable = true;
-            hostName = "localhost";
+            hostName = "magrathea.brill-godzilla.ts.net";
+            https = true;
             maxUploadSize = "16G";
             nginx.recommendedHttpHeaders = true;
 
@@ -80,7 +81,12 @@
 
         };
 
-        nginx.virtualHosts."localhost".listen = [ { addr = "127.0.0.1"; port = 9000; } ];
+        nginx.virtualHosts."magrathea.brill-godzilla.ts.net" = {
+            forceSSL = true;
+            listen = [ { addr = "127.0.0.1"; port = 9000; } ];
+            sslCertificate = "/var/lib/tailscale/certs/magrathea.brill-godzilla.ts.net.crt";
+            sslCertificateKey = "/var/lib/tailscale/certs/magrathea.brill-godzilla.ts.net.key";
+        };
 
         postgresql = {
 
