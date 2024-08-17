@@ -12,7 +12,7 @@
 
             appstoreEnable = true;
             autoUpdateApps.enable = true;
-            caching.apcu = true;
+            caching.redis = true;
 
             config = {
                 adminpassFile = config.sops.secrets."nextcloud-admin".path;
@@ -23,6 +23,7 @@
                 dbuser = "nextcloud";
             };
 
+            configureRedis = true;
             database.createLocally = true;
             enableImagemagick = false;
 
@@ -79,6 +80,8 @@
             };
 
         };
+
+        nginx."magrathea".listen = [ { addr = "127.0.0.1"; port = 9000; } ];
 
         postgresql = {
 
