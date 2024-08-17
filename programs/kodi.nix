@@ -5,6 +5,9 @@
 
     services = {
 
+        displayManager.autoLogin.enable = true;
+        displayManager.autoLogin.user = "kodi";
+
         xserver = {
 
             enable = true;
@@ -20,9 +23,6 @@
                 ]));
 
             };
-
-            displayManager.autoLogin.enable = true;
-            displayManager.autoLogin.user = "kodi";
 
         };
 

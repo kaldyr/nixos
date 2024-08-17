@@ -21,8 +21,6 @@
                 dbname = "nextcloud";
                 dbtype = "pgsql";
                 dbuser = "nextcloud";
-                defaultPhoneRegion = "US";
-                trustedProxies = "";
             };
 
             database.createLocally = true;
@@ -50,7 +48,6 @@
             extraOptions.mail_sendmailmode = "pipe";
             extraOptions.mail_smtpmode = "sendmail";
             hostName = "magrathea.brill-godzilla.ts.net";
-            logLevel = 3;
             maxUploadSize = "16G";
             nginx.recommendedHttpHeaders = true;
 
@@ -72,8 +69,15 @@
                 "pm.max_requests" = 500;
             };
 
-            settings.trusted_domains = [ "magrathea.brill-godzilla.ts.net" ];
-            settings.dbtableprefix = "nc_";
+            settings = {
+                dbtableprefix = "nc_";
+                default_phone_region = "US";
+                loglevel = 3;
+                mail_sendmailmode = "pipe";
+                mail_smtpmode = "sendmail";
+                trusted_domains = [ "magrathea.brill-godzilla.ts.net" ];
+                trusted_proxies = [ "magrathea" "nextcloud" ];
+            };
 
         };
 
