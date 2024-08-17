@@ -68,7 +68,7 @@
             };
 
             settings = {
-                dbtableprefix = "nc_";
+                dbtableprefix = "oc_";
                 default_phone_region = "US";
                 loglevel = 3;
                 mail_sendmailmode = "pipe";
