@@ -43,6 +43,7 @@
             extraAppsEnable = true;
             extraOptions.mail_sendmailmode = "pipe";
             extraOptions.mail_smtpmode = "sendmail";
+            hostName = "magrathea.brill-godzilla.ts.net";
             logLevel = 3;
             maxUploadSize = "16G";
             nginx.recommendedHttpHeaders = true;
