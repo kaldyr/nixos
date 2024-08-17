@@ -34,13 +34,13 @@
 
                 news = pkgs.fetchNextcloudApp {
                     url = "https://github.com/nextcloud/news/releases/download/25.0.0-alpha8/news.tar.gz";
-                    license = "agpl3";
+                    license = "agpl3Plus";
                     sha256 = "";
                 };
 
                 socialsharing_telegram = pkgs.fetchNextcloudApp {
                     url = "https://github.com/nextcloud-releases/socialsharing/releases/download/v3.1.0/socialsharing_telegram-v3.1.0.tar.gz";
-                    license = "agpl3";
+                    license = "agpl3Plus";
                     sha256 = "";
                 };
 
