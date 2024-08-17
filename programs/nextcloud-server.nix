@@ -28,7 +28,7 @@
 
             extraApps = with config.services.nextcloud.package.packages.apps; {
 
-                inherit calendar contacts deck mail notes talk tasks;
+                inherit calendar contacts deck mail notes spreed tasks;
 
                 news = pkgs.fetchNextcloudApp {
                     url = "https://github.com/nextcloud/news/releases/download/25.0.0-alpha8/news.tar.gz";
