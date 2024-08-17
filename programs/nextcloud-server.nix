@@ -33,7 +33,7 @@
                 news = pkgs.fetchNextcloudApp {
                     url = "https://github.com/nextcloud/news/releases/download/25.0.0-alpha8/news.tar.gz";
                     license = "agpl3Plus";
-                    sha256 = "";
+                    sha256 = "sha256-nj1yR2COwQ6ZqZ1/8v9csb/dipXMa61e45XQmA5WPwg=";
                 };
 
                 socialsharing_telegram = pkgs.fetchNextcloudApp {
@@ -45,8 +45,6 @@
             };
 
             extraAppsEnable = true;
-            extraOptions.mail_sendmailmode = "pipe";
-            extraOptions.mail_smtpmode = "sendmail";
             hostName = "magrathea.brill-godzilla.ts.net";
             maxUploadSize = "16G";
             nginx.recommendedHttpHeaders = true;
