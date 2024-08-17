@@ -3,6 +3,7 @@
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-intel
         ../programs/kodi.nix
+        ../programs/nextcloud-server.nix
     ];
 
     boot = {
@@ -20,7 +21,7 @@
     # The storage array should not be managed by Disko to preserve data
     disko.devices.disk.main = {
 
-        device = "";
+        device = "/dev/disk/by-id/wwn-0x500a0751e6e1bdd7";
         type = "disk";
 
         content = {
