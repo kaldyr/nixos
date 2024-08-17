@@ -46,7 +46,7 @@
             };
 
             extraAppsEnable = true;
-            hostName = "magrathea.brill-godzilla.ts.net";
+            hostName = "nextcloud";
             maxUploadSize = "16G";
             nginx.recommendedHttpHeaders = true;
 
@@ -81,7 +81,7 @@
 
         };
 
-        nginx.virtualHosts."localhost".listen = [ { addr = "127.0.0.1"; port = 9000; } ];
+        nginx.virtualHosts."nextcloud".listen = [ { addr = "127.0.0.1"; port = 9000; } ];
 
         postgresql = {
 
