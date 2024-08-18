@@ -34,30 +34,6 @@
 
         };
 
-        # Home files that need to be preserved between boots
-        #  These files do not need to be backed up
-        # Syncthing and Nextcloud handle the personal files
-        "/nix" = {
-
-            hideMounts = true;
-
-            users.${sysConfig.user} = {
-                directories = [
-                    ".local/share/applications"
-                    "Audiobooks"
-                    "Books"
-                    "Documents"
-                    "Downloads"
-                    "Music"
-                    "Notes"
-                    "Pictures"
-                    "Projects"
-                    "Videos"
-                ];
-            };
-
-        };
-
     };
 
     home-manager = {
