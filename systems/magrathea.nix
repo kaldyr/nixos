@@ -154,4 +154,43 @@
         tailscale.useRoutingFeatures = "server";
     };
 
+    systemd.services."tailscale-certs" = {
+
+        description = "Automatic renewal of Tailscale certificates";
+
+        after = [ "network-pre.target" "tailscale.service" ];
+        wants = [ "network-pre.target" "tailscale.service" ];
+        wantedBy = [ "multi-user.target" ];
+
+        serviceConfig.type = "oneshot";
+
+        script = ''
+            status="Starting";
+
+            until [ $status = "Running" ]; do
+                sleep 2
+                status=$(${pkgs.tailscale}/bin/tailscale status -json | ${pkgs.jq}/bin/jq -r .BackendState)
+            done
+
+            ${pkgs.tailscale}/bin/tailscale cert magrathea.brill-godzilla.ts.net
+        '';
+
+    };
+
+    systemd.timers."tailscale-certs" = {
+
+        description = "Automatic renewal of Tailscale certificates";
+
+        after = [ "network-pre.target" "tailscale.service" ];
+        wants = [ "network-pre.target" "tailscale.service" ];
+        wantedBy = [ "multi-user.target" ];
+
+        timerConfig = {
+            OnCalendar = "weekly";
+            Persistent = "true";
+            Unit = "tailscale-certs.service";
+        };
+
+    };
+
 }
