@@ -219,9 +219,9 @@
                     "noshadow, class:steam_app_"
                     "noblur, class:steam_app_"
                     "noborder, class:steam_app_"
-                    "pseudo, class:($terminal)$"
-                    "pseudo, class:(mpv)"
-                    "pseudo, class:(feh)"
+                    # "pseudo, class:($terminal)$"
+                    # "pseudo, class:(mpv)"
+                    # "pseudo, class:(feh)"
                 ];
 
             };
