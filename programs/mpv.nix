@@ -26,7 +26,7 @@
                 screenshot-directory = "$HOME/Pictures/Screenshots/mpv";
                 vo = "gpu";
                 volume-max = 100;
-                ytdl-format = "bestvideo[height<=?480]+bestaudio/best";
+                ytdl-format = "bestvideo+bestaudio/best";
             };
 
             scripts = with pkgs.mpvScripts; [

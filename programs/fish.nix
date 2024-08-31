@@ -15,7 +15,7 @@
 
             functions.fish_greeting = "";
 
-            interactiveShellInit = ''
+            interactiveShellInit = /* fish */ ''
                 bind \cl 'clear ; tput cup $(tput lines) ; commandline -f repaint'
                 tput cup $(tput lines) ; commandline -f repaint
             '';
@@ -35,7 +35,7 @@
                 rm = "rm -i";
             };
 
-            shellInit = ''
+            shellInit = /* fish */ ''
                 fish_config theme choose "Catppuccin Frappe"
             '';
 
