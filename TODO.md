@@ -2,7 +2,6 @@
 
 ## Changes
 - nh nix helper
-- Nextcloud on Magrathea
 - Samba Server on Magrathea
 - Syncthing
 - Browser Profile sync to RAM
