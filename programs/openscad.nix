@@ -1,7 +1,7 @@
 { lib, pkgs, sysConfig, ... }: {
 
     environment.persistence = lib.mkIf sysConfig.impermanence {
-        "/nix".users.${sysConfig.user}.directories = [
+        "/state".users.${sysConfig.user}.directories = [
             ".local/share/OpenSCAD"
         ];
     };
