@@ -8,6 +8,7 @@
         ../programs/mpv.nix
         ../programs/newsboat.nix
         ../programs/obsidian.nix
+        ../programs/openscad.nix
         ../programs/telegram.nix
         ../programs/zathura.nix
     ];
