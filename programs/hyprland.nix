@@ -229,12 +229,167 @@
 
         xdg = {
 
-            configFile."hypr/frappe.conf".source = pkgs.fetchFromGitHub {
-                owner = "catppuccin";
-                repo = "hyprland";
-                rev = "c388ac55563ddeea0afe9df79d4bfff0096b146b";
-                sha256 = "sha256-xSa/z0Pu+ioZ0gFH9qSo9P94NPkEMovstm1avJ7rvzM=";
-            } + "/themes/frappe.conf";
+            configFile = {
+
+                # "hypr/hyprland.conf".text = /* bash */ ''
+                #     $mainMod=SUPER
+                #     $terminal=foot
+                #
+                #     source=~/.config/hypr/frappe.conf
+                #
+                #     animations {
+                #         bezier=myBezier, 0.05, 0.9, 0.1, 1.05
+                #         animation=border, 1, 10, default
+                #         animation=borderangle, 1, 8, default
+                #         animation=fade, 1, 7, default
+                #         animation=windows, 1, 7, myBezier
+                #         animation=windowsOut, 1, 7, default, popin 80%
+                #         animation=workspaces, 1, 6, default
+                #         enabled=yes
+                #     }
+                #
+                #     decoration {
+                #         blur {
+                #             contrast=1.000000
+                #             enabled=true
+                #             ignore_opacity=true
+                #             new_optimizations=true
+                #             noise=0.030000
+                #             passes=3
+                #             size=12
+                #             xray=true
+                #         }
+                #         col.shadow=rgba(1a1a1aee)
+                #         dim_inactive=false
+                #         drop_shadow=yes
+                #         rounding=10
+                #         shadow_range=20
+                #         shadow_render_power=3
+                #     }
+                #
+                #     dwindle {
+                #         preserve_split=yes
+                #         pseudotile=yes
+                #     }
+                #
+                #     general {
+                #         border_size=0
+                #         gaps_in=14
+                #         gaps_out=28
+                #         layout=dwindle
+                #     }
+                #
+                #     gestures {
+                #         workspace_swipe=true
+                #     }
+                #
+                #     input {
+                #         touchpad {
+                #             natural_scroll=no
+                #         }
+                #         kb_layout=us
+                #         sensitivity=0
+                #     }
+                #
+                #     misc {
+                #         animate_mouse_windowdragging=yes
+                #         disable_hyprland_logo=yes
+                #         vrr=1
+                #     }
+                #     bind=$mainMod, q, exec, $terminal
+                #     bind=$mainMod, c, killactive,
+                #     bind=$mainMod, m, exit,
+                #     bind=$mainMod, v, togglefloating,
+                #     bind=$mainMod, r, exec, ${pkgs.fuzzel}
+                #     bind=$mainMod, o, pseudo,
+                #     bind=$mainMod, s, togglesplit,
+                #     bind=$mainMod, f, fullscreen,
+                #     bind=$mainMod, p, exec, grim $(xdg-user-dir PICTURES)/Screenshots/$(date +'%Y%m%d%H%M%S.png')
+                #     bind=$mainMod SHIFT, p, exec, ${pkgs.grim} -g "$(${pkgs.slurp})" - | ${pkgs.convert} - -shave 1x1 PNG:- | ${pkgs.swappy} -f - 
+                #     bind=$mainMod ALT, p, exec, ${pkgs.grim} -g "$(${pkgs.slurp})" - | ${pkgs.convert} - -shave 1x1 PNG:- | ${pkgs.tesseract} - - | ${pkgs.wl-copy} --primary
+                #     bind=$mainMod, y, exec, ln -sf $(command ls $HOME/Pictures/Wallpapers | ${pkgs.fuzzel} --dmenu) $HOME/Pictures/Wallpapers/.wallpaper && ${pkgs.swww} img $HOME/Pictures/Wallpapers/.wallpaper
+                #     bind=$mainMod, u, exec, ${pkgs.hyprpicker} -a
+                #     bind=$mainMod, g, exec, ${pkgs.mpv} $(${pkts.wl-paste})
+                #     bind=$mainMod, t, exec, hyprctl keyword monitor eDP-1,preferred,auto,1,transform,2
+                #     bind=$mainMod SHIFT, t, exec, hyprctl keyword monitor eDP-1,preferred,auto,1,transform,0
+                #     bind=$mainMod, n, exec, dunstctl history-pop
+                #     bind=$mainMod SHIFT, n, exec, dunstctl context
+                #     bind=$mainMod ALT, n, exec, dunstctl close
+                #     bind=, $XF86AudioRaiseVolume, exec, ${pkgs.pamixer} -i 1
+                #     bind=, $XF86AudioLowerVolume, exec, ${pkgs.pamixer} -d 1
+                #     bind=, $XF86AudioMute, exec, ${pkgs.pamixer} -t
+                #     bind=SHIFT, $$XF86AudioRaiseVolume, exec, ${pkgs.pamixer} --default-source -i 1
+                #     bind=SHIFT, $$XF86AudioLowerVolume, exec, ${pkgs.pamixer} --default-source -d 1
+                #     bind=SHIFT, $$XF86AudioMute, exec, ${pkgs.pamixer} --default-source -t
+                #     bind=, $XF86AudioPlay, exec, ${pkgs.playerctl} play-pause
+                #     bind=, $XF86AudioNext, exec, ${pkgs.playerctl} next
+                #     bind=, $XF86AudioPrev, exec, ${pkgs.playerctl} prev
+                #     bind=ALT, mouse:274, pass, ^(discord)$
+                #     bind=, $XF86MonBrightnessUp, exec, ${pkgs.brightnessctl} set +5%
+                #     bind=, $XF86MonBrightnessDown, exec, ${pkgs.brightnessctl} set 5%-
+                #     bind=$mainMod, h, movefocus, l
+                #     bind=$mainMod, l, movefocus, r
+                #     bind=$mainMod, k, movefocus, u
+                #     bind=$mainMod, j, movefocus, d
+                #     bind=$mainMod SHIFT, H, movewindow, l
+                #     bind=$mainMod SHIFT, J, movewindow, d
+                #     bind=$mainMod SHIFT, K, movewindow, u
+                #     bind=$mainMod SHIFT, L, movewindow, r
+                #     bind=$mainMod ALT, H, resizeactive, -1 0
+                #     bind=$mainMod ALT, J, resizeactive, 0 1
+                #     bind=$mainMod ALT, K, resizeactive, 0 -1
+                #     bind=$mainMod ALT, L, resizeactive, 1 0
+                #     bind=$mainMod, 1, workspace, 1
+                #     bind=$mainMod, 2, workspace, 2
+                #     bind=$mainMod, 3, workspace, 3
+                #     bind=$mainMod, 4, workspace, 4
+                #     bind=$mainMod, 5, workspace, 5
+                #     bind=$mainMod, 6, workspace, 6
+                #     bind=$mainMod, 7, workspace, 7
+                #     bind=$mainMod, 8, workspace, 8
+                #     bind=$mainMod, 9, workspace, 9
+                #     bind=$mainMod, 0, workspace, 10
+                #     bind=$mainMod SHIFT, 1, movetoworkspacesilent, 1
+                #     bind=$mainMod SHIFT, 2, movetoworkspacesilent, 2
+                #     bind=$mainMod SHIFT, 3, movetoworkspacesilent, 3
+                #     bind=$mainMod SHIFT, 4, movetoworkspacesilent, 4
+                #     bind=$mainMod SHIFT, 5, movetoworkspacesilent, 5
+                #     bind=$mainMod SHIFT, 6, movetoworkspacesilent, 6
+                #     bind=$mainMod SHIFT, 7, movetoworkspacesilent, 7
+                #     bind=$mainMod SHIFT, 8, movetoworkspacesilent, 8
+                #     bind=$mainMod SHIFT, 9, movetoworkspacesilent, 9
+                #     bind=$mainMod SHIFT, 0, movetoworkspacesilent, 10
+                #     bind=$mainMod, mouse_down, workspace, e+1
+                #     bind=$mainMod, mouse_up, workspace, e-1
+                #     bindm=$mainMod, mouse:272, movewindow
+                #     bindm=$mainMod, mouse:273, resizewindow
+                #     exec-once=swww-daemon --format xrgb
+                #     exec-once=swww img $HOME/Pictures/Wallpapers/.wallpaper
+                #     exec-once=wl-paste --type text --watch cliphist store
+                #     exec-once=wl-paste --type image --watch cliphist store
+                #     exec-once=waybar
+                #     layerrule=blur, launcher
+                #     monitor=DP-3, 1920x1080@60, -1920x0, 1
+                #     monitor=eDP-1, 2256x1504@60, 0x0, 1
+                #     windowrulev2=opacity 0.90 override 0.90 override, class:($terminal)$
+                #     windowrulev2=opacity 0.90 override 0.90 override, class:(neovide)$
+                #     windowrulev2=opacity 0.90 override 0.90 override, class:librewolf
+                #     windowrulev2=opacity 0.90 override 0.90 override, class:org.telegram.desktop
+                #     windowrulev2=opacity 0.90 override 0.90 override, class:discord
+                #     windowrulev2=opacity 0.90 override 0.90 override, class:steam$
+                #     windowrulev2=noshadow, class:steam_app_
+                #     windowrulev2=noblur, class:steam_app_
+                #     windowrulev2=noborder, class:steam_app_
+                # '';
+
+                "hypr/frappe.conf".source = pkgs.fetchFromGitHub {
+                    owner = "catppuccin";
+                    repo = "hyprland";
+                    rev = "c388ac55563ddeea0afe9df79d4bfff0096b146b";
+                    sha256 = "sha256-xSa/z0Pu+ioZ0gFH9qSo9P94NPkEMovstm1avJ7rvzM=";
+                } + "/themes/frappe.conf";
+
+            };
 
             mimeApps.defaultApplications = {
                 "default-web-browser" = [ "librewolf.desktop" ];

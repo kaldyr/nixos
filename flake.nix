@@ -21,7 +21,6 @@
 
         # Set nixpkgs to NixOS Unstable
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
         # nixpkgs-fresh.url = "github:NixOS/nixpkgs/master";
 
         # Sops - secret management
