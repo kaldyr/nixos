@@ -22,6 +22,7 @@
             libnotify
             pamixer
             pavucontrol
+            playerctl
             polkit_gnome
             slurp
             swww
@@ -37,373 +38,208 @@
 
             enable = true;
 
-            settings = {
-                "$mainMod" = "SUPER";
-                "$terminal" = "foot";
+            extraConfig = /* hyprlang */ ''
+                $mainMod=SUPER
+                $terminal=${pkgs.foot}/bin/foot
 
-                source = [ "~/.config/hypr/frappe.conf" ];
+                source=~/.config/hypr/frappe.conf
 
-                animations = {
-                    enabled = "yes";
-                    animation = [
-                        "border, 1, 10, default"
-                        "borderangle, 1, 8, default"
-                        "fade, 1, 7, default"
-                        "windows, 1, 7, myBezier"
-                        "windowsOut, 1, 7, default, popin 80%"
-                        "workspaces, 1, 6, default"
-                    ];
-                    bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
-                };
+                animations {
+                    bezier=myBezier, 0.05, 0.9, 0.1, 1.05
+                    animation=border, 1, 10, default
+                    animation=borderangle, 1, 8, default
+                    animation=fade, 1, 7, default
+                    animation=windows, 1, 7, myBezier
+                    animation=windowsOut, 1, 7, default, popin 80%
+                    animation=workspaces, 1, 6, default
+                    enabled=yes
+                }
 
-                bind = [
-                    # Main
-                    "$mainMod, q, exec, $terminal"
-                    "$mainMod, c, killactive,"
-                    "$mainMod, m, exit,"
-                    "$mainMod, v, togglefloating,"
-                    "$mainMod, r, exec, fuzzel"
-                    "$mainMod, o, pseudo,"
-                    "$mainMod, s, togglesplit,"
-                    "$mainMod, f, fullscreen,"
-                    # Screenshots
-                    "$mainMod, p, exec, grim $(xdg-user-dir PICTURES)/Screenshots/$(date +'%Y%m%d%H%M%S.png')"
-                    "$mainMod SHIFT, p, exec, grim -g \"$(slurp)\" - | convert - -shave 1x1 PNG:- | swappy -f - "
-                    "$mainMod ALT, p, exec, grim -g \"$(slurp)\" - | convert - -shave 1x1 PNG:- | tesseract - - | wl-copy --primary"
-                    # Set wallpaper
-                    "$mainMod, y, exec, ln -sf $(command ls $HOME/Pictures/Wallpapers | fuzzel --dmenu) $HOME/Pictures/Wallpapers/.wallpaper && swww img $HOME/Pictures/Wallpapers/.wallpaper"
-                    "$mainMod, u, exec, hyprpicker -a"
-                    # Play url from clipboard in mpv
-                    "$mainMod, g, exec, mpv $(wl-paste)"
-                    # Monitor flipping for laptop in tent mode
-                    "$mainMod, t, exec, hyprctl keyword monitor eDP-1,preferred,auto,1,transform,2"
-                    "$mainMod SHIFT, t, exec, hyprctl keyword monitor eDP-1,preferred,auto,1,transform,0"
-                    # Notifications
-                    "$mainMod, n, exec, dunstctl history-pop"
-                    "$mainMod SHIFT, n, exec, dunstctl context"
-                    "$mainMod ALT, n, exec, dunstctl close"
-                    # Media Controls
-                    ", $XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer -i 1"
-                    ", $XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer -d 1"
-                    ", $XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer -t"
-                    "SHIFT, $$XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer --default-source -i 1"
-                    "SHIFT, $$XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer --default-source -d 1"
-                    "SHIFT, $$XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer --default-source -t"
-                    ", $XF86AudioPlay, exec, playerctl play-pause"
-                    ", $XF86AudioNext, exec, playerctl next"
-                    ", $XF86AudioPrev, exec, playerctl prev"
-                    # Discord PTT
-                    # "$mainMod, mouse:274,pass,^(discord)$"
-                    "ALT, mouse:274, pass, ^(discord)$"
-                    # Brightness
-                    ", $XF86MonBrightnessUp, exec, brightnessctl set +5%"
-                    ", $XF86MonBrightnessDown, exec, brightnessctl set 5%-"
-                    # Move focus with mainMod + arrow keys
-                    "$mainMod, h, movefocus, l"
-                    "$mainMod, l, movefocus, r"
-                    "$mainMod, k, movefocus, u"
-                    "$mainMod, j, movefocus, d"
-                    # Move active window with mainMod + SHIFT + [H, J, K, L]
-                    "$mainMod SHIFT, H, movewindow, l"
-                    "$mainMod SHIFT, J, movewindow, d"
-                    "$mainMod SHIFT, K, movewindow, u"
-                    "$mainMod SHIFT, L, movewindow, r"
-                    # Resize active window with mainMod + ALT + [H, J, K, L]
-                    "$mainMod ALT, H, resizeactive, -1 0"
-                    "$mainMod ALT, J, resizeactive, 0 1"
-                    "$mainMod ALT, K, resizeactive, 0 -1"
-                    "$mainMod ALT, L, resizeactive, 1 0"
-                    # Switch workspaces with mainMod + [0-9]
-                    "$mainMod, 1, workspace, 1"
-                    "$mainMod, 2, workspace, 2"
-                    "$mainMod, 3, workspace, 3"
-                    "$mainMod, 4, workspace, 4"
-                    "$mainMod, 5, workspace, 5"
-                    "$mainMod, 6, workspace, 6"
-                    "$mainMod, 7, workspace, 7"
-                    "$mainMod, 8, workspace, 8"
-                    "$mainMod, 9, workspace, 9"
-                    "$mainMod, 0, workspace, 10"
-                    # Move active window to a workspace with mainMod + SHIFT + [0-9]
-                    "$mainMod SHIFT, 1, movetoworkspacesilent, 1"
-                    "$mainMod SHIFT, 2, movetoworkspacesilent, 2"
-                    "$mainMod SHIFT, 3, movetoworkspacesilent, 3"
-                    "$mainMod SHIFT, 4, movetoworkspacesilent, 4"
-                    "$mainMod SHIFT, 5, movetoworkspacesilent, 5"
-                    "$mainMod SHIFT, 6, movetoworkspacesilent, 6"
-                    "$mainMod SHIFT, 7, movetoworkspacesilent, 7"
-                    "$mainMod SHIFT, 8, movetoworkspacesilent, 8"
-                    "$mainMod SHIFT, 9, movetoworkspacesilent, 9"
-                    "$mainMod SHIFT, 0, movetoworkspacesilent, 10"
-                    # Scroll through existing workspaces with mainMod + scroll
-                    "$mainMod, mouse_down, workspace, e+1"
-                    "$mainMod, mouse_up, workspace, e-1"
-                ];
+                decoration {
+                    blur {
+                        contrast=1.000000
+                        enabled=true
+                        ignore_opacity=true
+                        new_optimizations=true
+                        noise=0.030000
+                        passes=3
+                        size=12
+                        xray=true
+                    }
+                    col.shadow=rgba(1a1a1aee)
+                    dim_inactive=false
+                    drop_shadow=yes
+                    rounding=10
+                    shadow_range=20
+                    shadow_render_power=3
+                }
 
-                bindm = [
-                    # Move/resize windows with mainMod + LMB/RMB and dragging
-                    "$mainMod, mouse:272, movewindow"
-                    "$mainMod, mouse:273, resizewindow"
-                ];
+                dwindle {
+                    preserve_split=yes
+                    pseudotile=yes
+                }
 
-                decoration = {
+                general {
+                    border_size=0
+                    gaps_in=14
+                    gaps_out=28
+                    layout=dwindle
+                }
 
-                    blur = {
-                        enabled = true;
-                        contrast = 1.0;
-                        ignore_opacity = true;
-                        new_optimizations = true;
-                        noise = 0.03;
-                        passes = 3;
-                        size = 12;
-                        xray = true;
-                    };
+                gestures {
+                    workspace_swipe=true
+                }
 
-                    "col.shadow" = "rgba(1a1a1aee)";
-                    dim_inactive = false;
-                    drop_shadow = "yes";
-                    rounding = 10;
-                    shadow_range = 20;
-                    shadow_render_power = 3;
+                input {
+                    touchpad {
+                        natural_scroll=no
+                    }
+                    kb_layout=us
+                    sensitivity=0
+                }
 
-                };
+                misc {
+                    animate_mouse_windowdragging=yes
+                    disable_hyprland_logo=yes
+                    vrr=1
+                }
 
-                dwindle = {
-                    preserve_split = "yes";
-                    pseudotile = "yes";
-                };
+                # Tent mode for laptop
+                bind=$mainMod, t, exec, ${pkgs.hyprland}/bin/hyprctl keyword monitor eDP-1,preferred,auto,1,transform,2
+                bind=$mainMod SHIFT, t, exec, ${pkgs.hyprland}/bin/hyprctl keyword monitor eDP-1,preferred,auto,1,transform,0
 
-                exec-once = [
-                    "swww-daemon --format xrgb"
-                    "swww img $HOME/Pictures/Wallpapers/.wallpaper"
-                    "wl-paste --type text --watch cliphist store"
-                    "wl-paste --type image --watch cliphist store"
-                    "waybar"
-                ];
+                # Screenshots
+                bind=$mainMod, p, exec, ${pkgs.grim}/bin/grim $(${pkgs.xdg-user-dirs}/bin/xdg-user-dir PICTURES)/Screenshots/$(${pkgs.coreutils}/bin/date +'%Y%m%d%H%M%S.png')
+                bind=$mainMod SHIFT, p, exec, ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.imagemagick}/bin/convert - -shave 1x1 PNG:- | ${pkgs.swappy}/bin/swappy -f - 
+                bind=$mainMod ALT, p, exec, ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.imagemagick}/bin/convert - -shave 1x1 PNG:- | ${pkgs.tesseract}/bin/tesseract - - | ${pkgs.wl-clipboard}/bin/wl-copy --primary
 
-                general = {
-                    border_size = 0;
-                    gaps_in = 14;
-                    gaps_out = 28;
-                    layout = "dwindle";
-                };
+                # Wallpapers
+                bind=$mainMod, y, exec, ln -sf $(command ls $HOME/Pictures/Wallpapers | ${pkgs.fuzzel}/bin/fuzzel --dmenu) $HOME/Pictures/Wallpapers/.wallpaper && ${pkgs.swww}/bin/swww img $HOME/Pictures/Wallpapers/.wallpaper
+                bind=$mainMod, u, exec, ${pkgs.hyprpicker}/bin/hyprpicker -a
 
-                gestures.workspace_swipe = true;
+                # Play media from clipboard
+                bind=$mainMod, g, exec, ${pkgs.mpv}/bin/mpv $(${pkgs.wl-clipboard}/bin/wl-paste)
 
-                input = {
-                    kb_layout = "us";
-                    sensitivity = 0;
-                    touchpad.natural_scroll = "no";
-                };
+                # Notification Controls
+                bind=$mainMod, n, exec, ${pkgs.dunst}/bin/dunstctl history-pop
+                bind=$mainMod SHIFT, n, exec, ${pkgs.dunst}/bin/dunstctl context
+                bind=$mainMod ALT, n, exec, ${pkgs.dunst}/bin/dunstctl close
 
-                layerrule = [ "blur, launcher" ];
+                # Media controls
+                bind=, $XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer -i 1
+                bind=, $XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer -d 1
+                bind=, $XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer -t
+                bind=SHIFT, $$XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer --default-source -i 1
+                bind=SHIFT, $$XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer --default-source -d 1
+                bind=SHIFT, $$XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer --default-source -t
+                bind=, $XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause
+                bind=, $XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next
+                bind=, $XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl prev
+                bind=, $XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl set +5%
+                bind=, $XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 5%-
 
-                misc = {
-                    disable_hyprland_logo = "yes";
-                    animate_mouse_windowdragging = "yes";
-                    vrr = 1;
-                };
+                # Pass PTT button directly to Discord
+                bind=ALT, mouse:274, pass, ^(discord)$
 
-                monitor = [
-                    "DP-3, 1920x1080@60, -1920x0, 1"
-                    "eDP-1, 2256x1504@60, 0x0, 1"
-                ];
+                # Hyprland controls
+                bind=$mainMod, q, exec, $terminal
+                bind=$mainMod, c, killactive,
+                bind=$mainMod, m, exit,
+                bind=$mainMod, v, togglefloating,
+                bind=$mainMod, r, exec, ${pkgs.fuzzel}/bin/fuzzel
+                bind=$mainMod, o, pseudo,
+                bind=$mainMod, s, togglesplit,
+                bind=$mainMod, f, fullscreen,
 
-                windowrulev2 = [
-                    "opacity 0.90 override 0.90 override, class:($terminal)$"
-                    "opacity 0.90 override 0.90 override, class:(neovide)$"
-                    "opacity 0.90 override 0.90 override, class:librewolf"
-                    "opacity 0.90 override 0.90 override, class:org.telegram.desktop"
-                    "opacity 0.90 override 0.90 override, class:discord"
-                    "opacity 0.90 override 0.90 override, class:steam$"
-                    "noshadow, class:steam_app_"
-                    "noblur, class:steam_app_"
-                    "noborder, class:steam_app_"
-                ];
+                bind=$mainMod, h, movefocus, l
+                bind=$mainMod, l, movefocus, r
+                bind=$mainMod, k, movefocus, u
+                bind=$mainMod, j, movefocus, d
 
-            };
+                bind=$mainMod SHIFT, H, movewindow, l
+                bind=$mainMod SHIFT, J, movewindow, d
+                bind=$mainMod SHIFT, K, movewindow, u
+                bind=$mainMod SHIFT, L, movewindow, r
+                bind=$mainMod ALT, H, resizeactive, -1 0
+                bind=$mainMod ALT, J, resizeactive, 0 1
+                bind=$mainMod ALT, K, resizeactive, 0 -1
+                bind=$mainMod ALT, L, resizeactive, 1 0
+
+                bind=$mainMod, 1, workspace, 1
+                bind=$mainMod, 2, workspace, 2
+                bind=$mainMod, 3, workspace, 3
+                bind=$mainMod, 4, workspace, 4
+                bind=$mainMod, 5, workspace, 5
+                bind=$mainMod, 6, workspace, 6
+                bind=$mainMod, 7, workspace, 7
+                bind=$mainMod, 8, workspace, 8
+                bind=$mainMod, 9, workspace, 9
+                bind=$mainMod, 0, workspace, 10
+
+                bind=$mainMod SHIFT, 1, movetoworkspacesilent, 1
+                bind=$mainMod SHIFT, 2, movetoworkspacesilent, 2
+                bind=$mainMod SHIFT, 3, movetoworkspacesilent, 3
+                bind=$mainMod SHIFT, 4, movetoworkspacesilent, 4
+                bind=$mainMod SHIFT, 5, movetoworkspacesilent, 5
+                bind=$mainMod SHIFT, 6, movetoworkspacesilent, 6
+                bind=$mainMod SHIFT, 7, movetoworkspacesilent, 7
+                bind=$mainMod SHIFT, 8, movetoworkspacesilent, 8
+                bind=$mainMod SHIFT, 9, movetoworkspacesilent, 9
+                bind=$mainMod SHIFT, 0, movetoworkspacesilent, 10
+
+                bind=$mainMod, mouse_down, workspace, e+1
+                bind=$mainMod, mouse_up, workspace, e-1
+                bindm=$mainMod, mouse:272, movewindow
+                bindm=$mainMod, mouse:273, resizewindow
+
+                # Launch Applications
+                exec-once=swww-daemon --format xrgb
+                exec-once=swww img $HOME/Pictures/Wallpapers/.wallpaper
+                exec-once=wl-paste --type text --watch cliphist store
+                exec-once=wl-paste --type image --watch cliphist store
+                exec-once=waybar
+
+                # Layer Rules
+                layerrule=blur, launcher
+
+                # Monitors
+                monitor=DP-3, 1920x1080@60, -1920x0, 1
+                monitor=eDP-1, 2256x1504@60, 0x0, 1
+
+                # Window Rules
+                windowrulev2=opacity 0.90 override 0.90 override, class:($terminal)$
+                windowrulev2=opacity 0.90 override 0.90 override, class:(neovide)$
+                windowrulev2=opacity 0.90 override 0.90 override, class:librewolf
+                windowrulev2=opacity 0.90 override 0.90 override, class:org.telegram.desktop
+                windowrulev2=opacity 0.90 override 0.90 override, class:discord
+                windowrulev2=opacity 0.90 override 0.90 override, class:steam$
+                windowrulev2=noshadow, class:steam_app_
+                windowrulev2=noblur, class:steam_app_
+                windowrulev2=noborder, class:steam_app_
+            '';
 
             xwayland.enable = true;
 
         };
 
-        xdg = {
+        xdg.configFile."hypr/frappe.conf".source = pkgs.fetchFromGitHub {
+            owner = "catppuccin";
+            repo = "hyprland";
+            rev = "c388ac55563ddeea0afe9df79d4bfff0096b146b";
+            sha256 = "sha256-xSa/z0Pu+ioZ0gFH9qSo9P94NPkEMovstm1avJ7rvzM=";
+        } + "/themes/frappe.conf";
 
-            configFile = {
-
-                # "hypr/hyprland.conf".text = /* bash */ ''
-                #     $mainMod=SUPER
-                #     $terminal=foot
-                #
-                #     source=~/.config/hypr/frappe.conf
-                #
-                #     animations {
-                #         bezier=myBezier, 0.05, 0.9, 0.1, 1.05
-                #         animation=border, 1, 10, default
-                #         animation=borderangle, 1, 8, default
-                #         animation=fade, 1, 7, default
-                #         animation=windows, 1, 7, myBezier
-                #         animation=windowsOut, 1, 7, default, popin 80%
-                #         animation=workspaces, 1, 6, default
-                #         enabled=yes
-                #     }
-                #
-                #     decoration {
-                #         blur {
-                #             contrast=1.000000
-                #             enabled=true
-                #             ignore_opacity=true
-                #             new_optimizations=true
-                #             noise=0.030000
-                #             passes=3
-                #             size=12
-                #             xray=true
-                #         }
-                #         col.shadow=rgba(1a1a1aee)
-                #         dim_inactive=false
-                #         drop_shadow=yes
-                #         rounding=10
-                #         shadow_range=20
-                #         shadow_render_power=3
-                #     }
-                #
-                #     dwindle {
-                #         preserve_split=yes
-                #         pseudotile=yes
-                #     }
-                #
-                #     general {
-                #         border_size=0
-                #         gaps_in=14
-                #         gaps_out=28
-                #         layout=dwindle
-                #     }
-                #
-                #     gestures {
-                #         workspace_swipe=true
-                #     }
-                #
-                #     input {
-                #         touchpad {
-                #             natural_scroll=no
-                #         }
-                #         kb_layout=us
-                #         sensitivity=0
-                #     }
-                #
-                #     misc {
-                #         animate_mouse_windowdragging=yes
-                #         disable_hyprland_logo=yes
-                #         vrr=1
-                #     }
-                #     bind=$mainMod, q, exec, $terminal
-                #     bind=$mainMod, c, killactive,
-                #     bind=$mainMod, m, exit,
-                #     bind=$mainMod, v, togglefloating,
-                #     bind=$mainMod, r, exec, ${pkgs.fuzzel}
-                #     bind=$mainMod, o, pseudo,
-                #     bind=$mainMod, s, togglesplit,
-                #     bind=$mainMod, f, fullscreen,
-                #     bind=$mainMod, p, exec, grim $(xdg-user-dir PICTURES)/Screenshots/$(date +'%Y%m%d%H%M%S.png')
-                #     bind=$mainMod SHIFT, p, exec, ${pkgs.grim} -g "$(${pkgs.slurp})" - | ${pkgs.convert} - -shave 1x1 PNG:- | ${pkgs.swappy} -f - 
-                #     bind=$mainMod ALT, p, exec, ${pkgs.grim} -g "$(${pkgs.slurp})" - | ${pkgs.convert} - -shave 1x1 PNG:- | ${pkgs.tesseract} - - | ${pkgs.wl-copy} --primary
-                #     bind=$mainMod, y, exec, ln -sf $(command ls $HOME/Pictures/Wallpapers | ${pkgs.fuzzel} --dmenu) $HOME/Pictures/Wallpapers/.wallpaper && ${pkgs.swww} img $HOME/Pictures/Wallpapers/.wallpaper
-                #     bind=$mainMod, u, exec, ${pkgs.hyprpicker} -a
-                #     bind=$mainMod, g, exec, ${pkgs.mpv} $(${pkts.wl-paste})
-                #     bind=$mainMod, t, exec, hyprctl keyword monitor eDP-1,preferred,auto,1,transform,2
-                #     bind=$mainMod SHIFT, t, exec, hyprctl keyword monitor eDP-1,preferred,auto,1,transform,0
-                #     bind=$mainMod, n, exec, dunstctl history-pop
-                #     bind=$mainMod SHIFT, n, exec, dunstctl context
-                #     bind=$mainMod ALT, n, exec, dunstctl close
-                #     bind=, $XF86AudioRaiseVolume, exec, ${pkgs.pamixer} -i 1
-                #     bind=, $XF86AudioLowerVolume, exec, ${pkgs.pamixer} -d 1
-                #     bind=, $XF86AudioMute, exec, ${pkgs.pamixer} -t
-                #     bind=SHIFT, $$XF86AudioRaiseVolume, exec, ${pkgs.pamixer} --default-source -i 1
-                #     bind=SHIFT, $$XF86AudioLowerVolume, exec, ${pkgs.pamixer} --default-source -d 1
-                #     bind=SHIFT, $$XF86AudioMute, exec, ${pkgs.pamixer} --default-source -t
-                #     bind=, $XF86AudioPlay, exec, ${pkgs.playerctl} play-pause
-                #     bind=, $XF86AudioNext, exec, ${pkgs.playerctl} next
-                #     bind=, $XF86AudioPrev, exec, ${pkgs.playerctl} prev
-                #     bind=ALT, mouse:274, pass, ^(discord)$
-                #     bind=, $XF86MonBrightnessUp, exec, ${pkgs.brightnessctl} set +5%
-                #     bind=, $XF86MonBrightnessDown, exec, ${pkgs.brightnessctl} set 5%-
-                #     bind=$mainMod, h, movefocus, l
-                #     bind=$mainMod, l, movefocus, r
-                #     bind=$mainMod, k, movefocus, u
-                #     bind=$mainMod, j, movefocus, d
-                #     bind=$mainMod SHIFT, H, movewindow, l
-                #     bind=$mainMod SHIFT, J, movewindow, d
-                #     bind=$mainMod SHIFT, K, movewindow, u
-                #     bind=$mainMod SHIFT, L, movewindow, r
-                #     bind=$mainMod ALT, H, resizeactive, -1 0
-                #     bind=$mainMod ALT, J, resizeactive, 0 1
-                #     bind=$mainMod ALT, K, resizeactive, 0 -1
-                #     bind=$mainMod ALT, L, resizeactive, 1 0
-                #     bind=$mainMod, 1, workspace, 1
-                #     bind=$mainMod, 2, workspace, 2
-                #     bind=$mainMod, 3, workspace, 3
-                #     bind=$mainMod, 4, workspace, 4
-                #     bind=$mainMod, 5, workspace, 5
-                #     bind=$mainMod, 6, workspace, 6
-                #     bind=$mainMod, 7, workspace, 7
-                #     bind=$mainMod, 8, workspace, 8
-                #     bind=$mainMod, 9, workspace, 9
-                #     bind=$mainMod, 0, workspace, 10
-                #     bind=$mainMod SHIFT, 1, movetoworkspacesilent, 1
-                #     bind=$mainMod SHIFT, 2, movetoworkspacesilent, 2
-                #     bind=$mainMod SHIFT, 3, movetoworkspacesilent, 3
-                #     bind=$mainMod SHIFT, 4, movetoworkspacesilent, 4
-                #     bind=$mainMod SHIFT, 5, movetoworkspacesilent, 5
-                #     bind=$mainMod SHIFT, 6, movetoworkspacesilent, 6
-                #     bind=$mainMod SHIFT, 7, movetoworkspacesilent, 7
-                #     bind=$mainMod SHIFT, 8, movetoworkspacesilent, 8
-                #     bind=$mainMod SHIFT, 9, movetoworkspacesilent, 9
-                #     bind=$mainMod SHIFT, 0, movetoworkspacesilent, 10
-                #     bind=$mainMod, mouse_down, workspace, e+1
-                #     bind=$mainMod, mouse_up, workspace, e-1
-                #     bindm=$mainMod, mouse:272, movewindow
-                #     bindm=$mainMod, mouse:273, resizewindow
-                #     exec-once=swww-daemon --format xrgb
-                #     exec-once=swww img $HOME/Pictures/Wallpapers/.wallpaper
-                #     exec-once=wl-paste --type text --watch cliphist store
-                #     exec-once=wl-paste --type image --watch cliphist store
-                #     exec-once=waybar
-                #     layerrule=blur, launcher
-                #     monitor=DP-3, 1920x1080@60, -1920x0, 1
-                #     monitor=eDP-1, 2256x1504@60, 0x0, 1
-                #     windowrulev2=opacity 0.90 override 0.90 override, class:($terminal)$
-                #     windowrulev2=opacity 0.90 override 0.90 override, class:(neovide)$
-                #     windowrulev2=opacity 0.90 override 0.90 override, class:librewolf
-                #     windowrulev2=opacity 0.90 override 0.90 override, class:org.telegram.desktop
-                #     windowrulev2=opacity 0.90 override 0.90 override, class:discord
-                #     windowrulev2=opacity 0.90 override 0.90 override, class:steam$
-                #     windowrulev2=noshadow, class:steam_app_
-                #     windowrulev2=noblur, class:steam_app_
-                #     windowrulev2=noborder, class:steam_app_
-                # '';
-
-                "hypr/frappe.conf".source = pkgs.fetchFromGitHub {
-                    owner = "catppuccin";
-                    repo = "hyprland";
-                    rev = "c388ac55563ddeea0afe9df79d4bfff0096b146b";
-                    sha256 = "sha256-xSa/z0Pu+ioZ0gFH9qSo9P94NPkEMovstm1avJ7rvzM=";
-                } + "/themes/frappe.conf";
-
-            };
-
-            mimeApps.defaultApplications = {
-                "default-web-browser" = [ "librewolf.desktop" ];
-                "text/html" = [ "librewolf.desktop" ];
-                "x-scheme-handler/ftp" = [ "librewolf.desktop" ];
-                "x-scheme-handler/http" = [ "librewolf.desktop" ];
-                "x-scheme-handler/https" = [ "librewolf.desktop" ];
-                "application/md" = [ "librewolf.desktop" ];
-                "application/pdf" = [ "org.pwmt.zathura.desktop" ];
-                "application/image" = [ "feh.desktop" ];
-                "application/video" = [ "mpv.desktop" ];
-                "application/audio" = [ "mpv.desktop" ];
-            };
-
+        xdg.mimeApps.defaultApplications = {
+            "default-web-browser" = [ "librewolf.desktop" ];
+            "text/html" = [ "librewolf.desktop" ];
+            "x-scheme-handler/ftp" = [ "librewolf.desktop" ];
+            "x-scheme-handler/http" = [ "librewolf.desktop" ];
+            "x-scheme-handler/https" = [ "librewolf.desktop" ];
+            "application/md" = [ "librewolf.desktop" ];
+            "application/pdf" = [ "org.pwmt.zathura.desktop" ];
+            "application/image" = [ "feh.desktop" ];
+            "application/video" = [ "mpv.desktop" ];
+            "application/audio" = [ "mpv.desktop" ];
         };
 
     };

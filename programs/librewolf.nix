@@ -8,21 +8,18 @@
 
     home-manager.users.${sysConfig.user} = {
 
-        home = {
-            # file.".librewolf/default/search.json.mozlz4".force = lib.mkForce true;
-            packages = with pkgs; [
-                nixos-icons
-                profile-cleaner
-                profile-sync-daemon
-            ];
-        };
+        # home.file.".librewolf/default/search.json.mozlz4".force = lib.mkForce true;
+
+        home.packages = with pkgs; [
+            nixos-icons
+            profile-cleaner
+            profile-sync-daemon
+        ];
 
         programs.librewolf = {
 
             enable = true;
 
-            # Uncomment when profile support lands in home manger for librewolf.
-            #     https://github.com/nix-community/home-manager/pull/5128
             # profiles.default = {
             #
             #     isDefault = true;
@@ -71,11 +68,15 @@
             #         };
             #     };
 
-            settings = {
+            settings = let
+
+                ffVersion = builtins.substring 0 5 pkgs.librewolf.version;
+
+            in {
                 "browser.compactmode.show" = true;
                 "browser.startup.page" = 3;
                 "extensions.unifiedExtensions.enabled" = false;
-                "general.useragent.override" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.";
+                "general.useragent.override" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:${ffVersion}) Gecko/20100101 Firefox/${ffVersion}";
                 "general.platform.override" = "Win32";
                 "identity.fxaccounts.enabled" = true;
                 "media.ffmpeg.vaapi.enabled" = true;
@@ -87,6 +88,8 @@
                 "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
                 "webgl.disabled" = false;
             };
+
+            # };
 
         };
 

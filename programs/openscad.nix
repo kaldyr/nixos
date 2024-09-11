@@ -8,7 +8,4 @@
 
     home-manager.users.${sysConfig.user}.home.packages = with pkgs; [ openscad ];
 
-    # xdg.configFile."OpenScad/OpenSCAD.conf".text = ''
-    # '';
-
 }
