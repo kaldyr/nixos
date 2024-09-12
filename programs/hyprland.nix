@@ -215,7 +215,7 @@
                 monitor=DP-3, 1920x1080@60, -1920x0, 1
 
                 # Window Rules
-                windowrulev2=opacity 0.90 override 0.90 override, class:(foot)$
+                windowrulev2=opacity 0.90 override 0.90 override, class:foot
                 windowrulev2=opacity 0.90 override 0.90 override, class:(neovide)$
                 windowrulev2=opacity 0.90 override 0.90 override, class:librewolf
                 windowrulev2=opacity 0.90 override 0.90 override, class:org.telegram.desktop
