@@ -1,11 +1,11 @@
 # Todo list for the nix config
 
 ## Changes
+
 - nh nix helper
 - Samba Server on Magrathea
 - Syncthing
 - Browser Profile sync to RAM
-- Fix media keys in hyprland
 - Hyprlock
 - Hypridle
 - Hyprcursor
@@ -16,6 +16,7 @@
 - Nix-serve, hydra, binary cache
 
 ## Things to look into
+
 - Fnott Notifications
 
 ## Disk layout
@@ -27,6 +28,7 @@ raid10 subvolumes:
 "snapshots": /media/snaps
 
 #### /media
+
 btrfs raid10 array subvolume "media" zstd:8
 - Audiobooks
 - Books
@@ -36,6 +38,7 @@ btrfs raid10 array subvolume "media" zstd:8
 - Videos
 
 #### /media/snapshots
+
 btrfs raid10 array subvolme "backups"
 - Receive snapshots for storage
 
@@ -44,15 +47,18 @@ btrfs raid10 array subvolme "backups"
 ### Nextcloud
 
 #### Phone
+
 Notes
 Pictures/Brightwheel
 Pictures/Messages
 Pictures/Phone
+Pictures/Screenshots
 Videos/Brightwheel
 Videos/Messages
 Videos/Phone
 
 #### Laptop/Desktop
+
 Documents
 Notes
 Pictures
@@ -68,7 +74,6 @@ Videos
 - Phone
 - Saved
 
-
 ### Syncthing
 
 - Audiobooks
@@ -77,6 +82,7 @@ Videos
 - Videos/Saved
 
 ### Git
+
 Saved on laptop, desktop, magrathea-ssd, magrathea-raid10
 - NixOS Config (also on github)
 - Projects
