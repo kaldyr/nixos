@@ -40,7 +40,6 @@
 
             extraConfig = /* hyprlang */ ''
                 $mainMod=SUPER
-                $terminal=${pkgs.foot}/bin/foot
 
                 source=~/.config/hypr/frappe.conf
 
@@ -104,18 +103,13 @@
                     vrr=1
                 }
 
-                # Tent mode for laptop
-                bind=$mainMod, t, exec, ${pkgs.hyprland}/bin/hyprctl keyword monitor eDP-1,preferred,auto,1,transform,2
-                bind=$mainMod SHIFT, t, exec, ${pkgs.hyprland}/bin/hyprctl keyword monitor eDP-1,preferred,auto,1,transform,0
-
                 # Screenshots
                 bind=$mainMod, p, exec, ${pkgs.grim}/bin/grim $(${pkgs.xdg-user-dirs}/bin/xdg-user-dir PICTURES)/Screenshots/$(${pkgs.coreutils}/bin/date +'%Y%m%d%H%M%S.png')
                 bind=$mainMod SHIFT, p, exec, ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.imagemagick}/bin/convert - -shave 1x1 PNG:- | ${pkgs.swappy}/bin/swappy -f - 
                 bind=$mainMod ALT, p, exec, ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.imagemagick}/bin/convert - -shave 1x1 PNG:- | ${pkgs.tesseract}/bin/tesseract - - | ${pkgs.wl-clipboard}/bin/wl-copy --primary
 
-                # Wallpapers
+                # Wallpaper
                 bind=$mainMod, y, exec, ln -sf $(command ls $HOME/Pictures/Wallpapers | ${pkgs.fuzzel}/bin/fuzzel --dmenu) $HOME/Pictures/Wallpapers/.wallpaper && ${pkgs.swww}/bin/swww img $HOME/Pictures/Wallpapers/.wallpaper
-                bind=$mainMod, u, exec, ${pkgs.hyprpicker}/bin/hyprpicker -a
 
                 # Play media from clipboard
                 bind=$mainMod, g, exec, ${pkgs.mpv}/bin/mpv $(${pkgs.wl-clipboard}/bin/wl-paste)
@@ -142,7 +136,7 @@
                 bind=ALT, mouse:274, pass, ^(discord)$
 
                 # Hyprland controls
-                bind=$mainMod, q, exec, $terminal
+                bind=$mainMod, q, exec, ${pkgs.foot}/bin/foot
                 bind=$mainMod, c, killactive,
                 bind=$mainMod, m, exit,
                 bind=$mainMod, v, togglefloating,
@@ -150,6 +144,7 @@
                 bind=$mainMod, o, pseudo,
                 bind=$mainMod, s, togglesplit,
                 bind=$mainMod, f, fullscreen,
+                bind=$mainMod, u, exec, ${pkgs.hyprpicker}/bin/hyprpicker -a
 
                 bind=$mainMod, h, movefocus, l
                 bind=$mainMod, l, movefocus, r
@@ -193,11 +188,11 @@
                 bindm=$mainMod, mouse:273, resizewindow
 
                 # Launch Applications
-                exec-once=swww-daemon --format xrgb
-                exec-once=swww img $HOME/Pictures/Wallpapers/.wallpaper
-                exec-once=wl-paste --type text --watch cliphist store
-                exec-once=wl-paste --type image --watch cliphist store
-                exec-once=waybar
+                exec-once=${pkgs.swww}/bin/swww-daemon --format xrgb
+                exec-once=${pkgs.swww}/bin/swww img $HOME/Pictures/Wallpapers/.wallpaper
+                exec-once=${pkgs.wl-clipboard}/bin/wl-paste --type text --watch cliphist store
+                exec-once=${pkgs.wl-clipboard}/bin/wl-paste --type image --watch cliphist store
+                exec-once=${pkgs.waybar}/bin/waybar
 
                 # Layer Rules
                 layerrule=blur, launcher
