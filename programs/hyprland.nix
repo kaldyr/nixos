@@ -103,63 +103,73 @@
                     vrr=1
                 }
 
+                # Launch Applications
+                bind=$mainMod, q, exec, foot
+                bind=$mainMod, r, exec, fuzzel
+                bind=$mainMod, u, exec, hyprpicker -a
+
                 # Screenshots
-                bind=$mainMod, p, exec, ${pkgs.grim}/bin/grim $(${pkgs.xdg-user-dirs}/bin/xdg-user-dir PICTURES)/Screenshots/$(${pkgs.coreutils}/bin/date +'%Y%m%d%H%M%S.png')
-                bind=$mainMod SHIFT, p, exec, ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.imagemagick}/bin/convert - -shave 1x1 PNG:- | ${pkgs.swappy}/bin/swappy -f - 
-                bind=$mainMod ALT, p, exec, ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.imagemagick}/bin/convert - -shave 1x1 PNG:- | ${pkgs.tesseract}/bin/tesseract - - | ${pkgs.wl-clipboard}/bin/wl-copy --primary
+                bind=$mainMod, p, exec, grim $(xdg-user-dir PICTURES)/Screenshots/$(date +'%Y%m%d%H%M%S.png')
+                bind=$mainMod SHIFT, p, exec, grim -g "$(slurp)" - | convert - -shave 1x1 PNG:- | swappy -f - 
+                bind=$mainMod ALT, p, exec, grim -g "$(slurp)" - | convert - -shave 1x1 PNG:- | tesseract - - | wl-copy --primary
 
                 # Wallpaper
-                bind=$mainMod, y, exec, ln -sf $(command ls $HOME/Pictures/Wallpapers | ${pkgs.fuzzel}/bin/fuzzel --dmenu) $HOME/Pictures/Wallpapers/.wallpaper && ${pkgs.swww}/bin/swww img $HOME/Pictures/Wallpapers/.wallpaper
+                bind=$mainMod, y, exec, ln -sf $(command ls $HOME/Pictures/Wallpapers | fuzzel --dmenu) $HOME/Pictures/Wallpapers/.wallpaper && swww img $HOME/Pictures/Wallpapers/.wallpaper
 
                 # Play media from clipboard
-                bind=$mainMod, g, exec, ${pkgs.mpv}/bin/mpv $(${pkgs.wl-clipboard}/bin/wl-paste)
+                bind=$mainMod, g, exec, mpv $(wl-paste)
 
                 # Notification Controls
-                bind=$mainMod, n, exec, ${pkgs.dunst}/bin/dunstctl history-pop
-                bind=$mainMod SHIFT, n, exec, ${pkgs.dunst}/bin/dunstctl context
-                bind=$mainMod ALT, n, exec, ${pkgs.dunst}/bin/dunstctl close
+                bind=$mainMod, n, exec, dunstctl history-pop
+                bind=$mainMod SHIFT, n, exec, dunstctl context
+                bind=$mainMod ALT, n, exec, dunstctl close
 
                 # Media controls
-                bind=, $XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer -i 1
-                bind=, $XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer -d 1
-                bind=, $XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer -t
-                bind=SHIFT, $$XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer --default-source -i 1
-                bind=SHIFT, $$XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer --default-source -d 1
-                bind=SHIFT, $$XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer --default-source -t
-                bind=, $XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause
-                bind=, $XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next
-                bind=, $XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl prev
-                bind=, $XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl set +5%
-                bind=, $XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 5%-
+                bind=, XF86AudioRaiseVolume, exec, pamixer -i 1
+                bind=, XF86AudioLowerVolume, exec, pamixer -d 1
+                bind=, XF86AudioMute, exec, pamixer -t
+                bind=SHIFT, XF86AudioRaiseVolume, exec, pamixer --default-source -i 1
+                bind=SHIFT, XF86AudioLowerVolume, exec, pamixer --default-source -d 1
+                bind=SHIFT, XF86AudioMute, exec, pamixer --default-source -t
+                bind=, XF86AudioPlay, exec, playerctl play-pause
+                bind=, XF86AudioNext, exec, playerctl next
+                bind=, XF86AudioPrev, exec, playerctl prev
 
-                # Pass PTT button directly to Discord
-                bind=ALT, mouse:274, pass, ^(discord)$
+                # Brightness
+                bind=, XF86MonBrightnessUp, exec, brightnessctl set +5%
+                bind=, XF86MonBrightnessDown, exec, brightnessctl set 5%-
 
                 # Hyprland controls
-                bind=$mainMod, q, exec, ${pkgs.foot}/bin/foot
                 bind=$mainMod, c, killactive,
                 bind=$mainMod, m, exit,
                 bind=$mainMod, v, togglefloating,
-                bind=$mainMod, r, exec, ${pkgs.fuzzel}/bin/fuzzel
                 bind=$mainMod, o, pseudo,
                 bind=$mainMod, s, togglesplit,
                 bind=$mainMod, f, fullscreen,
-                bind=$mainMod, u, exec, ${pkgs.hyprpicker}/bin/hyprpicker -a
 
+                # Focus
                 bind=$mainMod, h, movefocus, l
                 bind=$mainMod, l, movefocus, r
                 bind=$mainMod, k, movefocus, u
                 bind=$mainMod, j, movefocus, d
 
+                # Move Windows
                 bind=$mainMod SHIFT, H, movewindow, l
                 bind=$mainMod SHIFT, J, movewindow, d
                 bind=$mainMod SHIFT, K, movewindow, u
                 bind=$mainMod SHIFT, L, movewindow, r
+
+                # Resze Windows
                 bind=$mainMod ALT, H, resizeactive, -1 0
                 bind=$mainMod ALT, J, resizeactive, 0 1
                 bind=$mainMod ALT, K, resizeactive, 0 -1
                 bind=$mainMod ALT, L, resizeactive, 1 0
+                bind=$mainMod CTRL, H, resizeactive, -100 0
+                bind=$mainMod CTRL, J, resizeactive, 0 100
+                bind=$mainMod CTRL, K, resizeactive, 0 -100
+                bind=$mainMod CTRL, L, resizeactive, 100 0
 
+                # Switch Workspace
                 bind=$mainMod, 1, workspace, 1
                 bind=$mainMod, 2, workspace, 2
                 bind=$mainMod, 3, workspace, 3
@@ -171,6 +181,7 @@
                 bind=$mainMod, 9, workspace, 9
                 bind=$mainMod, 0, workspace, 10
 
+                # Move window to workspace
                 bind=$mainMod SHIFT, 1, movetoworkspacesilent, 1
                 bind=$mainMod SHIFT, 2, movetoworkspacesilent, 2
                 bind=$mainMod SHIFT, 3, movetoworkspacesilent, 3
@@ -182,27 +193,29 @@
                 bind=$mainMod SHIFT, 9, movetoworkspacesilent, 9
                 bind=$mainMod SHIFT, 0, movetoworkspacesilent, 10
 
+                # Mouse controls
                 bind=$mainMod, mouse_down, workspace, e+1
                 bind=$mainMod, mouse_up, workspace, e-1
                 bindm=$mainMod, mouse:272, movewindow
                 bindm=$mainMod, mouse:273, resizewindow
 
-                # Launch Applications
-                exec-once=${pkgs.swww}/bin/swww-daemon --format xrgb
-                exec-once=${pkgs.swww}/bin/swww img $HOME/Pictures/Wallpapers/.wallpaper
-                exec-once=${pkgs.wl-clipboard}/bin/wl-paste --type text --watch cliphist store
-                exec-once=${pkgs.wl-clipboard}/bin/wl-paste --type image --watch cliphist store
-                exec-once=${pkgs.waybar}/bin/waybar
+                # Auto-start Applications
+                exec-once=swww-daemon --format xrgb
+                exec-once=swww img $HOME/Pictures/Wallpapers/.wallpaper
+                exec-once=wl-paste --type text --watch cliphist store
+                exec-once=wl-paste --type image --watch cliphist store
+                exec-once=pamixer --default-source -t
+                exec-once=waybar
 
                 # Layer Rules
                 layerrule=blur, launcher
 
                 # Monitors
+                monitor=${sysConfig.monitor}
                 monitor=DP-3, 1920x1080@60, -1920x0, 1
-                monitor=eDP-1, 2256x1504@60, 0x0, 1
 
                 # Window Rules
-                windowrulev2=opacity 0.90 override 0.90 override, class:($terminal)$
+                windowrulev2=opacity 0.90 override 0.90 override, class:(foot)$
                 windowrulev2=opacity 0.90 override 0.90 override, class:(neovide)$
                 windowrulev2=opacity 0.90 override 0.90 override, class:librewolf
                 windowrulev2=opacity 0.90 override 0.90 override, class:org.telegram.desktop

@@ -24,15 +24,15 @@
         '';
 
         xdg.configFile."mpv/mpv.conf".text = /* bash */ ''
-            border = false
+            border = no
             gpu-api = vulkan
             hwdec = auto-safe
-            osc = false
-            osd-border-color = #232634
-            osd-color = #85c1dc
+            osc = no
+            osd-border-color = "#232634"
+            osd-color = "#85c1dc"
             osd-font = Inter
             osd-font-size = 24
-            osd-shadow-color = #303446
+            osd-shadow-color = "#303446"
             profile = gpu-hq
             screenshot-directory = $HOME/Pictures/Screenshots/mpv
             vo = gpu
