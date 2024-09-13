@@ -77,7 +77,7 @@
                     hostname = "gram";
                     instalVersion = "24.05"; 
                     impermanence = true;
-                    monitor = "=eDP-1, 2256x1504@60, 0x0, 1";
+                    monitor = "eDP-1, 2256x1504@60, 0x0, 1";
                     user = "matt";
                 };
             in buildSystem ( sysConfig );
