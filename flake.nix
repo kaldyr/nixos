@@ -112,7 +112,7 @@
                     hostname = "mjolnir";
                     instalVersion = "23.05"; 
                     impermanence = true;
-                    monitor = "HDMI-A-1, 3440x1440@85, 0x0, 1";
+                    monitor = "HDMI-A-1, 3440x1440@84.97900, 0x0, 1";
                     user = "matt";
                 };
             in buildSystem ( sysConfig );
