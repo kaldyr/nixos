@@ -77,7 +77,6 @@
                     hostname = "gram";
                     instalVersion = "24.05"; 
                     impermanence = true;
-                    monitor = "eDP-1, 2256x1504@60, 0x0, 1";
                     user = "matt";
                 };
             in buildSystem ( sysConfig );
@@ -89,7 +88,6 @@
                     hostname = "installer";
                     instalVersion = "24.05"; 
                     impermanence = false;
-                    monitor = ", preferred, auto, 1";
                     user = "nixos";
                 };
             in buildSystem ( sysConfig );
@@ -112,7 +110,6 @@
                     hostname = "mjolnir";
                     instalVersion = "23.05"; 
                     impermanence = true;
-                    monitor = "HDMI-A-1, 3440x1440@84.97900, 0x0, 1";
                     user = "matt";
                 };
             in buildSystem ( sysConfig );

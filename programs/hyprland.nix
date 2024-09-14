@@ -38,7 +38,16 @@
 
             enable = true;
 
-            extraConfig = /* hyprlang */ ''
+            extraConfig = let 
+
+                monitorConf = (
+                    if sysConfig.hostname == "gram" then /* hyprlang */
+                        "monitor=eDP-1, 2256x1504@60, 0x0, 1"
+                    else if sysConfig.hostname == "mjolnir" then /* hyprlang */
+                        "monitor=HDMI-A-1, 3440x1440@84.97900, 0x0, 1"
+                    else "" );
+
+            in /* hyprlang */ ''
                 $mainMod=SUPER
 
                 source=~/.config/hypr/frappe.conf
@@ -211,8 +220,8 @@
                 layerrule=blur, launcher
 
                 # Monitors
-                monitor=${sysConfig.monitor}
-                monitor=DP-3, 1920x1080@60, -1920x0, 1
+                ${monitorConf}
+                monitor=, preferred, auto, 1
 
                 # Window Rules
                 windowrulev2=opacity 0.90 override 0.90 override, class:foot
