@@ -1,4 +1,4 @@
-{ inputs, pkgs, sysConfig, ... }: {
+{ inputs, lib, pkgs, sysConfig, ... }: {
 
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-intel
@@ -19,6 +19,7 @@
 
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
+    hardware.pulseaudio.enable = lib.mkForce false;
     nixpkgs.config.allowUnfree = true;
     networking.hostName = sysConfig.hostname;
     time.timeZone = "America/Los_Angeles";
