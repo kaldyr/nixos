@@ -24,9 +24,19 @@
     time.timeZone = "America/Los_Angeles";
 
     services = {
+
         fwupd.enable = true;
         libinput.enable = true;
+
+        pipewire = {
+            enable = true;
+            alsa.enable = true;
+            pulse.enable = true;
+            wireplumber.enable = true;
+        };
+
         tailscale.useRoutingFeatures = "server";
+
     };
 
     systemd.services."tailscale-certs" = {
