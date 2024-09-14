@@ -22,6 +22,7 @@
     nixpkgs.config.allowUnfree = true;
     networking.hostName = sysConfig.hostname;
     time.timeZone = "America/Los_Angeles";
+    security.rtkit.enable = true;
 
     services = {
 

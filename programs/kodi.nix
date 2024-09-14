@@ -37,5 +37,6 @@
     };
 
     users.extraUsers.kodi.isNormalUser = true;
+    users.extraUsers.kodi.extraGroups = [ "audio" ];
 
 }
