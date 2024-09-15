@@ -37,6 +37,6 @@
     };
 
     users.extraUsers.kodi.isNormalUser = true;
-    users.extraUsers.kodi.extraGroups = [ "audio" "video" ];
+    users.extraUsers.kodi.extraGroups = [ "audio" "pipewire" "video" ];
 
 }

@@ -17,23 +17,33 @@
         loader.grub.gfxmodeEfi = "1920x1080";
     };
 
-    environment.systemPackages = with pkgs; [
-        pamixer
-        pulseaudio
-        alsa-utils
-    ];
+    hardware = {
+        alsa.enablePersistence = true;
+        enableRedistributableFirmware = true;
+        enableAllFirmware = true;
+    };
 
-    hardware.enableRedistributableFirmware = true;
-    hardware.enableAllFirmware = true;
     nixpkgs.config.allowUnfree = true;
     networking.hostName = sysConfig.hostname;
     time.timeZone = "America/Los_Angeles";
     security.rtkit.enable = true;
 
     services = {
+
         fwupd.enable = true;
         libinput.enable = true;
+
+        pipewire = {
+            enable = true;
+            alsa.enable = true;
+            audio.enable = true;
+            pulse.enable = true;
+            systemWide = true;
+            wireplumber.enable = true;
+        };
+
         tailscale.useRoutingFeatures = "server";
+
     };
 
     systemd.services."tailscale-certs" = {
@@ -46,7 +56,7 @@
 
         serviceConfig.type = "oneshot";
 
-        script = ''
+        script = /* bash */ ''
             status="Starting";
 
             until [ $status = "Running" ]; do
