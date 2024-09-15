@@ -37,6 +37,6 @@
     };
 
     users.extraUsers.kodi.isNormalUser = true;
-    users.extraUsers.kodi.extraGroups = [ "audio" ];
+    users.extraUsers.kodi.extraGroups = [ "audio" "video" ];
 
 }

@@ -1,4 +1,4 @@
-{ inputs, lib, pkgs, sysConfig, ... }: {
+{ inputs, pkgs, sysConfig, ... }: {
 
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-intel
@@ -17,28 +17,23 @@
         loader.grub.gfxmodeEfi = "1920x1080";
     };
 
+    environment.systemPackages = with pkgs; [
+        pamixer
+        pulseaudio
+        alsa-utils
+    ];
+
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
-    hardware.pulseaudio.enable = lib.mkForce false;
     nixpkgs.config.allowUnfree = true;
     networking.hostName = sysConfig.hostname;
     time.timeZone = "America/Los_Angeles";
     security.rtkit.enable = true;
 
     services = {
-
         fwupd.enable = true;
         libinput.enable = true;
-
-        pipewire = {
-            enable = true;
-            alsa.enable = true;
-            pulse.enable = true;
-            wireplumber.enable = true;
-        };
-
         tailscale.useRoutingFeatures = "server";
-
     };
 
     systemd.services."tailscale-certs" = {
