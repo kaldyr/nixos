@@ -17,12 +17,8 @@
         loader.grub.gfxmodeEfi = "1920x1080";
     };
 
-    hardware = {
-        alsa.enablePersistence = true;
-        enableRedistributableFirmware = true;
-        enableAllFirmware = true;
-    };
-
+    hardware.enableRedistributableFirmware = true;
+    hardware.enableAllFirmware = true;
     nixpkgs.config.allowUnfree = true;
     networking.hostName = sysConfig.hostname;
     time.timeZone = "America/Los_Angeles";
