@@ -8,7 +8,7 @@
         nextcloud = {
 
             enable = true;
-            package = pkgs.nextcloud30;
+            package = pkgs.nextcloud29;
 
             appstoreEnable = true;
             autoUpdateApps.enable = true;
@@ -37,11 +37,11 @@
                     sha256 = "sha256-nj1yR2COwQ6ZqZ1/8v9csb/dipXMa61e45XQmA5WPwg=";
                 };
 
-                socialsharing_telegram = pkgs.fetchNextcloudApp {
-                    url = "https://github.com/nextcloud-releases/socialsharing/releases/download/v3.1.0/socialsharing_telegram-v3.1.0.tar.gz";
-                    license = "agpl3Plus";
-                    sha256 = "sha256-qcjce8GOEPvb6v8hQQ0AuVf3dbcX3twjSZU0bQdOl3U=";
-                };
+                # socialsharing_telegram = pkgs.fetchNextcloudApp {
+                #     url = "https://github.com/nextcloud-releases/socialsharing/releases/download/v3.1.0/socialsharing_telegram-v3.1.0.tar.gz";
+                #     license = "agpl3Plus";
+                #     sha256 = "sha256-qcjce8GOEPvb6v8hQQ0AuVf3dbcX3twjSZU0bQdOl3U=";
+                # };
 
             };
 
