@@ -1,5 +1,10 @@
 { config, pkgs, ... }: {
 
+    environment.systemPackages = with pkgs; [
+        ffmpeg
+        imagemagick
+    ];
+
     networking.firewall.allowedTCPPorts = [ 9000 ];
     networking.firewall.allowedUDPPorts = [ 9000 ];
 
@@ -25,7 +30,7 @@
 
             configureRedis = true;
             database.createLocally = true;
-            enableImagemagick = false;
+            enableImagemagick = true;
 
             extraApps = with config.services.nextcloud.package.packages.apps; {
 
@@ -37,11 +42,11 @@
                     sha256 = "sha256-nj1yR2COwQ6ZqZ1/8v9csb/dipXMa61e45XQmA5WPwg=";
                 };
 
-                # socialsharing_telegram = pkgs.fetchNextcloudApp {
-                #     url = "https://github.com/nextcloud-releases/socialsharing/releases/download/v3.1.0/socialsharing_telegram-v3.1.0.tar.gz";
-                #     license = "agpl3Plus";
-                #     sha256 = "sha256-qcjce8GOEPvb6v8hQQ0AuVf3dbcX3twjSZU0bQdOl3U=";
-                # };
+                socialsharing_telegram = pkgs.fetchNextcloudApp {
+                    url = "https://github.com/nextcloud-releases/socialsharing/releases/download/v3.1.0/socialsharing_telegram-v3.1.0.tar.gz";
+                    license = "agpl3Plus";
+                    sha256 = "sha256-qcjce8GOEPvb6v8hQQ0AuVf3dbcX3twjSZU0bQdOl3U=";
+                };
 
             };
 
@@ -77,6 +82,7 @@
                 mail_sendmailmode = "pipe";
                 mail_smtpmode = "sendmail";
                 trusted_domains = [ "magrathea.brill-godzilla.ts.net" ];
+                trusted_proxies = [ "100.109.171.26" "127.0.0.1" "192.168.1.2" ];
             };
 
         };
