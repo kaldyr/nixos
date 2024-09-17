@@ -134,7 +134,7 @@
 
     users.extraUsers.postgresql = {
         extraGroups = [ "nextcloud" ];
-        group = [ "postgresql" ];
+        group = "postgresql";
         isSystemUser = true;
     };
 
