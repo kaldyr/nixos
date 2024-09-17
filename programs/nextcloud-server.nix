@@ -132,6 +132,7 @@
         after = [ "postgresql.service" ];
     };
 
+    users.extraUsers.postgresql.isSystemUser = true;
     users.extraUsers.postgresql.extraGroups = [ "nextcloud" ];
 
 }
