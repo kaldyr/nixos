@@ -3,10 +3,22 @@
     environment.systemPackages = with pkgs; [
         ffmpeg
         imagemagick
+        msmtp
     ];
 
     networking.firewall.allowedTCPPorts = [ 9000 ];
     networking.firewall.allowedUDPPorts = [ 9000 ];
+
+    programs.msmtp = {
+        enable = true;
+        setSendmail = true;
+        extraConfig = ''
+            defaults
+            auth on
+            tls on
+            tls_trust_file /var/lib/tailscale/certs/magrathea.brill-godzilla.ts.net.crt
+        '';
+    };
 
     services = {
 
@@ -81,6 +93,7 @@
                 loglevel = 3;
                 mail_sendmailmode = "pipe";
                 mail_smtpmode = "sendmail";
+                maintenance_window_start = "8";
                 trusted_domains = [ "magrathea.brill-godzilla.ts.net" ];
                 trusted_proxies = [ "100.109.171.26" "127.0.0.1" "192.168.1.2" ];
             };
@@ -95,15 +108,12 @@
         };
 
         postgresql = {
-
             enable = true;
             package = pkgs.postgresql_16;
-
             ensureDatabases = [ "nextcloud" ];
             ensureUsers = [ { name = "nextcloud"; ensureDBOwnership = true; } ];
             settings.max_connections = "300";
             settings.shared_buffers = "80MB";
-
         };
 
         postgresqlBackup = {
