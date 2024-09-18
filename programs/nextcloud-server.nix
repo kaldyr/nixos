@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }: {
 
     environment.systemPackages = with pkgs; [
+        exiftool
         ffmpeg
         imagemagick
         msmtp
