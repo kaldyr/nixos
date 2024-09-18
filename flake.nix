@@ -21,6 +21,7 @@
 
         # Set nixpkgs to NixOS Unstable
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+        nixpkgs-exiftool.url = "github:NixOS/nixpkgs/0dfa68647420b93080a04508dda41476cccc0cd0";
         nixpkgs-fresh.url = "github:NixOS/nixpkgs/master";
 
         # Sops - secret management
@@ -34,6 +35,7 @@
               , neovim
               , nixos-hardware
               , nixpkgs
+              , nixpkgs-exiftool
               , nixpkgs-fresh
               , sops-nix
               , ... }@inputs: {
