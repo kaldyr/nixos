@@ -1,12 +1,22 @@
-{ pkgs, sysConfig, ... }: {
+{ lib, pkgs, sysConfig, ... }: {
 
-    home-manager.users.${sysConfig.user}.services.nextcloud-client = {
+    environment.persistence = lib.mkIf sysConfig.impermanence {
+        "/state".users.${sysConfig.user}.directories = [ ".config/Nextcloud" ];
+    };
 
-        enable = true;
+    home-manager.users.${sysConfig.user} = {
 
-        package = pkgs.nextcloud-client;
-        startInBackground = true;
+        home.packages = with pkgs; [ nextcloud-client ];
+        
+        services.nextcloud-client = {
 
+            enable = true;
+
+            package = pkgs.nextcloud-client;
+            startInBackground = true;
+
+        };
+        
     };
 
 }
