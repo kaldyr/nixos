@@ -47,12 +47,18 @@
 
             extraApps = with config.services.nextcloud.package.packages.apps; {
 
-                inherit calendar contacts groupfolders mail memories notes spreed tasks;
+                inherit calendar contacts groupfolders mail memories notes previewgenerator spreed tasks;
 
                 news = pkgs.fetchNextcloudApp {
                     url = "https://github.com/nextcloud/news/releases/download/25.0.0-alpha8/news.tar.gz";
                     license = "agpl3Plus";
                     sha256 = "sha256-nj1yR2COwQ6ZqZ1/8v9csb/dipXMa61e45XQmA5WPwg=";
+                };
+
+                recognize = pkgs.fetchNextcloudApp {
+                    url = "https://github.com/nextcloud/recognize/releases/download/v7.0.3/recognize-7.0.3.tar.gz";
+                    license = "agpl3Plus";
+                    sha256 = "sha256-kVFdwpPIJ/2wAEClgY9xIpiUFls2lxlkBFLTmDa3iLo=";
                 };
 
                 socialsharing_telegram = pkgs.fetchNextcloudApp {
