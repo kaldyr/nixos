@@ -5,6 +5,7 @@
         ffmpeg
         imagemagick
         msmtp
+        nodejs_22
     ];
 
     networking.firewall.allowedTCPPorts = [ 9000 ];
