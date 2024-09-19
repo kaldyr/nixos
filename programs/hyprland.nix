@@ -208,7 +208,7 @@
                 bindm=$mainMod, mouse:273, resizewindow
 
                 # Auto-start Applications
-                exec-once=gnome-keyring-daemon --start
+                exec-once=gnome-keyring-daemon --start --components=secrets
                 exec-once=swww-daemon --format xrgb
                 exec-once=swww img $HOME/Pictures/Wallpapers/.wallpaper
                 exec-once=wl-paste --type text --watch cliphist store

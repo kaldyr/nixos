@@ -101,6 +101,7 @@
                 hunspellDicts.en_US
                 imagemagick
                 kjv
+                libgnome-keyring
                 libsecret
                 networkmanagerapplet
                 neovide
