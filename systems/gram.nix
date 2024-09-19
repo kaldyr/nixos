@@ -7,7 +7,6 @@
         ./desktop.nix
         ../programs/hyprland.nix
         ../programs/mpd.nix
-        ../programs/nextcloud-client.nix
         ../programs/plymouth.nix
         ../programs/steam.nix
     ];

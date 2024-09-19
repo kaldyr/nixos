@@ -7,6 +7,7 @@
         ../programs/librewolf.nix
         ../programs/mpv.nix
         ../programs/newsboat.nix
+        ../programs/nextcloud-client.nix
         ../programs/obsidian.nix
         ../programs/openscad.nix
         ../programs/telegram.nix
