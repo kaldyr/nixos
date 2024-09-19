@@ -95,6 +95,7 @@
                 android-tools
                 ffmpegthumbnailer
                 gimp
+                gnome-keyring
                 go-mtpfs
                 hunspell
                 hunspellDicts.en_US
