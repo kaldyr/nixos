@@ -101,6 +101,7 @@
                 hunspellDicts.en_US
                 imagemagick
                 kjv
+                libsecret
                 networkmanagerapplet
                 neovide
                 papirus-folders
@@ -260,6 +261,8 @@
         };
 
     };
+
+    programs.dconf.enable = true;
 
     security.polkit.enable = true;
     security.rtkit.enable = true;
