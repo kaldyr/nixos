@@ -172,10 +172,10 @@
                 bind=$mainMod ALT, J, resizeactive, 0 1
                 bind=$mainMod ALT, K, resizeactive, 0 -1
                 bind=$mainMod ALT, L, resizeactive, 1 0
-                bind=$mainMod CTRL, H, resizeactive, -100 0
-                bind=$mainMod CTRL, J, resizeactive, 0 100
-                bind=$mainMod CTRL, K, resizeactive, 0 -100
-                bind=$mainMod CTRL, L, resizeactive, 100 0
+                bind=$mainMod CTRL, H, resizeactive, -559 0 # Move window width from 1/2 screen to 1/3 screen
+                bind=$mainMod CTRL, J, resizeactive, 0 222 # Move window height from 1/2 screen to 1/3 screen
+                bind=$mainMod CTRL, K, resizeactive, 0 -222 # Move window width from 1/2 screen to 1/3 screen
+                bind=$mainMod CTRL, L, resizeactive, 559 0 # Move window height from 1/2 screen to 1/3 screen
 
                 # Switch Workspace
                 bind=$mainMod, 1, workspace, 1
