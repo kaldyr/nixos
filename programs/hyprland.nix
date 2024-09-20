@@ -27,6 +27,7 @@
             swww
             tesseract
             wl-clipboard
+            wl-screenrec
             xdg-desktop-portal-hyprland
         ];
 
@@ -120,6 +121,18 @@
                 bind=$mainMod, p, exec, grim $(xdg-user-dir PICTURES)/Screenshots/$(date +'%Y%m%d%H%M%S.png')
                 bind=$mainMod SHIFT, p, exec, grim -g "$(slurp)" - | convert - -shave 1x1 PNG:- | swappy -f - 
                 bind=$mainMod ALT, p, exec, grim -g "$(slurp)" - | convert - -shave 1x1 PNG:- | tesseract - - | wl-copy --primary
+
+                # Screen Record
+                bind=$mainMod SHIFT, r, exec, ${pkgs.writeShellScriptBin "recorder-toggle" /* bash */ ''
+                    pid=`${pkgs.procps}/bin/pgrep wl-screenrec`
+                    status=$?
+                    if [ $status != 0 ]
+                    then
+                        ${pkgs.wl-screenrec}/bin/wl-screenrec -g "$(${pkgs.slurp}/bin/slurp)" -f $HOME/Videos/Screenrec/$(date +'%Y%m%d%H%M%S.mp4');
+                    else
+                        ${pkgs.procps}/bin/pkill --signal SIGINT wl-screenrec
+                    fi;
+                ''}/bin/recorder-toggle
 
                 # Wallpaper
                 bind=$mainMod, y, exec, ln -sf $(command ls $HOME/Pictures/Wallpapers | fuzzel --dmenu) $HOME/Pictures/Wallpapers/.wallpaper && swww img $HOME/Pictures/Wallpapers/.wallpaper
