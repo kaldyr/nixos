@@ -93,6 +93,7 @@
 
             packages = with pkgs; [
                 android-tools
+                ffmpeg
                 ffmpegthumbnailer
                 gimp
                 gnome-keyring
