@@ -101,7 +101,6 @@
                 hunspellDicts.en_US
                 imagemagick
                 kjv
-                libgnome-keyring
                 libsecret
                 networkmanagerapplet
                 neovide
@@ -131,7 +130,6 @@
 
         services = {
             blueman-applet.enable = true;
-            gnome-keyring.enable = true;
             network-manager-applet.enable = true;
         };
 
@@ -265,12 +263,17 @@
 
     programs.dconf.enable = true;
 
-    security.polkit.enable = true;
-    security.rtkit.enable = true;
+    security = {
+        pam.services.login.enableGnomeKeyring = true;
+        polkit.enable = true;
+        rtkit.enable = true;
+    };
 
     services = {
 
         blueman.enable = true;
+        dbus.enable = true;
+        gnome.gnome-keyring.enable = true;
 
         keyd.enable = true;
         keyd.keyboards.default.settings.main.capslock = "esc";
