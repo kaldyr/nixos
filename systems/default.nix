@@ -93,7 +93,7 @@
 
     security.sudo = {
         execWheelOnly = true;
-        extraConfig = ''
+        extraConfig = /* bash */ ''
             Defaults lecture = never
         '';
     };
@@ -124,7 +124,7 @@
 
     system.stateVersion = sysConfig.instalVersion;
 
-    systemd.extraConfig = ''
+    systemd.extraConfig = /* bash */ ''
         DefaultTimeoutStopSec=10s
     '';
 

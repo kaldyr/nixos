@@ -15,7 +15,7 @@
     programs.msmtp = {
         enable = true;
         setSendmail = true;
-        extraConfig = ''
+        extraConfig = /* bash */ ''
             defaults
             auth on
             tls on

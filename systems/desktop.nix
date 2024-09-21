@@ -16,7 +16,7 @@
 
     environment = {
 
-        etc."fuse.conf".text = ''
+        etc."fuse.conf".text = /* bash */ ''
             user_allow_other
         '';
 
