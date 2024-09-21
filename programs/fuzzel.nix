@@ -17,7 +17,6 @@
             [main]
             filter-desktop=true
             font=Recursive Sn Csl St:size=10
-            fuzzy=yes
             icon-theme=Papirus
             icons-enabled=yes
             image-size-ratio=1.0
@@ -26,6 +25,7 @@
             letter-spacing=0
             line-height=24
             lines=10
+            match-mode=fzf
             prompt="❄️ ❯ "
             terminal=foot
             width=60
