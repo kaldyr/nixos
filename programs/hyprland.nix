@@ -7,6 +7,7 @@
         ./gammastep.nix
         ./swappy.nix
         ./udiskie.nix
+        ./waypaper.nix
         ./waybar.nix
         ./foot.nix
     ];
@@ -40,12 +41,28 @@
 
             extraConfig = let 
 
+                freesync = (
+                    if sysConfig.hostname == "mjolnir" then "1"
+                    else "0" );
+
                 monitorConf = (
                     if sysConfig.hostname == "gram" then /* hyprlang */
                         "monitor=eDP-1, 2256x1504@60, 0x0, 1"
                     else if sysConfig.hostname == "mjolnir" then /* hyprlang */
                         "monitor=HDMI-A-1, 3440x1440@84.97900, 0x0, 1"
                     else "" );
+
+                screenRecord = pkgs.writeShellScriptBin "screenRecord.sh" /* bash */ ''
+                    pid=`${pkgs.procps}/bin/pgrep wl-screenrec`
+                    status=$?
+
+                    if [ $status != 0 ]
+                    then
+                        ${pkgs.wl-screenrec}/bin/wl-screenrec -g "$(${pkgs.slurp}/bin/slurp)" --codec av1 -f $HOME/Videos/Screenrec/$(date +'%Y%m%d%H%M%S.mp4');
+                    else
+                        ${pkgs.procps}/bin/pkill --signal SIGINT wl-screenrec
+                    fi;
+                '';
 
             in /* hyprlang */ ''
                 $mainMod=SUPER
@@ -109,7 +126,7 @@
                 misc {
                     animate_mouse_windowdragging=yes
                     disable_hyprland_logo=yes
-                    vrr=1
+                    vrr=${freesync}
                 }
 
                 # Launch Applications
@@ -117,25 +134,17 @@
                 bind=$mainMod, r, exec, fuzzel
                 bind=$mainMod, u, exec, hyprpicker -a
 
-                # Screenshots
+                # Screen Capture
                 bind=$mainMod, p, exec, grim $(xdg-user-dir PICTURES)/Screenshots/$(date +'%Y%m%d%H%M%S.png')
                 bind=$mainMod SHIFT, p, exec, grim -g "$(slurp)" - | convert - -shave 1x1 PNG:- | swappy -f - 
                 bind=$mainMod ALT, p, exec, grim -g "$(slurp)" - | convert - -shave 1x1 PNG:- | tesseract - - | wl-copy --primary
-
-                # Screen Record
-                bind=$mainMod SHIFT, r, exec, ${pkgs.writeShellScriptBin "recorder-toggle" /* bash */ ''
-                    pid=`${pkgs.procps}/bin/pgrep wl-screenrec`
-                    status=$?
-                    if [ $status != 0 ]
-                    then
-                        ${pkgs.wl-screenrec}/bin/wl-screenrec -g "$(${pkgs.slurp}/bin/slurp)" -f $HOME/Videos/Screenrec/$(date +'%Y%m%d%H%M%S.mp4');
-                    else
-                        ${pkgs.procps}/bin/pkill --signal SIGINT wl-screenrec
-                    fi;
-                ''}/bin/recorder-toggle
+                bind=$mainMod SHIFT, r, exec, ${screenRecord}/bin/screenRecord.sh
 
                 # Wallpaper
-                bind=$mainMod, y, exec, ln -sf $(command ls $HOME/Pictures/Wallpapers | fuzzel --dmenu) $HOME/Pictures/Wallpapers/.wallpaper && swww img $HOME/Pictures/Wallpapers/.wallpaper
+                bind=$mainMod, w, exec, waypaper --folder $(xdg-user-dir PICTURES)/Wallpapers
+
+                # Paste from history
+                bind=$mainMod SHIFT, v, exec, cliphist list | fuzzel -d | cliphist decode | wl-copy && wl-paste
 
                 # Play media from clipboard
                 bind=$mainMod, g, exec, mpv $(wl-paste)
@@ -222,7 +231,7 @@
 
                 # Auto-start Applications
                 exec-once=swww-daemon --format xrgb
-                exec-once=swww img $HOME/Pictures/Wallpapers/.wallpaper
+                exec-once=waypaper --restore
                 exec-once=wl-paste --type text --watch cliphist store
                 exec-once=wl-paste --type image --watch cliphist store
                 exec-once=waybar
