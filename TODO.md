@@ -6,7 +6,6 @@
 - Samba Server on Magrathea?
 - Syncthing
 - Browser Profile sync to RAM
-- Hypridle
 - Convert theming to nix-colors
 - Move all "FetchFromGithub" to flake inputs?
 - Toggle laptop keyboard on Air60 (dis)connect
