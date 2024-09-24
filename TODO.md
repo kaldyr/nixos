@@ -3,13 +3,10 @@
 ## Changes
 
 - nh nix helper
-- Samba Server on Magrathea
+- Samba Server on Magrathea?
 - Syncthing
 - Browser Profile sync to RAM
-- Hyprlock
 - Hypridle
-- Hyprcursor
-- Hyprpaper?
 - Convert theming to nix-colors
 - Move all "FetchFromGithub" to flake inputs?
 - Toggle laptop keyboard on Air60 (dis)connect

@@ -12,12 +12,22 @@
         ./foot.nix
     ];
 
+    environment.sessionVariables = {
+        GTK_THEME = "catppuccin-frappe-sapphire-standard";
+        HYPRCURSOR_THEME = "catppuccin-frappe-sapphire-cursors";
+        HYPRCURSOR_SIZE = 24;
+        NIXOS_OZONE_WL = "1";
+        WLR_NO_HARDWARE_CURSORS = "1";
+    };
+
     home-manager.users.${sysConfig.user} = {
 
         home.packages = with pkgs; [
             brightnessctl
             cliphist
             grim
+            hyprcursor
+            hyprlock
             hyprpicker
             libnotify
             pamixer
@@ -158,9 +168,13 @@
                 bind=, XF86AudioRaiseVolume, exec, pamixer -i 1
                 bind=, XF86AudioLowerVolume, exec, pamixer -d 1
                 bind=, XF86AudioMute, exec, pamixer -t
+                bind=CTRL, XF86AudioRaiseVolume, exec, pamixer -i 5
+                bind=CTRL, XF86AudioLowerVolume, exec, pamixer -d 5
                 bind=SHIFT, XF86AudioRaiseVolume, exec, pamixer --default-source -i 1
                 bind=SHIFT, XF86AudioLowerVolume, exec, pamixer --default-source -d 1
                 bind=SHIFT, XF86AudioMute, exec, pamixer --default-source -t
+                bind=CTRL SHIFT, XF86AudioRaiseVolume, exec, pamixer --default-source -i 5
+                bind=CTRL SHIFT, XF86AudioLowerVolume, exec, pamixer --default-source -d 5
                 bind=, XF86AudioPlay, exec, playerctl play-pause
                 bind=, XF86AudioNext, exec, playerctl next
                 bind=, XF86AudioPrev, exec, playerctl prev
@@ -176,6 +190,7 @@
                 bind=$mainMod, o, pseudo,
                 bind=$mainMod, s, togglesplit,
                 bind=$mainMod, f, fullscreen,
+                bind=$mainMod SHIFT, o, exec, hyprlock
 
                 # Focus
                 bind=$mainMod, h, movefocus, l
@@ -184,20 +199,20 @@
                 bind=$mainMod, j, movefocus, d
 
                 # Move Windows
-                bind=$mainMod SHIFT, H, movewindow, l
-                bind=$mainMod SHIFT, J, movewindow, d
-                bind=$mainMod SHIFT, K, movewindow, u
-                bind=$mainMod SHIFT, L, movewindow, r
+                bind=$mainMod SHIFT, h, movewindow, l
+                bind=$mainMod SHIFT, j, movewindow, d
+                bind=$mainMod SHIFT, k, movewindow, u
+                bind=$mainMod SHIFT, l, movewindow, r
 
                 # Resze Windows
-                bind=$mainMod ALT, H, resizeactive, -1 0
-                bind=$mainMod ALT, J, resizeactive, 0 1
-                bind=$mainMod ALT, K, resizeactive, 0 -1
-                bind=$mainMod ALT, L, resizeactive, 1 0
-                bind=$mainMod CTRL, H, resizeactive, -559 0 # Move window width from 1/2 screen to 1/3 screen
-                bind=$mainMod CTRL, J, resizeactive, 0 222 # Move window height from 1/2 screen to 1/3 screen
-                bind=$mainMod CTRL, K, resizeactive, 0 -222 # Move window width from 1/2 screen to 1/3 screen
-                bind=$mainMod CTRL, L, resizeactive, 559 0 # Move window height from 1/2 screen to 1/3 screen
+                bind=$mainMod ALT, h, resizeactive, -1 0
+                bind=$mainMod ALT, j, resizeactive, 0 1
+                bind=$mainMod ALT, k, resizeactive, 0 -1
+                bind=$mainMod ALT, l, resizeactive, 1 0
+                bind=$mainMod CTRL, h, resizeactive, -559 0 # Move window width from 1/2 screen to 1/3 screen
+                bind=$mainMod CTRL, j, resizeactive, 0 222 # Move window height from 1/2 screen to 1/3 screen
+                bind=$mainMod CTRL, k, resizeactive, 0 -222 # Move window width from 1/2 screen to 1/3 screen
+                bind=$mainMod CTRL, l, resizeactive, 559 0 # Move window height from 1/2 screen to 1/3 screen
 
                 # Switch Workspace
                 bind=$mainMod, 1, workspace, 1
@@ -265,6 +280,94 @@
             rev = "c388ac55563ddeea0afe9df79d4bfff0096b146b";
             sha256 = "sha256-xSa/z0Pu+ioZ0gFH9qSo9P94NPkEMovstm1avJ7rvzM=";
         } + "/themes/frappe.conf";
+
+        xdg.configFile."hypr/hypridle.conf".text = /* hyprlang */ ''
+        '';
+
+        xdg.configFile."hypr/hyprlock.conf".text = /* hyprlang */ ''
+            source=~/.config/hypr/frappe.conf
+
+            $accent = 0xb3$sapphireAlpha
+            $accentAlpha = $sapphireAlpha
+            $font = Recursive Mn Csl St
+
+            # GENERAL
+            general {
+                disable_loading_bar = true
+                hide_cursor = true
+            }
+
+            # BACKGROUND
+            background {
+                monitor =
+                path = $HOME/Pictures/Wallpapers/mountain.jpg
+                blur_passes = 2
+                color = $base
+            }
+
+            # TIME
+            label {
+                monitor =
+                text = cmd[update:1000] echo "<b>$(date +"%l:%M %p")</b>"
+                color = $text
+                font_size = 60
+                font_family = $font
+                position = -130, -100
+                halign = right
+                valign = top
+                shadow_passes = 2
+            }
+
+            # DATE 
+            label {
+                monitor =
+                text = cmd[update:1000] echo "$(date +"%A, %B %e %Y")"
+                color = $text
+                font_size = 20
+                font_family = $font
+                position = -130, -250
+                halign = right
+                valign = top
+                shadow_passes = 2
+            }
+
+            # USER AVATAR
+            image {
+                monitor =
+                path = $HOME/Pictures/Saved/profile.png
+                size = 350
+                border_color = $accent
+                rounding = -1
+                position = 0, 75
+                halign = center
+                valign = center
+                shadow_passes = 2
+            }
+
+            # INPUT FIELD
+            input-field {
+                monitor =
+                size = 500, 60
+                outline_thickness = 4
+                dots_size = 0.2
+                dots_spacing = 0.2
+                dots_center = true
+                outer_color = $accent
+                inner_color = $surface0
+                font_color = $text
+                fade_on_empty = false
+                placeholder_text = <span foreground="##$textAlpha"><i>󰌾 Logged in as </i><span foreground="##$accentAlpha">$USER</span></span>
+                hide_input = false
+                check_color = $sky
+                fail_color = $red
+                fail_text = <i>$FAIL <b>($ATTEMPTS)</b></i>
+                capslock_color = $yellow
+                position = 0, -185
+                halign = center
+                valign = center
+                shadow_passes = 2
+            }
+        '';
 
         xdg.mimeApps.defaultApplications = {
             "default-web-browser" = [ "librewolf.desktop" ];
