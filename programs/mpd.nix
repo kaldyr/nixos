@@ -10,30 +10,17 @@
 
         home.packages = with pkgs; [
             mpd
+            mpdris2
             mpc-cli
         ];
 
-        programs.ncmpcpp = {
-
-            enable = true;
-
-            bindings = [
-                { key = "h"; command = "previous_column"; }
-                { key = "j"; command = "scroll_down"; }
-                { key = "k"; command = "scroll_up"; }
-                { key = "l"; command = "next_column"; }
-            ];
-
-            mpdMusicDir = "~/Music";
-
-        };
+        programs.ncmpcpp.enable = true;
 
         services.mpd = {
             
             enable = true;
             
             extraConfig = /* bash */ ''
-
                 audio_output {
                     type "pipewire"
                     name "pipewire"
@@ -45,13 +32,29 @@
                     path "/tmp/mpd.fifo"
                     format "44100:16:1"
                 }
-
             '';
 
             musicDirectory = "~/Music";
             network.startWhenNeeded = true;
 
         };
+
+        services.mpdris2 = {
+            enable = true;
+            mpd.musicDirectory = "/home/${sysConfig.user}/Music";
+            notifications = true;
+        };
+
+        xdg.configFile."ncmpcpp/bindings".text = /* bash */ ''
+            def_key "h"
+              previous_column
+            def_key "j"
+              scroll_down
+            def_key "k"
+              scroll_up
+            def_key "l"
+              next_column
+        '';
 
     };
 
