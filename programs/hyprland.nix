@@ -181,7 +181,7 @@
                 bind=CTRL SHIFT, XF86AudioLowerVolume, exec, pamixer --default-source -d 5
                 bind=, XF86AudioPlay, exec, playerctl play-pause
                 bind=, XF86AudioNext, exec, playerctl next
-                bind=, XF86AudioPrev, exec, playerctl prev
+                bind=, XF86AudioPrev, exec, playerctl previous
 
                 # Brightness
                 bind=, XF86MonBrightnessUp, exec, brightnessctl set +5%
