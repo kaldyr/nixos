@@ -44,9 +44,19 @@
         ];
 
         services = {
+
             cliphist.enable = true;
-            hypridle.enable = true;
+
+            hypridle.enable = (
+                # Mjolnir hyprlock crash when left for minutes
+                if sysConfig.hostname == "mjolnir" then
+                    false
+                else
+                    true
+            );
+
             playerctld.enable = true;
+
         };
 
         wayland.windowManager.hyprland = {
