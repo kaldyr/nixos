@@ -2,6 +2,8 @@
 
 ## Changes
 
+- Configure btrbk to snapshot state
+- Configure remote backup of snapshots
 - nh nix helper
 - Samba Server on Magrathea?
 - Syncthing
