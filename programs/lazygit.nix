@@ -1,4 +1,8 @@
-{ sysConfig, ... }: {
+{ lib, sysConfig, ... }: {
+
+    environment.persistence = lib.mkIf sysConfig.impermanence {
+        "/state".users.${sysConfig.user}.directories = [ ".state/lazygit" ];
+    };
 
     home-manager.users.${sysConfig.user} = {
 
