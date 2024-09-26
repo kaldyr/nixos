@@ -93,7 +93,6 @@
 
             packages = with pkgs; [
                 android-tools
-                exiftool
                 ffmpeg
                 ffmpegthumbnailer
                 gimp
