@@ -171,7 +171,7 @@
                 bind=$mainMod SHIFT, v, exec, cliphist list | fuzzel -d | cliphist decode | wl-copy && wl-paste
 
                 # Play media from clipboard
-                bind=$mainMod, g, exec, mpv $(wl-paste)
+                bind=$mainMod, g, exec, mpv $(wl-paste --primary)
 
                 # Notification Controls
                 bind=$mainMod, n, exec, dunstctl history-pop
