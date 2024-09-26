@@ -52,12 +52,19 @@
                     age
                     bc
                     duf
+                    exiftool
                     fd
                     gdu
                     jq
+                    mediainfo
+                    p7zip
                     ripgrep
                     sops
                     ssh-to-age
+                    unrar
+                    unzip
+                    xar
+                    zip
                 ];
 
                 stateVersion = sysConfig.instalVersion;
