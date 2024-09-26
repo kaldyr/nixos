@@ -94,7 +94,11 @@
     security.sudo = {
         execWheelOnly = true;
         extraConfig = /* bash */ ''
+            Defaults env_keep += "EDITOR PATH DISPLAY"
+            Defaults insults
             Defaults lecture = never
+            Defaults passprompt="[31m sudo[0m: password for [36m%p[0m, running as [31m%U[0m: "
+            Defaults pwfeedback
         '';
     };
 
