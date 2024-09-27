@@ -43,6 +43,11 @@
 
             [opener]
             edit = [ { run = 'nvim "$@"', desc = "Edit", block = true } ]
+            exif = [ { run = 'exiftool "$1"; echo "Press enter to exit"; read _', desc = "Show EXIF data", block = true } ]
+            exifedit = [
+                { run = 'exiftool -overwrite_original "-alldates<filename" -S -m -q "$1"', desc = "Set EXIF datetime from Filename" },
+                { run = 'exiftool "-filename<CreateDate" -d "_%Y%m%d_%H%M%S.%%e" -S -m -ee -q "$1"', desc = "Set Filename from EXIF datetime" },
+            ]
             extract = [ { run = 'ya pub extract --list "$@"', desc = "Extract Here" } ]
             image = [ { run = 'feh -. -Z "$@"', desc = "Open with feh", orphan = true } ]
             office = [ { run = 'libreoffice "$@"', desc = "Open with LibreOffice", orphan = true } ]
@@ -50,24 +55,24 @@
             pdf = [ { run = 'zathura "$@"', desc = "Open with Zathura", orphan = true } ]
             play = [
                 { run = 'mpv --force-window "$@"', desc = "Play with mpv", orphan = true },
-                { run = ''''mediainfo "$1"; echo "Press enter to exit"; read _'''', desc = "Show media info", block = true },
+                { run = 'mediainfo "$1"; echo "Press enter to exit"; read _', desc = "Show media info", block = true },
             ]
-            reveal = [ { run = ''''exiftool "$1"; echo "Press enter to exit"; read _'''', desc = "Show EXIF", block = true }, ]
 
             [open]
             rules = [
-                { mime = "application/{,g}zip", use = [ "extract", "reveal" ] },
-                { mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", use = [ "extract", "reveal" ] },
-                { mime = "application/pdf", use = [ "pdf", "reveal" ] },
-                { mime = "{audio,video}/*", use = [ "play", "reveal" ] },
-                { mime = "image/*", use = [ "image", "reveal" ] },
+                { mime = "application/{,g}zip", use = [ "extract", "exif" ] },
+                { mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", use = [ "extract", "exif" ] },
+                { mime = "application/pdf", use = [ "pdf", "exif" ] },
+                { mime = "audio/*", use = [ "play", "exif" ] },
+                { mime = "image/*", use = [ "image", "exif", "exifedit" ] },
                 { mime = "inode/directory", use = [ "edit", "play" ] },
-                { mime = "text/*", use = [ "edit", "reveal" ] },
-                { name = "*.od{g,p,s,t}", use = [ "office", "reveal" ] },
-                { name = "*.doc{,x}", use = [ "office", "reveal" ] },
-                { name = "*.ppt{,x}", use = [ "office", "reveal" ] },
-                { name = "*.xls{,x}", use = [ "office", "reveal" ] },
-                { mime = "*", use = [ "open", "edit", "reveal" ] },
+                { mime = "text/*", use = [ "edit", "exif" ] },
+                { mime = "video/*", use = [ "play", "exif", "exifedit" ] },
+                { name = "*.od{g,p,s,t}", use = [ "office", "exif" ] },
+                { name = "*.doc{,x}", use = [ "office", "exif" ] },
+                { name = "*.ppt{,x}", use = [ "office", "exif" ] },
+                { name = "*.xls{,x}", use = [ "office", "exif" ] },
+                { mime = "*", use = [ "open", "edit", "exif" ] },
             ]
 
             [tasks]
