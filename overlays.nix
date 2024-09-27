@@ -6,7 +6,7 @@
 
         # PACKAGE = inputs.NIXPKGS-VERSION.legacyPackages.${prev.system}.PACKAGE;
 
-        exiftool = inputs.nixpkgs-exiftool.legacyPackages.${prev.system}.exiftool;
+        exiftool_12-70 = inputs.nixpkgs-exiftool.legacyPackages.${prev.system}.exiftool;
 
     };
 

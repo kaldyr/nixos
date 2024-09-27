@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: {
 
     environment.systemPackages = with pkgs; [
-        exiftool
+        exiftool_12-70
         ffmpeg
         imagemagick
         libtensorflow
