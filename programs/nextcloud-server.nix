@@ -103,7 +103,7 @@
                 mail_sendmailmode = "pipe";
                 mail_smtpmode = "sendmail";
                 maintenance_window_start = "8";
-                "memories.exiftool" = "${lib.getExe pkgs.exiftool}";
+                "memories.exiftool" = "${lib.getExe pkgs.exiftool_12-70}";
                 trusted_domains = [ "magrathea.brill-godzilla.ts.net" ];
                 trusted_proxies = [ "100.109.171.26" "127.0.0.1" "192.168.1.2" ];
             };
