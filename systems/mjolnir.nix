@@ -30,7 +30,19 @@
     networking.hostName = sysConfig.hostname;
     time.timeZone = "America/Los_Angeles";
 
-    services.fwupd.enable = true;
-    services.libinput.enable = true;
+    services = {
+
+        fwupd.enable = true;
+
+        # Specific to the Nuphy Air60 v1 set to mac mode (Fixes F# key issues)
+        keyd.keyboards.default.settings.main = {
+            esc = "grave";
+            leftalt = "leftmeta";
+            leftmeta = "leftalt";
+        };
+
+        libinput.enable = true;
+
+    };
 
 }

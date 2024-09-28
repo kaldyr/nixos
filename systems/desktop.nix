@@ -276,8 +276,49 @@
         dbus.enable = true;
         gnome.gnome-keyring.enable = true;
 
-        keyd.enable = true;
-        keyd.keyboards.default.settings.main.capslock = "esc";
+        keyd = {
+
+            enable = true;
+
+            keyboards.default.settings = {
+
+                layerNavigate = {
+
+                    # For WASD games, turn instead of strafe when layer active
+                    a = "left";
+                    d = "right";
+                    w = "up";
+                    s = "down";
+
+                    # Extra keybinds for games from the numpad
+                    "1" = "kp1";
+                    "2" = "kp2";
+                    "3" = "kp3";
+                    "4" = "kp4";
+                    "5" = "kp5";
+                    "z" = "kp6";
+                    "q" = "kp7";
+                    "e" = "kp8";
+                    "r" = "kp9";
+                    "t" = "kp0";
+                    "f" = "kpminus";
+                    "g" = "kpplus";
+                    "v" = "kpdot";
+
+                    # For fast vim arrow movements without exiting insert mode
+                    h = "left";
+                    j = "down";
+                    k = "up";
+                    l = "right";
+
+                };
+
+                # Hold for navigation layer, tap for escape
+                main.capslock = "overload(layerNavigate, esc)";
+
+            };
+
+        };
 
         pipewire = {
             enable = true;
