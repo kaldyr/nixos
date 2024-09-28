@@ -282,7 +282,7 @@
 
             keyboards.default.settings = {
 
-                layerNavigate = {
+                layerCaps = {
 
                     # For WASD games, turn instead of strafe when layer active
                     a = "left";
@@ -314,7 +314,7 @@
                 };
 
                 # Hold for navigation layer, tap for escape
-                main.capslock = "overload(layerNavigate, esc)";
+                main.capslock = "overload(layerCaps, esc)";
 
             };
 
