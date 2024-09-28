@@ -4,7 +4,18 @@
 
         programs.waybar.enable = true;
 
-        xdg.configFile."waybar/config".text = /* json */ ''
+        xdg.configFile."waybar/config".text = let
+
+            hwmon-path = (
+                if sysConfig.hostname == "mjolnir" then
+                    "/sys/devices/pci0000:00/0000:00:08.1/0000:c4:00.0/hwmon/hwmon1/temp1_input"
+                else if sysConfig.hostname == "gram" then 
+                    ""
+                else
+                    ""
+                );
+
+        in /* json */ ''
             [
                 {
                     "battery": {
@@ -91,7 +102,7 @@
                     "temperature": {
                         "critical-threshold": 75,
                         "format": "",
-                        "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input"
+                        "hwmon-path": "${hwmon-path}"
                     },
                     "tray": {
                         "icon-size": 12,
