@@ -8,9 +8,9 @@
 
             hwmon-path = (
                 if sysConfig.hostname == "mjolnir" then
-                    "/sys/devices/pci0000:00/0000:00:08.1/0000:c4:00.0/hwmon/hwmon1/temp1_input"
+                    "/sys/devices/pci0000:00/0000:00:08.1/0000:c4:00.0/hwmon"
                 else if sysConfig.hostname == "gram" then 
-                    ""
+                    "/sys/devices/platform/coretemp.0/hwmon"
                 else
                     ""
                 );
@@ -27,20 +27,20 @@
                         "on-click": "2",
                         "states": {
                             "critical": 10,
-                            "warning": 25
+                            "warning": 25,
                         },
                         "tooltip": true,
-                        "tooltip-format": "{capacity}% - {time}"
+                        "tooltip-format": "{capacity}% - {time}",
                     },
                     "clock": {
                         "format": "  {:%H:%M  -  %a, %b %e}  󰸗",
-                        "tooltip-format": "<tt>{calendar}</tt>"
+                        "tooltip-format": "<tt>{calendar}</tt>",
                     },
                     "exclusive": false,
                     "gtk-layer-shell": true,
                     "height": 24,
                     "hyprland/window": {
-                        "format": "{}"
+                        "format": "{}",
                     },
                     "hyprland/workspaces": {
                         "all-outputs": true,
@@ -48,27 +48,27 @@
                         "format-icons": {
                             "active": " ",
                             "default": " ",
-                            "urgent": " "
+                            "urgent": " ",
                         },
                         "on-click": "activate",
                         "on-scroll-down": "hyprctl dispatch workspace e+1",
                         "on-scroll-up": "hyprctl dispatch workspace e-1",
-                        "sort-by-number": true
+                        "sort-by-number": true,
                     },
                     "layer": "top",
                     "mode": "dock",
                     "modules-center": [
-                        "clock"
+                        "clock",
                     ],
                     "modules-left": [
-                        "hyprland/workspaces"
+                        "hyprland/workspaces",
                     ],
                     "modules-right": [
                         "temperature",
                         "pulseaudio#output",
                         "pulseaudio#input",
                         "battery",
-                        "tray"
+                        "tray",
                     ],
                     "passthrough": false,
                     "position": "top",
@@ -80,7 +80,7 @@
                         "on-click-right": "pavucontrol --tab=4",
                         "on-scroll-down": "pamixer --default-source -d 1",
                         "on-scroll-up": "pamixer --default-source -i 1",
-                        "tooltip": false
+                        "tooltip": false,
                     },
                     "pulseaudio#output": {
                         "format": "{volume}% {icon} ",
@@ -91,18 +91,19 @@
                             "headphone": " ",
                             "headset": " ",
                             "phone": " ",
-                            "portable": " "
+                            "portable": " ",
                         },
                         "format-muted": " ",
                         "on-click": "pamixer -t",
                         "on-click-right": "pavucontrol --tab=3",
                         "on-scroll-down": "pamixer -d 1",
-                        "on-scroll-up": "pamixer -i 1"
+                        "on-scroll-up": "pamixer -i 1",
                     },
                     "temperature": {
                         "critical-threshold": 75,
                         "format": "",
-                        "hwmon-path": "${hwmon-path}"
+                        "hwmon-path-abs": "${hwmon-path}",
+                        "input-filename": "temp1_input",
                     },
                     "tray": {
                         "icon-size": 12,
