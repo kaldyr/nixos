@@ -1,4 +1,4 @@
-{ lib, pkgs, sysConfig, ... }: {
+{ pkgs, sysConfig, ... }: {
 
     imports = [
         ../programs/cava.nix
@@ -6,7 +6,6 @@
         ../programs/libreoffice.nix
         ../programs/librewolf.nix
         ../programs/mpv.nix
-        ../programs/newsboat.nix
         ../programs/nextcloud-client.nix
         ../programs/obsidian.nix
         ../programs/openscad.nix
@@ -20,28 +19,24 @@
             user_allow_other
         '';
 
-        persistence = lib.mkIf sysConfig.impermanence {
-            # Home files that need to be preserved between boots
-            #  These files do not need to be backed up
-            # Syncthing and Nextcloud handle the personal files
-            "/nix" = {
+        # Home files that need to be preserved between boots
+        #  These files are synced and do not need to be in snapshots 
+        persistence."/nix" = {
 
-                hideMounts = true;
+            hideMounts = true;
 
-                users.${sysConfig.user}.directories = [
-                    ".local/share/applications"
-                    "Audiobooks"
-                    "Books"
-                    "Documents"
-                    "Downloads"
-                    "Music"
-                    "Notes"
-                    "Pictures"
-                    "Projects"
-                    "Videos"
-                ];
-
-            };
+            users.${sysConfig.user}.directories = [
+                ".local/share/applications"
+                "Audiobooks"
+                "Books"
+                "Documents"
+                "Downloads"
+                "Music"
+                "Notes"
+                "Pictures"
+                "Projects"
+                "Videos"
+            ];
 
         };
 
@@ -93,8 +88,6 @@
 
             packages = with pkgs; [
                 android-tools
-                ffmpeg
-                ffmpegthumbnailer
                 gimp
                 gnome-keyring
                 go-mtpfs
@@ -104,12 +97,10 @@
                 kjv
                 libsecret
                 networkmanagerapplet
-                neovide
                 papirus-folders
                 vulkan-tools
                 xdg-utils
                 xdg-user-dirs
-                yt-dlp
             ];
 
             pointerCursor = {
@@ -156,12 +147,14 @@
         enableDefaultPackages = false;
 
         fontconfig = {
+
             defaultFonts = {
                 monospace = [ "Recursive Mn Csl St" "Noto Color Emoji" ];
                 sansSerif = [ "Inter" "Liberation Sans" "Noto Color Emoji" ];
                 serif = [ "Recursive Sa Ln St" "Liberation Serif" "Noto Color Emoji" ];
                 emoji = [ "Noto Color Emoji" ];
             };
+
             localConf = /* xml */ ''
                 <?xml version="1.0"?>
                 <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
@@ -230,6 +223,7 @@
                     </match>
                 </fontconfig>
             '';
+
         };
 
         packages = with pkgs; [

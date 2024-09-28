@@ -1,8 +1,6 @@
-{ lib, pkgs, sysConfig, ... }: {
+{ pkgs, sysConfig, ... }: {
 
-    environment.persistence = lib.mkIf sysConfig.impermanence {
-        "/nix".users.${sysConfig.user}.directories = [ ".local/share/Steam" ];
-    };
+    environment.persistence."/nix".users.${sysConfig.user}.directories = [ ".local/share/Steam" ];
 
     hardware.graphics.extraPackages32 = with pkgs; [ pkgsi686Linux.libva ];
 

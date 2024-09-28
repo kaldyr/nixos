@@ -29,30 +29,60 @@
 
         defaultPackages = lib.mkForce [];
 
+        # Home files that aren't declarative and need to be preserved
+        persistence."/state" = {
+
+            hideMounts = true;
+
+            users.${sysConfig.user}.directories = [
+                { directory = ".config/sops/age"; mode = "0700"; }
+                { directory = ".gnupg"; mode = "0700"; }
+                { directory = ".local/share/keyrings"; mode = "0700"; }
+                { directory = ".ssh"; mode = "0700"; }
+            ];
+
+        };
+
         # System files that aren't declarative and need to be preserved
-        # Snapshots will back up state
-        persistence = lib.mkIf sysConfig.impermanence {
+        persistence."/state/system" = {
 
-            "/state/system" = {
+            directories = [
+                { directory = "/etc/NetworkManager/system-connections"; mode = "0700"; }
+                { directory = "/var/lib/bluetooth"; mode = "0700"; }
+                "/var/lib/nixos"
+                "/var/lib/systemd/coredump"
+                { directory = "/var/lib/tailscale"; mode = "0700"; }
+                "/var/log"
+            ];
 
-                directories = [
-                    { directory = "/etc/NetworkManager/system-connections"; mode = "0700"; }
-                    { directory = "/var/lib/bluetooth"; mode = "0700"; }
-                    "/var/lib/nixos"
-                    "/var/lib/systemd/coredump"
-                    { directory = "/var/lib/tailscale"; mode = "0700"; }
-                    "/var/log"
-                ];
-
-                files = [ "/etc/machine-id" ];
-
-            };
+            files = [ "/etc/machine-id" ];
 
         };
 
         systemPackages = with pkgs; [ tailscale ];
 
     };
+
+    home-manager.users.${sysConfig.user}.home.packages = with pkgs; [
+        age
+        bc
+        duf
+        exiftool
+        fd
+        ffmpeg
+        ffmpegthumbnailer
+        gdu
+        jq
+        p7zip
+        ripgrep
+        sops
+        ssh-to-age
+        unrar
+        unzip
+        xar
+        yt-dlp
+        zip
+    ];
 
     networking = {
         enableIPv6 = false;

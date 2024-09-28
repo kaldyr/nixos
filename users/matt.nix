@@ -1,6 +1,6 @@
-{ config, pkgs, sysConfig, ...}: {
+{ config, pkgs, ...}: {
 
-    home-manager.users.${sysConfig.user}.home.sessionVariables = {
+    home-manager.users.matt.home.sessionVariables = {
         EDITOR = "nvim";
         VISUAL = "nvim";
     };
@@ -13,7 +13,7 @@
 
         mutableUsers = false;
 
-        users.${sysConfig.user} = {
+        users.matt = {
 
             description = "Matt";
             extraGroups = [ "wheel" "networkmanager" "video" ];

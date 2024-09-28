@@ -1,10 +1,6 @@
-{ lib, pkgs, sysConfig, ... }: {
+{ pkgs, sysConfig, ... }: {
 
-    environment.persistence = lib.mkIf sysConfig.impermanence {
-        "/state".users.${sysConfig.user}.directories = [
-            ".local/share/OpenSCAD"
-        ];
-    };
+    environment.persistence."/state".users.${sysConfig.user}.directories = [ ".local/share/OpenSCAD" ];
 
     home-manager.users.${sysConfig.user}.home.packages = with pkgs; [ openscad ];
 

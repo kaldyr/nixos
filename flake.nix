@@ -44,7 +44,7 @@
 
             buildSystem = sysConfig: nixpkgs.lib.nixosSystem {
 
-                system = sysConfig.arch;
+                system = "x86_64-linux";
                 specialArgs = { inherit inputs sysConfig; };
 
                 modules = [
@@ -73,32 +73,17 @@
             # Gram: Framework 11th Gen i5-1135G7
             "gram" = let
                 sysConfig = {
-                    arch = "x86_64-linux";
                     hostname = "gram";
                     instalVersion = "24.05"; 
-                    impermanence = true;
                     user = "matt";
                 };
             in buildSystem ( sysConfig );
 
-            # Installer: Custom ISO image for installing NixOS
-            "installer" = let
-                sysConfig = {
-                    arch = "x86_64-linux";
-                    hostname = "installer";
-                    instalVersion = "24.05"; 
-                    impermanence = false;
-                    user = "nixos";
-                };
-            in buildSystem ( sysConfig );
-                
             # Magrathea: Intel i5-2500K Nextcloud server with Kodi, media storage, and snapshot backups
             "magrathea" = let
                 sysConfig = {
-                    arch = "x86_64-linux";
                     hostname = "magrathea";
                     instalVersion = "24.05"; 
-                    impermanence = true;
                     user = "matt";
                 };
             in buildSystem ( sysConfig );
@@ -106,10 +91,8 @@
             # Mjolnir: MinisForum UM790 Pro
             "mjolnir" = let
                 sysConfig = {
-                    arch = "x86_64-linux";
                     hostname = "mjolnir";
                     instalVersion = "23.05"; 
-                    impermanence = true;
                     user = "matt";
                 };
             in buildSystem ( sysConfig );
@@ -117,10 +100,8 @@
             # Serenity: Ryzen 5 2400g Kodi, media storage, and off-site snapshot backups
             # "serenity" = let
             #     sysConfig = {
-            #         arch = "x86_64-linux";
             #         hostname = "serenity";
             #         instalVersion = ""; 
-            #         impermanence = true;
             #         user = "matt";
             #     };
             # in buildSystem ( sysConfig );

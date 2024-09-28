@@ -1,8 +1,6 @@
-{ inputs, lib, pkgs, sysConfig, ... }: {
+{ inputs, pkgs, sysConfig, ... }: {
 
-    environment.persistence = lib.mkIf sysConfig.impermanence {
-        "/state".users.${sysConfig.user}.directories = [ ".local/state/nvim" ];
-    };
+    environment.persistence."/state".users.${sysConfig.user}.directories = [ ".local/state/nvim" ];
 
     home-manager.users.${sysConfig.user} = {
 

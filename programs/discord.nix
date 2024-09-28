@@ -1,11 +1,9 @@
-{ lib, pkgs, sysConfig, ... }: {
+{ pkgs, sysConfig, ... }: {
 
-    environment.persistence = lib.mkIf sysConfig.impermanence {
-        "/nix".users.${sysConfig.user}.directories = [
-            ".config/BetterDiscord"
-            ".config/discord"
-        ];
-    };
+    environment.persistence."/nix".users.${sysConfig.user}.directories = [
+        ".config/BetterDiscord"
+        ".config/discord"
+    ];
 
     home-manager.users.${sysConfig.user} = {
 

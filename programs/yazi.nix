@@ -1,6 +1,8 @@
-{ sysConfig, ... }: {
+{ pkgs, sysConfig, ... }: {
 
     home-manager.users.${sysConfig.user} = {
+
+        home.packages = with pkgs; [ mediainfo ];
 
         programs.yazi.enable = true;
         programs.yazi.enableFishIntegration = true;

@@ -6,7 +6,6 @@
 1. [Setup the Config Folder](#setup-the-config-folder)
 1. [Build the Base System](#build-the-base-system)
 1. [Reboot into the New System](#reboot-into-the-new-system)
-1. [Building the custom ISO Image](#building-the-custom-iso-image)
 
 ## Boot Install Media
 
@@ -42,8 +41,3 @@ nixos-install --no-root-password --flake /mnt/nix/config#[machine]
 nixos-enter
 ```
 ## Reboot into the New System
-
-## Building the Custom ISO Image
-```bash
-nix run nixpkgs#nixos-generators -- --format iso --flake /nix/config#installer -o nixos.iso
-```

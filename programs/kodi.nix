@@ -1,12 +1,10 @@
-{ lib, pkgs, sysConfig, ... }: {
+{ pkgs, ... }: {
 
-    environment.persistence = lib.mkIf sysConfig.impermanence {
-        "/state".users.kodi.directories = [
-            { directory = ".cache"; mode = "0700"; }
-            ".compose-cache"
-            ".kodi"
-        ];
-    };
+    environment.persistence."/state".users.kodi.directories = [
+        { directory = ".cache"; mode = "0700"; }
+        ".compose-cache"
+        ".kodi"
+    ];
 
     networking.firewall.allowedTCPPorts = [ 8080 9090 ];
     networking.firewall.allowedUDPPorts = [ 8080 9090 ];
@@ -26,8 +24,7 @@
 
                 package = (pkgs.kodi-wayland.withPackages (kodiPackages: with kodiPackages; [
                     inputstream-adaptive
-                    sendtokodi
-                    # youtube
+                    youtube
                 ]));
 
             };
