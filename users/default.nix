@@ -1,20 +1,5 @@
 { inputs, sysConfig, ...}: {
 
-    imports = [
-        ../programs/bat.nix
-        ../programs/btop.nix
-        ../programs/eza.nix
-        ../programs/fish.nix
-        ../programs/fzf.nix
-        ../programs/git.nix
-        ../programs/lazygit.nix
-        ../programs/neovim.nix
-        ../programs/starship.nix
-        ../programs/yazi.nix
-        ../programs/zellij.nix
-        ../programs/zoxide.nix
-    ];
-
     home-manager = {
 
         extraSpecialArgs = { inherit inputs sysConfig; };

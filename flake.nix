@@ -59,10 +59,10 @@
                     sops-nix.nixosModules.sops
 
                     # System Config
+                    ./users/default.nix # Defaults for all users
+                    ./users/${sysConfig.user}.nix # Specific user configuration
                     ./systems/default.nix # Defaults for all systems
                     ./systems/${sysConfig.hostname}.nix # Specific for this machine
-                    ./users/default.nix # Defaults for all users
-                    ./users/${sysConfig.user}.nix # User configuration
 
                 ];
 
