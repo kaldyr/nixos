@@ -1,4 +1,4 @@
-{  lib, pkgs, sysConfig, ... }: {
+{ lib, pkgs, sysConfig, ... }: {
 
     environment.persistence."/state".users.${sysConfig.user}.directories = [ ".config/Nextcloud" ];
 
@@ -61,10 +61,6 @@
 
             if [ ! -f "/home/${sysConfig.user}/.config/Nextcloud/nextcloud.cfg" ]; then
                 echo "${ncInitialConfig}" > /home/${sysConfig.user}/.config/Nextcloud/nextcloud.cfg
-            fi
-
-            if [ ! -d "/home/${sysConfig.user}/Notes" ]; then
-                mkdir -p "/home/${sysConfig.user}/Notes"
             fi
         '';
 
