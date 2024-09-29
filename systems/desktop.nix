@@ -9,6 +9,7 @@
         ../programs/nextcloud-client.nix
         ../programs/obsidian.nix
         ../programs/openscad.nix
+        ../programs/pipewire.nix
         ../programs/telegram.nix
         ../programs/zathura.nix
     ];
@@ -118,7 +119,6 @@
             };
 
         };
-
 
         services = {
             blueman-applet.enable = true;
@@ -245,24 +245,24 @@
         bluetooth.settings.General.Enable = "Source,Sink,Media,Socket";
 
         graphics = {
+
             enable = true;
+
             extraPackages = with pkgs; [
                 libdrm
                 libva
                 libva-utils
                 vaapiVdpau
             ];
+
         };
 
     };
 
     programs.dconf.enable = true;
 
-    security = {
-        pam.services.login.enableGnomeKeyring = true;
-        polkit.enable = true;
-        rtkit.enable = true;
-    };
+    security.pam.services.login.enableGnomeKeyring = true;
+    security.polkit.enable = true;
 
     services = {
 
@@ -314,13 +314,7 @@
 
         };
 
-        pipewire = {
-            enable = true;
-            alsa.enable = true;
-            pulse.enable = true;
-            wireplumber.enable = true;
-        };
-
+        # Work towards automount phone for file copy
         udev.packages = with pkgs; [
             android-udev-rules
             libmtp

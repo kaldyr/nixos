@@ -1,4 +1,4 @@
-{ inputs, pkgs, sysConfig, ... }: {
+{ inputs, pkgs, ... }: {
 
     imports = [
         inputs.nixos-hardware.nixosModules.common-hidpi
@@ -13,7 +13,7 @@
 
     boot = {
         extraModulePackages = with pkgs; [ btrfs-progs ];
-        initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ]; # Fill out when installing
+        initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
         initrd.kernelModules = [ "i915" ];
         kernelModules = [ "kvm-intel" ];
         kernelPackages = pkgs.linuxKernel.packages.linux_zen;
@@ -23,7 +23,6 @@
 
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
-    networking.hostName = sysConfig.hostname;
     nixpkgs.config.allowUnfree = true;
     time.timeZone = "America/Los_Angeles";
 
@@ -42,14 +41,8 @@
 
         };
 
-        fwupd.enable = true;
-
-        libinput = {
-            enable = true;
-            touchpad.scrollMethod = "twofinger";
-            touchpad.accelSpeed = "-0.5";
-        };
-
+        libinput.touchpad.scrollMethod = "twofinger";
+        libinput.touchpad.accelSpeed = "-0.5";
         thermald.enable = true;
 
     };

@@ -102,6 +102,7 @@
     networking = {
         enableIPv6 = false;
         firewall.checkReversePath = "loose";
+        hostname = sysConfig.hostname;
         networkmanager.enable = true;
     };
 
@@ -137,7 +138,9 @@
     programs.fuse.userAllowOther = true;
 
     security.sudo = {
+
         execWheelOnly = true;
+
         extraConfig = /* bash */ ''
             Defaults env_keep += "EDITOR PATH DISPLAY"
             Defaults insults
@@ -145,22 +148,30 @@
             Defaults passprompt="[31m sudo[0m: password for [36m%p[0m, running as [31m%U[0m: "
             Defaults pwfeedback
         '';
+
     };
 
     services = {
 
+        fwupd.enable = true;
+        libinput.enable = true;
+
         openssh = {
+
             enable = true;
+
             knownHosts = {
                 "garm".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJId64RiXTZvY0oHr75V2TFURT6Qg8D6mgTCGVr59B7l root@gram";
                 "magrathea".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKymXBmxO/Yb9lFRyW+w1O3mZ7I6iLgnxW0kgI/4e1O3 root@magrathea";
                 "mjolnir".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEsWi8zGLMuMJM+2wawmRFEE6Qmnabq3kA4Rj3bLBBJ6 root@mjolnir";
             };
+
             settings = {
                 KbdInteractiveAuthentication = false;
                 PasswordAuthentication = false;
                 PermitRootLogin = lib.mkForce "no";
             };
+
         };
 
         tailscale.enable = true;

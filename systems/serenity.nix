@@ -22,10 +22,6 @@
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
     nixpkgs.config.allowUnfree = true;
-    networking.hostName = sysConfig.hostname;
     time.timeZone = "America/Los_Angeles";
-
-    services.fwupd.enable = true;
-    services.libinput.enable = true;
 
 }

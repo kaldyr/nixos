@@ -1,4 +1,4 @@
-{ inputs, pkgs, sysConfig, ... }: {
+{ inputs, pkgs, ... }: {
 
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-amd
@@ -27,22 +27,13 @@
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
     nixpkgs.config.allowUnfree = true;
-    networking.hostName = sysConfig.hostname;
     time.timeZone = "America/Los_Angeles";
 
-    services = {
-
-        fwupd.enable = true;
-
-        # Specific to the Nuphy Air60 v1 set to mac mode (Fixes F# key issues)
-        keyd.keyboards.default.settings.main = {
-            esc = "grave";
-            leftalt = "leftmeta";
-            leftmeta = "leftalt";
-        };
-
-        libinput.enable = true;
-
+    # Specific to the Nuphy Air60 v1 set to mac mode (Fixes F# key issues)
+    services.keyd.keyboards.default.settings.main = {
+        esc = "grave";
+        leftalt = "leftmeta";
+        leftmeta = "leftalt";
     };
 
 }
