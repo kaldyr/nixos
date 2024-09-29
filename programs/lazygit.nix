@@ -1,6 +1,6 @@
 { sysConfig, ... }: {
 
-    environment.persistence."/state".users.${sysConfig.user}.directories = [ ".state/lazygit" ];
+    environment.persistence."/state".users.${sysConfig.user}.directories = [ ".local/state/lazygit" ];
 
     home-manager.users.${sysConfig.user} = {
 
