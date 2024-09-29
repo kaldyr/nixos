@@ -3,6 +3,7 @@
     imports = [
         ../programs/cava.nix
         ../programs/discord.nix
+        ../programs/keyd.nix
         ../programs/libreoffice.nix
         ../programs/librewolf.nix
         ../programs/mpv.nix
@@ -260,7 +261,6 @@
     };
 
     programs.dconf.enable = true;
-
     security.pam.services.login.enableGnomeKeyring = true;
     security.polkit.enable = true;
 
@@ -269,73 +269,6 @@
         blueman.enable = true;
         dbus.enable = true;
         gnome.gnome-keyring.enable = true;
-
-        keyd = let 
-
-            layerCaps = {
-
-                # For WASD games, turn instead of strafe when layer active
-                a = "left";
-                d = "right";
-                w = "up";
-                s = "down";
-
-                # Extra keybinds for games from the numpad
-                "1" = "kp1";
-                "2" = "kp2";
-                "3" = "kp3";
-                "4" = "kp4";
-                "5" = "kp5";
-                "z" = "kp6";
-                "q" = "kp7";
-                "e" = "kp8";
-                "r" = "kp9";
-                "t" = "kp0";
-                "f" = "kpminus";
-                "g" = "kpplus";
-                "v" = "kpdot";
-
-                # For fast vim arrow movements without exiting insert mode
-                h = "left";
-                j = "down";
-                k = "up";
-                l = "right";
-
-            };
-
-        in {
-
-            enable = true;
-
-            keyboards.default = {
-
-                ids = [ "*" ];
-                settings.layerCaps = layerCaps;
-                settings.main.capslock = "overload(layerCaps, esc)";
-
-            };
-
-            # Specific to the Nuphy Air60 v1 set to mac mode (Fixes F# key issues)
-            keyboards."air60v1" = {
-
-                ids = [ "0fac:0ade" ];
-
-                settings = {
-
-                    layerCaps = layerCaps;
-
-                    main = {
-                        capslock = "overload(layerCaps, esc)";
-                        esc = "grave";
-                        leftalt = "leftmeta";
-                        leftmeta = "leftalt";
-                    };
-
-                };
-
-            };
-
-        };
 
         # Work towards automount phone for file copy
         udev.packages = with pkgs; [
