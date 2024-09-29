@@ -274,41 +274,63 @@
 
             enable = true;
 
-            keyboards.default.settings = {
+            keyboards.default = {
 
-                layerCaps = {
+                ids = [ "*" ];
 
-                    # For WASD games, turn instead of strafe when layer active
-                    a = "left";
-                    d = "right";
-                    w = "up";
-                    s = "down";
+                settings = {
 
-                    # Extra keybinds for games from the numpad
-                    "1" = "kp1";
-                    "2" = "kp2";
-                    "3" = "kp3";
-                    "4" = "kp4";
-                    "5" = "kp5";
-                    "z" = "kp6";
-                    "q" = "kp7";
-                    "e" = "kp8";
-                    "r" = "kp9";
-                    "t" = "kp0";
-                    "f" = "kpminus";
-                    "g" = "kpplus";
-                    "v" = "kpdot";
+                    layerCaps = {
 
-                    # For fast vim arrow movements without exiting insert mode
-                    h = "left";
-                    j = "down";
-                    k = "up";
-                    l = "right";
+                        # For WASD games, turn instead of strafe when layer active
+                        a = "left";
+                        d = "right";
+                        w = "up";
+                        s = "down";
+
+                        # Extra keybinds for games from the numpad
+                        "1" = "kp1";
+                        "2" = "kp2";
+                        "3" = "kp3";
+                        "4" = "kp4";
+                        "5" = "kp5";
+                        "z" = "kp6";
+                        "q" = "kp7";
+                        "e" = "kp8";
+                        "r" = "kp9";
+                        "t" = "kp0";
+                        "f" = "kpminus";
+                        "g" = "kpplus";
+                        "v" = "kpdot";
+
+                        # For fast vim arrow movements without exiting insert mode
+                        h = "left";
+                        j = "down";
+                        k = "up";
+                        l = "right";
+
+                    };
+
+                    # Hold for navigation layer, tap for escape
+                    main.capslock = "overload(layerCaps, esc)";
 
                 };
 
-                # Hold for navigation layer, tap for escape
-                main.capslock = "overload(layerCaps, esc)";
+            };
+
+            # Specific to the Nuphy Air60 v1 set to mac mode (Fixes F# key issues)
+            keyboards."air60v1" = {
+
+                ids = [
+                    "0fac:0ade"
+                    "05ac:024f"
+                ];
+
+                settings.main = {
+                    esc = "grave";
+                    leftalt = "leftmeta";
+                    leftmeta = "leftalt";
+                };
 
             };
 

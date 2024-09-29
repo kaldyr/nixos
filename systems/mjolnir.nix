@@ -29,11 +29,4 @@
     nixpkgs.config.allowUnfree = true;
     time.timeZone = "America/Los_Angeles";
 
-    # Specific to the Nuphy Air60 v1 set to mac mode (Fixes F# key issues)
-    services.keyd.keyboards.default.settings.main = {
-        esc = "grave";
-        leftalt = "leftmeta";
-        leftmeta = "leftalt";
-    };
-
 }
