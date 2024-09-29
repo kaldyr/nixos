@@ -55,8 +55,6 @@
                             "@snaps" = { mountpoint = "/snaps"; mountOptions = driveOptions; };
                             # Swapfile
                             "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "16G"; };
-                            # Syncthing storage
-                            "@sync" = { mountpoint = "/sync"; mountOptions = driveOptions; };
 
                             # Subvolumes for managing nextcloud
                             # Nextcloud - schedule snapshots
@@ -68,6 +66,7 @@
                             # After Disko does its thing, and before installing nixos, run the following:
                             #   chattr +C /var/lib.postgresql
                             "@mysql" = { mountpoint = "/var/lib/postgresql"; mountOptions = driveOptions; };  
+                            # FIXME: Change name from @mysql to @ncdb next install
 
                         };
 
