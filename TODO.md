@@ -2,11 +2,9 @@
 
 ## Changes
 
-- Configure btrbk to snapshot state
-- Configure remote backup of snapshots
+- Configure btrbk to snapshot state and archive
 - nh nix helper
 - Samba Server on Magrathea?
-- Syncthing
 - Browser Profile sync to RAM
 - Convert theming to nix-colors
 - Move all "FetchFromGithub" to flake inputs?
@@ -17,23 +15,36 @@
 
 - Fnott Notifications
 
-## Disk layout
+## Snapshot Map
+
+### Laptop/Desktop
+Hourly Snaps
+@state -> @snaps
+
+Archive Snaps
+Nightly
+@snaps -> magrathea:/storage/@snaps
 
 ### Magrathea
+Hourly Snaps
+@state -> @snaps
+@nextcloud -> @snaps
 
-raid10 subvolumes:
-"media": /media
-"snapshots": /media/snaps
+Archive Snaps
+Nightly
+@snaps -> /storage/@snaps
 
-#### /media
+Off-site Archive
+Weekly
+/storage/@snaps -> serenity:/storage/@snaps
 
-btrfs raid10 array subvolume "media" zstd:8
-- Movies
-- Music
-- TVShows
-- Videos
+### Serenity
+Hourly Snaps
+@state -> @snaps
 
-#### /media/snapshots
+Archive Snaps
+@snaps -> /storage/@snaps
 
-btrfs raid10 array subvolme "backups"
-- Receive snapshots for storage
+Off-site Archive
+Weekly
+/storage/@snaps -> magrathea:/storage/@snaps
