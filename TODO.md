@@ -28,8 +28,6 @@ raid10 subvolumes:
 #### /media
 
 btrfs raid10 array subvolume "media" zstd:8
-- Audiobooks
-- Books
 - Movies
 - Music
 - TVShows
@@ -39,48 +37,3 @@ btrfs raid10 array subvolume "media" zstd:8
 
 btrfs raid10 array subvolme "backups"
 - Receive snapshots for storage
-
-## Syncing
-
-### Nextcloud
-
-#### Phone
-
-Notes
-Pictures/Brightwheel
-Pictures/Messages
-Pictures/Phone
-Pictures/Screenshots
-Videos/Brightwheel
-Videos/Messages
-Videos/Phone
-
-#### Laptop/Desktop
-
-Documents
-Notes
-Pictures
-- Brightwheel
-- Messages
-- Phone
-- Saved
-- Screenshots
-- Wallpapers
-Videos
-- Brightwheel
-- Messages
-- Phone
-- Saved
-
-### Syncthing
-
-- Audiobooks
-- Books
-- Music
-- Videos/Saved
-
-### Git
-
-Saved on laptop, desktop, magrathea-ssd, magrathea-raid10
-- NixOS Config (also on github)
-- Projects

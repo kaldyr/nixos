@@ -29,7 +29,6 @@
 
             users.${sysConfig.user}.directories = [
                 ".local/share/applications"
-                "Audiobooks"
                 "Books"
                 "Documents"
                 "Downloads"
