@@ -100,9 +100,8 @@
     ];
 
     networking = {
-        enableIPv6 = false;
         firewall.checkReversePath = "loose";
-        hostname = sysConfig.hostname;
+        hostName = sysConfig.hostname;
         networkmanager.enable = true;
     };
 
