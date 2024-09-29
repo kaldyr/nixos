@@ -56,6 +56,7 @@
 
             main = {
                 capslock = "overload(layerCaps, esc)";
+                esc = "overload(layerCaps, esc)";
                 tab = "overload(layerTab, tab)"; 
             };
 
