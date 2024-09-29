@@ -21,6 +21,29 @@
         loader.grub.gfxmodeEfi = "2256x1504";
     };
 
+    fileSystems = {
+
+        "/" = {
+            device = "none";
+            fsType = "tmpfs";
+            neededForBoot = true;
+            options = [ "defaults" "size=8G" "mode=755" ];
+        };
+
+        "/etc/ssh".neededForBoot = true;
+
+        "/home" = {
+            device = "none";
+            fsType = "tmpfs";
+            neededForBoot = true;
+            options = [ "defaults" "size=256M" "mode=755" ];
+        };
+
+        "/nix".neededForBoot = true;
+        "/state".neededForBoot = true;
+
+    };
+
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
     nixpkgs.config.allowUnfree = true;

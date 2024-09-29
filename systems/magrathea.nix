@@ -18,6 +18,52 @@
         loader.grub.gfxmodeEfi = "1920x1080";
     };
 
+    fileSystems = {
+
+        "/" = {
+            device = "none";
+            fsType = "tmpfs";
+            neededForBoot = true;
+            options = [ "defaults" "size=2G" "mode=755" ];
+        };
+
+        "/etc/ssh".neededForBoot = true;
+
+        "/home" = {
+            device = "none";
+            fsType = "tmpfs";
+            neededForBoot = true;
+            options = [ "defaults" "size=256M" "mode=755" ];
+        };
+
+        "/nix".neededForBoot = true;
+        "/state".neededForBoot = true;
+
+        # To manually create the raid array:
+        #    mkfs.btrfs -m raid10 -d raid10 /dev/sdW /dev/sdX /dev/sdY /dev/sdZ
+        #    mkdir -p /storage
+        #    mount /dev/sdW /storage
+        #    cd /storage
+        #    btrfs subvolume create @media
+        #    btrfs subvolume create @snaps
+        #    cd ..
+        #    umount /storage
+
+        # "/storage/media" = {
+        #     device = ""; # Put the uuid of one of the disks in the array
+        #     fsType = "btrfs";
+        #     options = [ "subvol=@media" "noatime" "compress-force=zstd:8" ];
+        # };
+        #
+        # "/storage/snaps" = {
+        #     device = ""; # Put the uuid of one of the disks in the array
+        #     fsType = "btrfs";
+        #     options = [ "subvol=@snaps" "noatime" "compress-force=zstd:8" ];
+
+        # };
+
+    };
+
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
     nixpkgs.config.allowUnfree = true;
