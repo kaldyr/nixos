@@ -49,10 +49,8 @@
 
             hypridle.enable = (
                 # Mjolnir hyprlock crash when left for minutes
-                if sysConfig.hostname == "mjolnir" then
-                    false
-                else
-                    true
+                if sysConfig.hostname == "mjolnir" then false
+                else true
             );
 
             playerctld.enable = true;
@@ -67,7 +65,8 @@
 
                 freesync = (
                     if sysConfig.hostname == "mjolnir" then "1"
-                    else "0" );
+                    else "0"
+                );
 
                 monitorConf = (
                     if sysConfig.hostname == "gram" then /* hyprlang */
