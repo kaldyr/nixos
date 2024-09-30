@@ -49,7 +49,7 @@
 
             extraApps = with config.services.nextcloud.package.packages.apps; {
 
-                inherit calendar contacts groupfolders memories music notes previewgenerator spreed tasks;
+                inherit calendar contacts external groupfolders memories music notes previewgenerator spreed tasks;
 
                 news = pkgs.fetchNextcloudApp {
                     url = "https://github.com/nextcloud/news/releases/download/25.0.0-alpha8/news.tar.gz";
