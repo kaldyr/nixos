@@ -10,6 +10,8 @@
 - Move all "FetchFromGithub" to flake inputs?
 - Toggle laptop keyboard on Air60 (dis)connect
 - Nix-serve, hydra, binary cache
+- Beets with plugins (bandcamp)
+- Get phone to automount when plugged in
 
 ## Things to look into
 
