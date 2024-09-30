@@ -1,4 +1,4 @@
-{ inputs, pkgs, sysConfig, ... }: {
+{ pkgs, sysConfig, ... }: {
 
     environment.persistence."/state".users.${sysConfig.user}.directories = [ ".local/state/nvim" ];
 
@@ -7,8 +7,9 @@
         home.packages = with pkgs; [
             lua-language-server
             marksman
+            neovim
             nil
-        ] ++ [ inputs.neovim.packages.${pkgs.system}.default ];
+        ];
 
         xdg.desktopEntries.nvim = { name = "Neovim Wrapper"; noDisplay = true; };
 
