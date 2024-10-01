@@ -25,7 +25,7 @@
                     mouse_right_click = "close_all";
                     separator_color = "frame";
                 };
-                
+
                 urgency_critical = {
                     background = "#303446";
                     foreground = "#C6D0F5";

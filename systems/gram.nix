@@ -5,8 +5,8 @@
         inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
         ../disko/gram.nix
         ./desktop.nix
+        ../services/mpd.nix
         ../programs/hyprland.nix
-        ../programs/mpd.nix
         ../programs/plymouth.nix
         ../programs/steam.nix
     ];

@@ -8,8 +8,8 @@
         inputs.nixos-hardware.nixosModules.common-gpu-amd
         ../disko/mjolnir.nix
         ./desktop.nix
+        ../services/mpd.nix
         ../programs/hyprland.nix
-        ../programs/mpd.nix
         ../programs/plymouth.nix
         ../programs/steam.nix
     ];

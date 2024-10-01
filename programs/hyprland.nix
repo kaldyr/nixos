@@ -1,19 +1,20 @@
 { pkgs, sysConfig, ... }: {
 
     imports = [
-        ./dunst.nix
+        ../services/dunst.nix
+        ../services/gammastep.nix
+        ../services/hypridle.nix
+        ../services/udiskie.nix
         ./feh.nix
         ./fuzzel.nix
-        ./gammastep.nix
+        ./hyprlock.nix
         ./swappy.nix
-        ./udiskie.nix
         ./waypaper.nix
         ./waybar.nix
         ./foot.nix
     ];
 
     environment.sessionVariables = {
-        GTK_THEME = "catppuccin-frappe-sapphire-standard";
         HYPRCURSOR_THEME = "catppuccin-frappe-sapphire-cursors";
         HYPRCURSOR_SIZE = 24;
         NIXOS_OZONE_WL = "1";
@@ -27,11 +28,8 @@
             cliphist
             grim
             hyprcursor
-            hypridle
-            hyprlock
             hyprpicker
             libnotify
-            pamixer
             pavucontrol
             playerctl
             polkit_gnome
@@ -43,19 +41,8 @@
             xdg-desktop-portal-hyprland
         ];
 
-        services = {
-
-            cliphist.enable = true;
-
-            hypridle.enable = (
-                # Mjolnir hyprlock crash when left for minutes
-                if sysConfig.hostname == "mjolnir" then false
-                else true
-            );
-
-            playerctld.enable = true;
-
-        };
+        services.cliphist.enable = true;
+        services.playerctld.enable = true;
 
         wayland.windowManager.hyprland = {
 
@@ -292,110 +279,6 @@
             rev = "c388ac55563ddeea0afe9df79d4bfff0096b146b";
             sha256 = "sha256-xSa/z0Pu+ioZ0gFH9qSo9P94NPkEMovstm1avJ7rvzM=";
         } + "/themes/frappe.conf";
-
-        xdg.configFile."hypr/hypridle.conf".text = /* hyprlang */ ''
-            general {
-                lock_cmd = pidof hyprlock || hyprlock
-                before_sleep_cmd = loginctl lock-session
-                after_sleep_cmd = hyprctl dispatch dpms on
-            }
-
-            listener {
-                timeout = 600
-                on-timeout = loginctl lock-session
-            }
-
-            listener {
-                timeout = 630
-                on-timeout = hyprctl dispatch dpms off
-                on-resume = hyprctl dispatch dpms on
-            }
-        '';
-
-        xdg.configFile."hypr/hyprlock.conf".text = /* hyprlang */ ''
-            source=~/.config/hypr/frappe.conf
-
-            $accent = 0xb3$sapphireAlpha
-            $accentAlpha = $sapphireAlpha
-            $font = Recursive Mn Csl St
-
-            # GENERAL
-            general {
-                disable_loading_bar = true
-                hide_cursor = true
-            }
-
-            # BACKGROUND
-            background {
-                monitor =
-                path = $HOME/Pictures/Wallpapers/mountain.jpg
-                blur_passes = 2
-                color = $base
-            }
-
-            # TIME
-            label {
-                monitor =
-                text = cmd[update:1000] echo "<b>$(date +"%l:%M %p")</b>"
-                color = $text
-                font_size = 60
-                font_family = $font
-                position = -130, -100
-                halign = right
-                valign = top
-                shadow_passes = 2
-            }
-
-            # DATE 
-            label {
-                monitor =
-                text = cmd[update:1000] echo "$(date +"%A, %B %e %Y")"
-                color = $text
-                font_size = 20
-                font_family = $font
-                position = -130, -250
-                halign = right
-                valign = top
-                shadow_passes = 2
-            }
-
-            # USER AVATAR
-            image {
-                monitor =
-                path = $HOME/Pictures/Saved/profile.png
-                size = 350
-                border_color = $accent
-                rounding = -1
-                position = 0, 75
-                halign = center
-                valign = center
-                shadow_passes = 2
-            }
-
-            # INPUT FIELD
-            input-field {
-                monitor =
-                size = 500, 60
-                outline_thickness = 4
-                dots_size = 0.2
-                dots_spacing = 0.2
-                dots_center = true
-                outer_color = $accent
-                inner_color = $surface0
-                font_color = $text
-                fade_on_empty = false
-                placeholder_text = <span foreground="##$textAlpha"><i>󰌾 Logged in as </i><span foreground="##$accentAlpha">$USER</span></span>
-                hide_input = false
-                check_color = $sky
-                fail_color = $red
-                fail_text = <i>$FAIL <b>($ATTEMPTS)</b></i>
-                capslock_color = $yellow
-                position = 0, -185
-                halign = center
-                valign = center
-                shadow_passes = 2
-            }
-        '';
 
         xdg.mimeApps.defaultApplications = {
             "default-web-browser" = [ "librewolf.desktop" ];
