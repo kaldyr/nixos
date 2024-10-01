@@ -51,6 +51,7 @@
                 { run = 'exiftool "-filename<CreateDate" -d "_%Y%m%d_%H%M%S.%%e" -S -m -ee -q "$1"', desc = "Set Filename from EXIF datetime" },
             ]
             extract = [ { run = 'ya pub extract --list "$@"', desc = "Extract Here" } ]
+            foldersize = [ { run = 'du -hs "$@"; echo "Press enter to exit"; read _', desc = "Folder size", block = true } ]
             image = [ { run = 'feh -. -Z "$@"', desc = "Open with feh", orphan = true } ]
             office = [ { run = 'libreoffice "$@"', desc = "Open with LibreOffice", orphan = true } ]
             open = [ { run = 'xdg-open "$1"', desc = "XDG Open", orphan = true } ]
@@ -67,7 +68,7 @@
                 { mime = "application/pdf", use = [ "pdf", "exif" ] },
                 { mime = "audio/*", use = [ "play", "exif" ] },
                 { mime = "image/*", use = [ "image", "exif", "exifedit" ] },
-                { mime = "inode/directory", use = [ "edit", "play" ] },
+                { mime = "inode/directory", use = [ "edit", "play", "foldersize" ] },
                 { mime = "text/*", use = [ "edit", "exif" ] },
                 { mime = "video/*", use = [ "play", "exif", "exifedit" ] },
                 { name = "*.od{g,p,s,t}", use = [ "office", "exif" ] },
