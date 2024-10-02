@@ -165,6 +165,7 @@
         # Work towards automount phone for file copy
         udev.packages = with pkgs; [
             android-udev-rules
+            libmtp
             media-player-info
         ];
 
