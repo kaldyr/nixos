@@ -37,7 +37,7 @@
 
             };
 
-            layerTab = {
+            layerRightAlt = {
 
                 "1" = "f1";
                 "2" = "f2";
@@ -57,7 +57,7 @@
             main = {
                 capslock = "overload(layerCaps, esc)";
                 esc = "overload(layerCaps, esc)";
-                tab = "overload(layerTab, tab)"; 
+                rightalt = "overload(layerRightAlt, rightalt)"; 
             };
 
         };
