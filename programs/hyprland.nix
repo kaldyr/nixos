@@ -153,11 +153,8 @@
                 # Wallpaper
                 bind=$mainMod, w, exec, waypaper --folder $(xdg-user-dir PICTURES)/Wallpapers
 
-                # Paste from history
-                bind=$mainMod SHIFT, v, exec, cliphist list | fuzzel -d | cliphist decode | wl-copy && wl-paste
-
                 # Play media from clipboard
-                bind=$mainMod, g, exec, cliphist list | fuzzel -d | cliphist decode | wl-copy && mpv $(wl-paste)
+                bind=$mainMod, g, exec, cliphist list | grep "://" | fuzzel -d | cliphist decode | wl-copy && mpv $(wl-paste)
 
                 # Notification Controls
                 bind=$mainMod, n, exec, dunstctl history-pop
