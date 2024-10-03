@@ -35,10 +35,15 @@
                 k = "up";
                 l = "right";
 
+                # Extra functionality for 60% keyboard
+                "delete" = "insert";
+                "rightshift" = "print";
+
             };
 
             layerRightAlt = {
 
+                # F-keys
                 "1" = "f1";
                 "2" = "f2";
                 "3" = "f3";
@@ -51,6 +56,10 @@
                 "0" = "f10";
                 "minus" = "f11";
                 "equal" = "f12";
+
+                # Extra functionality for 60% keyboard
+                "delete" = "insert";
+                "rightshift" = "print";
 
             };
 
