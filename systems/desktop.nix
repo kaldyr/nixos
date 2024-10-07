@@ -84,6 +84,7 @@
                 android-tools
                 gimp
                 gnome-keyring
+                gnuplot
                 hunspell
                 hunspellDicts.en_US
                 imagemagick
