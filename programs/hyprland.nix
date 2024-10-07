@@ -57,7 +57,7 @@
 
                 monitorConf = (
                     if sysConfig.hostname == "gram" then /* hyprlang */
-                        "monitor=eDP-1, 2256x1504@60, 0x0, 1"
+                        "monitor=eDP-1, 2256x1504@60, 0x0, 1.2"
                     else if sysConfig.hostname == "mjolnir" then /* hyprlang */
                         "monitor=HDMI-A-1, 3440x1440@84.97900, 0x0, 1"
                     else "" );
