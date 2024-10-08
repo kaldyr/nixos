@@ -8,9 +8,11 @@
 
         xdg.configFile."foot/foot.ini".text = let
 
+            # Desktop Scaling changes the line-height
             lineHeight = (
                 if sysConfig.hostname == "gram" then "11.1"
-                else "11.6" );
+                else "11.6"
+            );
 
         in /* ini */ ''
             [colors]
@@ -53,8 +55,7 @@
             unicode-input=Control+Shift+i
 
             [main]
-            box-drawings-uses-font-glyphs=yes
-            font=Recursive Mn Csl St:size=10, Noto Color Emoji:size=10, Symbols Nerd Font:size=10
+            font=Recursive Mn Csl St:size=10, Noto Color Emoji:size=${lineHeight}, Symbols Nerd Font:size=${lineHeight}
             font-bold=Recursive Mn Csl St:size=10:style=Bold
             font-bold-italic=Recursive Mn Csl St:size=10:style=Bold Italic
             font-italic=Recursive Mn Csl St:size=10:style=Italic
