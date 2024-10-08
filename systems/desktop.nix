@@ -90,6 +90,7 @@
                 imagemagick
                 kjv
                 libsecret
+                lowfi
                 networkmanagerapplet
                 papirus-folders
                 vulkan-tools
