@@ -3,6 +3,7 @@
     imports = [
         ../programs/bat.nix
         ../programs/btop.nix
+        ../programs/direnv.nix
         ../programs/eza.nix
         ../programs/fish.nix
         ../programs/fzf.nix
@@ -81,6 +82,7 @@
     home-manager.users.${sysConfig.user}.home.packages = with pkgs; [
         age
         bc
+        devenv
         duf
         exiftool
         fd
