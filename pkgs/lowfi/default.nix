@@ -14,7 +14,9 @@ pkgs.rustPlatform.buildRustPackage rec {
 
     cargoHash = "sha256-2jLR3S7h39PvNrS/N6Fxv359JBpoCAImk/+XOp3uCvE=";
 
-    nativeBuildInputs = with pkgs; [ pkg-config ];
+    cargoBuildFlags = [ "--features mpris" ];
+
+    nativeBuildInputs = [ pkgs.pkg-config ];
 
     buildInputs = with pkgs; [
         alsa-lib
