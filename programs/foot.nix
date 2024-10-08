@@ -6,7 +6,13 @@
 
         programs.foot.enable = true;
 
-        xdg.configFile."foot/foot.ini".text = /* ini */ ''
+        xdg.configFile."foot/foot.ini".text = let
+
+            lineHeight = (
+                if sysConfig.hostname == "gram" then "11.1"
+                else "11.6" );
+
+        in /* ini */ ''
             [colors]
             foreground=c6d0f5 #c6d0f5
             background=303446 #303446
@@ -52,7 +58,7 @@
             font-bold=Recursive Mn Csl St:size=10:style=Bold
             font-bold-italic=Recursive Mn Csl St:size=10:style=Bold Italic
             font-italic=Recursive Mn Csl St:size=10:style=Italic
-            line-height=11.600000
+            line-height=${lineHeight}
             selection-target=primary
 
             [scrollback]
