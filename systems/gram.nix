@@ -36,7 +36,7 @@
             device = "none";
             fsType = "tmpfs";
             neededForBoot = true;
-            options = [ "defaults" "size=256M" "mode=755" ];
+            options = [ "defaults" "size=512M" "mode=755" ];
         };
 
         "/nix".neededForBoot = true;
