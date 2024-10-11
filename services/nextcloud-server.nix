@@ -1,13 +1,22 @@
 { config, lib, pkgs, ... }: {
 
-    environment.systemPackages = with pkgs; [
-        exiftool_12-70
-        ffmpeg
-        imagemagick
-        libtensorflow
-        msmtp
-        nodejs_22
-    ];
+    environment = {
+
+        # FIXME: Next install remove the btrfs subvolume and just persist it on /state
+        # persistence."/state/system".directories = [
+        #     { directory = "/var/lib/nextcloud"; mode = "0700"; }
+        # ];
+
+        systemPackages = with pkgs; [
+            exiftool_12-70
+            ffmpeg
+            imagemagick
+            libtensorflow
+            msmtp
+            nodejs_22
+        ];
+
+    };
 
     networking.firewall.allowedTCPPorts = [ 9000 ];
     networking.firewall.allowedUDPPorts = [ 9000 ];
