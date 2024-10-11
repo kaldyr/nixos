@@ -66,7 +66,7 @@
                             # After Disko does its thing, and before installing nixos, run the following:
                             #   chattr +C /var/lib.postgresql
                             "@mysql" = { mountpoint = "/var/lib/postgresql"; mountOptions = driveOptions; };  
-                            # FIXME: Change name from @mysql to @ncdb next install
+                            # FIXME: Change name from @mysql to @sql next install
 
                         };
 

@@ -117,21 +117,9 @@
             sslCertificateKey = "/var/lib/tailscale/certs/magrathea.brill-godzilla.ts.net.key";
         };
 
-        postgresql = {
-            enable = true;
-            package = pkgs.postgresql_16;
-            ensureDatabases = [ "nextcloud" ];
-            ensureUsers = [ { name = "nextcloud"; ensureDBOwnership = true; } ];
-            settings.max_connections = "300";
-            settings.shared_buffers = "80MB";
-        };
-
-        postgresqlBackup = {
-            enable = true;
-            databases = [ "nextcloud" ];
-            location = "/var/lib/nextcloud/dbbackup";
-            startAt = "*-*-* 01:15:00";
-        };
+        postgresql.ensureDatabases = [ "nextcloud" ];
+        postgresql.ensureUsers = [ { name = "nextcloud"; ensureDBOwnership = true; } ];
+        postgresqlBackup.databases = [ "nextcloud" ];
 
     };
 

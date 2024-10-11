@@ -3,9 +3,9 @@
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-intel
         ../disko/magrathea.nix
+        ../services/nextcloud-server.nix
         ../services/pipewire.nix
         ../programs/kodi.nix
-        ../programs/nextcloud-server.nix
     ];
 
     boot = {
