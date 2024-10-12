@@ -3,7 +3,7 @@
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-intel
         ../disko/magrathea.nix
-        ../services/nextcloud-server.nix
+        ../services/nextcloud.nix
         ../services/pipewire.nix
         ../programs/kodi.nix
     ];

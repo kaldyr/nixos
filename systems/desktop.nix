@@ -9,7 +9,7 @@
         ../programs/libreoffice.nix
         ../programs/librewolf.nix
         ../programs/mpv.nix
-        ../programs/nextcloud-client.nix
+        ../programs/nextcloud-desktop.nix
         ../programs/obsidian.nix
         ../programs/openscad.nix
         ../programs/telegram.nix
