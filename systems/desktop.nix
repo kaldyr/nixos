@@ -1,7 +1,6 @@
 { pkgs, sysConfig, ... }: {
 
     imports = [
-        ../settings/fonts.nix
         ../services/keyd.nix
         ../services/pipewire.nix
         ../programs/cava.nix
@@ -44,7 +43,81 @@
 
     };
 
+    fonts = {
+
+        enableDefaultPackages = false;
+
+        fontconfig = {
+
+            defaultFonts = {
+                monospace = [ "Recursive Mn Csl St" "Noto Color Emoji" ];
+                sansSerif = [ "Inter" "Liberation Sans" "Noto Color Emoji" ];
+                serif = [ "Recursive Sa Ln St" "Liberation Serif" "Noto Color Emoji" ];
+                emoji = [ "Noto Color Emoji" ];
+            };
+
+            localConf = /* xml */ ''
+                <?xml version="1.0"?>
+                <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+                <fontconfig>
+                    <match target="font">
+                        <test qual="any" name="family" compare="contains"><string>Inter</string></test>
+                        <!-- https://rsms.me/inter/#features -->
+                        <edit name="fontfeatures" mode="assign_replace">
+                            <string>calt</string> <!-- Contextural alternatives -->
+                            <string>tnum</string> <!-- Tabular numbers -->
+                            <string>case</string> <!-- Case alternates -->
+                            <string>ccmp</string> <!-- Compositions -->
+                            <string>cv02</string> <!-- Open four -->
+                            <string>cv03</string> <!-- Open six -->
+                            <string>cv04</string> <!-- Open nine -->
+                            <string>zero</string> <!-- Slashed zero -->
+                            <string>cv06</string> <!-- Simplified U -->
+                            <string>cv08</string> <!-- Upper case i with serif -->
+                            <string>cv05</string> <!-- Lower case L with tail -->
+                            <string>ss03</string> <!-- Round quotes & commas -->
+                        </edit>
+                    </match>
+                    <match target="font">
+                        <test qual="any" name="family" compare="contains"><string>Recursive</string></test>
+                        <!-- https://github.com/arrowtype/recursive#opentype-features -->
+                        <edit name="fontfeatures" mode="assign_replace">
+                            <string>dlig on</string> <!-- Code ligatures -->
+                            <string>ss03</string> <!-- Simplified f -->
+                            <string>ss04</string> <!-- Simplified i -->
+                            <string>ss05</string> <!-- Simplified l -->
+                            <string>ss06</string> <!-- Simplified r -->
+                            <string>ss07</string> <!-- Simplified italic Diagonals -->
+                            <string>ss08</string> <!-- No-serif L & Z -->
+                            <string>ss09</string> <!-- Simplified 6 & 9 -->
+                            <string>ss10</string> <!-- Dotted 0 -->
+                            <string>ss11</string> <!-- Simplified 1 -->
+                            <string>ss12</string> <!-- Simplified mono 'at'@ -->
+                            <string>case</string> <!-- Uppercase punctuation -->
+                            <string>liga</string> <!-- Italic ligatures -->
+                        </edit>
+                    </match>
+                </fontconfig>
+            '';
+
+        };
+
+        packages = with pkgs; [
+            font-awesome # Symbols
+            inter # System Sans Font
+            liberation_ttf # Open versions of MS fonts
+            (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+            noto-fonts-cjk-sans # Display of Chinese/Japanese/Korean characters
+            noto-fonts-cjk-serif # Display of Chinese/Japanese/Korean characters
+            noto-fonts-emoji # Symbols
+            recursive # System Mono Font
+        ];
+
+    };
+
     home-manager.users.${sysConfig.user} = {
+
+        fonts.fontconfig.enable = true;
 
         gtk = {
 
@@ -54,6 +127,12 @@
                 name = "catppuccin-frappe-sapphire-cursors";
                 package = pkgs.catppuccin-cursors.frappeSapphire;
                 size = 24;
+            };
+
+            font = {
+                name = "Inter";
+                package = pkgs.inter;
+                size = 11;
             };
 
             gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
