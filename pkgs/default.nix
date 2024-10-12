@@ -1,5 +1,5 @@
 pkgs: {
 
-    lowfi = pkgs.callPackage ./lowfi { };
+    lowfi = pkgs.callPackage ./lowfi.nix { };
 
 }
