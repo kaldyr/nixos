@@ -6,15 +6,7 @@
 
         programs.foot.enable = true;
 
-        xdg.configFile."foot/foot.ini".text = let
-
-            # Desktop Scaling changes the line-height
-            lineHeight = (
-                if sysConfig.hostname == "gram" then "11.1"
-                else "11.6"
-            );
-
-        in /* ini */ ''
+        xdg.configFile."foot/foot.ini".text = /* ini */ ''
             [colors]
             foreground=c6d0f5 #c6d0f5
             background=303446 #303446
@@ -51,15 +43,17 @@
             style=beam
 
             [key-bindings]
-            show-urls-launch=Control+Shift+u
+            pipe-scrollback=[sh -c "f=$(mktemp); cat> $f; foot nvim $f; rm $f"] Control+Shift+e
+            pipe-visible=[sh -c "f=$(mktemp); cat> $f; foot nvim $f; rm $f"] Control+Shift+y
+            show-urls-copy=Control+Shift+u
             unicode-input=Control+Shift+i
 
             [main]
-            font=Recursive Mn Csl St:size=10, Noto Color Emoji:size=${lineHeight}, Symbols Nerd Font:size=${lineHeight}
+            font=Recursive Mn Csl St:size=10, Noto Color Emoji:size=10, Symbols Nerd Font:size=11
             font-bold=Recursive Mn Csl St:size=10:style=Bold
             font-bold-italic=Recursive Mn Csl St:size=10:style=Bold Italic
             font-italic=Recursive Mn Csl St:size=10:style=Italic
-            line-height=${lineHeight}
+            line-height=11.1
             selection-target=primary
 
             [scrollback]
