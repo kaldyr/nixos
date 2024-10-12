@@ -10,17 +10,17 @@
 ## Boot Install Media
 
 ## Partition the Drive  
-```bash
+```fish
 disko -- --mode disko /usb/disko/[system].nix
 ```
 ## Setup the Config Folder
 
 ### Generate the default config (Just to get hardware config)  
-```bash
+```fish
 nixos-generate-config --root /mnt
 ```
 ### Install the configuration
-```bash
+```fish
 mkdir /mnt/nix/config
 git clone https://github.com/kaldyr/nixos /mnt/nix/config
 ```
@@ -35,7 +35,7 @@ git clone https://github.com/kaldyr/nixos /mnt/nix/config
 - If generating new keys, add them into the .sops.yaml and ```sops updatekeys secrets.yaml```
 
 ## Build the Base System
-```bash
+```fish
 cd /mnt
 nixos-install --no-root-password --flake /mnt/nix/config#[machine]
 nixos-enter
