@@ -22,7 +22,7 @@
         extraUsers."postgres" = {
             extraGroups = [ "nextcloud" ]; # FIXME: remove next install subvol -> state
             group = "postgres";
-            home = "/var/lib/posgresql/16";
+            home = "/var/lib/postgresql/16";
             isSystemUser = true;
         };
 
