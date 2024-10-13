@@ -129,16 +129,11 @@
         after = [ "postgresql.service" ];
     };
 
-    users = {
-
-        extraUsers.postgres = {
-            extraGroups = [ "nextcloud" ];
-            group = "postgres";
-            isSystemUser = true;
-        };
-
-        groups.postgres = {};
-
+    users.extraUsers."nextcloud" = {
+        description = "Nextcloud Service";
+        group = "nextcloud";
+        home = "/var/lib/nextcloud";
+        isSystemUser = true;
     };
 
 }

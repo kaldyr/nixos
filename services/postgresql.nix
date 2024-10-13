@@ -17,4 +17,18 @@
 
     };
 
+    users = {
+
+        extraUsers."postgres" = {
+            description = "Postgres Service";
+            extraGroups = [ "nextcloud" ]; # FIXME: remove next install subvol -> state
+            group = "postgres";
+            home = "/var/lib/posgresql";
+            isSystemUser = true;
+        };
+
+        groups.postgres = {};
+
+    };
+
 }

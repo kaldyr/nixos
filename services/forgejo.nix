@@ -2,9 +2,12 @@
 
     imports = [ ./postgresql.nix ];
 
-    persistence."/state/system".directories = [
+    environment.persistence."/state/system".directories = [
         { directory = "/var/lib/forgejo"; mode = "0700"; }
     ];
+
+    networking.firewall.allowedTCPPorts = [ 9090 ];
+    networking.firewall.allowedUDPPorts = [ 9090 ];
 
     services = {
 
@@ -46,12 +49,28 @@
 
             };
 
+            useWizard = false;
+
+        };
+
+        nginx.virtualHosts."localhost" = {
+            forceSSL = false;
+            listen = [ { addr = "127.0.0.1"; port = 9090; } ];
+            sslCertificate = "/var/lib/tailscale/certs/magrathea.brill-godzilla.ts.net.crt";
+            sslCertificateKey = "/var/lib/tailscale/certs/magrathea.brill-godzilla.ts.net.key";
         };
 
         postgresql.ensureDatabases = [ "forgejo" ];
         postgresql.ensureUsers = [ { name = "forgejo"; ensureDBOwnership = true; } ];
         postgresqlBackup.databases = [ "forgejo" ];
 
+    };
+
+    users.extraUsers."forgejo" = {
+        description = "Forgejo Service";
+        group = "forgejo";
+        home = "/var/lib/forgejo";
+        isSystemUser = true;
     };
 
 }
