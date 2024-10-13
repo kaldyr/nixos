@@ -67,7 +67,6 @@
     };
 
     users.extraUsers."forgejo" = {
-        description = "Forgejo Service";
         group = "forgejo";
         home = "/var/lib/forgejo";
         isSystemUser = true;

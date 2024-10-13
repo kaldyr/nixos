@@ -130,7 +130,6 @@
     };
 
     users.extraUsers."nextcloud" = {
-        description = "Nextcloud Service";
         group = "nextcloud";
         home = "/var/lib/nextcloud";
         isSystemUser = true;
