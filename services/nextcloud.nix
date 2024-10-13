@@ -1,5 +1,7 @@
 { config, lib, pkgs, ... }: {
 
+    imports = [ ./postgresql.nix ];
+
     environment = {
 
         # FIXME: Next install remove the btrfs subvolume and just persist it on /state
@@ -58,24 +60,12 @@
 
             extraApps = with config.services.nextcloud.package.packages.apps; {
 
-                inherit calendar contacts groupfolders memories music notes previewgenerator spreed tasks;
-
-                news = pkgs.fetchNextcloudApp {
-                    url = "https://github.com/nextcloud/news/releases/download/25.0.0-alpha8/news.tar.gz";
-                    license = "agpl3Plus";
-                    sha256 = "sha256-nj1yR2COwQ6ZqZ1/8v9csb/dipXMa61e45XQmA5WPwg=";
-                };
+                inherit calendar contacts groupfolders memories notes previewgenerator spreed tasks;
 
                 recognize = pkgs.fetchNextcloudApp {
                     url = "https://github.com/nextcloud/recognize/releases/download/v7.0.3/recognize-7.0.3.tar.gz";
                     license = "agpl3Plus";
                     sha256 = "sha256-kVFdwpPIJ/2wAEClgY9xIpiUFls2lxlkBFLTmDa3iLo=";
-                };
-
-                socialsharing_telegram = pkgs.fetchNextcloudApp {
-                    url = "https://github.com/nextcloud-releases/socialsharing/releases/download/v3.1.0/socialsharing_telegram-v3.1.0.tar.gz";
-                    license = "agpl3Plus";
-                    sha256 = "sha256-qcjce8GOEPvb6v8hQQ0AuVf3dbcX3twjSZU0bQdOl3U=";
                 };
 
             };

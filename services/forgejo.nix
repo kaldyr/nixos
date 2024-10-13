@@ -1,5 +1,7 @@
 { ... }: {
 
+    imports = [ ./postgresql.nix ];
+
     persistence."/state/system".directories = [
         { directory = "/var/lib/forgejo"; mode = "0700"; }
     ];
