@@ -3,7 +3,12 @@
     imports = [ ./postgresql.nix ];
 
     environment.persistence."/state/system".directories = [
-        { directory = "/var/lib/forgejo"; mode = "0700"; }
+        {
+            directory = "/var/lib/forgejo";
+            user = "forgejo";
+            group = "forgejo";
+            mode = "0700";
+        }
     ];
 
     networking.firewall.allowedTCPPorts = [ 9090 ];

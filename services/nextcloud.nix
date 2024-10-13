@@ -6,7 +6,12 @@
 
         # FIXME: Next install remove the btrfs subvolume and just persist it on /state
         # persistence."/state/system".directories = [
-        #     { directory = "/var/lib/nextcloud"; mode = "0700"; }
+        #     {
+        #         directory = "/var/lib/nextcloud";
+        #         user = "nextcloud";
+        #         group = "nextcloud";
+        #         mode = "0700";
+        #     }
         # ];
 
         systemPackages = with pkgs; [
