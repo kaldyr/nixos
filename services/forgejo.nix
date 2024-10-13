@@ -21,12 +21,11 @@
             };
 
             dump.enable = false;
-
             lfs.enable = true;
 
             settings = {
 
-                DEFAULT.APP_NAME = "Personal Forge";
+                DEFAULT.APP_NAME = "Project Forge";
 
                 log.LEVEL = "Warn";
 
@@ -40,9 +39,7 @@
                     HTTP_PORT = 9090;
                 };
 
-                # Comment out for initial install
-                service.DISABLE_REGISTRATION = true;
-
+                service.DISABLE_REGISTRATION = true; # Comment out for initial install
                 session.COOKIE_SECURE = true;
 
             };
@@ -50,7 +47,7 @@
         };
 
         postgresql.ensureDatabases = [ "forgejo" ];
-        postgresql.ensureUsers = [ "forgejo" ];
+        postgresql.ensureUsers = [ { name = "forgejo"; ensureDBOwnership = true; } ];
         postgresqlBackup.databases = [ "forgejo" ];
 
     };
