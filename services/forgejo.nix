@@ -44,10 +44,16 @@
                 repository.DEFAULT_BRANCH = "main";
 
                 server = {
+                    BUILTIN_SSH_SERVER_USER = "git";
                     DOMAIN = "magrathea";
                     HTTP_ADDR = "0.0.0.0";
                     HTTP_PORT = 9090;
                     ROOT_URL = "http://magrathea:9090";
+                    SSH_CREATE_AUTHORIZED_KEYS_FILE = true;
+                    SSH_LISTEN_HOST = "0.0.0.0";
+                    SSH_LISTEN_PORT = 2222;
+                    SSH_PORT = 2222;
+                    START_SSH_SERVER = true;
                 };
 
                 service.DISABLE_REGISTRATION = true; # Comment out for initial install
