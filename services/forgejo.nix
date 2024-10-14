@@ -25,6 +25,7 @@
             stateDir = "/var/lib/forgejo";
 
             database = {
+                createDatabase = true;
                 name = "forgejo";
                 type = "postgres";
                 user = "forgejo";
@@ -43,26 +44,19 @@
                 repository.DEFAULT_BRANCH = "main";
 
                 server = {
-                    DOMAIN = "git.magrathea.brill-godzilla.ts.net";
-                    ROOT_URL = "https://git.magrathea.brill-godzilla.ts.net";
-                    HTTP_ADDR = "127.0.0.1";
+                    DOMAIN = "magrathea";
+                    HTTP_ADDR = "0.0.0.0";
                     HTTP_PORT = 9090;
+                    ROOT_URL = "http://magrathea:9090";
                 };
 
                 service.DISABLE_REGISTRATION = true; # Comment out for initial install
-                session.COOKIE_SECURE = true;
+                session.COOKIE_SECURE = false; # Only accessible through tailnet
 
             };
 
             useWizard = false;
 
-        };
-
-        nginx.virtualHosts."localhost" = {
-            forceSSL = false;
-            listen = [ { addr = "127.0.0.1"; port = 9090; } ];
-            sslCertificate = "/var/lib/tailscale/certs/magrathea.brill-godzilla.ts.net.crt";
-            sslCertificateKey = "/var/lib/tailscale/certs/magrathea.brill-godzilla.ts.net.key";
         };
 
         postgresql.ensureDatabases = [ "forgejo" ];
