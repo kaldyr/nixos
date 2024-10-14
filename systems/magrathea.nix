@@ -50,18 +50,17 @@
         #    cd ..
         #    umount /storage
 
-        # "/storage/media" = {
-        #     device = ""; # Put the uuid of one of the disks in the array
-        #     fsType = "btrfs";
-        #     options = [ "subvol=@media" "noatime" "compress-force=zstd:8" ];
-        # };
-        #
-        # "/storage/snaps" = {
-        #     device = ""; # Put the uuid of one of the disks in the array
-        #     fsType = "btrfs";
-        #     options = [ "subvol=@snaps" "noatime" "compress-force=zstd:8" ];
+        "/storage/media" = {
+            device = "/dev/disk/by-uuid/c3cb725e-8cee-4690-a44d-114100497133";                                                                                                                            
+            fsType = "btrfs";
+            options = [ "subvol=@media" "noatime" "compress-force=zstd:8" ];
+        };
 
-        # };
+        "/storage/snaps" = {
+            device = "/dev/disk/by-uuid/c3cb725e-8cee-4690-a44d-114100497133";                                                                                                                            
+            fsType = "btrfs";
+            options = [ "subvol=@snaps" "noatime" "compress-force=zstd:8" ];
+        };
 
     };
 
