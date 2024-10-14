@@ -11,8 +11,8 @@
         }
     ];
 
-    networking.firewall.allowedTCPPorts = [ 9090 ];
-    networking.firewall.allowedUDPPorts = [ 9090 ];
+    networking.firewall.allowedTCPPorts = [ 2222 9090 ];
+    networking.firewall.allowedUDPPorts = [ 2222 9090 ];
 
     services = {
 
