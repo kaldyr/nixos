@@ -49,7 +49,7 @@
             unicode-input=Control+Shift+i
 
             [main]
-            font=Recursive Mn Csl St:size=10, Noto Color Emoji:size=10, Symbols Nerd Font:size=11
+            font=Recursive Mn Csl St:size=10, Font Awesome 6 Free Regular:size 10, Noto Color Emoji:size=10, Symbols Nerd Font:size=11
             font-bold=Recursive Mn Csl St:size=10:style=Bold
             font-bold-italic=Recursive Mn Csl St:size=10:style=Bold Italic
             font-italic=Recursive Mn Csl St:size=10:style=Italic
