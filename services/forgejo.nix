@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
 
     imports = [ ./postgresql.nix ];
 
@@ -19,6 +19,7 @@
         forgejo = {
 
             enable = true;
+            package = pkgs.forgejo;
 
             user = "forgejo";
             group = "forgejo";
