@@ -82,7 +82,6 @@
     home-manager.users.${sysConfig.user}.home.packages = with pkgs; [
         age
         bc
-        devenv
         duf
         exiftool
         fd
