@@ -8,7 +8,7 @@
 
         neovim = inputs.neovim.packages.${prev.system}.default;
         exiftool_12-70 = inputs.nixpkgs-exiftool.legacyPackages.${prev.system}.exiftool;
-        cliphist = inputs.nixpkgs-exiftool.legacyPackages.${prev.system}.cliphist;
+        cliphist = inputs.nixpkgs-fresh.legacyPackages.${prev.system}.cliphist;
 
     };
 
