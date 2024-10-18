@@ -28,15 +28,7 @@
 
     };
 
-    outputs = { disko
-              , home-manager
-              , impermanence
-              , neovim
-              , nixos-hardware
-              , nixpkgs
-              , nixpkgs-exiftool
-              , sops-nix
-              , ... }@inputs: {
+    outputs = { nixpkgs, ... }@inputs: {
 
         nixosConfigurations = let 
 
@@ -53,10 +45,10 @@
                     { nixpkgs.overlays = with overlays; [ additions modifications ]; }
 
                     # Load in Modules from Libraries
-                    disko.nixosModules.disko
-                    home-manager.nixosModules.home-manager
-                    impermanence.nixosModules.impermanence
-                    sops-nix.nixosModules.sops
+                    inputs.disko.nixosModules.disko
+                    inputs.home-manager.nixosModules.home-manager
+                    inputs.impermanence.nixosModules.impermanence
+                    inputs.sops-nix.nixosModules.sops
 
                     # System Config
                     ./users/default.nix # Defaults for all users
