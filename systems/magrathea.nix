@@ -19,6 +19,13 @@
         loader.grub.gfxmodeEfi = "1920x1080";
     };
 
+    environment.persistence."/state/system".directories = [ {
+        directory = "/var/lib/certs";
+        user = "root";
+        group = "webservice";
+        mode = "0750";
+    } ];
+
     fileSystems = {
 
         "/" = {
@@ -82,12 +89,6 @@
         serviceConfig.type = "oneshot";
 
         script = /* bash */ ''
-            mkdir -p /var/lib/tailscale/certs
-            chown :webservice /var/lib/tailscale
-            chown :webservice /var/lib/tailscale/certs
-            chmod 0750 /var/lib/tailscale
-            chmod 0750 /var/lib/tailscale/certs
-
             status="Starting";
 
             until [ $status = "Running" ]; do
@@ -95,9 +96,12 @@
                 status=$(${pkgs.tailscale}/bin/tailscale status -json | ${pkgs.jq}/bin/jq -r .BackendState)
             done
 
-            ${pkgs.tailscale}/bin/tailscale cert magrathea.brill-godzilla.ts.net
-            chown :webservice /var/lib/tailscale/certs/*
-            chmod 0640 /var/lib/tailscale/certs/*
+            ${pkgs.tailscale}/bin/tailscale cert \
+                --cert-file /var/lib/certs/magrathea.brill-godzilla.ts.net.crt \
+                --key-file /var/lib/certs/magrathea.brill-godzilla.ts.net.key \
+                magrathea.brill-godzilla.ts.net
+            chown :webservice /var/lib/certs/magrathea.brill-godzilla.ts.net.{crt,key}
+            chmod 0640 /var/lib/certs/magrathea.brill-godzilla.ts.net.{crt,key}
         '';
 
     };

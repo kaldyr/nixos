@@ -43,8 +43,8 @@
                 repository.DEFAULT_BRANCH = "main";
 
                 server = {
-                    CERT_FILE = "/var/lib/tailscale/certs/magrathea.brill-godzilla.ts.net.crt";
-                    KEY_FILE = "/var/lib/tailscale/certs/magrathea.brill-godzilla.ts.net.key";
+                    CERT_FILE = "/var/lib/certs/magrathea.brill-godzilla.ts.net.crt";
+                    KEY_FILE = "/var/lib/certs/magrathea.brill-godzilla.ts.net.key";
                     DOMAIN = "magrathea.brill-godzilla.ts.net";
                     HTTP_ADDR = "0.0.0.0";
                     HTTP_PORT = 9001;

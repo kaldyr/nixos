@@ -32,7 +32,7 @@
             defaults
             auth on
             tls on
-            tls_trust_file /var/lib/tailscale/certs/magrathea.brill-godzilla.ts.net.crt
+            tls_trust_file /var/lib/certs/magrathea.brill-godzilla.ts.net.crt
         '';
     };
 
@@ -114,8 +114,8 @@
         nginx.virtualHosts."localhost" = {
             forceSSL = false;
             listen = [ { addr = "127.0.0.1"; port = 9000; } ];
-            sslCertificate = "/var/lib/tailscale/certs/magrathea.brill-godzilla.ts.net.crt";
-            sslCertificateKey = "/var/lib/tailscale/certs/magrathea.brill-godzilla.ts.net.key";
+            sslCertificate = "/var/lib/certs/magrathea.brill-godzilla.ts.net.crt";
+            sslCertificateKey = "/var/lib/certs/magrathea.brill-godzilla.ts.net.key";
         };
 
         postgresql.ensureDatabases = [ "nextcloud" ];
