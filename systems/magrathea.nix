@@ -82,17 +82,22 @@
 
         enable = true;
 
-        settings = /* bash */ ''
-            netbios name = magrathea
-            mdns name = mdns
-            server string = magrathea media share
-            min protocol = SMB3
-            encrypt passwords = true
-            wins support = yes
-            local master = yes
-            preferred master = yes
-            workgroup = WORKGROUP
-        '';
+        settings = {
+            global = {
+                "encrypt passwords" = true;
+                "invalid users" = [ "root" ];
+                "local master" = "yes";
+                "mdns name" = "mdns";
+                "min protocol" = "SMB3";
+                "netbios name" = "magrathea";
+                "preferred master" = "yes";
+                security = "user";
+                "server string" = "Magrathea Media Share";
+                "wins support" = "yes";
+                "workgroup" = "WORKGROUP";
+            };
+
+        };
 
         shares.media = {
             path = "/storage/media";
@@ -104,6 +109,9 @@
             "create mask" = "0644";
             "directory mask" = "0755";
         };
+
+        smbd.enable = true;
+        nmbd.enable = true;
 
     };
 
