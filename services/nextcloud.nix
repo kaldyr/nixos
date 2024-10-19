@@ -135,6 +135,7 @@
     };
 
     users.extraUsers."nextcloud" = {
+        extraGroups = [ "webservice" ];
         group = "nextcloud";
         home = "/var/lib/nextcloud";
         isSystemUser = true;

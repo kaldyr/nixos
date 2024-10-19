@@ -90,6 +90,8 @@
             done
 
             ${pkgs.tailscale}/bin/tailscale cert magrathea.brill-godzilla.ts.net
+            chown :webservice magrathea.brill-godzilla.ts.net.*
+            chmod 0640 magrathea.brill-godzilla.ts.net.*
         '';
 
     };
@@ -109,5 +111,8 @@
         };
 
     };
+
+    # Group that can access tailscale certificates
+    users.groups."webservice" = {};
 
 }
