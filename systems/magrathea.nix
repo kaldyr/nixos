@@ -86,33 +86,37 @@
 
         # Manual intervention required: `sudo smbpasswd -a username` to login
 
-        settings.global = {
-            securityType = "user";
-            "encrypt passwords" = true;
-            "invalid users" = [ "root" ];
-            "guest account" = "nobody";
-            "local master" = true;
-            "map to guest" = "bad user";
-            "mdns name" = "mdns";
-            "min protocol" = "SMB3";
-            "netbios name" = "magrathea";
-            "preferred master" = true;
-            "server string" = "magrathea";
-            "wins support" = "yes";
-            "workgroup" = "WORKGROUP";
-        };
+        settings = {
 
-        shares.media = {
-            path = "/storage/media";
-            comment = "Media";
-            browsable = "yes";
-            public = "yes";
-            "read only" = "no";
-            "guest ok" = "yes";
-            "force user" = "matt";
-            "force group" = "users";
-            "create mask" = "0644";
-            "directory mask" = "0755";
+            global = {
+                securityType = "user";
+                "encrypt passwords" = true;
+                "invalid users" = [ "root" ];
+                "guest account" = "nobody";
+                "local master" = true;
+                "map to guest" = "bad user";
+                "mdns name" = "mdns";
+                "min protocol" = "SMB3";
+                "netbios name" = "magrathea";
+                "preferred master" = true;
+                "server string" = "magrathea";
+                "wins support" = "yes";
+                "workgroup" = "WORKGROUP";
+            };
+
+            "media" = {
+                path = "/storage/media";
+                comment = "Media";
+                browsable = "yes";
+                public = "yes";
+                "read only" = "no";
+                "guest ok" = "yes";
+                "force user" = "matt";
+                "force group" = "users";
+                "create mask" = "0644";
+                "directory mask" = "0755";
+            };
+
         };
 
     };
