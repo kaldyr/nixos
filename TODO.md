@@ -11,6 +11,21 @@
 - Nix-serve, hydra, binary cache
 - Beets with plugins (bandcamp)
 - Get phone to automount when plugged in
+- Re-evaluate what is stored on /nix and /state
+
+## @nix vs @state
+The @state subvolume will be snapshotted for backup/restore
+The @nix subvolume is just preserved between boots.
+Content on @nix is stuff that either is handled by nextcloud sync
+    or stuff that needs to be preserved between boots, but
+    not essential to presered between installs.
+
+### @state
+/var/lib/nextcloud
+
+### @nix
+All personal home folder documents and files are synced with nextcloud
+
 
 ## Things to look into
 
