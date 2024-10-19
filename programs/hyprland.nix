@@ -38,7 +38,6 @@
             tesseract
             wl-clipboard
             wl-screenrec
-            xdg-desktop-portal-hyprland
         ];
 
         services.cliphist.enable = true;
@@ -288,6 +287,20 @@
             "application/image" = [ "feh.desktop" ];
             "application/video" = [ "mpv.desktop" ];
             "application/audio" = [ "mpv.desktop" ];
+        };
+
+        xdg.portal = {
+
+            enable = true;
+
+            config.common.default = "*";
+
+            extraPortals = with pkgs; [
+                xdg-desktop-portal-gtk
+                xdg-desktop-portal-hyprland
+                xdg-desktop-portal-wlr
+            ];
+
         };
 
     };
