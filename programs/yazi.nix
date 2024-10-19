@@ -1,5 +1,7 @@
 { pkgs, sysConfig, ... }: {
 
+    environment.persistence."/state".users.${sysConfig.user}.directories = [ ".local/state/yazi" ];
+
     home-manager.users.${sysConfig.user} = {
 
         home.packages = with pkgs; [ mediainfo ];
