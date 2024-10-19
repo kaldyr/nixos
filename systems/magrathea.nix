@@ -78,6 +78,23 @@
 
     services.tailscale.useRoutingFeatures = "server";
 
+    services.samba = {
+
+        enable = true;
+
+        shares.media = {
+            path = "/storage/media";
+            browsable = "yes";
+            public = "yes";
+            writeable = "yes";
+            "force user" = "matt";
+            "force group" = "users";
+            "create mask" = "0644";
+            "directory mask" = "0755";
+        };
+
+    };
+
     systemd.services."tailscale-certs" = {
 
         description = "Automatic renewal of Tailscale certificates";
