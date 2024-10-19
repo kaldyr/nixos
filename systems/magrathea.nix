@@ -84,6 +84,8 @@
         package = pkgs.samba;
         openFirewall = true;
 
+        # Manual intervention required: `sudo smbpasswd -a username` to login
+
         settings.global = {
             securityType = "user";
             "encrypt passwords" = true;
