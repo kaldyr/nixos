@@ -81,37 +81,37 @@
     services.samba = {
 
         enable = true;
+        package = pkgs.samba;
+        openFirewall = true;
 
-        settings = {
-            global = {
-                "encrypt passwords" = true;
-                "invalid users" = [ "root" ];
-                "local master" = "yes";
-                "mdns name" = "mdns";
-                "min protocol" = "SMB3";
-                "netbios name" = "magrathea";
-                "preferred master" = "yes";
-                security = "user";
-                "server string" = "Magrathea Media Share";
-                "wins support" = "yes";
-                "workgroup" = "WORKGROUP";
-            };
-
+        settings.global = {
+            securityType = "user";
+            "encrypt passwords" = true;
+            "invalid users" = [ "root" ];
+            "guest account" = "nobody";
+            "local master" = true;
+            "map to guest" = "bad user";
+            "mdns name" = "mdns";
+            "min protocol" = "SMB3";
+            "netbios name" = "magrathea";
+            "preferred master" = true;
+            "server string" = "magrathea";
+            "wins support" = "yes";
+            "workgroup" = "WORKGROUP";
         };
 
         shares.media = {
             path = "/storage/media";
+            comment = "Media";
             browsable = "yes";
             public = "yes";
-            writeable = "yes";
+            "read only" = "no";
+            "guest ok" = "yes";
             "force user" = "matt";
             "force group" = "users";
             "create mask" = "0644";
             "directory mask" = "0755";
         };
-
-        smbd.enable = true;
-        nmbd.enable = true;
 
     };
 
