@@ -50,6 +50,7 @@
                     DOMAIN = "magrathea.brill-godzilla.ts.net";
                     HTTP_ADDR = "0.0.0.0";
                     HTTP_PORT = 9001;
+                    PROTOCOL = "https";
                     ROOT_URL = "https://magrathea.brill-godzilla.ts.net:9001";
                     BUILTIN_SSH_SERVER_USER = "git";
                     SSH_CREATE_AUTHORIZED_KEYS_FILE = true;
