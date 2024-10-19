@@ -56,10 +56,6 @@
                             # Swapfile
                             "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "16G"; };
 
-                            # Subvolumes for managing nextcloud
-                            # Nextcloud - schedule snapshots
-                            # FIXME: Remove this subvolume next install
-                            "@nextcloud" = { mountpoint = "/var/lib/nextcloud"; mountOptions = driveOptions; };
                             # Mysql
                             # Databases should not be stored with CoW property
                             # This will disable CoW, checksums, and compression for the database
