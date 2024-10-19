@@ -4,7 +4,6 @@
 
 - Configure btrbk to snapshot state and archive
 - nh nix helper
-- Samba Server on Magrathea?
 - Browser Profile sync to RAM
 - Convert theming to nix-colors
 - Move all "FetchFromGithub" to flake inputs?
