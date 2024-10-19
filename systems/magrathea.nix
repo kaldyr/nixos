@@ -82,6 +82,18 @@
 
         enable = true;
 
+        extraConfig = /* bash */ ''
+            netbios name = magrathea
+            mdns name = mdns
+            server string = magrathea media share
+            min protocol = SMB3
+            encrypt passwords = true
+            wins support = yes
+            local master = yes
+            preferred master = yes
+            workgroup = WORKGROUP
+        '';
+
         shares.media = {
             path = "/storage/media";
             browsable = "yes";
