@@ -82,6 +82,9 @@
         serviceConfig.type = "oneshot";
 
         script = /* bash */ ''
+            chown :webservice /var/lib/tailscale
+            chmod 0750 /var/lib/tailscale
+
             status="Starting";
 
             until [ $status = "Running" ]; do
@@ -90,8 +93,8 @@
             done
 
             ${pkgs.tailscale}/bin/tailscale cert magrathea.brill-godzilla.ts.net
-            chown :webservice magrathea.brill-godzilla.ts.net.*
-            chmod 0640 magrathea.brill-godzilla.ts.net.*
+            chown -R :webservice /var/lib/tailscale/certs
+            chmod -R 0640 /var/lib/tailscale/certs
         '';
 
     };
