@@ -82,7 +82,7 @@
 
         enable = true;
 
-        extraConfig = /* bash */ ''
+        settings = /* bash */ ''
             netbios name = magrathea
             mdns name = mdns
             server string = magrathea media share
