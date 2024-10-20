@@ -70,6 +70,15 @@
                     sha256 = "sha256-kVFdwpPIJ/2wAEClgY9xIpiUFls2lxlkBFLTmDa3iLo=";
                 };
 
+                # Nextcloud tosses errors because of this app even if not installed.
+                #   Workaround: Download whiteboard and disable it.
+                #   `sudo -u nextcloud nextcloud-occ app:disable whiteboard`
+                whiteboard = pkgs.fetchNextcloudApp {
+                    url = "https://github.com/nextcloud/whiteboard/archive/refs/tags/v1.0.4.tar.gz";
+                    license = "agpl3Plus";
+                    sha256 = "sha256-hIyCaHIRjmdCmjsasmcYGSs3cHUS/Bol+V7Jd7W+B30=";
+                };
+
             };
 
             extraAppsEnable = true;
