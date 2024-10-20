@@ -19,13 +19,12 @@ The @nix subvolume is just preserved between boots.
 Content on @nix is stuff that either is handled by nextcloud sync
     or stuff that needs to be preserved between boots, but
     not essential to presered between installs.
+Remove /system from the state
 
 ### @state
 /var/lib/nextcloud
-
-### @nix
-All personal home folder documents and files are synced with nextcloud
-
+/var/lib/forgejo
+postgresqlBackup -> /state/postgres/
 
 ## Things to look into
 
@@ -33,34 +32,12 @@ All personal home folder documents and files are synced with nextcloud
 
 ## Snapshot Map
 
-### Laptop/Desktop
-Hourly Snaps
-@state -> @snaps
-
-Archive Snaps
-Nightly
-@snaps -> magrathea:/storage/@snaps
-
 ### Magrathea
 Hourly Snaps
 @state -> @snaps
-@nextcloud -> @snaps
 
-Archive Snaps
-Nightly
+Archive Snaps Nightly
 @snaps -> /storage/@snaps
 
-Off-site Archive
-Weekly
+Off-site Archive Weekly
 /storage/@snaps -> serenity:/storage/@snaps
-
-### Serenity
-Hourly Snaps
-@state -> @snaps
-
-Archive Snaps
-@snaps -> /storage/@snaps
-
-Off-site Archive
-Weekly
-/storage/@snaps -> magrathea:/storage/@snaps

@@ -50,11 +50,11 @@
                             in {
                                 # SSH subvolume.  Race condition when symlinking and/or persisting with sops-nix
                                 "@etc_ssh" = { mountpoint = "/etc/ssh"; mountOptions = driveOptions; };
-                                # Files to be preserved between boots that can be regenerated easily
+                                # Files to be preserved between boots
                                 "@nix" = { mountpoint = "/nix"; mountOptions = driveOptions; };
-                                # Files to be preserved between boots and be backed up to restore machine state
+                                # FIXME: No longer needed.  Everything is synced or regenerated
                                 "@state" = { mountpoint = "/state"; mountOptions = driveOptions; };
-                                # Snapshot storage
+                                # FIXME: No longer needed.  Everything is synced or regenerated
                                 "@snaps" = { mountpoint = "/snaps"; mountOptions = driveOptions; };
                                 # Swapfile
                                 "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "8G"; };
