@@ -76,49 +76,57 @@
     nixpkgs.config.allowUnfree = true;
     time.timeZone = "America/Los_Angeles";
 
-    services.tailscale.useRoutingFeatures = "server";
+    services = {
 
-    services.samba = {
+        samba = {
 
-        enable = true;
-        package = pkgs.samba;
+            enable = true;
+            package = pkgs.samba;
 
-        openFirewall = true;
-        securityType = "user";
+            openFirewall = true;
+            securityType = "user";
 
-        # Manual intervention required after install: `sudo smbpasswd -a username` to login
+            # Manual intervention required after fresh install:
+            #   sudo smbpasswd -a USERNAME
 
-        settings = {
+            settings = {
 
-            global = {
-                "encrypt passwords" = true;
-                "invalid users" = [ "root" ];
-                "guest account" = "nobody";
-                "local master" = true;
-                "map to guest" = "bad user";
-                "mdns name" = "mdns";
-                "min protocol" = "SMB3";
-                "netbios name" = "magrathea";
-                "preferred master" = true;
-                "server string" = "magrathea";
-                "wins support" = "yes";
-                "workgroup" = "WORKGROUP";
-            };
+                global = {
+                    "encrypt passwords" = true;
+                    "invalid users" = [ "root" ];
+                    "guest account" = "nobody";
+                    "local master" = true;
+                    "map to guest" = "bad user";
+                    "mdns name" = "mdns";
+                    "min protocol" = "SMB3";
+                    "netbios name" = "magrathea";
+                    "preferred master" = true;
+                    "server string" = "magrathea";
+                    "wins support" = "yes";
+                    "workgroup" = "WORKGROUP";
+                };
 
-            "media" = {
-                path = "/storage/media";
-                comment = "Media";
-                browsable = "yes";
-                public = "yes";
-                "read only" = "no";
-                "guest ok" = "yes";
-                "force user" = "matt";
-                "force group" = "users";
-                "create mask" = "0664";
-                "directory mask" = "0775";
+                "media" = {
+                    path = "/storage/media";
+                    comment = "Media";
+                    browsable = "yes";
+                    public = "yes";
+                    "read only" = "no";
+                    "guest ok" = "yes";
+                    "force user" = "matt";
+                    "force group" = "users";
+                    "create mask" = "0664";
+                    "directory mask" = "0775";
+                };
+
             };
 
         };
+
+        samba-wsdd.enable = true;
+        samba-wsdd.openFirewall = true;
+
+        tailscale.useRoutingFeatures = "server";
 
     };
 
