@@ -95,14 +95,9 @@
                     "encrypt passwords" = true;
                     "invalid users" = [ "root" ];
                     "guest account" = "nobody";
-                    "local master" = true;
                     "map to guest" = "bad user";
-                    "mdns name" = "mdns";
-                    "min protocol" = "SMB3";
                     "netbios name" = "magrathea";
-                    "preferred master" = true;
                     "server string" = "magrathea";
-                    "wins support" = "yes";
                     "workgroup" = "WORKGROUP";
                 };
 
