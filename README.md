@@ -13,9 +13,34 @@
 ```fish
 disko -- --mode disko /usb/disko/[system].nix
 ```
+### Manual Interventions
+Disko does not manage raid arrays on purpose.  Running the above command would wipe data.
+
+#### Magrathea
+```fish
+mkfs.btrfs -m raid10 -d raid10 /dev/sdW /dev/sdX /dev/sdY /dev/sdZ
+mkdir -p /storage
+mount /dev/sdW /storage
+cd /storage
+btrfs subvolume create @media
+btrfs subvolume create @snaps
+cd ..
+umount /storage
+```
+#### Serenity
+```fish
+mkfs.btrfs -m raid1 -d raid1 /dev/sdY /dev/sdZ
+mkdir -p /storage
+mount /dev/sdW /storage
+cd /storage
+btrfs subvolume create @media
+btrfs subvolume create @snaps
+cd ..
+umount /storage
+```
 ## Setup the Config Folder
 
-### Generate the default config (Just to get hardware config)  
+### Generate the default config (Just to get hardware config)
 ```fish
 nixos-generate-config --root /mnt
 ```
@@ -39,5 +64,11 @@ git clone https://github.com/kaldyr/nixos /mnt/nix/config
 cd /mnt
 nixos-install --no-root-password --flake /mnt/nix/config#[machine]
 nixos-enter
+```
+### Manual Interventions
+
+#### Samba
+```fish
+sudo smbpasswd -a USERNAME
 ```
 ## Reboot into the New System

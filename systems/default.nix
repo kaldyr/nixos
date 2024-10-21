@@ -101,6 +101,7 @@
     ];
 
     networking = {
+        firewall.enable = true;
         firewall.checkReversePath = "loose";
         hostName = sysConfig.hostname;
         networkmanager.enable = true;

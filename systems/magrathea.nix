@@ -47,16 +47,6 @@
         "/nix".neededForBoot = true;
         "/state".neededForBoot = true;
 
-        # To manually create the raid array:
-        #    mkfs.btrfs -m raid10 -d raid10 /dev/sdW /dev/sdX /dev/sdY /dev/sdZ
-        #    mkdir -p /storage
-        #    mount /dev/sdW /storage
-        #    cd /storage
-        #    btrfs subvolume create @media
-        #    btrfs subvolume create @snaps
-        #    cd ..
-        #    umount /storage
-
         "/storage/media" = {
             device = "/dev/disk/by-uuid/c3cb725e-8cee-4690-a44d-114100497133";                                                                                                                            
             fsType = "btrfs";
@@ -85,9 +75,6 @@
 
             openFirewall = true;
             securityType = "user";
-
-            # Manual intervention required after fresh install:
-            #   sudo smbpasswd -a USERNAME
 
             settings = {
 

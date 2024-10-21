@@ -40,16 +40,6 @@
         "/nix".neededForBoot = true;
         "/state".neededForBoot = true;
 
-        # To manually create the raid array:
-        #    mkfs.btrfs -m raid1 -d raid1 /dev/sdY /dev/sdZ
-        #    mkdir -p /storage
-        #    mount /dev/sdW /storage
-        #    cd /storage
-        #    btrfs subvolume create @media
-        #    btrfs subvolume create @snaps
-        #    cd ..
-        #    umount /storage
-
         "/storage/media" = {
             device = ""; # Put the uuid of one of the disks in the array
             fsType = "btrfs";
