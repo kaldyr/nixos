@@ -33,6 +33,6 @@ postgresqlBackup -> /state/postgres/
 ## Snapshot Map
 
 ### Magrathea
-Hourly: @state -> @snaps
-Nightly: @snaps -> /storage/@snaps
-Weekly: /storage/@snaps -> serenity:/storage/@snaps
+- Hourly: @state -> @snaps
+- Nightly: @snaps -> /storage/@snaps
+- Weekly: /storage/@snaps -> serenity:/storage/@snaps
