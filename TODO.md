@@ -14,11 +14,11 @@
 - Re-evaluate what is stored on /nix and /state
 
 ## @nix vs @state
-The @state subvolume will be snapshotted for backup/restore
-The @nix subvolume is just preserved between boots.
-Content on @nix is stuff that either is handled by nextcloud sync
-    or stuff that needs to be preserved between boots, but
-    not essential to presered between installs.
+The @state subvolume will be snapshotted for backup/restore  
+The @nix subvolume is just preserved between boots  
+Content on @nix is stuff that either is handled by nextcloud sync  
+or stuff that needs to be preserved between boots, but  
+not essential to preserved between installs.  
 Remove /system from the state
 
 ### @state
@@ -33,11 +33,6 @@ postgresqlBackup -> /state/postgres/
 ## Snapshot Map
 
 ### Magrathea
-Hourly Snaps
-@state -> @snaps
-
-Archive Snaps Nightly
-@snaps -> /storage/@snaps
-
-Off-site Archive Weekly
-/storage/@snaps -> serenity:/storage/@snaps
+Hourly: @state -> @snaps
+Nightly: @snaps -> /storage/@snaps
+Weekly: /storage/@snaps -> serenity:/storage/@snaps
