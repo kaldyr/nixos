@@ -110,7 +110,7 @@
                 default_phone_region = "US";
                 default_locale = "en_US";
                 log_type = "file";
-                loglevel = 3;
+                loglevel = 4;
                 mail_sendmailmode = "pipe";
                 mail_smtpmode = "sendmail";
                 maintenance_window_start = "8";
