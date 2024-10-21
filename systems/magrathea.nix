@@ -82,14 +82,15 @@
 
         enable = true;
         package = pkgs.samba;
-        openFirewall = true;
 
-        # Manual intervention required: `sudo smbpasswd -a username` to login
+        openFirewall = true;
+        securityType = "user";
+
+        # Manual intervention required after install: `sudo smbpasswd -a username` to login
 
         settings = {
 
             global = {
-                securityType = "user";
                 "encrypt passwords" = true;
                 "invalid users" = [ "root" ];
                 "guest account" = "nobody";
@@ -113,8 +114,8 @@
                 "guest ok" = "yes";
                 "force user" = "matt";
                 "force group" = "users";
-                "create mask" = "0644";
-                "directory mask" = "0755";
+                "create mask" = "0664";
+                "directory mask" = "0775";
             };
 
         };
