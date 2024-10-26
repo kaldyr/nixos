@@ -9,6 +9,7 @@
         ../disko/mjolnir.nix
         ./desktop.nix
         ../services/mpd.nix
+        ../services/openrazer.nix
         ../programs/hyprland.nix
         ../programs/plymouth.nix
         ../programs/steam.nix
