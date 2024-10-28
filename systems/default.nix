@@ -87,6 +87,7 @@
         fd
         ffmpeg
         ffmpegthumbnailer
+        htmlq
         gdu
         jq
         p7zip
