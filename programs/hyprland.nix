@@ -167,7 +167,7 @@
                 bind=$mainMod ALT, n, exec, dunstctl close
 
                 # Paste into windows
-                bind=$mainMod CTRL, v, exec, wtype $(cliphist list | fuzzel -d | cliphist decode )
+                bind=$mainMod SHIFT, v, exec, wtype $(cliphist list | fuzzel -d | cliphist decode )
 
                 # Media controls
                 bind=, XF86AudioRaiseVolume, exec, pamixer -i 1
@@ -195,7 +195,8 @@
                 bind=$mainMod, o, pseudo,
                 bind=$mainMod, s, togglesplit,
                 bind=$mainMod, f, fullscreen,
-                bind=$mainMod SHIFT, o, exec, hyprlock
+                bind=$mainMod SHIFT, s, exec, hyprlock
+                bind=$mainMod ALT, s, exec, systemctl suspend
 
                 # Focus
                 bind=$mainMod, h, movefocus, l
