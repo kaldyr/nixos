@@ -38,6 +38,7 @@
             tesseract
             wl-clipboard
             wl-screenrec
+            wtype
         ];
 
         services.cliphist.enable = true;
@@ -59,6 +60,11 @@
                         "monitor=eDP-1, 2256x1504@60, 0x0, 1.175000"
                     else if sysConfig.hostname == "mjolnir" then /* hyprlang */
                         "monitor=HDMI-A-1, 3440x1440@84.97900, 0x0, 1"
+                    else "" );
+
+                pttFix = (
+                    if sysConfig.hostname == "mjolnir" then /* hyprlang */
+                        "exec-once=wayland-push-to-talk-fix -k 'BTN_MIDDLE' -n 'XF86WheelButton' /dev/input/by-id/usb-Razer_Razer_DeathAdder_Essential-event-mouse"
                     else "" );
 
                 screenRecord = pkgs.writeShellScriptBin "screenRecord.sh" /* bash */ ''
@@ -160,6 +166,9 @@
                 bind=$mainMod SHIFT, n, exec, dunstctl context
                 bind=$mainMod ALT, n, exec, dunstctl close
 
+                # Paste into windows
+                bind=$mainMod CTRL, v, exec, wtype $(cliphist list | fuzzel -d | cliphist decode )
+
                 # Media controls
                 bind=, XF86AudioRaiseVolume, exec, pamixer -i 1
                 bind=, XF86AudioLowerVolume, exec, pamixer -d 1
@@ -246,6 +255,7 @@
                 exec-once=wl-paste --type text --watch cliphist store
                 exec-once=wl-paste --type image --watch cliphist store
                 exec-once=waybar
+                ${pttFix}
 
                 # Layer Rules
                 layerrule=blur, launcher
@@ -289,20 +299,6 @@
             "application/audio" = [ "mpv.desktop" ];
         };
 
-        xdg.portal = {
-
-            enable = true;
-
-            config.common.default = "*";
-
-            extraPortals = with pkgs; [
-                xdg-desktop-portal-gtk
-                xdg-desktop-portal-hyprland
-                xdg-desktop-portal-wlr
-            ];
-
-        };
-
     };
 
     services.greetd = {
@@ -314,6 +310,27 @@
             initial_session.command = "${pkgs.hyprland}/bin/Hyprland 1>/dev/null";
             initial_session.user = sysConfig.user;
         };
+
+    };
+
+    xdg.portal = {
+
+        enable = true;
+
+        config.common.default = "*";
+
+        configPackages = with pkgs; [
+            xdg-desktop-portal-gtk
+            xdg-desktop-portal
+        ];
+
+        extraPortals = with pkgs; [
+            xdg-desktop-portal-gtk
+            xdg-desktop-portal-hyprland
+            xdg-desktop-portal
+        ];
+
+        wlr.enable = true;
 
     };
 

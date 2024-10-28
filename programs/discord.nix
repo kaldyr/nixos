@@ -1,15 +1,24 @@
 { pkgs, sysConfig, ... }: {
 
     environment.persistence."/nix".users.${sysConfig.user}.directories = [
-        ".config/BetterDiscord"
         ".config/discord"
+        ".config/Vencord"
+    ];
+
+    environment.systemPackages = with pkgs; [
+        libevdev
+        xdotool
     ];
 
     home-manager.users.${sysConfig.user} = {
 
-        home.packages = with pkgs; [ discord ];
+        home.packages = with pkgs; [
+            (discord.override { withVencord = true; })
+            vesktop
+            wayland-push-to-talk-fix
+        ];
 
-        xdg.configFile."BetterDiscord/themes/frappe.theme.css".source = pkgs.fetchFromGitHub {
+        xdg.configFile."Vencord/themes/frappe.theme.css".source = pkgs.fetchFromGitHub {
             owner = "catppuccin";
             repo = "discord";
             rev = "807261856fb5e481a44162917b6d07ad0b587435";
