@@ -14,7 +14,6 @@
 
         home.packages = with pkgs; [
             (discord.override { withVencord = true; })
-            vesktop
             wayland-push-to-talk-fix
         ];
 
