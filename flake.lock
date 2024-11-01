@@ -42,11 +42,11 @@
     },
     "impermanence": {
       "locked": {
-        "lastModified": 1729068498,
-        "narHash": "sha256-C2sGRJl1EmBq0nO98TNd4cbUy20ABSgnHWXLIJQWRFA=",
+        "lastModified": 1730403150,
+        "narHash": "sha256-W1FH5aJ/GpRCOA7DXT/sJHFpa5r8sq2qAUncWwRZ3Gg=",
         "owner": "nix-community",
         "repo": "impermanence",
-        "rev": "e337457502571b23e449bf42153d7faa10c0a562",
+        "rev": "0d09341beeaa2367bac5d718df1404bf2ce45e6f",
         "type": "github"
       },
       "original": {
@@ -119,22 +119,6 @@
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "0dfa68647420b93080a04508dda41476cccc0cd0",
-        "type": "github"
-      }
-    },
-    "nixpkgs-fresh": {
-      "locked": {
-        "lastModified": 1730369536,
-        "narHash": "sha256-jkeg1tzI+ZmVZ5Hvm6tCnNQAdW8oHSMU41FYa65ayWI=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "ef04eea76a63eadfe941e1eaaabc45b295dca75f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "master",
-        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -211,7 +195,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-exiftool": "nixpkgs-exiftool",
-        "nixpkgs-fresh": "nixpkgs-fresh",
         "sops-nix": "sops-nix"
       }
     },
