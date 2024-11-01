@@ -16,6 +16,10 @@
         ../programs/zoxide.nix
     ];
 
+    # Temp fix for [nixpkg merge](https://github.com/NixOS/nixpkgs/pull/351151) causing problems with impermenance.
+    boot.initrd.systemd.suppressedUnits = [ "systemd-machine-id-commit.service" ];
+    systemd.suppressedSystemUnits = [ "systemd-machine-id-commit.service" ];
+
     boot.loader = {
 
         efi.efiSysMountPoint = "/boot";
