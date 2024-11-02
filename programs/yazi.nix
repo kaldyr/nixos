@@ -21,7 +21,7 @@
             [manager]
             linemode = "size"
             mouse_events = [ "click", "scroll" ]
-            ratio = [1, 3, 4]
+            ratio = [0, 2, 4]
             scrolloff = 5
             show_hidden = false
             show_symlink = true
