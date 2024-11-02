@@ -88,10 +88,10 @@
                 { key = 'DownArrow', mods = 'ALT', action = wezterm.action.AdjustPaneSize { 'Down', 1 } };
                 { key = 'UpArrow', mods = 'ALT', action = wezterm.action.AdjustPaneSize { 'Up', 1 } };
                 { key = 'RightArrow', mods = 'ALT', action = wezterm.action.AdjustPaneSize { 'Right', 1 } };
-                { key = 'r', mods = 'ALT', action = wezterm.action.SplitHorizontal( { domain = 'CurrentPaneDomain' } ) };
-                { key = 'd', mods = 'ALT', action = wezterm.action.SplitVertical( { domain = 'CurrentPaneDomain' } ) };
-                { key = 't', mods = 'ALT', action = wezterm.action.SpawnTab 'DefaultDomain' };
+                { key = 'p', mods = 'ALT', action = wezterm.action.SplitHorizontal( { domain = 'CurrentPaneDomain' } ) };
+                { key = 'v', mods = 'ALT', action = wezterm.action.SplitVertical( { domain = 'CurrentPaneDomain' } ) };
                 { key = 'm', mods = 'ALT', action = wezterm.action.TogglePaneZoomState };
+                { key = 't', mods = 'ALT', action = wezterm.action.SpawnTab 'DefaultDomain' };
                 { key = '.', mods = 'ALT', action = wezterm.action.ActivateTabRelative( 1 ) };
                 { key = ',', mods = 'ALT', action = wezterm.action.ActivateTabRelative( -1 ) };
                 { key = '>', mods = 'SHIFT|ALT', action = wezterm.action.MoveTabRelative( 1 ) };
