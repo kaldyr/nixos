@@ -146,7 +146,7 @@
                 }
 
                 # Launch Applications
-                bind=$mainMod, q, exec, foot
+                bind=$mainMod, q, exec, wezterm
                 bind=$mainMod, r, exec, fuzzel
                 bind=$mainMod, u, exec, hyprpicker -a
 
@@ -268,6 +268,7 @@
 
                 # Window Rules
                 windowrulev2=opacity 0.90 override 0.90 override, class:foot
+                windowrulev2=opacity 0.90 override 0.90 override, class:wezterm
                 windowrulev2=opacity 0.90 override 0.90 override, class:librewolf
                 windowrulev2=opacity 0.90 override 0.90 override, class:org.telegram.desktop
                 windowrulev2=opacity 0.90 override 0.90 override, class:discord
