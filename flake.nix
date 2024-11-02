@@ -26,6 +26,9 @@
         # Sops - secret management
         sops-nix.url = "github:Mic92/sops-nix";
 
+        # Wezterm
+        wezterm.url = "github:wez/wezterm?dir=nix";
+
     };
 
     outputs = { nixpkgs, ... }@inputs: {

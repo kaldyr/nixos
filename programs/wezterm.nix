@@ -6,34 +6,106 @@
 
         xdg.configFile."wezterm/wezterm.lua".text = lib.mkForce /* lua */ ''
             local wezterm = require "wezterm"
+            local io = require 'io'
+            local os = require 'os'
             local config = {}
+
+            wezterm.on( 'trigger-nvim-with-scrollback', function( window, pane )
+
+                local text = pane:get_lines_as_text( pane:get_dimensions().scrollback_rows )
+                local name = os.tmpname()
+                local f, err = assert( io.open( name, 'w+' ) )
+
+                if f then
+
+                    f:write( text )
+                    f:flush()
+                    f:close()
+
+                    window:perform_action(
+                        wezterm.action.SpawnCommandInNewTab {
+                            args = { 'nvim', name },
+                        },
+                        pane
+                    )
+
+                    wezterm.sleep_ms(1000)
+                    os.remove(name)
+
+                else
+                    print( 'Error opening scrollback' .. err )
+                end
+
+            end )
 
             if wezterm.config_builder then
                 config = wezterm.config_builder()
             end
 
-            config.adjust_window_size_when_changing_font_size = true
+            config.adjust_window_size_when_changing_font_size = false
 
             config.color_scheme = "Catppuccin Frappe"
 
-            config.disable_default_key_bindings = true
-
+            config.default_cursor_style = 'SteadyBar'
             config.enable_kitty_graphics = true
             config.enable_scroll_bar = false
 
-            -- config.enable_wayland = true
+            config.enable_wayland = true
 
-            config.font = wezterm.font { family = 'Recursive Mn Csl St' }
-            config.font_size = 10.0
+            config.font = wezterm.font_with_fallback {
+                'Recursive Mn Csl St',
+                'Font Awesome 6 Free Regular',
+                'Noto Color Emoji',
+                'Symbols Nerd Font',
+            }
+
+            config.font_size = 9.75
+            config.warn_about_missing_glyphs = false
 
             config.hide_mouse_cursor_when_typing = false
+
             config.hide_tab_bar_if_only_one_tab = true
+            config.use_fancy_tab_bar = false
 
             config.hyperlink_rules = wezterm.default_hyperlink_rules()
 
+            config.inactive_pane_hsb = {
+                brightness = 0.7,
+            }
+
+            config.disable_default_key_bindings = true
             config.keys = {
-                { key = '-', mods = 'CTRL', action = wezterm.action.DecreaseFontSize };
-                { key = '=', mods = 'CTRL', action = wezterm.action.IncreaseFontSize };
+                { key = '-', mods = 'ALT', action = wezterm.action.DecreaseFontSize };
+                { key = '=', mods = 'ALT', action = wezterm.action.IncreaseFontSize };
+                { key = 'y', mods = 'ALT', action = wezterm.action.QuickSelect };
+                { key = 'u', mods = 'ALT', action = wezterm.action.CharSelect };
+                { key = 'e', mods = 'ALT', action = wezterm.action.EmitEvent 'trigger-nvim-with-scrollback' };
+                { key = 'h', mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Left' };
+                { key = 'j', mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Down' };
+                { key = 'k', mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Up' };
+                { key = 'l', mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Right' };
+                { key = 'LeftArrow', mods = 'ALT', action = wezterm.action.AdjustPaneSize { 'Left', 1 } };
+                { key = 'DownArrow', mods = 'ALT', action = wezterm.action.AdjustPaneSize { 'Down', 1 } };
+                { key = 'UpArrow', mods = 'ALT', action = wezterm.action.AdjustPaneSize { 'Up', 1 } };
+                { key = 'RightArrow', mods = 'ALT', action = wezterm.action.AdjustPaneSize { 'Right', 1 } };
+                { key = 'r', mods = 'ALT', action = wezterm.action.SplitHorizontal( { domain = 'CurrentPaneDomain' } ) };
+                { key = 'd', mods = 'ALT', action = wezterm.action.SplitVertical( { domain = 'CurrentPaneDomain' } ) };
+                { key = 't', mods = 'ALT', action = wezterm.action.SpawnTab 'DefaultDomain' };
+                { key = 'm', mods = 'ALT', action = wezterm.action.TogglePaneZoomState };
+                { key = '.', mods = 'ALT', action = wezterm.action.ActivateTabRelative( 1 ) };
+                { key = ',', mods = 'ALT', action = wezterm.action.ActivateTabRelative( -1 ) };
+                { key = '>', mods = 'SHIFT|ALT', action = wezterm.action.MoveTabRelative( 1 ) };
+                { key = '<', mods = 'SHIFT|ALT', action = wezterm.action.MoveTabRelative( -1 ) };
+                { key = '1', mods = 'ALT', action = wezterm.action.ActivateTab( 0 ) };
+                { key = '2', mods = 'ALT', action = wezterm.action.ActivateTab( 1 ) };
+                { key = '3', mods = 'ALT', action = wezterm.action.ActivateTab( 2 ) };
+                { key = '4', mods = 'ALT', action = wezterm.action.ActivateTab( 3 ) };
+                { key = '5', mods = 'ALT', action = wezterm.action.ActivateTab( 4 ) };
+                { key = '6', mods = 'ALT', action = wezterm.action.ActivateTab( 5 ) };
+                { key = '7', mods = 'ALT', action = wezterm.action.ActivateTab( 6 ) };
+                { key = '8', mods = 'ALT', action = wezterm.action.ActivateTab( 7 ) };
+                { key = '9', mods = 'ALT', action = wezterm.action.ActivateTab( 8 ) };
+                { key = '0', mods = 'ALT', action = wezterm.action.ActivateTab( 9 ) };
             }
 
             config.scrollback_lines = 10000

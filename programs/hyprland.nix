@@ -6,12 +6,13 @@
         ../services/hypridle.nix
         ../services/udiskie.nix
         ./feh.nix
+        ./foot.nix
         ./fuzzel.nix
         ./hyprlock.nix
         ./swappy.nix
         ./waypaper.nix
         ./waybar.nix
-        ./foot.nix
+        ./wezterm.nix
     ];
 
     environment.sessionVariables = {
