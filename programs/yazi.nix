@@ -92,6 +92,22 @@
             enabled = false
         '';
 
+        xdg.configFile."yazi/sidebar/yazi.toml".text = /* toml */ ''
+            [manager]
+            linemode = "size"
+            mouse_events = [ "click", "scroll" ]
+            ratio = [0, 4, 0]
+            scrolloff = 5
+            show_hidden = false
+            show_symlink = true
+            sort_by = "natural"
+            sort_dir_first = true
+            sort_reverse = false
+            sort_sensitive = false
+            sort_translit = false
+            title_format = "Yazi: {cwd}"
+        '';
+
     };
 
 }
