@@ -4,16 +4,69 @@
 
     home-manager.users.${sysConfig.user} = {
 
-        home.packages = with pkgs; [ mediainfo ];
+        home.packages = with pkgs; [
+            mediainfo
+            ouch
+        ];
 
-        programs.yazi.enable = true;
-        programs.yazi.enableFishIntegration = true;
+        programs.yazi = {
+
+            enable = true;
+            enableFishIntegration = true;
+
+            plugins = let
+
+                yazi-plugins = pkgs.fetchFromGitHub {
+                    owner = "yazi-rs";
+                    repo = "plugins";
+                    rev = "ad52adf917d6dd679dbc2dcefa3a9384654bd1c7";
+                    sha256 = "sha256-UOSH8RM+6VkQqi14bwUdFUNm8CgbDRlNial9VevjYuU=";
+                };
+
+            in {
+
+                "chmod" = "${yazi-plugins}/chmod.yazi";
+                "full-border" = "${yazi-plugins}/full-border.yazi";
+                "hide-preview" = "${yazi-plugins}/hide-preview.yazi";
+                "jump-to-char" = "${yazi-plugins}/jump-to-char.yazi";
+
+                "ouch" = pkgs.fetchFromGitHub {
+                    owner = "ndtoan96";
+                    repo = "ouch.yazi";
+                    rev = "v0.2.1";
+                    sha256 = "sha256-yLt9aY6hUIOdBI5bMdCs7VYFJGyD3WIkmPxvWKNCskA=";
+                };
+
+                "smart-filter" = "${yazi-plugins}/smart-filter.yazi";
+
+                "starship" = pkgs.fetchFromGitHub {
+                    owner = "Rolv-Apneseth";
+                    repo = "starship.yazi";
+                    rev = "77a65f5a367f833ad5e6687261494044006de9c3";
+                    sha256 = "sha256-sAB0958lLNqqwkpucRsUqLHFV/PJYoJL2lHFtfHDZF8=";
+                };
+
+            };
+
+        };
+
+        xdg.configFile."yazi/init.lua".text = /* lua */ ''
+            require( 'full-border' ):setup {
+                type = ui.Border.ROUNDED,
+            }
+            require( 'starship' ):setup()
+        '';
 
         xdg.configFile."yazi/keymap.toml".text = /* toml */ ''
             [manager]
             prepend_keymap = [
-                { on = "<C-k>", run = "seek -5", desc = "Seek up 5 units in the preview" },
-                { on = "<C-j>", run = "seek 5", desc = "Seek down 5 units in the preview" },
+                { on = "q", run = "close", desc = "Close the current tab, or quit if it is last tab" },
+                { on = [ "c", "m" ], run = "plugin chmod", desc = "Chmod on selected files" },
+                { on = "\\", run = "plugin --sync hide-preview", desc = "Toggle preview pane" },
+                { on = "`", run = "shell \"$SHELL\" --block --confirm", desc = "Open shell here" },
+                { on = "C", run = "plugin ouch --args=zip", desc = "Compress with ouch" },
+                { on = "f", run = "plugin jump-to-char", desc = "Jump to Char" },
+                { on = "F", run = "plugin smart-filter", desc = "Smart Filter" },
             ]
         '';
 
@@ -21,7 +74,7 @@
             [manager]
             linemode = "size"
             mouse_events = [ "click", "scroll" ]
-            ratio = [0, 2, 4]
+            ratio = [0, 1, 2]
             scrolloff = 5
             show_hidden = false
             show_symlink = true
@@ -45,6 +98,12 @@
             ueberzug_scale = 1
             wrap = "no"
 
+            [plugin]
+            prepend_previewers = [
+                { mime = "application/*zip", run = "ouch" },
+                { mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", run = "ouch" },
+            ]
+
             [opener]
             edit = [ { run = 'nvim "$@"', desc = "Edit", block = true } ]
             exif = [ { run = 'exiftool "$1"; echo "Press enter to exit"; read _', desc = "Show EXIF data", block = true } ]
@@ -52,7 +111,7 @@
                 { run = 'exiftool -overwrite_original "-alldates<filename" -S -m -q "$1"', desc = "Set EXIF datetime from Filename" },
                 { run = 'exiftool "-filename<CreateDate" -d "_%Y%m%d_%H%M%S.%%e" -S -m -ee -q "$1"', desc = "Set Filename from EXIF datetime" },
             ]
-            extract = [ { run = 'ya pub extract --list "$@"', desc = "Extract Here" } ]
+            extract = [ { run = 'ouch d -y "$@"', desc = "Extract Here with ouch" } ]
             foldersize = [ { run = 'du -hs "$@"; echo "Press enter to exit"; read _', desc = "Folder size", block = true } ]
             image = [ { run = 'feh -. -Z "$@"', desc = "Open with feh", orphan = true } ]
             office = [ { run = 'libreoffice "$@"', desc = "Open with LibreOffice", orphan = true } ]
@@ -90,22 +149,6 @@
 
             [log]
             enabled = false
-        '';
-
-        xdg.configFile."yazi/sidebar/yazi.toml".text = /* toml */ ''
-            [manager]
-            linemode = "size"
-            mouse_events = [ "click", "scroll" ]
-            ratio = [0, 4, 0]
-            scrolloff = 5
-            show_hidden = false
-            show_symlink = true
-            sort_by = "natural"
-            sort_dir_first = true
-            sort_reverse = false
-            sort_sensitive = false
-            sort_translit = false
-            title_format = "Yazi: {cwd}"
         '';
 
     };
