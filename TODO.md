@@ -2,8 +2,9 @@
 
 ## Changes
 
+- Wallpaper slideshow script
 - Configure btrbk to snapshot state and archive
-- nh nix helper
+- nh nix helper?
 - Browser Profile sync to RAM
 - Convert theming to nix-colors
 - Move all "FetchFromGithub" to flake inputs?
