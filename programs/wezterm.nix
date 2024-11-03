@@ -53,25 +53,26 @@
             config.font = wezterm.font({
                 family = 'Recursive Mn Csl St',
                 harfbuzz_features = {
-                    '+dlig',
-                    '+ss03',
-                    '+ss04',
-                    '+ss05',
-                    '+ss06',
-                    '+ss07',
-                    '+ss08',
-                    '+ss09',
-                    '+ss10',
-                    '+ss11',
-                    '+ss12',
-                    '+case',
-                    '+liga',
-                    '+afrc',
+                    'case', -- Uppercase punctuation
+                    'dlig', -- Code ligatures
+                    'ss01', -- Single-story 'a'
+                    -- 'ss02', -- Single-story 'g'
+                    'ss03', -- Simplified f
+                    'ss04', -- Simplified i
+                    'ss05', -- Simplified l
+                    'ss06', -- Simplified r
+                    'ss07', -- Simplified italic Diagonals
+                    'ss08', -- No-serif L & Z
+                    'ss09', -- Simplified 6 & 9
+                    'ss10', -- Dotted 0
+                    'ss11', -- Simplified 1
+                    'ss12', -- Simplified mono 'at'@
+                    'titl', -- No descender on 'Q'
                 }
             })
 
             config.cell_width = 1.0
-            config.font_size = 9.5
+            config.font_size = 11
             config.warn_about_missing_glyphs = false
             config.hide_mouse_cursor_when_typing = false
             config.hide_tab_bar_if_only_one_tab = true

@@ -65,24 +65,27 @@
                         <!-- https://rsms.me/inter/#features -->
                         <edit name="fontfeatures" mode="assign_replace">
                             <string>calt</string> <!-- Contextural alternatives -->
-                            <string>tnum</string> <!-- Tabular numbers -->
                             <string>case</string> <!-- Case alternates -->
                             <string>ccmp</string> <!-- Compositions -->
                             <string>cv02</string> <!-- Open four -->
                             <string>cv03</string> <!-- Open six -->
                             <string>cv04</string> <!-- Open nine -->
-                            <string>zero</string> <!-- Slashed zero -->
+                            <string>cv05</string> <!-- Lower case L with tail -->
                             <string>cv06</string> <!-- Simplified U -->
                             <string>cv08</string> <!-- Upper case i with serif -->
-                            <string>cv05</string> <!-- Lower case L with tail -->
                             <string>ss03</string> <!-- Round quotes & commas -->
+                            <string>tnum</string> <!-- Tabular numbers -->
+                            <string>zero</string> <!-- Slashed zero -->
                         </edit>
                     </match>
                     <match target="font">
                         <test qual="any" name="family" compare="contains"><string>Recursive</string></test>
                         <!-- https://github.com/arrowtype/recursive#opentype-features -->
                         <edit name="fontfeatures" mode="assign_replace">
-                            <string>dlig on</string> <!-- Code ligatures -->
+                            <string>case</string> <!-- Uppercase punctuation -->
+                            <string>dlig</string> <!-- Code ligatures -->
+                            <string>ss01</string> <!-- Single-story 'a' -->
+                            <!-- <string>ss02</string> Single-story 'g' -->
                             <string>ss03</string> <!-- Simplified f -->
                             <string>ss04</string> <!-- Simplified i -->
                             <string>ss05</string> <!-- Simplified l -->
@@ -93,8 +96,7 @@
                             <string>ss10</string> <!-- Dotted 0 -->
                             <string>ss11</string> <!-- Simplified 1 -->
                             <string>ss12</string> <!-- Simplified mono 'at'@ -->
-                            <string>case</string> <!-- Uppercase punctuation -->
-                            <string>liga</string> <!-- Italic ligatures -->
+                            <string>titl</string> <!-- No descender on 'Q' -->
                         </edit>
                     </match>
                 </fontconfig>
@@ -106,7 +108,7 @@
             font-awesome # Symbols
             inter # System Sans Font
             liberation_ttf # Open versions of MS fonts
-            (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+            ( nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; } )
             noto-fonts-cjk-sans # Display of Chinese/Japanese/Korean characters
             noto-fonts-cjk-serif # Display of Chinese/Japanese/Korean characters
             noto-fonts-emoji # Symbols
