@@ -42,44 +42,43 @@
                 config = wezterm.config_builder()
             end
 
+            config.animation_fps = 85
             config.adjust_window_size_when_changing_font_size = false
-
             config.color_scheme = "Catppuccin Frappe"
-
             config.default_cursor_style = 'SteadyBar'
             config.enable_kitty_graphics = true
             config.enable_scroll_bar = false
-
             config.enable_wayland = true
 
             config.font = wezterm.font({
                 family = 'Recursive Mn Csl St',
                 harfbuzz_features = {
-                    'dlig on',
-                    'ss03',
-                    'ss04',
-                    'ss05',
-                    'ss06',
-                    'ss07',
-                    'ss08',
-                    'ss09',
-                    'ss10',
-                    'ss11',
-                    'ss12',
-                    'case',
-                    'liga',
+                    '+dlig',
+                    '+ss03',
+                    '+ss04',
+                    '+ss05',
+                    '+ss06',
+                    '+ss07',
+                    '+ss08',
+                    '+ss09',
+                    '+ss10',
+                    '+ss11',
+                    '+ss12',
+                    '+case',
+                    '+liga',
+                    '+afrc',
                 }
             })
 
-            config.font_size = 9.75
+            config.cell_width = 1.0
+            config.font_size = 9.5
             config.warn_about_missing_glyphs = false
-
             config.hide_mouse_cursor_when_typing = false
-
             config.hide_tab_bar_if_only_one_tab = true
             config.use_fancy_tab_bar = false
-
             config.hyperlink_rules = wezterm.default_hyperlink_rules()
+            config.pane_focus_follows_mouse = true
+            config.show_tab_index_in_tab_bar = false
 
             config.inactive_pane_hsb = {
                 brightness = 0.7,
@@ -208,9 +207,7 @@
             }
 
             config.scrollback_lines = 10000
-
             config.use_dead_keys = false
-
             config.window_padding = {
                 left = 0;
                 right = 0;
