@@ -52,12 +52,24 @@
 
             config.enable_wayland = true
 
-            config.font = wezterm.font_with_fallback {
-                'Recursive Mn Csl St',
-                'Font Awesome 6 Free Regular',
-                'Noto Color Emoji',
-                'Symbols Nerd Font',
-            }
+            config.font = wezterm.font({
+                family = 'Recursive Mn Csl St',
+                harfbuzz_features = {
+                    'dlig on',
+                    'ss03',
+                    'ss04',
+                    'ss05',
+                    'ss06',
+                    'ss07',
+                    'ss08',
+                    'ss09',
+                    'ss10',
+                    'ss11',
+                    'ss12',
+                    'case',
+                    'liga',
+                }
+            })
 
             config.font_size = 9.75
             config.warn_about_missing_glyphs = false
