@@ -85,7 +85,7 @@
                             <string>case</string> <!-- Uppercase punctuation -->
                             <string>dlig</string> <!-- Code ligatures -->
                             <string>ss01</string> <!-- Single-story 'a' -->
-                            <!-- <string>ss02</string> Single-story 'g' -->
+                            <string>ss02</string> <!-- Single-story 'g' -->
                             <string>ss03</string> <!-- Simplified f -->
                             <string>ss04</string> <!-- Simplified i -->
                             <string>ss05</string> <!-- Simplified l -->

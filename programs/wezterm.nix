@@ -56,7 +56,7 @@
                     'case', -- Uppercase punctuation
                     'dlig', -- Code ligatures
                     'ss01', -- Single-story 'a'
-                    -- 'ss02', -- Single-story 'g'
+                    'ss02', -- Single-story 'g'
                     'ss03', -- Simplified f
                     'ss04', -- Simplified i
                     'ss05', -- Simplified l
@@ -83,6 +83,7 @@
 
             config.inactive_pane_hsb = {
                 brightness = 0.7,
+                saturation = 1.0,
             }
 
             config.disable_default_key_bindings = true
@@ -92,19 +93,14 @@
                 { key = 'y', mods = 'ALT', action = wezterm.action.QuickSelect },
                 { key = 'u', mods = 'ALT', action = wezterm.action.CharSelect },
                 { key = 'e', mods = 'ALT', action = wezterm.action.EmitEvent 'trigger-nvim-with-scrollback' },
-                { key = 'p',
+                { key = 'q',
                     mods = 'ALT',
                     action = wezterm.action.ActivateKeyTable {
                         name = 'create_pane',
                         timeout_milliseconds = 5000,
                     },
                 },
-                { key = 's',
-                    mods = 'ALT',
-                    action = wezterm.action.PaneSelect {
-                        mode = 'SwapWithActiveKeepFocus',
-                    },
-                },
+                { key = 's', mods = 'ALT', action = wezterm.action.PaneSelect { mode = 'SwapWithActiveKeepFocus', }, },
                 { key = 'h', mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Left' },
                 { key = 'j', mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Down' },
                 { key = 'k', mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Up' },
@@ -137,72 +133,56 @@
                     { key = 'Escape', action = "PopKeyTable" },
                     { key = 'Enter', action = "PopKeyTable" },
                     { key = 'h',
-                        action = wezterm.action.SplitPane(
-                            {
-                                direction = 'Left',
-                                size = { Percent = 50 },
-                            }
-                        )
+                        action = wezterm.action.SplitPane( {
+                            direction = 'Left',
+                            size = { Percent = 50 },
+                        })
                     },
                     { key = 'j',
-                        action = wezterm.action.SplitPane(
-                            {
-                                direction = 'Down',
-                                size = { Percent = 50 },
-                            }
-                        )
+                        action = wezterm.action.SplitPane( {
+                            direction = 'Down',
+                            size = { Percent = 50 },
+                        })
                     },
                     { key = 'k',
-                        action = wezterm.action.SplitPane(
-                            {
-                                direction = 'Up',
-                                size = { Percent = 50 },
-                            }
-                        )
+                        action = wezterm.action.SplitPane( {
+                            direction = 'Up',
+                            size = { Percent = 50 },
+                        })
                     },
                     { key = 'l',
-                        action = wezterm.action.SplitPane(
-                            {
-                                direction = 'Right',
-                                size = { Percent = 50 },
-                            }
-                        )
+                        action = wezterm.action.SplitPane( {
+                            direction = 'Right',
+                            size = { Percent = 50 },
+                        })
                     },
                     { key = 'LeftArrow',
-                        action = wezterm.action.SplitPane(
-                            {
-                                direction = 'Left',
-                                size = { Percent = 50 },
-                                top_level = true,
-                            }
-                        )
+                        action = wezterm.action.SplitPane( {
+                            direction = 'Left',
+                            size = { Percent = 50 },
+                            top_level = true,
+                        })
                     },
                     { key = 'DownArrow',
-                        action = wezterm.action.SplitPane(
-                            {
-                                direction = 'Down',
-                                size = { Percent = 50 },
-                                top_level = true,
-                            }
-                        )
+                        action = wezterm.action.SplitPane( {
+                            direction = 'Down',
+                            size = { Percent = 50 },
+                            top_level = true,
+                        })
                     },
                     { key = 'UpArrow',
-                        action = wezterm.action.SplitPane(
-                            {
-                                direction = 'Up',
-                                size = { Percent = 50 },
-                                top_level = true,
-                            }
-                        )
+                        action = wezterm.action.SplitPane( {
+                            direction = 'Up',
+                            size = { Percent = 50 },
+                            top_level = true,
+                        })
                     },
                     { key = 'RightArrow',
-                        action = wezterm.action.SplitPane(
-                            {
-                                direction = 'Right',
-                                size = { Percent = 50 },
-                                top_level = true,
-                            }
-                        )
+                        action = wezterm.action.SplitPane( {
+                            direction = 'Right',
+                            size = { Percent = 50 },
+                            top_level = true,
+                        })
                     },
                 }
             }
