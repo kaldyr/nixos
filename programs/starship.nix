@@ -4,6 +4,7 @@
 
         programs.starship.enable = true;
         programs.starship.enableFishIntegration = true;
+        programs.starship.enableNushellIntegration = true;
 
         xdg.configFile."starship.toml".text = /* toml */ ''
             format = "$all"

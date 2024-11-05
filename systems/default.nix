@@ -10,6 +10,7 @@
         ../programs/git.nix
         ../programs/lazygit.nix
         ../programs/neovim.nix
+        ../programs/nushell.nix
         ../programs/starship.nix
         ../programs/yazi.nix
         ../programs/zellij.nix

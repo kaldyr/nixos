@@ -5,6 +5,7 @@
         enable = true;
 
         enableFishIntegration = true;
+        enableNushellIntegration = true;
 
         extraOptions = [
             "-1"

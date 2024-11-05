@@ -13,6 +13,7 @@
 
             enable = true;
             enableFishIntegration = true;
+            enableNushellIntegration = true;
 
             plugins = let
 
