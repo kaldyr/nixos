@@ -18,7 +18,7 @@
 
 ## Keybind motions
 - All keybinds should follow the same pattern
-- Everything relating to hyprland on Meta/Super/Win key
+- Everything relating to hyprland on Meta/Super/Win/Whatever key
 - Everything relating to wezterm on Alt key
 - Everything application specific on Ctrl key
 - Shift is extra modifier
