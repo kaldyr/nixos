@@ -4,13 +4,13 @@
         ../services/dunst.nix
         ../services/gammastep.nix
         ../services/hypridle.nix
+        ../services/swww.nix
         ../services/udiskie.nix
         ./feh.nix
         ./foot.nix
         ./fuzzel.nix
         ./hyprlock.nix
         ./swappy.nix
-        ./waypaper.nix
         ./waybar.nix
         ./wezterm.nix
     ];
@@ -35,7 +35,6 @@
             playerctl
             polkit_gnome
             slurp
-            swww
             tesseract
             wl-clipboard
             wl-screenrec
@@ -156,9 +155,6 @@
                 bind=$mainMod ALT, p, exec, grim -g "$(slurp)" - | convert - -shave 1x1 PNG:- | tesseract - - | wl-copy --primary
                 bind=$mainMod SHIFT, r, exec, ${screenRecord}/bin/screenRecord.sh
 
-                # Wallpaper
-                bind=$mainMod, w, exec, waypaper --folder $(xdg-user-dir PICTURES)/Wallpapers
-
                 # Play media from clipboard
                 bind=$mainMod, g, exec, cliphist list | grep "://" | fuzzel -d | cliphist decode | wl-copy && mpv $(wl-paste)
 
@@ -253,7 +249,6 @@
 
                 # Auto-start Applications
                 exec-once=swww-daemon --format xrgb
-                exec-once=waypaper --restore
                 exec-once=wl-paste --type text --watch cliphist store
                 exec-once=wl-paste --type image --watch cliphist store
                 exec-once=waybar
