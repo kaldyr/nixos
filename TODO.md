@@ -2,7 +2,9 @@
 
 ## Changes
 
-- Wallpaper slideshow script
+- Unify motions between wezterm, hyprland, and terminal applications
+- Script for handling terminal/editor pane navigation with unified keybind
+- Script to manage opening files in yazi with editor in a new buffer (or split) if editor open in terminal pane
 - Configure btrbk to snapshot state and archive
 - nh nix helper?
 - Browser Profile sync to RAM
@@ -13,6 +15,26 @@
 - Beets with plugins (bandcamp)
 - Get phone to automount when plugged in
 - Re-evaluate what is stored on /nix and /state
+
+## Keybind motions
+- All keybinds should follow the same pattern
+- Everything relating to hyprland on Meta/Super/Win key
+- Everything relating to wezterm on Alt key
+- Everything application specific on Ctrl key
+- Shift is extra modifier
+
+### Special case for editor window
+- Pane navigation in wezterm should instead be script
+
+#### Script
+The idea here is to make pretend like each editor pane is a terminal pane.  
+Is current terminal pane an editor pane?
+- Yes: Is current editor pane on the edge?
+-   Yes: Navigate to next terminal pane.
+-   No: Navigate to next editor pane.
+- No: Is new terminal pane an editor pane?
+-   Yes: Navigate to the closest editor pane to the prev terminal pane.
+-   No: Navigate to next terminal pane.
 
 ## @nix vs @state
 - The @state subvolume will be snapshotted for backup/restore
