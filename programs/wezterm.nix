@@ -159,28 +159,28 @@
                     { key = 'LeftArrow',
                         action = wezterm.action.SplitPane( {
                             direction = 'Left',
-                            size = { Percent = 50 },
+                            size = { Percent = 25 },
                             top_level = true,
                         })
                     },
                     { key = 'DownArrow',
                         action = wezterm.action.SplitPane( {
                             direction = 'Down',
-                            size = { Percent = 50 },
+                            size = { Percent = 25 },
                             top_level = true,
                         })
                     },
                     { key = 'UpArrow',
                         action = wezterm.action.SplitPane( {
                             direction = 'Up',
-                            size = { Percent = 50 },
+                            size = { Percent = 25 },
                             top_level = true,
                         })
                     },
                     { key = 'RightArrow',
                         action = wezterm.action.SplitPane( {
                             direction = 'Right',
-                            size = { Percent = 50 },
+                            size = { Percent = 25 },
                             top_level = true,
                         })
                     },
