@@ -17,7 +17,7 @@
         initrd.kernelModules = [ "i915" ];
         kernelModules = [ "kvm-intel" ];
         kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-        kernelParams = [ "btrfs" "quiet" ];
+        kernelParams = [ "btrfs" "i915.enable_fbc=1" "i915.enable_psr=1" "quiet" ];
         loader.grub.gfxmodeEfi = "2256x1504";
     };
 
