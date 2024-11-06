@@ -249,6 +249,7 @@
 
                 # Auto-start Applications
                 exec-once=swww-daemon --format xrgb
+                exec-once=systemctl --user start wallpaper-change.service
                 exec-once=wl-paste --type text --watch cliphist store
                 exec-once=wl-paste --type image --watch cliphist store
                 exec-once=waybar
