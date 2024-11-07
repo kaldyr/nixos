@@ -1,6 +1,9 @@
 { pkgs, sysConfig, ... }: {
 
-    environment.persistence."/nix".users.${sysConfig.user}.files = [ ".cache/helix/helix.log" ];
+    environment.persistence."/nix".users.${sysConfig.user} = {
+        directories = [ ".config/helix/runtime" ];
+        files = [ ".cache/helix/helix.log" ];
+    };
 
     home-manager.users.${sysConfig.user} = {
 
