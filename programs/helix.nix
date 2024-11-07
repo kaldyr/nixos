@@ -19,9 +19,11 @@
 
             [editor]
             auto-completion = true
-            completion-timeout = 5
-            line-number = "relative"
             bufferline = "multiple"
+            completion-timeout = 5
+            completion-trigger-len = 2
+            line-number = "relative"
+            scrolloff = 3
 
             [editor.cursor-shape]
             insert = "bar"
@@ -33,17 +35,32 @@
             character = "▏"
             skip-levels = 1
 
+            [editor.statusline]
+            left = [
+                "spinner",
+                "file-name",
+                "file-encoding"
+            ]
+            center = []
+            right = [
+                "diagnostics",
+                "register",
+                "position-percentage",
+                "position",
+                "file-type"
+            ]
+
             [editor.whitespace.render]
+            nbsp = "all"
+            newline = "none"
+            nnbsp = "all"
             space = "all"
             tab = "all"
-            nbsp = "all"
-            nnbsp = "all"
-            newline = "none"
 
             [editor.whitespace.characters]
-            space = "·"
             nbsp = "⍽"
             nnbsp = "␣"
+            space = "·"
             tab = "→"
             tabpad = "·"
             newline = "⏎"
@@ -73,11 +90,23 @@
                 "replace_with_yanked",
                 "select_mode"
             ]
+        '';
 
-            # [[language]]
-            # name = "yaml"
-            # auto-format = true
-            # indent = { tab-width = 2, unit = " " }
+        xdg.configFile."helix/languages.toml".text = /* toml */ ''
+            [[language]]
+            name = "yaml"
+            auto-format = true
+            indent = { tab-width = 2, unit = " " }
+
+            [[language]]
+            name = "html"
+            auto-format = true
+            indent = { tab-width = 2, unit = " " }
+
+            [[language]]
+            name = "templ"
+            auto-format = true
+            indent = { tab-width = 2, unit = " " }
         '';
 
     };
