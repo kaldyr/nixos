@@ -189,6 +189,8 @@
 
             config.scrollback_lines = 10000
             config.use_dead_keys = false
+            config.show_update_window = false
+
             config.window_padding = {
                 left = 0;
                 right = 0;
