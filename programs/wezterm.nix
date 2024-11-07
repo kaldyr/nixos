@@ -44,6 +44,7 @@
 
             config.animation_fps = 85
             config.adjust_window_size_when_changing_font_size = false
+            config.check_for_updates = false
             config.color_scheme = "Catppuccin Frappe"
             config.default_cursor_style = 'SteadyBar'
             config.enable_kitty_graphics = true
@@ -189,7 +190,6 @@
 
             config.scrollback_lines = 10000
             config.use_dead_keys = false
-            config.show_update_window = false
 
             config.window_padding = {
                 left = 0;
