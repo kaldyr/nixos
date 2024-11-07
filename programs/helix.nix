@@ -46,7 +46,7 @@
             nnbsp = "␣"
             tab = "→"
             tabpad = "·"
-            # Figure out how to show spaces at the end of a line
+            newline = "⏎"
 
             [keys.select]
             C-k = [ # scroll selections up one line
