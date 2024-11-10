@@ -5,7 +5,7 @@
         ../programs/btop.nix
         ../programs/direnv.nix
         ../programs/eza.nix
-        ../programs/fish.nix
+        # ../programs/fish.nix
         ../programs/fzf.nix
         ../programs/git.nix
         ../programs/helix.nix
@@ -14,7 +14,7 @@
         ../programs/nushell.nix
         ../programs/starship.nix
         ../programs/yazi.nix
-        ../programs/zellij.nix
+        # ../programs/zellij.nix
         ../programs/zoxide.nix
     ];
 
@@ -102,7 +102,6 @@
         ssh-to-age
         unrar
         unzip
-        xar
         yt-dlp
         zip
     ];

@@ -26,7 +26,7 @@
                 "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP2NONOi1+Moj3dj/K2jHlakcTUgmRR5RxqlHzvlrxPF matt@mjolnir"
             ];
 
-            shell = pkgs.fish;
+            shell = pkgs.nushell;
 
         };
 

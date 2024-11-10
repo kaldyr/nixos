@@ -37,7 +37,6 @@
             slurp
             tesseract
             wl-clipboard
-            wl-screenrec
             wtype
         ];
 
@@ -66,18 +65,6 @@
                     if sysConfig.hostname == "mjolnir" then /* hyprlang */
                         "exec-once=wayland-push-to-talk-fix -k 'BTN_MIDDLE' -n 'XF86WheelButton' /dev/input/by-id/usb-Razer_Razer_DeathAdder_Essential-event-mouse"
                     else "" );
-
-                screenRecord = pkgs.writeShellScriptBin "screenRecord.sh" /* bash */ ''
-                    pid=`${pkgs.procps}/bin/pgrep wl-screenrec`
-                    status=$?
-
-                    if [ $status != 0 ]
-                    then
-                        ${pkgs.wl-screenrec}/bin/wl-screenrec -g "$(${pkgs.slurp}/bin/slurp)" --codec hevc --encode-pixfmt vuyx -f $HOME/Videos/Screenrec/$(date +'%Y%m%d%H%M%S.mp4');
-                    else
-                        ${pkgs.procps}/bin/pkill --signal SIGINT wl-screenrec
-                    fi;
-                '';
 
             in /* hyprlang */ ''
                 $mainMod=SUPER
@@ -153,7 +140,6 @@
                 bind=$mainMod, p, exec, grim $(xdg-user-dir PICTURES)/Screenshots/$(date +'%Y%m%d%H%M%S.png')
                 bind=$mainMod SHIFT, p, exec, grim -g "$(slurp)" - | convert - -shave 1x1 PNG:- | swappy -f - 
                 bind=$mainMod ALT, p, exec, grim -g "$(slurp)" - | convert - -shave 1x1 PNG:- | tesseract - - | wl-copy --primary
-                bind=$mainMod SHIFT, r, exec, ${screenRecord}/bin/screenRecord.sh
 
                 # Play media from clipboard
                 bind=$mainMod, g, exec, cliphist list | grep "://" | fuzzel -d | cliphist decode | wl-copy && mpv $(wl-paste)

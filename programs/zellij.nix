@@ -3,7 +3,7 @@
     home-manager.users.${sysConfig.user} = {
 
         programs.zellij.enable = true;
-        programs.zellij.enableFishIntegration = false;
+        # programs.zellij.enableFishIntegration = false;
 
         xdg.configFile."zellij/config.kdl".text = /* kdl */ ''
             copy_clipboard "primary"
