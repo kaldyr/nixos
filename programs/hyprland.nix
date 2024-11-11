@@ -248,7 +248,6 @@
                 bindm=$mainMod, mouse:273, resizewindow
 
                 # Auto-start Applications
-                exec-once=swww-daemon --format xrgb & sleep 5 & systemctl --user start wallpaper-change.service
                 exec-once=wl-paste --type text --watch cliphist store
                 exec-once=wl-paste --type image --watch cliphist store
                 exec-once=waybar
