@@ -6,13 +6,22 @@
 
         systemd.user.services.wallpaper-change = {
 
-            Unit.Description = "Set the wallpaper";
+            Install.WantedBy = [ "graphical.target" ];
 
-            Service.ExecStart = toString (
-                pkgs.writeShellScript "wallpaper-change" ''
-                    image="$(${pkgs.findutils}/bin/find $HOME/Pictures/Wallpapers -type f | ${pkgs.coreutils}/bin/shuf -n 1)"
-                    ${pkgs.swww}/bin/swww img $image
-                '' );
+            Unit = {
+                Description = "Set the wallpaper";
+                PartOf = [ "graphical.target" ];
+                After = [ "graphical.target" ];
+            };
+
+            Service = {
+                ExecStart = toString (
+                    pkgs.writeShellScript "wallpaper-change" ''
+                        image="$(${pkgs.findutils}/bin/find $HOME/Pictures/Wallpapers -type f | ${pkgs.coreutils}/bin/shuf -n 1)"
+                        ${pkgs.swww}/bin/swww img $image
+                    '' );
+                Type = "oneshot";
+            };
 
         };
 
