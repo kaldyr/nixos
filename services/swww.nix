@@ -5,11 +5,17 @@
         home.packages = with pkgs; [ swww ];
 
         systemd.user.services.swww = {
+
             Install.WantedBy = [ "graphical-session.target" ];
             Unit.Description = "Wayland wallpaper daemon";
             Unit.PartOf = [ "graphical-session.target" ];
-            Service.ExecStart = "${lib.getExe' pkgs.swww "swww-daemon"} --format xrgb";
-            Service.Restart = "on-failure";
+
+            Service = {
+                ExecStartPre = "${lib.getExe' pkgs.coreutils "sleep"} 0.5";
+                ExecStart = "${lib.getExe' pkgs.swww "swww-daemon"} --format xrgb";
+                Restart = "on-failure";
+            };
+
         };
 
         systemd.user.services.wallpaper-change = {
@@ -24,11 +30,10 @@
             };
 
             Service = {
-                ExecStartPre = "${lib.getExe' pkgs.coreutils "sleep"} 1";
+                ExecStartPre = "${lib.getExe' pkgs.coreutils "sleep"} 0.5";
                 ExecStart = toString (
                     pkgs.writeShellScript "wallpaper-change" ''
-                        image="$(${pkgs.findutils}/bin/find $HOME/Pictures/Wallpapers -type f | ${pkgs.coreutils}/bin/shuf -n 1)"
-                        ${pkgs.swww}/bin/swww img $image
+                        ${pkgs.swww}/bin/swww img "$(${pkgs.findutils}/bin/find $HOME/Pictures/Wallpapers -type f | ${pkgs.coreutils}/bin/shuf -n 1)"
                     '' );
                 Type = "oneshot";
             };
@@ -42,7 +47,7 @@
             Install.WantedBy = [ "timers.target" ];
 
             Timer = {
-                OnCalendar = "*:0/2";
+                OnCalendar = "*:0/1";
                 Unit = "wallpaper-change.service";
                 Persistent = true;
             };
