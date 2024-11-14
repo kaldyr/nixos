@@ -71,7 +71,7 @@
             "gram" = let
                 sysConfig = {
                     hostname = "gram";
-                    instalVersion = "24.05"; 
+                    instalVersion = "24.05";
                     user = "matt";
                 };
             in buildSystem ( sysConfig );
@@ -80,7 +80,7 @@
             "magrathea" = let
                 sysConfig = {
                     hostname = "magrathea";
-                    instalVersion = "24.05"; 
+                    instalVersion = "24.05";
                     user = "matt";
                 };
             in buildSystem ( sysConfig );
@@ -89,7 +89,7 @@
             "mjolnir" = let
                 sysConfig = {
                     hostname = "mjolnir";
-                    instalVersion = "23.05"; 
+                    instalVersion = "23.05";
                     user = "matt";
                 };
             in buildSystem ( sysConfig );
@@ -98,7 +98,7 @@
             # "serenity" = let
             #     sysConfig = {
             #         hostname = "serenity";
-            #         instalVersion = ""; 
+            #         instalVersion = "";
             #         user = "matt";
             #     };
             # in buildSystem ( sysConfig );
