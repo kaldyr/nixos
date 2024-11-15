@@ -21,7 +21,6 @@
 
         # Nixpkgs
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-        # nixpkgs.url = "github:NixOS/nixpkgs/2d2a9ddbe3f2c00747398f3dc9b05f7f2ebb0f53";
         nixpkgs-exiftool.url = "github:NixOS/nixpkgs/0dfa68647420b93080a04508dda41476cccc0cd0";
 
         # Sops - secret management
@@ -55,9 +54,11 @@
                     inputs.impermanence.nixosModules.impermanence
                     inputs.sops-nix.nixosModules.sops
 
-                    # System Config
+                    # User config
                     ./users/default.nix # Defaults for all users
                     ./users/${sysConfig.user}.nix # Specific user configuration
+
+                    # System Config
                     ./systems/default.nix # Defaults for all systems
                     ./systems/${sysConfig.hostname}.nix # Specific for this machine
 
