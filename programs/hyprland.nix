@@ -106,12 +106,14 @@
                         size=12
                         xray=true
                     }
-                    col.shadow=rgba(1a1a1aee)
                     dim_inactive=false
-                    drop_shadow=yes
                     rounding=10
-                    shadow_range=20
-                    shadow_render_power=3
+                    shadow {
+                        color=rgba(1a1a1aee)
+                        enabled=yes
+                        range=20
+                        render_power=3
+                    }
                 }
 
                 dwindle {
