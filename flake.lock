@@ -129,11 +129,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1731539916,
-        "narHash": "sha256-iPNBtMFEyF/QuGtxfrN6WRvK6GNqkpT3MpCvw6zttoE=",
+        "lastModified": 1731708096,
+        "narHash": "sha256-WpEalR/PpuQGhw/h4ywd02ydN72eN1vBt98g+qkhDIo=",
         "owner": "kaldyr",
         "repo": "neovim",
-        "rev": "6aa9317e13ba660493ede8c39b0d5c245ab79c0b",
+        "rev": "a4b7e286ed0d1689b2e504d012b5b31f28121379",
         "type": "github"
       },
       "original": {
