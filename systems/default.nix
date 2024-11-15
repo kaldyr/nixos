@@ -96,6 +96,7 @@
         htmlq
         gdu
         jq
+        lazysql
         p7zip
         ripgrep
         sops
