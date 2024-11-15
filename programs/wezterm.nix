@@ -10,6 +10,10 @@
             local os = require 'os'
             local config = {}
 
+            if wezterm.config_builder then
+                config = wezterm.config_builder()
+            end
+
             wezterm.on( 'trigger-nvim-with-scrollback', function( window, pane )
 
                 local text = pane:get_lines_as_text( pane:get_dimensions().scrollback_rows )
@@ -38,10 +42,6 @@
 
             end )
 
-            if wezterm.config_builder then
-                config = wezterm.config_builder()
-            end
-
             config.animation_fps = 85
             config.adjust_window_size_when_changing_font_size = false
             config.check_for_updates = false
@@ -54,8 +54,8 @@
             config.font = wezterm.font({
                 family = 'Recursive Mn Csl St',
                 harfbuzz_features = {
-                    'case', -- Uppercase punctuation
-                    'dlig', -- Code ligatures
+                    'case=1', -- Uppercase punctuation
+                    'dlig=1', -- Code ligatures
                     'ss01', -- Single-story 'a'
                     'ss02', -- Single-story 'g'
                     'ss03', -- Simplified f
@@ -85,6 +85,19 @@
             config.inactive_pane_hsb = {
                 brightness = 0.7,
                 saturation = 1.0,
+            }
+
+            config.default_domain = "local"
+            config.ssh_domains = {
+                {
+                    name = 'magrathea',
+                    remote_address = 'magrathea',
+                    username = '${sysConfig.user}',
+                },
+            }
+            config.unix_domains = {
+                { name = 'dev' },
+                { name = 'nix' },
             }
 
             config.disable_default_key_bindings = true
