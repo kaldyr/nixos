@@ -19,9 +19,10 @@
 ## Keybind motions
 - All keybinds should follow the same pattern
 - Everything relating to hyprland on Meta/Super/Win/Whatever key
-- Everything relating to wezterm on Alt key
+- Everything relating to mux on Alt key
 - Everything application specific on Ctrl key
 - Shift is extra modifier
+- Submaps for Hyprland
 
 ### Special case for editor window
 - Pane navigation in wezterm should instead be script
@@ -52,6 +53,9 @@ not essential to preserved between installs.
 ## Things to look into
 
 - Fnott Notifications
+- Wired Notifications: Toqozz/wired-notify
+- Walker application launcher: abenz1267/walker
+- Stylix theme application: danth/stylix
 
 ## Snapshot Map
 
