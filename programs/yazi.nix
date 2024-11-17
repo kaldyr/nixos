@@ -12,8 +12,7 @@
         programs.yazi = {
 
             enable = true;
-            # enableFishIntegration = true;
-            enableNushellIntegration = true;
+            enableFishIntegration = true;
 
             plugins = let
 
@@ -63,7 +62,7 @@
             prepend_keymap = [
                 { on = "q", run = "close", desc = "Close the current tab, or quit if it is last tab" },
                 { on = [ "c", "m" ], run = "plugin chmod", desc = "Chmod on selected files" },
-                { on = "\\", run = "plugin --sync hide-preview", desc = "Toggle preview pane" },
+                { on = "+", run = "plugin --sync hide-preview", desc = "Toggle preview pane" },
                 { on = "`", run = "shell \"$SHELL\" --block --confirm", desc = "Open shell here" },
                 { on = "C", run = "plugin ouch --args=zip", desc = "Compress with ouch" },
                 { on = "f", run = "plugin jump-to-char", desc = "Jump to Char" },

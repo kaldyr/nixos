@@ -1,6 +1,6 @@
 { pkgs, sysConfig, ... }: {
 
-    environment.persistence."/state".users.${sysConfig.user}.directories = [
+    environment.persistence."/nix".users.${sysConfig.user}.directories = [
         ".config/fish"
         ".local/share/fish"
     ];
@@ -16,6 +16,7 @@
             interactiveShellInit = /* fish */ ''
                 bind \cl 'clear ; tput cup $(tput lines) ; commandline -f repaint'
                 tput cup $(tput lines) ; commandline -f repaint
+                fish_vi_key_bindings insert
             '';
 
             shellAliases = {
@@ -40,7 +41,7 @@
         };
 
         xdg = {
-        
+
             configFile."fish/themes/Catppuccin Frappe.theme".source = pkgs.fetchFromGitHub {
                 owner = "catppuccin";
                 repo = "fish";

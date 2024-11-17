@@ -5,13 +5,12 @@
         ../programs/btop.nix
         ../programs/direnv.nix
         ../programs/eza.nix
-        # ../programs/fish.nix
+        ../programs/fish.nix
         ../programs/fzf.nix
         ../programs/git.nix
         ../programs/helix.nix
         ../programs/lazygit.nix
         ../programs/neovim.nix
-        ../programs/nushell.nix
         ../programs/starship.nix
         ../programs/yazi.nix
         # ../programs/zellij.nix
