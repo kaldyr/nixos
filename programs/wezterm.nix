@@ -95,10 +95,6 @@
                     username = '${sysConfig.user}',
                 },
             }
-            config.unix_domains = {
-                { name = 'dev' },
-                { name = 'nix' },
-            }
 
             config.disable_default_key_bindings = true
             config.keys = {
@@ -125,6 +121,7 @@
                 { key = 'RightArrow', mods = 'ALT', action = wezterm.action.AdjustPaneSize { 'Right', 1 } },
                 { key = 'f', mods = 'ALT', action = wezterm.action.TogglePaneZoomState },
                 { key = 'x', mods = 'ALT', action = wezterm.action.CloseCurrentPane { confirm = true } },
+                { key = 'x', mods = 'SHIFT|ALT', action = wezterm.action.CloseCurrentTab { confirm = true } },
                 { key = 't', mods = 'ALT', action = wezterm.action.SpawnTab 'DefaultDomain' },
                 { key = '.', mods = 'ALT', action = wezterm.action.ActivateTabRelative( 1 ) },
                 { key = ',', mods = 'ALT', action = wezterm.action.ActivateTabRelative( -1 ) },
