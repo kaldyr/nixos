@@ -1,12 +1,7 @@
 { sysConfig, ... }: {
 
-    hardware.openrazer = {
-
-        enable = true;
-
-        devicesOffOnScreensaver = true;
-
-    };
+    hardware.openrazer.enable = true;
+    hardware.openrazer.devicesOffOnScreensaver = true;
 
     home-manager.users.${sysConfig.user}.xdg.configFile."openrazer/persistence.conf".text = /* ini */ ''
         [632423H20104252]
