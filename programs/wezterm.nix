@@ -1,6 +1,29 @@
-{ lib, sysConfig, ... }: {
+{ lib, pkgs, sysConfig, ... }: {
 
     home-manager.users.${sysConfig.user} = {
+
+        programs.fish.shellAliases."dev" = let
+
+            buildDevPanes = pkgs.writeShellScript "buildDevPanes.sh" /* bash */ ''
+                # Get the current pane
+                current_pane_id=$(wezterm cli list-clients --format json | jq '.[].focused_pane_id')
+                # Get the tab id for the tab the current pane is in
+                tab_id=$(wezterm cli list --format json | jq -r '.[] | select(.pane_id == '$current_pane_id') | .tab_id')
+                # Get the number of panes that exist in this window
+                panes_in_tab=$(wezterm cli list --format json | jq -r '[ .[] | select(.tab_id == '$tab_id') ] | length')
+                # Only build the pane setup if no other panes exist in this tab
+                if [ $panes_in_tab == '1' ]; then
+                    yazi=$(wezterm cli split-pane --left --cells 45 -- yazi)
+                    lazygit=$(wezterm cli split-pane --pane-id $yazi --bottom -- lazygit)
+                    wezterm cli split-pane --bottom --cells 8 -- fish
+                    wezterm cli send-text --pane-id $yazi --no-paste '+.'
+                    wezterm cli send-text --pane-id $lazygit --no-paste '+'
+                    wezterm cli activate-pane --pane-id $current_pane_id
+                    nvim .
+                fi
+            '';
+
+        in "${pkgs.bash}/bin/bash ${buildDevPanes}";
 
         programs.wezterm.enable = true;
 
@@ -39,6 +62,11 @@
                 else
                     print( 'Error opening scrollback' .. err )
                 end
+
+            end )
+
+            wezterm.on( 'trigger-build-dev-panes', function()
+
 
             end )
 
