@@ -12,7 +12,7 @@
             [character]
             error_symbol = "[󰊠](bold red)"
             format = "$symbol [|](bold bright-black) "
-            vicmd_symbol = "[󰊠](bold yellow) "
+            vicmd_symbol = "[:](bold yellow)"
 
             [directory]
             read_only = "󰌾"
