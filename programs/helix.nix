@@ -72,7 +72,6 @@
             "$" = "goto_line_end"
             "^" = "goto_first_nonwhitespace"
             G = "goto_file_end"
-            "%" = "match_brackets"
             V = ["select_mode", "extend_to_line_bounds"]
             C = ["extend_to_line_end", "yank_main_selection_to_clipboard", "delete_selection", "insert_mode"]
             D = ["extend_to_line_end", "yank_main_selection_to_clipboard", "delete_selection"]
@@ -167,7 +166,7 @@
             D = ["extend_to_line_bounds", "delete_selection", "normal_mode"]
             C = ["goto_line_start", "extend_to_line_bounds", "change_selection"]
             "%" = "match_brackets"
-            S = "surround_add" # Basically 99% of what I use vim-surround for
+            S = "surround_add"
             u = ["switch_to_lowercase", "collapse_selection", "normal_mode"]
             U = ["switch_to_uppercase", "collapse_selection", "normal_mode"]
 
@@ -184,7 +183,7 @@
             x = ["yank_main_selection_to_clipboard", "delete_selection"]
             y = ["yank_main_selection_to_clipboard", "normal_mode", "flip_selections", "collapse_selection"]
             Y = ["extend_to_line_bounds", "yank_main_selection_to_clipboard", "goto_line_start", "collapse_selection", "normal_mode"]
-            p = "replace_selections_with_clipboard" # No life without this
+            p = "replace_selections_with_clipboard"
             P = "paste_clipboard_before"
 
             C-k = [ # scroll selections up one line
