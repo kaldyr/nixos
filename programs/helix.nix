@@ -77,14 +77,14 @@
             D = ["extend_to_line_end", "yank_main_selection_to_clipboard", "delete_selection"]
             S = "surround_add"
 
-            # Clipboards over registers ye ye
+            # Clipboards over registers
             x = "delete_selection"
             p = ["paste_clipboard_after", "collapse_selection"]
             P = ["paste_clipboard_before", "collapse_selection"]
             Y = ["extend_to_line_end", "yank_main_selection_to_clipboard", "collapse_selection"]
 
-            i = ["insert_mode", "collapse_selection"]
-            a = ["append_mode", "collapse_selection"]
+            i = ["collapse_selection", "insert_mode"]
+            a = ["collapse_selection", "append_mode"]
 
             # Undoing the 'd' + motion commands restores the selection which is annoying
             u = ["undo", "collapse_selection"]
@@ -152,7 +152,7 @@
             g = { g = ["select_mode", "extend_to_line_bounds", "goto_file_start", "extend_to_line_bounds", "yank_main_selection_to_clipboard", "collapse_selection", "normal_mode"] }
 
             [keys.insert]
-            # Escape the madness! No more fighting with the cursor! Or with multiple cursors!
+            tab = ["completion"]
             esc = ["collapse_selection", "normal_mode"]
 
              [keys.select]
