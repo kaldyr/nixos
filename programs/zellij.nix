@@ -8,6 +8,7 @@
 
             buildDevLayout = pkgs.writeShellScript "buildDevLayout.sh" /* bash */ ''
                 zellij --layout dev
+                sleep 0.5
                 zellij action write-chars "+"
                 zellij action move-focus down
                 zellij action write-chars "+"
