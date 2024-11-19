@@ -69,6 +69,7 @@
 
             # Clipboards over registers
             x = "delete_selection"
+            y = ["yank_main_selection_to_clipboard", "collapse_selection"]
             p = ["paste_clipboard_after", "collapse_selection"]
             P = ["paste_clipboard_before", "collapse_selection"]
             Y = ["extend_to_line_end", "yank_main_selection_to_clipboard", "collapse_selection"]
@@ -127,17 +128,6 @@
             w = ["move_next_word_start", "yank_main_selection_to_clipboard", "delete_selection"]
             W = ["move_next_long_word_start", "yank_main_selection_to_clipboard", "delete_selection"]
             g = { g = ["select_mode", "extend_to_line_bounds", "goto_file_start", "extend_to_line_bounds", "yank_main_selection_to_clipboard", "delete_selection", "normal_mode"] }
-
-            [keys.normal.y]
-            y = ["extend_to_line_bounds", "yank_main_selection_to_clipboard", "normal_mode", "collapse_selection"]
-            j = ["select_mode", "extend_to_line_bounds", "extend_line_below", "yank_main_selection_to_clipboard", "collapse_selection", "normal_mode"]
-            down = ["select_mode", "extend_to_line_bounds", "extend_line_below", "yank_main_selection_to_clipboard", "collapse_selection", "normal_mode"]
-            k = ["select_mode", "extend_to_line_bounds", "extend_line_above", "yank_main_selection_to_clipboard", "collapse_selection", "normal_mode"]
-            up = ["select_mode", "extend_to_line_bounds", "extend_line_above", "yank_main_selection_to_clipboard", "collapse_selection", "normal_mode"]
-            G = ["select_mode", "extend_to_line_bounds", "goto_last_line", "extend_to_line_bounds", "yank_main_selection_to_clipboard", "collapse_selection", "normal_mode"]
-            w = ["move_next_word_start", "yank_main_selection_to_clipboard", "collapse_selection", "normal_mode"]
-            W = ["move_next_long_word_start", "yank_main_selection_to_clipboard", "collapse_selection", "normal_mode"]
-            g = { g = ["select_mode", "extend_to_line_bounds", "goto_file_start", "extend_to_line_bounds", "yank_main_selection_to_clipboard", "collapse_selection", "normal_mode"] }
 
             [keys.insert]
             esc = ["collapse_selection", "normal_mode"]
