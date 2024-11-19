@@ -13,7 +13,7 @@
         ../programs/neovim.nix
         ../programs/starship.nix
         ../programs/yazi.nix
-        # ../programs/zellij.nix
+        ../programs/zellij.nix
         ../programs/zoxide.nix
     ];
 
@@ -86,7 +86,6 @@
 
     home-manager.users.${sysConfig.user}.home.packages = with pkgs; [
         age
-        bc
         duf
         exiftool
         fd
@@ -96,6 +95,7 @@
         gdu
         jq
         lazysql
+        numbat
         p7zip
         ripgrep
         sops
