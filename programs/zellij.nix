@@ -10,15 +10,11 @@
 
             buildDevLayout = pkgs.writeShellScript "buildDevLayout.sh" /* bash */ ''
                 zellij --layout dev
-                sleep 0.5
-                zellij action write-chars "+"
+                sleep 0.2
                 zellij action move-focus down
                 zellij action write-chars "+"
-                zellij action move-focus down
-                zellij action write-chars "clear"
-                zellij action write 10
                 zellij action move-focus up
-                zellij action move-focus up
+                zellij action write-chars "+"
                 zellij action move-focus right
             '';
 
@@ -144,9 +140,11 @@
                     bind "Alt p" { SwitchToMode "Pane"; }
                     bind "Alt s" { SwitchToMode "Scroll"; }
                     bind "Alt t" { SwitchToMode "Tab"; }
+                    bind "Alt c" { Run "zellij" "run" "--floating" "--close-on-exit" "--" "numbat"; }
                 }
             }
 
+            pane_frames true
             theme "catppuccin-frappe"
 
             ui {
@@ -159,26 +157,39 @@
 
         xdg.configFile."zellij/layouts/default.kdl".text = /* kdl */ ''
             layout {
-                pane split_direction="vertical" {
-                    pane
-                }
-                pane size=1 borderless=true {
-                    plugin location="file:${pkgs.zellijPlugins.zjstatus}/bin/zjstatus.wasm" {
-                        hide_frame_for_single_pane "true"
-                        format_left  "{mode}#[fg=#89B4FA,bg=#181825,bold] {tabs}"
-                        format_right "#[fg=#424554,bg=#181825]{session}"
-                        format_space "#[bg=#181825]"
+                default_tab_template {
+                    children
+                    pane size=1 borderless=true {
+                        plugin location="file:/nix/store/fsx1pqsl6qg67s393nlvxnvnwzjfqslx-zjstatus-0.19.0/bin/zjstatus.wasm" {
+                            hide_frame_for_single_pane "false"
+                            border_enabled "true"
+                            format_left   "{mode}#[fg=black]{tabs}"
+                            format_center ""
+                            format_right  ""
+                            format_space  "#[fg=yellow] "
 
-                        mode_normal          "#[fg=black,bg=#89B4FA] NORMAL #[fg=#87B4FA,bg=#181825]"
-                        mode_tmux            "#[fg=black,bg=#FFC387] TMUX #[fg=#FFC387,bg=#181825]"
-                        // mode_default_to_mode "tmux"
+                            // mode_normal  "#[fg=red]  "
+                            mode_normal  "#[fg=blue]  "
+                            mode_locked  "#[fg=red]  "
 
-                        tab_normal              "#[fg=#181825,bg=#4C4C59] #[fg=#000000,bg=#4C4C59]{index}  {name} #[fg=#4C4C59,bg=#181825]"
-                        tab_normal_fullscreen   "#[fg=#6C7086,bg=#181825] {index} {name} [] "
-                        tab_normal_sync         "#[fg=#6C7086,bg=#181825] {index} {name} <> "
-                        tab_active              "#[fg=#181825,bg=#ffffff,bold,italic] {index}  {name} #[fg=#ffffff,bg=#181825]"
-                        tab_active_fullscreen   "#[fg=#9399B2,bg=#181825,bold,italic] {index} {name} [] "
-                        tab_active_sync         "#[fg=#9399B2,bg=#181825,bold,italic] {index} {name} <> "
+                            // formatting for inactive tabs
+                            tab_normal              "#[fg=#6C7086]{name}"
+                            tab_normal_fullscreen   "#[fg=#6C7086]{name}"
+                            tab_normal_sync         "#[fg=#6C7086]{name}"
+
+                            // formatting for the current active tab
+                            tab_active              "#[fg=blue,bold]{name}#[fg=yellow,bold]{floating_indicator}"
+                            tab_active_fullscreen   "#[fg=yellow,bold]{name}#[fg=yellow,bold]{fullscreen_indicator}"
+                            tab_active_sync         "#[fg=green,bold]{name}#[fg=yellow,bold]{sync_indicator}"
+
+                            // separator between the tabs
+                            tab_separator           "#[fg=cyan,bold] ⋮ "
+
+                            // indicators
+                            tab_sync_indicator       " "
+                            tab_fullscreen_indicator " "
+                            tab_floating_indicator   ""
+                        }
                     }
                 }
             }
@@ -186,57 +197,65 @@
 
         xdg.configFile."zellij/layouts/dev.kdl".text = /* kdl */ ''
             layout {
-                pane split_direction="horizontal" {
-                    pane split_direction="vertical" {
-                        pane {
-                            size 36
+                tab {
+                    pane split_direction="horizontal" {
+                        pane split_direction="vertical" {
                             pane {
-                                command "yazi"
-                                name "Yazi"
-                                focus true
+                                size 36
+                                pane {
+                                    command "yazi"
+                                    name "Yazi"
+                                    focus true
+                                }
+                                pane {
+                                    command "lazygit"
+                                    name "Lazygit"
+                                }
                             }
-                            pane {
-                                command "lazygit"
-                                name "Lazygit"
-                                close_on_exit true
-                            }
-                            pane {
-                                size 14
-                                command "numbat"
-                                name "Calculator"
-                            }
-                        }
-                        pane split_direction="horizontal" {
-                            pane {
-                                command "hx"
-                                args "."
-                                name "Helix"
-                            }
-                            pane {
-                                size 10
-                                command "fish"
-                                name "Console"
+                            pane split_direction="horizontal" {
+                                pane {
+                                    command "hx"
+                                    args "."
+                                    name "Helix"
+                                }
+                                pane {
+                                    size 10
+                                    command "fish"
+                                    name "Console"
+                                }
                             }
                         }
                     }
-                }
-                pane size=1 borderless=true {
-                    plugin location="file:${pkgs.zellijPlugins.zjstatus}/bin/zjstatus.wasm" {
-                        hide_frame_for_single_pane "true"
-                        format_left  "{mode}#[fg=#89B4FA,bg=#181825,bold] {tabs}"
-                        format_right "#[fg=#424554,bg=#181825]{session}"
-                        format_space "#[bg=#181825]"
+                    pane size=1 borderless=true {
+                        plugin location="file:/nix/store/fsx1pqsl6qg67s393nlvxnvnwzjfqslx-zjstatus-0.19.0/bin/zjstatus.wasm" {
+                            hide_frame_for_single_pane "false"
+                            border_enabled "true"
+                            format_left   "{mode}#[fg=black]{tabs}"
+                            format_center ""
+                            format_right  ""
+                            format_space  "#[fg=yellow] "
 
-                        mode_normal          "#[fg=black,bg=#89B4FA] NORMAL #[fg=#87B4FA,bg=#181825]"
-                        mode_tmux            "#[fg=black,bg=#FFC387] TMUX #[fg=#FFC387,bg=#181825]"
-                        // mode_default_to_mode "tmux"
+                            mode_normal  "#[fg=blue]  "
+                            mode_locked  "#[fg=red]  "
 
-                        tab_normal              "#[fg=#181825,bg=#4C4C59] #[fg=#000000,bg=#4C4C59]{index}  {name} #[fg=#4C4C59,bg=#181825]"
-                        tab_normal_fullscreen   "#[fg=#6C7086,bg=#181825] {index} {name} [] "
-                        tab_normal_sync         "#[fg=#6C7086,bg=#181825] {index} {name} <> "
-                        tab_active              "#[fg=#181825,bg=#ffffff,bold,italic] {index}  {name} #[fg=#ffffff,bg=#181825]"
-                        tab_active_fullscreen   "#[fg=#9399B2,bg=#181825,bold,italic] {index} {name} [] "
-                        tab_active_sync         "#[fg=#9399B2,bg=#181825,bold,italic] {index} {name} <> "
+                            // formatting for inactive tabs
+                            tab_normal              "#[fg=#6C7086]{name}"
+                            tab_normal_fullscreen   "#[fg=#6C7086]{name}"
+                            tab_normal_sync         "#[fg=#6C7086]{name}"
+
+                            // formatting for the current active tab
+                            tab_active              "#[fg=blue,bold]{name}#[fg=yellow,bold]{floating_indicator}"
+                            tab_active_fullscreen   "#[fg=yellow,bold]{name}#[fg=yellow,bold]{fullscreen_indicator}"
+                            tab_active_sync         "#[fg=green,bold]{name}#[fg=yellow,bold]{sync_indicator}"
+
+                            // separator between the tabs
+                            tab_separator           "#[fg=cyan,bold] ⋮ "
+
+                            // indicators
+                            tab_sync_indicator       " "
+                            tab_fullscreen_indicator " "
+                            tab_floating_indicator   ""
+                        }
                     }
                 }
             }
