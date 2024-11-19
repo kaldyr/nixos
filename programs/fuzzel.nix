@@ -1,6 +1,6 @@
 { sysConfig, ... }: {
 
-    environment.persistence."/state".users.${sysConfig.user}.files = [ ".cache/fuzzel" ];
+    environment.persistence."/nix".users.${sysConfig.user}.files = [ ".cache/fuzzel" ];
 
     home-manager.users.${sysConfig.user} = {
 
