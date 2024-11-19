@@ -1,5 +1,7 @@
 { pkgs, sysConfig, ... }: {
 
+    environment.persistence."/nix".users.${sysConfig.user}.directories = [ ".cache/zellij" ];
+
     home-manager.users.${sysConfig.user} = {
 
         home.packages = with pkgs; [ zellijPlugins.zjstatus ];
@@ -40,8 +42,8 @@
                     bind "j" { MovePane "Down"; }
                     bind "k" { MovePane "Up"; }
                     bind "l" { MovePane "Right"; }
-                    bind "n" { NewPane "Right"; SwitchToMode "Normal"; }
-                    bind "d" { NewPane "Down"; SwitchToMode "Normal"; }
+                    bind "s" { NewPane "Right"; SwitchToMode "Normal"; }
+                    bind "v" { NewPane "Down"; SwitchToMode "Normal"; }
                     bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0; }
                     bind "x" { CloseFocus; SwitchToMode "Normal"; }
                     bind "z" { TogglePaneFrames; SwitchToMode "Normal"; }
