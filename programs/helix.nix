@@ -35,19 +35,9 @@
             character = "▏"
 
             [editor.statusline]
-            left = [
-                "spinner",
-                "file-name",
-                "file-encoding"
-            ]
+            left = [ "spinner", "file-name", "file-encoding" ]
             center = []
-            right = [
-                "diagnostics",
-                "register",
-                "position-percentage",
-                "position",
-                "file-type"
-            ]
+            right = [ "diagnostics", "register", "position-percentage", "position", "file-type" ]
 
             [editor.whitespace.render]
             nbsp = "all"
@@ -100,7 +90,7 @@
             j = "move_line_down"
             k = "move_line_up"
 
-            C-k = [ # scroll selections up one line
+            up = [ # scroll selections up one line
                 "ensure_selections_forward",
                 "extend_to_line_bounds",
                 "extend_char_right",
@@ -110,10 +100,9 @@
                 "add_newline_above",
                 "move_line_up",
                 "replace_with_yanked",
-                "collapse_selection"
-            ]
+                "collapse_selection" ]
 
-            C-j = [ # scroll selections down one line
+            down = [ # scroll selections down one line
                 "ensure_selections_forward",
                 "extend_to_line_bounds",
                 "extend_char_right",
@@ -122,8 +111,7 @@
                 "add_newline_below",
                 "move_line_down",
                 "replace_with_yanked",
-                "collapse_selection"
-            ]
+                "collapse_selection" ]
 
             [keys.normal.d]
             d = ["extend_to_line_bounds", "yank_main_selection_to_clipboard", "delete_selection"]
@@ -152,7 +140,6 @@
             g = { g = ["select_mode", "extend_to_line_bounds", "goto_file_start", "extend_to_line_bounds", "yank_main_selection_to_clipboard", "collapse_selection", "normal_mode"] }
 
             [keys.insert]
-            tab = ["completion"]
             esc = ["collapse_selection", "normal_mode"]
 
              [keys.select]
@@ -178,7 +165,7 @@
             k = ["extend_line_up", "extend_to_line_bounds"]
             j = ["extend_line_down", "extend_to_line_bounds"]
 
-            # Clipboards over registers ye ye
+            # Clipboards over registers
             d = ["yank_main_selection_to_clipboard", "delete_selection"]
             x = ["yank_main_selection_to_clipboard", "delete_selection"]
             y = ["yank_main_selection_to_clipboard", "normal_mode", "flip_selections", "collapse_selection"]
@@ -186,7 +173,7 @@
             p = "replace_selections_with_clipboard"
             P = "paste_clipboard_before"
 
-            C-k = [ # scroll selections up one line
+            up = [ # scroll selections up one line
                 "ensure_selections_forward",
                 "extend_to_line_bounds",
                 "extend_char_right",
@@ -196,10 +183,9 @@
                 "add_newline_above",
                 "move_line_up",
                 "replace_with_yanked",
-                "select_mode"
-            ]
+                "select_mode" ]
 
-            C-j = [ # scroll selections down one line
+            down = [ # scroll selections down one line
                 "ensure_selections_forward",
                 "extend_to_line_bounds",
                 "extend_char_right",
@@ -208,8 +194,7 @@
                 "add_newline_below",
                 "move_line_down",
                 "replace_with_yanked",
-                "select_mode"
-            ]
+                "select_mode" ]
 
             # Escape the madness! No more fighting with the cursor! Or with multiple cursors!
             esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
