@@ -28,7 +28,6 @@
             copy_clipboard "primary"
             copy_command "wl-copy"
             copy_on_select true
-            default_layout "compact"
 
             keybinds clear-defaults=true {
                 locked {
