@@ -2,6 +2,8 @@
 
     home-manager.users.${sysConfig.user} = {
 
+        home.packages = with pkgs; [ zellijPlugins.zjstatus ];
+
         programs.fish.shellAliases."dev" = let
 
             buildDevLayout = pkgs.writeShellScript "buildDevLayout.sh" /* bash */ ''
@@ -38,13 +40,12 @@
                     bind "j" { MovePane "Down"; }
                     bind "k" { MovePane "Up"; }
                     bind "l" { MovePane "Right"; }
-                    bind "c" { NewPane "Right"; SwitchToMode "Normal"; }
+                    bind "n" { NewPane "Right"; SwitchToMode "Normal"; }
                     bind "d" { NewPane "Down"; SwitchToMode "Normal"; }
                     bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0; }
                     bind "x" { CloseFocus; SwitchToMode "Normal"; }
                     bind "z" { TogglePaneFrames; SwitchToMode "Normal"; }
                     bind "w" { ToggleFloatingPanes; SwitchToMode "Normal"; }
-                    bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "Normal"; }
                 }
                 renamepane {
                     bind "Esc" { UndoRenameTab; SwitchToMode "Normal"; }
@@ -115,7 +116,7 @@
                     bind "," { GoToPreviousTab; }
                     bind ">" { MoveTab "Right"; }
                     bind "<" { MoveTab "Left"; }
-                    bind "/" { NewTab; SwitchToMode "Normal"; }
+                    bind "n" { NewTab; SwitchToMode "Normal"; }
                     bind "s" { ToggleActiveSyncTab; SwitchToMode "Normal"; }
                     bind "b" { BreakPane; SwitchToMode "Normal"; }
                     bind "]" { BreakPaneRight; SwitchToMode "Normal"; }
@@ -134,7 +135,6 @@
                     bind "Alt ," { GoToPreviousTab; }
                     bind "Alt >" { MoveTab "Right"; }
                     bind "Alt <" { MoveTab "Left"; }
-                    bind "Alt /" { NewTab; }
                     bind "Alt f" { ToggleFocusFullscreen; }
                     bind "Alt g" { SwitchToMode "Locked"; }
                     bind "Alt r" { SwitchToMode "Resize"; }
@@ -151,6 +151,33 @@
                 pane_frames {
                     hide_session_name true
                     rounded_corners true
+                }
+            }
+        '';
+
+        xdg.configFile."zellij/layouts/default.kdl".text = /* kdl */ ''
+            layout {
+                pane split_direction="vertical" {
+                    pane
+                }
+                pane size=1 borderless=true {
+                    plugin location="file:${pkgs.zellijPlugins.zjstatus}/bin/zjstatus.wasm" {
+                        hide_frame_for_single_pane "true"
+                        format_left  "{mode}#[fg=#89B4FA,bg=#181825,bold] {tabs}"
+                        format_right "#[fg=#424554,bg=#181825]{session}"
+                        format_space "#[bg=#181825]"
+
+                        mode_normal          "#[fg=black,bg=#89B4FA] NORMAL #[fg=#87B4FA,bg=#181825]"
+                        mode_tmux            "#[fg=black,bg=#FFC387] TMUX #[fg=#FFC387,bg=#181825]"
+                        // mode_default_to_mode "tmux"
+
+                        tab_normal              "#[fg=#181825,bg=#4C4C59] #[fg=#000000,bg=#4C4C59]{index}  {name} #[fg=#4C4C59,bg=#181825]"
+                        tab_normal_fullscreen   "#[fg=#6C7086,bg=#181825] {index} {name} [] "
+                        tab_normal_sync         "#[fg=#6C7086,bg=#181825] {index} {name} <> "
+                        tab_active              "#[fg=#181825,bg=#ffffff,bold,italic] {index}  {name} #[fg=#ffffff,bg=#181825]"
+                        tab_active_fullscreen   "#[fg=#9399B2,bg=#181825,bold,italic] {index} {name} [] "
+                        tab_active_sync         "#[fg=#9399B2,bg=#181825,bold,italic] {index} {name} <> "
+                    }
                 }
             }
         '';
@@ -195,7 +222,23 @@
                     }
                 }
                 pane size=1 borderless=true {
-                    plugin location="zellij:compact-bar"
+                    plugin location="file:${pkgs.zellijPlugins.zjstatus}/bin/zjstatus.wasm" {
+                        hide_frame_for_single_pane "true"
+                        format_left  "{mode}#[fg=#89B4FA,bg=#181825,bold] {tabs}"
+                        format_right "#[fg=#424554,bg=#181825]{session}"
+                        format_space "#[bg=#181825]"
+
+                        mode_normal          "#[fg=black,bg=#89B4FA] NORMAL #[fg=#87B4FA,bg=#181825]"
+                        mode_tmux            "#[fg=black,bg=#FFC387] TMUX #[fg=#FFC387,bg=#181825]"
+                        // mode_default_to_mode "tmux"
+
+                        tab_normal              "#[fg=#181825,bg=#4C4C59] #[fg=#000000,bg=#4C4C59]{index}  {name} #[fg=#4C4C59,bg=#181825]"
+                        tab_normal_fullscreen   "#[fg=#6C7086,bg=#181825] {index} {name} [] "
+                        tab_normal_sync         "#[fg=#6C7086,bg=#181825] {index} {name} <> "
+                        tab_active              "#[fg=#181825,bg=#ffffff,bold,italic] {index}  {name} #[fg=#ffffff,bg=#181825]"
+                        tab_active_fullscreen   "#[fg=#9399B2,bg=#181825,bold,italic] {index} {name} [] "
+                        tab_active_sync         "#[fg=#9399B2,bg=#181825,bold,italic] {index} {name} <> "
+                    }
                 }
             }
         '';
