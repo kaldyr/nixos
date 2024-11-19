@@ -191,7 +191,6 @@
                             pane {
                                 command "yazi"
                                 name "Yazi"
-                                close_on_exit true
                                 focus true
                             }
                             pane {
@@ -203,7 +202,6 @@
                                 size 14
                                 command "numbat"
                                 name "Calculator"
-                                close_on_exit true
                             }
                         }
                         pane split_direction="horizontal" {
@@ -216,7 +214,6 @@
                                 size 10
                                 command "fish"
                                 name "Console"
-                                close_on_exit true
                             }
                         }
                     }
