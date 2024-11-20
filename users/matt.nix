@@ -1,8 +1,8 @@
 { config, pkgs, ...}: {
 
     home-manager.users."matt".home.sessionVariables = {
-        EDITOR = "nvim";
-        VISUAL = "nvim";
+        EDITOR = "hx";
+        VISUAL = "hx";
     };
 
     programs.nano.enable = false;
