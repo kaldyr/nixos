@@ -12,7 +12,7 @@
                 zellij --layout dev
                 sleep 0.2
                 zellij action move-focus down
-                zellij action write-chars "+"
+                zellij action write-chars "++"
                 zellij action move-focus up
                 zellij action write-chars "+"
                 zellij action move-focus right
@@ -38,6 +38,7 @@
                     bind "j" { MovePane "Down"; }
                     bind "k" { MovePane "Up"; }
                     bind "l" { MovePane "Right"; }
+                    bind "n" { NewPane; SwitchToMode "Normal"; }
                     bind "s" { NewPane "Right"; SwitchToMode "Normal"; }
                     bind "v" { NewPane "Down"; SwitchToMode "Normal"; }
                     bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0; }
@@ -115,6 +116,7 @@
                     bind ">" { MoveTab "Right"; }
                     bind "<" { MoveTab "Left"; }
                     bind "n" { NewTab; SwitchToMode "Normal"; }
+                    bind "N" { NewTab { cwd "~"; }; SwitchToMode "Normal"; }
                     bind "s" { ToggleActiveSyncTab; SwitchToMode "Normal"; }
                     bind "b" { BreakPane; SwitchToMode "Normal"; }
                     bind "]" { BreakPaneRight; SwitchToMode "Normal"; }
@@ -140,7 +142,14 @@
                     bind "Alt p" { SwitchToMode "Pane"; }
                     bind "Alt s" { SwitchToMode "Scroll"; }
                     bind "Alt t" { SwitchToMode "Tab"; }
-                    bind "Alt c" { Run "zellij" "run" "--floating" "--close-on-exit" "--" "numbat"; }
+                    bind "Alt c" {
+                        Run "numbat" {
+                            name "Calculator"
+                            floating true
+                            close_on_exit true
+                        };
+                        SwitchToMode "Normal"
+                    }
                 }
             }
 
@@ -159,7 +168,7 @@
                 default_tab_template {
                     children
                     pane size=1 borderless=true {
-                        plugin location="file:/nix/store/fsx1pqsl6qg67s393nlvxnvnwzjfqslx-zjstatus-0.19.0/bin/zjstatus.wasm" {
+                        plugin location="file:${pkgs.zellijPlugins.zjstatus}/bin/zjstatus.wasm" {
                             hide_frame_for_single_pane "true"
                             hide_frame_except_for_search "false"
                             hide_frame_except_for_fullscreen "false"
@@ -169,17 +178,20 @@
                             format_right  ""
                             format_space  "#[fg=yellow] "
 
-                            mode_locked  "#[fg=red]  "
-                            mode_normal  "#[fg=blue]  "
-                            mode_pane    "#[fg=green]  "
-                            mode_scroll  "#[fg=cyan]  "
-                            mode_session "#[fg=yellow]  "
-                            mode_tab     "#[fg=magenta]  "
+                            mode_entersearch "#[fg=blue]   "
+                            mode_locked "#[fg=red]   "
+                            mode_normal "#[fg=blue]   "
+                            mode_pane "#[fg=green]   "
+                            mode_resize "#[fg=yellow] 󰩨  "
+                            mode_scroll "#[fg=cyan]   "
+                            mode_search "#[fg=blue]   "
+                            mode_session "#[fg=yellow] 󰖲  "
+                            mode_tab "#[fg=magenta] 󰓩  "
 
                             // formatting for inactive tabs
-                            tab_normal              "#[fg=#6C7086]{name}"
-                            tab_normal_fullscreen   "#[fg=#6C7086]{name}"
-                            tab_normal_sync         "#[fg=#6C7086]{name}"
+                            tab_normal              "#[fg=#black]{name}"
+                            tab_normal_fullscreen   "#[fg=#black]{name}"
+                            tab_normal_sync         "#[fg=#black]{name}"
 
                             // formatting for the current active tab
                             tab_active              "#[fg=blue,bold]{name}#[fg=yellow,bold]{floating_indicator}"
@@ -196,6 +208,7 @@
                         }
                     }
                 }
+                tab name=""
             }
         '';
 
@@ -230,8 +243,8 @@
                             }
                         }
                     }
-                    pane size=1 borderless=true {
-                        plugin location="file:/nix/store/fsx1pqsl6qg67s393nlvxnvnwzjfqslx-zjstatus-0.19.0/bin/zjstatus.wasm" {
+                     pane size=1 borderless=true {
+                        plugin location="file:${pkgs.zellijPlugins.zjstatus}/bin/zjstatus.wasm" {
                             hide_frame_for_single_pane "true"
                             hide_frame_except_for_search "false"
                             hide_frame_except_for_fullscreen "false"
@@ -241,17 +254,20 @@
                             format_right  ""
                             format_space  "#[fg=yellow] "
 
-                            mode_locked  "#[fg=red]  "
-                            mode_normal  "#[fg=blue]  "
-                            mode_pane    "#[fg=green]  "
-                            mode_scroll  "#[fg=cyan]  "
-                            mode_session "#[fg=yellow]  "
-                            mode_tab     "#[fg=magenta]  "
+                            mode_entersearch "#[fg=blue]   "
+                            mode_locked "#[fg=red]   "
+                            mode_normal "#[fg=blue]   "
+                            mode_pane "#[fg=green]   "
+                            mode_resize "#[fg=yellow] 󰩨  "
+                            mode_scroll "#[fg=cyan]   "
+                            mode_search "#[fg=blue]   "
+                            mode_session "#[fg=yellow] 󰖲  "
+                            mode_tab "#[fg=magenta] 󰓩  "
 
                             // formatting for inactive tabs
-                            tab_normal              "#[fg=#6C7086]{name}"
-                            tab_normal_fullscreen   "#[fg=#6C7086]{name}"
-                            tab_normal_sync         "#[fg=#6C7086]{name}"
+                            tab_normal              "#[fg=#black]{name}"
+                            tab_normal_fullscreen   "#[fg=#black]{name}"
+                            tab_normal_sync         "#[fg=#black]{name}"
 
                             // formatting for the current active tab
                             tab_active              "#[fg=blue,bold]{name}#[fg=yellow,bold]{floating_indicator}"
