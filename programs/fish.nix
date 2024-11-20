@@ -7,6 +7,13 @@
 
     home-manager.users.${sysConfig.user} = {
 
+        home.packages = with pkgs.fishPlugins; [
+            autopair
+            fzf-fish
+            puffer
+            sponge
+        ];
+
         programs.fish = {
 
             enable = true;
@@ -20,12 +27,10 @@
             shellAliases = {
                 sourcefish = "source ~/.config/fish/config.fish && fish_logo";
                 "!!" = "eval \\$history[1]";
-                bc = "bc -l";
                 cat = "bat";
                 cp = "cp -i";
                 df = "duf";
                 du = "du -hs";
-                l = "yazi";
                 ln = "ln -i";
                 mkdir = "mkdir -pv";
                 mv = "mv -i";
