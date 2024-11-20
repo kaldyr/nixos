@@ -169,9 +169,12 @@
                             format_right  ""
                             format_space  "#[fg=yellow] "
 
-                            // mode_normal  "#[fg=red]  "
-                            mode_normal  "#[fg=blue]  "
                             mode_locked  "#[fg=red]  "
+                            mode_normal  "#[fg=blue]  "
+                            mode_pane    "#[fg=green]  "
+                            mode_scroll  "#[fg=cyan]  "
+                            mode_session "#[fg=yellow]  "
+                            mode_tab     "#[fg=magenta]  "
 
                             // formatting for inactive tabs
                             tab_normal              "#[fg=#6C7086]{name}"
@@ -238,8 +241,12 @@
                             format_right  ""
                             format_space  "#[fg=yellow] "
 
-                            mode_normal  "#[fg=blue]  "
                             mode_locked  "#[fg=red]  "
+                            mode_normal  "#[fg=blue]  "
+                            mode_pane    "#[fg=green]  "
+                            mode_scroll  "#[fg=cyan]  "
+                            mode_session "#[fg=yellow]  "
+                            mode_tab     "#[fg=magenta]  "
 
                             // formatting for inactive tabs
                             tab_normal              "#[fg=#6C7086]{name}"
