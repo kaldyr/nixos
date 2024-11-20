@@ -11,6 +11,7 @@
         ../programs/helix.nix
         ../programs/lazygit.nix
         ../programs/neovim.nix
+        ../programs/numbat.nix
         ../programs/starship.nix
         ../programs/yazi.nix
         ../programs/zellij.nix
@@ -95,7 +96,6 @@
         gdu
         jq
         lazysql
-        numbat
         p7zip
         ripgrep
         sops
