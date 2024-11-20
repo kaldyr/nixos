@@ -14,8 +14,6 @@
             functions.fish_greeting = "";
 
             interactiveShellInit = /* fish */ ''
-                bind \cl 'clear ; tput cup $(tput lines) ; commandline -f repaint'
-                tput cup $(tput lines) ; commandline -f repaint
                 fish_vi_key_bindings insert
             '';
 

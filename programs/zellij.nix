@@ -144,7 +144,6 @@
                 }
             }
 
-            pane_frames true
             theme "catppuccin-frappe"
 
             ui {
@@ -161,8 +160,10 @@
                     children
                     pane size=1 borderless=true {
                         plugin location="file:/nix/store/fsx1pqsl6qg67s393nlvxnvnwzjfqslx-zjstatus-0.19.0/bin/zjstatus.wasm" {
-                            hide_frame_for_single_pane "false"
-                            border_enabled "true"
+                            hide_frame_for_single_pane "true"
+                            hide_frame_except_for_search "false"
+                            hide_frame_except_for_fullscreen "false"
+
                             format_left   "{mode}#[fg=black]{tabs}"
                             format_center ""
                             format_right  ""
@@ -228,8 +229,10 @@
                     }
                     pane size=1 borderless=true {
                         plugin location="file:/nix/store/fsx1pqsl6qg67s393nlvxnvnwzjfqslx-zjstatus-0.19.0/bin/zjstatus.wasm" {
-                            hide_frame_for_single_pane "false"
-                            border_enabled "true"
+                            hide_frame_for_single_pane "true"
+                            hide_frame_except_for_search "false"
+                            hide_frame_except_for_fullscreen "false"
+
                             format_left   "{mode}#[fg=black]{tabs}"
                             format_center ""
                             format_right  ""
