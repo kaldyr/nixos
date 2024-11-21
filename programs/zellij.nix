@@ -1,6 +1,7 @@
 { pkgs, sysConfig, ... }: {
 
     environment.persistence."/nix".users.${sysConfig.user}.directories = [ ".cache/zellij" ];
+    # just the permissions file, nothing else persisted
 
     home-manager.users.${sysConfig.user} = {
 
@@ -31,6 +32,13 @@
             keybinds clear-defaults=true {
                 locked {
                     bind "Alt g" { SwitchToMode "Normal"; }
+                }
+                move {
+                    bind "Alt m" "Esc" { SwitchToMode "Normal"; }
+                    bind "h" { MovePane "Left"; }
+                    bind "j" { MovePane "Down"; }
+                    bind "k" { MovePane "Up"; }
+                    bind "l" { MovePane "Right"; }
                 }
                 pane {
                     bind "Alt p" "Esc" "Enter" { SwitchToMode "Normal"; }
@@ -137,9 +145,10 @@
                     bind "Alt <" { MoveTab "Left"; }
                     bind "Alt f" { ToggleFocusFullscreen; }
                     bind "Alt g" { SwitchToMode "Locked"; }
-                    bind "Alt r" { SwitchToMode "Resize"; }
+                    bind "Alt m" { SwitchToMode "Move"; }
                     bind "Alt o" { SwitchToMode "Session"; }
                     bind "Alt p" { SwitchToMode "Pane"; }
+                    bind "Alt r" { SwitchToMode "Resize"; }
                     bind "Alt s" { SwitchToMode "Scroll"; }
                     bind "Alt t" { SwitchToMode "Tab"; }
                     bind "Alt c" {
@@ -178,10 +187,13 @@
                             format_right  ""
                             format_space  "#[fg=yellow] "
 
-                            mode_entersearch "#[fg=blue]   "
+                            mode_enter_search "#[fg=blue]   "
                             mode_locked "#[fg=red]   "
+                            mode_move "#[fg=yellow]   "
                             mode_normal "#[fg=blue]   "
                             mode_pane "#[fg=green]   "
+                            mode_rename_pane "#[fg=green] 󱩼  "
+                            mode_rename_tab "#[fg=magenta] 󱩼  "
                             mode_resize "#[fg=yellow] 󰩨  "
                             mode_scroll "#[fg=cyan]   "
                             mode_search "#[fg=blue]   "
@@ -254,10 +266,13 @@
                             format_right  ""
                             format_space  "#[fg=yellow] "
 
-                            mode_entersearch "#[fg=blue]   "
+                            mode_enter_search "#[fg=blue]   "
                             mode_locked "#[fg=red]   "
+                            mode_move "#[fg=yellow]   "
                             mode_normal "#[fg=blue]   "
                             mode_pane "#[fg=green]   "
+                            mode_rename_pane "#[fg=green] 󱩼  "
+                            mode_rename_tab "#[fg=magenta] 󱩼  "
                             mode_resize "#[fg=yellow] 󰩨  "
                             mode_scroll "#[fg=cyan]   "
                             mode_search "#[fg=blue]   "
