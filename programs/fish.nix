@@ -7,13 +7,6 @@
 
     home-manager.users.${sysConfig.user} = {
 
-        home.packages = with pkgs.fishPlugins; [
-            autopair
-            fzf-fish
-            puffer
-            sponge
-        ];
-
         programs.fish = {
 
             enable = true;
@@ -23,6 +16,13 @@
             interactiveShellInit = /* fish */ ''
                 fish_vi_key_bindings insert
             '';
+
+            plugins = [
+                { name = "autopair"; src = pkgs.fishPlugins.autopair; }
+                { name = "fzf-fish"; src = pkgs.fishPlugins.fzf-fish; }
+                { name = "puffer"; src = pkgs.fishPlugins.puffer; }
+                { name = "sponge"; src = pkgs.fishPlugins.sponge; }
+            ];
 
             shellAliases = {
                 sourcefish = "source ~/.config/fish/config.fish && fish_logo";
