@@ -1,7 +1,6 @@
 { pkgs, sysConfig, ... }: {
 
-    environment.persistence."/nix".users.${sysConfig.user}.directories = [ ".cache/zellij" ];
-    # just the permissions file, nothing else persisted
+    environment.persistence."/nix".users.${sysConfig.user}.files = [ ".cache/zellij/permissions.kdl" ];
 
     home-manager.users.${sysConfig.user} = {
 
@@ -10,13 +9,18 @@
         programs.fish.shellAliases."dev" = let
 
             buildDevLayout = pkgs.writeShellScript "buildDevLayout.sh" /* bash */ ''
+                tabname=''${PWD##*/}
+                if [ ''${PWD} == "/nix/config" ]; then
+                  tabname='NixOS Config'
+                fi
                 zellij --layout dev
-                sleep 0.2
+                sleep 0.1
                 zellij action move-focus down
                 zellij action write-chars "++"
                 zellij action move-focus up
                 zellij action write-chars "+"
                 zellij action move-focus right
+                zellij action rename-tab "$tabname"
             '';
 
         in "${pkgs.bash}/bin/bash ${buildDevLayout}";
@@ -30,11 +34,11 @@
             copy_on_select true
 
             keybinds clear-defaults=true {
-                locked {
+               locked {
                     bind "Alt g" { SwitchToMode "Normal"; }
                 }
                 move {
-                    bind "Alt m" "Esc" { SwitchToMode "Normal"; }
+                    bind "Alt m" "Esc" "Enter" { SwitchToMode "Normal"; }
                     bind "h" { MovePane "Left"; }
                     bind "j" { MovePane "Down"; }
                     bind "k" { MovePane "Up"; }
@@ -42,17 +46,13 @@
                 }
                 pane {
                     bind "Alt p" "Esc" "Enter" { SwitchToMode "Normal"; }
-                    bind "h" { MovePane "Left"; }
-                    bind "j" { MovePane "Down"; }
-                    bind "k" { MovePane "Up"; }
-                    bind "l" { MovePane "Right"; }
                     bind "n" { NewPane; SwitchToMode "Normal"; }
                     bind "s" { NewPane "Right"; SwitchToMode "Normal"; }
                     bind "v" { NewPane "Down"; SwitchToMode "Normal"; }
                     bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0; }
                     bind "x" { CloseFocus; SwitchToMode "Normal"; }
                     bind "z" { TogglePaneFrames; SwitchToMode "Normal"; }
-                    bind "w" { ToggleFloatingPanes; SwitchToMode "Normal"; }
+                    bind "f" { ToggleFloatingPanes; SwitchToMode "Normal"; }
                 }
                 renamepane {
                     bind "Esc" { UndoRenameTab; SwitchToMode "Normal"; }
@@ -119,10 +119,6 @@
                     bind "Alt t" "Esc" { SwitchToMode "Normal"; }
                     bind "r" { SwitchToMode "RenameTab"; TabNameInput 0; }
                     bind "x" { CloseTab; SwitchToMode "Normal"; }
-                    bind "." { GoToNextTab; }
-                    bind "," { GoToPreviousTab; }
-                    bind ">" { MoveTab "Right"; }
-                    bind "<" { MoveTab "Left"; }
                     bind "n" { NewTab; SwitchToMode "Normal"; }
                     bind "N" { NewTab { cwd "~"; }; SwitchToMode "Normal"; }
                     bind "s" { ToggleActiveSyncTab; SwitchToMode "Normal"; }
@@ -135,10 +131,10 @@
                     bind "Enter" { SwitchToMode "Normal"; }
                 }
                 shared_except "locked" {
-                    bind "Alt h" { MoveFocusOrTab "Left"; }
+                    bind "Alt h" { MoveFocus "Left"; }
                     bind "Alt j" { MoveFocus "Down"; }
                     bind "Alt k" { MoveFocus "Up"; }
-                    bind "Alt l" { MoveFocusOrTab "Right"; }
+                    bind "Alt l" { MoveFocus "Right"; }
                     bind "Alt ." { GoToNextTab; }
                     bind "Alt ," { GoToPreviousTab; }
                     bind "Alt >" { MoveTab "Right"; }
@@ -159,8 +155,18 @@
                         };
                         SwitchToMode "Normal"
                     }
+                    bind "Alt y" {
+                        Run "yazi" {
+                            name "Yazi"
+                            floating true
+                            close_on_exit true
+                        };
+                        SwitchToMode "Normal"
+                    }
                 }
             }
+
+            pane_frames true
 
             theme "catppuccin-frappe"
 
@@ -182,41 +188,41 @@
                             hide_frame_except_for_search "false"
                             hide_frame_except_for_fullscreen "false"
 
-                            format_left   "{mode}#[fg=black]{tabs}"
+                            format_left   "{mode}  #[fg=black]{tabs}"
                             format_center ""
                             format_right  ""
-                            format_space  "#[fg=yellow] "
+                            format_space  ""
 
-                            mode_enter_search "#[fg=blue]   "
-                            mode_locked "#[fg=red]   "
-                            mode_move "#[fg=yellow]   "
-                            mode_normal "#[fg=blue]   "
-                            mode_pane "#[fg=green]   "
-                            mode_rename_pane "#[fg=green] 󱩼  "
-                            mode_rename_tab "#[fg=magenta] 󱩼  "
-                            mode_resize "#[fg=yellow] 󰩨  "
-                            mode_scroll "#[fg=cyan]   "
-                            mode_search "#[fg=blue]   "
-                            mode_session "#[fg=yellow] 󰖲  "
-                            mode_tab "#[fg=magenta] 󰓩  "
+                            mode_enter_search "#[fg=blue] "
+                            mode_locked       "#[fg=red] "
+                            mode_move         "#[fg=yellow] "
+                            mode_normal       "#[fg=blue] "
+                            mode_pane         "#[fg=green] "
+                            mode_rename_pane  "#[fg=green] 󱩼"
+                            mode_rename_tab   "#[fg=magenta] 󱩼"
+                            mode_resize       "#[fg=yellow] 󰩨"
+                            mode_scroll       "#[fg=cyan] "
+                            mode_search       "#[fg=blue] "
+                            mode_session      "#[fg=yellow] 󰖲"
+                            mode_tab          "#[fg=magenta] 󰓩"
 
                             // formatting for inactive tabs
-                            tab_normal              "#[fg=#black]{name}"
-                            tab_normal_fullscreen   "#[fg=#black]{name}"
-                            tab_normal_sync         "#[fg=#black]{name}"
+                            tab_normal            "#[fg=black]{name}"
+                            tab_normal_fullscreen "#[fg=black]{name}"
+                            tab_normal_sync       "#[fg=black]{name}"
 
                             // formatting for the current active tab
-                            tab_active              "#[fg=blue,bold]{name}#[fg=yellow,bold]{floating_indicator}"
-                            tab_active_fullscreen   "#[fg=yellow,bold]{name}#[fg=yellow,bold]{fullscreen_indicator}"
-                            tab_active_sync         "#[fg=green,bold]{name}#[fg=yellow,bold]{sync_indicator}"
+                            tab_active            "#[fg=blue,bold]{name}#[fg=yellow,bold]{floating_indicator}"
+                            tab_active_fullscreen "#[fg=yellow,bold]{name}#[fg=yellow,bold]{fullscreen_indicator}"
+                            tab_active_sync       "#[fg=green,bold]{name}#[fg=yellow,bold]{sync_indicator}"
 
                             // separator between the tabs
-                            tab_separator           "#[fg=cyan,bold] ⋮ "
+                            tab_separator "#[fg=cyan,bold]  ⋮  "
 
                             // indicators
-                            tab_sync_indicator       " "
-                            tab_fullscreen_indicator " "
-                            tab_floating_indicator   ""
+                            tab_sync_indicator       "  "
+                            tab_fullscreen_indicator "  "
+                            tab_floating_indicator   "  "
                         }
                     }
                 }
@@ -261,41 +267,41 @@
                             hide_frame_except_for_search "false"
                             hide_frame_except_for_fullscreen "false"
 
-                            format_left   "{mode}#[fg=black]{tabs}"
+                            format_left   "{mode}  #[fg=black]{tabs}"
                             format_center ""
                             format_right  ""
-                            format_space  "#[fg=yellow] "
+                            format_space  ""
 
-                            mode_enter_search "#[fg=blue]   "
-                            mode_locked "#[fg=red]   "
-                            mode_move "#[fg=yellow]   "
-                            mode_normal "#[fg=blue]   "
-                            mode_pane "#[fg=green]   "
-                            mode_rename_pane "#[fg=green] 󱩼  "
-                            mode_rename_tab "#[fg=magenta] 󱩼  "
-                            mode_resize "#[fg=yellow] 󰩨  "
-                            mode_scroll "#[fg=cyan]   "
-                            mode_search "#[fg=blue]   "
-                            mode_session "#[fg=yellow] 󰖲  "
-                            mode_tab "#[fg=magenta] 󰓩  "
+                            mode_enter_search "#[fg=blue] "
+                            mode_locked       "#[fg=red] "
+                            mode_move         "#[fg=yellow] "
+                            mode_normal       "#[fg=blue] "
+                            mode_pane         "#[fg=green] "
+                            mode_rename_pane  "#[fg=green] 󱩼"
+                            mode_rename_tab   "#[fg=magenta] 󱩼"
+                            mode_resize       "#[fg=yellow] 󰩨"
+                            mode_scroll       "#[fg=cyan] "
+                            mode_search       "#[fg=blue] "
+                            mode_session      "#[fg=yellow] 󰖲"
+                            mode_tab          "#[fg=magenta] 󰓩"
 
                             // formatting for inactive tabs
-                            tab_normal              "#[fg=#black]{name}"
-                            tab_normal_fullscreen   "#[fg=#black]{name}"
-                            tab_normal_sync         "#[fg=#black]{name}"
+                            tab_normal            "#[fg=black]{name}"
+                            tab_normal_fullscreen "#[fg=black]{name}"
+                            tab_normal_sync       "#[fg=black]{name}"
 
                             // formatting for the current active tab
-                            tab_active              "#[fg=blue,bold]{name}#[fg=yellow,bold]{floating_indicator}"
-                            tab_active_fullscreen   "#[fg=yellow,bold]{name}#[fg=yellow,bold]{fullscreen_indicator}"
-                            tab_active_sync         "#[fg=green,bold]{name}#[fg=yellow,bold]{sync_indicator}"
+                            tab_active            "#[fg=blue,bold]{name}#[fg=yellow,bold]{floating_indicator}"
+                            tab_active_fullscreen "#[fg=yellow,bold]{name}#[fg=yellow,bold]{fullscreen_indicator}"
+                            tab_active_sync       "#[fg=green,bold]{name}#[fg=yellow,bold]{sync_indicator}"
 
                             // separator between the tabs
-                            tab_separator           "#[fg=cyan,bold] ⋮ "
+                            tab_separator "#[fg=cyan,bold]  ⋮  "
 
                             // indicators
-                            tab_sync_indicator       " "
-                            tab_fullscreen_indicator " "
-                            tab_floating_indicator   ""
+                            tab_sync_indicator       "  "
+                            tab_fullscreen_indicator "  "
+                            tab_floating_indicator   "  "
                         }
                     }
                 }
