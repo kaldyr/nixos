@@ -11,6 +11,7 @@
         steam = {
             enable = true;
             dedicatedServer.openFirewall = true;
+            # extraPackages = with pkgs; [ steam-run ];
             remotePlay.openFirewall = true;
         };
 

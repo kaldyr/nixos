@@ -3,7 +3,7 @@
     imports = [
         ../services/keyd.nix
         ../services/pipewire.nix
-        ../programs/cava.nix
+        # ../programs/cava.nix
         ../programs/discord.nix
         ../programs/libreoffice.nix
         ../programs/librewolf.nix

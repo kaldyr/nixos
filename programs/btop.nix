@@ -5,12 +5,12 @@
         programs.btop.enable = true;
 
         xdg.configFile."btop/btop.conf".text = /* bash */ ''
+            clock_format = ""
             color_theme = "catppuccin_frappe.theme"
-            disk_filter = "/ /home /nix"
+            disks_filter = "/ /boot /home /nix"
             log_level = "WARNING"
             proc_tree = True
             theme_background = False
-            use_fstab = False
             vim_keys = True
         '';
 
