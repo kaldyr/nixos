@@ -51,8 +51,6 @@
                     bind "v" { NewPane "Down"; SwitchToMode "Normal"; }
                     bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0; }
                     bind "x" { CloseFocus; SwitchToMode "Normal"; }
-                    bind "z" { TogglePaneFrames; SwitchToMode "Normal"; }
-                    bind "f" { ToggleFloatingPanes; SwitchToMode "Normal"; }
                 }
                 renamepane {
                     bind "Esc" { UndoRenameTab; SwitchToMode "Normal"; }
@@ -107,13 +105,6 @@
                         };
                         SwitchToMode "Normal"
                     }
-                    bind "p" {
-                        LaunchOrFocusPlugin "plugin-manager" {
-                            floating true
-                            move_to_focused_tab true
-                        };
-                        SwitchToMode "Normal"
-                    }
                 }
                 tab {
                     bind "Alt t" "Esc" { SwitchToMode "Normal"; }
@@ -147,6 +138,7 @@
                     bind "Alt r" { SwitchToMode "Resize"; }
                     bind "Alt s" { SwitchToMode "Scroll"; }
                     bind "Alt t" { SwitchToMode "Tab"; }
+                    bind "Alt w" { ToggleFloatingPanes; SwitchToMode "Normal"; }
                     bind "Alt c" {
                         Run "numbat" {
                             name "Calculator"
