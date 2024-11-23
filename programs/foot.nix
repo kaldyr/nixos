@@ -43,16 +43,14 @@
             style=beam
 
             [key-bindings]
-            pipe-scrollback=[sh -c "f=$(mktemp); cat> $f; foot nvim $f; rm $f"] Control+Shift+e
-            pipe-visible=[sh -c "f=$(mktemp); cat> $f; foot nvim $f; rm $f"] Control+Shift+y
-            show-urls-copy=Control+Shift+u
-            unicode-input=Control+Shift+i
+            show-urls-copy=Alt+Shift+u
+            unicode-input=Alt+u
 
             [main]
-            font=Recursive Mn Csl St:size=10, Font Awesome 6 Free Regular:size 10, Noto Color Emoji:size=10, Symbols Nerd Font:size=11
-            font-bold=Recursive Mn Csl St:size=10:style=Bold
-            font-bold-italic=Recursive Mn Csl St:size=10:style=Bold Italic
-            font-italic=Recursive Mn Csl St:size=10:style=Italic
+            font=Rec Mono Custom:size=10, Font Awesome 6 Free Regular:size 10, Noto Color Emoji:size=10, Symbols Nerd Font:size=11
+            font-bold=Rec Mono Custom:size=10:style=Bold
+            font-bold-italic=Rec Mono Custom:size=10:style=Bold Italic
+            font-italic=Rec Mono Custom:size=10:style=Italic
             line-height=11.1
             selection-target=primary
 

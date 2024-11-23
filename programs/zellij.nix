@@ -6,25 +6,6 @@
 
         home.packages = with pkgs; [ zellijPlugins.zjstatus ];
 
-        programs.fish.shellAliases."dev" = let
-
-            buildDevLayout = pkgs.writeShellScript "buildDevLayout.sh" /* bash */ ''
-                tabname=''${PWD##*/}
-                if [ ''${PWD} == "/nix/config" ]; then
-                  tabname='NixOS Config'
-                fi
-                zellij --layout dev
-                sleep 0.1
-                zellij action move-focus down
-                zellij action write-chars "++"
-                zellij action move-focus up
-                zellij action write-chars "+"
-                zellij action move-focus right
-                zellij action rename-tab "$tabname"
-            '';
-
-        in "${pkgs.bash}/bin/bash ${buildDevLayout}";
-
         programs.zellij.enable = true;
         programs.zellij.enableFishIntegration = true;
 
@@ -130,6 +111,16 @@
                     bind "Alt ," { GoToPreviousTab; }
                     bind "Alt >" { MoveTab "Right"; }
                     bind "Alt <" { MoveTab "Left"; }
+                    bind "Alt 1" { GoToTab 1; }
+                    bind "Alt 2" { GoToTab 2; }
+                    bind "Alt 3" { GoToTab 3; }
+                    bind "Alt 4" { GoToTab 4; }
+                    bind "Alt 5" { GoToTab 5; }
+                    bind "Alt 6" { GoToTab 6; }
+                    bind "Alt 7" { GoToTab 7; }
+                    bind "Alt 8" { GoToTab 8; }
+                    bind "Alt 9" { GoToTab 9; }
+                    bind "Alt 0" { GoToTab 10; }
                     bind "Alt f" { ToggleFocusFullscreen; }
                     bind "Alt g" { SwitchToMode "Locked"; }
                     bind "Alt m" { SwitchToMode "Move"; }
@@ -214,7 +205,7 @@
                             // indicators
                             tab_sync_indicator       "  "
                             tab_fullscreen_indicator "  "
-                            tab_floating_indicator   "  "
+                            tab_floating_indicator   "  "
                         }
                     }
                 }
@@ -241,9 +232,9 @@
                             }
                             pane split_direction="horizontal" {
                                 pane {
-                                    command "hx"
+                                    command "nvim"
                                     args "."
-                                    name "Helix"
+                                    name "Neovim"
                                 }
                                 pane {
                                     size 10
@@ -293,7 +284,7 @@
                             // indicators
                             tab_sync_indicator       "  "
                             tab_fullscreen_indicator "  "
-                            tab_floating_indicator   "  "
+                            tab_floating_indicator   "  "
                         }
                     }
                 }

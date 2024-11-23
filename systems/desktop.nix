@@ -50,9 +50,9 @@
         fontconfig = {
 
             defaultFonts = {
-                monospace = [ "Recursive Mn Csl St" "Noto Color Emoji" ];
+                monospace = [ "Rec Mono Custom" "Noto Color Emoji" ];
                 sansSerif = [ "Inter" "Liberation Sans" "Noto Color Emoji" ];
-                serif = [ "Recursive Sa Ln St" "Liberation Serif" "Noto Color Emoji" ];
+                serif = [ "Rec Mono Custom" "Liberation Serif" "Noto Color Emoji" ];
                 emoji = [ "Noto Color Emoji" ];
             };
 
@@ -78,27 +78,6 @@
                             <string>zero</string> <!-- Slashed zero -->
                         </edit>
                     </match>
-                    <match target="font">
-                        <test qual="any" name="family" compare="contains"><string>Recursive</string></test>
-                        <!-- https://github.com/arrowtype/recursive#opentype-features -->
-                        <edit name="fontfeatures" mode="assign_replace">
-                            <string>case</string> <!-- Uppercase punctuation -->
-                            <string>dlig</string> <!-- Code ligatures -->
-                            <string>ss01</string> <!-- Single-story 'a' -->
-                            <string>ss02</string> <!-- Single-story 'g' -->
-                            <string>ss03</string> <!-- Simplified f -->
-                            <string>ss04</string> <!-- Simplified i -->
-                            <string>ss05</string> <!-- Simplified l -->
-                            <string>ss06</string> <!-- Simplified r -->
-                            <string>ss07</string> <!-- Simplified italic Diagonals -->
-                            <string>ss08</string> <!-- No-serif L & Z -->
-                            <string>ss09</string> <!-- Simplified 6 & 9 -->
-                            <string>ss10</string> <!-- Dotted 0 -->
-                            <string>ss11</string> <!-- Simplified 1 -->
-                            <string>ss12</string> <!-- Simplified mono 'at'@ -->
-                            <string>titl</string> <!-- No descender on 'Q' -->
-                        </edit>
-                    </match>
                 </fontconfig>
             '';
 
@@ -112,7 +91,7 @@
             noto-fonts-cjk-sans # Display of Chinese/Japanese/Korean characters
             noto-fonts-cjk-serif # Display of Chinese/Japanese/Korean characters
             noto-fonts-emoji # Symbols
-            recursive # System Mono Font
+            recursive-mono-custom # Custom build of Recursive Mono
         ];
 
     };

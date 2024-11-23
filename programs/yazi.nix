@@ -62,7 +62,7 @@
             prepend_keymap = [
                 { on = "q", run = "close", desc = "Close the current tab, or quit if it is last tab" },
                 { on = [ "c", "m" ], run = "plugin chmod", desc = "Chmod on selected files" },
-                { on = "+", run = "plugin --sync hide-preview", desc = "Toggle preview pane" },
+                { on = "\\", run = "plugin --sync hide-preview", desc = "Toggle preview pane" },
                 { on = "`", run = "shell \"$SHELL\" --block --confirm", desc = "Open shell here" },
                 { on = "C", run = "plugin ouch --args=zip", desc = "Compress with ouch" },
                 { on = "f", run = "plugin jump-to-char", desc = "Jump to Char" },
@@ -70,7 +70,26 @@
             ]
         '';
 
-        xdg.configFile."yazi/yazi.toml".text = /* toml */ ''
+        xdg.configFile."yazi/yazi.toml".text = let
+
+            buildDevLayout = pkgs.writeShellScript "buildDevLayout.sh" /* bash */ ''
+                cd $1
+                tabname=''${PWD##*/}
+                if [ ''${PWD} == "/nix/config" ]; then
+                  tabname='NixOS'
+                fi
+                zellij --layout dev
+                sleep 0.1
+                zellij action move-focus down
+                zellij action write-chars "++"
+                zellij action move-focus up
+                zellij action write-chars "\\"
+                zellij action move-focus right
+                zellij action rename-tab "$tabname"
+                kill -s SIGQUIT $PPID
+            '';
+
+        in /* toml */ ''
             [manager]
             linemode = "size"
             mouse_events = [ "click", "scroll" ]
@@ -105,6 +124,7 @@
             ]
 
             [opener]
+            dev = [ { run = '${pkgs.bash}/bin/bash ${buildDevLayout} "$@"', desc = "IDE in new tab", orphan = true } ]
             edit = [ { run = 'nvim "$@"', desc = "Edit", block = true } ]
             exif = [ { run = 'exiftool "$1"; echo "Press enter to exit"; read _', desc = "Show EXIF data", block = true } ]
             exifedit = [
@@ -129,7 +149,7 @@
                 { mime = "application/pdf", use = [ "pdf", "exif" ] },
                 { mime = "audio/*", use = [ "play", "exif" ] },
                 { mime = "image/*", use = [ "image", "exif", "exifedit" ] },
-                { mime = "inode/directory", use = [ "edit", "play", "foldersize" ] },
+                { mime = "inode/directory", use = [ "dev", "play", "foldersize" ] },
                 { mime = "text/*", use = [ "edit", "exif" ] },
                 { mime = "video/*", use = [ "play", "exif", "exifedit" ] },
                 { name = "*.od{g,p,s,t}", use = [ "office", "exif" ] },

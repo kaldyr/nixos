@@ -10,7 +10,7 @@
 
             $accent = 0xb3$sapphireAlpha
             $accentAlpha = $sapphireAlpha
-            $font = Recursive Mn Csl St
+            $font = Rec Mono Custom
 
             # GENERAL
             general {

@@ -18,7 +18,7 @@
 
             [main]
             filter-desktop=true
-            font=Recursive Sn Csl St:size=10
+            font=Rec Mono Custom:size=10
             icon-theme=Papirus
             icons-enabled=yes
             image-size-ratio=1.0

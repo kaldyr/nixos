@@ -33,7 +33,7 @@
                         "tooltip-format": "{capacity}% - {time}",
                     },
                     "clock": {
-                        "format": "{:%t%A%t%t%B %e%t%t%H : %M%t}",
+                        "format": "  {:%H : %M    %A, %B %e}  ",
                         "tooltip-format": "<tt>{calendar}</tt>",
                     },
                     "exclusive": false,
@@ -46,9 +46,9 @@
                         "all-outputs": true,
                         "format": "{icon}",
                         "format-icons": {
-                            "active": " ",
-                            "default": " ",
-                            "urgent": " ",
+                            "active": "",
+                            "default": "",
+                            "urgent": "",
                         },
                         "on-click": "activate",
                         "on-scroll-down": "hyprctl dispatch workspace e+1",
@@ -147,7 +147,7 @@
 
             * {
                 font-size: 10px;
-                font-family: "Inter", "Font Awesome 6 Free";
+                font-family: "Rec Mono Custom", "Font Awesome 6 Free";
             }
 
             window#waybar {
