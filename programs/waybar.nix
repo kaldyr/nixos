@@ -146,7 +146,7 @@
             @define-color rosewater #f2d5cf;
 
             * {
-                font-size: 12px;
+                font-size: 11px;
                 font-family: "Liga Rec Mono Custom", "Font Awesome 6 Free";
                 font-weight: normal;
                 letter-spacing: .1rem;
