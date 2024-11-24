@@ -20,8 +20,8 @@
         initrd.availableKernelModules = [ "nvme" "xhci_pci" "ehci_pci" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" ];
         initrd.kernelModules = [ "amdgpu" ];
         kernelModules = [ "kvm-amd" ];
-        kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-        kernelParams = [ "btrfs" "quiet" ];
+        kernelPackages = pkgs.linuxKernel.packages.linux_lqx;
+        kernelParams = [ "btrfs" "quiet" "preempt=full" ];
         loader.grub.gfxmodeEfi = "3440x1440,1920x1080";
     };
 
