@@ -7,33 +7,32 @@
             Regular:
                 MONO: 1
                 CASL: 1
-                wght: 450
+                wght: 425
                 slnt: 0
                 CRSV: 0
             Italic:
                 MONO: 1
                 CASL: 1
-                wght: 450
+                wght: 425
                 slnt: -15
                 CRSV: 1
             Bold:
                 MONO: 1
                 CASL: 1
-                wght: 825
+                wght: 800
                 slnt: 0
                 CRSV: 0
             Bold Italic:
                 MONO: 1
                 CASL: 1
-                wght: 825
+                wght: 800
                 slnt: -15
                 CRSV: 1
 
-        Code Ligatures: True
+        Code Ligatures: False
 
         Features:
         - case
-        - dlig
         - ss01
         - ss02
         - ss03
@@ -81,6 +80,14 @@
             })
         ]);
 
+    ligaturizer = pkgs.fetchFromGitHub {
+        owner = "ToxicFrog";
+        repo = "Ligaturizer";
+        rev = "v5";
+        sha256 = "sha256-sFzoUvA4DB9CVonW/OZWWpwP0R4So6YlAQeqe7HLq50=";
+        fetchSubmodules = true;
+    };
+
 in pkgs.stdenv.mkDerivation {
 
     pname = "recursive-mono-custom";
@@ -93,19 +100,27 @@ in pkgs.stdenv.mkDerivation {
         hash = "sha256-kq6IEz9HpomyWtrY6tqb+EYwhOEypWL3wYAMdZ97rDc=";
     };
 
-    buildPhase = ''
+    buildPhase = /* bash */ ''
         export LD_LIBRARY_PATH="${pkgs.ttfautohint}/lib:LD_LIBRARY_PATH"
 
         mkdir nix-output
 
         ${pythonEnv}/bin/python \
         scripts/instantiate-code-fonts.py ${config}
-        cp fonts/RecMonoCustom/*Regular* fonts/RecMonoCustom/*Bold-* nix-output
+        buildFolder=''${PWD}
+        pushd ${ligaturizer}
+        find ''${buildFolder}/fonts/RecMonoCustom \
+            -name "*.ttf" \
+            -exec ${pkgs.fontforge}/bin/fontforge \
+            -lang py \
+            -script ligaturize.py {} \
+            --output-dir=''${buildFolder}/nix-output \;
+        popd
     '';
 
     installPhase = ''
         mkdir -p $out/share/fonts/truetype
-        cp ./nix-output/* $out/share/fonts/truetype
+        cp ./nix-output/*.ttf $out/share/fonts/truetype
     '';
 
     meta = {

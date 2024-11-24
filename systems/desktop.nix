@@ -50,9 +50,9 @@
         fontconfig = {
 
             defaultFonts = {
-                monospace = [ "Rec Mono Custom" "Noto Color Emoji" ];
+                monospace = [ "Liga Rec Mono Custom" "Noto Color Emoji" ];
                 sansSerif = [ "Inter" "Liberation Sans" "Noto Color Emoji" ];
-                serif = [ "Rec Mono Custom" "Liberation Serif" "Noto Color Emoji" ];
+                serif = [ "Liga Rec Mono Custom" "Liberation Serif" "Noto Color Emoji" ];
                 emoji = [ "Noto Color Emoji" ];
             };
 
