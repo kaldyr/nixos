@@ -47,10 +47,10 @@
             unicode-input=Alt+u
 
             [main]
-            font=Rec Mono Custom:size=10, Font Awesome 6 Free Regular:size 10, Noto Color Emoji:size=10, Symbols Nerd Font:size=11
-            font-bold=Rec Mono Custom:size=10:style=Bold
-            font-bold-italic=Rec Mono Custom:size=10:style=Bold Italic
-            font-italic=Rec Mono Custom:size=10:style=Italic
+            font=Liga Rec Mono Custom:size=11, Font Awesome 6 Free Regular:size 11, Noto Color Emoji:size=11, Symbols Nerd Font:size=11
+            font-bold=Liga Rec Mono Custom:size=11:style=Bold
+            font-bold-italic=Liga Rec Mono Custom:size=11:style=Bold Italic
+            font-italic=Liga Rec Mono Custom:size=11:style=Italic
             line-height=11.1
             selection-target=primary
 

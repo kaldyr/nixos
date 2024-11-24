@@ -10,7 +10,7 @@
 
             $accent = 0xb3$sapphireAlpha
             $accentAlpha = $sapphireAlpha
-            $font = Rec Mono Custom
+            $font = Liga Rec Mono Custom
 
             # GENERAL
             general {

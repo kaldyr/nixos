@@ -147,7 +147,7 @@
 
             * {
                 font-size: 12px;
-                font-family: "Rec Mono Custom", "Font Awesome 6 Free";
+                font-family: "Liga Rec Mono Custom", "Font Awesome 6 Free";
                 font-weight: normal;
                 letter-spacing: .1rem;
             }
