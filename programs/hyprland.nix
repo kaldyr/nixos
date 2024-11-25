@@ -288,7 +288,7 @@
                 windowrulev2=noinitialfocus, title:^(Blish HUD)$
                 windowrulev2=noborder, title:^(Blish HUD)$
                 windowrulev2=pin, title:^(Blish HUD)$
-                windowrulev2=opacity 0.10, title:^(Blish HUD)$
+                windowrulev2=opacity 0.5 0.1, title:^(Blish HUD)$
             '';
 
             xwayland.enable = true;
