@@ -1,4 +1,52 @@
-{ pkgs, sysConfig, ... }: {
+{ pkgs, sysConfig, ... }: let
+
+    statusPane = /* kdl */ ''
+        pane size=1 borderless=true {
+            plugin location="file:${pkgs.zellijPlugins.zjstatus}/bin/zjstatus.wasm" {
+                hide_frame_for_single_pane "true"
+                hide_frame_except_for_search "false"
+                hide_frame_except_for_fullscreen "false"
+
+                format_left   "{mode}  #[fg=black]{tabs}"
+                format_center ""
+                format_right  ""
+                format_space  ""
+
+                mode_enter_search "#[fg=blue] "
+                mode_locked       "#[fg=red] "
+                mode_move         "#[fg=yellow] "
+                mode_normal       "#[fg=blue] "
+                mode_pane         "#[fg=green] "
+                mode_rename_pane  "#[fg=green] 󱩼"
+                mode_rename_tab   "#[fg=magenta] 󱩼"
+                mode_resize       "#[fg=yellow] 󰩨"
+                mode_scroll       "#[fg=cyan] "
+                mode_search       "#[fg=blue] "
+                mode_session      "#[fg=yellow] 󰖲"
+                mode_tab          "#[fg=magenta] 󰓩"
+
+                // formatting for inactive tabs
+                tab_normal            "#[fg=black]{name}"
+                tab_normal_fullscreen "#[fg=black]{name}"
+                tab_normal_sync       "#[fg=black]{name}"
+
+                // formatting for the current active tab
+                tab_active            "#[fg=blue,bold]{name}#[fg=yellow,bold]{floating_indicator}"
+                tab_active_fullscreen "#[fg=yellow,bold]{name}#[fg=yellow,bold]{fullscreen_indicator}"
+                tab_active_sync       "#[fg=green,bold]{name}#[fg=yellow,bold]{sync_indicator}"
+
+                // separator between the tabs
+                tab_separator "#[fg=cyan,bold]  ⋮  "
+
+                // indicators
+                tab_sync_indicator       "  "
+                tab_fullscreen_indicator "  "
+                tab_floating_indicator   "  "
+            }
+        }
+    '';
+
+in {
 
     environment.persistence."/nix".users.${sysConfig.user}.files = [ ".cache/zellij/permissions.kdl" ];
 
@@ -165,49 +213,7 @@
             layout {
                 default_tab_template {
                     children
-                    pane size=1 borderless=true {
-                        plugin location="file:${pkgs.zellijPlugins.zjstatus}/bin/zjstatus.wasm" {
-                            hide_frame_for_single_pane "true"
-                            hide_frame_except_for_search "false"
-                            hide_frame_except_for_fullscreen "false"
-
-                            format_left   "{mode}  #[fg=black]{tabs}"
-                            format_center ""
-                            format_right  ""
-                            format_space  ""
-
-                            mode_enter_search "#[fg=blue] "
-                            mode_locked       "#[fg=red] "
-                            mode_move         "#[fg=yellow] "
-                            mode_normal       "#[fg=blue] "
-                            mode_pane         "#[fg=green] "
-                            mode_rename_pane  "#[fg=green] 󱩼"
-                            mode_rename_tab   "#[fg=magenta] 󱩼"
-                            mode_resize       "#[fg=yellow] 󰩨"
-                            mode_scroll       "#[fg=cyan] "
-                            mode_search       "#[fg=blue] "
-                            mode_session      "#[fg=yellow] 󰖲"
-                            mode_tab          "#[fg=magenta] 󰓩"
-
-                            // formatting for inactive tabs
-                            tab_normal            "#[fg=black]{name}"
-                            tab_normal_fullscreen "#[fg=black]{name}"
-                            tab_normal_sync       "#[fg=black]{name}"
-
-                            // formatting for the current active tab
-                            tab_active            "#[fg=blue,bold]{name}#[fg=yellow,bold]{floating_indicator}"
-                            tab_active_fullscreen "#[fg=yellow,bold]{name}#[fg=yellow,bold]{fullscreen_indicator}"
-                            tab_active_sync       "#[fg=green,bold]{name}#[fg=yellow,bold]{sync_indicator}"
-
-                            // separator between the tabs
-                            tab_separator "#[fg=cyan,bold]  ⋮  "
-
-                            // indicators
-                            tab_sync_indicator       "  "
-                            tab_fullscreen_indicator "  "
-                            tab_floating_indicator   "  "
-                        }
-                    }
+                    ${statusPane}
                 }
                 tab name=""
             }
@@ -244,49 +250,7 @@
                             }
                         }
                     }
-                     pane size=1 borderless=true {
-                        plugin location="file:${pkgs.zellijPlugins.zjstatus}/bin/zjstatus.wasm" {
-                            hide_frame_for_single_pane "true"
-                            hide_frame_except_for_search "false"
-                            hide_frame_except_for_fullscreen "false"
-
-                            format_left   "{mode}  #[fg=black]{tabs}"
-                            format_center ""
-                            format_right  ""
-                            format_space  ""
-
-                            mode_enter_search "#[fg=blue] "
-                            mode_locked       "#[fg=red] "
-                            mode_move         "#[fg=yellow] "
-                            mode_normal       "#[fg=blue] "
-                            mode_pane         "#[fg=green] "
-                            mode_rename_pane  "#[fg=green] 󱩼"
-                            mode_rename_tab   "#[fg=magenta] 󱩼"
-                            mode_resize       "#[fg=yellow] 󰩨"
-                            mode_scroll       "#[fg=cyan] "
-                            mode_search       "#[fg=blue] "
-                            mode_session      "#[fg=yellow] 󰖲"
-                            mode_tab          "#[fg=magenta] 󰓩"
-
-                            // formatting for inactive tabs
-                            tab_normal            "#[fg=black]{name}"
-                            tab_normal_fullscreen "#[fg=black]{name}"
-                            tab_normal_sync       "#[fg=black]{name}"
-
-                            // formatting for the current active tab
-                            tab_active            "#[fg=blue,bold]{name}#[fg=yellow,bold]{floating_indicator}"
-                            tab_active_fullscreen "#[fg=yellow,bold]{name}#[fg=yellow,bold]{fullscreen_indicator}"
-                            tab_active_sync       "#[fg=green,bold]{name}#[fg=yellow,bold]{sync_indicator}"
-
-                            // separator between the tabs
-                            tab_separator "#[fg=cyan,bold]  ⋮  "
-
-                            // indicators
-                            tab_sync_indicator       "  "
-                            tab_fullscreen_indicator "  "
-                            tab_floating_indicator   "  "
-                        }
-                    }
+                    ${statusPane}
                 }
             }
         '';
