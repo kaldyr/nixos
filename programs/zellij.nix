@@ -27,9 +27,8 @@
                 }
                 pane {
                     bind "Alt p" "Esc" "Enter" { SwitchToMode "Normal"; }
-                    bind "n" { NewPane; SwitchToMode "Normal"; }
-                    bind "s" { NewPane "Right"; SwitchToMode "Normal"; }
-                    bind "v" { NewPane "Down"; SwitchToMode "Normal"; }
+                    bind "v" { NewPane "Right"; SwitchToMode "Normal"; }
+                    bind "n" { NewPane "Down"; SwitchToMode "Normal"; }
                     bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0; }
                     bind "x" { CloseFocus; SwitchToMode "Normal"; }
                 }

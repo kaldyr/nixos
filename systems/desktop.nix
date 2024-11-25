@@ -7,6 +7,7 @@
         ../programs/discord.nix
         ../programs/libreoffice.nix
         ../programs/librewolf.nix
+        ../programs/lutris.nix
         ../programs/mpv.nix
         ../programs/nextcloud-desktop.nix
         ../programs/obsidian.nix

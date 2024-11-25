@@ -272,6 +272,23 @@
                 windowrulev2=noshadow, class:steam_app_
                 windowrulev2=noblur, class:steam_app_
                 windowrulev2=noborder, class:steam_app_
+
+                # gw2
+                windowrulev2=bordersize 0,title:^(Guild Wars 2)$
+                windowrulev2=opaque,title:^(Guild Wars 2)$
+                windowrulev2=noblur,title:^(Guild Wars 2)$
+                windowrulev2=noshadow,title:^(Guild Wars 2)$
+                windowrulev2=norounding,title:^(Guild Wars 2)$
+
+                # blish hud
+                windowrulev2=noblur,title:^(Blish HUD)$
+                windowrulev2=float, title:^(Blish HUD)$
+                windowrulev2=center, title:^(Blish HUD)$
+                windowrulev2=nofocus, title:^(Blish HUD)$
+                windowrulev2=noinitialfocus, title:^(Blish HUD)$
+                windowrulev2=noborder, title:^(Blish HUD)$
+                windowrulev2=pin, title:^(Blish HUD)$
+                windowrulev2=opacity 0.10, title:^(Blish HUD)$
             '';
 
             xwayland.enable = true;
