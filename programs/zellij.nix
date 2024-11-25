@@ -150,6 +150,7 @@
             }
 
             pane_frames true
+            session_serialization false
 
             theme "catppuccin-frappe"
 
