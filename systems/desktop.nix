@@ -49,12 +49,41 @@
 
         fontconfig = {
 
+            antialias = true;
+
             defaultFonts = {
-                monospace = [ "Liga Rec Mono Custom" "Noto Color Emoji" ];
-                sansSerif = [ "Inter" "Liberation Sans" "Noto Color Emoji" ];
-                serif = [ "Liga Rec Mono Custom" "Liberation Serif" "Noto Color Emoji" ];
                 emoji = [ "Noto Color Emoji" ];
+                monospace = [
+                    "Liga Rec Mono Custom"
+                    "JuliaMono"
+                    "Noto Sans Mono CJK HK"
+                    "Noto Sans Mono CJK JP"
+                    "Noto Sans Mono CJK KR"
+                    "Noto Sans Mono CJK SC"
+                    "Noto Sans Mono CJK TC"
+                ];
+                sansSerif = [
+                    "Inter"
+                    "Liberation Sans"
+                    "Noto Color Emoji"
+                    "Noto Sans CJK HK"
+                    "Noto Sans CJK JP"
+                    "Noto Sans CJK KR"
+                    "Noto Sans CJK SC"
+                    "Noto Sans CJK TC"
+                ];
+                serif = [
+                    "Libertinus Serif"
+                    "Liberation Serif"
+                    "Noto Serif CJK HK"
+                    "Noto Serif CJK JP"
+                    "Noto Serif CJK KR"
+                    "Noto Serif CJK SC"
+                    "Noto Serif CJK TC"
+                ];
             };
+
+            hinting.enable = true;
 
             localConf = /* xml */ ''
                 <?xml version="1.0"?>
@@ -73,6 +102,9 @@
                             <string>cv05</string> <!-- Lower case L with tail -->
                             <string>cv06</string> <!-- Simplified U -->
                             <string>cv08</string> <!-- Upper case i with serif -->
+                            <string>cv09</string> <!-- Flat-top three -->
+                            <string>cv12</string> <!-- Compact f -->
+                            <string>cv13</string> <!-- Compact t -->
                             <string>ss03</string> <!-- Round quotes & commas -->
                             <string>tnum</string> <!-- Tabular numbers -->
                             <string>zero</string> <!-- Slashed zero -->
@@ -81,17 +113,22 @@
                 </fontconfig>
             '';
 
+            subpixel.rgba = "rgb";
+            subpixel.lcdfilter = "default";
+
         };
 
         packages = with pkgs; [
             font-awesome # Symbols
             inter # System Sans Font
+            julia-mono
             liberation_ttf # Open versions of MS fonts
+            libertinus # System Serif Font
             ( nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; } )
             noto-fonts-cjk-sans # Display of Chinese/Japanese/Korean characters
             noto-fonts-cjk-serif # Display of Chinese/Japanese/Korean characters
             noto-fonts-emoji # Symbols
-            recursive-mono-custom # Custom build of Recursive Mono
+            recursive-mono-custom # Custom build of Recursive Mono with Fira Code Ligatures
         ];
 
     };
