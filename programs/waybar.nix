@@ -146,10 +146,9 @@
             @define-color rosewater #f2d5cf;
 
             * {
-                font-size: 11px;
-                font-family: "Liga Rec Mono Custom", "Font Awesome 6 Free";
-                font-weight: normal;
-                letter-spacing: .1rem;
+                font-size: 10px;
+                font-family: "Inter", "Font Awesome 6 Free";
+                font-weight: bold;
             }
 
             window#waybar {
@@ -165,6 +164,7 @@
                 background: @mantle;
                 padding: 0 10px;
                 border-radius: 0 0 10px 0;
+                font-weight: bold;
             }
 
             #workspaces button {
@@ -240,10 +240,6 @@
             }
 
             #clock {
-                font-size: 11px;
-                font-family: "Inter";
-                font-weight: bold;
-                letter-spacing: .1rem;
                 background: @mantle;
                 color: @blue;
                 padding: 0 12px 0 10px;
