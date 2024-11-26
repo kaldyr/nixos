@@ -73,7 +73,7 @@
 
                     if [ $status != 0 ]
                     then
-                        ${pkgs.wl-screenrec}/bin/wl-screenrec -g "$(${pkgs.slurp}/bin/slurp)" --codec hevc --encode-pixfmt vuyx -f $HOME/Videos/Screenrec/$(date +'%Y%m%d%H%M%S.mp4');
+                        ${pkgs.wl-screenrec}/bin/wl-screenrec -g "$(${pkgs.slurp}/bin/slurp)" --audio --low-power=off -f $HOME/Videos/Screenrec/$(date +'%Y%m%d%H%M%S.mp4');
                     else
                         ${pkgs.procps}/bin/pkill --signal SIGINT wl-screenrec
                     fi;
