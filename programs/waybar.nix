@@ -240,7 +240,10 @@
             }
 
             #clock {
+                font-size: 11px;
+                font-family: "Inter";
                 font-weight: bold;
+                letter-spacing: .1rem;
                 background: @mantle;
                 color: @blue;
                 padding: 0 12px 0 10px;
