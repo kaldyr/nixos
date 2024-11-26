@@ -161,6 +161,7 @@
     services = {
 
         fwupd.enable = true;
+        irqbalance.enable = true;
         libinput.enable = true;
 
         openssh = {
