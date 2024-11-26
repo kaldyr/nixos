@@ -33,8 +33,8 @@
 
             config.disable_default_key_bindings = true
             config.keys = {
-                { key = '-', mods = 'ALT', action = wezterm.action.DecreaseFontSize },
-                { key = '=', mods = 'ALT', action = wezterm.action.IncreaseFontSize },
+                { key = '-', mods = 'CTRL', action = wezterm.action.DecreaseFontSize },
+                { key = '=', mods = 'CTRL', action = wezterm.action.IncreaseFontSize },
                 { key = 'u', mods = 'ALT', action = wezterm.action.CharSelect },
             }
 

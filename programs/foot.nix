@@ -51,7 +51,7 @@
             font-bold=Liga Rec Mono Custom:size=11:style=Bold
             font-bold-italic=Liga Rec Mono Custom:size=11:style=Bold Italic
             font-italic=Liga Rec Mono Custom:size=11:style=Italic
-            line-height=11.1
+            line-height=13
             selection-target=primary
 
             [scrollback]
@@ -67,8 +67,8 @@
         '';
 
         xdg.desktopEntries = {
-            "org.codeberg.dnkl.footclient" = { name = "Foot Client"; noDisplay = true; };
-            "org.codeberg.dnkl.foot-server" = { name = "Foot Server"; noDisplay = true; };
+            "footclient" = { name = "Foot Client"; noDisplay = true; };
+            "foot-server" = { name = "Foot Server"; noDisplay = true; };
         };
 
     };
