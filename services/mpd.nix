@@ -14,9 +14,9 @@
         ];
 
         services.mpd = {
-            
+
             enable = true;
-            
+
             extraConfig = /* bash */ ''
                 audio_output {
                     type "pipewire"
