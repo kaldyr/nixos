@@ -188,9 +188,9 @@
                 bind=, XF86MonBrightnessDown, exec, brightnessctl set 5%-
 
                 # Hyprland controls
-                bind=$mainMod, c, killactive,
-                bind=$mainMod, m, exit,
-                bind=$mainMod, v, togglefloating,
+                bind=$mainMod, x, killactive,
+                bind=$mainMod SHIFT, x, exit,
+                bind=$mainMod, w, togglefloating,
                 bind=$mainMod, o, pseudo,
                 bind=$mainMod, s, togglesplit,
                 bind=$mainMod, f, fullscreen,
