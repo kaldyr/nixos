@@ -207,6 +207,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-cava": {
+      "locked": {
+        "lastModified": 1729739434,
+        "narHash": "sha256-UPpByZ0SbVXGHTSod/qLcWEf/Cy3l6N+lWr5cwD7Hvg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "1dfebceb6e98e46cd24052f71207d66bc2e3ed82",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "1dfebceb6e98e46cd24052f71207d66bc2e3ed82",
+        "type": "github"
+      }
+    },
     "nixpkgs-exiftool": {
       "locked": {
         "lastModified": 1710927174,
@@ -279,6 +295,7 @@
         "neovim": "neovim",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
+        "nixpkgs-cava": "nixpkgs-cava",
         "nixpkgs-exiftool": "nixpkgs-exiftool",
         "nixpkgs-zellij": "nixpkgs-zellij",
         "sops-nix": "sops-nix",

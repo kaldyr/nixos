@@ -16,7 +16,7 @@
             gradient_color_7='#ea999c'
             gradient_color_8='#e78284'
             gradient_count = 8
-            
+
             [general]
             bar_width=1
 
