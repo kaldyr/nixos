@@ -63,7 +63,7 @@ in {
             copy_on_select true
 
             keybinds clear-defaults=true {
-               locked {
+                locked {
                     bind "Alt g" { SwitchToMode "Normal"; }
                 }
                 move {
