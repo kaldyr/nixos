@@ -1,51 +1,51 @@
 { lib, pkgs, }: let
 
-	config = builtins.toFile "config.yaml" ''
-Family Name: Custom
+	config = builtins.toFile "config.yaml" /* yaml */ ''
+        Family Name: Custom
 
-Fonts:
-  Regular:
-    MONO: 1
-    CASL: 1
-    wght: 375
-    slnt: 0
-    CRSV: 0
-  Italic:
-    MONO: 1
-    CASL: 1
-    wght: 375
-    slnt: -15
-    CRSV: 1
-  Bold:
-    MONO: 1
-    CASL: 1
-    wght: 825
-    slnt: 0
-    CRSV: 0
-  Bold Italic:
-    MONO: 1
-    CASL: 1
-    wght: 825
-    slnt: -15
-    CRSV: 1
+        Fonts:
+          Regular:
+            MONO: 1
+            CASL: 1
+            wght: 375
+            slnt: 0
+            CRSV: 0
+          Italic:
+            MONO: 1
+            CASL: 1
+            wght: 375
+            slnt: -15
+            CRSV: 1
+          Bold:
+            MONO: 1
+            CASL: 1
+            wght: 825
+            slnt: 0
+            CRSV: 0
+          Bold Italic:
+            MONO: 1
+            CASL: 1
+            wght: 825
+            slnt: -15
+            CRSV: 1
 
-Code Ligatures: True
+        Code Ligatures: True
 
-Features:
-- dlig
-- ss01
-- ss02
-- ss03
-- ss04
-- ss05
-- ss06
-- ss08
-- ss09
-- ss10
-- ss11
-- ss12
-- titl
-'';
+        Features:
+        - dlig
+        - ss01
+        - ss02
+        - ss03
+        - ss04
+        - ss05
+        - ss06
+        - ss08
+        - ss09
+        - ss10
+        - ss11
+        - ss12
+        - titl
+    '';
 
 	pythonEnv = pkgs.python3.withPackages (ps:
 		with ps;
