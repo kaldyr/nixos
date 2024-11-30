@@ -4,13 +4,12 @@
 
     home-manager.users.${sysConfig.user} = {
 
-        programs.neovim.enable = true;
-
         home.packages = with pkgs; [
             gopls
             htmx-lsp
             lua-language-server
             marksman
+            neovim
             nil
             taplo
             yaml-language-server
