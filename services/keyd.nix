@@ -67,6 +67,14 @@
                 capslock = "overload(layerCaps, esc)";
                 esc = "overload(layerCaps, esc)";
                 rightalt = "overload(layerRightAlt, rightalt)"; 
+                leftcontrol = "layer(control)";
+            };
+
+            control = {
+                comma = "macro(space b p)";
+                "." = "macro(space b n)";
+                "<" = "macro(space B p)";
+                ">" = "macro(space B n)";
             };
 
         };

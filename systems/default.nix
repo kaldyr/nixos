@@ -12,6 +12,7 @@
         ../programs/lazygit.nix
         ../programs/neovim.nix
         ../programs/numbat.nix
+        ../programs/nushell.nix
         ../programs/starship.nix
         ../programs/yazi.nix
         ../programs/zellij.nix

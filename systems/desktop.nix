@@ -125,7 +125,7 @@
             julia-mono
             liberation_ttf # Open versions of MS fonts
             libertinus # System Serif Font
-            ( nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; } )
+            nerd-fonts.symbols-only
             noto-fonts-cjk-sans # Display of Chinese/Japanese/Korean characters
             noto-fonts-cjk-serif # Display of Chinese/Japanese/Korean characters
             noto-fonts-emoji # Symbols
