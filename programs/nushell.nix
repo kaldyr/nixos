@@ -1,36 +1,36 @@
 { sysConfig, ... }: {
 
-    environment.persistence."/nix".users.${sysConfig.user}.files = [
-        ".config/nushell/history.sqlite3"
-        ".config/nushell/history.sqlite3-shm"
-        ".config/nushell/history.sqlite3-wal"
-    ];
+	environment.persistence."/nix".users.${sysConfig.user}.files = [
+		".config/nushell/history.sqlite3"
+		".config/nushell/history.sqlite3-shm"
+		".config/nushell/history.sqlite3-wal"
+	];
 
-    home-manager.users.${sysConfig.user} = {
+	home-manager.users.${sysConfig.user} = {
 
-        programs.nushell = {
+		programs.nushell = {
 
-            enable = true;
+			enable = true;
 
-            extraConfig = /* nu */ ''
-                $env.config = {
-                    completions: {
-                        algorithm: fuzzy
-                    }
+			extraConfig = /* nu */ ''
+				$env.config = {
+					completions: {
+						algorithm: fuzzy
+					}
 
-                    edit_mode: vi
+					edit_mode: vi
 
-                    history: {
-                        sync_on_enter: true
-                        file_format: "sqlite"
-                    }
+					history: {
+						sync_on_enter: true
+						file_format: "sqlite"
+					}
 
-                    show_banner: false
-                }
-            '';
+					show_banner: false
+				}
+			'';
 
-        };
+		};
 
-    };
+	};
 
 }

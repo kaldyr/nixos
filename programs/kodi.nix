@@ -1,40 +1,40 @@
 { pkgs, ... }: {
 
-    environment.persistence."/state".users.kodi.directories = [
-        { directory = ".cache"; mode = "0700"; }
-        ".compose-cache"
-        ".kodi"
-    ];
+	environment.persistence."/state".users.kodi.directories = [
+		{ directory = ".cache"; mode = "0700"; }
+		".compose-cache"
+		".kodi"
+	];
 
-    networking.firewall.allowedTCPPorts = [ 8080 9090 ];
-    networking.firewall.allowedUDPPorts = [ 8080 9090 ];
+	networking.firewall.allowedTCPPorts = [ 8080 9090 ];
+	networking.firewall.allowedUDPPorts = [ 8080 9090 ];
 
-    services = {
+	services = {
 
-        displayManager.autoLogin.enable = true;
-        displayManager.autoLogin.user = "kodi";
-        pipewire.systemWide = true;
+		displayManager.autoLogin.enable = true;
+		displayManager.autoLogin.user = "kodi";
+		pipewire.systemWide = true;
 
-        xserver = {
+		xserver = {
 
-            enable = true;
+			enable = true;
 
-            desktopManager.kodi = {
+			desktopManager.kodi = {
 
-                enable = true;
+				enable = true;
 
-                package = (pkgs.kodi-wayland.withPackages (kodiPackages: with kodiPackages; [
-                    inputstream-adaptive
-                    youtube
-                ]));
+				package = (pkgs.kodi-wayland.withPackages (kodiPackages: with kodiPackages; [
+					inputstream-adaptive
+					youtube
+				]));
 
-            };
+			};
 
-        };
+		};
 
-    };
+	};
 
-    users.extraUsers.kodi.isNormalUser = true;
-    users.extraUsers.kodi.extraGroups = [ "audio" "pipewire" "video" ];
+	users.extraUsers.kodi.isNormalUser = true;
+	users.extraUsers.kodi.extraGroups = [ "audio" "pipewire" "video" ];
 
 }

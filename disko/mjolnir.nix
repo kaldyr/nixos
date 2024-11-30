@@ -1,74 +1,74 @@
 {
 
-    disko.devices.disk.main = {
+	disko.devices.disk.main = {
 
-        device = "/dev/disk/by-id/nvme-SOLIDIGM_SSDPFKKW020X7_SSC1N514010901I6Z";
-        type = "disk";
+		device = "/dev/disk/by-id/nvme-SOLIDIGM_SSDPFKKW020X7_SSC1N514010901I6Z";
+		type = "disk";
 
-        content = {
+		content = {
 
-            type = "gpt";
+			type = "gpt";
 
-            partitions = {
+			partitions = {
 
-                ESP = {
+				ESP = {
 
-                    name = "ESP";
-                    type = "EF00";
-                    start = "1MiB";
-                    size = "2G";
+					name = "ESP";
+					type = "EF00";
+					start = "1MiB";
+					size = "2G";
 
-                    content = {
-                        type = "filesystem";
-                        format = "vfat";
-                        extraArgs = [ "-F" "32" ];
-                        mountpoint = "/boot";
-                        mountOptions = [ "defaults" ];
-                    };
+					content = {
+						type = "filesystem";
+						format = "vfat";
+						extraArgs = [ "-F" "32" ];
+						mountpoint = "/boot";
+						mountOptions = [ "defaults" ];
+					};
 
-                };
+				};
 
-                luks = {
+				luks = {
 
-                    size = "100%";
+					size = "100%";
 
-                    content = {
+					content = {
 
-                        type = "luks";
-                        name = "crypted";
-                        settings.allowDiscards = true;
+						type = "luks";
+						name = "crypted";
+						settings.allowDiscards = true;
 
-                        content = {
+						content = {
 
-                            type = "btrfs";
-                            extraArgs = [ "-f" ];
+							type = "btrfs";
+							extraArgs = [ "-f" ];
 
-                            # btrfs subvolumes must all have the same mount options for now.
-                            subvolumes = let
-                                driveOptions = [ "noatime" "discard=async" "compress-force=zstd:1" ];
-                            in {
-                                # SSH subvolume.  Race condition when symlinking and/or persisting with sops-nix
-                                "@etc_ssh" = { mountpoint = "/etc/ssh"; mountOptions = driveOptions; };
-                                # Files to be preserved between boots
-                                "@nix" = { mountpoint = "/nix"; mountOptions = driveOptions; };
-                                # FIXME: No longer needed.  Everything is synced or regenerated
-                                "@state" = { mountpoint = "/state"; mountOptions = driveOptions; };
-                                # FIXME: No longer needed.  Everything is synced or regenerated
-                                "@snaps" = { mountpoint = "/snaps"; mountOptions = driveOptions; };
-                                # Swapfile
-                                "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "16G"; };
-                            };
+							# btrfs subvolumes must all have the same mount options for now.
+							subvolumes = let
+								driveOptions = [ "noatime" "discard=async" "compress-force=zstd:1" ];
+							in {
+								# SSH subvolume.  Race condition when symlinking and/or persisting with sops-nix
+								"@etc_ssh" = { mountpoint = "/etc/ssh"; mountOptions = driveOptions; };
+								# Files to be preserved between boots
+								"@nix" = { mountpoint = "/nix"; mountOptions = driveOptions; };
+								# FIXME: No longer needed.  Everything is synced or regenerated
+								"@state" = { mountpoint = "/state"; mountOptions = driveOptions; };
+								# FIXME: No longer needed.  Everything is synced or regenerated
+								"@snaps" = { mountpoint = "/snaps"; mountOptions = driveOptions; };
+								# Swapfile
+								"@swap" = { mountpoint = "/swap"; swap.swapfile.size = "16G"; };
+							};
 
-                        };
+						};
 
-                    };
+					};
 
-                };
+				};
 
-            };
+			};
 
-        };
+		};
 
-    };
+	};
 
 }

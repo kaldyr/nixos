@@ -1,19 +1,19 @@
 { pkgs, sysConfig, ... }: {
 
-    home-manager.users.${sysConfig.user} = {
+	home-manager.users.${sysConfig.user} = {
 
-        home.packages = with pkgs; [
-            udiskie
-            udisks
-        ];
+		home.packages = with pkgs; [
+			udiskie
+			udisks
+		];
 
-        services.udiskie = {
-            enable = true;
-            automount = true;
-            notify = true;
-            tray = "auto";
-        };
+		services.udiskie = {
+			enable = true;
+			automount = true;
+			notify = true;
+			tray = "auto";
+		};
 
-    };
+	};
 
 }

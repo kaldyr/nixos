@@ -1,14 +1,14 @@
 { sysConfig, ... }: {
 
-    environment.persistence."/state".users.${sysConfig.user}.directories = [ ".local/share/zoxide" ];
+	environment.persistence."/state".users.${sysConfig.user}.directories = [ ".local/share/zoxide" ];
 
-    home-manager.users.${sysConfig.user}.programs.zoxide = {
+	home-manager.users.${sysConfig.user}.programs.zoxide = {
 
-        enable = true;
+		enable = true;
 
-        enableFishIntegration = true;
-        # enableNushellIntegration = true;
+		enableFishIntegration = true;
+		# enableNushellIntegration = true;
 
-    };
+	};
 
 }

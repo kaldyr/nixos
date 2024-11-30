@@ -1,283 +1,283 @@
 { pkgs, sysConfig, ... }: {
 
-    imports = [
-        ../services/keyd.nix
-        ../services/pipewire.nix
-        ../programs/cava.nix
-        ../programs/discord.nix
-        ../programs/libreoffice.nix
-        ../programs/librewolf.nix
-        ../programs/lutris.nix
-        ../programs/mpv.nix
-        ../programs/nextcloud-desktop.nix
-        ../programs/obsidian.nix
-        ../programs/openscad.nix
-        ../programs/telegram.nix
-        ../programs/zathura.nix
-    ];
+	imports = [
+		../services/keyd.nix
+		../services/pipewire.nix
+		../programs/cava.nix
+		../programs/discord.nix
+		../programs/libreoffice.nix
+		../programs/librewolf.nix
+		../programs/lutris.nix
+		../programs/mpv.nix
+		../programs/nextcloud-desktop.nix
+		../programs/obsidian.nix
+		../programs/openscad.nix
+		../programs/telegram.nix
+		../programs/zathura.nix
+	];
 
-    environment = {
+	environment = {
 
-        etc."fuse.conf".text = /* bash */ ''
-            user_allow_other
-        '';
+		etc."fuse.conf".text = /* bash */ ''
+			user_allow_other
+		'';
 
-        # Home files that need to be preserved between boots
-        #  These files are synced and do not need to be in snapshots 
-        persistence."/nix" = {
+		# Home files that need to be preserved between boots
+		#  These files are synced and do not need to be in snapshots 
+		persistence."/nix" = {
 
-            hideMounts = true;
+			hideMounts = true;
 
-            users.${sysConfig.user}.directories = [
-                ".local/share/applications"
-                "Books"
-                "Documents"
-                "Downloads"
-                "Music"
-                "Notes"
-                "Pictures"
-                "Projects"
-                "Videos"
-            ];
+			users.${sysConfig.user}.directories = [
+				".local/share/applications"
+				"Books"
+				"Documents"
+				"Downloads"
+				"Music"
+				"Notes"
+				"Pictures"
+				"Projects"
+				"Videos"
+			];
 
-        };
+		};
 
-    };
+	};
 
-    fonts = {
+	fonts = {
 
-        enableDefaultPackages = false;
+		enableDefaultPackages = false;
 
-        fontconfig = {
+		fontconfig = {
 
-            antialias = true;
+			antialias = true;
 
-            defaultFonts = {
-                emoji = [ "Noto Color Emoji" ];
-                monospace = [
-                    "Liga Rec Mono Custom"
-                    "JuliaMono"
-                    "Noto Sans Mono CJK HK"
-                    "Noto Sans Mono CJK JP"
-                    "Noto Sans Mono CJK KR"
-                    "Noto Sans Mono CJK SC"
-                    "Noto Sans Mono CJK TC"
-                ];
-                sansSerif = [
-                    "Inter"
-                    "Liberation Sans"
-                    "Noto Color Emoji"
-                    "Noto Sans CJK HK"
-                    "Noto Sans CJK JP"
-                    "Noto Sans CJK KR"
-                    "Noto Sans CJK SC"
-                    "Noto Sans CJK TC"
-                ];
-                serif = [
-                    "Libertinus Serif"
-                    "Liberation Serif"
-                    "Noto Serif CJK HK"
-                    "Noto Serif CJK JP"
-                    "Noto Serif CJK KR"
-                    "Noto Serif CJK SC"
-                    "Noto Serif CJK TC"
-                ];
-            };
+			defaultFonts = {
+				emoji = [ "Noto Color Emoji" ];
+				monospace = [
+					"Liga Rec Mono Custom"
+					"JuliaMono"
+					"Noto Sans Mono CJK HK"
+					"Noto Sans Mono CJK JP"
+					"Noto Sans Mono CJK KR"
+					"Noto Sans Mono CJK SC"
+					"Noto Sans Mono CJK TC"
+				];
+				sansSerif = [
+					"Inter"
+					"Liberation Sans"
+					"Noto Color Emoji"
+					"Noto Sans CJK HK"
+					"Noto Sans CJK JP"
+					"Noto Sans CJK KR"
+					"Noto Sans CJK SC"
+					"Noto Sans CJK TC"
+				];
+				serif = [
+					"Libertinus Serif"
+					"Liberation Serif"
+					"Noto Serif CJK HK"
+					"Noto Serif CJK JP"
+					"Noto Serif CJK KR"
+					"Noto Serif CJK SC"
+					"Noto Serif CJK TC"
+				];
+			};
 
-            hinting.enable = true;
+			hinting.enable = true;
 
-            localConf = /* xml */ ''
-                <?xml version="1.0"?>
-                <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
-                <fontconfig>
-                    <match target="font">
-                        <test qual="any" name="family" compare="contains"><string>Inter</string></test>
-                        <!-- https://rsms.me/inter/#features -->
-                        <edit name="fontfeatures" mode="assign_replace">
-                            <string>calt</string> <!-- Contextural alternatives -->
-                            <string>case</string> <!-- Case alternates -->
-                            <string>ccmp</string> <!-- Compositions -->
-                            <string>cv02</string> <!-- Open four -->
-                            <string>cv03</string> <!-- Open six -->
-                            <string>cv04</string> <!-- Open nine -->
-                            <string>cv05</string> <!-- Lower case L with tail -->
-                            <string>cv06</string> <!-- Simplified U -->
-                            <string>cv08</string> <!-- Upper case i with serif -->
-                            <string>cv09</string> <!-- Flat-top three -->
-                            <string>cv12</string> <!-- Compact f -->
-                            <string>cv13</string> <!-- Compact t -->
-                            <string>ss03</string> <!-- Round quotes & commas -->
-                            <string>tnum</string> <!-- Tabular numbers -->
-                            <string>zero</string> <!-- Slashed zero -->
-                        </edit>
-                    </match>
-                </fontconfig>
-            '';
+			localConf = /* xml */ ''
+				<?xml version="1.0"?>
+				<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+				<fontconfig>
+					<match target="font">
+						<test qual="any" name="family" compare="contains"><string>Inter</string></test>
+						<!-- https://rsms.me/inter/#features -->
+						<edit name="fontfeatures" mode="assign_replace">
+							<string>calt</string> <!-- Contextural alternatives -->
+							<string>case</string> <!-- Case alternates -->
+							<string>ccmp</string> <!-- Compositions -->
+							<string>cv02</string> <!-- Open four -->
+							<string>cv03</string> <!-- Open six -->
+							<string>cv04</string> <!-- Open nine -->
+							<string>cv05</string> <!-- Lower case L with tail -->
+							<string>cv06</string> <!-- Simplified U -->
+							<string>cv08</string> <!-- Upper case i with serif -->
+							<string>cv09</string> <!-- Flat-top three -->
+							<string>cv12</string> <!-- Compact f -->
+							<string>cv13</string> <!-- Compact t -->
+							<string>ss03</string> <!-- Round quotes & commas -->
+							<string>tnum</string> <!-- Tabular numbers -->
+							<string>zero</string> <!-- Slashed zero -->
+						</edit>
+					</match>
+				</fontconfig>
+			'';
 
-            subpixel.rgba = "rgb";
-            subpixel.lcdfilter = "default";
+			subpixel.rgba = "rgb";
+			subpixel.lcdfilter = "default";
 
-        };
+		};
 
-        packages = with pkgs; [
-            font-awesome # Symbols
-            inter # System Sans Font
-            julia-mono
-            liberation_ttf # Open versions of MS fonts
-            libertinus # System Serif Font
-            nerd-fonts.symbols-only
-            noto-fonts-cjk-sans # Display of Chinese/Japanese/Korean characters
-            noto-fonts-cjk-serif # Display of Chinese/Japanese/Korean characters
-            noto-fonts-emoji # Symbols
-            recursive-mono-custom # Custom build of Recursive Mono with Fira Code Ligatures
-        ];
+		packages = with pkgs; [
+			font-awesome # Symbols
+			inter # System Sans Font
+			julia-mono # Math font
+			liberation_ttf # Open versions of MS fonts
+			libertinus # System Serif Font
+			nerd-fonts.symbols-only # Symbol font
+			noto-fonts-cjk-sans # Display of Chinese/Japanese/Korean characters
+			noto-fonts-cjk-serif # Display of Chinese/Japanese/Korean characters
+			noto-fonts-emoji # Symbols
+			recursive-mono-custom # Custom build of Recursive Mono with Fira Code Ligatures
+		];
 
-    };
+	};
 
-    home-manager.users.${sysConfig.user} = {
+	home-manager.users.${sysConfig.user} = {
 
-        fonts.fontconfig.enable = true;
+		fonts.fontconfig.enable = true;
 
-        gtk = {
+		gtk = {
 
-            enable = true;
+			enable = true;
 
-            cursorTheme = {
-                name = "catppuccin-frappe-sapphire-cursors";
-                package = pkgs.catppuccin-cursors.frappeSapphire;
-                size = 24;
-            };
+			cursorTheme = {
+				name = "catppuccin-frappe-sapphire-cursors";
+				package = pkgs.catppuccin-cursors.frappeSapphire;
+				size = 24;
+			};
 
-            font = {
-                name = "Inter";
-                package = pkgs.inter;
-                size = 11;
-            };
+			font = {
+				name = "Inter";
+				package = pkgs.inter;
+				size = 11;
+			};
 
-            gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
-            gtk4.extraConfig.gtk-applications-prefer-dark-theme = true;
+			gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+			gtk4.extraConfig.gtk-applications-prefer-dark-theme = true;
 
-            iconTheme = {
-                name = "Papirus";
-                package = pkgs.catppuccin-papirus-folders.override {
-                    accent = "sapphire";
-                    flavor = "frappe";
-                };
-            };
+			iconTheme = {
+				name = "Papirus";
+				package = pkgs.catppuccin-papirus-folders.override {
+					accent = "sapphire";
+					flavor = "frappe";
+				};
+			};
 
-            theme = {
-                name = "catppuccin-frappe-sapphire-standard";
-                package = pkgs.catppuccin-gtk.override {
-                    accents = [ "sapphire" ];
-                    size = "standard";
-                    variant = "frappe";
-                };
-            };
+			theme = {
+				name = "catppuccin-frappe-sapphire-standard";
+				package = pkgs.catppuccin-gtk.override {
+					accents = [ "sapphire" ];
+					size = "standard";
+					variant = "frappe";
+				};
+			};
 
-        };
+		};
 
-        home = {
+		home = {
 
-            packages = with pkgs; [
-                android-tools
-                gimp
-                gnome-keyring
-                gnuplot
-                hunspell
-                hunspellDicts.en_US
-                imagemagick
-                kjv
-                libsecret
-                lowfi
-                networkmanagerapplet
-                papirus-folders
-                vulkan-tools
-                xdg-utils
-                xdg-user-dirs
-            ];
+			packages = with pkgs; [
+				android-tools
+				gimp
+				gnome-keyring
+				gnuplot
+				hunspell
+				hunspellDicts.en_US
+				imagemagick
+				kjv
+				libsecret
+				lowfi
+				networkmanagerapplet
+				papirus-folders
+				vulkan-tools
+				xdg-utils
+				xdg-user-dirs
+			];
 
-            pointerCursor = {
-                name = "catppuccin-frappe-sapphire-cursors";
-                package = pkgs.catppuccin-cursors.frappeSapphire;
-                size = 24;
-                gtk.enable = true;
-                x11.enable = true;
-            };
+			pointerCursor = {
+				name = "catppuccin-frappe-sapphire-cursors";
+				package = pkgs.catppuccin-cursors.frappeSapphire;
+				size = 24;
+				gtk.enable = true;
+				x11.enable = true;
+			};
 
-            sessionVariables = {
-                GTK_THEME = "catppuccin-frappe-sapphire-standard";
-                XCURSOR_THEME = "catppuccin-frappe-sapphire-cursors";
-                XCURSOR_SIZE = 24;
-            };
+			sessionVariables = {
+				GTK_THEME = "catppuccin-frappe-sapphire-standard";
+				XCURSOR_THEME = "catppuccin-frappe-sapphire-cursors";
+				XCURSOR_SIZE = 24;
+			};
 
-        };
+		};
 
-        services.blueman-applet.enable = true;
-        services.network-manager-applet.enable = true;
+		services.blueman-applet.enable = true;
+		services.network-manager-applet.enable = true;
 
-        xdg = {
+		xdg = {
 
-            configFile."mimeapps.list".force = true;
-            mimeApps.enable = true;
+			configFile."mimeapps.list".force = true;
+			mimeApps.enable = true;
 
-            userDirs = {
-                enable = true;
-                createDirectories = true;
-                desktop = null;
-                publicShare = null;
-                templates = null;
-            };
+			userDirs = {
+				enable = true;
+				createDirectories = true;
+				desktop = null;
+				publicShare = null;
+				templates = null;
+			};
 
-        };
+		};
 
-    };
+	};
 
-    hardware = {
+	hardware = {
 
-        bluetooth.enable = true;
-        bluetooth.settings.General.Enable = "Source,Sink,Media,Socket";
+		bluetooth.enable = true;
+		bluetooth.settings.General.Enable = "Source,Sink,Media,Socket";
 
-        graphics = {
+		graphics = {
 
-            enable = true;
+			enable = true;
 
-            extraPackages = with pkgs; [
-                libdrm
-                libva
-                libva-utils
-                vaapiVdpau
-            ];
+			extraPackages = with pkgs; [
+				libdrm
+				libva
+				libva-utils
+				vaapiVdpau
+			];
 
-        };
+		};
 
-    };
+	};
 
-    programs.dconf.enable = true;
-    security.pam.services.login.enableGnomeKeyring = true;
-    security.polkit.enable = true;
+	programs.dconf.enable = true;
+	security.pam.services.login.enableGnomeKeyring = true;
+	security.polkit.enable = true;
 
-    services = {
+	services = {
 
-        blueman.enable = true;
-        dbus.enable = true;
-        gnome.gnome-keyring.enable = true;
+		blueman.enable = true;
+		dbus.enable = true;
+		gnome.gnome-keyring.enable = true;
 
-        # Work towards automount phone for file copy
-        udev.packages = with pkgs; [
-            android-udev-rules
-            libmtp
-            media-player-info
-        ];
+		# Work towards automount phone for file copy
+		udev.packages = with pkgs; [
+			android-udev-rules
+			libmtp
+			media-player-info
+		];
 
-        udisks2.enable = true;
-        udisks2.mountOnMedia = true;
+		udisks2.enable = true;
+		udisks2.mountOnMedia = true;
 
-        xserver = {
-            excludePackages = with pkgs; [ xterm ];
-            xkb.layout = "us";
-            xkb.variant = "";
-        };
+		xserver = {
+			excludePackages = with pkgs; [ xterm ];
+			xkb.layout = "us";
+			xkb.variant = "";
+		};
 
-    };
+	};
 
 }

@@ -1,11 +1,11 @@
 { pkgs, sysConfig, ... }: {
 
-    home-manager.users.${sysConfig.user} = {
+	home-manager.users.${sysConfig.user} = {
 
-        home.packages = with pkgs; [ feh ];
+		home.packages = with pkgs; [ feh ];
 
-        xdg.mimeApps.associations.added."application/image" = [ "feh.desktop" ];
+		xdg.mimeApps.associations.added."application/image" = [ "feh.desktop" ];
 
-    };
+	};
 
 }
