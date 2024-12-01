@@ -220,6 +220,8 @@
 				bind=$mainMod CTRL, l, resizeactive, 559 0 # Move window height from 1/2 screen to 1/3 screen
 
 				# Switch Workspace
+				bind=$mainMod, code:59, workspace, -1 # ,
+				bind=$mainMod, code:60, workspace, +1 # .
 				bind=$mainMod, 1, workspace, 1
 				bind=$mainMod, 2, workspace, 2
 				bind=$mainMod, 3, workspace, 3
