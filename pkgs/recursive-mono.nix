@@ -7,13 +7,13 @@
           Regular:
             MONO: 1
             CASL: 1
-            wght: 375
+            wght: 400
             slnt: 0
             CRSV: 0
           Italic:
             MONO: 1
             CASL: 1
-            wght: 375
+            wght: 400
             slnt: -15
             CRSV: 1
           Bold:
@@ -33,8 +33,6 @@
 
         Features:
         - dlig
-        - ss01
-        - ss02
         - ss03
         - ss04
         - ss05

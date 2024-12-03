@@ -13,7 +13,7 @@
 			set completion-highlight-fg "#C6D0F5"
 			set default-bg "#303446"
 			set default-fg "#C6D0F5"
-			set font "Inter 12"
+			set font "Recursive Sans Casual Static 12"
 			set guioptions "none"
 			set highlight-active-color "#F4B8E4"
 			set highlight-color "#575268"

@@ -33,7 +33,7 @@
 						"tooltip-format": "{capacity}% - {time}",
 					},
 					"clock": {
-						"format": "  {:%H : %M	%A, %B %e}  ",
+						"format": "  {:%H : %M    %A, %B %e}  ",
 						"tooltip-format": "<tt>{calendar}</tt>",
 					},
 					"exclusive": false,
@@ -114,11 +114,11 @@
 		'';
 
 		xdg.configFile."waybar/style.css".text = /* css */ ''
-			@define-color base   #303446;
+			@define-color base #303446;
 			@define-color mantle #292c3c;
-			@define-color crust  #232634;
+			@define-color crust #232634;
 
-			@define-color text	 #c6d0f5;
+			@define-color text #c6d0f5;
 			@define-color subtext0 #a5adce;
 			@define-color subtext1 #b5bfe2;
 
@@ -130,24 +130,24 @@
 			@define-color overlay1 #838ba7;
 			@define-color overlay2 #949cbb;
 
-			@define-color blue	  #8caaee;
-			@define-color lavender  #babbf1;
-			@define-color sapphire  #85c1dc;
-			@define-color sky	   #99d1db;
-			@define-color teal	  #81c8be;
-			@define-color green	 #a6d189;
-			@define-color yellow	#e5c890;
-			@define-color peach	 #ef9f76;
-			@define-color maroon	#ea999c;
-			@define-color red	   #e78284;
-			@define-color mauve	 #ca9ee6;
-			@define-color pink	  #f4b8e4;
-			@define-color flamingo  #eebebe;
+			@define-color blue #8caaee;
+			@define-color lavender #babbf1;
+			@define-color sapphire #85c1dc;
+			@define-color sky #99d1db;
+			@define-color teal #81c8be;
+			@define-color green #a6d189;
+			@define-color yellow #e5c890;
+			@define-color peach #ef9f76;
+			@define-color maroon #ea999c;
+			@define-color red #e78284;
+			@define-color mauve #ca9ee6;
+			@define-color pink #f4b8e4;
+			@define-color flamingo #eebebe;
 			@define-color rosewater #f2d5cf;
 
 			* {
-				font-size: 10px;
-				font-family: "Inter", "Font Awesome 6 Free";
+				font-size: 11px;
+				font-family: "Recursive Sans Casual Static", "Symbols Nerd Font", "Font Awesome 6 Free";
 				font-weight: bold;
 			}
 
@@ -164,7 +164,6 @@
 				background: @mantle;
 				padding: 0 10px;
 				border-radius: 0 0 10px 0;
-				font-weight: bold;
 			}
 
 			#workspaces button {
@@ -178,7 +177,6 @@
 			#workspaces button.active {
 				background: @teal;
 				color: @crust;
-				font-weight: bold;
 			}
 
 			#workspaces button.urgent {
@@ -242,6 +240,7 @@
 			#clock {
 				background: @mantle;
 				color: @blue;
+				letter-spacing: 0.1rem;
 				padding: 0 12px 0 10px;
 				border-radius: 0 0 12px 12px;
 			}

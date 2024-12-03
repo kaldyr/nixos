@@ -11,7 +11,7 @@
 			show_panel=false
 			line_size=4
 			text_size=16
-			text_font=Inter
+			text_font=Recursive Sans Casual Static
 			paint_mode=brush
 			early_exit=false
 			fill_shape=false

@@ -83,7 +83,7 @@
 				zellij action move-focus down
 				zellij action write-chars "++"
 				zellij action move-focus up
-				zellij action write-chars "\\"
+				zellij action write-chars ".\\"
 				zellij action move-focus right
 				zellij action rename-tab "$tabname"
 				kill -s SIGQUIT $PPID

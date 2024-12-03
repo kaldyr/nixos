@@ -30,7 +30,7 @@
 			osc = no
 			osd-border-color = "#232634"
 			osd-color = "#85c1dc"
-			osd-font = Inter
+			osd-font = Recursive Sans Casual Static
 			osd-font-size = 24
 			osd-shadow-color = "#303446"
 			profile = gpu-hq
