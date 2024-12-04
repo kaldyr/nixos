@@ -1,10 +1,9 @@
 { pkgs, sysConfig, ... }: {
 
 	imports = [
-		../services/keyd.nix
-		../services/pipewire.nix
 		../programs/cava.nix
 		../programs/discord.nix
+		../programs/keepass.nix
 		../programs/libreoffice.nix
 		../programs/librewolf.nix
 		../programs/lutris.nix
@@ -14,6 +13,8 @@
 		../programs/openscad.nix
 		../programs/telegram.nix
 		../programs/zathura.nix
+		../services/keyd.nix
+		../services/pipewire.nix
 	];
 
 	environment = {
@@ -87,19 +88,19 @@
 			hinting.enable = true;
 
 			localConf = /* xml */ ''
-                <?xml version='1.0'?>
-                <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
-                <fontconfig>
-                    <match target="font">
-                        <test qual="any" name="family" compare="contains"><string>Recursive</string></test>
-                        <!-- https://github.com/arrowtype/recursive#opentype-features -->
-                        <edit name="fontfeatures" mode="assign_replace">
-                            <string>ss20</string>
-                            <string>case</string>
-                            <string>liga</string>
-                        </edit>
-                    </match>
-                </fontconfig>
+<?xml version='1.0'?>
+<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+<fontconfig>
+	<match target="font">
+		<test qual="any" name="family" compare="contains"><string>Recursive</string></test>
+		<!-- https://github.com/arrowtype/recursive#opentype-features -->
+		<edit name="fontfeatures" mode="assign_replace">
+			<string>ss20</string>
+			<string>case</string>
+			<string>liga</string>
+		</edit>
+	</match>
+</fontconfig>
 			'';
 
 			subpixel.rgba = "rgb";
