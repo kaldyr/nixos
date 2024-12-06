@@ -193,6 +193,14 @@ in {
 						};
 						SwitchToMode "Normal"
 					}
+					bind "Alt z" {
+						Run "lazygit" {
+							name "Lazygit"
+							floating true
+							close_on_exit true
+						};
+						SwitchToMode "Normal"
+					}
 				}
 			}
 

@@ -25,7 +25,7 @@
 			config.font = wezterm.font( 'Liga Rec Mono Custom' )
 			config.cell_width = 1.0
 			config.line_height = 1.1
-			config.font_size = 11
+			config.font_size = 12
 			config.warn_about_missing_glyphs = false
 			config.hide_mouse_cursor_when_typing = false
 			config.hide_tab_bar_if_only_one_tab = true

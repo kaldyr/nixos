@@ -30,7 +30,7 @@
 			};
 
 			Service = {
-				ExecStartPre = "${lib.getExe' pkgs.coreutils "sleep"} 0.5";
+				ExecStartPre = "${lib.getExe' pkgs.coreutils "sleep"} 1";
 				ExecStart = toString (
 					pkgs.writeShellScript "wallpaper-change" ''
 						${pkgs.swww}/bin/swww img "$(${pkgs.findutils}/bin/find $HOME/Pictures/Wallpapers -type f | ${pkgs.coreutils}/bin/shuf -n 1)"
