@@ -23,6 +23,7 @@
 			completion-timeout = 5
 			completion-trigger-len = 2
 			line-number = "relative"
+			indent = { tab-width = 4, unit = "\t" }
 			scrolloff = 3
 
 			[editor.cursor-shape]
@@ -212,12 +213,12 @@
 			[[language]]
 			name = "html"
 			auto-format = true
-			indent = { tab-width = 2, unit = " " }
+			indent = { tab-width = 2, unit = "\t" }
 
 			[[language]]
 			name = "templ"
 			auto-format = true
-			indent = { tab-width = 2, unit = " " }
+			indent = { tab-width = 2, unit = "\t" }
 		'';
 
 	};
