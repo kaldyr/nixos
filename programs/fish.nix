@@ -15,6 +15,12 @@
 
 			interactiveShellInit = /* fish */ ''
 				fish_vi_key_bindings insert
+				bind -M insert \cA beginning-of-line
+				bind -M insert \cE end-of-line
+				bind yy fish_clipboard_copy
+				bind p fish_clipboard_paste
+				bind -M visual y fish_clipboard_copy
+				bind -M visual p fish_clipboard_paste
 			'';
 
 			plugins = [
