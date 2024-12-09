@@ -14,7 +14,7 @@
 		impermanence.url = "github:nix-community/impermanence";
 
 		# Custom Neovim
-		neovim.url = "github:kaldyr/neovim/mini";
+		neovim.url = "github:kaldyr/neovim";
 		neovim.inputs.nixpkgs.follows = "nixpkgs";
 
 		# NixOS Hardware
