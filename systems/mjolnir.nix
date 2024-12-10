@@ -19,6 +19,7 @@
         extraModulePackages = with pkgs; [ btrfs-progs ];
         initrd.availableKernelModules = [ "nvme" "xhci_pci" "ehci_pci" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" ];
         initrd.kernelModules = [ "amdgpu" ];
+        kernel.sysctl."vm.max_map_count" = 16777216;
         kernelModules = [ "kvm-amd" ];
         kernelPackages = pkgs.linuxKernel.packages.linux_zen;
         kernelParams = [ "btrfs" "quiet" "preempt=full" ];
