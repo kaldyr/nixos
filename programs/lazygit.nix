@@ -1,12 +1,12 @@
 { sysConfig, ... }: {
 
-	environment.persistence."/state".users.${sysConfig.user}.directories = [ ".local/state/lazygit" ];
+    environment.persistence."/state".users.${sysConfig.user}.directories = [ ".local/state/lazygit" ];
 
-	home-manager.users.${sysConfig.user} = {
+    home-manager.users.${sysConfig.user} = {
 
-		programs.lazygit.enable = true;
+        programs.lazygit.enable = true;
 
-		xdg.configFile."lazygit/config.yml".text = /* yaml */ ''
+        xdg.configFile."lazygit/config.yml".text = /* yaml */ ''
             gui:
               theme:
                 activeBorderColor:
@@ -31,6 +31,6 @@
                 unstagedChangesColor:
                   - '#e78284'
         '';
-	};
+    };
 
 }

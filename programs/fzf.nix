@@ -1,11 +1,11 @@
 { sysConfig, ... }: {
 
-	home-manager.users.${sysConfig.user}.programs.fzf = {
+    home-manager.users.${sysConfig.user}.programs.fzf = {
 
-		enable = true;
+        enable = true;
 
-		# enableFishIntegration = true;
+        enableFishIntegration = true;
 
-	};
+    };
 
 }
