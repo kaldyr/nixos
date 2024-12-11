@@ -13,8 +13,10 @@
 This is a multi-system and multi-user flake.  It has laptops, desktops, and home server.
 - ☕ Espresso  
 Desktop: Ryzen 5700g  
+Budgie  
 - ⚔ Gram  
 Laptop: Framework 13 11th Gen Intel i5  
+Hyprland  
 - 🪐 Magrathea  
 Home server: Intel i5-2500k still kicking  
 Nextcloud  
@@ -22,12 +24,36 @@ Forgejo (Gitea)
 Kodi  
 - 🔨 Mjolnir  
 Desktop: Minisforum UM790 Pro  
+Hyprland  
 - 🍵Oolong  
 Laptop: Dell Inspiron  
+Budgie  
 - 🚀 Serenity  
 Home server: Ryzen 2400g  
 Off-site backup  
 Kodi  
+
+Notable customizations
+- Custom built font  
+[Recursive Mono](https://recursive.design)
+Configured to my liking  
+Ligatures added from FiraCode  
+TODO:
+Use nerd font patcher  
+Find a nice flowing script to swap italics  
+- Keybinds  
+Keyd used to remap capslock to escape and a custom layer  
+Unified keybinds between applications  
+
+Modifiers:  
+Hyprland: META/Windows/Whatever key  
+Zellij/Wezterm: Alt (leftalt)  
+Applications: Ctrl  
+
+hjkl - movement  
+Caps+hjkl - arrow keys  
+, - tab previous  
+. - tab next  
 
 ## Boot Install Media
 
