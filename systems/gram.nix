@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ inputs, pkgs, sysConfig, ... }: {
 
     imports = [
         inputs.nixos-hardware.nixosModules.common-hidpi
@@ -7,8 +7,9 @@
         ./desktop.nix
         ../services/mpd.nix
         ../programs/hyprland.nix
+        ../programs/nextcloud-desktop.nix
+        ../programs/openscad.nix
         ../programs/plymouth.nix
-        ../programs/steam.nix
     ];
 
     boot = {

@@ -1,8 +1,10 @@
-{ sysConfig, ... }: {
+{ lib, sysConfig, ... }: {
 
-    environment.persistence."/state".users.${sysConfig.user}.directories = [
-        ".local/share/direnv"
-    ];
+    environment.persistence = lib.mkIf sysConfig.homeImpermanence {
+        "/state".users.${sysConfig.user}.directories = [
+            ".local/share/direnv"
+        ];
+    };
 
     home-manager.users.${sysConfig.user} = {
 

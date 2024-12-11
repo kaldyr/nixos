@@ -1,4 +1,4 @@
-{ pkgs, sysConfig, ... }: {
+{ lib, pkgs, sysConfig, ... }: {
 
     imports = [
         ../programs/cava.nix
@@ -8,10 +8,10 @@
         ../programs/librewolf.nix
         ../programs/lutris.nix
         ../programs/mpv.nix
-        ../programs/nextcloud-desktop.nix
         ../programs/obsidian.nix
-        ../programs/openscad.nix
+        ../programs/steam.nix
         ../programs/telegram.nix
+        ../programs/wezterm.nix
         ../programs/zathura.nix
         ../services/keyd.nix
         ../services/pipewire.nix
@@ -25,22 +25,22 @@
 
         # Home files that need to be preserved between boots
         #  These files are synced and do not need to be in snapshots
-        persistence."/nix" = {
 
-            hideMounts = true;
-
-            users.${sysConfig.user}.directories = [
-                ".local/share/applications"
-                "Books"
-                "Documents"
-                "Downloads"
-                "Music"
-                "Notes"
-                "Pictures"
-                "Projects"
-                "Videos"
-            ];
-
+        persistence = lib.mkIf sysConfig.homeImpermanence {
+            "/nix" = {
+                hideMounts = true;
+                users.${sysConfig.user}.directories = [
+                    ".local/share/applications"
+                    "Books"
+                    "Documents"
+                    "Downloads"
+                    "Music"
+                    "Notes"
+                    "Pictures"
+                    "Projects"
+                    "Videos"
+                ];
+            };
         };
 
     };
@@ -66,6 +66,7 @@
                 ];
                 sansSerif = [
                     "Recursive Sans Casual Static"
+                    "Inter"
                     "Liberation Sans"
                     "Noto Color Emoji"
                     "Noto Sans CJK HK"
@@ -88,19 +89,37 @@
             hinting.enable = true;
 
             localConf = /* xml */ ''
-<?xml version='1.0'?>
-<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
-<fontconfig>
-    <match target="font">
-        <test qual="any" name="family" compare="contains"><string>Recursive</string></test>
-        <!-- https://github.com/arrowtype/recursive#opentype-features -->
-        <edit name="fontfeatures" mode="assign_replace">
-            <string>ss20</string>
-            <string>case</string>
-            <string>liga</string>
-        </edit>
-    </match>
-</fontconfig>
+                <?xml version='1.0'?>
+                <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+                <fontconfig>
+                    <match target="font">
+                        <test qual="any" name="family" compare="contains"><string>Inter</string></test>
+                        <!-- https://rsms.me/inter/#features -->
+                        <edit name="fontfeatures" mode="assign_replace">
+                            <string>calt</string> <!-- Contextural alternatives -->
+                            <string>case</string> <!-- Case alternates -->
+                            <string>ccmp</string> <!-- Compositions -->
+                            <string>cv02</string> <!-- Open four -->
+                            <string>cv03</string> <!-- Open six -->
+                            <string>cv04</string> <!-- Open nine -->
+                            <string>cv05</string> <!-- Lower case L with tail -->
+                            <string>cv06</string> <!-- Simplified U -->
+                            <string>cv08</string> <!-- Upper case i with serif -->
+                            <string>ss03</string> <!-- Round quotes & commas -->
+                            <string>tnum</string> <!-- Tabular numbers -->
+                            <string>zero</string> <!-- Slashed zero -->
+                        </edit>
+                    </match>
+                    <match target="font">
+                        <test qual="any" name="family" compare="contains"><string>Recursive</string></test>
+                        <!-- https://github.com/arrowtype/recursive#opentype-features -->
+                        <edit name="fontfeatures" mode="assign_replace">
+                            <string>ss20</string>
+                            <string>case</string>
+                            <string>liga</string>
+                        </edit>
+                    </match>
+                </fontconfig>
             '';
 
             subpixel.rgba = "rgb";
@@ -110,6 +129,7 @@
 
         packages = with pkgs; [
             font-awesome # Symbols
+            inter # Sans Font
             julia-mono # Math font
             liberation_ttf # Open versions of MS fonts
             libertinus # System Serif Font

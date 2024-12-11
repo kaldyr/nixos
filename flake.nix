@@ -73,12 +73,23 @@
 
         in {
 
+            # Espresso: Desktop 5600g
+            "espresso" = let
+                sysConfig = {
+                    hostname = "espresso";
+                    instalVersion = "24.11";
+                    user = "matshkas";
+                    homeImpermanence = false;
+                };
+            in buildSystem ( sysConfig );
+
             # Gram: Framework 11th Gen i5-1135G7
             "gram" = let
                 sysConfig = {
                     hostname = "gram";
                     instalVersion = "24.05";
                     user = "matt";
+                    homeImpermanence = true;
                 };
             in buildSystem ( sysConfig );
 
@@ -88,6 +99,7 @@
                     hostname = "magrathea";
                     instalVersion = "24.05";
                     user = "matt";
+                    homeImpermanence = true;
                 };
             in buildSystem ( sysConfig );
 
@@ -97,6 +109,17 @@
                     hostname = "mjolnir";
                     instalVersion = "23.05";
                     user = "matt";
+                    homeImpermanence = true;
+                };
+            in buildSystem ( sysConfig );
+
+            # Oolong: Laptop
+            "oolong" = let
+                sysConfig = {
+                    hostname = "oolong";
+                    instalVersion = "24.11";
+                    user = "matshkas";
+                    homeImpermanence = false;
                 };
             in buildSystem ( sysConfig );
 
@@ -106,6 +129,7 @@
                    hostname = "serenity";
                    instalVersion = "";
                    user = "matt";
+                    homeImpermanence = true;
                };
             in buildSystem ( sysConfig );
 

@@ -1,9 +1,11 @@
-{ pkgs, sysConfig, ... }: {
+{ lib, pkgs, sysConfig, ... }: {
 
-    environment.persistence."/nix".users.${sysConfig.user}.directories = [
-        ".config/discord"
-        ".config/Vencord"
-    ];
+    environment.persistence = lib.mkIf sysConfig.homeImpermanence {
+        "/nix".users.${sysConfig.user}.directories = [
+            ".config/discord"
+            ".config/Vencord"
+        ];
+    };
 
     environment.systemPackages = with pkgs; [
         libevdev

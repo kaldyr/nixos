@@ -1,6 +1,8 @@
 { lib, pkgs, sysConfig, ... }: {
 
-    environment.persistence."/state".users.${sysConfig.user}.directories = [ ".config/Nextcloud" ];
+    environment.persistence = lib.mkIf sysConfig.homeImpermanence {
+        "/state".users.${sysConfig.user}.directories = [ ".config/Nextcloud" ];
+    };
 
     home-manager.users.${sysConfig.user} = let
 

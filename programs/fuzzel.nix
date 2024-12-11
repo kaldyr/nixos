@@ -1,6 +1,8 @@
-{ sysConfig, ... }: {
+{ lib, sysConfig, ... }: {
 
-    environment.persistence."/nix".users.${sysConfig.user}.files = [ ".cache/fuzzel" ];
+    environment.persistence = lib.mkIf sysConfig.homeImpermanence {
+        "/nix".users.${sysConfig.user}.files = [ ".cache/fuzzel" ];
+    };
 
     home-manager.users.${sysConfig.user} = {
 

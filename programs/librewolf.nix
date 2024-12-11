@@ -1,8 +1,10 @@
-{ pkgs, sysConfig, ... }: {
+{ lib, pkgs, sysConfig, ... }: {
 
-    environment.persistence."/state".users.${sysConfig.user}.directories = [
-        { directory = ".librewolf"; mode = "0700"; }
-    ];
+    environment.persistence = lib.mkIf sysConfig.homeImpermanence {
+        "/state".users.${sysConfig.user}.directories = [
+            { directory = ".librewolf"; mode = "0700"; }
+        ];
+    };
 
     home-manager.users.${sysConfig.user} = {
 

@@ -12,7 +12,6 @@
         ./hyprlock.nix
         ./swappy.nix
         ./waybar.nix
-        ./wezterm.nix
     ];
 
     environment.sessionVariables = {

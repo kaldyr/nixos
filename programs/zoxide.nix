@@ -1,6 +1,8 @@
-{ sysConfig, ... }: {
+{ lib, sysConfig, ... }: {
 
-    environment.persistence."/state".users.${sysConfig.user}.directories = [ ".local/share/zoxide" ];
+    environment.persistence = lib.mkIf sysConfig.homeImpermanence {
+        "/state".users.${sysConfig.user}.directories = [ ".local/share/zoxide" ];
+    };
 
     home-manager.users.${sysConfig.user}.programs.zoxide = {
 

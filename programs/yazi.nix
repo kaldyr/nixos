@@ -1,6 +1,8 @@
-{ pkgs, sysConfig, ... }: {
+{ lib, pkgs, sysConfig, ... }: {
 
-    environment.persistence."/state".users.${sysConfig.user}.directories = [ ".local/state/yazi" ];
+    environment.persistence = lib.mkIf sysConfig.homeImpermanence {
+        "/state".users.${sysConfig.user}.directories = [ ".local/state/yazi" ];
+    };
 
     home-manager.users.${sysConfig.user} = {
 

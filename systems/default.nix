@@ -53,17 +53,14 @@
         defaultPackages = lib.mkForce [];
 
         # Home files that aren't declarative and need to be preserved
-        persistence."/state" = {
-
+        persistence."/state" = lib.mkIf sysConfig.homeImpermanence {
             hideMounts = true;
-
             users.${sysConfig.user}.directories = [
                 { directory = ".config/sops/age"; mode = "0700"; }
                 { directory = ".gnupg"; mode = "0700"; }
                 { directory = ".local/share/keyrings"; mode = "0700"; }
                 { directory = ".ssh"; mode = "0700"; }
             ];
-
         };
 
         # System files that aren't declarative and need to be preserved
@@ -96,7 +93,6 @@
         htmlq
         gdu
         jq
-        lazysql
         p7zip
         ripgrep
         sops

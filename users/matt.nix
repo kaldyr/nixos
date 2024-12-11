@@ -1,8 +1,15 @@
 { config, pkgs, ...}: {
 
-    home-manager.users."matt".home.sessionVariables = {
-        EDITOR = "nvim";
-        VISUAL = "nvim";
+    home-manager.users."matt" = {
+
+        home = {
+            sessionVariables.EDITOR = "nvim";
+            sessionVariables.VISUAL = "nvim";
+            packages = with pkgs; [ lazysql ];
+        };
+
+        programs.zellij.enableFishIntegration = true;
+
     };
 
     programs.nano.enable = false;

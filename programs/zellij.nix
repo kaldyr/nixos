@@ -1,4 +1,4 @@
-{ pkgs, sysConfig, ... }: let
+{ lib, pkgs, sysConfig, ... }: let
 
     statusPane = /* kdl */ ''
         pane size=1 borderless=true {
@@ -48,14 +48,15 @@
 
 in {
 
-    environment.persistence."/nix".users.${sysConfig.user}.files = [ ".cache/zellij/permissions.kdl" ];
+    environment.persistence = lib.mkIf sysConfig.homeImpermanence {
+        "/nix".users.${sysConfig.user}.files = [ ".cache/zellij/permissions.kdl" ];
+    };
 
     home-manager.users.${sysConfig.user} = {
 
         home.packages = with pkgs; [ zellijPlugins.zjstatus ];
 
         programs.zellij.enable = true;
-        programs.zellij.enableFishIntegration = true;
 
         xdg.configFile."zellij/config.kdl".text = /* kdl */ ''
             copy_clipboard "primary"

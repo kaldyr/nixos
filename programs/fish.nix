@@ -1,9 +1,11 @@
-{ pkgs, sysConfig, ... }: {
+{ lib, pkgs, sysConfig, ... }: {
 
-    environment.persistence."/nix".users.${sysConfig.user}.directories = [
-        ".config/fish"
-        ".local/share/fish"
-    ];
+    environment.persistence = lib.mkIf sysConfig.homeImpermanence {
+        "/nix".users.${sysConfig.user}.directories = [
+            ".config/fish"
+            ".local/share/fish"
+        ];
+    };
 
     home-manager.users.${sysConfig.user} = {
 
