@@ -5,7 +5,7 @@
         sessionVariables.EDITOR = "nano";
         sessionVariables.VISUAL = "nano";
 
-        home.packages = with pkgs; [
+        packages = with pkgs; [
             floorp
             image-roll
             newsboat

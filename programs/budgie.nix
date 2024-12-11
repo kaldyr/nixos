@@ -35,8 +35,11 @@
     };
 
     services = {
-        displayManager.autoLogin.enable = true;
-        displayManager.autoLogin.user = "matshkas";
+        displayManager = {
+            enable = true;
+            autoLogin.enable = true;
+            autoLogin.user = "matshkas";
+        };
         gvfs.enable = true;
         tumbler.enable = true;
         xserver.desktopManager.budgie.enable = true;
