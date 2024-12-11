@@ -210,11 +210,11 @@
         "plugin:which-key-nvim": "plugin:which-key-nvim"
       },
       "locked": {
-        "lastModified": 1733872444,
-        "narHash": "sha256-aujleJ0wc1kqMiV4sMNzKAhgKY8g4lYG5GyL2aaBn+E=",
+        "lastModified": 1733953710,
+        "narHash": "sha256-XGvsfhfv9xInMDKndI47QXzo+aXj/SDi570ZhHcLoK4=",
         "owner": "kaldyr",
         "repo": "neovim",
-        "rev": "3a4160e7ed9e4bbd17f834b16e199afece51ae4e",
+        "rev": "8fb476cc5a58ad3cdddb85b882f2bf3020f92ddb",
         "type": "github"
       },
       "original": {
