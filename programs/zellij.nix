@@ -190,6 +190,10 @@ in {
                             name "Yazi"
                             floating true
                             close_on_exit true
+                            height "80%"
+                            width "80%"
+                            x "10%"
+                            y "10%"
                         };
                         SwitchToMode "Normal"
                     }
@@ -198,6 +202,10 @@ in {
                             name "Lazygit"
                             floating true
                             close_on_exit true
+                            height "80%"
+                            width "80%"
+                            x "10%"
+                            y "10%"
                         };
                         SwitchToMode "Normal"
                     }
@@ -233,7 +241,7 @@ in {
                     pane split_direction="horizontal" {
                         pane split_direction="vertical" {
                             pane {
-                                size 36
+                                size 44
                                 pane {
                                     command "yazi"
                                     name "Yazi"

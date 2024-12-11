@@ -202,7 +202,6 @@
         "plugin:obsidian-nvim": "plugin:obsidian-nvim",
         "plugin:plenary-nvim": "plugin:plenary-nvim",
         "plugin:render-markdown-nvim": "plugin:render-markdown-nvim",
-        "plugin:sort-nvim": "plugin:sort-nvim",
         "plugin:telescope-git-file-history-nvim": "plugin:telescope-git-file-history-nvim",
         "plugin:telescope-nvim": "plugin:telescope-nvim",
         "plugin:telescope-ui-select-nvim": "plugin:telescope-ui-select-nvim",
@@ -211,11 +210,11 @@
         "plugin:which-key-nvim": "plugin:which-key-nvim"
       },
       "locked": {
-        "lastModified": 1733813170,
-        "narHash": "sha256-xTUtsislvqpKSTReB73QE5LNhvIylRYO6VbiAxQFXTI=",
+        "lastModified": 1733872444,
+        "narHash": "sha256-aujleJ0wc1kqMiV4sMNzKAhgKY8g4lYG5GyL2aaBn+E=",
         "owner": "kaldyr",
         "repo": "neovim",
-        "rev": "10f5e57cc2bf5f8187e4bc4b456bc2f5f2dce4d3",
+        "rev": "3a4160e7ed9e4bbd17f834b16e199afece51ae4e",
         "type": "github"
       },
       "original": {
@@ -621,22 +620,6 @@
       "original": {
         "owner": "MeanderingProgrammer",
         "repo": "render-markdown.nvim",
-        "type": "github"
-      }
-    },
-    "plugin:sort-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1681328492,
-        "narHash": "sha256-xncv1vuSoxLEFoWUC2RR5wlzXvrPBd2Fpl2di+EGMTU=",
-        "owner": "sQVe",
-        "repo": "sort.nvim",
-        "rev": "c789da6968337d2a61104a929880b5f144e02855",
-        "type": "github"
-      },
-      "original": {
-        "owner": "sQVe",
-        "repo": "sort.nvim",
         "type": "github"
       }
     },
