@@ -11,23 +11,23 @@
 ## Description
 
 This is a multi-system and multi-user flake.  It has laptops, desktops, and home server.
-- ☕ Espresso
-Desktop: Ryzen 5700g
-- 󰓥 Gram
-Laptop: Framework 13 11th Gen Intel i5
-- 🪐 Magrathea
-Home server: Intel i5-2500k still kicking
-Nextcloud
-Forgejo (Gitea)
-Kodi
-- 🔨 Mjolnir
-Desktop: Minisforum UM790 Pro 
-- 🍵Oolong
-Laptop: Dell Inspiron
--  Serenity
-Home server: Ryzen 2400g
-Off-site backup
-Kodi
+- ☕ Espresso  
+Desktop: Ryzen 5700g  
+- ⚔ Gram
+Laptop: Framework 13 11th Gen Intel i5  
+- 🪐 Magrathea  
+Home server: Intel i5-2500k still kicking  
+Nextcloud  
+Forgejo (Gitea)  
+Kodi  
+- 🔨 Mjolnir  
+Desktop: Minisforum UM790 Pro  
+- 🍵Oolong  
+Laptop: Dell Inspiron  
+- 🚀 Serenity  
+Home server: Ryzen 2400g  
+Off-site backup  
+Kodi  
 
 ## Boot Install Media
 
