@@ -73,7 +73,7 @@
 
         in {
 
-            # Espresso: Desktop 5600g
+            # Espresso: Desktop 5700g
             "espresso" = let
                 sysConfig = {
                     hostname = "espresso";
@@ -117,7 +117,7 @@
             "oolong" = let
                 sysConfig = {
                     hostname = "oolong";
-                    instalVersion = "24.11";
+                    instalVersion = "24.05";
                     user = "matshkas";
                     homeImpermanence = false;
                 };
