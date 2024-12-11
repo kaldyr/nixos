@@ -36,12 +36,13 @@
 
     services = {
         displayManager = {
-            enable = true;
             autoLogin.enable = true;
             autoLogin.user = "matshkas";
         };
         gvfs.enable = true;
         tumbler.enable = true;
+        xserver.enable = true;
+        xserver.displayManager.sddm.enable = true;
         xserver.desktopManager.budgie.enable = true;
     };
 

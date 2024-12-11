@@ -7,7 +7,6 @@
         inputs.nixos-hardware.nixosModules.common-gpu-amd
         ../disko/espresso.nix
         ./desktop.nix
-        ../services/mpd.nix
         ../programs/budgie.nix
         ../programs/plymouth.nix
     ];
