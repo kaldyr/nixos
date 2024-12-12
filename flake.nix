@@ -125,12 +125,12 @@
 
             # Serenity: Ryzen 5 2400g Kodi, media storage, and off-site snapshot backups
             "serenity" = let
-               sysConfig = {
-                   hostname = "serenity";
-                   instalVersion = "";
-                   user = "matt";
+                sysConfig = {
+                    hostname = "serenity";
+                    instalVersion = "";
+                    user = "matt";
                     homeImpermanence = true;
-               };
+                };
             in buildSystem ( sysConfig );
 
         };

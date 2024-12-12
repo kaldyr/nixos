@@ -210,11 +210,11 @@
         "plugin:which-key-nvim": "plugin:which-key-nvim"
       },
       "locked": {
-        "lastModified": 1733953710,
-        "narHash": "sha256-XGvsfhfv9xInMDKndI47QXzo+aXj/SDi570ZhHcLoK4=",
+        "lastModified": 1734046178,
+        "narHash": "sha256-V7dtR0zS9m+KtRRkyuhMGjjYccchSYAFjWAjy2vuR2Y=",
         "owner": "kaldyr",
         "repo": "neovim",
-        "rev": "8fb476cc5a58ad3cdddb85b882f2bf3020f92ddb",
+        "rev": "eb86d375b307394f32fae79e2a1a46af22eb50ef",
         "type": "github"
       },
       "original": {
@@ -466,11 +466,11 @@
     "plugin:noice-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1733604332,
-        "narHash": "sha256-0otV4qnUumHu6zyaM/om7zhKf01DlPKv+VYREceW84Y=",
+        "lastModified": 1734026622,
+        "narHash": "sha256-OpwgNTGunmy6Y7D/k0T+DFK/WJ8MeVTGWwjiPTQlvEY=",
         "owner": "folke",
         "repo": "noice.nvim",
-        "rev": "7b1960c48078a8b2fb44a89db82f4fa637b2d7c8",
+        "rev": "eaed6cc9c06aa2013b5255349e4f26a6b17ab70f",
         "type": "github"
       },
       "original": {
@@ -482,11 +482,11 @@
     "plugin:nui-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1726376728,
-        "narHash": "sha256-90Wq+vT361mTaGU/SvAezqJkX9HHmZ2GI2fKBDxPn04=",
+        "lastModified": 1733856815,
+        "narHash": "sha256-6U7E/i5FuNXQy+sF4C5DVxuTPqNKD5wxUgFohpOjm9Q=",
         "owner": "MunifTanjim",
         "repo": "nui.nvim",
-        "rev": "b58e2bfda5cea347c9d58b7f11cf3012c7b3953f",
+        "rev": "53e907ffe5eedebdca1cd503b00aa8692068ca46",
         "type": "github"
       },
       "original": {
