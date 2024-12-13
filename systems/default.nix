@@ -90,8 +90,8 @@
         fd
         ffmpeg
         ffmpegthumbnailer
-        htmlq
         gdu
+        htmlq
         jq
         p7zip
         ripgrep
