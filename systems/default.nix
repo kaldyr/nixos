@@ -38,8 +38,8 @@
             theme = pkgs.fetchFromGitHub {
                 owner = "catppuccin";
                 repo = "grub";
-                rev = "88f6124757331fd3a37c8a69473021389b7663ad";
-                sha256 = "sha256-e8XFWebd/GyX44WQI06Cx6sOduCZc5z7/YhweVQGMGY=";
+                rev = "ffcceb344e2bc86adc8e64437459c1f38adf5b63";
+                sha256 = "sha256-bDw+W69jeSiE1VBdQqqaeZf7OqCN7q5XYJ5+94PILXE=";
             } + "/src/catppuccin-frappe-grub-theme";
 
             useOSProber = false;

@@ -11,8 +11,8 @@
         xdg.configFile."bat/themes/Catppuccin Frappe.tmTheme".source = pkgs.fetchFromGitHub {
             owner = "catppuccin";
             repo = "bat";
-            rev = "d3feec47b16a8e99eabb34cdfbaa115541d374fc";
-            sha256 = "sha256-s0CHTihXlBMCKmbBBb8dUhfgOOQu9PBCQ+uviy7o47w=";
+            rev = "d2bbee4f7e7d5bac63c054e4d8eca57954b31471";
+            sha256 = "sha256-x1yqPCWuoBSx/cI94eA+AWwhiSA42cLNUOFJl7qjhmw=";
         } + "/themes/Catppuccin Frappe.tmTheme";
 
     };
