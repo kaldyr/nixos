@@ -152,20 +152,20 @@
 
                 # Screen Capture
                 bind=$mainMod, p, exec, grim $(xdg-user-dir PICTURES)/Screenshots/$(date +'%Y%m%d%H%M%S.png')
-                bind=$mainMod SHIFT, p, exec, grim -g "$(slurp)" - | convert - -shave 1x1 PNG:- | swappy -f -
-                bind=$mainMod ALT, p, exec, grim -g "$(slurp)" - | convert - -shave 1x1 PNG:- | tesseract - - | wl-copy --primary
+                bind=$mainMod SHIFT, p, exec, slurp | grim -g - - | magick - -shave 1x1 PNG:- | swappy -f -
+                bind=$mainMod ALT, p, exec, slurp | grim -g - - | tesseract - - | wl-copy
                 bind=$mainMod SHIFT, r, exec, ${screenRecord}/bin/screenRecord.sh
 
                 # Play media from clipboard
-                bind=$mainMod, g, exec, cliphist list | grep "://" | fuzzel -d | cliphist decode | wl-copy && mpv $(wl-paste)
+                bind=$mainMod, g, exec, mpv $(cliphist list | grep "://" | fuzzel -d | cliphist decode)
 
                 # Notification Controls
                 bind=$mainMod, n, exec, dunstctl history-pop
                 bind=$mainMod SHIFT, n, exec, dunstctl context
                 bind=$mainMod ALT, n, exec, dunstctl close
 
-                # Paste into windows
-                bind=$mainMod SHIFT, v, exec, wtype $(cliphist list | fuzzel -d | cliphist decode )
+                # Use wtype to paste into things that do not like to obey paste keybinds
+                bind=$mainMod, v, exec, cliphist list | fuzzel -d | cliphist decode | wtype
 
                 # Media controls
                 bind=, XF86AudioRaiseVolume, exec, pamixer -i 1
