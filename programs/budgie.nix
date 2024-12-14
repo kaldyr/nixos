@@ -5,7 +5,6 @@
         budgie.excludePackages = with pkgs; [
             mate.atril
             mate.mate-terminal
-            vlc
         ];
 
         systemPackages = with pkgs; [

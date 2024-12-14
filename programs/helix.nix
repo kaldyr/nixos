@@ -25,7 +25,6 @@
             completion-timeout = 5
             completion-trigger-len = 2
             line-number = "relative"
-            indent = { tab-width = 4, unit = "\t" }
             scrolloff = 3
 
             [editor.cursor-shape]
@@ -208,14 +207,29 @@
 
         xdg.configFile."helix/languages.toml".text = /* toml */ ''
             [[language]]
-            name = "yaml"
+            name = "go"
             auto-format = true
-            indent = { tab-width = 2, unit = " " }
+            indent = { tab-width = 3, unit = "\t" }
 
             [[language]]
             name = "html"
             auto-format = true
             indent = { tab-width = 2, unit = "\t" }
+
+            [[language]]
+            name = "lua"
+            auto-format = true
+            indent = { tab-width = 3, unit = "\t" }
+
+            [[language]]
+            name = "nix"
+            auto-format = true
+            indent = { tab-width = 4, unit = " " }
+
+            [[language]]
+            name = "yaml"
+            auto-format = true
+            indent = { tab-width = 2, unit = " " }
 
             [[language]]
             name = "templ"
