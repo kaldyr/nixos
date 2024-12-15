@@ -222,6 +222,11 @@
             indent = { tab-width = 3, unit = "\t" }
 
             [[language]]
+            name = "md"
+            auto-format = true
+            indent = { tab-width = 3, unit = "\t" }
+
+            [[language]]
             name = "nix"
             auto-format = true
             indent = { tab-width = 4, unit = " " }
