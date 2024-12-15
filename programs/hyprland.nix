@@ -165,7 +165,7 @@
                 bind=$mainMod ALT, n, exec, dunstctl close
 
                 # Use wtype to paste into things that do not like to obey paste keybinds
-                bind=$mainMod, v, exec, cliphist list | fuzzel -d | cliphist decode | wtype
+                bind=$mainMod, v, exec, wtype $(cliphist list | fuzzel -d | cliphist decode )
 
                 # Media controls
                 bind=, XF86AudioRaiseVolume, exec, pamixer -i 1
