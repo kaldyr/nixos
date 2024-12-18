@@ -13,8 +13,8 @@
         # Impermanence - come back to truth at every boot
         impermanence.url = "github:nix-community/impermanence";
 
-        # Custom Neovim
-        neovim.url = "github:kaldyr/neovim";
+        # Neovim Nightly
+        neovim.url = "github:nix-community/neovim-nightly-overlay";
         neovim.inputs.nixpkgs.follows = "nixpkgs";
 
         # NixOS Hardware
@@ -79,6 +79,7 @@
                     hostname = "espresso";
                     instalVersion = "24.11";
                     user = "matshkas";
+                    systemImpermanence = true;
                     homeImpermanence = false;
                 };
             in buildSystem ( sysConfig );
@@ -89,6 +90,7 @@
                     hostname = "gram";
                     instalVersion = "24.05";
                     user = "matt";
+                    systemImpermanence = true;
                     homeImpermanence = true;
                 };
             in buildSystem ( sysConfig );
@@ -99,6 +101,7 @@
                     hostname = "magrathea";
                     instalVersion = "24.05";
                     user = "matt";
+                    systemImpermanence = true;
                     homeImpermanence = true;
                 };
             in buildSystem ( sysConfig );
@@ -109,16 +112,18 @@
                     hostname = "mjolnir";
                     instalVersion = "23.05";
                     user = "matt";
+                    systemImpermanence = true;
                     homeImpermanence = true;
                 };
             in buildSystem ( sysConfig );
 
-            # Oolong: Laptop
+            # Oolong: Dell Inspiron 14 3473 - 4GB RAM, 32GB SSD
             "oolong" = let
                 sysConfig = {
                     hostname = "oolong";
-                    instalVersion = "24.05";
+                    instalVersion = "24.11"; # Fresh install on December 17th, 2024
                     user = "matshkas";
+                    systemImpermanence = false;
                     homeImpermanence = false;
                 };
             in buildSystem ( sysConfig );
@@ -129,6 +134,7 @@
                     hostname = "serenity";
                     instalVersion = "";
                     user = "matt";
+                    systemImpermanence = true;
                     homeImpermanence = true;
                 };
             in buildSystem ( sysConfig );

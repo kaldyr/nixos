@@ -64,7 +64,7 @@
         };
 
         # System files that aren't declarative and need to be preserved
-        persistence."/state/system" = {
+        persistence."/state/system" = lib.mkIf sysConfig.systemImpermanence {
 
             directories = [
                 { directory = "/etc/NetworkManager/system-connections"; mode = "0700"; }

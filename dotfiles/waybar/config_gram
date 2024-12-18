@@ -1,0 +1,96 @@
+[
+	{
+		"battery": {
+			"format": "<span font='Font Awesome 5 Free 11'>{icon}</span>  ",
+			"format-charging": "<span font='Font Awesome 5 Free'></span>  <span font='Font Awesome 5 Free 11'>{icon}</span>  ",
+			"format-icons": [ "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹" ],
+			"format-time": "{H}h {M}m",
+			"interval": 30,
+			"on-click": "2",
+			"states": {
+				"critical": 10,
+				"warning": 25,
+			},
+			"tooltip": true,
+			"tooltip-format": "{capacity}% - {time}",
+		},
+		"clock": {
+			"format": "  {:%H : %M	%A, %B %e}  ",
+			"tooltip-format": "<tt>{calendar}</tt>",
+		},
+		"exclusive": false,
+		"gtk-layer-shell": true,
+		"height": 24,
+		"hyprland/window": {
+			"format": "{}",
+		},
+		"hyprland/workspaces": {
+			"all-outputs": true,
+			"format": "{icon}",
+			"format-icons": {
+				"active": "",
+				"default": "",
+				"urgent": "",
+			},
+			"on-click": "activate",
+			"on-scroll-down": "hyprctl dispatch workspace e+1",
+			"on-scroll-up": "hyprctl dispatch workspace e-1",
+			"sort-by-number": true,
+		},
+		"layer": "top",
+		"mode": "dock",
+		"modules-center": [
+			"clock",
+		],
+		"modules-left": [
+			"hyprland/workspaces",
+		],
+		"modules-right": [
+			"temperature",
+			"pulseaudio#output",
+			"pulseaudio#input",
+			"battery",
+			"tray",
+		],
+		"passthrough": false,
+		"position": "top",
+		"pulseaudio#input": {
+			"format": "{format_source}",
+			"format-source": " {volume}%",
+			"format-source-muted": " ",
+			"on-click": "pamixer --default-source -t",
+			"on-click-right": "pavucontrol --tab=4",
+			"on-scroll-down": "pamixer --default-source -d 1",
+			"on-scroll-up": "pamixer --default-source -i 1",
+			"tooltip": false,
+		},
+		"pulseaudio#output": {
+			"format": "{volume}% {icon} ",
+			"format-icons": {
+				"car": " ",
+				"default": [ "", "", "" ],
+				"hands-free": " ",
+				"headphone": " ",
+				"headset": " ",
+				"phone": " ",
+				"portable": " ",
+			},
+			"format-muted": " ",
+			"on-click": "pamixer -t",
+			"on-click-right": "pavucontrol --tab=3",
+			"on-scroll-down": "pamixer -d 1",
+			"on-scroll-up": "pamixer -i 1",
+		},
+		"temperature": {
+			"critical-threshold": 75,
+			"format": "",
+			"hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
+			"input-filename": "temp1_input",
+		},
+		"tray": {
+			"icon-size": 12,
+			"spacing": 12
+		}
+	}
+	"_vim_": { "modeline": "/* vim: set ft=json: */" }
+]

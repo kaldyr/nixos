@@ -6,7 +6,6 @@
         sessionVariables.VISUAL = "nano";
 
         packages = with pkgs; [
-            floorp
             image-roll
             newsboat
         ];
