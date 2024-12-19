@@ -16,6 +16,7 @@
         ../programs/openscad.nix
         ../programs/plymouth.nix
         ../programs/steam.nix
+        ../programs/wezterm.nix
     ];
 
     boot = {
@@ -28,6 +29,8 @@
         kernelParams = [ "btrfs" "quiet" "preempt=full" ];
         loader.grub.gfxmodeEfi = "3440x1440,1920x1080";
     };
+
+    environment.systemPackages = with pkgs; [ lowfi ];
 
     fileSystems = {
 

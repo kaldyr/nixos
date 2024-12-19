@@ -78,6 +78,10 @@
                     fi;
                 '';
 
+                terminal = (
+                    if sysConfig.hostname == "oolong" then "foot"
+                    else "wezterm" );
+
             in /* hyprlang */ ''
                 $mainMod=SUPER
 
@@ -146,7 +150,7 @@
                 }
 
                 # Launch Applications
-                bind=$mainMod, q, exec, wezterm
+                bind=$mainMod, q, exec, ${terminal}
                 bind=$mainMod, r, exec, fuzzel
                 bind=$mainMod, u, exec, hyprpicker -a
 

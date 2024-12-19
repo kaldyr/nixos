@@ -12,6 +12,7 @@
         ../programs/openscad.nix
         ../programs/plymouth.nix
         ../programs/steam.nix
+        ../programs/wezterm.nix
     ];
 
     boot = {
@@ -23,6 +24,8 @@
         kernelParams = [ "btrfs" "i915.enable_fbc=1" "i915.enable_psr=1" "quiet" ];
         loader.grub.gfxmodeEfi = "2256x1504";
     };
+
+    environment.systemPackages = with pkgs; [ lowfi ];
 
     fileSystems = {
 

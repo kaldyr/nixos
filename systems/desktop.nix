@@ -9,7 +9,6 @@
         ../programs/mpv.nix
         ../programs/obsidian.nix
         ../programs/telegram.nix
-        ../programs/wezterm.nix
         ../programs/zathura.nix
         ../services/keyd.nix
         ../services/pipewire.nix
@@ -186,7 +185,6 @@
         home = {
 
             packages = with pkgs; [
-                android-tools
                 gimp
                 gnome-keyring
                 gnuplot
@@ -195,7 +193,6 @@
                 imagemagick
                 kjv
                 libsecret
-                lowfi
                 networkmanagerapplet
                 papirus-folders
                 vulkan-tools
