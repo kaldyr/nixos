@@ -6,10 +6,8 @@
         ../programs/keepass.nix
         ../programs/libreoffice.nix
         ../programs/librewolf.nix
-        ../programs/lutris.nix
         ../programs/mpv.nix
         ../programs/obsidian.nix
-        ../programs/steam.nix
         ../programs/telegram.nix
         ../programs/wezterm.nix
         ../programs/zathura.nix

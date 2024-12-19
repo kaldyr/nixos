@@ -8,7 +8,9 @@
         ../disko/espresso.nix
         ./desktop.nix
         ../programs/budgie.nix
+        ../programs/lutris.nix
         ../programs/plymouth.nix
+        ../programs/steam.nix
     ];
 
     boot = {
