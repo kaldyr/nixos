@@ -3,6 +3,17 @@ return {
 	'echasnovski/mini.nvim',
 
 	config = function()
+		require('mini.animate').setup({
+			cursor = { enable = false },
+			scroll = {
+				timing = require('mini.animate').gen_timing.linear({
+					duration = 85, unit = 'total'
+				})
+			},
+			resize = { enable = false },
+			open = { enable = false },
+			close = { enable = false },
+		})
 		require('mini.basics').setup({
 			options = {
 				basic = true,

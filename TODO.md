@@ -3,14 +3,9 @@
 ## Changes
 
 - Unify motions between wezterm, hyprland, and terminal applications
-- Script for handling terminal/editor pane navigation with unified keybind
 - Script to manage opening files in yazi with editor in a new buffer (or split) if editor open in terminal pane
 - Configure btrbk to snapshot state and archive
-- nh nix helper?
 - Browser Profile sync to RAM
-- Convert theming to nix-colors
-- Move all "FetchFromGithub" to flake inputs?
-- Toggle laptop keyboard on Air60 (dis)connect
 - Nix-serve, hydra, binary cache
 - Beets with plugins (bandcamp)
 - Get phone to automount when plugged in

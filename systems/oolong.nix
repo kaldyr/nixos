@@ -59,4 +59,25 @@
 
     };
 
+    nix = {
+        buildMachines = [ {
+            hostName = "magrathea";
+            system = "x86_64-linux";
+            protocol = "ssh-ng";
+            maxJobs = 4;
+            speedFactor = 999;
+            supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        } ];
+        distributedBuilds = true;
+        settings.builders-use-substitutes = true;
+    };
+
+    programs.ssh.extraConfig = ''
+        Host magrathea
+            HostName magrathea
+            User nixremote
+            IdentitiesOnly yes
+            IdentityFile /root/.ssh/nixremote
+    '';
+
 }

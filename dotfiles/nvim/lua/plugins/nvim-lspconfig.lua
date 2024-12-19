@@ -27,8 +27,6 @@ return {
 		end
 
 		local capabilities = require('blink.cmp').get_lsp_capabilities()
-		-- local capabilities = vim.lsp.protocol.make_client_capabilities()
-		-- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 		vim.filetype.add({ extension = { templ = 'templ' } }) -- a-h/templ Go
 		require('lspconfig').cssls.setup { on_attach = on_attach, capabilities = capabilities }

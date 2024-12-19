@@ -26,12 +26,7 @@ vim.keymap.set('n', '<Right>', '"mx"mp', { silent = true }) -- <Caps-l>
 vim.keymap.set('n', '<C-w>n', '<Cmd>new<CR>', { desc = 'Split down', silent = true })
 vim.keymap.set('n', '<C-w>v', '<Cmd>vnew<CR>', { desc = 'Split to right', silent = true })
 vim.keymap.set('n', '<C-q>', '<Cmd>bd<CR>', { desc = 'Close Buffer', silent = true })
-
--- Screen Movement
-vim.keymap.set('n', '<C-d>', '<C-d>zz')
-vim.keymap.set('n', '<C-u>', '<C-u>zz')
-vim.keymap.set('n', 'n', 'nzzzv')
-vim.keymap.set('n', 'N', 'Nzzzv')
+vim.keymap.set('n', '<C-w>t', '<Cmd>tabnew<CR>', { desc = 'New Tab', silent = true })
 
 -- Execute/Replay Macro over selection
 vim.keymap.set('x', '.', '<Cmd>norm .<CR>', { silent = true, noremap = true })
