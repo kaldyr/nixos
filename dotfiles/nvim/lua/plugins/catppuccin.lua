@@ -22,8 +22,9 @@ return {
 
 		integrations = {
 			barbar = true,
-			cmp = true,
+			blink_cmp = true,
 			flash = true,
+			fzf = true,
 			gitsigns = true,
 			native_lsp = {
 				enabled = true,
@@ -49,10 +50,8 @@ return {
 				enabled = true,
 			},
 			noice = true,
+			notify = true,
 			render_markdown = true,
-			telescope = {
-				enabled = true,
-			},
 			treesitter = true,
 			treesitter_context = true,
 			which_key = true,
