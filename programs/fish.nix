@@ -23,6 +23,10 @@
                 bind p fish_clipboard_paste
                 bind -M visual y fish_clipboard_copy
                 bind -M visual p fish_clipboard_paste
+                bind \cl clear\ -x\ \; \ tput\ cup\ \$COLUMNS\ 0\ \;\ commandline\ -f\ repaint
+                bind -M insert \cl clear\ -x\ \; \ tput\ cup\ \$COLUMNS\ 0\ \;\ commandline\ -f\ repaint
+                bind -M visual \cl clear\ -x\ \; \ tput\ cup\ \$COLUMNS\ 0\ \;\ commandline\ -f\ repaint
+                tput cup $COLUMNS 0
             '';
 
             plugins = [
