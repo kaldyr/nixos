@@ -14,6 +14,17 @@ return {
 		},
 	},
 
-	opts = {},
+	opts = {
+		preset = 'helix',
+	},
+
+	config = function(_, opts)
+		local wk = require('which-key')
+		wk.setup(opts)
+		wk.add({
+			{ '\\', group = 'Toggle' },
+			{ ' ', group = 'Pickers' },
+		})
+	end,
 
 }

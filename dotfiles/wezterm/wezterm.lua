@@ -16,15 +16,16 @@ config.enable_kitty_graphics = true
 config.enable_scroll_bar = false
 config.enable_wayland = true
 config.font = wezterm.font( 'Liga Rec Mono Custom' )
+-- config.font = wezterm.font( 'Maple Mono NF' )
 config.font_size = 12
+config.harfbuzz_features = { 'zero' }
 config.hide_mouse_cursor_when_typing = false
 config.hide_tab_bar_if_only_one_tab = true
-config.line_height = 1.1
+config.line_height = 1.0
 config.scrollback_lines = 10000
 config.use_dead_keys = false
 config.use_fancy_tab_bar = false
 config.warn_about_missing_glyphs = false
-
 
 config.disable_default_key_bindings = true
 config.keys = {
@@ -32,6 +33,7 @@ config.keys = {
 	{ key = '=', mods = 'ALT', action = wezterm.action.IncreaseFontSize },
 	{ key = '0', mods = 'ALT', action = wezterm.action.ResetFontSize },
 	{ key = 'u', mods = 'ALT', action = wezterm.action.CharSelect },
+	{ key = 'q', mods = 'ALT', action = wezterm.action.QuickSelect },
 }
 
 config.window_padding = {

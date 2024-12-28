@@ -66,7 +66,10 @@
             fi
         '';
 
-        home.packages = with pkgs; [ nextcloud-client ];
+        home.packages = with pkgs; [
+            nextcloud-client
+            nextcloud-talk-desktop
+        ];
 
         services.nextcloud-client = {
             enable = true;

@@ -2,13 +2,14 @@ return {
 
 	'epwalsh/obsidian.nvim',
 
+	dependencies = 'nvim-lua/plenary.nvim',
+
 	event = {
 		"BufReadPre " .. vim.fn.expand '~' .. '/Notes/*.md',
 		"BufNewFile " .. vim.fn.expand '~' .. '/Notes/*.md',
 	},
 
 	opts = {
-		completion = { nvim_cmp = true },
 		finder = 'telescope.nvim',
 		mappings = {
 			['gf'] = {

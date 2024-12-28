@@ -9,6 +9,7 @@
         home.packages = with pkgs; [
             mediainfo
             ouch
+            simple-mtpfs
         ];
 
         programs.yazi = {
@@ -37,6 +38,13 @@
                     repo = "ouch.yazi";
                     rev = "v0.4.0";
                     sha256 = "sha256-eRjdcBJY5RHbbggnMHkcIXUF8Sj2nhD/o7+K3vD3hHY=";
+                };
+
+                "simple-mtpfs" = pkgs.fetchFromGitHub {
+                    owner = "boydaihungst";
+                    repo = "simple-mtpfs.yazi";
+                    rev = "4941d8f211b620bff3b11d17add6c2f5ccd3781e";
+                    sha256 = "sha256-kOiB5LQAzSLgD47QrvZroaQqJHFPWEtG2S1q+RNbBnU=";
                 };
 
                 "smart-filter" = "${yazi-plugins}/smart-filter.yazi";

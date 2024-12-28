@@ -1,70 +1,85 @@
+local o, g = vim.opt, vim.g
+
 -- Define the Leader Key
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+g.mapleader = ' '
+g.maplocalleader = ' '
 
 -- General
-vim.opt.clipboard = 'unnamedplus'
-vim.opt.conceallevel = 2
-vim.opt.cursorline = true
-vim.opt.laststatus = 3
-vim.opt.mouse = 'a'
-vim.opt.number = true
-vim.opt.numberwidth = 2
-vim.opt.relativenumber = false
-vim.opt.ruler = false
-vim.opt.scrolloff = 8
-vim.opt.showtabline = 0
-vim.opt.sidescrolloff = 8
-vim.opt.signcolumn = 'yes'
-vim.opt.smartcase = true
-vim.opt.spelllang = 'en_us'
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-vim.opt.swapfile = false
-vim.opt.syntax = 'on'
-vim.opt.termguicolors = true
-vim.opt.timeout = true;
-vim.opt.timeoutlen = 400
-vim.opt.title = true
-vim.opt.undofile = true
-vim.opt.wrap = false
-vim.opt.shortmess:append "sfFI"
+o.backup = false
+o.clipboard = 'unnamedplus'
+o.mouse = 'a'
+o.splitbelow = true
+o.splitright = true
+o.swapfile = false
+o.undofile = true
+o.writebackup = false
+
+-- Appearance
+o.breakindent = true
+o.conceallevel = 2
+o.cursorline = true
+o.laststatus = 3
+o.linebreak = true
+o.number = true
+o.pumblend = 10
+o.pumheight = 10
+o.ruler = false
+o.scrolloff = 8
+o.shortmess:append "sfFIWc"
+o.showmode = false
+o.showtabline = 0
+o.sidescrolloff = 8
+o.signcolumn = 'yes'
+o.syntax = 'on'
+o.timeout = true;
+o.timeoutlen = 400
+o.title = true
+o.wrap = false
+
+-- Editing
+o.formatoptions = 'qjl1t'
+o.ignorecase = true
+o.incsearch = true
+o.infercase = true
+o.smartcase = true
+o.spelllang = 'en_us'
+o.virtualedit = 'block'
 
 -- Folding
-vim.opt.foldcolumn = 'auto:1'
-vim.opt.foldenable = true
-vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 99
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.opt.foldnestmax = 10
-vim.opt.foldtext = ''
+o.foldcolumn = 'auto:1'
+o.foldenable = true
+o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+o.foldlevel = 99
+o.foldlevelstart = 99
+o.foldmethod = 'expr'
+o.foldnestmax = 10
+o.foldtext = ''
 
 -- Default Indenting, use .editorconfig for projects
-vim.opt.autoindent = true
-vim.opt.expandtab = false
-vim.opt.shiftwidth = 0
-vim.opt.smartindent = false
-vim.opt.smarttab = false
-vim.opt.softtabstop = -1
-vim.opt.tabstop = 3
+o.autoindent = true
+o.expandtab = false
+o.shiftwidth = 0
+o.smartindent = false
+o.smarttab = false
+o.softtabstop = -1
+o.tabstop = 3
 
 -- Special characters
-vim.opt.fillchars = {
+o.fillchars = {
 	eob = ' ',
 	fold = ' ',
+	foldclose = '',
 	foldopen = '',
 	foldsep = ' ',
-	foldclose = '',
 }
 
-vim.opt.listchars = {
+o.listchars = {
 	extends = '⟩',
 	lead = '·',
-	leadmultispace = '▏   ',
+	leadmultispace = '🢒   ',
 	nbsp = '␣',
 	precedes = '⟨',
 	space = '·',
-	tab = '▏ ',
-	trail = '␣',
+	tab = '🢒 ',
+	trail = '·',
 }

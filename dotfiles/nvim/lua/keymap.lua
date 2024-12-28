@@ -1,55 +1,74 @@
+local map = vim.keymap.set
+
 -- Cleanup space for leader key usage
-vim.keymap.set('', '<Space>', '<Nop>')
-vim.keymap.set('n', 'Q', '<Nop>')
+map('', '<Space>', '<Nop>')
+map('n', 'Q', '<Nop>')
 
 -- Escape removes highlights
-vim.keymap.set('n', '<ESC>', '<Cmd>nohls<CR>', { silent = true })
+map('n', '<ESC>', '<Cmd>nohls<CR>', { silent = true })
 
 -- Line Movement
-vim.keymap.set('n', '<Down>', '<Cmd>move .+1<CR>==', { silent = true, noremap = true }) -- <Caps-j>
-vim.keymap.set('n', '<Up>', '<Cmd>move .-2<CR>==', { silent = true, noremap = true }) -- <Caps-k>
-vim.keymap.set('v', '<Down>', ":move '>+1<CR>gv=gv", { silent = true, noremap = true }) -- <Caps-j>
-vim.keymap.set('v', '<Up>', ":move '<-2<CR>gv=gv", { silent = true, noremap = true }) -- <Caps-k>
-
--- Indentation
-vim.keymap.set('n', '<', '<<', { silent = true, noremap = true })
-vim.keymap.set('n', '>', '>>', { silent = true, noremap = true })
--- Stay in visual mode after indent
-vim.keymap.set('v', '<', '<gv', { silent = true })
-vim.keymap.set('v', '>', '>gv', { silent = true })
+map('n', '<Down>', '<Cmd>move .+1<CR>==', { silent = true, noremap = true }) -- <Caps-j>
+map('n', '<Up>', '<Cmd>move .-2<CR>==', { silent = true, noremap = true }) -- <Caps-k>
+map('v', '<Down>', ":move '>+1<CR>gv=gv", { silent = true, noremap = true }) -- <Caps-j>
+map('v', '<Up>', ":move '<-2<CR>gv=gv", { silent = true, noremap = true }) -- <Caps-k>
 
 -- Character movement
-vim.keymap.set('n', '<Left>', '"mxh"mP', { silent = true }) -- <Caps-h>
-vim.keymap.set('n', '<Right>', '"mx"mp', { silent = true }) -- <Caps-l>
+map('n', '<Left>', '"mxh"mP', { silent = true }) -- <Caps-h>
+map('n', '<Right>', '"mx"mp', { silent = true }) -- <Caps-l>
+
+-- Window movement
+-- map('n', '<C-h>', '<Cmd>wincmd h<CR>', { desc = 'Move Window Left', silent = true })
+-- map('n', '<C-j>', '<Cmd>wincmd j<CR>', { desc = 'Move Window Down', silent = true })
+-- map('n', '<C-k>', '<Cmd>wincmd k<CR>', { desc = 'Move Window Up', silent = true })
+-- map('n', '<C-l>', '<Cmd>wincmd l<CR>', { desc = 'Move Window Right', silent = true })
+
+-- Tabs
+map('n', '<C-/>', '<Cmd>tabnew<CR>', { desc = 'Create New Tab', silent = true })
+map('n', '[t', '<Cmd>tabp<CR>', { desc = 'Swap to Tab left', silent = true })
+map('n', ']t', '<Cmd>tabn<CR>', { desc = 'Swap to Tab right', silent = true })
+
+-- Window resize
+-- map('n', '<C-Left>', '"<Cmd>vertical resize -" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Decrease window width' })
+-- map('n', '<C-Down>', '"<Cmd>resize -" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Decrease window height' })
+-- map('n', '<C-Up>', '"<Cmd>resize +" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Increase window height' })
+-- map('n', '<C-Right>', '"<Cmd>vertical resize +" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Increase window width' })
 
 -- Window management
-vim.keymap.set('n', '<C-w>n', '<Cmd>new<CR>', { desc = 'Split down', silent = true })
-vim.keymap.set('n', '<C-w>v', '<Cmd>vnew<CR>', { desc = 'Split to right', silent = true })
-vim.keymap.set('n', '<C-q>', '<Cmd>bd<CR>', { desc = 'Close Buffer', silent = true })
-vim.keymap.set('n', '<C-w>t', '<Cmd>tabnew<CR>', { desc = 'New Tab', silent = true })
+map('n', '<C-w>n', '<Cmd>new<CR>', { desc = 'Split down', silent = true })
+map('n', '<C-w>v', '<Cmd>vnew<CR>', { desc = 'Split to right', silent = true })
+map('n', '<C-q>', '<Cmd>bd<CR>', { desc = 'Close Buffer', silent = true })
+map('n', '<C-w>t', '<Cmd>tabnew<CR>', { desc = 'New Tab', silent = true })
+
+-- Indentation
+map('n', '<', '<<', { silent = true, noremap = true })
+map('n', '>', '>>', { silent = true, noremap = true })
+-- Stay in visual mode after indent
+map('v', '<', '<gv', { silent = true })
+map('v', '>', '>gv', { silent = true })
 
 -- Execute/Replay Macro over selection
-vim.keymap.set('x', '.', '<Cmd>norm .<CR>', { silent = true, noremap = true })
-vim.keymap.set('x', '@', '<Cmd>norm @@<CR>', { silent = true, noremap = true })
+map('x', '.', ':norm .<CR>', { silent = true, noremap = true })
+map('x', '@', ':norm @@<CR>', { silent = true, noremap = true })
 
 -- Replace word under cursor
-vim.keymap.set(
+map(
 	'n',
-	'<leader>r',
+	'<C-r>',
 	':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gcI<left><left><left><left>',
-	{ desc = '[R]eplace Word under cursor', silent = false }
+	{ desc = 'Replace Word under cursor', silent = false }
 )
 
 -- Replace selection
-vim.keymap.set(
+map(
 	'v',
-	'<leader>r',
-	'"hy:%s/<C-r>h/<C-r>h/gc<left><left><left>',
-	{ desc = '[R]eplace Selection', silent = false }
+	'<C-r>',
+	'"hy:%s/<C-r>h/<C-r>h/gcI<left><left><left>',
+	{ desc = 'Replace Selection', silent = false }
 )
 
 -- Smart dd - if the line is empty don't override registers
-vim.keymap.set(
+map(
 	'n',
 	'dd',
 	function()

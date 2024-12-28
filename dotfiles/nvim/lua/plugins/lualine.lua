@@ -2,15 +2,13 @@ return {
 
 	'nvim-lualine/lualine.nvim',
 
-	dependencies = {
-		'nvim-tree/nvim-web-devicons',
-	},
+	dependencies = 'nvim-tree/nvim-web-devicons',
 
 	opts = {
 
 		options = {
 			show_filename_only = false,
-			theme = 'catppuccin',
+			theme = 'auto',
 			component_separators = { left = '', right = '' },
 			section_separators = { left = '', right = '' }
 		},

@@ -10,6 +10,10 @@
         home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+        # Hyprland from source
+        hyprland.url = "github:hyprwm/Hyprland";
+        hyprland.inputs.nixpkgs.follows = "nixpkgs";
+
         # Impermanence - come back to truth at every boot
         impermanence.url = "github:nix-community/impermanence";
 
@@ -28,8 +32,13 @@
         sops-nix.url = "github:Mic92/sops-nix";
         sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-        # Wezterm
+        # Yazi File Manager
+        # yazi.url = "github:sxyazi/yazi";
+        # yazi.inputs.nixpkgs.follows = "nixpkgs";
+
+        # Wezterm Terminal Emulator
         wezterm.url = "github:wez/wezterm?dir=nix";
+        wezterm.inputs.nixpkgs.follows = "nixpkgs";
 
         # Zellij status plugin
         zjstatus.url = "github:dj95/zjstatus";
