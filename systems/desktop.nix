@@ -130,7 +130,7 @@
             julia-mono # Math font
             liberation_ttf # Open versions of MS fonts
             libertinus # System Serif Font
-            maple-mono-NF
+            nerd-fonts.monaspace
             nerd-fonts.symbols-only # Symbol font
             noto-fonts-cjk-sans # Display of Chinese/Japanese/Korean characters
             noto-fonts-cjk-serif # Display of Chinese/Japanese/Korean characters
