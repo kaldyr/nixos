@@ -17,22 +17,10 @@ map('v', '<Up>', ":move '<-2<CR>gv=gv", { silent = true, noremap = true }) -- <C
 map('n', '<Left>', '"mxh"mP', { silent = true }) -- <Caps-h>
 map('n', '<Right>', '"mx"mp', { silent = true }) -- <Caps-l>
 
--- Window movement
--- map('n', '<C-h>', '<Cmd>wincmd h<CR>', { desc = 'Move Window Left', silent = true })
--- map('n', '<C-j>', '<Cmd>wincmd j<CR>', { desc = 'Move Window Down', silent = true })
--- map('n', '<C-k>', '<Cmd>wincmd k<CR>', { desc = 'Move Window Up', silent = true })
--- map('n', '<C-l>', '<Cmd>wincmd l<CR>', { desc = 'Move Window Right', silent = true })
-
 -- Tabs
 map('n', '<C-/>', '<Cmd>tabnew<CR>', { desc = 'Create New Tab', silent = true })
 map('n', '[t', '<Cmd>tabp<CR>', { desc = 'Swap to Tab left', silent = true })
 map('n', ']t', '<Cmd>tabn<CR>', { desc = 'Swap to Tab right', silent = true })
-
--- Window resize
--- map('n', '<C-Left>', '"<Cmd>vertical resize -" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Decrease window width' })
--- map('n', '<C-Down>', '"<Cmd>resize -" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Decrease window height' })
--- map('n', '<C-Up>', '"<Cmd>resize +" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Increase window height' })
--- map('n', '<C-Right>', '"<Cmd>vertical resize +" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Increase window width' })
 
 -- Window management
 map('n', '<C-w>n', '<Cmd>new<CR>', { desc = 'Split down', silent = true })

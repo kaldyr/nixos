@@ -8,7 +8,7 @@ return {
 		{ '<leader>b', function() require('fzf-lua').buffers() end, desc = 'Buffer Picker', silent = true },
 		{ '<leader>f', function() require('fzf-lua').files() end, desc = 'File Picker', silent = true },
 		{ '<leader>h', function() require('fzf-lua').git_bcommits() end, desc = 'Git File History', silent = true },
-		{ '<leader>l', function() require('fzf-lua').live_grep() end, desc = 'Search Live Grep', silent = true },
+		{ '<leader>l', function() require('fzf-lua').live_grep_glob() end, desc = 'Search Live Grep', silent = true },
 		{ '<leader>q', function() require('fzf-lua').quickfix() end, desc = 'Quickfix Picker', silent = true },
 		{ '<leader>Q', function() require('fzf-lua').grep_quickfix({ multiprocess = true }) end, desc = 'Search Quickfix', silent = true },
 		{ '<leader>r', function() require('fzf-lua').resume() end, desc = 'Resume Last Picker', silent = true },
@@ -20,6 +20,17 @@ return {
 	opts = {
 		'default-title',
 		fzf_colors = true,
+		oldfiles = {
+			include_current_session = true,
+		},
+		previewers = {
+			builtin = {
+				syntax_limit_b = 1024 * 100,
+			},
+		},
+		grep = {
+			rg_glob = true,
+		},
 	},
 
 }
