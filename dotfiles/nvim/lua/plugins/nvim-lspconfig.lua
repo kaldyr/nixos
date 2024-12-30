@@ -66,17 +66,41 @@ return {
 						parameterNames = true,
 						rangeVariableTypes = true,
 					},
-					-- root_dir = function()
-					-- 	return vim.fn.getcwd()
-					-- end,
 					staticcheck = true,
-					-- usePlaceholders = true,
+					usePlaceholders = true,
 				},
 			},
 		}
 		require('lspconfig').html.setup { on_attach = on_attach, capabilities = capabilities, filetypes = { 'html', 'templ' } }
 		require('lspconfig').htmx.setup { on_attach = on_attach, capabilities = capabilities, filetypes = { 'html', 'templ' } }
-		require('lspconfig').lua_ls.setup { on_attach = on_attach, capabilities = capabilities }
+		require('lspconfig').lua_ls.setup {
+			on_attach = on_attach,
+			capabilities = capabilities,
+			settings = {
+				Lua = {
+					workspace = {
+						checkThirdParty = false,
+					},
+					codeLens = {
+						enable = true,
+					},
+					completion = {
+						callSnippet = "Replace",
+					},
+					doc = {
+						privateName = { "^_" },
+					},
+					hint = {
+						enable = true,
+						setType = true,
+						paramType = true,
+						paramName = "Enable",
+						semicolon = "Enable",
+						arrayIndex = "Disable",
+					},
+				},
+			},
+		}
 		require('lspconfig').marksman.setup { on_attach = on_attach, capabilities = capabilities }
 		require('lspconfig').nil_ls.setup { on_attach = on_attach, capabilities = capabilities }
 		require('lspconfig').nushell.setup { on_attach = on_attach, capabilities = capabilities }
