@@ -130,13 +130,11 @@
             julia-mono # Math font
             liberation_ttf # Open versions of MS fonts
             libertinus # System Serif Font
-            nerd-fonts.monaspace
-            nerd-fonts.symbols-only # Symbol font
+            maple-mono-7
             noto-fonts-cjk-sans # Display of Chinese/Japanese/Korean characters
             noto-fonts-cjk-serif # Display of Chinese/Japanese/Korean characters
             noto-fonts-emoji # Symbols
             recursive # System sans font
-            recursive-mono-custom # Custom build of Recursive Mono with Fira Code Ligatures
         ];
 
     };
