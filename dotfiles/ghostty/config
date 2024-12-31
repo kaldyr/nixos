@@ -1,7 +1,7 @@
 theme = catppuccin-frappe
 shell-integration = fish
 window-decoration = false
-font-family = "MapleMono NF"
+font-family = "Maple Mono NF"
 window-padding-x = 0
 font-size = 10
 window-padding-y = 0

@@ -1,7 +1,7 @@
-{ sysConfig, ... }: {
+{ pkgs, sysConfig, ... }: {
 
     home-manager.users.${sysConfig.user} = { config, ... }: {
-        programs.wezterm.enable = true;
+        home.packages = with pkgs; [ ghostty ];
         xdg.configFile."ghostty/config".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/ghostty/config";
     };
 
