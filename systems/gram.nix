@@ -6,6 +6,7 @@
         ../disko/gram.nix
         ./desktop.nix
         ../services/mpd.nix
+        ../programs/ghostty.nix
         ../programs/hyprland.nix
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix

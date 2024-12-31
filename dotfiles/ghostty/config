@@ -1,0 +1,13 @@
+theme = catppuccin-frappe
+shell-integration = fish
+window-decoration = false
+font-family = "MapleMono NF"
+window-padding-x = 0
+font-size = 10
+window-padding-y = 0
+window-padding-balance = true
+
+keybind = alt+\=reload_config
+keybind = alt+minus=decrease_font_size:1
+keybind = alt+equal=increase_font_size:1
+keybind = alt+zero=reset_font_size

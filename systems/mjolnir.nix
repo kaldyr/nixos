@@ -10,6 +10,7 @@
         ./desktop.nix
         ../services/mpd.nix
         ../services/openrazer.nix
+        ../programs/ghostty.nix
         ../programs/hyprland.nix
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix

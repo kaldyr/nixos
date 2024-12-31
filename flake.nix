@@ -6,6 +6,9 @@
         disko.url = "github:nix-community/disko";
         disko.inputs.nixpkgs.follows = "nixpkgs";
 
+        # Ghostty
+        ghostty.url = "github:ghostty-org/ghostty";
+
         # Manage the home folder and user applications
         home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
