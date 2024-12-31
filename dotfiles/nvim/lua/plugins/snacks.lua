@@ -5,6 +5,10 @@ return {
 	priority = 1000,
 	lazy = false,
 
+	keys = {
+		{ '<leader>z', function() Snacks.lazygit() end, noremap = true, silent = true, desc = 'Lazygit' },
+	},
+
 	init = function()
 		vim.api.nvim_create_autocmd( 'User', {
 			pattern = 'VeryLazy',
@@ -48,6 +52,10 @@ return {
 			},
 		},
 
+		lazygit = {
+			configure = true,
+		},
+
 		notifier = { enabled = true },
 		scope = { enabled = true },
 
@@ -62,6 +70,8 @@ return {
 			enable = true,
 			folds = { open = true },
 		},
+
+		terminal = {} ,
 
 		toggle = {
 			enabled = true,

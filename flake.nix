@@ -33,7 +33,7 @@
         sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
         # Yazi File Manager
-        # yazi.url = "github:sxyazi/yazi";
+        yazi.url = "github:sxyazi/yazi";
         # yazi.inputs.nixpkgs.follows = "nixpkgs";
 
         # Wezterm Terminal Emulator

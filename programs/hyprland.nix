@@ -126,8 +126,8 @@
 
                 general {
                     border_size=0
-                    gaps_in=14
-                    gaps_out=28
+                    gaps_in=10
+                    gaps_out=13
                     layout=dwindle
                 }
 
@@ -269,7 +269,7 @@
 
                 # Window Rules
                 windowrulev2=opacity 0.90 override 0.90 override, class:foot
-                windowrulev2=opacity 0.90 override 0.90 override, class:wezterm
+                windowrulev2=opacity 0.90 override 0.90 override, class:org.wezfurlong.wezterm
                 windowrulev2=opacity 0.90 override 0.90 override, class:librewolf
                 windowrulev2=opacity 0.90 override 0.90 override, class:org.telegram.desktop
                 windowrulev2=opacity 0.90 override 0.90 override, class:discord
