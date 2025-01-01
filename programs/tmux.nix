@@ -2,11 +2,13 @@
 
     home-manager.users.${sysConfig.user} = { config, ... }: {
 
-        programs.tmux.enable = true;
+        home.packages = with pkgs; [
+            tmux
+            yq-go
+        ];
 
-        xdg.configFile = {
-            "tmux/tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/tmux/tmux.conf";
-        };
+        xdg.configFile."tmux".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/tmux";
+
     };
 
 }

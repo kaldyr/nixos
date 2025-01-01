@@ -1,0 +1,6 @@
+[submodule "dotfiles/tmux/plugins/catppuccin"]
+	path = dotfiles/tmux/plugins/catppuccin
+	url = https://github.com/catppuccin/tmux
+[submodule "dotfiles/tmux/plugins/tmux-nerd-font-window-name"]
+	path = dotfiles/tmux/plugins/tmux-nerd-font-window-name
+	url = https://github.com/joshmedeski/tmux-nerd-font-window-name

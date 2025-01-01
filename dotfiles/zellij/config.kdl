@@ -98,16 +98,6 @@ keybinds clear-defaults=true {
 		bind "Alt ," { GoToPreviousTab; }
 		bind "Alt >" { MoveTab "Right"; }
 		bind "Alt <" { MoveTab "Left"; }
-		bind "Alt 1" { GoToTab 1; }
-		bind "Alt 2" { GoToTab 2; }
-		bind "Alt 3" { GoToTab 3; }
-		bind "Alt 4" { GoToTab 4; }
-		bind "Alt 5" { GoToTab 5; }
-		bind "Alt 6" { GoToTab 6; }
-		bind "Alt 7" { GoToTab 7; }
-		bind "Alt 8" { GoToTab 8; }
-		bind "Alt 9" { GoToTab 9; }
-		bind "Alt 0" { GoToTab 10; }
 		bind "Alt f" { ToggleFocusFullscreen; }
 		bind "Alt g" { SwitchToMode "Locked"; }
 		bind "Alt m" { SwitchToMode "Move"; }
