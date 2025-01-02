@@ -13,6 +13,7 @@
         ../programs/openscad.nix
         ../programs/plymouth.nix
         ../programs/steam.nix
+        ../programs/tmux.nix
         ../programs/wezterm.nix
     ];
 
