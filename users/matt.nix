@@ -8,7 +8,7 @@
             packages = with pkgs; [ lazysql ];
         };
 
-        # programs.zellij.enableFishIntegration = true;
+        programs.zellij.enableFishIntegration = true;
 
     };
 

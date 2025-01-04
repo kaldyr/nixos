@@ -125,9 +125,10 @@
                 }
 
                 general {
-                    border_size=0
-                    gaps_in=10
-                    gaps_out=13
+                    border_size=1
+                    col.active_border=$teal
+                    gaps_in=8
+                    gaps_out=12
                     layout=dwindle
                 }
 

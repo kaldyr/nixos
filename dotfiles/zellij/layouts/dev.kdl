@@ -1,6 +1,32 @@
 layout {
-	default_tab_template {
-		children
+	tab name="Devel" {
+		pane split_direction="horizontal" {
+			pane split_direction="vertical" {
+				pane {
+					size 62
+					pane {
+						command "yazi"
+						name "Yazi"
+					}
+					pane {
+						command "lazygit"
+						name "Lazygit"
+					}
+				}
+				pane split_direction="horizontal" {
+					pane {
+						command "nvim"
+						name "Neovim"
+						focus true
+					}
+					pane {
+						size 10
+						command "fish"
+						name "Console"
+					}
+				}
+			}
+		}
 		pane size=1 borderless=true {
 			plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
 				hide_frame_for_single_pane "true"
@@ -45,5 +71,4 @@ layout {
 			}
 		}
 	}
-	tab name=""
 }
