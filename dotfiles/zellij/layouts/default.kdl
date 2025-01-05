@@ -3,9 +3,9 @@ layout {
 		children
 		pane size=1 borderless=true {
 			plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
-				hide_frame_for_single_pane "true"
-				hide_frame_except_for_search "false"
-				hide_frame_except_for_fullscreen "false"
+				// hide_frame_for_single_pane "true"
+				// hide_frame_except_for_search "false"
+				// hide_frame_except_for_fullscreen "false"
 
 				format_left   "{mode}  #[fg=black]{tabs}"
 				format_center ""

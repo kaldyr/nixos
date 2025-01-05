@@ -43,10 +43,6 @@
         wezterm.url = "github:wez/wezterm?dir=nix";
         wezterm.inputs.nixpkgs.follows = "nixpkgs";
 
-        # Zellij status plugin
-        zjstatus.url = "github:dj95/zjstatus";
-        zjstatus.inputs.nixpkgs.follows = "nixpkgs";
-
     };
 
     outputs = { nixpkgs, ... }@inputs: {

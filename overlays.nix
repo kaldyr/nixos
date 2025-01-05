@@ -12,7 +12,6 @@
         neovim = inputs.neovim.packages.${prev.system}.neovim;
         yazi = inputs.yazi.packages.${prev.system}.yazi;
         wezterm = inputs.wezterm.packages.${prev.system}.default;
-        zellijPlugins.zjstatus = inputs.zjstatus.packages.${prev.system}.default;
 
     };
 
