@@ -3,7 +3,7 @@ layout {
 		pane split_direction="horizontal" {
 			pane split_direction="vertical" {
 				pane {
-					size 62
+					size 50
 					pane {
 						command "yazi"
 						name "Yazi"
@@ -29,10 +29,6 @@ layout {
 		}
 		pane size=1 borderless=true {
 			plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
-				// hide_frame_for_single_pane "true"
-				// hide_frame_except_for_search "false"
-				// hide_frame_except_for_fullscreen "false"
-
 				format_left   "{mode}  #[fg=black]{tabs}"
 				format_center ""
 				format_right  ""

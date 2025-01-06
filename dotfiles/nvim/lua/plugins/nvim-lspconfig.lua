@@ -11,7 +11,7 @@ return {
 	config = function()
 
 		local on_attach = function(_, bufnr)
-			vim.lsp.inlay_hint.enable( true )
+			vim.lsp.inlay_hint.enable( false )
 			local map, lb = vim.keymap.set, vim.lsp.buf
 			map('n', 'gd', lb.definition, { buffer = bufnr, desc = 'Goto Definition' })
 			map('n', 'gD', lb.declaration, { buffer = bufnr, desc = 'Goto Declaration' })
