@@ -1,4 +1,3 @@
-#!/run/current-system/sw/bin/bash
 cd $1
 tabname=''${PWD##*/}
 if [ ''${PWD} == "/nix/config" ]; then
@@ -13,4 +12,4 @@ zellij action move-focus up
 zellij action write-chars ".\\"
 zellij action move-focus right
 zellij action rename-tab "$tabname"
-kill -s SIGQUIT $PPID
+kill -s SIGTERM $PPID
