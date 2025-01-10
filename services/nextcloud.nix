@@ -100,6 +100,7 @@
                 dbtableprefix = "oc_";
                 default_phone_region = "US";
                 default_locale = "en_US";
+                default_timezone = "America/Los_Angeles";
                 log_type = "file";
                 loglevel = 4;
                 mail_sendmailmode = "pipe";
