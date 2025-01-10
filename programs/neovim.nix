@@ -29,7 +29,7 @@
             htmx-lsp
             lua-language-server
             marksman
-            nil
+            nixd
             taplo
             yaml-language-server
             vscode-langservers-extracted

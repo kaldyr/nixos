@@ -102,7 +102,7 @@ return {
 			},
 		}
 		require('lspconfig').marksman.setup { on_attach = on_attach, capabilities = capabilities }
-		require('lspconfig').nil_ls.setup { on_attach = on_attach, capabilities = capabilities }
+		require('lspconfig').nixd.setup { on_attach = on_attach, capabilities = capabilities }
 		require('lspconfig').nushell.setup { on_attach = on_attach, capabilities = capabilities }
 		require('lspconfig').taplo.setup { on_attach = on_attach, capabilities = capabilities }
 		require('lspconfig').templ.setup { on_attach = on_attach, capabilities = capabilities, filetypes = { 'templ' } }

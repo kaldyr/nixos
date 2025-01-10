@@ -90,7 +90,7 @@
                     systemImpermanence = true;
                     homeImpermanence = false;
                 };
-            in buildSystem ( sysConfig );
+            in buildSystem sysConfig;
 
             # Gram: Framework 11th Gen i5-1135G7
             "gram" = let
@@ -101,7 +101,7 @@
                     systemImpermanence = true;
                     homeImpermanence = true;
                 };
-            in buildSystem ( sysConfig );
+            in buildSystem sysConfig;
 
             # Magrathea: Intel i5-2500K Nextcloud server with Kodi, media storage, and snapshot backups
             "magrathea" = let
@@ -112,7 +112,7 @@
                     systemImpermanence = true;
                     homeImpermanence = true;
                 };
-            in buildSystem ( sysConfig );
+            in buildSystem sysConfig;
 
             # Mjolnir: MinisForum UM790 Pro
             "mjolnir" = let
@@ -123,7 +123,7 @@
                     systemImpermanence = true;
                     homeImpermanence = true;
                 };
-            in buildSystem ( sysConfig );
+            in buildSystem sysConfig;
 
             # Oolong: Dell Inspiron 14 3473 - 4GB RAM, 32GB SSD
             "oolong" = let
@@ -134,7 +134,7 @@
                     systemImpermanence = false;
                     homeImpermanence = false;
                 };
-            in buildSystem ( sysConfig );
+            in buildSystem sysConfig;
 
             # Serenity: Ryzen 5 2400g Kodi, media storage, and off-site snapshot backups
             "serenity" = let
@@ -145,7 +145,7 @@
                     systemImpermanence = true;
                     homeImpermanence = true;
                 };
-            in buildSystem ( sysConfig );
+            in buildSystem sysConfig;
 
         };
 
