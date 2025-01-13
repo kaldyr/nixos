@@ -137,11 +137,12 @@
                 }
 
                 input {
+                    follow_mouse=2
+                    kb_layout=us
+                    sensitivity=0
                     touchpad {
                         natural_scroll=no
                     }
-                    kb_layout=us
-                    sensitivity=0
                 }
 
                 misc {
