@@ -64,6 +64,9 @@ return {
 			["<C-n>"] = { "select_next", "fallback" },
 			["<C-up>"] = { "scroll_documentation_up", "fallback" },
 			["<C-down>"] = { "scroll_documentation_down", "fallback" },
+			cmdline = {
+				['<CR>'] = {}
+			},
 		},
 
 		signature = {
