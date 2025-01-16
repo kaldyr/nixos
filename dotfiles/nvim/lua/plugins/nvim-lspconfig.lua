@@ -34,7 +34,12 @@ return {
 
 		vim.filetype.add({ extension = { templ = 'templ' } }) -- a-h/templ Go
 		require('lspconfig').cssls.setup { on_attach = on_attach, capabilities = capabilities }
-		require('lspconfig').elixirls.setup { on_attach = on_attach, capabilities = capabilities }
+		require('lspconfig').elixirls.setup {
+			cmd = { 'elixir-ls' },
+			filetypes = { 'elixir', 'eelixir', 'eex', 'heex', 'surface' },
+			on_attach = on_attach,
+			capabilities = capabilities
+		}
 		require('lspconfig').gopls.setup {
 			on_attach = on_attach,
 			capabilities = capabilities,

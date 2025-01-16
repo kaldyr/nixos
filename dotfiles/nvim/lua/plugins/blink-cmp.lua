@@ -65,7 +65,21 @@ return {
 			["<C-up>"] = { "scroll_documentation_up", "fallback" },
 			["<C-down>"] = { "scroll_documentation_down", "fallback" },
 			cmdline = {
-				['<CR>'] = {}
+				['<CR>'] = {},
+				["<Tab>"] = {
+					function(cmp)
+						return cmp.select_next()
+					end,
+					"snippet_forward",
+					"fallback",
+				},
+				["<S-Tab>"] = {
+					function(cmp)
+						return cmp.select_prev()
+					end,
+					"snippet_backward",
+					"fallback",
+				},
 			},
 		},
 
