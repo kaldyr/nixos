@@ -7,6 +7,7 @@ return {
 
 	keys = {
 		{ '<leader>z', function() Snacks.lazygit() end, noremap = true, silent = true, desc = 'Lazygit' },
+		{ '\\`', function() Snacks.terminal.toggle() end, noremap = true, silent = true, desc = 'Toggle Terminal' },
 	},
 
 	init = function()

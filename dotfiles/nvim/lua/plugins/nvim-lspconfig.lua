@@ -32,15 +32,17 @@ return {
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend( 'force', capabilities, require('blink.cmp').get_lsp_capabilities())
 
-		vim.filetype.add({ extension = { templ = 'templ' } }) -- a-h/templ Go
+		vim.filetype.add({ autostart = false, extension = { templ = 'templ' } }) -- a-h/templ Go
 		require('lspconfig').cssls.setup { on_attach = on_attach, capabilities = capabilities }
 		require('lspconfig').elixirls.setup {
+			autostart = false,
 			cmd = { 'elixir-ls' },
 			filetypes = { 'elixir', 'eelixir', 'eex', 'heex', 'surface' },
 			on_attach = on_attach,
 			capabilities = capabilities
 		}
 		require('lspconfig').gopls.setup {
+			autostart = false,
 			on_attach = on_attach,
 			capabilities = capabilities,
 			cmd = { 'gopls' },
@@ -77,9 +79,10 @@ return {
 				},
 			},
 		}
-		require('lspconfig').html.setup { on_attach = on_attach, capabilities = capabilities, filetypes = { 'html', 'templ' } }
-		require('lspconfig').htmx.setup { on_attach = on_attach, capabilities = capabilities, filetypes = { 'html', 'templ' } }
+		require('lspconfig').html.setup { autostart = false, on_attach = on_attach, capabilities = capabilities, filetypes = { 'html', 'templ' } }
+		require('lspconfig').htmx.setup { autostart = false, on_attach = on_attach, capabilities = capabilities, filetypes = { 'html', 'templ' } }
 		require('lspconfig').lua_ls.setup {
+			autostart = false,
 			on_attach = on_attach,
 			capabilities = capabilities,
 			settings = {
@@ -107,12 +110,12 @@ return {
 				},
 			},
 		}
-		require('lspconfig').marksman.setup { on_attach = on_attach, capabilities = capabilities }
-		require('lspconfig').nixd.setup { on_attach = on_attach, capabilities = capabilities }
-		require('lspconfig').nushell.setup { on_attach = on_attach, capabilities = capabilities }
-		require('lspconfig').taplo.setup { on_attach = on_attach, capabilities = capabilities }
-		require('lspconfig').templ.setup { on_attach = on_attach, capabilities = capabilities, filetypes = { 'templ' } }
-		require('lspconfig').yamlls.setup { on_attach = on_attach, capabilities = capabilities }
+		require('lspconfig').marksman.setup { autostart = false, on_attach = on_attach, capabilities = capabilities }
+		require('lspconfig').nixd.setup { autostart = false, on_attach = on_attach, capabilities = capabilities }
+		require('lspconfig').nushell.setup { autostart = false, on_attach = on_attach, capabilities = capabilities }
+		require('lspconfig').taplo.setup { autostart = false, on_attach = on_attach, capabilities = capabilities }
+		require('lspconfig').templ.setup { autostart = false, on_attach = on_attach, capabilities = capabilities, filetypes = { 'templ' } }
+		require('lspconfig').yamlls.setup { autostart = false, on_attach = on_attach, capabilities = capabilities }
 		vim.g.markdown_fenced_languages = {'css', 'fish', 'html', 'go', 'javascript', 'json', 'lua', 'nix', 'python', 'sql', 'vim'}
 
 	end
