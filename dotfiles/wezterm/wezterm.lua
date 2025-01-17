@@ -1,8 +1,10 @@
 local wezterm = require 'wezterm'
 local wa = wezterm.action
--- local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
--- local io = require 'io'
--- local os = require 'os'
+-- Stuff for mux - comment out if not muxing
+local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
+local io = require 'io'
+local os = require 'os'
+-- End Stuff for mux
 
 local config = {}
 
@@ -115,34 +117,35 @@ config.font_rules = {
 	},
 }
 
--- Functions for keybinds
--- wezterm.on( 'trigger-nvim-with-scrollback', function( window, pane )
---
--- 	local text = pane:get_lines_as_text( pane:get_dimensions().scrollback_rows )
--- 	local name = os.tmpname()
--- 	local f, err = assert( io.open( name, 'w+' ) )
---
--- 	if f then
---
--- 		f:write( text )
--- 		f:flush()
--- 		f:close()
---
--- 		window:perform_action(
--- 			wa.SpawnCommandInNewTab {
--- 				args = { 'nvim', name },
--- 			},
--- 			pane
--- 		)
---
--- 		wezterm.sleep_ms(1000)
--- 		os.remove(name)
---
--- 	else
--- 		print( 'Error opening scrollback' .. err )
--- 	end
---
--- end )
+-- Functions for keybinds - comment out if not muxing
+wezterm.on( 'trigger-nvim-with-scrollback', function( window, pane )
+
+	local text = pane:get_lines_as_text( pane:get_dimensions().scrollback_rows )
+	local name = os.tmpname()
+	local f, err = assert( io.open( name, 'w+' ) )
+
+	if f then
+
+		f:write( text )
+		f:flush()
+		f:close()
+
+		window:perform_action(
+			wa.SpawnCommandInNewTab {
+				args = { 'nvim', name },
+			},
+			pane
+		)
+
+		wezterm.sleep_ms(1000)
+		os.remove(name)
+
+	else
+		print( 'Error opening scrollback' .. err )
+	end
+
+end )
+-- End functions for keybinds
 
 -- Keybinds
 config.disable_default_key_bindings = true
@@ -152,67 +155,72 @@ config.keys = {
 	{ key = '0', mods = 'ALT', action = wa.ResetFontSize },
 	{ key = 'u', mods = 'ALT', action = wa.CharSelect },
 	{ key = 'q', mods = 'ALT', action = wa.QuickSelect },
-	-- { key = 's', mods = 'ALT', action = wa.PaneSelect { mode = 'SwapWithActiveKeepFocus', }, },
-	-- { key = 'h', mods = 'ALT', action = wa.ActivatePaneDirection 'Left' },
-	-- { key = 'j', mods = 'ALT', action = wa.ActivatePaneDirection 'Down' },
-	-- { key = 'k', mods = 'ALT', action = wa.ActivatePaneDirection 'Up' },
-	-- { key = 'l', mods = 'ALT', action = wa.ActivatePaneDirection 'Right' },
-	-- { key = 'h', mods = 'SHIFT|ALT', action = wa.SplitPane( { direction = 'Left' } ) },
-	-- { key = 'j', mods = 'SHIFT|ALT', action = wa.SplitPane( { direction = 'Down' } ) },
-	-- { key = 'k', mods = 'SHIFT|ALT', action = wa.SplitPane( { direction = 'Up' } ) },
-	-- { key = 'l', mods = 'SHIFT|ALT', action = wa.SplitPane( { direction = 'Right' } ) },
-	-- { key = 'LeftArrow', mods = 'SHIFT|ALT', action = wa.SplitPane( { direction = 'Left', top_level = true } ) },
-	-- { key = 'DownArrow', mods = 'SHIFT|ALT', action = wa.SplitPane( { direction = 'Down', top_level = true } ) },
-	-- { key = 'UpArrow', mods = 'SHIFT|ALT', action = wa.SplitPane( { direction = 'Up', top_level = true } ) },
-	-- { key = 'RightArrow', mods = 'SHIFT|ALT', action = wa.SplitPane( { direction = 'Right', top_level = true } ) },
-	-- { key = 'LeftArrow', mods = 'ALT', action = wa.AdjustPaneSize { 'Left', 1 } },
-	-- { key = 'DownArrow', mods = 'ALT', action = wa.AdjustPaneSize { 'Down', 1 } },
-	-- { key = 'UpArrow', mods = 'ALT', action = wa.AdjustPaneSize { 'Up', 1 } },
-	-- { key = 'RightArrow', mods = 'ALT', action = wa.AdjustPaneSize { 'Right', 1 } },
-	-- { key = 'f', mods = 'ALT', action = wa.TogglePaneZoomState },
-	-- { key = 'x', mods = 'ALT', action = wa.CloseCurrentPane { confirm = true } },
-	-- { key = 't', mods = 'ALT', action = wa.SpawnTab 'DefaultDomain' },
-	-- { key = '.', mods = 'ALT', action = wa.ActivateTabRelative( 1 ) },
-	-- { key = ',', mods = 'ALT', action = wa.ActivateTabRelative( -1 ) },
-	-- { key = '>', mods = 'SHIFT|ALT', action = wa.MoveTabRelative( 1 ) },
-	-- { key = '<', mods = 'SHIFT|ALT', action = wa.MoveTabRelative( -1 ) },
+	-- Mux keybinds - comment out if not muxing
+	{ key = 's', mods = 'ALT', action = wa.PaneSelect { mode = 'SwapWithActiveKeepFocus', }, },
+	{ key = 'h', mods = 'ALT', action = wa.ActivatePaneDirection 'Left' },
+	{ key = 'j', mods = 'ALT', action = wa.ActivatePaneDirection 'Down' },
+	{ key = 'k', mods = 'ALT', action = wa.ActivatePaneDirection 'Up' },
+	{ key = 'l', mods = 'ALT', action = wa.ActivatePaneDirection 'Right' },
+	{ key = 'h', mods = 'SHIFT|ALT', action = wa.SplitPane { direction = 'Left', size = {Cells=50} }  },
+	{ key = 'j', mods = 'SHIFT|ALT', action = wa.SplitPane { direction = 'Down', size = {Cells=10} }  },
+	{ key = 'k', mods = 'SHIFT|ALT', action = wa.SplitPane { direction = 'Up' }  },
+	{ key = 'l', mods = 'SHIFT|ALT', action = wa.SplitPane { direction = 'Right' }  },
+	{ key = 'LeftArrow', mods = 'SHIFT|ALT', action = wa.SplitPane( { direction = 'Left', top_level = true } ) },
+	{ key = 'DownArrow', mods = 'SHIFT|ALT', action = wa.SplitPane( { direction = 'Down', top_level = true } ) },
+	{ key = 'UpArrow', mods = 'SHIFT|ALT', action = wa.SplitPane( { direction = 'Up', top_level = true } ) },
+	{ key = 'RightArrow', mods = 'SHIFT|ALT', action = wa.SplitPane( { direction = 'Right', top_level = true } ) },
+	{ key = 'LeftArrow', mods = 'ALT', action = wa.AdjustPaneSize { 'Left', 1 } },
+	{ key = 'DownArrow', mods = 'ALT', action = wa.AdjustPaneSize { 'Down', 1 } },
+	{ key = 'UpArrow', mods = 'ALT', action = wa.AdjustPaneSize { 'Up', 1 } },
+	{ key = 'RightArrow', mods = 'ALT', action = wa.AdjustPaneSize { 'Right', 1 } },
+	{ key = 'f', mods = 'ALT', action = wa.TogglePaneZoomState },
+	{ key = 'x', mods = 'ALT', action = wa.CloseCurrentPane { confirm = true } },
+	{ key = 't', mods = 'ALT', action = wa.SpawnTab 'DefaultDomain' },
+	{ key = '.', mods = 'ALT', action = wa.ActivateTabRelative( 1 ) },
+	{ key = ',', mods = 'ALT', action = wa.ActivateTabRelative( -1 ) },
+	{ key = '>', mods = 'SHIFT|ALT', action = wa.MoveTabRelative( 1 ) },
+	{ key = '<', mods = 'SHIFT|ALT', action = wa.MoveTabRelative( -1 ) },
+	{ key = 'e', mods = 'ALT', action = wa.EmitEvent 'trigger-nvim-with-scrollback' },
+	-- End mux keybinds
 }
 
--- tabline.setup({
--- 	options = {
--- 		icons_enabled = true,
--- 		theme = 'Catppuccin Frappe',
--- 		tabs_enabled = true,
--- 		color_overrides = {},
--- 		section_separators = {
--- 			left = '',
--- 			right = '',
--- 		},
--- 		component_separators = {
--- 			left = '',
--- 			right = '',
--- 		},
--- 		tab_separators = {
--- 			left = '',
--- 			right = '',
--- 		},
--- 	},
--- 	sections = {
--- 		tabline_a = { 'mode' },
--- 		tabline_b = { },
--- 		tabline_c = { },
--- 		tab_active = {
--- 			{ 'process', padding = 1 },
--- 			{ 'zoomed', padding = 0 },
--- 		},
--- 		tab_inactive = {
--- 			{ 'process', padding = 1 }
--- 		},
--- 		tabline_x = { },
--- 		tabline_y = { },
--- 		tabline_z = { 'domain' },
--- 	},
--- 	extensions = {},
--- })
+-- Tabline - comment out if not muxing
+tabline.setup({
+	options = {
+		icons_enabled = true,
+		theme = 'Catppuccin Frappe',
+		tabs_enabled = true,
+		color_overrides = {},
+		section_separators = {
+			left = '',
+			right = '',
+		},
+		component_separators = {
+			left = '',
+			right = '',
+		},
+		tab_separators = {
+			left = '',
+			right = '',
+		},
+	},
+	sections = {
+		tabline_a = { },
+		tabline_b = { },
+		tabline_c = { },
+		tab_active = {
+			{ 'process', padding = 1 },
+			{ 'zoomed', padding = 0 },
+		},
+		tab_inactive = {
+			{ 'process', padding = 1 }
+		},
+		tabline_x = { },
+		tabline_y = { },
+		tabline_z = { },
+	},
+	extensions = {},
+})
+-- End Tabline
 
 return config
