@@ -86,8 +86,8 @@ keybinds clear-defaults=true {
 		bind "Alt t" "Esc" { SwitchToMode "Normal"; }
 		bind "r" { SwitchToMode "RenameTab"; TabNameInput 0; }
 		bind "x" { CloseTab; SwitchToMode "Normal"; }
-		bind "n" { NewTab; SwitchToMode "Normal"; }
-		bind "N" { NewTab { cwd "~"; }; SwitchToMode "Normal"; }
+		bind "n" { NewTab { cwd "~"; }; SwitchToMode "Normal"; }
+		bind "N" { NewTab; SwitchToMode "Normal"; }
 		bind "s" { ToggleActiveSyncTab; SwitchToMode "Normal"; }
 		bind "b" { BreakPane; SwitchToMode "Normal"; }
 		bind "]" { BreakPaneRight; SwitchToMode "Normal"; }
