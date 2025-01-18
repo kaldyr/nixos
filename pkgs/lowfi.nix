@@ -3,16 +3,16 @@
 pkgs.rustPlatform.buildRustPackage rec {
 
     pname = "lowfi";
-    version = "1.5.3";
+    version = "1.5.6";
 
     src = pkgs.fetchFromGitHub {
         owner = "talwat";
         repo = "lowfi";
         rev = version;
-        hash = "sha256-pfvTOoWsXukZTfev9+Ifcp3YYIqtYZgmEVPHuqD4IsM=";
+        hash = "sha256-lR22UN9LiuJknq2KTNOXcybXwi2KvLRe0KHocFWL0GM=";
     };
 
-    cargoHash = "sha256-oRZ44IZRli0PNnQkeplD0ggh1ipDlyehNBTpxrgl/JI=";
+    cargoHash = "sha256-lH/8n0NcGl+EagE3o9K/+wB47h4a4CwBWsZWFcoMxG0=";
 
     cargoBuildFlags = [ "--features mpris" ];
 

@@ -37,7 +37,7 @@
 
         # Yazi File Manager
         yazi.url = "github:sxyazi/yazi";
-        # yazi.inputs.nixpkgs.follows = "nixpkgs";
+        yazi.inputs.nixpkgs.follows = "nixpkgs";
 
         # Wezterm Terminal Emulator
         wezterm.url = "github:wez/wezterm?dir=nix";
