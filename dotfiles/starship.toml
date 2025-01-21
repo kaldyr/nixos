@@ -2,7 +2,7 @@ format = "$all"
 palette = "catppuccin_frappe"
 
 [character]
-error_symbol = "[󰊠](bold red)"
+error_symbol = "[](bold red)"
 format = "$symbol [|](bold bright-black) "
 vicmd_symbol = "[:](bold yellow)"
 
