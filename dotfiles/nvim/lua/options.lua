@@ -23,6 +23,7 @@ o.linebreak = true
 o.number = true
 o.pumblend = 10
 o.pumheight = 10
+o.relativenumber = true
 o.ruler = false
 o.scrolloff = 8
 o.shortmess:append "sfFIWc"

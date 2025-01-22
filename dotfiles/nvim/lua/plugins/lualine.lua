@@ -2,7 +2,10 @@ return {
 
 	'nvim-lualine/lualine.nvim',
 
-	dependencies = 'nvim-tree/nvim-web-devicons',
+	dependencies = {
+		'nvim-tree/nvim-web-devicons',
+		'yavorski/lualine-macro-recording.nvim'
+	},
 
 	opts = {
 
@@ -15,7 +18,8 @@ return {
 
 		sections = {
 			lualine_a = {
-				{ 'mode', separator = { left = '', right = '' }, right_padding = 2 }
+				{ 'mode', separator = { left = '', right = '' }, right_padding = 2 },
+				{ 'macro_recording', '%s' },
 			},
 			lualine_b = { 'branch', 'diff' },
 			lualine_c = {

@@ -28,13 +28,3 @@ end )
 ac( 'TextYankPost', '*', function()
 	vim.highlight.on_yank()
 end )
-
--- Show relative line numbers
-ac( 'ModeChanged', '*:[V\x16]*', function()
-	vim.wo.relativenumber = vim.wo.number
-end )
-
--- Hide relative line numbers
-ac( 'ModeChanged', '[V\x16]*:*', function()
-	vim.wo.relativenumber = string.find(vim.fn.mode(), '^[V\22]') ~= nil
-end )
