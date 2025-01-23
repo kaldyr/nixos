@@ -1,7 +1,7 @@
 local wezterm = require 'wezterm'
 local wa = wezterm.action
 -- Stuff for mux - comment out if not muxing
-local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
+local tabline = wezterm.plugin.require("/home/matt/.config/wezterm/tabline.wez")
 local io = require 'io'
 local os = require 'os'
 -- End Stuff for mux

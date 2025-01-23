@@ -3,7 +3,7 @@ return {
 	'echasnovski/mini.nvim',
 
 	config = function()
-		-- require('mini.bracketed').setup()
+		require('mini.ai').setup()
 		require('mini.bufremove').setup()
 		require('mini.hipatterns').setup({
 			highlighters = {
@@ -15,11 +15,6 @@ return {
 			}
 		})
 		require('mini.operators').setup()
-		-- require('mini.splitjoin').setup({
-		-- 	mappings = {
-		-- 		toggle = 'gj',
-		-- 	},
-		-- })
 		-- require('mini.surround').setup()
 	end,
 
