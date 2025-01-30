@@ -7,11 +7,10 @@
         # PACKAGE = inputs.NIXPKGS-VERSION.legacyPackages.${prev.system}.PACKAGE;
 
         exiftool_12-70 = inputs.nixpkgs-exiftool.legacyPackages.${prev.system}.exiftool;
-        ghostty = inputs.ghostty.packages.${prev.system}.ghostty-releasefast;
-        hyprland = inputs.hyprland.packages.${prev.system}.hyprland;
+        # hyprland = inputs.hyprland.packages.${prev.system}.hyprland;
         neovim = inputs.neovim.packages.${prev.system}.neovim;
-        yazi = inputs.yazi.packages.${prev.system}.yazi;
-        wezterm = inputs.wezterm.packages.${prev.system}.default;
+        # yazi = inputs.yazi.packages.${prev.system}.yazi;
+        # wezterm = inputs.wezterm.packages.${prev.system}.default;
 
     };
 

@@ -6,16 +6,13 @@
         disko.url = "github:nix-community/disko";
         disko.inputs.nixpkgs.follows = "nixpkgs";
 
-        # Ghostty
-        ghostty.url = "github:ghostty-org/ghostty";
-
         # Manage the home folder and user applications
         home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
         # Hyprland from source
-        hyprland.url = "github:hyprwm/Hyprland";
-        hyprland.inputs.nixpkgs.follows = "nixpkgs";
+        # hyprland.url = "github:hyprwm/Hyprland";
+        # hyprland.inputs.nixpkgs.follows = "nixpkgs";
 
         # Impermanence - come back to truth at every boot
         impermanence.url = "github:nix-community/impermanence";
@@ -36,12 +33,12 @@
         sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
         # Yazi File Manager
-        yazi.url = "github:sxyazi/yazi";
-        yazi.inputs.nixpkgs.follows = "nixpkgs";
+        # yazi.url = "github:sxyazi/yazi";
+        # yazi.inputs.nixpkgs.follows = "nixpkgs";
 
         # Wezterm Terminal Emulator
-        wezterm.url = "github:wez/wezterm?dir=nix";
-        wezterm.inputs.nixpkgs.follows = "nixpkgs";
+        # wezterm.url = "github:wez/wezterm?dir=nix";
+        # wezterm.inputs.nixpkgs.follows = "nixpkgs";
 
     };
 
