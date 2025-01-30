@@ -18,8 +18,8 @@
         impermanence.url = "github:nix-community/impermanence";
 
         # Neovim Nightly
-        neovim.url = "github:nix-community/neovim-nightly-overlay";
-        neovim.inputs.nixpkgs.follows = "nixpkgs";
+        # neovim.url = "github:nix-community/neovim-nightly-overlay";
+        # neovim.inputs.nixpkgs.follows = "nixpkgs";
 
         # NixOS Hardware
         nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -79,70 +79,58 @@
         in {
 
             # Espresso: Desktop 5700g
-            "espresso" = let
-                sysConfig = {
-                    hostname = "espresso";
-                    instalVersion = "24.11";
-                    user = "matshkas";
-                    systemImpermanence = true;
-                    homeImpermanence = false;
-                };
-            in buildSystem sysConfig;
+            "espresso" = let sysConfig = {
+                hostname = "espresso";
+                instalVersion = "24.11";
+                user = "matshkas";
+                systemImpermanence = true;
+                homeImpermanence = false;
+            }; in buildSystem sysConfig;
 
-            # Gram: Framework 11th Gen i5-1135G7
-            "gram" = let
-                sysConfig = {
-                    hostname = "gram";
-                    instalVersion = "24.05";
-                    user = "matt";
-                    systemImpermanence = true;
-                    homeImpermanence = true;
-                };
-            in buildSystem sysConfig;
+            # Hofud: Dell Inspiron 3185
+            "hofud" = let sysConfig = {
+                hostname = "hofud";
+                instalVersion = "24.11";
+                user = "matt";
+                systemImpermanence = false;
+                homeImpermanence = false;
+            }; in buildSystem sysConfig;
 
             # Magrathea: Intel i5-2500K Nextcloud server with Kodi, media storage, and snapshot backups
-            "magrathea" = let
-                sysConfig = {
-                    hostname = "magrathea";
-                    instalVersion = "24.05";
-                    user = "matt";
-                    systemImpermanence = true;
-                    homeImpermanence = true;
-                };
-            in buildSystem sysConfig;
+            "magrathea" = let sysConfig = {
+                hostname = "magrathea";
+                instalVersion = "24.05";
+                user = "matt";
+                systemImpermanence = true;
+                homeImpermanence = true;
+            }; in buildSystem sysConfig;
 
             # Mjolnir: MinisForum UM790 Pro
-            "mjolnir" = let
-                sysConfig = {
-                    hostname = "mjolnir";
-                    instalVersion = "23.05";
-                    user = "matt";
-                    systemImpermanence = true;
-                    homeImpermanence = true;
-                };
-            in buildSystem sysConfig;
+            "mjolnir" = let sysConfig = {
+                hostname = "mjolnir";
+                instalVersion = "23.05";
+                user = "matt";
+                systemImpermanence = true;
+                homeImpermanence = true;
+            }; in buildSystem sysConfig;
 
             # Oolong: Dell Inspiron 14 3473 - 4GB RAM, 32GB SSD
-            "oolong" = let
-                sysConfig = {
-                    hostname = "oolong";
-                    instalVersion = "24.11"; # Fresh install on December 17th, 2024
-                    user = "matshkas";
-                    systemImpermanence = false;
-                    homeImpermanence = false;
-                };
-            in buildSystem sysConfig;
+            "oolong" = let sysConfig = {
+                hostname = "oolong";
+                instalVersion = "24.11"; # Fresh install on December 17th, 2024
+                user = "matshkas";
+                systemImpermanence = false;
+                homeImpermanence = false;
+            }; in buildSystem sysConfig;
 
             # Serenity: Ryzen 5 2400g Kodi, media storage, and off-site snapshot backups
-            "serenity" = let
-                sysConfig = {
-                    hostname = "serenity";
-                    instalVersion = "";
-                    user = "matt";
-                    systemImpermanence = true;
-                    homeImpermanence = true;
-                };
-            in buildSystem sysConfig;
+            "serenity" = let sysConfig = {
+                hostname = "serenity";
+                instalVersion = "";
+                user = "matt";
+                systemImpermanence = true;
+                homeImpermanence = true;
+            }; in buildSystem sysConfig;
 
         };
 
