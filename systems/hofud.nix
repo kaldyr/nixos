@@ -1,11 +1,8 @@
-{ inputs, pkgs, sysConfig, ... }: {
+{ pkgs, ... }: {
 
     imports = [
-        inputs.nixos-hardware.nixosModules.common-hidpi
-        inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
         ../disko/hofud.nix
         ./desktop.nix
-        ../services/mpd.nix
         ../programs/hyprland.nix
         ../programs/nextcloud-desktop.nix
         ../programs/openscad.nix
@@ -22,8 +19,11 @@
         loader.grub.gfxmodeEfi = "1366x768";
     };
 
-    hardware.enableRedistributableFirmware = true;
-    hardware.enableAllFirmware = true;
+    hardware = {
+        cpu.amd.updateMicrocode = true;
+        enableAllFirmware = true;
+        enableRedistributableFirmware = true;
+    };
     nixpkgs.config.allowUnfree = true;
     time.timeZone = "America/Los_Angeles";
 
