@@ -13,7 +13,7 @@
                 name = "ESP";
                 type = "EF00";
                 start = "1MiB";
-                size = "768M";
+                size = "1G";
                 content = {
                     type = "filesystem";
                     format = "vfat";
@@ -37,7 +37,7 @@
                             driveOptions = [ "noatime" "discard=async" "compress-force=zstd:1" ];
                         in {
                             "@root" = { mountpoint = "/"; mountOptions = driveOptions; };
-                            "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "1G"; };
+                            "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "2G"; };
                         };
                     };
                 };

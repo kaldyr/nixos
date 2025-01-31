@@ -3,7 +3,7 @@
     imports = [
         inputs.nixos-hardware.nixosModules.common-hidpi
         inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
-        ../disko/gram.nix
+        ../disko/hofud.nix
         ./desktop.nix
         ../services/mpd.nix
         ../programs/hyprland.nix
