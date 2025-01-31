@@ -18,6 +18,15 @@ return {
 
 			accept = { auto_brackets = { enabled = true } },
 
+			documentation = {
+				auto_show = true,
+				auto_show_delay_ms = 1000,
+			},
+
+			ghost_text = {
+				enabled = true,
+			},
+
 			list = {
 				selection = {
 					preselect = function(ctx)
@@ -104,8 +113,9 @@ return {
 			end,
 			providers = {
 				lsp = {
-					min_keyword_length = 2, -- Number of characters to trigger porvider
-					score_offset = 0, -- Boost/penalize the score of the items
+					min_keyword_length = 0,
+					score_offset = 0,
+					timeout_ms = 1000,
 				},
 				path = {
 					min_keyword_length = 0,
