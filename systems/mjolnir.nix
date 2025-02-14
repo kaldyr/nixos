@@ -30,7 +30,7 @@
         loader.grub.gfxmodeEfi = "3440x1440,1920x1080";
     };
 
-    environment.systemPackages = with pkgs; [ lowfi ];
+    # environment.systemPackages = with pkgs; [ lowfi ];
 
     fileSystems = {
 

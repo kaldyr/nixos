@@ -11,6 +11,7 @@
         ../programs/lutris.nix
         ../programs/plymouth.nix
         ../programs/steam.nix
+        ../programs/wezterm.nix
     ];
 
     boot = {

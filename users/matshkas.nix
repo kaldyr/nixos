@@ -1,15 +1,16 @@
 { config, pkgs, ...}: {
 
-    home-manager.users."matshkas".home = {
-
-        sessionVariables.EDITOR = "nano";
-        sessionVariables.VISUAL = "nano";
-
-        packages = with pkgs; [
-            image-roll
-            newsboat
-        ];
-
+    home-manager.users."matshkas" = {
+        home = {
+            sessionVariables.EDITOR = "nano";
+            sessionVariables.VISUAL = "nano";
+            packages = with pkgs; [
+                floorp
+                image-roll
+                newsboat
+            ];
+        };
+        programs.zellij.enableFishIntegration = false;
     };
 
     sops.secrets.matshkas-password.neededForUsers = true;
