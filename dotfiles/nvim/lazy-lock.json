@@ -8,7 +8,7 @@
   "friendly-snippets": { "branch": "main", "commit": "efff286dd74c22f731cdec26a70b46e5b203c619" },
   "fzf-lua": { "branch": "main", "commit": "5e703b571878825e0386e59b8626801fdbaf5a9c" },
   "gitsigns.nvim": { "branch": "main", "commit": "632fda72df903255dc1683cd739dceaa7338128a" },
-  "lazy.nvim": { "branch": "main", "commit": "7e6c863bc7563efbdd757a310d17ebc95166cef3" },
+  "lazy.nvim": { "branch": "main", "commit": "d8f26efd456190241afd1b0f5235fe6fdba13d4a" },
   "lazydev.nvim": { "branch": "main", "commit": "8620f82ee3f59ff2187647167b6b47387a13a018" },
   "lualine-macro-recording.nvim": { "branch": "main", "commit": "e2dcf63ba74e6111b53e1520a4f8a17a3d7427a1" },
   "lualine.nvim": { "branch": "master", "commit": "2a5bae925481f999263d6f5ed8361baef8df4f83" },
@@ -28,6 +28,7 @@
   "tiny-inline-diagnostic.nvim": { "branch": "main", "commit": "2c50854895c9b553482d4289976194a477b41b8f" },
   "treesj": { "branch": "main", "commit": "48c1a7539f376fd40ceb9cf12d697040fcf90649" },
   "treewalker.nvim": { "branch": "main", "commit": "38733b84229fa2d379c9969a9a4c2db776092cdc" },
+  "undotree": { "branch": "master", "commit": "2556c6800b210b2096b55b66e74b4cc1d9ebbe4f" },
   "which-key.nvim": { "branch": "main", "commit": "1f8d414f61e0b05958c342df9b6a4c89ce268766" },
   "yazi.nvim": { "branch": "main", "commit": "a7db0425ca8ebbac6aa0117fd009f7b6e1e260ae" }
 }
