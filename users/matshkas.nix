@@ -7,6 +7,7 @@
             packages = with pkgs; [
                 floorp
                 image-roll
+                lutris
                 newsboat
             ];
         };
