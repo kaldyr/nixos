@@ -1,6 +1,5 @@
 (call_expression
 	(selector_expression
-	operand: (identifier) @operand (#any-of? @operand "db" "DB" "siteDB")
 	field: (field_identifier) @field (#any-of? @field "Exec" "NamedExec" "QueryRow" "Select" "Get" "Query"))
 	(argument_list
 		([

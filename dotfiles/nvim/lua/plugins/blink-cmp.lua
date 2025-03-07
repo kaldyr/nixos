@@ -20,12 +20,8 @@ return {
 
 			documentation = {
 				auto_show = true,
-				auto_show_delay_ms = 1000,
+				auto_show_delay_ms = 500,
 			},
-
-			-- ghost_text = {
-			-- 	enabled = true,
-			-- },
 
 			list = {
 				selection = {
@@ -73,23 +69,23 @@ return {
 			["<C-n>"] = { "select_next", "fallback" },
 			["<C-up>"] = { "scroll_documentation_up", "fallback" },
 			["<C-down>"] = { "scroll_documentation_down", "fallback" },
-			cmdline = {
-				['<CR>'] = {},
-				["<Tab>"] = {
-					function(cmp)
-						return cmp.select_next()
-					end,
-					"snippet_forward",
-					"fallback",
-				},
-				["<S-Tab>"] = {
-					function(cmp)
-						return cmp.select_prev()
-					end,
-					"snippet_backward",
-					"fallback",
-				},
-			},
+			-- cmdline = {
+			-- 	['<CR>'] = {},
+			-- 	["<Tab>"] = {
+			-- 		function(cmp)
+			-- 			return cmp.select_next()
+			-- 		end,
+			-- 		"snippet_forward",
+			-- 		"fallback",
+			-- 	},
+			-- 	["<S-Tab>"] = {
+			-- 		function(cmp)
+			-- 			return cmp.select_prev()
+			-- 		end,
+			-- 		"snippet_backward",
+			-- 		"fallback",
+			-- 	},
+			-- },
 		},
 
 		signature = {
@@ -99,18 +95,18 @@ return {
 
 		sources = {
 			default = { 'lsp', 'path', 'snippets', 'buffer' },
-			cmdline = function()
-				local type = vim.fn.getcmdtype()
-				-- Search forward and backward
-				if type == "/" or type == "?" then
-					return { "buffer" }
-				end
-				-- Commands
-				if type == ":" then
-					return { "cmdline" }
-				end
-				return {}
-			end,
+			-- cmdline = function()
+			-- 	local type = vim.fn.getcmdtype()
+			-- 	-- Search forward and backward
+			-- 	if type == "/" or type == "?" then
+			-- 		return { "buffer" }
+			-- 	end
+			-- 	-- Commands
+			-- 	if type == ":" then
+			-- 		return { "cmdline" }
+			-- 	end
+			-- 	return {}
+			-- end,
 			providers = {
 				lsp = {
 					min_keyword_length = 2,
