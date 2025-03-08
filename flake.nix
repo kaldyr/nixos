@@ -17,6 +17,10 @@
         # Impermanence - come back to truth at every boot
         impermanence.url = "github:nix-community/impermanence";
 
+        # Ladybird browser
+        # ladybird.url = "github:LadyBirdBrowser/ladybird";
+        # ladybird.inputs.nixpkgs.follows = "nixpkgs";
+
         # Neovim Nightly
         # neovim.url = "github:nix-community/neovim-nightly-overlay";
         # neovim.inputs.nixpkgs.follows = "nixpkgs";

@@ -5,7 +5,10 @@
         home = {
             sessionVariables.EDITOR = "nvim";
             sessionVariables.VISUAL = "nvim";
-            packages = with pkgs; [ lazysql ];
+            packages = with pkgs; [
+                # ladybird
+                lazysql
+            ];
         };
 
         programs.zellij.enableFishIntegration = true;
