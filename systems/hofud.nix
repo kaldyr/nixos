@@ -3,7 +3,7 @@
     imports = [
         ../disko/hofud.nix
         ./desktop.nix
-        ./modules/programs/plymouth.nix
+        ../programs/plymouth.nix
         ../programs/hyprland.nix
         ../programs/nextcloud-desktop.nix
         ../programs/openscad.nix
