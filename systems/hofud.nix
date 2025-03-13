@@ -3,10 +3,11 @@
     imports = [
         ../disko/hofud.nix
         ./desktop.nix
-        ../programs/plymouth.nix
         ../programs/hyprland.nix
+        ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix
         ../programs/openscad.nix
+        ../programs/plymouth.nix
         ../programs/steam.nix
         ../programs/wezterm.nix
     ];
