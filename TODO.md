@@ -10,6 +10,7 @@
 - Beets with plugins (bandcamp)
 - Get phone to automount when plugged in
 - Re-evaluate what is stored on /nix and /state
+- MOVE ALL FOLDERS FROM STATE TO NIX
 
 ## Keybind motions
 - All keybinds should follow the same pattern

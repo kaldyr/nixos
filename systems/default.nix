@@ -49,7 +49,7 @@
         defaultPackages = lib.mkForce [];
 
         # Home files that aren't declarative and need to be preserved
-        persistence."/state" = lib.mkIf sysConfig.homeImpermanence {
+        persistence."/nix" = lib.mkIf sysConfig.homeImpermanence {
             hideMounts = true;
             users.${sysConfig.user}.directories = [
                 { directory = ".config/sops/age"; mode = "0700"; }
@@ -60,8 +60,7 @@
         };
 
         # System files that aren't declarative and need to be preserved
-        persistence."/state/system" = lib.mkIf sysConfig.systemImpermanence {
-
+        persistence."/home" = lib.mkIf sysConfig.systemImpermanence {
             directories = [
                 { directory = "/etc/NetworkManager/system-connections"; mode = "0700"; }
                 { directory = "/var/lib/bluetooth"; mode = "0700"; }
@@ -70,9 +69,7 @@
                 { directory = "/var/lib/tailscale"; mode = "0700"; }
                 "/var/log"
             ];
-
             files = [ "/etc/machine-id" ];
-
         };
 
         systemPackages = with pkgs; [ tailscale ];

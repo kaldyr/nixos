@@ -51,7 +51,6 @@
         };
 
         "/nix".neededForBoot = true;
-        "/state".neededForBoot = true;
 
     };
 

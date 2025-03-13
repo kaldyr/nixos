@@ -1,47 +1,22 @@
-{ config, lib, pkgs, sysConfig, ... }: {
+{ pkgs, ... }: {
 
     imports = [
-        ../disko/hofud.nix
+        ../disko/gram.nix
         ./desktop.nix
-        ./modules/programs/plymouth.nix
         ../programs/hyprland.nix
         ../programs/nextcloud-desktop.nix
         ../programs/openscad.nix
-        ../programs/steam.nix
         ../programs/wezterm.nix
     ];
 
     boot = {
         extraModulePackages = with pkgs; [ btrfs-progs ];
-        initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
-        initrd.kernelModules = [ "amdgpu" ];
+        initrd.availableKernelModules = [ "xhci_pci" "ahci" "ehci_pci" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" ];
+        initrd.kernelModules = [];
         kernelModules = [ "kvm-amd" ];
         kernelPackages = pkgs.linuxKernel.packages.linux_zen;
         kernelParams = [ "btrfs" "quiet" ];
-        loader.grub.gfxmodeEfi = "1920x1200,1920x1080";
-        supportedFilesystems = [ "ntfs" ];
-    };
-
-    fileSystems = {
-        "/" = {
-            device = "none";
-            fsType = "tmpfs";
-            neededForBoot = true;
-            options = [ "defaults" "size=6G" "mode=755" ];
-        };
-        "/etc/ssh".neededForBoot = true;
-        "/home" = {
-            device = "none";
-            fsType = "tmpfs";
-            neededForBoot = true;
-            options = [ "defaults" "size=1G" "mode=755" ];
-        };
-        "/nix".neededForBoot = true;
-        "/windows" = {
-            device = "/dev/disk/by-uuid/B6F2645BF264223B";
-            fsType = "ntfs-3g";
-            options = [ "rw" "uid=1000" "gid=100" ];
-        };
+        loader.grub.gfxmodeEfi = "1366x768";
     };
 
     hardware = {
@@ -66,7 +41,6 @@
         libinput.touchpad.scrollMethod = "twofinger";
         libinput.touchpad.accelSpeed = "-0.5";
         thermald.enable = true;
-        xserver.videoDrivers = [ "amdgpu" ];
     };
 
 }

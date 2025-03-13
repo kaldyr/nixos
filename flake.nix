@@ -10,20 +10,8 @@
         home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-        # Hyprland from source
-        # hyprland.url = "github:hyprwm/Hyprland";
-        # hyprland.inputs.nixpkgs.follows = "nixpkgs";
-
         # Impermanence - come back to truth at every boot
         impermanence.url = "github:nix-community/impermanence";
-
-        # Ladybird browser
-        # ladybird.url = "github:LadyBirdBrowser/ladybird";
-        # ladybird.inputs.nixpkgs.follows = "nixpkgs";
-
-        # Neovim Nightly
-        # neovim.url = "github:nix-community/neovim-nightly-overlay";
-        # neovim.inputs.nixpkgs.follows = "nixpkgs";
 
         # NixOS Hardware
         nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -35,14 +23,6 @@
         # Sops - secret management
         sops-nix.url = "github:Mic92/sops-nix";
         sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-
-        # Yazi File Manager
-        # yazi.url = "github:sxyazi/yazi";
-        # yazi.inputs.nixpkgs.follows = "nixpkgs";
-
-        # Wezterm Terminal Emulator
-        # wezterm.url = "github:wez/wezterm?dir=nix";
-        # wezterm.inputs.nixpkgs.follows = "nixpkgs";
 
     };
 
@@ -91,10 +71,19 @@
                 homeImpermanence = false;
             }; in buildSystem sysConfig;
 
-            # Hofud: Dell Inspiron 3185
+            # Gram: Dell Inspiron 3185
+            "gram" = let sysConfig = {
+                hostname = "gram";
+                instalVersion = "24.11";
+                user = "matt";
+                systemImpermanence = false;
+                homeImpermanence = false;
+            }; in buildSystem sysConfig;
+
+            # Hofud: Dell Inspiron 7425 Shared Laptop
             "hofud" = let sysConfig = {
                 hostname = "hofud";
-                instalVersion = "24.11";
+                instalVersion = "24.05";
                 user = "matt";
                 systemImpermanence = false;
                 homeImpermanence = false;
