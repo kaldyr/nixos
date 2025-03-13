@@ -21,7 +21,7 @@
         loader.grub = {
             default = 2;
             gfxmodeEfi = "1920x1200,1920x1080";
-            useOSProber = true;
+            useOSProber = lib.mkForce true;
         };
         supportedFilesystems = [ "ntfs" ];
     };
