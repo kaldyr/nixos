@@ -18,8 +18,11 @@
         kernelModules = [ "kvm-amd" ];
         kernelPackages = pkgs.linuxKernel.packages.linux_zen;
         kernelParams = [ "btrfs" "quiet" ];
-        loader.grub.gfxmodeEfi = "1920x1200,1920x1080";
-        loader.grub.useOSProber = true;
+        loader.grub = {
+            default = 2;
+            gfxmodeEfi = "1920x1200,1920x1080";
+            useOSProber = true;
+        };
         supportedFilesystems = [ "ntfs" ];
     };
 
