@@ -60,7 +60,7 @@
         };
 
         # System files that aren't declarative and need to be preserved
-        persistence."/home" = lib.mkIf sysConfig.systemImpermanence {
+        persistence."/nix/system" = lib.mkIf sysConfig.systemImpermanence {
             directories = [
                 { directory = "/etc/NetworkManager/system-connections"; mode = "0700"; }
                 { directory = "/var/lib/bluetooth"; mode = "0700"; }

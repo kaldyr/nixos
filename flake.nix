@@ -85,8 +85,8 @@
                 hostname = "hofud";
                 instalVersion = "24.05";
                 user = "matt";
-                systemImpermanence = false;
-                homeImpermanence = false;
+                systemImpermanence = true;
+                homeImpermanence = true;
             }; in buildSystem sysConfig;
 
             # Magrathea: Intel i5-2500K Nextcloud server with Kodi, media storage, and snapshot backups
