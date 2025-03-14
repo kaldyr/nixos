@@ -184,6 +184,7 @@
         home = {
 
             packages = with pkgs; [
+                aisleriot
                 gimp
                 gnome-keyring
                 gnuplot

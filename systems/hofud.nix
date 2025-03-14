@@ -39,12 +39,6 @@
             options = [ "defaults" "size=6G" "mode=755" ];
         };
         "/etc/ssh".neededForBoot = true;
-        "/home" = {
-            device = "none";
-            fsType = "tmpfs";
-            neededForBoot = true;
-            options = [ "defaults" "size=1G" "mode=755" ];
-        };
         "/nix".neededForBoot = true;
         "/windows" = {
             device = "/dev/disk/by-uuid/B6F2645BF264223B";

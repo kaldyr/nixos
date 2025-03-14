@@ -33,25 +33,14 @@
     # environment.systemPackages = with pkgs; [ lowfi ];
 
     fileSystems = {
-
         "/" = {
             device = "none";
             fsType = "tmpfs";
             neededForBoot = true;
             options = [ "defaults" "size=16G" "mode=755" ];
         };
-
         "/etc/ssh".neededForBoot = true;
-
-        "/home" = {
-            device = "none";
-            fsType = "tmpfs";
-            neededForBoot = true;
-            options = [ "defaults" "size=1G" "mode=755" ];
-        };
-
         "/nix".neededForBoot = true;
-
     };
 
     hardware.enableRedistributableFirmware = true;
