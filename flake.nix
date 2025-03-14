@@ -83,7 +83,7 @@
             # Hofud: Dell Inspiron 7425 Shared Laptop
             "hofud" = let sysConfig = {
                 hostname = "hofud";
-                instalVersion = "24.05";
+                instalVersion = "24.11";
                 user = "matt";
                 systemImpermanence = true;
                 homeImpermanence = true;

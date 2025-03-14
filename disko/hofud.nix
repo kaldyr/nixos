@@ -15,7 +15,7 @@
                     name = "ESP";
                     type = "EF00";
                     start = "1MiB";
-                    size = "256M";
+                    size = "2G";
                     content = {
                         type = "filesystem";
                         format = "vfat";
@@ -25,10 +25,8 @@
                     };
                 };
 
-                windows.size = "768G";
-
                 luks = {
-                    size = "100%";
+                    size = "256G";
                     content = {
                         type = "luks";
                         name = "crypted";
@@ -50,6 +48,8 @@
                         };
                     };
                 };
+
+                windows.size = "100%";
 
             };
 

@@ -1,6 +1,10 @@
-{ config, lib, pkgs, sysConfig, ... }: {
+{ inputs, lib, pkgs, ... }: {
 
     imports = [
+        inputs.nixos-hardware.nixosModules.common-cpu-amd
+        inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
+        inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
+        inputs.nixos-hardware.nixosModules.common-gpu-amd
         ../disko/hofud.nix
         ./desktop.nix
         ../programs/hyprland.nix
