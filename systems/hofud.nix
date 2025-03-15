@@ -41,7 +41,7 @@
         "/etc/ssh".neededForBoot = true;
         "/nix".neededForBoot = true;
         "/windows" = {
-            device = "/dev/disk/by-uuid/B6F2645BF264223B";
+            device = "/dev/disk/by-uuid/0658A90C58A8FB95";
             fsType = "ntfs-3g";
             options = [ "rw" "uid=1000" "gid=100" ];
         };
