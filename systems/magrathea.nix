@@ -36,14 +36,6 @@
         };
 
         "/etc/ssh".neededForBoot = true;
-
-        "/home" = {
-            device = "none";
-            fsType = "tmpfs";
-            neededForBoot = true;
-            options = [ "defaults" "size=256M" "mode=755" ];
-        };
-
         "/nix".neededForBoot = true;
         "/state".neededForBoot = true;
 
