@@ -15,7 +15,7 @@
             exiftool_12-70
             ffmpeg
             imagemagick
-            libtensorflow
+            # libtensorflow
             msmtp
             nodejs_22
         ];
