@@ -84,6 +84,9 @@
         ffmpeg
         ffmpegthumbnailer
         gdu
+        gnupg
+        jq
+        lazyjournal
         p7zip
         ripgrep
         sops
@@ -131,6 +134,11 @@
     };
 
     programs.fuse.userAllowOther = true;
+    programs.gnupg.agent = {
+        enable = true;
+        enableSSHSupport = true;
+        pinentryPackage = pkgs.pinentry-curses;
+    };
 
     security.sudo = {
 

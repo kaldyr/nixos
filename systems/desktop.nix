@@ -1,6 +1,7 @@
 { lib, pkgs, sysConfig, ... }: {
 
     imports = [
+        ../programs/brave.nix
         ../programs/cava.nix
         ../programs/discord.nix
         ../programs/keepass.nix
@@ -9,6 +10,7 @@
         ../programs/mpv.nix
         ../programs/obsidian.nix
         ../programs/telegram.nix
+        ../programs/termusic.nix
         ../programs/zathura.nix
         ../services/keyd.nix
         ../services/pipewire.nix
@@ -27,6 +29,7 @@
             "/nix" = {
                 hideMounts = true;
                 users.${sysConfig.user}.directories = [
+                    ".config/gnome-games"
                     ".local/share/applications"
                     "Books"
                     "Documents"
@@ -195,6 +198,7 @@
                 libsecret
                 networkmanagerapplet
                 papirus-folders
+                sblast
                 vulkan-tools
                 xdg-utils
                 xdg-user-dirs

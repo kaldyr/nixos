@@ -15,6 +15,7 @@
     home-manager.users.${sysConfig.user} = {
 
         home.packages = with pkgs; [
+            # discord
             (discord.override { withVencord = true; })
             wayland-push-to-talk-fix
         ];

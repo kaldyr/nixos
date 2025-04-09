@@ -1,4 +1,4 @@
-{ pkgs, sysConfig, ... }: {
+{ lib, pkgs, sysConfig, ... }: {
 
     imports = [
         ../services/dunst.nix
@@ -14,6 +14,10 @@
         ./waybar.nix
     ];
 
+    environment.persistence = lib.mkIf sysConfig.homeImpermanence {
+        "/nix".users.${sysConfig.user}.directories = [ ".config/easyeffects" ];
+    };
+
     environment.sessionVariables = {
         HYPRCURSOR_THEME = "catppuccin-frappe-sapphire-cursors";
         HYPRCURSOR_SIZE = 24;
@@ -26,6 +30,7 @@
         home.packages = with pkgs; [
             brightnessctl
             cliphist
+            easyeffects
             grim
             hyprcursor
             hyprpicker
@@ -55,12 +60,12 @@
         xdg.configFile."hypr/hyprland".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/hypr/hyprland";
 
         xdg.mimeApps.defaultApplications = {
-            "default-web-browser" = [ "librewolf.desktop" ];
-            "text/html" = [ "librewolf.desktop" ];
-            "x-scheme-handler/ftp" = [ "librewolf.desktop" ];
-            "x-scheme-handler/http" = [ "librewolf.desktop" ];
-            "x-scheme-handler/https" = [ "librewolf.desktop" ];
-            "application/md" = [ "librewolf.desktop" ];
+            "default-web-browser" = [ "brave-browser.desktop" ];
+            "text/html" = [ "brave-browser.desktop" ];
+            "x-scheme-handler/ftp" = [ "brave-browser.desktop" ];
+            "x-scheme-handler/http" = [ "brave-browser.desktop" ];
+            "x-scheme-handler/https" = [ "brave-browser.desktop" ];
+            "application/md" = [ "brave-browser.desktop" ];
             "application/pdf" = [ "org.pwmt.zathura.desktop" ];
             "application/image" = [ "feh.desktop" ];
             "application/video" = [ "mpv.desktop" ];

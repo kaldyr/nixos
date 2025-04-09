@@ -7,6 +7,7 @@
         inputs.nixos-hardware.nixosModules.common-gpu-amd
         ../disko/hofud.nix
         ./desktop.nix
+        # ../services/openrazer.nix
         ../programs/hyprland.nix
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix
@@ -28,6 +29,7 @@
             gfxmodeEfi = "1920x1200,1920x1080";
             useOSProber = lib.mkForce true;
         };
+        loader.timeout = null;
         supportedFilesystems = [ "ntfs" ];
     };
 

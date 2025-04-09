@@ -13,7 +13,7 @@
 
         displayManager.autoLogin.enable = true;
         displayManager.autoLogin.user = "kodi";
-        pipewire.systemWide = true;
+        # pipewire.systemWide = true;
 
         xserver = {
 
