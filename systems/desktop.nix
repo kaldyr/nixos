@@ -33,6 +33,7 @@
                     ".local/share/applications"
                     "Books"
                     "Documents"
+                    "DnD"
                     "Downloads"
                     "Music"
                     "Notes"
