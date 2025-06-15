@@ -15,9 +15,9 @@
     home-manager.users.${sysConfig.user} = {
 
         home.packages = with pkgs; [
-            discord
-            # (discord.override { withVencord = true; })
-            # wayland-push-to-talk-fix
+            # discord
+            (discord.override { withVencord = true; })
+            wayland-push-to-talk-fix
         ];
 
         xdg.configFile."Vencord/themes/frappe.theme.css".source = pkgs.fetchFromGitHub {

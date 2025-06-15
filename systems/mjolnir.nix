@@ -8,7 +8,7 @@
         inputs.nixos-hardware.nixosModules.common-gpu-amd
         ../disko/mjolnir.nix
         ./desktop.nix
-        ../services/openrazer.nix
+        # ../services/openrazer.nix
         ../programs/hyprland.nix
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix

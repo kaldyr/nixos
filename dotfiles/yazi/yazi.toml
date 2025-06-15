@@ -1,4 +1,4 @@
-[manager]
+[mgr]
 linemode = "size"
 mouse_events = [ "click", "scroll" ]
 ratio = [0, 1, 2]

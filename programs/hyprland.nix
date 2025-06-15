@@ -15,7 +15,10 @@
     ];
 
     environment.persistence = lib.mkIf sysConfig.homeImpermanence {
-        "/nix".users.${sysConfig.user}.directories = [ ".config/easyeffects" ];
+        "/nix".users.${sysConfig.user}.directories = [
+            ".config/easyeffects"
+            ".local/share/godot"
+        ];
     };
 
     environment.sessionVariables = {
