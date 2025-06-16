@@ -41,7 +41,7 @@
         nextcloud = {
 
             enable = true;
-            package = pkgs.nextcloud30;
+            package = pkgs.nextcloud31;
 
             appstoreEnable = true;
             autoUpdateApps.enable = true;
