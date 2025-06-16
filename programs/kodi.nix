@@ -1,6 +1,6 @@
 { pkgs, ... }: {
 
-    environment.persistence."/state".users.kodi.directories = [
+    environment.persistence."/state".users.matt.directories = [
         { directory = ".cache"; mode = "0700"; }
         ".compose-cache"
         ".kodi"
@@ -12,7 +12,7 @@
     services = {
 
         displayManager.autoLogin.enable = true;
-        displayManager.autoLogin.user = "kodi";
+        displayManager.autoLogin.user = "matt";
         # pipewire.systemWide = true;
 
         xserver = {
@@ -34,7 +34,7 @@
 
     };
 
-    users.extraUsers.kodi.isNormalUser = true;
-    users.extraUsers.kodi.extraGroups = [ "audio" "pipewire" "video" ];
+    # users.extraUsers.kodi.isNormalUser = true;
+    # users.extraUsers.kodi.extraGroups = [ "audio" "pipewire" "video" ];
 
 }
