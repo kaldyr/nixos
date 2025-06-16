@@ -66,7 +66,6 @@
             package = pkgs.samba;
 
             openFirewall = true;
-            securityType = "user";
 
             settings = {
 
@@ -76,6 +75,7 @@
                     "guest account" = "nobody";
                     "map to guest" = "bad user";
                     "netbios name" = "magrathea";
+                    "security" = "user";
                     "server string" = "magrathea";
                     "workgroup" = "WORKGROUP";
                 };
