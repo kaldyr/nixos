@@ -1,5 +1,5 @@
-intro-banner = "short"
-prompt = "> "
+intro-banner = "off"
+prompt = ">>> "
 pretty-print = "auto"
 
 [exchange-rates]
