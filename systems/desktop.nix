@@ -195,6 +195,7 @@
                 hunspell
                 hunspellDicts.en_US
                 imagemagick
+                inkscape
                 kjv
                 libsecret
                 networkmanagerapplet
