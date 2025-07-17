@@ -17,20 +17,6 @@ return {
 		{ '<leader>t', function() require('fzf-lua').treesitter() end, desc = 'Treesitter Picker', silent = true },
 	},
 
-	opts = {
-		'default-title',
-		fzf_colors = true,
-		oldfiles = {
-			include_current_session = true,
-		},
-		previewers = {
-			builtin = {
-				syntax_limit_b = 1024 * 100,
-			},
-		},
-		grep = {
-			rg_glob = true,
-		},
-	},
+	opts = {},
 
 }

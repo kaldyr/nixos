@@ -12,6 +12,7 @@ return {
 			delete = { text = '_' },
 			topdelete = { text = '‾' },
 			changedelete = { text = '⨫' },
+			untracked = { text = '┆' },
 		},
 
 		preview_config = {
