@@ -19,6 +19,16 @@ require 'options'
 require 'keymap'
 require 'autocmd'
 
+vim.lsp.enable({
+	'html',
+	'lua_ls',
+	'marksman',
+	'nixd',
+	'templ',
+	'yamlls',
+})
+vim.g.markdown_fenced_languages = {'css', 'fish', 'html', 'go', 'javascript', 'json', 'lua', 'nix', 'python', 'sql', 'vim'}
+
 require('lazy').setup({
 	performance = {
 		rtp = {
