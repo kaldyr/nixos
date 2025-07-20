@@ -4,7 +4,6 @@ return {
 
 	config = function()
 		require('mini.ai').setup()
-		require('mini.bufremove').setup()
 		require('mini.hipatterns').setup({
 			highlighters = {
 				fixme = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
@@ -15,7 +14,6 @@ return {
 			}
 		})
 		require('mini.operators').setup()
-		-- require('mini.surround').setup()
 	end,
 
 }

@@ -30,7 +30,6 @@ return {
 	end,
 
 	opts = {
-
 		bigfile = { enabled = true },
 		bufdelete = { enabled = true },
 		dim = { enabled = true },
@@ -57,21 +56,19 @@ return {
 		lazygit = { configure = true },
 		notifier = { enabled = true },
 		scope = { enabled = true },
-
 		scroll = {
 			enabled = true,
 			animate = {
-				duration = { step = 15, total = 150 },
+				duration = {
+					step = 15,
+					total = 150,
+				},
 			},
 		},
-
 		statuscolumn = {
 			enable = true,
 			folds = { open = true },
 		},
-
-		terminal = {} ,
-
 		toggle = {
 			enabled = true,
 			color = {
@@ -81,9 +78,8 @@ return {
 			notify = true,
 			which_key = true,
 		},
-
+		words = { enabled = true },
 		zen = { enabled = true },
-
 	},
 
 }
