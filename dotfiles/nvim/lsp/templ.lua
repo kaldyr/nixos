@@ -1,4 +1,4 @@
 return {
 	cmd = { 'templ' },
-	filetype = { 'templ' },
+	filetypes = { 'templ' },
 }

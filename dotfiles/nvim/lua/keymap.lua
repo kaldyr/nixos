@@ -7,6 +7,10 @@ map('n', 'Q', '<Nop>')
 -- Escape removes highlights
 map('n', '<ESC>', '<Cmd>nohls<CR>', { silent = true })
 
+-- LSP
+map('n', 'gd', vim.lsp.buf.definition, { silent = true, noremap = true })
+map('n', 'gD', vim.lsp.buf.declaration, { silent = true, noremap = true })
+
 -- Line Movement
 map('n', '<Down>', '<Cmd>move .+1<CR>==', { silent = true, noremap = true }) -- <Caps-j>
 map('n', '<Up>', '<Cmd>move .-2<CR>==', { silent = true, noremap = true }) -- <Caps-k>
