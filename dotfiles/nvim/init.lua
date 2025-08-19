@@ -20,6 +20,7 @@ require 'keymap'
 require 'autocmd'
 
 vim.lsp.enable({
+	'gopls',
 	'html',
 	'lua_ls',
 	'marksman',
