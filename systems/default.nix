@@ -190,8 +190,6 @@
 
     system.stateVersion = sysConfig.instalVersion;
 
-    systemd.extraConfig = /* bash */ ''
-        DefaultTimeoutStopSec=10s
-    '';
+    systemd.settings.Manager.DefaultTimeoutStopSec = "10s";
 
 }
