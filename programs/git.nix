@@ -3,9 +3,8 @@
     home-manager.users.${sysConfig.user}.programs.git = {
 
         enable = true;
-
-        userEmail = "kaldyr@gmail.com";
-        userName = "kaldyr";
+        settings.user.email = "kaldyr@gmail.com";
+        settings.user.name = "kaldyr";
 
     };
 

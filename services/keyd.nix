@@ -29,6 +29,8 @@
 				"g" = "kpplus";
 				"v" = "kpdot";
 
+                "." = "s";
+
 				# For fast vim arrow movements without exiting insert mode
 				h = "left";
 				j = "down";

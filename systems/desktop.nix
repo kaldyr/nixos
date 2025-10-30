@@ -273,11 +273,10 @@
         gnome.gnome-keyring.enable = true;
 
         # Work towards automount phone for file copy
-        udev.packages = with pkgs; [
-            android-udev-rules
-            libmtp
-            media-player-info
-        ];
+        # udev.packages = with pkgs; [
+        #     libmtp
+        #     media-player-info
+        # ];
 
         udisks2.enable = true;
         udisks2.mountOnMedia = true;

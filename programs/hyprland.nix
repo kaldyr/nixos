@@ -16,6 +16,7 @@
 
     environment.persistence = lib.mkIf sysConfig.homeImpermanence {
         "/nix".users.${sysConfig.user}.directories = [
+            ".cache/hyprland"
             ".config/easyeffects"
             ".local/share/godot"
         ];
@@ -25,6 +26,7 @@
         HYPRCURSOR_THEME = "catppuccin-frappe-sapphire-cursors";
         HYPRCURSOR_SIZE = 24;
         NIXOS_OZONE_WL = "1";
+        PROTON_ENABLE_WAYLAND = "1";
         WLR_NO_HARDWARE_CURSORS = "1";
     };
 
