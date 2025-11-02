@@ -137,7 +137,7 @@
             maple-mono-7
             noto-fonts-cjk-sans # Display of Chinese/Japanese/Korean characters
             noto-fonts-cjk-serif # Display of Chinese/Japanese/Korean characters
-            noto-fonts-emoji # Symbols
+            noto-fonts-color-emoji # Symbols
             recursive # System sans font
         ];
 
@@ -255,7 +255,7 @@
                 libdrm
                 libva
                 libva-utils
-                vaapiVdpau
+                libva-vdpau-driver
             ];
 
         };
