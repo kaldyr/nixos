@@ -1,13 +1,10 @@
 { inputs, lib, pkgs, ... }: {
 
     imports = [
-        inputs.nixos-hardware.nixosModules.common-cpu-amd
-        inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
-        inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
-        inputs.nixos-hardware.nixosModules.common-gpu-amd
+        inputs.nixos-hardware.nixosModules.common-hidpi
+        inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
         ../disko/hofud.nix
         ./desktop.nix
-        # ../services/openrazer.nix
         ../programs/hyprland.nix
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix
@@ -19,14 +16,14 @@
 
     boot = {
         extraModulePackages = with pkgs; [ btrfs-progs ];
-        initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
-        initrd.kernelModules = [ "amdgpu" ];
-        kernelModules = [ "kvm-amd" ];
+        initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
+        initrd.kernelModules = [ "i915" ];
+        kernelModules = [ "kvm-intel" ];
         kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-        kernelParams = [ "btrfs" "quiet" ];
+        kernelParams = [ "btrfs" "i915.enable_fbc=1" "i915.enable_psr=1" "quiet" ];
         loader.grub = {
             default = 2;
-            gfxmodeEfi = "1920x1200,1920x1080";
+            gfxmodeEfi = "2256x1504";
             useOSProber = lib.mkForce true;
         };
         loader.timeout = null;
@@ -42,11 +39,6 @@
         };
         "/etc/ssh".neededForBoot = true;
         "/nix".neededForBoot = true;
-        "/windows" = {
-            device = "/dev/disk/by-uuid/0658A90C58A8FB95";
-            fsType = "ntfs-3g";
-            options = [ "rw" "uid=1000" "gid=100" ];
-        };
     };
 
     hardware = {

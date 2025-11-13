@@ -2,7 +2,7 @@
 
     disko.devices.disk.main = {
 
-        device = "/dev/disk/by-id/nvme-WD_BLACK_SN770_1TB_22412T456504";
+        device = "/dev/disk/by-id/nvme-CT500P3PSSD8_240746F1F0AC";
         type = "disk";
 
         content = {
@@ -26,7 +26,7 @@
                 };
 
                 luks = {
-                    size = "256G";
+                    size = "100%";
                     content = {
                         type = "luks";
                         name = "crypted";

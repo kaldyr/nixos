@@ -14,7 +14,7 @@ This is a multi-system and multi-user flake.  It has laptops, desktops, and home
 - ☕ Espresso  
 Desktop: Ryzen 5700g  
 Budgie  
-- ⚔ Gram  
+- ⚔ Hofud  
 Laptop: Framework 13 11th Gen Intel i5  
 Hyprland  
 - 🪐 Magrathea  
@@ -59,7 +59,7 @@ Caps+hjkl - arrow keys
 
 ## Partition the Drive  
 ```fish
-disko -- --mode disko /usb/disko/[system].nix
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest --mode destroy,format,mount /path/to/[system].nix
 ```
 ### Manual Interventions
 Disko does not manage raid arrays on purpose.  Running the above command would wipe data.

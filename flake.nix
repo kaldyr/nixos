@@ -71,19 +71,10 @@
                 homeImpermanence = false;
             }; in buildSystem sysConfig;
 
-            # Gram: Dell Inspiron 3185
-            "gram" = let sysConfig = {
-                hostname = "gram";
-                instalVersion = "24.11";
-                user = "matt";
-                systemImpermanence = false;
-                homeImpermanence = false;
-            }; in buildSystem sysConfig;
-
-            # Hofud: Dell Inspiron 7425 Shared Laptop
+            # Hofud: Framework 13 11th gen Intel i5
             "hofud" = let sysConfig = {
                 hostname = "hofud";
-                instalVersion = "24.11";
+                instalVersion = "25.05";
                 user = "matt";
                 systemImpermanence = true;
                 homeImpermanence = true;
