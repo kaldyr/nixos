@@ -18,16 +18,11 @@
         extraModulePackages = with pkgs; [ btrfs-progs ];
         initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
         initrd.kernelModules = [ "i915" ];
+        kernel.sysctl."vm.max_map_count" = 16777216;
         kernelModules = [ "kvm-intel" ];
         kernelPackages = pkgs.linuxKernel.packages.linux_zen;
         kernelParams = [ "btrfs" "i915.enable_fbc=1" "i915.enable_psr=1" "quiet" ];
-        loader.grub = {
-            default = 2;
-            gfxmodeEfi = "2256x1504";
-            useOSProber = lib.mkForce true;
-        };
-        loader.timeout = null;
-        supportedFilesystems = [ "ntfs" ];
+        loader.grub.gfxmodeEfi = "2256x1504";
     };
 
     fileSystems = {
