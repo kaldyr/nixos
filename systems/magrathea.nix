@@ -1,12 +1,12 @@
 { inputs, pkgs, ... }: {
 
     imports = [
-        inputs.nixos-hardware.nixosModules.common-cpu-intel
+        # inputs.nixos-hardware.nixosModules.common-cpu-intel
         ../disko/magrathea.nix
         ../services/forgejo.nix
         ../services/nextcloud.nix
-        ../services/pipewire.nix
-        ../programs/kodi.nix
+        # ../services/pipewire.nix
+        # ../programs/kodi.nix
     ];
 
     boot = {

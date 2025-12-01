@@ -76,7 +76,7 @@
             hostName = "localhost";
             https = true;
             maxUploadSize = "16G";
-            nginx.recommendedHttpHeaders = true;
+            # nginx.recommendedHttpHeaders = true;
 
             phpOptions = {
                 "opcache.enable" = "1";
