@@ -20,7 +20,7 @@
 		},
 		"exclusive": false,
 		"gtk-layer-shell": true,
-		"height": 24,
+		"height": 28,
 		"hyprland/window": {
 			"format": "{}",
 		},
@@ -88,8 +88,8 @@
 			"input-filename": "temp1_input",
 		},
 		"tray": {
-			"icon-size": 12,
-			"spacing": 12
+			"icon-size": 16,
+			"spacing": 12,
 		}
 	},
 	{

@@ -71,7 +71,7 @@
                 homeImpermanence = false;
             }; in buildSystem sysConfig;
 
-            # Hofud: Framework 13 11th gen Intel i5
+            # Hofud: Framework 13 11th gen Intel i5-1135G7
             "hofud" = let sysConfig = {
                 hostname = "hofud";
                 instalVersion = "25.05";
