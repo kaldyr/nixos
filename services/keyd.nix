@@ -67,7 +67,7 @@
 
 			main = {
 				capslock = "overload(layerCaps, esc)";
-				esc = "overload(layerCaps, esc)";
+				esc = "`";
 				rightalt = "overload(layerRightAlt, rightalt)";
 				leftcontrol = "layer(control)";
 			};
