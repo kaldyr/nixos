@@ -2,6 +2,7 @@
 
     environment.persistence = lib.mkIf sysConfig.homeImpermanence {
         "/nix".users.${sysConfig.user}.directories = [
+            ".cache/fish/generated_completions"
             ".config/fish"
             ".local/share/fish"
         ];
