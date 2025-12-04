@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ pkgs, ... }: {
 
     imports = [
         # inputs.nixos-hardware.nixosModules.common-cpu-intel
