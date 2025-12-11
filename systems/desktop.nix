@@ -13,7 +13,6 @@
         ../programs/telegram.nix
         ../programs/termusic.nix
         ../programs/zathura.nix
-        ../services/keyd.nix
         ../services/pipewire.nix
     ];
 

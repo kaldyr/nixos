@@ -9,6 +9,7 @@
         ../disko/mjolnir.nix
         ./desktop.nix
         ../services/epson-et-8550.nix
+        ../services/keyd.nix
         ../services/openrazer.nix
         ../programs/hyprland.nix
         ../programs/lutris.nix

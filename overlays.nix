@@ -7,6 +7,7 @@
         # PACKAGE = inputs.NIXPKGS-VERSION.legacyPackages.${prev.system}.PACKAGE;
 
         exiftool_12-70 = inputs.nixpkgs-exiftool.legacyPackages.${prev.system}.exiftool;
+        floorp-bin = inputs.nixpkgs-floorp.legacyPackages.${prev.system}.floorp-bin;
         # hyprland = inputs.hyprland.packages.${prev.system}.hyprland;
         # neovim = inputs.neovim.packages.${prev.system}.neovim;
         # yazi = inputs.yazi.packages.${prev.system}.yazi;
