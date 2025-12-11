@@ -37,12 +37,12 @@
         displayManager = {
             autoLogin.enable = true;
             autoLogin.user = "matshkas";
+            sddm.enable = true;
         };
+        desktopManager.budgie.enable = true;
         gvfs.enable = true;
         tumbler.enable = true;
         xserver.enable = true;
-        xserver.displayManager.sddm.enable = true;
-        xserver.desktopManager.budgie.enable = true;
     };
 
 }
