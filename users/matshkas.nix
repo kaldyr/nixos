@@ -1,6 +1,7 @@
 { config, pkgs, ...}: {
 
     home-manager.users."matshkas" = {
+
         home = {
             sessionVariables.EDITOR = "nano";
             sessionVariables.VISUAL = "nano";
@@ -8,10 +9,11 @@
                 floorp
                 image-roll
                 lutris
-                newsboat
             ];
         };
+
         programs.zellij.enableFishIntegration = false;
+
     };
 
     sops.secrets.matshkas-password.neededForUsers = true;
@@ -21,9 +23,6 @@
         mutableUsers = false;
 
         users."matshkas" = {
-
-            # Temporary
-            createHome = true;
 
             description = "Matshkas";
             extraGroups = [ "wheel" "networkmanager" "video" ];

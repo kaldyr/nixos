@@ -8,6 +8,7 @@
         ../programs/libreoffice.nix
         ../programs/librewolf.nix
         ../programs/mpv.nix
+        ../programs/newsboat.nix
         ../programs/obsidian.nix
         ../programs/telegram.nix
         ../programs/termusic.nix
