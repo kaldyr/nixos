@@ -189,6 +189,7 @@
 
             packages = with pkgs; [
                 aisleriot
+                blender
                 gimp
                 gnome-keyring
                 gnuplot
