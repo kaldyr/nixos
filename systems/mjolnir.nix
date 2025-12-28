@@ -16,6 +16,7 @@
         ../programs/nextcloud-desktop.nix
         ../programs/openscad.nix
         ../programs/plymouth.nix
+        ../programs/retroarch.nix
         ../programs/steam.nix
         ../programs/wezterm.nix
     ];

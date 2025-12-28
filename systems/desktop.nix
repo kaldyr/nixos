@@ -39,6 +39,7 @@
                     "Notes"
                     "Pictures"
                     "Projects"
+                    "Roms"
                     "Videos"
                 ];
             };
