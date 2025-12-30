@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ lib, inputs, pkgs, sysConfig, ... }: {
 
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-amd
@@ -35,7 +35,14 @@
         loader.grub.gfxmodeEfi = "3440x1440,1920x1080";
     };
 
-    # environment.systemPackages = with pkgs; [ lowfi ];
+    environment.systemPackages = with pkgs; [
+        quickemu
+        quickgui
+        virglrenderer
+    ];
+    environment.persistence = lib.mkIf sysConfig.homeImpermanence {
+        "/nix".users.${sysConfig.user}.directories = [ "Machines" ];
+    };
 
     fileSystems = {
         "/" = {
@@ -51,6 +58,23 @@
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
     nixpkgs.config.allowUnfree = true;
+
+    networking = {
+        bridges."br0".interfaces = [ "enp3s0" ];
+        interfaces."br0".ipv4.addresses = [{
+            address = "10.0.0.106";
+            prefixLength = 24;
+        }];
+        defaultGateway = "10.0.0.1";
+        nameservers = [ "10.0.0.1" "9.9.9.9" ];
+    };
+
     time.timeZone = "America/Los_Angeles";
+
+    virtualisation.libvirtd = {
+        enable = true;
+        allowedBridges = [ "br0" ];
+    };
+
 
 }

@@ -23,7 +23,7 @@
         users."matt" = {
 
             description = "Matt";
-            extraGroups = [ "wheel" "networkmanager" "video" ];
+            extraGroups = [ "libvirtd" "networkmanager" "video" "wheel" ];
             hashedPasswordFile = config.sops.secrets.matt-password.path;
             isNormalUser = true;
 
