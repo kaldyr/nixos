@@ -56,22 +56,22 @@
     hardware.enableAllFirmware = true;
     nixpkgs.config.allowUnfree = true;
 
-    networking = {
-        bridges."br0".interfaces = [ "enp3s0" ];
-        interfaces."br0".ipv4.addresses = [{
-            address = "10.0.0.106";
-            prefixLength = 24;
-        }];
-        defaultGateway = "10.0.0.1";
-        nameservers = [ "10.0.0.1" "9.9.9.9" ];
-    };
+    # networking = {
+    #     bridges."br0".interfaces = [ "enp1s0" ];
+    #     interfaces."br0".ipv4.addresses = [{
+    #         address = "10.0.0.231";
+    #         prefixLength = 24;
+    #     }];
+    #     defaultGateway = "10.0.0.1";
+    #     nameservers = [ "10.0.0.1" "9.9.9.9" ];
+    # };
 
     time.timeZone = "America/Los_Angeles";
 
-    virtualisation.libvirtd = {
-        enable = true;
-        allowedBridges = [ "br0" ];
-    };
+    # virtualisation.libvirtd = {
+    #     enable = true;
+    #     allowedBridges = [ "br0" ];
+    # };
 
 
 }
