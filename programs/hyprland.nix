@@ -48,6 +48,7 @@
             wl-clipboard
             wl-screenrec
             wtype
+            xwayland
         ];
 
         services.cliphist.enable = true;
@@ -85,7 +86,7 @@
 
         settings = rec {
             default_session = initial_session;
-            initial_session.command = "Hyprland";
+            initial_session.command = "start-hyprland";
             initial_session.user = sysConfig.user;
         };
 
