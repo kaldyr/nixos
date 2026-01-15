@@ -33,10 +33,12 @@
     };
 
     environment.systemPackages = with pkgs; [
+        android-tools
         quickemu
         quickgui
         virglrenderer
     ];
+
     environment.persistence = lib.mkIf sysConfig.homeImpermanence {
         "/nix".users.${sysConfig.user}.directories = [ "Machines" ];
     };

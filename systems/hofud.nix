@@ -27,6 +27,8 @@
         loader.grub.gfxmodeEfi = "2256x1504";
     };
 
+    environment.systemPackages = with pkgs; [ android-tools ];
+
     fileSystems = {
         "/" = {
             device = "none";
