@@ -68,6 +68,8 @@
     #     nameservers = [ "10.0.0.1" "9.9.9.9" ];
     # };
 
+	services.keyd.keyboards.default.settings.main.esc = "`";
+
     time.timeZone = "America/Los_Angeles";
 
     # virtualisation.libvirtd = {
