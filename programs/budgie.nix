@@ -24,7 +24,7 @@
         dconf.enable = true;
         thunar = {
             enable = true;
-            plugins = with pkgs.xfce; [
+            plugins = with pkgs; [
                 thunar-archive-plugin
                 thunar-media-tags-plugin
                 thunar-volman
@@ -34,6 +34,7 @@
     };
 
     services = {
+        desktopManager.budgie.enable = true;
         displayManager = {
             autoLogin.enable = true;
             autoLogin.user = "matshkas";
@@ -42,7 +43,6 @@
         gvfs.enable = true;
         tumbler.enable = true;
         xserver.enable = true;
-        xserver.desktopManager.budgie.enable = true;
     };
 
 }
