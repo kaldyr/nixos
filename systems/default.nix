@@ -34,8 +34,8 @@
             theme = pkgs.fetchFromGitHub {
                 owner = "catppuccin";
                 repo = "grub";
-                rev = "ffcceb344e2bc86adc8e64437459c1f38adf5b63";
-                sha256 = "sha256-bDw+W69jeSiE1VBdQqqaeZf7OqCN7q5XYJ5+94PILXE=";
+                rev = "0a37ab19f654e77129b409fed371891c01ffd0b9";
+                sha256 = "sha256-jgM22pvCQvb0bjQQXoiqGMgScR9AgCK3OfDF5Ud+/mk=";
             } + "/src/catppuccin-frappe-grub-theme";
 
             useOSProber = false;
@@ -87,6 +87,7 @@
         gnupg
         jq
         lazyjournal
+        lazysql
         p7zip
         ripgrep
         sops

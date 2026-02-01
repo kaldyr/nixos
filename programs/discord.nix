@@ -23,8 +23,8 @@
         xdg.configFile."Vencord/themes/frappe.theme.css".source = pkgs.fetchFromGitHub {
             owner = "catppuccin";
             repo = "discord";
-            rev = "16b1e5156583ee376ded4fa602842fa540826bbc";
-            sha256 = "sha256-ECVHRuHbe3dvwrOsi6JAllJ37xb18HaUPxXoysyPP70=";
+            rev = "f235754322320211a8646d963466fac402e5c297";
+            sha256 = "sha256-7v1Hu6QofOyFOGnHeqHFK0JsxUxdJ9uTjI7nM7mdTsg=";
         } + "/themes/frappe.theme.css";
 
     };

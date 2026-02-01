@@ -204,6 +204,7 @@
                 })
                 kjv
                 libsecret
+                lowfi
                 networkmanagerapplet
                 papirus-folders
                 sblast

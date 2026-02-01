@@ -1,10 +1,10 @@
 { lib, pkgs }: pkgs.stdenv.mkDerivation rec {
 
     pname = "MapleMono-NF-unhinted";
-    version = "7.0-beta34";
+    version = "7.9";
     src = pkgs.fetchurl {
         url = "https://github.com/subframe7536/Maple-font/releases/download/v${version}/${pname}.zip";
-        sha256 = "sha256-4QpOY6b++pDJuS7sJ2li0xdw1KQeMi/S9hSGMSgzh5M=";
+        sha256 = "sha256-gkjWJgZgvhBmtevpDSUTFYLfg4PzjbHChN0fLcnStG4=";
     };
 
     # Work around the "unpacker appears to have produced no directories"
