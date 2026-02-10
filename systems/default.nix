@@ -7,7 +7,6 @@
         ../programs/fish.nix
         ../programs/fzf.nix
         ../programs/git.nix
-        ../programs/helix.nix
         ../programs/lazygit.nix
         ../programs/neovim.nix
         ../programs/numbat.nix
