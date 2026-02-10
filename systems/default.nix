@@ -4,7 +4,6 @@
         ../programs/bat.nix
         ../programs/btop.nix
         ../programs/direnv.nix
-        ../programs/eza.nix
         ../programs/fish.nix
         ../programs/fzf.nix
         ../programs/git.nix
@@ -82,6 +81,7 @@
         fd
         ffmpeg
         ffmpegthumbnailer
+        g-ls
         gdu
         gnupg
         jq
