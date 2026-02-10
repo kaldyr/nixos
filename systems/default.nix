@@ -75,7 +75,6 @@
         age
         duf
         exiftool
-        fd
         ffmpeg
         ffmpegthumbnailer
         g-ls
@@ -85,7 +84,6 @@
         lazyjournal
         lazysql
         p7zip
-        ripgrep
         sops
         ssh-to-age
         unrar

@@ -18,12 +18,10 @@
         home.packages = with pkgs; [
             neovim
             # System utilities
-            fd
             fzf
             gcc
             git
             gnumake
-            ripgrep
             # Language servers
             gopls
             htmx-lsp
