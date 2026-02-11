@@ -7,7 +7,6 @@
         ../services/swww.nix
         ../services/udiskie.nix
         ./feh.nix
-        ./foot.nix
         ./fuzzel.nix
         ./hyprlock.nix
         ./swappy.nix

@@ -4,6 +4,7 @@
         ../programs/brave.nix
         ../programs/cava.nix
         ../programs/discord.nix
+        ../programs/ghostty.nix
         ../programs/keepass.nix
         ../programs/libreoffice.nix
         ../programs/librewolf.nix

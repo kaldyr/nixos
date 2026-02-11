@@ -13,7 +13,6 @@
         ../programs/openscad.nix
         ../programs/plymouth.nix
         ../programs/steam.nix
-        ../programs/wezterm.nix
     ];
 
     boot = {

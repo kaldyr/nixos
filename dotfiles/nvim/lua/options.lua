@@ -47,14 +47,14 @@ o.spelllang = 'en_us'
 o.virtualedit = 'block'
 
 -- Folding
-o.foldcolumn = 'auto:1'
-o.foldenable = true
-o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-o.foldlevel = 99
-o.foldlevelstart = 99
-o.foldmethod = 'expr'
-o.foldnestmax = 10
-o.foldtext = ''
+-- o.foldcolumn = 'auto:1'
+-- o.foldenable = true
+-- o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- o.foldlevel = 99
+-- o.foldlevelstart = 99
+-- o.foldmethod = 'expr'
+-- o.foldnestmax = 10
+-- o.foldtext = ''
 
 -- Default Indenting, use .editorconfig for projects
 o.autoindent = true

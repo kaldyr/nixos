@@ -10,10 +10,10 @@ return {
 
 	opts = {
 		auto_install = false,
-		highlight = {
-			enable = true,
-			additional_vim_regex_highlighting = true,
-		},
+		-- highlight = {
+		-- 	enable = true,
+		-- 	additional_vim_regex_highlighting = true,
+		-- },
 		parser_install_dir = vim.fn.stdpath('data') .. '/grammars/parser', -- Folder controlled by Nix, contains all grammars
 		incremental_selection = {
 			enable = true,

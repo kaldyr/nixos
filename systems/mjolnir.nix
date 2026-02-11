@@ -18,7 +18,6 @@
         ../programs/plymouth.nix
         ../programs/retroarch.nix
         ../programs/steam.nix
-        ../programs/wezterm.nix
     ];
 
     boot = {

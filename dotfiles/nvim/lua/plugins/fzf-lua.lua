@@ -11,10 +11,19 @@ return {
 		{ '<leader>q', function() require('fzf-lua').quickfix() end, desc = 'Quickfix Picker', silent = true },
 		{ '<leader>Q', function() require('fzf-lua').grep_quickfix({ multiprocess = true }) end, desc = 'Search Quickfix', silent = true },
 		{ '<leader>r', function() require('fzf-lua').resume() end, desc = 'Resume Last Picker', silent = true },
-		{ '<leader>s', function() require('fzf-lua').grep({ multiprocess = true }) end, desc = 'Search File Contents', silent = true },
+		{ '<leader>s', function() require('fzf-lua').grep() end, desc = 'Search File Contents', silent = true },
 		{ '<leader>t', function() require('fzf-lua').treesitter() end, desc = 'Treesitter Picker', silent = true },
 	},
 
-	opts = {},
+	opts = {
+		grep = {
+			prompt = 'Grep> ',
+			input_prompt = 'Grep For> ',
+			multiprocess = true,
+			git_icons = true,
+			file_icons = true,
+			color_icons = true,
+		},
+	},
 
 }
