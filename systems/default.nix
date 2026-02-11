@@ -8,7 +8,6 @@
         ../programs/git.nix
         ../programs/lazygit.nix
         ../programs/neovim.nix
-        ../programs/numbat.nix
         ../programs/starship.nix
         ../programs/yazi.nix
         ../programs/zellij.nix
@@ -84,6 +83,7 @@
         lazyjournal
         lazysql
         p7zip
+        libqalculate
         sops
         ssh-to-age
         unrar

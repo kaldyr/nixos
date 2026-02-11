@@ -117,7 +117,7 @@ keybinds clear-defaults=true {
 		bind "Alt w" { ToggleFloatingPanes; SwitchToMode "Normal"; }
 		bind "Alt e" { EditScrollback; SwitchToMode "Normal"; }
 		bind "Alt c" {
-			Run "numbat" {
+			Run "qalc" {
 				name "Calculator"
 				floating true
 				close_on_exit true
