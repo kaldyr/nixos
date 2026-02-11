@@ -1,6 +1,0 @@
-intro-banner = "off"
-prompt = ">>> "
-pretty-print = "auto"
-
-[exchange-rates]
-fetching-policy = "on-first-use"
