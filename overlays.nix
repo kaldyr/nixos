@@ -2,7 +2,7 @@
 
     additions = final: _prev: import ./pkgs final.pkgs;
 
-        modifications = final: prev: {
+    modifications = final: prev: {
 
         # PACKAGE = inputs.NIXPKGS-VERSION.legacyPackages.${prev.system}.PACKAGE;
 
@@ -10,8 +10,15 @@
         floorp-bin = inputs.nixpkgs-floorp.legacyPackages.${prev.system}.floorp-bin;
         # hyprland = inputs.hyprland.packages.${prev.system}.hyprland;
         # neovim = inputs.neovim.packages.${prev.system}.neovim;
-        # yazi = inputs.yazi.packages.${prev.system}.yazi;
-        # wezterm = inputs.wezterm.packages.${prev.system}.default;
+
+        discord = (prev.discord.override {
+            withOpenASAR = true;
+            withVencord = true;
+        }).overrideAttrs (prevAttrs: {
+            desktopItem = prevAttrs.desktopItem.override (prevDesktopAttrs: {
+                exec = "env NIXOS_OZONE_WL=1 ELECTRON_PLATFORM_HINT=wayland ${prevDesktopAttrs.exec} --enable-blink-features=MiddleClickAutoscroll --enable-features=WebRTCPipeWireCapturer";
+            });
+        });
 
     };
 
