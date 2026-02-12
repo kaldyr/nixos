@@ -8,7 +8,6 @@
             packages = with pkgs; [
                 floorp-bin
                 image-roll
-                lutris
             ];
         };
 
