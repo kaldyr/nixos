@@ -11,6 +11,7 @@
         ../services/epson-et-8550.nix
         ../services/keyd.nix
         ../services/openrazer.nix
+        ../programs/foot.nix
         ../programs/hyprland.nix
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix
