@@ -15,8 +15,8 @@
     buildInputs = with pkgs; [
         libevdev
         xdotool
-        xorg.libX11
-        xorg.xorgproto
+        libX11
+        xorgproto
     ];
 
     installPhase = ''
