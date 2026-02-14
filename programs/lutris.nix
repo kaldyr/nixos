@@ -10,11 +10,20 @@
 
     home-manager.users.${sysConfig.user} = {
 
-        home.packages = with pkgs; [
-            lutris
-            gamemode
-            wine
-        ];
+        home.packages = [ pkgs.wine ];
+
+        programs.lutris = {
+            enable = true;
+            extraPackages = with pkgs; [
+                gamemode
+                protobuf
+                proton-ge-bin
+                winetricks
+                wineWow64Packages.full
+            ];
+            defaultWinePackage = pkgs.proton-ge-bin;
+            winePackages = with pkgs; [ wineWow64Packages.full ];
+        };
 
     };
 
