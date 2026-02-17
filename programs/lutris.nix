@@ -3,6 +3,7 @@
     environment.persistence = lib.mkIf sysConfig.homeImpermanence {
         "/nix".users.${sysConfig.user}.directories = [
             ".cache/lutris"
+            ".config/lutris"
             ".local/share/lutris"
             ".wine"
         ];
@@ -10,7 +11,7 @@
 
     home-manager.users.${sysConfig.user} = {
 
-        home.packages = [ pkgs.wine ];
+        home.packages = with pkgs; [ wine ];
 
         programs.lutris = {
             enable = true;
