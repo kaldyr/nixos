@@ -7,6 +7,7 @@
         ./desktop.nix
         ../services/epson-et-8550.nix
         ../services/keyd.nix
+        ../programs/helium.nix
         ../programs/hyprland.nix
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix
