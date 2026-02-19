@@ -11,7 +11,6 @@
         ../services/epson-et-8550.nix
         ../services/keyd.nix
         ../services/openrazer.nix
-        ../programs/foot.nix
         ../programs/hyprland.nix
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix
@@ -19,6 +18,7 @@
         ../programs/plymouth.nix
         ../programs/retroarch.nix
         ../programs/steam.nix
+        ../programs/tmux.nix
     ];
 
     boot = {
