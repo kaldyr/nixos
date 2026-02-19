@@ -8,7 +8,6 @@
 
         home.packages = with pkgs; [
             mediainfo
-            ouch
             simple-mtpfs
         ];
 
@@ -32,13 +31,6 @@
                 "full-border" = "${yazi-plugins}/full-border.yazi";
                 "hide-preview" = "${yazi-plugins}/hide-preview.yazi";
                 "jump-to-char" = "${yazi-plugins}/jump-to-char.yazi";
-
-                "ouch" = pkgs.fetchFromGitHub {
-                    owner = "ndtoan96";
-                    repo = "ouch.yazi";
-                    rev = "v0.7.0";
-                    sha256 = "sha256-1kNqEXPjuXMtYDgRdQNqc8Y0waWHj+I2XXmvk9Sz0g0=";
-                };
 
                 "smart-filter" = "${yazi-plugins}/smart-filter.yazi";
 

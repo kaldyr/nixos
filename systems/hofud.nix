@@ -1,4 +1,4 @@
-{ inputs, lib, pkgs, ... }: {
+{ inputs, pkgs, ... }: {
 
     imports = [
         inputs.nixos-hardware.nixosModules.common-hidpi
@@ -7,7 +7,6 @@
         ./desktop.nix
         ../services/epson-et-8550.nix
         ../services/keyd.nix
-        ../programs/helium.nix
         ../programs/hyprland.nix
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix
@@ -41,7 +40,7 @@
     };
 
     hardware = {
-        cpu.amd.updateMicrocode = true;
+        cpu.intel.updateMicrocode = true;
         enableAllFirmware = true;
         enableRedistributableFirmware = true;
     };
@@ -62,7 +61,7 @@
         libinput.touchpad.scrollMethod = "twofinger";
         libinput.touchpad.accelSpeed = "-0.5";
         thermald.enable = true;
-        xserver.videoDrivers = [ "amdgpu" ];
+        xserver.videoDrivers = [ "i915" ];
     };
 
 }

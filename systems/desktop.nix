@@ -4,6 +4,7 @@
         ../programs/cava.nix
         ../programs/discord.nix
         ../programs/ghostty.nix
+        ../programs/helium.nix
         ../programs/keepass.nix
         ../programs/libreoffice.nix
         ../programs/librewolf.nix
@@ -198,11 +199,7 @@
                 hunspell
                 hunspellDicts.en_US
                 imagemagick
-                (inkscape-with-extensions.override {
-                    inkscapeExtensions = with pkgs; [
-                        inkscape-extensions.inkstitch
-                    ];
-                })
+                inkscape
                 kjv
                 libsecret
                 lowfi
@@ -210,8 +207,8 @@
                 papirus-folders
                 sblast
                 vulkan-tools
-                xdg-utils
                 xdg-user-dirs
+                xdg-utils
             ];
 
             pointerCursor = {

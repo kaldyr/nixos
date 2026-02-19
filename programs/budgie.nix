@@ -14,6 +14,7 @@
             dconf-editor
             file-roller
             gnome-tweaks
+            image-roll
             nano
             xclip
         ];

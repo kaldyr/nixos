@@ -12,7 +12,6 @@
         ../services/keyd.nix
         ../services/openrazer.nix
         ../programs/foot.nix
-        ../programs/helium.nix
         ../programs/hyprland.nix
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix
@@ -35,7 +34,6 @@
 
     environment.systemPackages = with pkgs; [
         android-tools
-        helium
         quickemu
         quickgui
         virglrenderer

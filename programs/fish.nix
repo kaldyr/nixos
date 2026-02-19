@@ -52,7 +52,7 @@
                 ln = "ln -i";
                 ls = "g -1 --color basic --dir-first --git --icon";
                 ll = "ls --long";
-                la = "ls -l --all";
+                lla = "ls --long --all";
                 l = "ls";
                 mkdir = "mkdir -pv";
                 mv = "mv -i";
