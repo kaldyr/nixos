@@ -65,12 +65,12 @@
         xdg.configFile."hypr/hyprland".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/hypr/hyprland";
 
         xdg.mimeApps.defaultApplications = {
-            "default-web-browser" = [ "brave-browser.desktop" ];
-            "text/html" = [ "brave-browser.desktop" ];
-            "x-scheme-handler/ftp" = [ "brave-browser.desktop" ];
-            "x-scheme-handler/http" = [ "brave-browser.desktop" ];
-            "x-scheme-handler/https" = [ "brave-browser.desktop" ];
-            "application/md" = [ "brave-browser.desktop" ];
+            "default-web-browser" = [ "helium.desktop" ];
+            "text/html" = [ "helium.desktop" ];
+            "x-scheme-handler/ftp" = [ "helium.desktop" ];
+            "x-scheme-handler/http" = [ "helium.desktop" ];
+            "x-scheme-handler/https" = [ "helium.desktop" ];
+            "application/md" = [ "helium.desktop" ];
             "application/pdf" = [ "org.pwmt.zathura.desktop" ];
             "application/image" = [ "feh.desktop" ];
             "application/video" = [ "mpv.desktop" ];

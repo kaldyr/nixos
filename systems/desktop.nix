@@ -1,7 +1,6 @@
 { lib, pkgs, sysConfig, ... }: {
 
     imports = [
-        ../programs/brave.nix
         ../programs/cava.nix
         ../programs/discord.nix
         ../programs/ghostty.nix
@@ -195,6 +194,7 @@
                 gimp
                 gnome-keyring
                 gnuplot
+                helium
                 hunspell
                 hunspellDicts.en_US
                 imagemagick

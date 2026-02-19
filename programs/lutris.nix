@@ -19,10 +19,9 @@
                 gamemode
                 protobuf
                 proton-ge-bin
-                winetricks
                 wineWow64Packages.full
+                winetricks
             ];
-            defaultWinePackage = pkgs.proton-ge-bin;
             winePackages = with pkgs; [ wineWow64Packages.full ];
         };
 

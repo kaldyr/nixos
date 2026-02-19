@@ -10,6 +10,7 @@
         floorp-bin = inputs.nixpkgs-floorp.legacyPackages.${prev.system}.floorp-bin;
         # hyprland = inputs.hyprland.packages.${prev.system}.hyprland;
         # neovim = inputs.neovim.packages.${prev.system}.neovim;
+        helium = inputs.helium.packages.${prev.system}.default;
 
         discord = (prev.discord.override {
             withOpenASAR = true;
