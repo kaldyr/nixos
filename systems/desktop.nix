@@ -190,8 +190,6 @@
         home = {
 
             packages = with pkgs; [
-                aisleriot
-                blender
                 gimp
                 gnome-keyring
                 gnuplot
@@ -202,10 +200,8 @@
                 inkscape
                 kjv
                 libsecret
-                lowfi
                 networkmanagerapplet
                 papirus-folders
-                sblast
                 vulkan-tools
                 xdg-user-dirs
                 xdg-utils
