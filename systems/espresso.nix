@@ -25,6 +25,8 @@
         loader.grub.gfxmodeEfi = "1920x1080";
     };
 
+    environment.systemPackages = with pkgs; [ floorp-bin ];
+
     fileSystems = {
         "/" = {
             device = "none";

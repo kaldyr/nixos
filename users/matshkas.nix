@@ -5,10 +5,6 @@
         home = {
             sessionVariables.EDITOR = "nano";
             sessionVariables.VISUAL = "nano";
-            packages = with pkgs; [
-                floorp-bin
-                image-roll
-            ];
         };
 
         programs.zellij.enableFishIntegration = false;
