@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ inputs, lib, pkgs, sysConfig, ... }: {
 
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-amd
@@ -26,6 +26,8 @@
     };
 
     environment.systemPackages = with pkgs; [ floorp-bin ];
+
+    home-manager.users.${sysConfig.user}.gtk.theme.name = lib.mkForce "Qogir";
 
     fileSystems = {
         "/" = {
