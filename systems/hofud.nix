@@ -5,14 +5,15 @@
         inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
         ../disko/hofud.nix
         ./desktop.nix
-        ../services/epson-et-8550.nix
-        ../services/keyd.nix
         ../programs/hyprland.nix
+        ../programs/librewolf.nix
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix
         ../programs/openscad.nix
         ../programs/plymouth.nix
         ../programs/steam.nix
+        ../services/epson-et-8550.nix
+        ../services/keyd.nix
     ];
 
     boot = {

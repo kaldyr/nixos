@@ -7,7 +7,6 @@
         ../programs/helium.nix
         ../programs/keepass.nix
         ../programs/libreoffice.nix
-        ../programs/librewolf.nix
         ../programs/mpv.nix
         ../programs/newsboat.nix
         ../programs/obsidian.nix

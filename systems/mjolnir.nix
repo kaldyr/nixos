@@ -8,10 +8,9 @@
         inputs.nixos-hardware.nixosModules.common-gpu-amd
         ../disko/mjolnir.nix
         ./desktop.nix
-        ../services/epson-et-8550.nix
-        ../services/keyd.nix
         ../services/openrazer.nix
         ../programs/hyprland.nix
+        ../programs/librewolf.nix
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix
         ../programs/openscad.nix
@@ -19,6 +18,8 @@
         ../programs/retroarch.nix
         ../programs/steam.nix
         ../programs/tmux.nix
+        ../services/epson-et-8550.nix
+        ../services/keyd.nix
     ];
 
     boot = {
