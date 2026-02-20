@@ -2,8 +2,8 @@
 
     disko.devices.disk.main = {
 
-        device = "/dev/disk/by-id/nvme-SPCC_M.2_PCIe_SSD_230165515150004";
-        # device = "/dev/disk/by-id/nvme-ADATA_SWORDFISH_2L212L1J2JLE";
+        # device = "/dev/disk/by-id/nvme-SPCC_M.2_PCIe_SSD_230165515150004";
+        device = "/dev/disk/by-id/nvme-ADATA_SWORDFISH_2L212L1J2JLE";
         type = "disk";
 
         content = {
