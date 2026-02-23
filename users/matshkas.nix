@@ -1,14 +1,8 @@
 { config, pkgs, ...}: {
 
-    home-manager.users."matshkas" = {
-
-        home = {
-            sessionVariables.EDITOR = "nano";
-            sessionVariables.VISUAL = "nano";
-        };
-
-        programs.zellij.enableFishIntegration = false;
-
+    home-manager.users."matshkas".home = {
+        sessionVariables.EDITOR = "nano";
+        sessionVariables.VISUAL = "nano";
     };
 
     sops.secrets.matshkas-password.neededForUsers = true;

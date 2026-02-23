@@ -10,7 +10,7 @@
         ../programs/neovim.nix
         ../programs/starship.nix
         ../programs/yazi.nix
-        ../programs/zellij.nix
+        ../programs/qalculate.nix
     ];
 
     boot.loader = {
@@ -83,7 +83,6 @@
         lazyjournal
         lazysql
         p7zip
-        libqalculate
         sops
         ssh-to-age
         unrar

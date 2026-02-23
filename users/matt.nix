@@ -1,18 +1,11 @@
 { config, pkgs, ...}: {
 
-    home-manager.users."matt" = {
-
-        home = {
-            sessionVariables.EDITOR = "nvim";
-            sessionVariables.VISUAL = "nvim";
-        };
-
-        programs.zellij.enableFishIntegration = true;
-
+    home-manager.users."matt".home = {
+        sessionVariables.EDITOR = "nvim";
+        sessionVariables.VISUAL = "nvim";
     };
 
     programs.nano.enable = false;
-
     sops.secrets.matt-password.neededForUsers = true;
 
     users = {

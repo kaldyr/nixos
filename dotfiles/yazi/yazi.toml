@@ -32,7 +32,6 @@ prepend_previewers = [
 ]
 
 [opener]
-dev = [ { run = 'bash /nix/config/scripts/yazi-open-zellij-devel-tab.sh "$@"', desc = "IDE in new tab", orphan = true } ]
 edit = [ { run = 'nvim "$@"', desc = "Edit", block = true } ]
 exif = [ { run = 'exiftool "$1"; echo "Press enter to exit"; read _', desc = "Show EXIF data", block = true } ]
 exifedit = [
