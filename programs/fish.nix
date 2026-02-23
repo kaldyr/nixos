@@ -45,7 +45,6 @@
             shellAliases = {
                 sourcefish = "source ~/.config/fish/config.fish && fish_logo";
                 "!!" = "eval \\$history[1]";
-                cat = "bat";
                 cp = "cp -i";
                 df = "duf";
                 du = "du -hs";
