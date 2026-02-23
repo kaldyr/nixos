@@ -8,9 +8,10 @@
         ../programs/git.nix
         ../programs/lazygit.nix
         ../programs/neovim.nix
-        ../programs/starship.nix
-        ../programs/yazi.nix
         ../programs/qalculate.nix
+        ../programs/starship.nix
+        ../programs/tmux.nix
+        ../programs/yazi.nix
     ];
 
     boot.loader = {

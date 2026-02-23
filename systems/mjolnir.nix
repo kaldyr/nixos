@@ -17,7 +17,6 @@
         ../programs/plymouth.nix
         ../programs/retroarch.nix
         ../programs/steam.nix
-        ../programs/tmux.nix
         ../services/epson-et-8550.nix
         ../services/keyd.nix
     ];
