@@ -35,7 +35,11 @@
             python312Packages.pylatexenc
         ];
 
-        xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim";
+        xdg.configFile."nvim/lsp".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/lsp";
+        xdg.configFile."nvim/lua".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/lua";
+        xdg.configFile."nvim/queries".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/queries";
+        xdg.configFile."nvim/init.lua".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/init.lua";
+        xdg.configFile."nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/${sysConfig.hostname}-lock.json";
         xdg.desktopEntries.nvim = { name = "Neovim Wrapper"; noDisplay = true; };
 
     };
