@@ -10,6 +10,7 @@
         ./desktop.nix
         ../services/openrazer.nix
         ../programs/hyprland.nix
+        ../programs/kitty.nix
         ../programs/librewolf.nix
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix

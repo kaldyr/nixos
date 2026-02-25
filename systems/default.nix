@@ -10,7 +10,6 @@
         ../programs/neovim.nix
         ../programs/qalculate.nix
         ../programs/starship.nix
-        ../programs/tmux.nix
         ../programs/yazi.nix
     ];
 
