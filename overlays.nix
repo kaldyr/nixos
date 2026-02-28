@@ -18,6 +18,7 @@
         exiftool_12-70 = inputs.nixpkgs-exiftool.legacyPackages.${prev.stdenv.hostPlatform.system}.exiftool;
         floorp-bin = inputs.nixpkgs-floorp.legacyPackages.${prev.stdenv.hostPlatform.system}.floorp-bin;
         helium = inputs.helium.packages.${prev.stdenv.hostPlatform.system}.default;
+        openscad = inputs.nixpkgs-openscad.legacyPackages.${prev.stdenv.hostPlatform.system}.openscad;
 
     };
 
