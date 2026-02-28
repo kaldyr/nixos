@@ -10,13 +10,6 @@ if [ "$SITE" == "youtube" ] || [ "$SITE" == "be" ]; then
 
 	if [ "$RES" == "none" ]; then
 		CMD="mpv --ytdl-format=\"ba\" --no-video $URL 2>/dev/null"
-		ZELLIJ="$(pidof zellij)"
-
-		if [ "$ZELLIJ" != "" ]; then
-			CMD="zellij run -c -- $CMD"
-		else
-			CMD="wezterm start -- $CMD"
-		fi
 	else
 		CMD="mpv --ytdl-format=\"bv*[height<=$RES]+ba\" $URL 2>/dev/null"
 	fi
