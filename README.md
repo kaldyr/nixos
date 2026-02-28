@@ -47,7 +47,7 @@ Unified keybinds between applications
 
 Modifiers:  
 Hyprland: META/Windows/Whatever key  
-Zellij/Wezterm: Alt (leftalt)  
+Terminal: Alt (leftalt)  
 Applications: Ctrl  
 
 hjkl - movement  
