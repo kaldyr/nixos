@@ -123,8 +123,11 @@
         nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
         registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
 
-        settings.experimental-features = "nix-command flakes";
-        settings.auto-optimise-store = true;
+        settings = {
+            auto-optimise-store = true;
+            download-buffer-size = 524288000;
+            experimental-features = "nix-command flakes";
+        };
 
     };
 

@@ -20,7 +20,6 @@
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
         nixpkgs-exiftool.url = "github:NixOS/nixpkgs/0dfa68647420b93080a04508dda41476cccc0cd0";
         nixpkgs-floorp.url = "github:NixOS/nixpkgs/eabbe1044fbe014573ed5ed7f7523181f98d31ec";
-        nixpkgs-libreoffice.url = "github:NixOS/nixpkgs/f2d16bccd7ccfc9d5091093b2757db6ec93c29e4";
 
         # Sops - secret management
         sops-nix.url = "github:Mic92/sops-nix";
