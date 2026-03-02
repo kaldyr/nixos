@@ -3,7 +3,6 @@
     imports = [
         ../programs/cava.nix
         ../programs/discord.nix
-        ../programs/foot.nix
         ../programs/helium.nix
         ../programs/keepass.nix
         ../programs/kitty.nix
@@ -136,7 +135,7 @@
             julia-mono # Math font
             liberation_ttf # Open versions of MS fonts
             libertinus # System Serif Font
-            maple-mono-7
+            maple-mono-7 # Mono Font
             noto-fonts-cjk-sans # Display of Chinese/Japanese/Korean characters
             noto-fonts-cjk-serif # Display of Chinese/Japanese/Korean characters
             noto-fonts-color-emoji # Symbols
