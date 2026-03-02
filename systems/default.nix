@@ -84,6 +84,7 @@
         lazysql
         p7zip
         sops
+        superfile
         ssh-to-age
         unrar
         unzip

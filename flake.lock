@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1771881364,
-        "narHash": "sha256-A5uE/hMium5of/QGC6JwF5TGoDAfpNtW00T0s9u/PN8=",
+        "lastModified": 1772420042,
+        "narHash": "sha256-naZz40TUFMa0E0CutvwWsSPhgD5JldyTUDEgP9ADpfU=",
         "owner": "nix-community",
         "repo": "disko",
-        "rev": "a4cb7bf73f264d40560ba527f9280469f1f081c6",
+        "rev": "5af7af10f14706e4095bd6bc0d9373eb097283c6",
         "type": "github"
       },
       "original": {
@@ -48,11 +48,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772218752,
-        "narHash": "sha256-G8nArvOTZXU8DRvrzAdz3Elcj6kA/vMtvY9mrGLATtA=",
+        "lastModified": 1772380461,
+        "narHash": "sha256-O3ukj3Bb3V0Tiy/4LUfLlBpWypJ9P0JeUgsKl2nmZZY=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f3a30376bb9eb2f6f61816be7d6ed954b6d2a3b9",
+        "rev": "f140aa04d7d14f8a50ab27f3691b5766b17ae961",
         "type": "github"
       },
       "original": {
@@ -165,29 +165,29 @@
         "type": "github"
       }
     },
-    "nixpkgs-openscad": {
+    "nixpkgs-libreoffice": {
       "locked": {
-        "lastModified": 1772054969,
-        "narHash": "sha256-tFmuSayf5+9EEHJhlnq4na2+V06n/BRGAQE74RYmB10=",
+        "lastModified": 1771562020,
+        "narHash": "sha256-dSW83iynZqBIby3UMskEHrBzghApLcPrQcMUljjxXVI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "27e907633015940076035fa48c4260cd0cac6227",
+        "rev": "f2d16bccd7ccfc9d5091093b2757db6ec93c29e4",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "27e907633015940076035fa48c4260cd0cac6227",
+        "rev": "f2d16bccd7ccfc9d5091093b2757db6ec93c29e4",
         "type": "github"
       }
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1771848320,
-        "narHash": "sha256-0MAd+0mun3K/Ns8JATeHT1sX28faLII5hVLq0L3BdZU=",
+        "lastModified": 1772198003,
+        "narHash": "sha256-I45esRSssFtJ8p/gLHUZ1OUaaTaVLluNkABkk6arQwE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "2fc6539b481e1d2569f25f8799236694180c0993",
+        "rev": "dd9b079222d43e1943b6ebd802f04fd959dc8e61",
         "type": "github"
       },
       "original": {
@@ -207,7 +207,7 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-exiftool": "nixpkgs-exiftool",
         "nixpkgs-floorp": "nixpkgs-floorp",
-        "nixpkgs-openscad": "nixpkgs-openscad",
+        "nixpkgs-libreoffice": "nixpkgs-libreoffice",
         "sops-nix": "sops-nix"
       }
     },
@@ -218,11 +218,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772048434,
-        "narHash": "sha256-/wA0OaH6kZ/pFA+nXR/tvg5oupOmEDmMS5us79JT60o=",
+        "lastModified": 1772401007,
+        "narHash": "sha256-YHykQg0h9hrlZGpMcywnaFzQ1Kn/5YNCCOSaaAl6z7Q=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "334daa7c273dd8bf7a0cd370e4e16022b64e55e9",
+        "rev": "d8be5ea4cd3bc363492ab5bc6e874ccdc5465fe4",
         "type": "github"
       },
       "original": {
