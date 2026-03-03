@@ -11,7 +11,7 @@ return {
 		flavour = 'auto',
 
 		background = {
-			dark = 'macchiato',
+			dark = 'frappe',
 			light = 'latte',
 		},
 
