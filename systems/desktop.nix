@@ -11,7 +11,6 @@
         ../programs/newsboat.nix
         ../programs/obsidian.nix
         ../programs/telegram.nix
-        ../programs/termusic.nix
         ../programs/zathura.nix
         ../services/pipewire.nix
     ];
