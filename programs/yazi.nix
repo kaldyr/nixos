@@ -43,6 +43,8 @@
 
             };
 
+            shellWrapperName = "y";
+
         };
 
         xdg.configFile = {
