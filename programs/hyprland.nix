@@ -34,6 +34,7 @@
         home.packages = with pkgs; [
             brightnessctl
             cliphist
+            dragon-drop
             easyeffects
             grim
             hyprcursor
