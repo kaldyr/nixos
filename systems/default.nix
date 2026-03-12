@@ -19,22 +19,12 @@
         efi.efiSysMountPoint = "/boot";
 
         grub = {
-
             enable = true;
-
             device = "nodev";
             efiInstallAsRemovable = true;
             efiSupport = true;
-
-            theme = pkgs.fetchFromGitHub {
-                owner = "catppuccin";
-                repo = "grub";
-                rev = "0a37ab19f654e77129b409fed371891c01ffd0b9";
-                sha256 = "sha256-jgM22pvCQvb0bjQQXoiqGMgScR9AgCK3OfDF5Ud+/mk=";
-            } + "/src/catppuccin-frappe-grub-theme";
-
+            theme = pkgs.catppuccin-grub.override { flavor = "frappe"; };
             useOSProber = false;
-
         };
 
     };
