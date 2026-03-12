@@ -34,13 +34,6 @@ Off-site backup
 Kodi  
 
 Notable customizations
-- Custom built font  
-[Recursive Mono](https://recursive.design)
-Configured to my liking  
-Ligatures added from FiraCode  
-TODO:
-Use nerd font patcher  
-Find a nice flowing script to swap italics  
 - Keybinds  
 Keyd used to remap capslock to escape and a custom layer  
 Unified keybinds between applications  
