@@ -190,7 +190,6 @@
                 gimp
                 gnome-keyring
                 gnuplot
-                helium
                 hunspell
                 hunspellDicts.en_US
                 imagemagick

@@ -17,8 +17,6 @@
 
     };
 
-    programs.dconf.enable = true;
-
     services = {
         desktopManager.budgie.enable = true;
         displayManager = {

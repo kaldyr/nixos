@@ -1,4 +1,4 @@
-{ inputs, lib, pkgs, sysConfig, ... }: {
+{ inputs, pkgs, ... }: {
 
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-amd
@@ -7,7 +7,7 @@
         inputs.nixos-hardware.nixosModules.common-gpu-amd
         ../disko/espresso.nix
         ./desktop.nix
-        ../programs/budgie.nix
+        ../programs/hyprland.nix
         ../programs/lutris.nix
         ../programs/plymouth.nix
         ../programs/steam.nix
@@ -25,9 +25,11 @@
         loader.grub.gfxmodeEfi = "1920x1080";
     };
 
-    environment.systemPackages = with pkgs; [ floorp-bin ];
-
-    home-manager.users.${sysConfig.user}.gtk.theme.name = lib.mkForce "Qogir";
+    environment.systemPackages = with pkgs; [
+        floorp-bin
+        nano
+        xarchiver
+    ];
 
     fileSystems = {
         "/" = {
@@ -44,6 +46,20 @@
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
     nixpkgs.config.allowUnfree = true;
+
+    programs.thunar = {
+        enable = true;
+        plugins = with pkgs; [
+            thunar-archive-plugin
+            thunar-media-tags-plugin
+            thunar-shares-plugin
+            thunar-volman
+            tumbler
+        ];
+    };
+
+    services.tumbler.enable = true;
+
     time.timeZone = "America/Los_Angeles";
 
 }
