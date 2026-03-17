@@ -7,6 +7,7 @@ g.maplocalleader = ' '
 -- General
 o.backup = false
 o.clipboard = 'unnamedplus'
+o.encoding = 'utf-8'
 o.mouse = 'a'
 o.splitbelow = true
 o.splitright = true
