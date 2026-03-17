@@ -25,7 +25,7 @@ set notification-warning-fg rgba(250,227,176,1)
 set inputbar-fg             rgba(198,208,245,1)
 set inputbar-bg             rgba(65,69,89,1)
 
-set recolor                 "true"
+set recolor                 "false"
 set recolor-lightcolor      rgba(48,52,70,1)
 set recolor-darkcolor       rgba(198,208,245,1)
 
