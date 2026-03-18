@@ -29,15 +29,11 @@ return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
 	o.termguicolors = true
 	o.timeout = true;
 	o.timeoutlen = 400
-	o.title = true
 	o.wrap = false
 	-- Editing
 	o.formatoptions = 'qjl1t'
 	o.ignorecase = true
 	o.incsearch = true
-	o.infercase = true
-	o.smartcase = true
-	o.spelllang = 'en_us'
 	o.virtualedit = 'block'
 
 	-- Keymaps
@@ -47,6 +43,9 @@ return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
 	map('n', 'Q', '<Nop>')
 	-- Escape removes highlights
 	map('n', '<ESC>', '<Cmd>nohls<CR>', { silent = true })
+	-- Remap keys that jump into input, since read only
+	map('n', 'A', '$', { silent = true })
+	map('n', 'I', '^', { silent = true })
 
 	-- Start
 	vim.cmd("hi Normal ctermbg=None ctermfg=None guibg=None guifg=None")
