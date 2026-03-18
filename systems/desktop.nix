@@ -5,6 +5,7 @@
         ../programs/discord.nix
         ../programs/helium.nix
         ../programs/keepass.nix
+        ../programs/kitty.nix
         ../programs/libreoffice.nix
         ../programs/mpv.nix
         ../programs/newsboat.nix

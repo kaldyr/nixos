@@ -6,7 +6,6 @@
         ../programs/fish.nix
         ../programs/fzf.nix
         ../programs/git.nix
-        ../programs/kitty.nix
         ../programs/lazygit.nix
         ../programs/neovim.nix
         ../programs/qalculate.nix
