@@ -81,6 +81,7 @@
         unzip
         yt-dlp
         zip
+        zmx
     ];
 
     networking = {

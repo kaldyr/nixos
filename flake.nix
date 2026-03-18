@@ -29,6 +29,9 @@
         helium.url = "github:schembriaiden/helium-browser-nix-flake";
         helium.inputs.nixpkgs.follows = "nixpkgs";
 
+        # zmx session persistence
+        zmx.url = "github:neurosnap/zmx";
+
     };
 
     outputs = { nixpkgs, ... }@inputs: {
