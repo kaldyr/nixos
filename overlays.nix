@@ -4,7 +4,7 @@
 
     modifications = final: prev: {
 
-        # PACKAGE = inputs.NIXPKGS-VERSION.legacyPackages.${prev.system}.PACKAGE;
+        # PACKAGE = inputs.NIXPKGS-VERSION.legacyPackages.${prev.stdenv.hostPlatform.system}.PACKAGE;
 
         discord = (prev.discord.override {
             withOpenASAR = true;
