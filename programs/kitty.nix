@@ -5,7 +5,8 @@
         programs.kitty.enable = true;
 
         xdg.configFile."kitty/kitty.conf".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/kitty/kitty.conf";
-        xdg.configFile."kitty/themes/frappe.conf".source = pkgs.fetchFromGitHub {
+        xdg.configFile."kitty/relative_resize.py".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/kitty/relative_resize.py";
+        xdg.configFile."kitty/frappe.conf".source = pkgs.fetchFromGitHub {
             owner = "catppuccin";
             repo = "kitty";
             rev = "43098316202b84d6a71f71aaf8360f102f4d3f1a";
