@@ -183,6 +183,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-yt-dlp": {
+      "locked": {
+        "lastModified": 1773837110,
+        "narHash": "sha256-cqW/e1x1ftSt898H8O9Sl10y9ZgYYrUMKg2pvAbD5vg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "0b216c5dcae9ec800948d5fb18f092f0c675dfda",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "0b216c5dcae9ec800948d5fb18f092f0c675dfda",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1773734432,
@@ -224,6 +240,7 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-exiftool": "nixpkgs-exiftool",
         "nixpkgs-floorp": "nixpkgs-floorp",
+        "nixpkgs-yt-dlp": "nixpkgs-yt-dlp",
         "sops-nix": "sops-nix",
         "zmx": "zmx"
       }
