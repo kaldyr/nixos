@@ -84,7 +84,7 @@
 		"temperature": {
 			"critical-threshold": 75,
 			"format": "",
-			"hwmon-path-abs": "/sys/class/hwmon/hwmon2/",
+			"hwmon-path-abs": "/sys/class/hwmon/hwmon2",
 			"input-filename": "temp1_input",
 		},
 		"tray": {
