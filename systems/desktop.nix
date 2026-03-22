@@ -1,4 +1,4 @@
-{ lib, pkgs, sysConfig, ... }: {
+{ config, lib, pkgs, sysConfig, ... }: {
 
     imports = [
         ../programs/cava.nix
@@ -164,6 +164,7 @@
             };
 
             gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+            gtk4.theme = null;
             gtk4.extraConfig.gtk-applications-prefer-dark-theme = true;
 
             iconTheme = {
@@ -233,6 +234,7 @@
                 createDirectories = true;
                 desktop = null;
                 publicShare = null;
+                setSessionVariables = true;
                 templates = null;
             };
 
