@@ -18,7 +18,6 @@
         exiftool_12-70 = inputs.nixpkgs-exiftool.legacyPackages.${prev.stdenv.hostPlatform.system}.exiftool;
         helium = inputs.helium.packages.${prev.stdenv.hostPlatform.system}.default;
         floorp-bin = inputs.nixpkgs-floorp.legacyPackages.${prev.stdenv.hostPlatform.system}.floorp-bin;
-        yt-dlp = inputs.nixpkgs-yt-dlp.legacyPackages.${prev.stdenv.hostPlatform.system}.yt-dlp;
         zmx = inputs.zmx.packages.${prev.stdenv.hostPlatform.system}.default;
 
     };
