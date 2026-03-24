@@ -1,7 +1,7 @@
-{ sysConfig, ... }: {
+{ pkgs, sysConfig, ... }: {
 
     home-manager.users.${sysConfig.user} = { config, ... }: {
-        programs.cava.enable = true;
+        home.packages = with pkgs; [ cava ];
         xdg.configFile."cava/config".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/cava/config";
     };
 
