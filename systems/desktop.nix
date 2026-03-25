@@ -3,6 +3,7 @@
     imports = [
         ../programs/cava.nix
         ../programs/discord.nix
+        ../programs/ghostty.nix
         ../programs/helium.nix
         ../programs/keepass.nix
         ../programs/kitty.nix
