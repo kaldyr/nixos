@@ -37,12 +37,17 @@
             python312Packages.pylatexenc
         ];
 
-        xdg.configFile."nvim/lsp".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/lsp";
-        xdg.configFile."nvim/lua".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/lua";
-        xdg.configFile."nvim/queries".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/queries";
-        xdg.configFile."nvim/init.lua".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/init.lua";
-        xdg.configFile."nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/${sysConfig.hostname}-lock.json";
-        xdg.desktopEntries.nvim = { name = "Neovim Wrapper"; noDisplay = true; };
+        xdg = {
+            configFile = {
+                "nvim/lsp".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/lsp";
+                "nvim/lua".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/lua";
+                "nvim/queries".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/queries";
+                "nvim/init.lua".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/init.lua";
+                "nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/${sysConfig.hostname}-lock.json";
+            };
+            mimeApps.associations.added."text/plain" = [ "nvim.desktop" ];
+
+        };
 
     };
 

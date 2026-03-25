@@ -14,7 +14,7 @@ font-feature = ss07
 font-feature = ss08
 font-feature = ss11
 font-feature = zero
-font-size = 10
+font-size = 10.6
 font-thicken = true
 
 # Theme
@@ -25,17 +25,18 @@ theme = Catppuccin Frappe
 
 # Integrations
 shell-integration = fish
-
 window-decoration = false
 window-padding-balance = true
 window-padding-x = 0
 window-padding-y = 0
 
+# Keybindings
 keybind = alt+\=reload_config
 keybind = alt+minus=decrease_font_size:1
 keybind = alt+equal=increase_font_size:1
 keybind = alt+zero=reset_font_size
 
+# Scrollback
 keybind = alt+u=scroll_page_up
 keybind = alt+d=scroll_page_down
 keybind = alt+e=write_scrollback_file:open
@@ -52,9 +53,6 @@ keybind = alt+shift+,=move_tab:-1
 keybind = alt+f=toggle_split_zoom
 keybind = alt+n=new_split:down
 keybind = alt+v=new_split:right
-keybind = alt+x=close_window
-# focus window
-# swap
 keybind = alt+h=goto_split:left
 keybind = alt+j=goto_split:down
 keybind = alt+k=goto_split:up
