@@ -25,6 +25,7 @@ theme = Catppuccin Frappe
 
 # Integrations
 shell-integration = fish
+shell-integration-features = ssh-terminfo
 window-decoration = false
 window-padding-balance = true
 window-padding-x = 0
