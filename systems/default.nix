@@ -122,11 +122,49 @@
 
     };
 
-    programs.fuse.userAllowOther = true;
-    programs.gnupg.agent = {
-        enable = true;
-        enableSSHSupport = true;
-        pinentryPackage = pkgs.pinentry-curses;
+    programs = {
+
+        fuse.userAllowOther = true;
+
+        gnupg.agent = {
+            enable = true;
+            enableSSHSupport = true;
+            pinentryPackage = pkgs.pinentry-curses;
+        };
+
+        ssh = {
+            extraConfig = "
+                Host = espresso.*
+                    HostName espresso
+                    RemoteCommand zmx attach %k
+                    RequestTTY yes
+                    ControlPath ~/.ssh/cm-%r@%h:%p
+                    ControlMaster auto
+                    ControlPersist 10m
+                Host = hofud.*
+                    HostName hofud
+                    RemoteCommand zmx attach %k
+                    RequestTTY yes
+                    ControlPath ~/.ssh/cm-%r@%h:%p
+                    ControlMaster auto
+                    ControlPersist 10m
+                Host = magrathea.*
+                    HostName magrathea
+                    RemoteCommand zmx attach %k
+                    RequestTTY yes
+                    ControlPath ~/.ssh/cm-%r@%h:%p
+                    ControlMaster auto
+                    ControlPersist 10m
+                Host = mjolnir.*
+                    HostName mjolnir
+                    RemoteCommand zmx attach %k
+                    RequestTTY yes
+                    ControlPath ~/.ssh/cm-%r@%h:%p
+                    ControlMaster auto
+                    ControlPersist 10m
+            ";
+        };
+
     };
 
     security.sudo = {
@@ -155,7 +193,7 @@
 
             knownHosts = {
                 "espresso".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICKugLnV4qqCMN5dhN4BWEx9Q7OG+BAk0a+2RzNmzFhr root@espresso";
-                "gram".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJId64RiXTZvY0oHr75V2TFURT6Qg8D6mgTCGVr59B7l root@gram";
+                "hofud".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGYN+zwhYvBqGaKgxSPEVLj6KE2uGdbPUR1se1hN+1NG root@hofud";
                 "magrathea".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKymXBmxO/Yb9lFRyW+w1O3mZ7I6iLgnxW0kgI/4e1O3 root@magrathea";
                 "mjolnir".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEsWi8zGLMuMJM+2wawmRFEE6Qmnabq3kA4Rj3bLBBJ6 root@mjolnir";
                 "oolong".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIECVKXiwEIQDR5+EJKCDXYNWAE7QZsAmakeDj+htH4FU root@oolong";
