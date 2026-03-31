@@ -31,15 +31,7 @@
                 "full-border" = "${yazi-plugins}/full-border.yazi";
                 "hide-preview" = "${yazi-plugins}/hide-preview.yazi";
                 "jump-to-char" = "${yazi-plugins}/jump-to-char.yazi";
-
                 "smart-filter" = "${yazi-plugins}/smart-filter.yazi";
-
-                "starship" = pkgs.fetchFromGitHub {
-                    owner = "Rolv-Apneseth";
-                    repo = "starship.yazi";
-                    rev = "eca186171c5f2011ce62712f95f699308251c749";
-                    sha256 = "sha256-xcz2+zepICZ3ji0Hm0SSUBSaEpabWUrIdG7JmxUl/ts=";
-                };
 
             };
 
