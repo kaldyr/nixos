@@ -13,7 +13,7 @@
 
         displayManager.autoLogin.enable = true;
         displayManager.autoLogin.user = "matt";
-        # pipewire.systemWide = true;
+        pipewire.systemWide = true;
 
         xserver = {
 
@@ -34,7 +34,7 @@
 
     };
 
-    # users.extraUsers.kodi.isNormalUser = true;
-    # users.extraUsers.kodi.extraGroups = [ "audio" "pipewire" "video" ];
+    users.extraUsers.kodi.isNormalUser = true;
+    users.extraUsers.kodi.extraGroups = [ "audio" "pipewire" "video" ];
 
 }
