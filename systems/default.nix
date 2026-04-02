@@ -71,7 +71,7 @@
         gnupg
         jq
         lazyjournal
-        lazysql
+        lazycut
         p7zip
         sops
         superfile
