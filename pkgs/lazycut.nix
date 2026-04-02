@@ -3,6 +3,11 @@
     pname = "lazycut";
     version = "0.3.9";
 
+    buildInputs = with pkgs; [
+        chafa
+        ffmpeg
+    ];
+
     src = pkgs.fetchFromGitHub {
         owner = "ozemin";
         repo = "lazycut";
