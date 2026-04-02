@@ -62,6 +62,7 @@
 
     home-manager.users.${sysConfig.user}.home.packages = with pkgs; [
         age
+        chafa
         duf
         exiftool
         ffmpeg
