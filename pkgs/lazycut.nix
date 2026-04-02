@@ -3,16 +3,6 @@
     pname = "lazycut";
     version = "0.3.9";
 
-    nativeBuildInputs = with pkgs; [
-        makeWrapper
-        pkg-config
-    ];
-
-    buildInputs = with pkgs; [
-        chafa
-        ffmpeg
-    ];
-
     src = pkgs.fetchFromGitHub {
         owner = "ozemin";
         repo = "lazycut";
@@ -22,10 +12,11 @@
 
     vendorHash = "sha256-KfVNSESu06xiFYb+r2Yv4rgDc/NZ1tuGC0IWUdQrywo=";
 
-    postInstall = ''
+    nativeBuildInputs = with pkgs; [ makeWrapper ];
+
+    postFixup = ''
         wrapProgram $out/bin/lazycut \
-          --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.chafa pkgs.ffmpeg ]} \
-          --prefix LD_LIBRARY_PATH : ${pkgs.lib.makeLibraryPath [ pkgs.chafa ]}
-    '';
+          --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.ffmpeg pkgs.chafa ]}
+      '';
 
 }
