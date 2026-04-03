@@ -2,9 +2,9 @@
 
     home-manager.users.${sysConfig.user} = {
 
-        home.packages = with pkgs; [ swww ];
+        home.packages = with pkgs; [ awww ];
 
-        systemd.user.services.swww = {
+        systemd.user.services.awww = {
 
             Install.WantedBy = [ "graphical-session.target" ];
             Unit.Description = "Wayland wallpaper daemon";
@@ -12,7 +12,7 @@
 
             Service = {
                 ExecStartPre = "${lib.getExe' pkgs.coreutils "sleep"} 0.5";
-                ExecStart = "${lib.getExe' pkgs.swww "swww-daemon"} --format xrgb";
+                ExecStart = "${lib.getExe' pkgs.awww "awww-daemon"} --format xrgb";
                 Restart = "on-failure";
             };
 
@@ -25,15 +25,15 @@
             Unit = {
                 Description = "Set the wallpaper";
                 PartOf = [ "graphical-session.target" ];
-                After = [ "swww.service" ];
-                Requires = [ "swww.service" ];
+                After = [ "awww.service" ];
+                Requires = [ "awww.service" ];
             };
 
             Service = {
                 ExecStartPre = "${lib.getExe' pkgs.coreutils "sleep"} 1";
                 ExecStart = toString (
                     pkgs.writeShellScript "wallpaper-change" ''
-                        ${pkgs.swww}/bin/swww img "$(${pkgs.findutils}/bin/find $HOME/Pictures/Wallpapers -type f | ${pkgs.coreutils}/bin/shuf -n 1)"
+                        ${pkgs.awww}/bin/awww img "$(${pkgs.findutils}/bin/find $HOME/Pictures/Wallpapers -type f | ${pkgs.coreutils}/bin/shuf -n 1)"
                     '' );
                 Type = "oneshot";
             };

@@ -1,10 +1,10 @@
 { lib, pkgs, sysConfig, ... }: {
 
     imports = [
+        ../services/awww.nix
         ../services/dunst.nix
         ../services/gammastep.nix
         ../services/hypridle.nix
-        ../services/swww.nix
         ../services/udiskie.nix
         ./feh.nix
         ./fuzzel.nix
