@@ -3,9 +3,6 @@
     environment.persistence = lib.mkIf sysConfig.homeImpermanence {
         "/nix".users.${sysConfig.user}.directories = [
             { directory = ".config/net.imput.helium"; mode = "0700"; }
-            # { directory = ".cache/BraveSoftware"; mode = "0700"; }
-            # { directory = ".config/BraveSoftware"; mode = "0700"; }
-            # { directory = ".local/share/kwalletd"; mode = "0700"; }
         ];
     };
 
