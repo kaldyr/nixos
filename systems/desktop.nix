@@ -200,6 +200,7 @@
                 libsecret
                 networkmanagerapplet
                 papirus-folders
+                vex-tui
                 vulkan-tools
                 xdg-user-dirs
                 xdg-utils
