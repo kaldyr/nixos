@@ -1,4 +1,4 @@
-{ config, lib, pkgs, sysConfig, ... }: {
+{ lib, pkgs, sysConfig, ... }: {
 
     imports = [
         ../programs/cava.nix
