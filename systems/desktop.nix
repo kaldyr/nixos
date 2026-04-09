@@ -131,9 +131,8 @@
         packages = with pkgs; [
             font-awesome # Symbols
             inter # Sans Font
-            julia-mono # Math font
             liberation_ttf # Open versions of MS fonts
-            libertinus # System Serif Font
+            libertinus # System Serif Font and Math
             maple-mono-7 # Mono Font
             noto-fonts-cjk-sans # Display of Chinese/Japanese/Korean characters
             noto-fonts-cjk-serif # Display of Chinese/Japanese/Korean characters
@@ -196,6 +195,7 @@
                 hunspellDicts.en_US
                 imagemagick
                 inkscape
+                kew
                 kjv
                 libsecret
                 networkmanagerapplet
