@@ -6,6 +6,7 @@
         ../services/forgejo.nix
         ../services/nextcloud.nix
         ../services/pipewire.nix
+        ../services/technitium.nix
         ../programs/kodi.nix
     ];
 
