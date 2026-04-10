@@ -131,6 +131,7 @@
         packages = with pkgs; [
             font-awesome # Symbols
             inter # Sans Font
+            julia-mono # Math font
             liberation_ttf # Open versions of MS fonts
             libertinus # System Serif Font and Math
             maple-mono-7 # Mono Font
