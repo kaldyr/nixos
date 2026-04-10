@@ -6,10 +6,7 @@
 
     home-manager.users.${sysConfig.user} = { config, ... }: {
 
-        home.packages = with pkgs; [
-            nextcloud-client
-            nextcloud-talk-desktop
-        ];
+        home.packages = with pkgs; [ nextcloud-client ];
 
         services.nextcloud-client = {
             enable = true;
