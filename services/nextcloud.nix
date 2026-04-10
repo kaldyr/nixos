@@ -63,12 +63,6 @@
 
                 inherit calendar contacts groupfolders memories previewgenerator tasks;
 
-                recognize = pkgs.fetchNextcloudApp {
-                    url = "https://github.com/nextcloud/recognize/releases/download/v7.0.3/recognize-7.0.3.tar.gz";
-                    license = "agpl3Plus";
-                    sha256 = "sha256-kVFdwpPIJ/2wAEClgY9xIpiUFls2lxlkBFLTmDa3iLo=";
-                };
-
             };
 
             extraAppsEnable = true;
