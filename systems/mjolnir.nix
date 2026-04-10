@@ -26,6 +26,7 @@
         initrd.availableKernelModules = [ "nvme" "xhci_pci" "ehci_pci" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" ];
         initrd.kernelModules = [ "amdgpu" ];
         kernel.sysctl."vm.max_map_count" = 16777216;
+        kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 1000;
         kernelModules = [ "kvm-amd" ];
         kernelPackages = pkgs.linuxKernel.packages.linux_zen;
         kernelParams = [ "btrfs" "quiet" "preempt=full" ];
@@ -56,6 +57,7 @@
 
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
+    networking.firewall.allowedUDPPortRanges = [ { from = 1000; to = 1005; } ];
     nixpkgs.config.allowUnfree = true;
 
     # networking = {
