@@ -12,10 +12,9 @@
         } ];
 
         systemPackages = with pkgs; [
-            exiftool_12-70
+            exiftool
             ffmpeg
             imagemagick
-            # libtensorflow
             msmtp
             nodejs_22
         ];
@@ -62,7 +61,7 @@
 
             extraApps = with config.services.nextcloud.package.packages.apps; {
 
-                inherit calendar contacts groupfolders memories notes previewgenerator spreed tasks;
+                inherit calendar contacts groupfolders memories previewgenerator tasks;
 
                 recognize = pkgs.fetchNextcloudApp {
                     url = "https://github.com/nextcloud/recognize/releases/download/v7.0.3/recognize-7.0.3.tar.gz";
