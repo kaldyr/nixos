@@ -18,7 +18,7 @@ return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
 	o.number = false
 	o.pumblend = 10
 	o.pumheight = 10
-	o.relativenumber = false
+	o.relativenumber = true
 	o.ruler = false
 	o.scrolloff = 8
 	o.shortmess:append "sfFIWc"
