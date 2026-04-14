@@ -31,36 +31,34 @@ return {
 		},
 
 		integrations = {
-			-- barbar = true,
+			barbar = true,
 			blink_cmp = true,
 			-- flash = true,
 			fzf = true,
 			gitsigns = true,
 			mini = { enabled = true, },
-			-- native_lsp = {
-			-- 	enabled = true,
-			-- 	virtual_text = {
-			-- 		errors = { 'italic' },
-			-- 		hints = { 'italic' },
-			-- 		information = { 'italic' },
-			-- 		ok = { 'italic' },
-			-- 		warnings = { 'italic' },
-			-- 	},
-			-- 	underlines = {
-			-- 		errors = { 'underline' },
-			-- 		hints = { 'underline' },
-			-- 		information = { 'underline' },
-			-- 		ok = { 'underline' },
-			-- 		warnings = { 'underline' },
-			-- 	},
-			-- 	inlay_hints = {
-			-- 		background = true,
-			-- 	},
-			-- },
-			-- noice = true,
-			-- render_markdown = true,
-			-- treesitter = true,
-			-- treesitter_context = true,
+			native_lsp = {
+				enabled = true,
+				virtual_text = {
+					errors = { 'italic' },
+					hints = { 'italic' },
+					information = { 'italic' },
+					ok = { 'italic' },
+					warnings = { 'italic' },
+				},
+				underlines = {
+					errors = { 'underline' },
+					hints = { 'underline' },
+					information = { 'underline' },
+					ok = { 'underline' },
+					warnings = { 'underline' },
+				},
+				inlay_hints = {
+					background = true,
+				},
+			},
+			noice = true,
+			render_markdown = true,
 			which_key = true,
 		},
 

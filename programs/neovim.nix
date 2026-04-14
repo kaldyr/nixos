@@ -45,7 +45,7 @@
                 "nvim/init.lua".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/init.lua";
                 "nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/${sysConfig.hostname}-lock.json";
             };
-            # desktopEntries.nvim = { name = "Neovim Wrapper"; noDisplay = true; };
+            desktopEntries.nvim = { name = "Neovim Wrapper"; noDisplay = true; };
             mimeApps.associations.added."text/plain" = [ "nvim.desktop" ];
         };
 

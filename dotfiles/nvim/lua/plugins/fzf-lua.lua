@@ -9,10 +9,11 @@ return {
 		{ '<leader>f', function() require('fzf-lua').files() end, desc = 'File Picker', silent = true },
 		{ '<leader>h', function() require('fzf-lua').git_bcommits() end, desc = 'Git File History', silent = true },
 		{ '<leader>q', function() require('fzf-lua').quickfix() end, desc = 'Quickfix Picker', silent = true },
-		{ '<leader>Q', function() require('fzf-lua').grep_quickfix({ multiprocess = true }) end, desc = 'Search Quickfix', silent = true },
+		{ '<leader>Q', function() require('fzf-lua').lgrep_quickfix({ multiprocess = true }) end, desc = 'Search Quickfix', silent = true },
 		{ '<leader>r', function() require('fzf-lua').resume() end, desc = 'Resume Last Picker', silent = true },
 		{ '<leader>s', function() require('fzf-lua').grep() end, desc = 'Search File Contents', silent = true },
-		{ '<leader>t', function() require('fzf-lua').treesitter() end, desc = 'Treesitter Picker', silent = true },
+		{ '<leader>l', function() require('fzf-lua').live_grep_native() end, desc = 'Live Grep File Contents', silent = true },
+		{ '<leader>L', function() require('fzf-lua').live_grep_resume() end, desc = 'Resume Live Grep', silent = true },
 	},
 
 	opts = {
