@@ -191,6 +191,7 @@
             packages = with pkgs; [
                 gimp
                 gnome-keyring
+                gnumeric
                 gnuplot
                 hunspell
                 hunspellDicts.en_US
@@ -201,7 +202,6 @@
                 libsecret
                 networkmanagerapplet
                 papirus-folders
-                vex-tui
                 vulkan-tools
                 xdg-user-dirs
                 xdg-utils
