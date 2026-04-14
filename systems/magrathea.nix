@@ -152,22 +152,4 @@
     # Group that can access tailscale certificates
     users.groups."webservice" = {};
 
-    # Configure a user for being a remote build server
-    nix.settings.trusted-users = [ "nixremote" ];
-    users.groups."nixremote" = {};
-    users.users."nixremote" = {
-
-        description = "Nix Remote Builder";
-
-        home = "/home/nixremote";
-        homeMode = "400";
-        group = "nixremote";
-        isSystemUser = true;
-
-        openssh.authorizedKeys.keys = [
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFjTNnEmk0a4o+t9fteNSNL/N4C+xE2uhQ+QnQ+girtb root@oolong"
-        ];
-
-    };
-
 }
