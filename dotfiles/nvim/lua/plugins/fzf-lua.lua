@@ -17,6 +17,12 @@ return {
 	},
 
 	opts = {
+		file_ignore_patterns = {
+			"%.nextcloudsync.log",
+			"%.obsidian/",
+			"%.sync_.*%.db.*",
+			"%.trash/"
+		},
 		grep = {
 			prompt = 'Grep> ',
 			input_prompt = 'Grep For> ',
