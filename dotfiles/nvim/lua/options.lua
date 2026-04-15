@@ -17,6 +17,7 @@ o.writebackup = false
 
 -- Appearance
 o.breakindent = true
+o.concealcursor = 'nc'
 o.conceallevel = 2
 o.cursorline = true
 o.laststatus = 3
@@ -27,7 +28,7 @@ o.pumheight = 10
 o.relativenumber = true
 o.ruler = false
 o.scrolloff = 8
-o.shortmess:append "sfFIWc"
+o.shortmess:append 'sfFIWc'
 o.showmode = false
 o.showtabline = 0
 o.sidescrolloff = 8
