@@ -11,6 +11,7 @@
         ../programs/qalculate.nix
         ../programs/starship.nix
         ../programs/yazi.nix
+        ../programs/zoxide.nix
     ];
 
     boot.loader = {
