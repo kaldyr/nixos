@@ -1,22 +1,11 @@
 # Todo list for the nix config
 
 ## Changes
-
-- Unify motions between terminal, hyprland, and terminal applications
 - Configure btrbk to snapshot state and archive
-- Nix-serve, hydra, binary cache
 - Beets with plugins (bandcamp)
 - Get phone to automount when plugged in
 - Re-evaluate what is stored on /nix and /state
 - MOVE ALL FOLDERS FROM STATE TO NIX
-
-## Keybind motions
-- All keybinds should follow the same pattern
-- Everything relating to hyprland on Meta/Super/Win/Whatever key
-- Everything relating to mux on Alt key
-- Everything application specific on Ctrl key
-- Shift is extra modifier
-- Submaps for Hyprland
 
 ## @nix vs @state
 - The @state subvolume will be snapshotted for backup/restore
@@ -32,7 +21,6 @@ not essential to preserved between installs.
 - postgresqlBackup service -> /state/postgres/
 
 ## Things to look into
-
 - Fnott Notifications
 - Wired Notifications: Toqozz/wired-notify
 - Walker application launcher: abenz1267/walker
