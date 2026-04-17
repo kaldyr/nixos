@@ -48,6 +48,9 @@ o.smartcase = true
 o.spelllang = 'en_us'
 o.virtualedit = 'block'
 
+-- Autocomplete
+o.autocomplete = true
+
 -- Folding
 o.foldcolumn = 'auto:1'
 o.foldenable = true
