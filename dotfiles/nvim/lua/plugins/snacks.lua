@@ -19,12 +19,12 @@ return {
 				t.inlay_hints():map('\\h')
 				t.line_number({ name = 'Line Number' }):map('\\n')
 				t.option('background', { on = 'dark', off = 'light', name = 'Dark Mode' }):map('\\b')
-				t.option('cursorcolumn', {name = 'Highlight Cursor Column'}):map('\\C')
-				t.option('cursorline', {name = 'Highlight Cursor Line'}):map('\\c')
-				t.option('list', {name = 'List Characters'}):map('\\l')
+				t.option('cursorcolumn', { name = 'Highlight Cursor Column' }):map('\\C')
+				t.option('cursorline', { name = 'Highlight Cursor Line' }):map('\\c')
+				t.option('list', { name = 'List Characters' }):map('\\l')
 				t.option('relativenumber', { name = 'Relative Number' }):map('\\r')
 				t.option('spell', { name = 'Spelling' }):map('\\s')
-				t.option('wrap', {name = 'Wrap'}):map('\\w')
+				t.option('wrap', { name = 'Wrap' }):map('\\w')
 			end
 		} )
 	end,
@@ -32,6 +32,7 @@ return {
 	opts = {
 		bigfile = { enabled = true },
 		bufdelete = { enabled = true },
+		debug = { enabled = true },
 		dim = { enabled = true },
 		image = { enabled = true },
 		indent = {
@@ -79,7 +80,6 @@ return {
 			which_key = true,
 		},
 		words = { enabled = true },
-		zen = { enabled = true },
 	},
 
 }
