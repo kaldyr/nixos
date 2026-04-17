@@ -8,6 +8,7 @@
 
         home.packages = with pkgs; [
             mediainfo
+            ouch
             simple-mtpfs
         ];
 
@@ -21,8 +22,8 @@
                 yazi-plugins = pkgs.fetchFromGitHub {
                     owner = "yazi-rs";
                     repo = "plugins";
-                    rev = "d078b01ecbdb0f85f6ea8836a851c6bf72f9f865";
-                    sha256 = "sha256-aPe1AntPE76xq0VA/4FtBtRXmj+tfDjdMlQ9B9MkM+U=";
+                    rev = "442d9080da7524c8e58e10c610b832538c87464d";
+                    sha256 = "sha256-5WxCUf/Lv3wms7IPgkK0lJuJhIPa1E46obOFASS8eZU=";
                 };
 
             in {
@@ -31,7 +32,22 @@
                 "full-border" = "${yazi-plugins}/full-border.yazi";
                 "hide-preview" = "${yazi-plugins}/hide-preview.yazi";
                 "jump-to-char" = "${yazi-plugins}/jump-to-char.yazi";
+
+                "ouch" = pkgs.fetchFromGitHub {
+                    owner = "ndtoan96";
+                    repo = "ouch.yazi";
+                    rev = "v0.7.0";
+                    sha256 = "sha256-1kNqEXPjuXMtYDgRdQNqc8Y0waWHj+I2XXmvk9Sz0g0=";
+                };
+
                 "smart-filter" = "${yazi-plugins}/smart-filter.yazi";
+
+                "starship" = pkgs.fetchFromGitHub {
+                    owner = "Rolv-Apneseth";
+                    repo = "starship.yazi";
+                    rev = "a83710153ab5625a64ef98d55e6ddad480a3756f";
+                    sha256 = "sha256-CPRVJVunBLwFLCoj+XfoIIwrrwHxqoElbskCXZgFraw=";
+                };
 
             };
 

@@ -32,6 +32,9 @@ exifedit = [
 	{ run = 'exiftool -overwrite_original "-alldates<filename" -S -m -q "$1"', desc = "Set EXIF datetime from Filename" },
 	{ run = 'exiftool "-filename<CreateDate" -d "_%Y%m%d_%H%M%S.%%e" -S -m -ee -q "$1"', desc = "Set Filename from EXIF datetime" },
 ]
+extract = [
+	{ run = 'ouch d -y "$@"', desc = "Extract here with ouch" },
+]
 foldersize = [ { run = 'du -hs "$@"; echo "Press enter to exit"; read _', desc = "Folder size", block = true } ]
 image = [ { run = 'feh -. -Z "$@"', desc = "Open with feh", orphan = true } ]
 office = [ { run = 'libreoffice "$@"', desc = "Open with LibreOffice", orphan = true } ]
@@ -69,3 +72,9 @@ suppress_preload = false
 
 [log]
 enabled = false
+
+[plugin]
+prepend_previewers = [
+	{ mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}", run = "ouch --archive-icon='🗄️ '" },
+	{ mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}", run = "ouch --show-file-icons" },
+]
