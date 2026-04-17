@@ -80,7 +80,6 @@
         yt-dlp
         zip
         zmx
-        zoxide
     ];
 
     networking = {
