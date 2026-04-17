@@ -133,4 +133,6 @@
         isSystemUser = true;
     };
 
+    users.groups."nextcloud" = { };
+
 }
