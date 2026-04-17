@@ -9,10 +9,8 @@
             scripts = with pkgs.mpvScripts; [
                 modernx-zydezu
                 mpris
-                # mpv-cheatsheet
                 mpv-playlistmanager
                 thumbfast
-                quality-menu
             ];
 
         };
