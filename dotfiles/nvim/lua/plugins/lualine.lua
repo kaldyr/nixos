@@ -18,7 +18,7 @@ return {
 
 		sections = {
 			lualine_a = {
-				{ 'mode', separator = { left = '', right = '' }, right_padding = 2 },
+				{ 'mode', separator = { left = '', right = '' }, right_padding = 2 },
 				{ 'macro_recording', '%s' },
 			},
 			lualine_b = { 'branch', 'diff' },
@@ -28,7 +28,7 @@ return {
 			lualine_x = { 'diagnostics' },
 			lualine_y = { 'filetype' },
 			lualine_z = {
-				{ 'location', separator = { left = '', right = '' }, left_padding = 2 },
+				{ 'location', separator = { left = '', right = '' }, left_padding = 2 },
 			}
 		},
 
