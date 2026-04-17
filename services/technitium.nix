@@ -27,4 +27,6 @@
         isSystemUser = true;
     };
 
+    users.groups."technitium" = { };
+
 }

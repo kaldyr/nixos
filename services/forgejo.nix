@@ -80,4 +80,6 @@
         isSystemUser = true;
     };
 
+    users.groups."forgejo" = {};
+
 }
