@@ -20,10 +20,11 @@
         };
     };
 
-    users.groups.technitium = { };
-    users.users.technitium = {
-        isSystemUser = true;
+    users.extraUsers."technitium" = {
+        extraGroups = [ "webservice" ];
         group = "technitium";
+        home = "/var/lib/technitium";
+        isSystemUser = true;
     };
 
 }
