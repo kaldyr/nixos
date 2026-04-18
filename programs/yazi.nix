@@ -7,6 +7,7 @@
     home-manager.users.${sysConfig.user} = { config, ... }: {
 
         home.packages = with pkgs; [
+            glow
             mediainfo
             ouch
             simple-mtpfs
@@ -32,6 +33,7 @@
                 "full-border" = "${yazi-plugins}/full-border.yazi";
                 "hide-preview" = "${yazi-plugins}/hide-preview.yazi";
                 "jump-to-char" = "${yazi-plugins}/jump-to-char.yazi";
+                "mount" = "${yazi-plugins}/mount.yazi";
 
                 "ouch" = pkgs.fetchFromGitHub {
                     owner = "ndtoan96";
@@ -40,7 +42,10 @@
                     sha256 = "sha256-1kNqEXPjuXMtYDgRdQNqc8Y0waWHj+I2XXmvk9Sz0g0=";
                 };
 
+                "piper" = "${yazi-plugins}/piper.yazi";
+                "smart-enter" = "${yazi-plugins}/smart-enter.yazi";
                 "smart-filter" = "${yazi-plugins}/smart-filter.yazi";
+                "smart-paste" = "${yazi-plugins}/smart-paste.yazi";
 
                 "starship" = pkgs.fetchFromGitHub {
                     owner = "Rolv-Apneseth";

@@ -49,11 +49,12 @@
                 df = "duf";
                 du = "du -hs";
                 ln = "ln -i";
-                ls = "g -1 --color basic --dir-first --git --icon --sort .name";
-                ll = "ls --long";
-                la = "ls --long --almost-all";
-                lla = "ls --long --almost-all";
+                ls = "g -1 --color basic --smart-group --dir-first --literal --git --icon --sort .name";
                 l = "ls";
+                la = "ls --long --almost-all";
+                ll = "ls --long";
+                lla = "ls --long --almost-all";
+                lt = "ls --tree --depth 3";
                 mkdir = "mkdir -pv";
                 mv = "mv -i";
                 rm = "rm -i";

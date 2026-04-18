@@ -1,10 +1,13 @@
 [mgr]
 prepend_keymap = [
-    { on = "q", run = "close", desc = "Close the current tab, or quit if it is last tab" },
-    { on = "c", run = "plugin chmod", desc = "Chmod on selected files" },
-	 { on = "C", run = "plugin ouch", desc = "Compress with ouch" },
-    { on = "`", run = "shell \"$SHELL\" --block --confirm", desc = "Open shell here" },
-    { on = "f", run = "plugin jump-to-char", desc = "Jump to Char" },
-    { on = "F", run = "plugin smart-filter", desc = "Smart Filter" },
-    { on = "R", run = "shell -- dragon-drop -x -i -T %h", desc = "Drag Files" },
+	{ on = "`", run = "shell \"$SHELL\" --block --confirm", desc = "Open shell here" },
+	{ on = "c", run = "plugin chmod", desc = "Chmod on selected files" },
+	{ on = "C", run = "plugin ouch", desc = "Compress with ouch" },
+	{ on = "f", run = "plugin jump-to-char", desc = "Jump to Char" },
+	{ on = "F", run = "plugin smart-filter", desc = "Smart Filter" },
+	{ on = "l", run = "plugin smart-enter", desc = "Enter the child directory or open file" },
+	{ on = "M", run = "plugin mount", desc = "Mount drives interface" },
+	{ on = "R", run = "shell -- dragon-drop -x -i -T %h", desc = "Drag Files" },
+	{ on = "p", run = "plugin smart-paste", desc = "Paste into the hovered directory or CWD" },
+	{ on = "q", run = "close", desc = "Close the current tab, or quit if it is last tab" },
 ]

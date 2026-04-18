@@ -13,16 +13,12 @@ sort_translit = false
 title_format = "Yazi: {cwd}"
 
 [preview]
-cache_dir = ""
 image_delay = 50
 image_filter = "triangle"
 image_quality = 75
 max_height = 900
 max_width = 600
-sixel_fraction = 15
 tab_size = 2
-ueberzug_offset = [ 0, 0, 0, 0 ]
-ueberzug_scale = 1
 wrap = "no"
 
 [opener]
@@ -75,6 +71,9 @@ enabled = false
 
 [plugin]
 prepend_previewers = [
+	{ url = "*/", run = 'piper -- g --tree --depth 3 --color basic --dir-first --literal --git --icon --sort .name "$1"' },
+	{ url = "*.csv", run = 'piper -- bat -p --color=always "$1"' },
+	{ url = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w$w -s=dark "$1"' },
 	{ mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}", run = "ouch --archive-icon='🗄️ '" },
 	{ mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}", run = "ouch --show-file-icons" },
 ]
