@@ -7,6 +7,7 @@
     home-manager.users.${sysConfig.user} = { config, ... }: {
 
         home.packages = with pkgs; [
+            eza
             glow
             mediainfo
             ouch
