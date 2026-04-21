@@ -49,7 +49,7 @@
                 df = "duf";
                 du = "du -hs";
                 ln = "ln -i";
-                ls = "g -1 --color always --smart-group --dir-first --literal --git --icon --sort .name";
+                ls = "eza -1 --color=always --smart-group --group-directories-first --no-quotes --git --icons=always --sort name";
                 l = "ls";
                 la = "ls --long --almost-all";
                 ll = "ls --long";

@@ -66,9 +66,9 @@
         age
         duf
         exiftool
+        eza
         ffmpeg
         ffmpegthumbnailer
-        g-ls
         gdu
         gnupg
         jq
