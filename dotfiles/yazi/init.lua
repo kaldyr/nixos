@@ -2,6 +2,7 @@ require( 'full-border' ):setup {
     type = ui.Border.ROUNDED,
 }
 
+require( 'sshfs' ):setup()
 require( 'starship' ):setup()
 
 function Linemode:size_and_mtime()

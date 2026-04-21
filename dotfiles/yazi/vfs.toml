@@ -1,5 +1,0 @@
-[services.magrathea]
-type = "sftp"
-host = "magrathea"
-user = "matt"
-port = 22

@@ -11,6 +11,7 @@
             mediainfo
             ouch
             simple-mtpfs
+            sshfs
         ];
 
         programs.yazi = {
@@ -46,6 +47,13 @@
                 "smart-enter" = "${yazi-plugins}/smart-enter.yazi";
                 "smart-filter" = "${yazi-plugins}/smart-filter.yazi";
                 "smart-paste" = "${yazi-plugins}/smart-paste.yazi";
+
+                "sshfs" = pkgs.fetchFromGitHub {
+                    owner = "uhs-robert";
+                    repo = "sshfs.yazi";
+                    rev = "7ba17a8c8498fca9f0a9c437704e74b56d96ed96";
+                    sha256 = "sha256-TS3/xl8jbbCoF1LzPYvmG9BRqvlzPg4EZRErlL7S2/M=";
+                };
 
                 "starship" = pkgs.fetchFromGitHub {
                     owner = "Rolv-Apneseth";
