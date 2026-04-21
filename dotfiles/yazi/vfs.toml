@@ -3,4 +3,3 @@ type = "sftp"
 host = "magrathea"
 user = "matt"
 port = 22
-key_file = ~/.ssh/id_ed25519

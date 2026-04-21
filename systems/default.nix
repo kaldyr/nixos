@@ -192,6 +192,8 @@
 
             enable = true;
 
+            allowSFTP = true;
+
             knownHosts = {
                 "espresso".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICKugLnV4qqCMN5dhN4BWEx9Q7OG+BAk0a+2RzNmzFhr root@espresso";
                 "hofud".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGYN+zwhYvBqGaKgxSPEVLj6KE2uGdbPUR1se1hN+1NG root@hofud";
