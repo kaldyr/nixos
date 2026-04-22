@@ -54,7 +54,7 @@
                 la = "ls --long --almost-all";
                 ll = "ls --long";
                 lla = "ls --long --almost-all";
-                lt = "ls --tree --depth 3";
+                lt = "ls -TL=3 --almost-all";
                 mkdir = "mkdir -pv";
                 mv = "mv -i";
                 rm = "rm -i";
