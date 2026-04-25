@@ -270,7 +270,6 @@
 
     services = {
 
-        blueman.enable = true;
         dbus.enable = true;
         gnome.gnome-keyring.enable = true;
 

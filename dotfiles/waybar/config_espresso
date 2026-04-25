@@ -15,7 +15,7 @@
 			"tooltip-format": "{capacity}% - {time}",
 		},
 		"clock": {
-			"format": "  {:%H : %M	%A, %B %e}  ",
+			"format": "  {:%H : %M    %A, %B %e}  ",
 			"tooltip-format": "<tt>{calendar}</tt>",
 		},
 		"exclusive": false,
