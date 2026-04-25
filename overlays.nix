@@ -15,12 +15,13 @@
             });
         });
 
+        helium = inputs.helium.packages.${prev.stdenv.hostPlatform.system}.default;
+        floorp-bin = inputs.nixpkgs-floorp.legacyPackages.${prev.stdenv.hostPlatform.system}.floorp-bin;
+
         openldap = prev.openldap.overrideAttrs {
             doCheck = !prev.stdenv.hostPlatform.isi686;
         };
 
-        helium = inputs.helium.packages.${prev.stdenv.hostPlatform.system}.default;
-        floorp-bin = inputs.nixpkgs-floorp.legacyPackages.${prev.stdenv.hostPlatform.system}.floorp-bin;
         zmx = inputs.zmx.packages.${prev.stdenv.hostPlatform.system}.default;
 
     };
