@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ inputs, lib, pkgs, sysConfig, ... }: {
 
     imports = [
         inputs.nixos-hardware.nixosModules.common-hidpi
@@ -27,7 +27,12 @@
         loader.grub.gfxmodeEfi = "2256x1504";
     };
 
-    environment.systemPackages = with pkgs; [ android-tools ];
+    environment.persistence."/nix".users.${sysConfig.user} = lib.mkIf sysConfig.homeImpermanence {
+        directories = [
+            "DnD"
+            "Homeschool"
+        ];
+    };
 
     fileSystems = {
         "/" = {

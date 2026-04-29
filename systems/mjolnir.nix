@@ -33,16 +33,19 @@
         loader.grub.gfxmodeEfi = "3440x1440,1920x1080";
     };
 
+    environment.persistence."/nix".users.${sysConfig.user} = lib.mkIf sysConfig.homeImpermanence {
+        directories = [
+            "DnD"
+            "Homeschool"
+            "Machines"
+        ];
+    };
+
     environment.systemPackages = with pkgs; [
-        android-tools
         quickemu
         quickgui
         virglrenderer
     ];
-
-    environment.persistence = lib.mkIf sysConfig.homeImpermanence {
-        "/nix".users.${sysConfig.user}.directories = [ "Machines" ];
-    };
 
     fileSystems = {
         "/" = {

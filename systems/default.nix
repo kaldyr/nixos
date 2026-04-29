@@ -1,8 +1,8 @@
 { config, inputs, lib, pkgs, sysConfig, ... }: {
 
     imports = [
-        ../programs/bat.nix
-        ../programs/btop.nix
+        ../programs/bat
+        ../programs/btop
         ../programs/direnv.nix
         ../programs/fish.nix
         ../programs/fzf.nix

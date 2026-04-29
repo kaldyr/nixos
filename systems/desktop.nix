@@ -1,7 +1,7 @@
 { lib, pkgs, sysConfig, ... }: {
 
     imports = [
-        ../programs/cava.nix
+        ../programs/cava
         ../programs/discord.nix
         ../programs/helium.nix
         ../programs/keepass.nix
@@ -32,7 +32,6 @@
                     ".local/share/applications"
                     "Books"
                     "Documents"
-                    "DnD"
                     "Downloads"
                     "Music"
                     "Notes"
@@ -189,6 +188,7 @@
         home = {
 
             packages = with pkgs; [
+                android-tools
                 gimp
                 gnome-keyring
                 gnumeric
