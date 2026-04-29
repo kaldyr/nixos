@@ -31,6 +31,10 @@ map('n', '<C-w>n', '<Cmd>new<CR>', { desc = 'Split down', silent = true })
 map('n', '<C-w>v', '<Cmd>vnew<CR>', { desc = 'Split to right', silent = true })
 map('n', '<C-q>', '<Cmd>bd<CR>', { desc = 'Close Buffer', silent = true })
 map('n', '<C-w>t', '<Cmd>tabnew<CR>', { desc = 'New Tab', silent = true })
+map('n', '<C-h>', ':wincmd h<CR>', { desc = 'Window Left', silent = true })
+map('n', '<C-j>', ':wincmd j<CR>', { desc = 'Window Down', silent = true })
+map('n', '<C-k>', ':wincmd k<CR>', { desc = 'Window Up', silent = true })
+map('n', '<C-l>', ':wincmd l<CR>', { desc = 'Window Right', silent = true })
 
 -- Indentation
 map('n', '<', '<<', { silent = true, noremap = true })
