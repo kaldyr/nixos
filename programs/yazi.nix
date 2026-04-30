@@ -6,6 +6,13 @@
 
     home-manager.users.${sysConfig.user} = { config, ... }: {
 
+        home.file.".local/share/yazi/sshfs.list".text = ''
+            espresso
+            hofud
+            magrathea
+            mjolnir
+        '';
+
         home.packages = with pkgs; [
             glow
             mediainfo

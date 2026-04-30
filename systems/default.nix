@@ -135,29 +135,45 @@
 
         ssh = {
             extraConfig = "
+                Host = espresso
+                    HostName espresso
+                    User matshkas
                 Host = espresso.*
                     HostName espresso
+                    User matshkas
                     RemoteCommand zmx attach %k
                     RequestTTY yes
                     ControlPath ~/.ssh/cm-%r@%h:%p
                     ControlMaster auto
                     ControlPersist 10m
+                Host = hofud
+                    HostName hofud
+                    User matt
                 Host = hofud.*
                     HostName hofud
+                    User matt
                     RemoteCommand zmx attach %k
                     RequestTTY yes
                     ControlPath ~/.ssh/cm-%r@%h:%p
                     ControlMaster auto
                     ControlPersist 10m
+                Host = magrathea
+                    HostName magrathea
+                    User matt
                 Host = magrathea.*
                     HostName magrathea
+                    User matt
                     RemoteCommand zmx attach %k
                     RequestTTY yes
                     ControlPath ~/.ssh/cm-%r@%h:%p
                     ControlMaster auto
                     ControlPersist 10m
+                Host = mjolnir
+                    HostName mjolnir
+                    User matt
                 Host = mjolnir.*
                     HostName mjolnir
+                    User matt
                     RemoteCommand zmx attach %k
                     RequestTTY yes
                     ControlPath ~/.ssh/cm-%r@%h:%p
