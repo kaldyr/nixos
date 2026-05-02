@@ -14,7 +14,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "fzf-lua": {
-      "rev": "b437bafc981a180d609bb4092c56ce8999f7a2c4",
+      "rev": "5b36002c54d647307339714cec47e89c2c2c50c1",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitsigns.nvim": {
@@ -74,7 +74,7 @@
       "src": "https://github.com/folke/which-key.nvim"
     },
     "yazi.nvim": {
-      "rev": "125ca6525757d383a721363a38c1c8852559b6d8",
+      "rev": "ec07130c3e7f0eb503fce931732f2aed9b7e8a58",
       "src": "https://github.com/mikavilpas/yazi.nvim"
     }
   }
