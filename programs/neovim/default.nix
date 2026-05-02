@@ -38,13 +38,7 @@
         ];
 
         xdg = {
-            configFile = {
-                "nvim/lsp".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/lsp";
-                "nvim/lua".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/lua";
-                "nvim/queries".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/queries";
-                "nvim/init.lua".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/init.lua";
-                "nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/nvim/${sysConfig.hostname}-lock.json";
-            };
+            configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/neovim/config/";
             desktopEntries.nvim = { name = "Neovim Wrapper"; noDisplay = true; };
             mimeApps.associations.added."text/plain" = [ "nvim.desktop" ];
         };

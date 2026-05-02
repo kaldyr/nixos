@@ -8,7 +8,7 @@
         ../programs/fzf.nix
         ../programs/git.nix
         ../programs/lazygit.nix
-        ../programs/neovim.nix
+        ../programs/neovim
         ../programs/qalculate.nix
         ../programs/starship.nix
         ../programs/yazi.nix
