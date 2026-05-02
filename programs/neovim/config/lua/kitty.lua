@@ -1,15 +1,37 @@
 return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
 
+	-- Startup
+
+	local g, o = vim.g, vim.opt
+
+	-- Cache compiled lua
+	vim.loader.enable()
+
+	-- Disable built-in plugins
+	g.loaded_gzip = 1
+	g.loaded_matchit = 1
+	g.loaded_netrw = 1
+	g.loaded_tarPlugin = 1
+	g.loaded_tohtml = 1
+	g.loaded_tutor = 1
+	g.loaded_zipPlugin = 1
+
+	-- Delay clipboard until UiEnter for startup time
+	vim.schedule( function() o.clipboard = 'unnamedplus' end )
+
 	-- Options
-	local o = vim.opt
+	-- Define the Leader Key
+	g.mapleader = ' '
+	g.maplocalleader = ' '
+
 	-- General
 	o.backup = false
-	o.clipboard = 'unnamedplus'
 	o.compatible = false
 	o.encoding = 'utf-8'
 	o.swapfile = false
 	o.undofile = false
 	o.writebackup = false
+
 	-- Appearance
 	o.breakindent = true
 	o.cursorline = true
@@ -23,26 +45,31 @@ return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
 	o.scrolloff = 8
 	o.shortmess:append "sfFIWc"
 	o.showcmd = false
-	o.showmode = true
+	o.showmode = false
 	o.showtabline = 0
 	o.sidescrolloff = 8
 	o.termguicolors = true
 	o.timeout = true;
 	o.timeoutlen = 400
 	o.wrap = false
+
 	-- Editing
 	o.formatoptions = 'qjl1t'
 	o.ignorecase = true
 	o.incsearch = true
+	o.smartcase = true
 	o.virtualedit = 'block'
 
 	-- Keymaps
 	local map = vim.keymap.set
+
 	-- Cleanup space for leader key usage
 	map('', '<Space>', '<Nop>')
 	map('n', 'Q', '<Nop>')
+
 	-- Escape removes highlights
 	map('n', '<ESC>', '<Cmd>nohls<CR>', { silent = true })
+
 	-- Remap keys that jump into input, since read only
 	map('n', 'A', '$', { silent = true })
 	map('n', 'I', '^', { silent = true })
