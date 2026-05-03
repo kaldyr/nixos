@@ -11,7 +11,7 @@
         ../programs/neovim
         ../programs/qalculate.nix
         ../programs/starship.nix
-        ../programs/yazi.nix
+        ../programs/yazi
         ../programs/zoxide.nix
     ];
 
