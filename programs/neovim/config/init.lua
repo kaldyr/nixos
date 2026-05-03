@@ -695,6 +695,8 @@ vim.schedule( function()
 
 end )
 
+vim.schedule( function() require('mini.operators').setup() end )
+
 --<--
 -- Which-key              -->  What was that key again?
 
