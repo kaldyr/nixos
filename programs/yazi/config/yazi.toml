@@ -9,7 +9,7 @@ sort_by = "natural"
 sort_dir_first = true
 sort_reverse = false
 sort_sensitive = false
-sort_translit = false
+sort_translit = true
 title_format = "Yazi: {cwd}"
 
 [preview]
@@ -71,7 +71,6 @@ enabled = false
 
 [plugin]
 prepend_previewers = [
-	# { url = "*/", run = 'piper -- g --tree --depth 3 --color always --dir-first --literal --git --icon --sort .name "$1"' },
 	{ url = "*/", run = 'piper -- eza -TL=3 --color=always --icons=always --group-directories-first --no-quotes "$1"' },
 	{ url = "*.csv", run = 'piper -- bat -p --color=always "$1"' },
 	{ url = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w$w -s=dark "$1"' },
