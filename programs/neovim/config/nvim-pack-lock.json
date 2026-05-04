@@ -34,7 +34,7 @@
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mini.nvim": {
-      "rev": "0f339bf5c93f392dc5d2417d47d7b9edc5f96fe8",
+      "rev": "48555f1615f08c6318150aacb52bf7d61a5af798",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "noice.nvim": {
@@ -82,7 +82,7 @@
       "src": "https://github.com/folke/which-key.nvim"
     },
     "yazi.nvim": {
-      "rev": "845c0d27a6c2d3778a1f522acd77617948ce62cb",
+      "rev": "fe67c14bcff50915faf16fb86b7314d6d5e668e5",
       "src": "https://github.com/mikavilpas/yazi.nvim"
     }
   }
