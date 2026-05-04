@@ -9,6 +9,5 @@ prepend_keymap = [
 	{ on = [ "M", "d" ], run = "plugin mount", desc = "Mount drives interface" },
 	{ on = [ "M", "s" ], run = "plugin sshfs -- menu", desc = "Mount SSHFS" },
 	{ on = "R", run = "shell -- dragon-drop -x -i -T %h", desc = "Drag Files" },
-	{ on = "p", run = "plugin smart-paste", desc = "Paste into the hovered directory or CWD" },
 	{ on = "q", run = "close", desc = "Close the current tab, or quit if it is last tab" },
 ]
