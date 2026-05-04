@@ -283,6 +283,10 @@ ac( 'FileType', 'help', function()
 	vim.cmd [[wincmd L]]
 end )
 
+ac( 'Filetype', 'markdown', function()
+	vim.cmd [[ set nolist ]]
+end )
+
 -- Highlight yanked text
 ac( 'TextYankPost', '*', function()
 	vim.highlight.on_yank()
@@ -572,39 +576,35 @@ end )
 --<--
 -- Fzf-lua                -->  Fuzzy Pickers
 
-vim.schedule( function()
+require('fzf-lua').setup({
 
-	require('fzf-lua').setup({
+	file_ignore_patterns = {
+		'%.nextcloudsync.log',
+		'%.obsidian/',
+		'%.sync_.*%.db.*',
+		'%.trash/',
+	},
 
-		file_ignore_patterns = {
-			"%.nextcloudsync.log",
-			"%.obsidian/",
-			"%.sync_.*%.db.*",
-			"%.trash/",
-		},
+	grep = {
+		prompt = 'Grep> ',
+		input_prompt = 'Grep For> ',
+		multiprocess = true,
+		git_icons = true,
+		file_icons = true,
+		color_icons = true,
+	},
 
-		grep = {
-			prompt = 'Grep> ',
-			input_prompt = 'Grep For> ',
-			multiprocess = true,
-			git_icons = true,
-			file_icons = true,
-			color_icons = true,
-		},
+})
 
-	})
-
-	map( 'n', '<leader>b', function() require('fzf-lua').buffers() end, { silent = true, desc = 'Buffer Picker' } )
-	map( 'n', '<leader>f', function() require('fzf-lua').files() end, { silent = true, desc = 'File Picker' } )
-	map( 'n', '<leader>h', function() require('fzf-lua').git_bcommits() end, { silent = true, desc = 'Git History Picker' } )
-	map( 'n', '<leader>q', function() require('fzf-lua').quickfix() end, { silent = true, desc = 'Quickfix Picker' } )
-	map( 'n', '<leader>Q', function() require('fzf-lua').lgrep_quickfix({ multiprocess = true }) end, { silent = true, desc = 'Search Quickfix' } )
-	map( 'n', '<leader>r', function() require('fzf-lua').resume() end, { silent = true, desc = 'Resume last Picker' } )
-	map( 'n', '<leader>s', function() require('fzf-lua').grep() end, { silent = true, desc = 'Search file contents' } )
-	map( 'n', '<leader>l', function() require('fzf-lua').live_grep_native() end, { silent = true, desc = 'Live grep file contents' } )
-	map( 'n', '<leader>L', function() require('fzf-lua').live_grep_resume() end, { silent = true, desc = 'Resume live grep' } )
-
-end )
+map( 'n', '<leader>b', function() require('fzf-lua').buffers() end, { silent = true, desc = 'Buffer Picker' } )
+map( 'n', '<leader>f', function() require('fzf-lua').files() end, { silent = true, desc = 'File Picker' } )
+map( 'n', '<leader>h', function() require('fzf-lua').git_bcommits() end, { silent = true, desc = 'Git History Picker' } )
+map( 'n', '<leader>q', function() require('fzf-lua').quickfix() end, { silent = true, desc = 'Quickfix Picker' } )
+map( 'n', '<leader>Q', function() require('fzf-lua').lgrep_quickfix({ multiprocess = true }) end, { silent = true, desc = 'Search Quickfix' } )
+map( 'n', '<leader>r', function() require('fzf-lua').resume() end, { silent = true, desc = 'Resume last Picker' } )
+map( 'n', '<leader>s', function() require('fzf-lua').grep() end, { silent = true, desc = 'Search file contents' } )
+map( 'n', '<leader>l', function() require('fzf-lua').live_grep_native() end, { silent = true, desc = 'Live grep file contents' } )
+map( 'n', '<leader>L', function() require('fzf-lua').live_grep_resume() end, { silent = true, desc = 'Resume live grep' } )
 
 --<--
 -- Gitsigns               -->  Indicators for git changes
@@ -763,8 +763,8 @@ ac( 'Filetype', 'markdown', function()
 		ui = {
 			enable = false,
 			checkboxes = {
-				[' '] = { hl_group = 'ObsidianTodo' },
-				['x'] = { hl_group = 'ObsidianDone' },
+				[' '] = { char = ' ', hl_group = 'ObsidianTodo', order = 1 },
+				['x'] = { char = '󰱒', hl_group = 'ObsidianDone', order = 2 },
 			},
 		},
 
