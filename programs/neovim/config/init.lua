@@ -259,6 +259,7 @@ ac( 'VimEnter', '*', function()
 	-- If neovim opened a folder instead of a file, close the buffer
 	if string.sub(vim.fn.expand('%p'), 0, -1) == pwd then
 		vim.api.nvim_buf_delete(0, { force = true })
+		require('fzf-lua').files()
 	end
 
 	-- Default options
@@ -438,6 +439,8 @@ vim.pack.add({
 	gh 'nvim-lualine/lualine.nvim',
 	gh 'yavorski/lualine-macro-recording.nvim',
 	gh 'echasnovski/mini.nvim',
+	gh 'folke/noice.nvim',
+	gh 'MunifTanjim/nui.nvim',
 	gh 'nvim-treesitter/nvim-treesitter-context',
 	gh 'nvim-tree/nvim-web-devicons',
 	gh 'epwalsh/obsidian.nvim',
@@ -698,25 +701,27 @@ end )
 vim.schedule( function() require('mini.operators').setup() end )
 
 --<--
--- Which-key              -->  What was that key again?
+-- Noice                  -->  UI for messages, cmdline, and popupmenu
 
 vim.schedule( function()
 
-	require('which-key').setup({ preset = 'helix' })
+	require('noice').setup({
 
-	require('which-key').add({
-		{ '\\', group = 'Toggle' },
-		{ ' ', group = 'Pickers' },
+		lsp = {
+			override = {
+				["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+				["vim.lsp.util.stylize_markdown"] = true,
+			},
+		},
+		presets = {
+			bottom_search = true,
+			command_palette = true,
+			long_message_to_split = true,
+			inc_rename = false,
+			lsp_doc_border = false,
+		},
+
 	})
-
-	map(
-		'n',
-		'<leader>?',
-		function()
-			require('which-key').show({ global = false })
-		end,
-		{ desc = 'Buffer Local Keymaps (which-key)' }
-	)
 
 end )
 
@@ -862,7 +867,7 @@ vim.schedule( function()
 end )
 
 --<--
--- Tiny Inline Diagnostic --> Nice looking diagnostics
+-- Tiny Inline Diagnostic -->  Nice looking diagnostics
 
 vim.schedule( function()
 
@@ -872,7 +877,7 @@ vim.schedule( function()
 end )
 
 --<--
--- Treesj                 --> Split/join
+-- Treesj                 -->  Split/join
 
 vim.schedule( function()
 
@@ -882,6 +887,29 @@ vim.schedule( function()
 	})
 
 	map( 'n', '<leader>j', function() require('treesj').toggle() end, { desc = 'Toggle Join/Split code block' } )
+
+end )
+
+--<--
+-- Which-key              -->  What was that key again?
+
+vim.schedule( function()
+
+	require('which-key').setup({ preset = 'helix' })
+
+	require('which-key').add({
+		{ '\\', group = 'Toggle' },
+		{ ' ', group = 'Pickers' },
+	})
+
+	map(
+		'n',
+		'<leader>?',
+		function()
+			require('which-key').show({ global = false })
+		end,
+		{ desc = 'Buffer Local Keymaps (which-key)' }
+	)
 
 end )
 
