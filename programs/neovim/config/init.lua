@@ -176,6 +176,17 @@ map('n', '\\z', 'zi', { desc = 'Toggle folding', silent = true })
 map('x', '.', ':norm .<CR>', { silent = true, noremap = true })
 map('x', '@', ':norm @@<CR>', { silent = true, noremap = true })
 
+-- Plugins
+map('n', '<leader>pc', function()
+	vim.pack.update( nil, { offline=true} )
+end, { desc = 'Check Installed Plugins' })
+map('n', '<leader>ps', function()
+	vim.pack.update( nil, { target = 'lockfile' } )
+end, { desc = 'Sync plugins to version in lockfile' })
+map('n', '<leader>pu', function()
+	vim.pack.update()
+end, { desc = 'Update plugins' })
+
 -- Replace word under cursor
 map(
 	'n',
@@ -900,6 +911,7 @@ vim.schedule( function()
 	require('which-key').add({
 		{ '\\', group = 'Toggle' },
 		{ ' ', group = 'Pickers' },
+		{ '<leader>p', group = 'Plugin Management' },
 	})
 
 	map(
