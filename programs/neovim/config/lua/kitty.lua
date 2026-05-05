@@ -40,7 +40,7 @@ return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
 	o.number = false
 	o.pumblend = 10
 	o.pumheight = 10
-	o.relativenumber = true
+	o.relativenumber = false
 	o.ruler = false
 	o.scrolloff = 8
 	o.shortmess:append "sfFIWc"
@@ -73,6 +73,9 @@ return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
 	-- Remap keys that jump into input, since read only
 	map('n', 'A', '$', { silent = true })
 	map('n', 'I', '^', { silent = true })
+
+	map('n', 'r', '<Cmd>set relativenumber<CR>', { silent = true })
+	map('n', 'R', '<Cmd>set norelativenumber<CR>', { silent = true })
 
 	-- Start
 	vim.cmd("hi Normal ctermbg=None ctermfg=None guibg=None guifg=None")
