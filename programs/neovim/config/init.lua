@@ -24,6 +24,7 @@ vim.schedule( function() o.clipboard = 'unnamedplus' end )
 
 --<--
 -- Options  -->
+
 -- Define the Leader Key
 g.mapleader = ' '
 g.maplocalleader = ' '
@@ -130,6 +131,7 @@ g.markdown_fenced_languages = {
 
 --<--
 -- Keymaps  -->
+
 local map = vim.keymap.set
 
 -- Cleanup space for leader key usage
