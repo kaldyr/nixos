@@ -377,6 +377,9 @@ vim.lsp.config( 'lua_ls', {
 			completion = {
 				callSnippet = "Replace",
 			},
+			diagnostics = {
+				disable = { 'missing-fields' },
+			},
 			doc = {
 				privateName = { "^_" },
 			},
@@ -458,7 +461,7 @@ vim.pack.add({
 	gh 'MunifTanjim/nui.nvim',
 	gh 'nvim-treesitter/nvim-treesitter-context',
 	gh 'nvim-tree/nvim-web-devicons',
-	gh 'epwalsh/obsidian.nvim',
+	gh 'obsidian-nvim/obsidian.nvim',
 	gh 'nvim-lua/plenary.nvim',
 	gh 'MeanderingProgrammer/render-markdown.nvim',
 	gh 'folke/snacks.nvim',
@@ -743,30 +746,13 @@ ac( 'Filetype', 'markdown', function()
 
 	require('obsidian').setup({
 
-		finder = 'fzf-lua',
-
-		mappings = {
-			['gf'] = {
-				action = function()
-					return require('obsidian').util.gf_passthrough()
-				end,
-				opts = { buffer = true, expr = true, noremap = false },
-			},
-			['<cr>'] = {
-				action = function()
-					return require('obsidian').util.smart_action()
-				end,
-				opts = { buffer = true, expr = true },
-			},
+		checkbox = {
+			enabled = true,
+			create_new = true,
+			order = { ' ', 'x' },
 		},
 
-		ui = {
-			enable = false,
-			checkboxes = {
-				[' '] = { char = ' ', hl_group = 'ObsidianTodo', order = 1 },
-				['x'] = { char = '󰱒', hl_group = 'ObsidianDone', order = 2 },
-			},
-		},
+		legacy_commands = false,
 
 		workspaces = {
 			{ name = 'Notes', path = vim.fn.expand '~' .. '/Notes' },
@@ -781,11 +767,18 @@ ac( 'Filetype', 'markdown', function()
 					templates = {
 						folder = vim.NIL,
 					},
-					disable_frontmatter = true,
 				},
 			},
 		},
 	})
+
+	map(
+		'n',
+		'<cr>',
+		function()
+			return require('obsidian.actions').smart_action()
+		end,
+		{ buffer = true, expr = true, desc = 'Obsidian smart action' })
 
 end )
 
