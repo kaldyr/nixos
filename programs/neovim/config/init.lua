@@ -377,21 +377,21 @@ vim.lsp.config( 'lua_ls', {
 				enable = true,
 			},
 			completion = {
-				callSnippet = "Replace",
+				callSnippet = 'Replace',
 			},
 			diagnostics = {
 				disable = { 'missing-fields' },
 			},
 			doc = {
-				privateName = { "^_" },
+				privateName = { '^_' },
 			},
 			hint = {
 				enable = true,
 				setType = true,
 				paramType = true,
-				paramName = "Enable",
-				semicolon = "Enable",
-				arrayIndex = "Disable",
+				paramName = 'Enable',
+				semicolon = 'Enable',
+				arrayIndex = 'Disable',
 			},
 		},
 	},
