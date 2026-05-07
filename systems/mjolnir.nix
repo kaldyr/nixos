@@ -29,7 +29,7 @@
         kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 1000;
         kernelModules = [ "kvm-amd" ];
         kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-        kernelParams = [ "btrfs" "quiet" "preempt=full" ];
+        kernelParams = [ "btrfs" "quiet" "preempt=full" "iommu=pt" ];
         loader.grub.gfxmodeEfi = "3440x1440,1920x1080";
     };
 
