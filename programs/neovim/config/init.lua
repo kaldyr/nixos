@@ -1,5 +1,6 @@
 -- Config   --
 -- Startup  -->
+--------------
 -- vim:fdm=marker:fdl=0:foldmarker=-->,<--
 
 local g, o = vim.g, vim.opt
@@ -22,8 +23,9 @@ o.rtp:append( vim.fn.stdpath('data') .. '/grammars' )
 -- Delay clipboard until UiEnter for startup time
 vim.schedule( function() o.clipboard = 'unnamedplus' end )
 
---<--
+--<-----------
 -- Options  -->
+--------------
 
 -- Define the Leader Key
 g.mapleader = ' '
@@ -129,8 +131,9 @@ g.markdown_fenced_languages = {
 	'vim',
 }
 
---<--
+--<-----------
 -- Keymaps  -->
+--------------
 
 local map = vim.keymap.set
 
@@ -252,8 +255,9 @@ map(
 	{ desc = 'Toggle between words or symbols', silent = true }
 )
 
---<--
+--<-----------
 -- Autocmd  -->
+--------------
 
 local ac = function( event, pattern, callback )
 	vim.api.nvim_create_autocmd(event, {
@@ -294,9 +298,10 @@ ac( 'TextYankPost', '*', function()
 	vim.highlight.on_yank()
 end )
 
---<--
+--<-----------
 -- LSP      --
 -- Golang   -->
+--------------
 
 vim.lsp.config( 'gopls', {
 	cmd = { 'gopls' },
@@ -336,8 +341,9 @@ vim.lsp.config( 'gopls', {
 
 vim.lsp.enable('gopls')
 
---<--
+--<-----------
 -- Html     -->
+--------------
 
 vim.lsp.config( 'html', {
 	cmd = { 'vscode-html-language-server', '--stdio' },
@@ -352,8 +358,9 @@ vim.lsp.config( 'html', {
 
 vim.lsp.enable('html')
 
---<--
+--<-----------
 -- Lua      -->
+--------------
 
 vim.lsp.config( 'lua_ls', {
 	cmd = { 'lua-language-server' },
@@ -403,8 +410,9 @@ vim.lsp.config( 'lua_ls', {
 
 vim.lsp.enable('lua_ls')
 
---<--
+--<-----------
 -- Markdown -->
+--------------
 
 vim.lsp.config( 'marksman', {
 	cmd = { 'marksman' },
@@ -413,8 +421,9 @@ vim.lsp.config( 'marksman', {
 
 vim.lsp.enable('marksman')
 
---<--
+--<-----------
 -- Nix      -->
+--------------
 
 vim.lsp.config( 'nixd', {
 	cmd = { 'nixd' },
@@ -423,8 +432,9 @@ vim.lsp.config( 'nixd', {
 
 vim.lsp.enable('nixd')
 
---<--
+--<-----------
 -- Templ    -->
+--------------
 
 vim.lsp.config( 'templ', {
 	cmd = { 'templ' },
@@ -433,8 +443,9 @@ vim.lsp.config( 'templ', {
 
 vim.lsp.enable('templ')
 
---<--
+--<-----------
 -- Yaml     -->
+--------------
 
 vim.lsp.config( 'yamlls', {
 	cmd = { 'yaml-language-server' },
@@ -443,9 +454,10 @@ vim.lsp.config( 'yamlls', {
 
 vim.lsp.enable('yamlls')
 
---<--
+--<-----------
 -- Plugins  --
 -- Install  -->
+--------------
 
 local gh = function(repo) return 'https://github.com/' .. repo end
 ---@type (string|vim.pack.Spec)[]
@@ -473,8 +485,9 @@ vim.pack.add({
 	gh 'mikavilpas/yazi.nvim',
 })
 
---<--
+--<-------------------------
 -- Catppuccin             -->  Colorscheme
+----------------------------
 
 require('catppuccin').setup({
 
@@ -546,8 +559,9 @@ require('catppuccin').setup({
 
 vim.cmd [[ colorscheme catppuccin ]]
 
---<--
+--<-------------------------
 -- Blink.cmp              -->  Completion
+----------------------------
 
 vim.schedule( function()
 
@@ -578,8 +592,9 @@ vim.schedule( function()
 
 end )
 
---<--
+--<-------------------------
 -- Fzf-lua                -->  Fuzzy Pickers
+----------------------------
 
 require('fzf-lua').setup({
 
@@ -611,8 +626,9 @@ map( 'n', '<leader>s', function() require('fzf-lua').grep() end, { silent = true
 map( 'n', '<leader>l', function() require('fzf-lua').live_grep_native() end, { silent = true, desc = 'Live grep file contents' } )
 map( 'n', '<leader>L', function() require('fzf-lua').live_grep_resume() end, { silent = true, desc = 'Resume live grep' } )
 
---<--
+--<-------------------------
 -- Gitsigns               -->  Indicators for git changes
+----------------------------
 
 vim.schedule( function()
 
@@ -652,8 +668,9 @@ vim.schedule( function()
 
 end )
 
---<--
+--<-------------------------
 -- Lazydev                -->  Teach lua lsp about neovim
+----------------------------
 
 ac( 'Filetype', 'lua', function()
 
@@ -665,8 +682,9 @@ ac( 'Filetype', 'lua', function()
 
 end )
 
---<--
+--<-------------------------
 -- Lualine                -->  Status line
+----------------------------
 
 require('lualine').setup({
 
@@ -695,8 +713,9 @@ require('lualine').setup({
 
 })
 
---<--
+--<-------------------------
 -- Mini                   -->  Collection of mini plugins
+----------------------------
 
 vim.schedule( function() require('mini.ai').setup() end )
 
@@ -716,8 +735,9 @@ end )
 
 vim.schedule( function() require('mini.operators').setup() end )
 
---<--
+--<-------------------------
 -- Noice                  -->  UI for messages, cmdline, and popupmenu
+----------------------------
 
 vim.schedule( function()
 
@@ -741,8 +761,9 @@ vim.schedule( function()
 
 end )
 
---<--
+--<-------------------------
 -- Obsidian               -->  Work with Obsidian vaults
+----------------------------
 
 ac( 'Filetype', 'markdown', function()
 
@@ -784,8 +805,9 @@ ac( 'Filetype', 'markdown', function()
 
 end )
 
---<--
+--<-------------------------
 -- Render Markdown        -->  Make markdown look great
+----------------------------
 
 ac( 'Filetype', 'markdown', function()
 
@@ -799,8 +821,9 @@ ac( 'Filetype', 'markdown', function()
 
 end )
 
---<--
+--<-------------------------
 -- Snacks                 -->  Collection of tiny plugins
+----------------------------
 
 require('snacks').setup({
 
@@ -872,8 +895,9 @@ vim.schedule( function()
 	map( 'n', '<leader>z', function() Snacks.lazygit() end, { noremap = true, silent = true, desc = 'Lazygit' } )
 end )
 
---<--
+--<-------------------------
 -- Tiny Inline Diagnostic -->  Nice looking diagnostics
+----------------------------
 
 vim.schedule( function()
 
@@ -882,8 +906,9 @@ vim.schedule( function()
 
 end )
 
---<--
+--<-------------------------
 -- Treesj                 -->  Split/join
+----------------------------
 
 vim.schedule( function()
 
@@ -896,8 +921,9 @@ vim.schedule( function()
 
 end )
 
---<--
+--<-------------------------
 -- Which-key              -->  What was that key again?
+----------------------------
 
 vim.schedule( function()
 
@@ -920,8 +946,9 @@ vim.schedule( function()
 
 end )
 
---<--
+--<-------------------------
 -- Yazi                   -->  The best file manager
+----------------------------
 
 vim.schedule( function()
 
@@ -933,4 +960,4 @@ vim.schedule( function()
 
 end )
 
---<--
+--<-------------------------
