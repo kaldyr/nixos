@@ -1,6 +1,6 @@
--- Config   --
--- Startup  -->
---------------
+-- Config ------------------
+-- Startup                -->
+----------------------------
 -- vim:fdm=marker:fdl=0:foldmarker=-->,<--
 
 local g, o = vim.g, vim.opt
@@ -23,9 +23,9 @@ o.rtp:append( vim.fn.stdpath('data') .. '/grammars' )
 -- Delay clipboard until UiEnter for startup time
 vim.schedule( function() o.clipboard = 'unnamedplus' end )
 
---<-----------
--- Options  -->
---------------
+--<-------------------------
+-- Options                -->
+----------------------------
 
 -- Define the Leader Key
 g.mapleader = ' '
@@ -131,9 +131,9 @@ g.markdown_fenced_languages = {
 	'vim',
 }
 
---<-----------
--- Keymaps  -->
---------------
+--<-------------------------
+-- Keymaps                -->
+----------------------------
 
 local map = vim.keymap.set
 
@@ -151,6 +151,8 @@ map('n', 'gD', vim.lsp.buf.declaration, { silent = true, noremap = true })
 -- Line Movement
 map('n', '<Down>', '<Cmd>move .+1<CR>==', { silent = true, noremap = true }) -- <Caps-j>
 map('n', '<Up>', '<Cmd>move .-2<CR>==', { silent = true, noremap = true }) -- <Caps-k>
+map('i', '<Down>', '<Esc><Cmd>move .+1<CR>==gi', { silent = true, noremap = true }) -- <Caps-j>
+map('i', '<Up>', '<Esc><Cmd>move .-2<CR>==gi', { silent = true, noremap = true }) -- <Caps-k>
 map('v', '<Down>', ":move '>+1<CR>gv=gv", { silent = true, noremap = true }) -- <Caps-j>
 map('v', '<Up>', ":move '<-2<CR>gv=gv", { silent = true, noremap = true }) -- <Caps-k>
 
@@ -176,6 +178,23 @@ map('v', '>', '>gv', { silent = true })
 -- Folding
 map('n', 'Z', 'zA', { desc = 'Toggle folds at cursor', silent = true })
 map('n', '\\z', 'zi', { desc = 'Toggle folding', silent = true })
+map('n', 'zv', 'zMzvzz', { desc = 'Close all folds except current' })
+map('n', 'zj', 'zcjzOzz', { desc = 'Close current fold and open next' })
+map('n', 'zk', 'zckzOzz', { desc = 'Close current fold and open previous' })
+
+-- Selection
+map('n', '==', 'ggVG', { silent = true, noremap = true, desc = 'Select All' })
+map('n', '<C-a>', 'ggVG', { silent = true, noremap = true, desc = 'Select All' })
+
+-- Don't step on registers
+map('v', 'p', '"_dP', { silent = true, noremap = true })
+map('v', 'C', '"_c', { silent = true, noremap = true })
+map('v', 'D', '"_d', { silent = true, noremap = true })
+
+-- Add undo breakpoints
+map( 'i', ',', ',<C-g>u', { silent = true, noremap = true })
+map( 'i', '.', '.<C-g>u', { silent = true, noremap = true })
+map( 'i', ';', ';<C-g>u', { silent = true, noremap = true })
 
 -- Execute/Replay Macro over selection
 map('x', '.', ':norm .<CR>', { silent = true, noremap = true })
@@ -255,9 +274,9 @@ map(
 	{ desc = 'Toggle between words or symbols', silent = true }
 )
 
---<-----------
--- Autocmd  -->
---------------
+--<-------------------------
+-- Autocmd                -->
+----------------------------
 
 local ac = function( event, pattern, callback )
 	vim.api.nvim_create_autocmd(event, {
@@ -276,7 +295,6 @@ ac( 'VimEnter', '*', function()
 	-- If neovim opened a folder instead of a file, close the buffer
 	if string.sub(vim.fn.expand('%p'), 0, -1) == pwd then
 		vim.api.nvim_buf_delete(0, { force = true })
-		require('fzf-lua').files()
 	end
 
 	-- Default options
@@ -289,7 +307,7 @@ ac( 'FileType', 'help', function()
 	vim.cmd [[wincmd L]]
 end )
 
-ac( 'Filetype', 'markdown', function()
+ac( 'Filetype', { 'gitcommit', 'markdown', 'text' }, function()
 	vim.cmd [[ set nolist ]]
 end )
 
@@ -298,10 +316,10 @@ ac( 'TextYankPost', '*', function()
 	vim.highlight.on_yank()
 end )
 
---<-----------
--- LSP      --
--- Golang   -->
---------------
+--<-------------------------
+-- LSP                    --
+-- Golang                 -->
+----------------------------
 
 vim.lsp.config( 'gopls', {
 	cmd = { 'gopls' },
@@ -341,9 +359,9 @@ vim.lsp.config( 'gopls', {
 
 vim.lsp.enable('gopls')
 
---<-----------
--- Html     -->
---------------
+--<-------------------------
+-- Html                   -->
+----------------------------
 
 vim.lsp.config( 'html', {
 	cmd = { 'vscode-html-language-server', '--stdio' },
@@ -358,9 +376,9 @@ vim.lsp.config( 'html', {
 
 vim.lsp.enable('html')
 
---<-----------
--- Lua      -->
---------------
+--<-------------------------
+-- Lua                    -->
+----------------------------
 
 vim.lsp.config( 'lua_ls', {
 	cmd = { 'lua-language-server' },
@@ -410,9 +428,9 @@ vim.lsp.config( 'lua_ls', {
 
 vim.lsp.enable('lua_ls')
 
---<-----------
--- Markdown -->
---------------
+--<-------------------------
+-- Markdown               -->
+----------------------------
 
 vim.lsp.config( 'marksman', {
 	cmd = { 'marksman' },
@@ -421,9 +439,9 @@ vim.lsp.config( 'marksman', {
 
 vim.lsp.enable('marksman')
 
---<-----------
--- Nix      -->
---------------
+--<-------------------------
+-- Nix                    -->
+----------------------------
 
 vim.lsp.config( 'nixd', {
 	cmd = { 'nixd' },
@@ -432,9 +450,9 @@ vim.lsp.config( 'nixd', {
 
 vim.lsp.enable('nixd')
 
---<-----------
--- Templ    -->
---------------
+--<-------------------------
+-- Templ                  -->
+----------------------------
 
 vim.lsp.config( 'templ', {
 	cmd = { 'templ' },
@@ -443,9 +461,9 @@ vim.lsp.config( 'templ', {
 
 vim.lsp.enable('templ')
 
---<-----------
--- Yaml     -->
---------------
+--<-------------------------
+-- Yaml                   -->
+----------------------------
 
 vim.lsp.config( 'yamlls', {
 	cmd = { 'yaml-language-server' },
@@ -454,10 +472,10 @@ vim.lsp.config( 'yamlls', {
 
 vim.lsp.enable('yamlls')
 
---<-----------
--- Plugins  --
--- Install  -->
---------------
+--<-------------------------
+-- Plugins                --
+-- Install                -->
+----------------------------
 
 local gh = function(repo) return 'https://github.com/' .. repo end
 ---@type (string|vim.pack.Spec)[]
@@ -801,7 +819,8 @@ ac( 'Filetype', 'markdown', function()
 		function()
 			return require('obsidian.actions').smart_action()
 		end,
-		{ buffer = true, expr = true, desc = 'Obsidian smart action' })
+		{ buffer = true, expr = true, desc = 'Obsidian smart action' }
+	)
 
 end )
 
@@ -917,7 +936,7 @@ vim.schedule( function()
 		max_join_length = 240,
 	})
 
-	map( 'n', '<leader>j', function() require('treesj').toggle() end, { desc = 'Toggle Join/Split code block' } )
+	map( 'n', 'gj', function() require('treesj').toggle() end, { desc = 'Toggle Join/Split code block' } )
 
 end )
 
