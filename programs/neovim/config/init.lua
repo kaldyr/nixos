@@ -190,6 +190,7 @@ map('n', '<C-a>', 'ggVG', { silent = true, noremap = true, desc = 'Select All' }
 map('v', 'p', '"_dP', { silent = true, noremap = true })
 map('v', 'C', '"_c', { silent = true, noremap = true })
 map('v', 'D', '"_d', { silent = true, noremap = true })
+map('v', 'X', '"_x', { silent = true, noremap = true })
 
 -- Add undo breakpoints
 map( 'i', ',', ',<C-g>u', { silent = true, noremap = true })
@@ -406,6 +407,7 @@ vim.lsp.config( 'lua_ls', {
 			},
 			diagnostics = {
 				disable = { 'missing-fields' },
+				globals = { 'hl' },
 			},
 			doc = {
 				privateName = { '^_' },
