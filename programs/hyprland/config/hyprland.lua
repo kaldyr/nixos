@@ -1,7 +1,7 @@
 -- Config --
 -- Startup      -->
--- vim:fdm=marker:fdl=0:foldmarker=-->,<--
 ------------------
+-- vim:fdm=marker:fdl=0:foldmarker=-->,<--
 
 -- Get the hostname for machine specific configs
 local hostname = ''
@@ -24,6 +24,7 @@ hl.on( 'hyprland.start', function()
 	exe 'waybar'
 	exe 'nm-applet'
 	exe 'tailscale systray'
+	exe 'nextcloud-desktop'
 
 	if hostname == 'espresso' then
 		exe 'wayland-push-to-talk-fix -k "grave" -n "grave" /dev/input/by-id/usb-04d9_daskeyboard-event-kbd'
@@ -254,10 +255,11 @@ hl.gesture({
 -- Keybindings  -->
 ------------------
 
-local b, e = hl.bind, hl.dsp.exec_cmd
-local m    = function(key) return 'SUPER + ' .. key end
-local s    = function(key) return 'SHIFT + ' .. key end
-local ms   = function(key) return 'SUPER + SHIFT + ' .. key end
+local b, e, r = hl.bind, hl.dsp.exec_cmd, hl.dsp.submap('reset')
+
+local m  = function(key) return 'SUPER + ' .. key end
+local s  = function(key) return 'SHIFT + ' .. key end
+local ms = function(key) return 'SUPER + SHIFT + ' .. key end
 
 -- Terminal Launchers
 b( m 'q',  e 'kitty', { pseudotile = true } )
