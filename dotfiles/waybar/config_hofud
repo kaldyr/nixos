@@ -44,6 +44,7 @@
 		],
 		"modules-left": [
 			"hyprland/workspaces",
+			"hyprland/submap",
 		],
 		"modules-right": [
 			"temperature",

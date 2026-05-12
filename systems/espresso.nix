@@ -7,7 +7,7 @@
         inputs.nixos-hardware.nixosModules.common-gpu-amd
         ../disko/espresso.nix
         ./desktop.nix
-        ../programs/hyprland.nix
+        ../programs/hyprland
         ../programs/lutris.nix
         ../programs/plymouth.nix
         ../programs/steam.nix

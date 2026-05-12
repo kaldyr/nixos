@@ -223,7 +223,7 @@ map(
 map(
 	'v',
 	'<C-r>',
-	'"hy:%s/<C-r>h/<C-r>h/gcI<left><left><left>',
+	'"hy:%s/<C-r>h/<C-r>h/gcI<left><left><left><left>',
 	{ desc = 'Replace Selection', silent = false }
 )
 

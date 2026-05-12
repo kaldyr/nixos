@@ -255,20 +255,22 @@ hl.gesture({
 -- Keybindings  -->
 ------------------
 
-local b, e, r = hl.bind, hl.dsp.exec_cmd, hl.dsp.submap('reset')
+-- Shorthand for functions
+local b, e, smap = hl.bind, hl.dsp.exec_cmd, hl.dsp.submap
 
+-- Shorthand for modifiers:  m = meta, s = shift, ms = meta + shift
 local m  = function(key) return 'SUPER + ' .. key end
 local s  = function(key) return 'SHIFT + ' .. key end
 local ms = function(key) return 'SUPER + SHIFT + ' .. key end
 
 -- Terminal Launchers
 b( m 'q',  e 'kitty', { pseudotile = true } )
-b( ms 'q', hl.dsp.submap('terminal') )
-hl.define_submap( 'terminal', function()
-	b( 'c',        e 'kitty qalc', { float = true } )
-	b( 'q',        e 'kitty',      { float = true } )
-	b( 'y',        e 'kitty yazi', { float = true } )
-	b( 'catchall', hl.dsp.submap('reset') )
+b( ms 'q', smap('terminal') )
+hl.define_submap( 'terminal', 'reset', function()
+	b( 'c',        e 'kitty qalc', { class = 'float' } )
+	b( 'q',        e 'kitty',      { class = 'float' } )
+	b( 'y',        e 'kitty yazi', { class = 'float' } )
+	b( 'catchall', smap('reset') )
 end )
 
 -- Other Launchers
@@ -279,25 +281,25 @@ b( m 'y', e 'kitty yazi' )
 b( m 'c', e 'kitty qalc' )
 
 -- Screen Capture
-b( m 'p', hl.dsp.submap('capture') )
-hl.define_submap( 'capture', function()
+b( m 'p', smap('capture') )
+hl.define_submap( 'capture', 'reset', function()
 	b( 's',        e 'grim $(xdg-user-dir PICTURES)/Screenshots/$(date +"%Y%m%d%H%M%S.png")' )
 	b( 'a',        e 'slurp | grim -g - - | magick - -shave 1x1 PNG:- | swappy -f -' )
 	b( 'o',        e 'slurp | grim -g - - | tesseract - - | wl-copy' )
 	b( 'r',        e '/nix/config/scripts/screenRecord.sh' )
-	b( 'catchall', hl.dsp.submap('reset') )
+	b( 'catchall', smap('reset') )
 end )
 
 -- Play Media
 b( m 'g', e '/nix/hhonfig/scripts/yt-dlp.sh' )
 
 -- Notification Controls
-b( m 'n', hl.dsp.submap('notify') )
-hl.define_submap( 'notify', function()
+b( m 'n', smap('notify') )
+hl.define_submap( 'notify', 'reset', function()
 	b( 'x',        e 'dunstctl close' )
 	b( 'p',        e 'dunstctl history-pop' )
 	b( 'c',        e 'dunstctl context' )
-	b( 'catchall', hl.dsp.submap('reset') )
+	b( 'catchall', smap('reset') )
 end )
 
 -- Use wtype to paste into things that do not like to obey paste keybinds
@@ -330,12 +332,12 @@ b( m 'Tab', function()
 end )
 
 -- Shutdown Menu
-b( ms 'x', hl.dsp.submap('shutdown') )
-hl.define_submap( 'shutdown', function()
+b( ms 'x', smap('shutdown') )
+hl.define_submap( 'shutdown', 'reset', function()
 	b( 'l',        e 'hyprlock' )
 	b( 's',        e 'systemctl suspend' )
 	b( 'x',        e 'command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch "hl.dsp.exit()"' )
-	b( 'catchall', hl.dsp.submap('reset') )
+	b( 'catchall', smap('reset') )
 end )
 
 -- Focus Windows
@@ -398,6 +400,8 @@ wr({
 	},
 	no_focus = true,
 })
+
+wr({ name = 'float', match = { class = 'float' }, float = true })
 
 -- Specific     --
 

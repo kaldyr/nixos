@@ -5,7 +5,7 @@
         inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
         ../disko/hofud.nix
         ./desktop.nix
-        ../programs/hyprland.nix
+        ../programs/hyprland
         ../programs/librewolf.nix
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix
