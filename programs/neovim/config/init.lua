@@ -184,7 +184,6 @@ map('n', 'zk', 'zckzOzz', { desc = 'Close current fold and open previous' })
 
 -- Selection
 map('n', '==', 'ggVG', { silent = true, noremap = true, desc = 'Select All' })
-map('n', '<C-a>', 'ggVG', { silent = true, noremap = true, desc = 'Select All' })
 
 -- Don't step on registers
 map('v', 'p', '"_dP', { silent = true, noremap = true })
