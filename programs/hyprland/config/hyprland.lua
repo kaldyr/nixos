@@ -1,6 +1,6 @@
 -- Config --
--- Startup      -->
-------------------
+-- Startup         -->
+---------------------
 -- vim:fdm=marker:fdl=0:foldmarker=-->,<--
 
 -- Get the hostname for machine specific configs
@@ -24,7 +24,6 @@ hl.on( 'hyprland.start', function()
 	exe 'waybar'
 	exe 'nm-applet'
 	exe 'tailscale systray'
-	exe 'nextcloud-desktop'
 
 	if hostname == 'espresso' then
 		exe 'wayland-push-to-talk-fix -k "grave" -n "grave" /dev/input/by-id/usb-04d9_daskeyboard-event-kbd'
@@ -41,34 +40,46 @@ hl.on( 'hyprland.start', function()
 
 end )
 
---<---------------
--- Monitors     -->
-------------------
+--<------------------
+-- Monitors        -->
+---------------------
 
 -- Main monitor
-local output, mode, position, scale = '', 'preferred', 'auto', 'auto'
 
 if hostname == 'espresso' then
-	output = 'HDMI-A-1'
-	mode   = '1920x1080@60'
+	hl.monitor({
+		output = 'HDMI-A-1',
+		mode   = '1920x1080@60',
+		position = 'auto',
+		scale = 1,
+	})
 
 elseif hostname == 'hofud' then
-	output = 'eDP-1'
-	mode   = '2256x1504@60'
-	position = '0x0'
-	scale = '1.175000'
+	hl.monitor({
+		output = 'eDP-1',
+		mode   = '2256x1504@60',
+		position = '0x0',
+		scale = '1.175000',
+	})
 
 elseif hostname == 'mjolnir' then
-	output = 'HDMI-A-1'
-	mode   = '3440x1440@84.97900'
+	hl.monitor({
+		output = 'HDMI-A-1',
+		mode   = '3440x1440@84.97900',
+		position = 'auto',
+		scale = 1,
+		bitdepth = 10,
+		sdrbrightness = 1.2,
+		sdrsaturation = 0.98,
+	})
 
 end
 
-hl.monitor({ output = output, mode = mode, position = position, scale = scale })
+hl.monitor({ output = '', mode = 'preferred', position = 'auto', scale = 1 })
 
---<---------------
--- Environment  -->
-------------------
+--<------------------
+-- Environment     -->
+---------------------
 
 hl.env( 'ELECTRON_OZONE_PLATFORM_HINT', 'wayland' )
 hl.env( 'HYPRCURSOR_SIZE', '24' )
@@ -78,9 +89,9 @@ hl.env( 'PROTON_ENABLE_WAYLAND', '1' )
 hl.env( 'WLR_NO_HARDWARE_CURSORS', '1' )
 hl.env( 'XCURSOR_SIZE', '24' )
 
---<---------------
--- General      -->
-------------------
+--<------------------
+-- General         -->
+---------------------
 
 local vrr = 0
 if hostname == 'mjolnir' or hostname == 'espresso' then vrr = 1 end
@@ -103,8 +114,14 @@ hl.config({
 			inactive_border = 0x8885c1dc, -- 0xff444444
 		},
 
-		gaps_in          = 10, -- 5
-		gaps_out         = 20, -- 20
+		gaps_in  = 12, -- 5
+		gaps_out = {
+			top = 8,
+			left = 18,
+			right = 18,
+			bottom = 18,
+		}, -- 20
+
 		layout           = 'dwindle', -- dwindle
 		resize_on_border = false, -- false
 	},
@@ -112,26 +129,24 @@ hl.config({
 	misc = {
 		disable_hyprland_logo   = true, -- false
 		force_default_wallpaper = 0, -- -1
-		vrr = vrr, -- 0
+		vrr                     = vrr, -- 0
 	},
 
 })
 
---<---------------
--- Layout       -->
-------------------
+--<------------------
+-- Layout          -->
+---------------------
 
 hl.config({
-
 	dwindle = {
 		preserve_split = true,
 	},
-
 })
 
---<---------------
--- Appearance   -->
-------------------
+--<------------------
+-- Appearance      -->
+---------------------
 
 hl.config({
 
@@ -158,15 +173,15 @@ hl.config({
 			passes             = 3, -- 1
 			popups             = false, -- false
 			popups_ignorealpha = 0.2, -- 0.2
-			size               = 15, -- 8
+			size               = 12, -- 8
 			special            = false, -- false
 			vibrancy           = 0.1696, -- 0.1696
 			vibrancy_darkness  = 0.0, -- 0.0
-			xray               = true, -- false
+			xray               = false, -- false
 		},
 
 		glow = {
-			enabled      = true, -- false
+			enabled      = false, -- false
 			color        = 0x5a81c8be, -- 0xee1a1a1a
 			range        = 8, -- 10
 			render_power = 3, -- 3
@@ -184,9 +199,9 @@ hl.config({
 
 })
 
---<---------------
--- Animations   -->
-------------------
+--<------------------
+-- Animations      -->
+---------------------
 
 hl.config({
 	animations = {
@@ -207,7 +222,7 @@ hl.curve('almostLinear',   { type = 'bezier', points = { {0.5, 0.5},   {0.75, 1}
 hl.curve('quick',          { type = 'bezier', points = { {0.15, 0},    {0.1, 1}  } })
 
 -- Default springs
-hl.curve('easy',           { type = 'spring', mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
+hl.curve('easy', { type = 'spring', mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
 
 hl.animation({ leaf = 'global',        enabled = true, speed = 10,   bezier = 'default' })
 hl.animation({ leaf = 'border',        enabled = true, speed = 5.39, bezier = 'easeOutQuint' })
@@ -222,14 +237,14 @@ hl.animation({ leaf = 'layersIn',      enabled = true, speed = 4,    bezier = 'e
 hl.animation({ leaf = 'layersOut',     enabled = true, speed = 1.5,  bezier = 'linear',       style = 'fade' })
 hl.animation({ leaf = 'fadeLayersIn',  enabled = true, speed = 1.79, bezier = 'almostLinear' })
 hl.animation({ leaf = 'fadeLayersOut', enabled = true, speed = 1.39, bezier = 'almostLinear' })
-hl.animation({ leaf = 'workspaces',    enabled = true, speed = 1.94, bezier = 'almostLinear', style = 'fade' })
-hl.animation({ leaf = 'workspacesIn',  enabled = true, speed = 1.21, bezier = 'almostLinear', style = 'fade' })
-hl.animation({ leaf = 'workspacesOut', enabled = true, speed = 1.94, bezier = 'almostLinear', style = 'fade' })
+hl.animation({ leaf = 'workspaces',    enabled = true, speed = 1.94, bezier = 'almostLinear', style = 'slidefade' })
+hl.animation({ leaf = 'workspacesIn',  enabled = true, speed = 1.21, bezier = 'almostLinear', style = 'slidefade' })
+hl.animation({ leaf = 'workspacesOut', enabled = true, speed = 1.94, bezier = 'almostLinear', style = 'slidefade' })
 hl.animation({ leaf = 'zoomFactor',    enabled = true, speed = 7,    bezier = 'quick' })
 
---<---------------
--- Input        -->
-------------------
+--<------------------
+-- Input           -->
+---------------------
 hl.config({
 	input = {
 		follow_mouse = 2,
@@ -251,9 +266,9 @@ hl.gesture({
 	action = 'workspace'
 })
 
---<---------------
--- Keybindings  -->
-------------------
+--<------------------
+-- Keybindings     -->
+---------------------
 
 -- Shorthand for functions
 local b, e, smap = hl.bind, hl.dsp.exec_cmd, hl.dsp.submap
@@ -374,11 +389,17 @@ for i = 1,10 do
 	b( ms(i % 10),  hl.dsp.window.move({ workspace = i, follow = false }) )
 end
 
---<---------------
--- Window Rules -->
-------------------
+--<------------------
+-- Workspace Rules -->
+---------------------
 
--- General      --
+
+
+--<------------------
+-- Window Rules    -->
+---------------------
+
+-- General         --
 
 local wr = hl.window_rule
 local suppressMaximizeRule = wr({
@@ -405,7 +426,7 @@ wr({ name = 'float', match = { class = 'float' }, float = true })
 
 -- Specific     --
 
-wr({
+wr({ -- Age of Empires Online (Celeste Fan Project) Launcher
 	name         = 'aoeo-launch',
 	match        = { title = '^(celeste launcher.exe)$' },
 	border_size  = 0,
@@ -416,7 +437,7 @@ wr({
 	stay_focused = false,
 })
 
-wr({
+wr({ -- Age of Empires Online (Celeste Fan Project)
 	name             = 'aoeo',
 	match            = { title = '^(spartan.exe)$' },
 	border_size      = 0,
@@ -428,7 +449,7 @@ wr({
 	stay_focused     = false,
 })
 
-wr({
+wr({ -- Battle.net Launcher
 	name             = 'battle-net',
 	match            = { class = '^(battle.net.exe)$' },
 	border_size      = 0,
@@ -438,7 +459,7 @@ wr({
 	opaque           = true,
 })
 
-wr({
+wr({ -- Diablo II Resurrected
 	name             = 'diablo-ii',
 	match            = { title = '^(d2r.exe)$' },
 	border_size      = 0,
@@ -452,14 +473,14 @@ wr({
 	suppress_event   = 'fullscreen maximize',
 })
 
-wr({
+wr({ -- Discord
 	name         = 'discord',
 	match        = { class = 'discord' },
 	allows_input = true,
 	opacity      = '0.9',
 })
 
-wr({
+wr({ -- System Tray Icon for Wine Applications
 	name        = 'explorer-exe',
 	match       = { class = '^(explorer.exe)$' },
 	border_size = 1,
@@ -478,7 +499,7 @@ wr({
 	pseudo  =  true,
 })
 
-wr({
+wr({ -- Guild Wars 2
 	name             = 'guild-wars-2',
 	match            = { title = '^(Guild Wars 2)$' },
 	border_size      = 0,
@@ -492,19 +513,18 @@ wr({
 	suppress_event   = 'fullscreen maximize',
 })
 
-wr({ name = 'helium', match = { class = 'helium' }, opacity = '0.9' })
+wr({ name = 'helium', match = { class = 'helium' }, opacity = '0.85' })
 
-wr({
+wr({ -- Kitty Terminal
 	name    = 'kitty',
 	match   = { class = 'kitty' },
-	opacity = '0.9',
-	pseudo  = true,
+	opacity = '0.8',
 	size    = '{1408, 1026}',
 })
 
-wr({ name = 'steam',  match = { class = 'steam$' }, opacity = '0.9' })
+wr({ name = 'steam',  match = { class = 'steam$' }, opacity = '0.85' })
 
-wr({
+wr({ -- Steam game
 	name        = 'steam-app',
 	match       = { class = 'steam_app_.*' },
 	border_size = 0,
@@ -515,6 +535,6 @@ wr({
 	opaque      = true,
 })
 
-wr({ name = 'telegram', match = { class = '.*telegram.*' }, opacity = '0.9' })
+wr({ name = 'telegram', match = { class = '.*telegram.*' }, opacity = '0.85' })
 
---<---------------
+--<------------------

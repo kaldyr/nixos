@@ -21,30 +21,29 @@
         ];
     };
 
-    environment.systemPackages = with pkgs; [
-        brightnessctl
-        cliphist
-        dragon-drop
-        easyeffects
-        grim
-        hyprcursor
-        hyprland
-        hyprpicker
-        hyprshutdown
-        libnotify
-        pavucontrol
-        playerctl
-        polkit_gnome
-        slurp
-        tesseract
-        wl-clipboard
-        wl-screenrec
-        wtype
-        xdg-desktop-portal-hyprland
-        xwayland
-    ];
-
     home-manager.users.${sysConfig.user} = { config, ... }: {
+
+        home.packages = with pkgs; [
+            brightnessctl
+            cliphist
+            dragon-drop
+            easyeffects
+            grim
+            hyprcursor
+            hyprpicker
+            hyprshutdown
+            libnotify
+            pavucontrol
+            playerctl
+            polkit_gnome
+            slurp
+            tesseract
+            wl-clipboard
+            wl-screenrec
+            wtype
+            xdg-desktop-portal-hyprland
+            xwayland
+        ];
 
         services.cliphist.enable = true;
         services.playerctld.enable = true;
@@ -65,6 +64,21 @@
             "application/audio" = [ "mpv.desktop" ];
         };
 
+        wayland.windowManager.hyprland = {
+            enable = true;
+            package = null;
+            portalPackage = null;
+            systemd.enable = true;
+            settings = {};
+        };
+
+    };
+
+    programs.hyprland = {
+        enable = true;
+        package = pkgs.hyprland;
+        portalPackage = pkgs.xdg-desktop-portal-hyprland;
+        withUWSM = true;
     };
 
     services.greetd = {
@@ -73,7 +87,7 @@
 
         settings = rec {
             default_session = initial_session;
-            initial_session.command = "start-hyprland";
+            initial_session.command = "uwsm start hyprland.desktop";
             initial_session.user = sysConfig.user;
         };
 
