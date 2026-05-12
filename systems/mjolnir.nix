@@ -9,7 +9,7 @@
         ../disko/mjolnir.nix
         ./desktop.nix
         ../services/openrazer.nix
-        ../programs/hyprland.nix
+        ../programs/hyprland
         ../programs/librewolf.nix
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix

@@ -28,6 +28,9 @@
         helium.url = "github:schembriaiden/helium-browser-nix-flake";
         helium.inputs.nixpkgs.follows = "nixpkgs";
 
+        # Hyprland
+        hyprland.url = "github:hyprwm/Hyprland";
+
         # zmx session persistence
         zmx.url = "github:neurosnap/zmx";
 

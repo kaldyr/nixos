@@ -15,8 +15,12 @@
             });
         });
 
-        helium = inputs.helium.packages.${prev.stdenv.hostPlatform.system}.default;
         floorp-bin = inputs.nixpkgs-floorp.legacyPackages.${prev.stdenv.hostPlatform.system}.floorp-bin;
+        helium = inputs.helium.packages.${prev.stdenv.hostPlatform.system}.default;
+
+        # Hyprland flake
+        hyprland = inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.hyprland;
+        xdg-desktop-portal-hyprland = inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
         openldap = prev.openldap.overrideAttrs {
             doCheck = !prev.stdenv.hostPlatform.isi686;

@@ -1,16 +1,16 @@
 { lib, pkgs, sysConfig, ... }: {
 
     imports = [
-        ../services/awww.nix
-        ../services/dunst.nix
-        ../services/gammastep.nix
-        ../services/hypridle.nix
-        ../services/udiskie.nix
-        ./feh.nix
-        ./fuzzel.nix
-        ./hyprlock.nix
-        ./swappy.nix
-        ./waybar.nix
+        ../../services/awww.nix
+        ../../services/dunst.nix
+        ../../services/gammastep.nix
+        ../../services/hypridle.nix
+        ../../services/udiskie.nix
+        ../feh.nix
+        ../fuzzel.nix
+        ../hyprlock.nix
+        ../swappy.nix
+        ../waybar.nix
     ];
 
     environment.persistence = lib.mkIf sysConfig.homeImpermanence {
@@ -21,49 +21,35 @@
         ];
     };
 
-    environment.sessionVariables = {
-        HYPRCURSOR_THEME = "catppuccin-frappe-sapphire-cursors";
-        HYPRCURSOR_SIZE = 24;
-        NIXOS_OZONE_WL = "1";
-        PROTON_ENABLE_WAYLAND = "1";
-        WLR_NO_HARDWARE_CURSORS = "1";
-    };
+    environment.systemPackages = with pkgs; [
+        brightnessctl
+        cliphist
+        dragon-drop
+        easyeffects
+        grim
+        hyprcursor
+        hyprland
+        hyprpicker
+        hyprshutdown
+        libnotify
+        pavucontrol
+        playerctl
+        polkit_gnome
+        slurp
+        tesseract
+        wl-clipboard
+        wl-screenrec
+        wtype
+        xdg-desktop-portal-hyprland
+        xwayland
+    ];
 
     home-manager.users.${sysConfig.user} = { config, ... }: {
-
-        home.packages = with pkgs; [
-            brightnessctl
-            cliphist
-            dragon-drop
-            easyeffects
-            grim
-            hyprcursor
-            hyprpicker
-            libnotify
-            pavucontrol
-            playerctl
-            polkit_gnome
-            slurp
-            tesseract
-            wl-clipboard
-            wl-screenrec
-            wtype
-            xwayland
-        ];
 
         services.cliphist.enable = true;
         services.playerctld.enable = true;
 
-        wayland.windowManager.hyprland = {
-            enable = true;
-            extraConfig = /* hyprlang */ ''
-                source = ~/.config/hypr/hyprland/frappe.conf
-                source = ~/.config/hypr/hyprland/${sysConfig.hostname}.conf
-                source = ~/.config/hypr/hyprland/common.conf
-            '';
-        };
-
-        xdg.configFile."hypr/hyprland".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/hypr/hyprland";
+        xdg.configFile."hypr/hyprland.lua".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/hyprland.lua";
 
         xdg.mimeApps.defaultApplications = lib.mkForce {
             "default-web-browser" = [ "helium.desktop" ];
@@ -100,14 +86,11 @@
         config.common.default = "*";
 
         configPackages = with pkgs; [
-            xdg-desktop-portal-gtk
-            xdg-desktop-portal
+            xdg-desktop-portal-hyprland
         ];
 
         extraPortals = with pkgs; [
-            xdg-desktop-portal-gtk
             xdg-desktop-portal-hyprland
-            xdg-desktop-portal
         ];
 
         wlr.enable = true;
