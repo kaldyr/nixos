@@ -286,26 +286,37 @@ local ms = function(key) return 'SUPER + SHIFT + ' .. key end
 local term_row_height = 19
 local term_col_width  = 24
 
--- Height of a terminal that factors in terminal line height to remove gaps
-local function term_height(scale)
-	local monitor  = hl.get_active_monitor()
-	local overall = monitor.height * scale * monitor.scale
-	return (overall - (overall % term_row_height))
+local function float_large()
+	local mon = hl.get_active_monitor()
+
+	local w, h = 1152, 646
+
+	if     mon.height == 1440 then h = 855
+	elseif mon.height == 1504 then h = 880
+	end
+
+	if     mon.width == 3440 then w = 1368
+	elseif mon.width == 2256 then w = 1359
+	end
+
+	return { w, h }
 end
 
--- Width of a terminal that factors in terminal col width to remove gaps (extra scaling down for wider monitors)
-local function term_width(scale)
-	local monitor  = hl.get_active_monitor()
-	local overall = monitor.width * scale * monitor.scale * (monitor.height * 3) / (monitor.width * 2)
-	return (overall - (overall % term_col_width))
-end
+local function float_small()
+	local mon = hl.get_active_monitor()
 
--- local function split_thirds()
--- 	local mon  = hl.get_active_monitor()
--- 	local gaps_in  = hl.get_config('general.gaps_in')
--- 	local gaps_out = hl.get_config('general.gaps_out')
---
--- end
+	local w, h = 384, 323
+
+	if     mon.height == 1440 then h = 323
+	elseif mon.height == 1504 then h = 318
+	end
+
+	if     mon.width == 3440 then w = 480
+	elseif mon.width == 2256 then w = 485
+	end
+
+	return { w, h }
+end
 
 -- Events for creating subgroup notifications
 local submap_timeout = 15000
@@ -346,11 +357,11 @@ end )
 -- Terminal Launchers
 b( m 'q', hl.dsp.submap('terminal') )
 hl.define_submap( 'terminal', 'reset', function()
-	b( 'b',        e('kitty btop', { opacity = '0.85', float  = true, size = {term_width(0.7), term_height(0.7)} }) )
-	b( 'c',        e('kitty qalc', { opacity = '0.85', float  = true, size = {term_width(0.2), term_height(0.2)} }) )
-	b( 'f',        e('kitty',      { opacity = '0.85', float  = true, size = {term_width(0.6), term_height(0.6)} }) )
-	b( 'q',        e('kitty',      { opacity = '0.85', pseudo = true, size = {term_width(0.6), term_height(0.6)} }) )
-	b( 'y',        e('kitty yazi', { opacity = '0.75', float   = true, size = {term_width(0.6), term_height(0.6)} }) )
+	b( 'b',        e('kitty btop', { opacity = '0.85', float  = true, size = float_large() }) )
+	b( 'c',        e('kitty qalc', { opacity = '0.85', float  = true, size = float_small() }) )
+	b( 'f',        e('kitty',      { opacity = '0.85', float  = true, size = float_large() }) )
+	b( 'q',        e('kitty',      { opacity = '0.85' }) )
+	b( 'y',        e('kitty yazi', { opacity = '0.85', float  = true, size = float_large() }) )
 	b( 'catchall', hl.dsp.submap('reset') )
 end )
 
