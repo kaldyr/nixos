@@ -283,7 +283,7 @@ local s  = function(key) return 'SHIFT + ' .. key end
 local ms = function(key) return 'SUPER + SHIFT + ' .. key end
 
 local function float_large()
-	local mon = hl.get_active_monitor()
+	local mon = hl.get_active_monitor() or ''
 
 	local w, h = 1152, 646
 	if     mon.width == 3440 then w, h = 1152, 855
@@ -294,7 +294,7 @@ local function float_large()
 end
 
 local function float_small()
-	local mon = hl.get_active_monitor()
+	local mon = hl.get_active_monitor() or ''
 
 	local w, h = 384, 323
 	if     mon.width == 3440 then w, h = 480, 323
