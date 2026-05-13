@@ -382,7 +382,7 @@ hl.define_submap( 'notify', 'reset', function()
 end )
 
 -- Use wtype to paste into things that do not like to obey paste keybinds
-b( m 'v', e 'ewtype $(cliphist list | fuzzel -d | cliphist decode' )
+b( m 'v', e 'wtype $(cliphist list | fuzzel -d | cliphist decode' )
 
 -- Media controls
 b( 'XF86AudioRaiseVolume',    e 'pamixer -i 1',                  { locked = true, repeating = true } )
