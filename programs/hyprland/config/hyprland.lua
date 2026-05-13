@@ -323,7 +323,7 @@ hl.on( 'keybinds.submap', function(name)
 		hl.timer( function() hl.dispatch( hl.dsp.submap('reset') ) end, { timeout = submap_timeout, type = 'oneshot' } )
 	elseif name == 'shutdown' then
 		hl.notification.create({
-			text = 'l - Lock Screen\ns - Suspend\nx - Exit Hyprland',
+			text = 'l - Lock Screen\ns - Suspend\np - Poweroff\nx - Exit Hyprland',
 			duration = submap_timeout,
 			color = 'rgb(81c8be)',
 		})
@@ -413,6 +413,7 @@ b( ms 'x', hl.dsp.submap('shutdown') )
 hl.define_submap( 'shutdown', 'reset', function()
 	b( 'l',        e 'hyprlock' )
 	b( 's',        e 'systemctl suspend' )
+	b( 'p',        e 'poweroff' )
 	b( 'x',        e 'uwsm stop' )
 	b( 'catchall', hl.dsp.submap('reset') )
 end )
