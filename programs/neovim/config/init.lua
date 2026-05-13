@@ -316,7 +316,7 @@ end )
 
 -- Highlight yanked text
 ac( 'TextYankPost', '*', function()
-	vim.highlight.on_yank()
+	vim.hl.on_yank()
 end )
 
 --<-------------------------
@@ -400,7 +400,7 @@ vim.lsp.config( 'lua_ls', {
 		Lua = {
 			workspace = {
 				checkThirdParty = false,
-				Library = {
+				library = {
 					vim.fn.stdpath('data') .. '/stubs'
 				}
 			},

@@ -447,7 +447,7 @@ b( m 'code:59',    hl.dsp.focus({ workspace = 'e-1' }) ) -- ,
 b( m 'code:60',    hl.dsp.focus({ workspace = 'e+1' }) ) -- .
 b( m 'mouse_down', hl.dsp.focus({ workspace = 'e-1' }) )
 b( m 'mouse_up',   hl.dsp.focus({ workspace = 'e+1' }) )
-for i = 1,10 do
+for i = 1, 10 do
 	b( m(i % 10),   hl.dsp.focus({ workspace = i }) )
 	b( ms(i % 10),  hl.dsp.window.move({ workspace = i, follow = false }) )
 end
