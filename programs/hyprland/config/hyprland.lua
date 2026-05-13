@@ -282,10 +282,6 @@ local m  = function(key) return 'SUPER + ' .. key end
 local s  = function(key) return 'SHIFT + ' .. key end
 local ms = function(key) return 'SUPER + SHIFT + ' .. key end
 
--- Dimensions based on monitor, scale, and gaps for terminal applications
-local term_row_height = 19
-local term_col_width  = 24
-
 local function float_large()
 	local mon = hl.get_active_monitor()
 
