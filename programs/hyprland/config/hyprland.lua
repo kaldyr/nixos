@@ -59,7 +59,7 @@ elseif hostname == 'hofud' then
 		output = 'eDP-1',
 		mode   = '2256x1504@60',
 		position = '0x0',
-		scale = '1.175000',
+		scale = 1.175000,
 	})
 
 elseif hostname == 'mjolnir' then
@@ -197,6 +197,10 @@ hl.config({
 
 	},
 
+	misc = {
+		font_family = 'Maple Mono NF',
+	},
+
 })
 
 --<------------------
@@ -271,50 +275,110 @@ hl.gesture({
 ---------------------
 
 -- Shorthand for functions
-local b, e, smap = hl.bind, hl.dsp.exec_cmd, hl.dsp.submap
+local b, e = hl.bind, hl.dsp.exec_cmd
 
 -- Shorthand for modifiers:  m = meta, s = shift, ms = meta + shift
 local m  = function(key) return 'SUPER + ' .. key end
 local s  = function(key) return 'SHIFT + ' .. key end
 local ms = function(key) return 'SUPER + SHIFT + ' .. key end
 
+-- Dimensions based on monitor, scale, and gaps for terminal applications
+local term_row_height = 19
+local term_col_width  = 24
+
+-- Height of a terminal that factors in terminal line height to remove gaps
+local function term_height(scale)
+	local monitor  = hl.get_active_monitor()
+	local overall = monitor.height * scale * monitor.scale
+	return (overall - (overall % term_row_height))
+end
+
+-- Width of a terminal that factors in terminal col width to remove gaps (extra scaling down for wider monitors)
+local function term_width(scale)
+	local monitor  = hl.get_active_monitor()
+	local overall = monitor.width * scale * monitor.scale * (monitor.height * 3) / (monitor.width * 2)
+	return (overall - (overall % term_col_width))
+end
+
+-- local function split_thirds()
+-- 	local mon  = hl.get_active_monitor()
+-- 	local gaps_in  = hl.get_config('general.gaps_in')
+-- 	local gaps_out = hl.get_config('general.gaps_out')
+--
+-- end
+
+-- Events for creating subgroup notifications
+local submap_timeout = 15000
+hl.on( 'keybinds.submap', function(name)
+	if name == 'capture' then
+		hl.notification.create({
+			text = 'a - Select Area\ns - Entire Screen\no - OCR\nr - Screen Record Gif',
+			duration = submap_timeout,
+			color = 'rgb(81c8be)',
+		})
+		hl.timer( function() hl.dispatch( hl.dsp.submap('reset') ) end, { timeout = submap_timeout, type = 'oneshot' } )
+	elseif name == 'notify' then
+		hl.notification.create({
+			text = 'x - Dismiss\np - Pop Recent\nc - Context',
+			duration = submap_timeout,
+			color = 'rgb(81c8be)',
+		})
+		hl.timer( function() hl.dispatch( hl.dsp.submap('reset') ) end, { timeout = submap_timeout, type = 'oneshot' } )
+	elseif name == 'shutdown' then
+		hl.notification.create({
+			text = 'l - Lock Screen\ns - Suspend\nx - Exit Hyprland',
+			duration = submap_timeout,
+			color = 'rgb(81c8be)',
+		})
+		hl.timer( function() hl.dispatch( hl.dsp.submap('reset') ) end, { timeout = submap_timeout, type = 'oneshot' } )
+	elseif name == 'terminal' then
+		hl.notification.create({
+			text = 'Terminal Launcher\nb - Btop\nc - Calculator\nf - Floating Kitty\nq - Kitty\ny - Yazi File Manager',
+			duration = submap_timeout,
+			color = 'rgb(81c8be)',
+		})
+		hl.timer( function() hl.dispatch( hl.dsp.submap('reset') ) end, { timeout = submap_timeout, type = 'oneshot' } )
+	elseif name == '' then
+		hl.dispatch( e 'hyprctl dismissnotify' )
+	end
+end )
+
 -- Terminal Launchers
-b( m 'q',  e 'kitty', { pseudotile = true } )
-b( ms 'q', smap('terminal') )
+b( m 'q', hl.dsp.submap('terminal') )
 hl.define_submap( 'terminal', 'reset', function()
-	b( 'c',        e 'kitty qalc', { class = 'float' } )
-	b( 'q',        e 'kitty',      { class = 'float' } )
-	b( 'y',        e 'kitty yazi', { class = 'float' } )
-	b( 'catchall', smap('reset') )
+	b( 'b',        e('kitty btop', { opacity = '0.85', float  = true, size = {term_width(0.7), term_height(0.7)} }) )
+	b( 'c',        e('kitty qalc', { opacity = '0.85', float  = true, size = {term_width(0.2), term_height(0.2)} }) )
+	b( 'f',        e('kitty',      { opacity = '0.85', float  = true, size = {term_width(0.6), term_height(0.6)} }) )
+	b( 'q',        e('kitty',      { opacity = '0.85', pseudo = true, size = {term_width(0.6), term_height(0.6)} }) )
+	b( 'y',        e('kitty yazi', { opacity = '0.75', float   = true, size = {term_width(0.6), term_height(0.6)} }) )
+	b( 'catchall', hl.dsp.submap('reset') )
 end )
 
 -- Other Launchers
 b( m 'r', e 'fuzzel' )
 b( m 'u', e 'hyprpicker -a' )
 b( m 'm', e 'keepmenu' )
-b( m 'y', e 'kitty yazi' )
-b( m 'c', e 'kitty qalc' )
 
 -- Screen Capture
-b( m 'p', smap('capture') )
+b( m 'p', hl.dsp.submap('capture') )
 hl.define_submap( 'capture', 'reset', function()
 	b( 's',        e 'grim $(xdg-user-dir PICTURES)/Screenshots/$(date +"%Y%m%d%H%M%S.png")' )
 	b( 'a',        e 'slurp | grim -g - - | magick - -shave 1x1 PNG:- | swappy -f -' )
 	b( 'o',        e 'slurp | grim -g - - | tesseract - - | wl-copy' )
 	b( 'r',        e '/nix/config/scripts/screenRecord.sh' )
-	b( 'catchall', smap('reset') )
+	b( 'catchall', hl.dsp.submap('reset') )
 end )
 
 -- Play Media
 b( m 'g', e '/nix/hhonfig/scripts/yt-dlp.sh' )
 
 -- Notification Controls
-b( m 'n', smap('notify') )
+b( m 'n', hl.dsp.submap('notify') )
 hl.define_submap( 'notify', 'reset', function()
 	b( 'x',        e 'dunstctl close' )
 	b( 'p',        e 'dunstctl history-pop' )
 	b( 'c',        e 'dunstctl context' )
-	b( 'catchall', smap('reset') )
+	b( 'catchall', hl.dsp.submap('reset') )
 end )
 
 -- Use wtype to paste into things that do not like to obey paste keybinds
@@ -337,22 +401,23 @@ b( 'XF86MonBrightnessUp',   e 'brightnessctl set +5%', { locked = true, repeatin
 b( 'XF86MonBrightnessDown', e 'brightnessctl set 5%-', { locked = true, repeating = true } )
 
 -- Hyprland Controls
-b( m 'x',   hl.dsp.window.close() )
-b( m 'w',   hl.dsp.window.float({ action = 'toggle' }) )
-b( m 'o',   hl.dsp.window.pseudo() )
-b( m 'f',   hl.dsp.window.fullscreen() )
+b( m 'x',         hl.dsp.window.close() )
+b( m 'w',         hl.dsp.window.float({ action = 'toggle' }) )
+b( m 'o',         hl.dsp.window.pseudo() )
+b( m 'f',         hl.dsp.window.fullscreen() )
+-- b( m 'code:691',  align_workspace() )
 b( m 'Tab', function()
 	hl.dispatch( hl.dsp.window.cycle_next() )
 	hl.dispatch( hl.dsp.window.bring_to_top() )
 end )
 
 -- Shutdown Menu
-b( ms 'x', smap('shutdown') )
+b( ms 'x', hl.dsp.submap('shutdown') )
 hl.define_submap( 'shutdown', 'reset', function()
 	b( 'l',        e 'hyprlock' )
 	b( 's',        e 'systemctl suspend' )
-	b( 'x',        e 'command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch "hl.dsp.exit()"' )
-	b( 'catchall', smap('reset') )
+	b( 'x',        e 'uwsm stop' )
+	b( 'catchall', hl.dsp.submap('reset') )
 end )
 
 -- Focus Windows
@@ -421,8 +486,6 @@ wr({
 	},
 	no_focus = true,
 })
-
-wr({ name = 'float', match = { class = 'float' }, float = true })
 
 -- Specific     --
 
@@ -514,14 +577,6 @@ wr({ -- Guild Wars 2
 })
 
 wr({ name = 'helium', match = { class = 'helium' }, opacity = '0.85' })
-
-wr({ -- Kitty Terminal
-	name    = 'kitty',
-	match   = { class = 'kitty' },
-	opacity = '0.8',
-	size    = '{1408, 1026}',
-})
-
 wr({ name = 'steam',  match = { class = 'steam$' }, opacity = '0.85' })
 
 wr({ -- Steam game
