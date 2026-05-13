@@ -20,6 +20,9 @@ g.loaded_zipPlugin = 1
 -- Get the grammars
 o.rtp:append( vim.fn.stdpath('data') .. '/grammars' )
 
+-- Get stubs
+o.rtp:append( vim.fn.stdpath('data') .. '/stubs' )
+
 -- Delay clipboard until UiEnter for startup time
 vim.schedule( function() o.clipboard = 'unnamedplus' end )
 
@@ -397,6 +400,9 @@ vim.lsp.config( 'lua_ls', {
 		Lua = {
 			workspace = {
 				checkThirdParty = false,
+				Library = {
+					vim.fn.stdpath('data') .. '/stubs'
+				}
 			},
 			codeLens = {
 				enable = true,

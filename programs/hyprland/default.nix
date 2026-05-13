@@ -23,6 +23,8 @@
 
     home-manager.users.${sysConfig.user} = { config, ... }: {
 
+        home.file.".local/share/nvim/stubs/hl.meta.lua".source = "${pkgs.hyprland}/share/hypr/stubs/hl.meta.lua";
+
         home.packages = with pkgs; [
             brightnessctl
             cliphist
