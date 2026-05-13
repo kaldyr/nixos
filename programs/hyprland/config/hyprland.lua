@@ -290,13 +290,8 @@ local function float_large()
 	local mon = hl.get_active_monitor()
 
 	local w, h = 1152, 646
-
-	if     mon.height == 1440 then h = 855
-	elseif mon.height == 1504 then h = 880
-	end
-
-	if     mon.width == 3440 then w = 1368
-	elseif mon.width == 2256 then w = 1359
+	if     mon.width == 3440 then w, h = 1152, 855
+	elseif mon.width == 2256 then w, h = 1226, 880
 	end
 
 	return { w, h }
@@ -306,13 +301,8 @@ local function float_small()
 	local mon = hl.get_active_monitor()
 
 	local w, h = 384, 323
-
-	if     mon.height == 1440 then h = 323
-	elseif mon.height == 1504 then h = 318
-	end
-
-	if     mon.width == 3440 then w = 480
-	elseif mon.width == 2256 then w = 485
+	if     mon.width == 3440 then w, h = 480, 323
+	elseif mon.width == 2256 then w, h = 485, 318
 	end
 
 	return { w, h }
