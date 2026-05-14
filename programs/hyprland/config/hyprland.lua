@@ -51,7 +51,7 @@ if hostname == 'espresso' then
 		output = 'HDMI-A-1',
 		mode   = '1920x1080@60',
 		position = 'auto',
-		scale = 1,
+		scale = '1',
 	})
 
 elseif hostname == 'hofud' then
@@ -59,7 +59,7 @@ elseif hostname == 'hofud' then
 		output = 'eDP-1',
 		mode   = '2256x1504@60',
 		position = '0x0',
-		scale = 1.175000,
+		scale = '1.175000',
 	})
 
 elseif hostname == 'mjolnir' then
@@ -67,7 +67,7 @@ elseif hostname == 'mjolnir' then
 		output = 'HDMI-A-1',
 		mode   = '3440x1440@84.97900',
 		position = 'auto',
-		scale = 1,
+		scale = '1',
 		bitdepth = 10,
 		sdrbrightness = 1.2,
 		sdrsaturation = 0.98,
@@ -75,7 +75,7 @@ elseif hostname == 'mjolnir' then
 
 end
 
-hl.monitor({ output = '', mode = 'preferred', position = 'auto', scale = 1 })
+hl.monitor({ output = '', mode = 'preferred', position = 'auto', scale = '1' })
 
 --<------------------
 -- Environment     -->
@@ -97,6 +97,10 @@ local vrr = 0
 if hostname == 'mjolnir' or hostname == 'espresso' then vrr = 1 end
 
 hl.config({
+
+	dwindle = {
+		preserve_split = true,
+	},
 
 	ecosystem = {
 		no_donation_nag = true, -- false
@@ -135,16 +139,6 @@ hl.config({
 })
 
 --<------------------
--- Layout          -->
----------------------
-
-hl.config({
-	dwindle = {
-		preserve_split = true,
-	},
-})
-
---<------------------
 -- Appearance      -->
 ---------------------
 
@@ -157,11 +151,12 @@ hl.config({
 		inactive_opacity      = 0.9, -- 1.0
 		border_part_of_window = true, -- true
 		dim_around            = 0.4, -- 0.4
-		dim_inactive          = false, -- false
+		dim_inactive          = true, -- false
 		dim_modal             = true, -- true
 		dim_special           = 0.2, -- 0.2
+		dim_strength          = 0.15, -- 0.5
 		rounding              = 16, -- 0
-		rounding_power        = 2.0, -- 2.0
+		rounding_power        = 5, -- 2.0
 
 		blur = {
 			enabled            = true, -- true
@@ -169,14 +164,14 @@ hl.config({
 			contrast           = 0.8916, -- 0.8916
 			ignore_opacity     = true, -- true
 			new_optimizations  = true, -- true
-			noise              = 0.0117, -- 0.0117
+			noise              = 0.05, -- 0.0117
 			passes             = 3, -- 1
 			popups             = false, -- false
 			popups_ignorealpha = 0.2, -- 0.2
 			size               = 12, -- 8
 			special            = false, -- false
-			vibrancy           = 0.1696, -- 0.1696
-			vibrancy_darkness  = 0.0, -- 0.0
+			vibrancy           = 0.5, -- 0.1696
+			vibrancy_darkness  = 0.9, -- 0.0
 			xray               = false, -- false
 		},
 
@@ -277,10 +272,8 @@ hl.gesture({
 -- Shorthand for functions
 local b, e = hl.bind, hl.dsp.exec_cmd
 
--- Shorthand for modifiers:  m = meta, s = shift, ms = meta + shift
-local m  = function(key) return 'SUPER + ' .. key end
-local s  = function(key) return 'SHIFT + ' .. key end
-local ms = function(key) return 'SUPER + SHIFT + ' .. key end
+-- Shorthand for modifiers
+local m, s, c, a = 'SUPER + ', 'SHIFT + ', 'CTRL + ', 'ALT + '
 
 local function float_large()
 	local mon = hl.get_active_monitor() or ''
@@ -341,7 +334,7 @@ hl.on( 'keybinds.submap', function(name)
 end )
 
 -- Terminal Launchers
-b( m 'q', hl.dsp.submap('terminal') )
+b( m..'q', hl.dsp.submap('terminal') )
 hl.define_submap( 'terminal', 'reset', function()
 	b( 'b',        e('kitty btop', { opacity = '0.85', float  = true, size = float_large() }) )
 	b( 'c',        e('kitty qalc', { opacity = '0.85', float  = true, size = float_small() }) )
@@ -352,12 +345,12 @@ hl.define_submap( 'terminal', 'reset', function()
 end )
 
 -- Other Launchers
-b( m 'r', e 'fuzzel' )
-b( m 'u', e 'hyprpicker -a' )
-b( m 'm', e 'keepmenu' )
+b( m..'r', e 'fuzzel' )
+b( m..'u', e 'hyprpicker -a' )
+b( m..'m', e 'keepmenu' )
 
 -- Screen Capture
-b( m 'p', hl.dsp.submap('capture') )
+b( m..'p', hl.dsp.submap('capture') )
 hl.define_submap( 'capture', 'reset', function()
 	b( 's',        e 'grim $(xdg-user-dir PICTURES)/Screenshots/$(date +"%Y%m%d%H%M%S.png")' )
 	b( 'a',        e 'slurp | grim -g - - | magick - -shave 1x1 PNG:- | swappy -f -' )
@@ -367,10 +360,10 @@ hl.define_submap( 'capture', 'reset', function()
 end )
 
 -- Play Media
-b( m 'g', e '/nix/hhonfig/scripts/yt-dlp.sh' )
+b( m..'g', e '/nix/hhonfig/scripts/yt-dlp.sh' )
 
 -- Notification Controls
-b( m 'n', hl.dsp.submap('notify') )
+b( m..'n', hl.dsp.submap('notify') )
 hl.define_submap( 'notify', 'reset', function()
 	b( 'x',        e 'dunstctl close' )
 	b( 'p',        e 'dunstctl history-pop' )
@@ -379,15 +372,15 @@ hl.define_submap( 'notify', 'reset', function()
 end )
 
 -- Use wtype to paste into things that do not like to obey paste keybinds
-b( m 'v', e 'wtype $(cliphist list | fuzzel -d | cliphist decode' )
+b( m..'v', e 'wtype $(cliphist list | fuzzel -d | cliphist decode' )
 
 -- Media controls
 b( 'XF86AudioRaiseVolume',    e 'pamixer -i 1',                  { locked = true, repeating = true } )
 b( 'XF86AudioLowerVolume',    e 'pamixer -d 1',                  { locked = true, repeating = true } )
 b( 'XF86AudioMute',           e 'pamixer -t',                    { locked = true } )
-b( s 'XF86AudioRaiseVolume',  e 'pamixer --default-source -i 1', { locked = true, repeating = true } )
-b( s 'XF86AudioLowerVolume',  e 'pamixer --default-source -d 1', { locked = true, repeating = true } )
-b( s 'XF86AudioMute',         e 'pamixer --default-source -t',   { locked = true } )
+b( s..'XF86AudioRaiseVolume', e 'pamixer --default-source -i 1', { locked = true, repeating = true } )
+b( s..'XF86AudioLowerVolume', e 'pamixer --default-source -d 1', { locked = true, repeating = true } )
+b( s..'XF86AudioMute',        e 'pamixer --default-source -t',   { locked = true } )
 b( 'XF86AudioNext',           e 'playerctl next',                { locked = true } )
 b( 'XF86AudioPlay',           e 'playerctl play-pause',          { locked = true } )
 b( 'XF86AudioPause',          e 'playerctl play-pause',          { locked = true } )
@@ -398,18 +391,18 @@ b( 'XF86MonBrightnessUp',   e 'brightnessctl set +5%', { locked = true, repeatin
 b( 'XF86MonBrightnessDown', e 'brightnessctl set 5%-', { locked = true, repeating = true } )
 
 -- Hyprland Controls
-b( m 'x',         hl.dsp.window.close() )
-b( m 'w',         hl.dsp.window.float({ action = 'toggle' }) )
-b( m 'o',         hl.dsp.window.pseudo() )
-b( m 'f',         hl.dsp.window.fullscreen() )
+b( m..'x', hl.dsp.window.close() )
+b( m..'w', hl.dsp.window.float({ action = 'toggle' }) )
+b( m..'o', hl.dsp.window.pseudo() )
+b( m..'f', hl.dsp.window.fullscreen() )
 -- b( m 'code:691',  align_workspace() )
-b( m 'Tab', function()
+b( m..'Tab', function()
 	hl.dispatch( hl.dsp.window.cycle_next() )
 	hl.dispatch( hl.dsp.window.bring_to_top() )
 end )
 
 -- Shutdown Menu
-b( ms 'x', hl.dsp.submap('shutdown') )
+b( m..s..'x', hl.dsp.submap('shutdown') )
 hl.define_submap( 'shutdown', 'reset', function()
 	b( 'l',        e 'hyprlock' )
 	b( 's',        e 'systemctl suspend' )
@@ -419,37 +412,37 @@ hl.define_submap( 'shutdown', 'reset', function()
 end )
 
 -- Focus Windows
-b( m 'h', hl.dsp.focus({ direction = 'l' }) )
-b( m 'j', hl.dsp.focus({ direction = 'd' }) )
-b( m 'k', hl.dsp.focus({ direction = 'u' }) )
-b( m 'l', hl.dsp.focus({ direction = 'r' }) )
+b( m..'h', hl.dsp.focus({ direction = 'l' }) )
+b( m..'j', hl.dsp.focus({ direction = 'd' }) )
+b( m..'k', hl.dsp.focus({ direction = 'u' }) )
+b( m..'l', hl.dsp.focus({ direction = 'r' }) )
 
 -- Move Windows
-b( ms 'h',        hl.dsp.window.move({ direction = 'l' }) )
-b( ms 'j',        hl.dsp.window.move({ direction = 'd' }) )
-b( ms 'k',        hl.dsp.window.move({ direction = 'u' }) )
-b( ms 'l',        hl.dsp.window.move({ direction = 'r' }) )
-b( m 'mouse:272', hl.dsp.window.drag(), { mouse = true } )
+b( m..s..'h',      hl.dsp.window.move({ direction = 'l' }) )
+b( m..s..'j',      hl.dsp.window.move({ direction = 'd' }) )
+b( m..s..'k',      hl.dsp.window.move({ direction = 'u' }) )
+b( m..s..'l',      hl.dsp.window.move({ direction = 'r' }) )
+b( m..'mouse:272', hl.dsp.window.drag(), { mouse = true } )
 
 -- Resize Windows
-b( m 'left',      hl.dsp.window.resize({ x = -24,  y = 0,  relative = true}), { repeating = true } ) -- width of one terminal col
-b( m 'down',      hl.dsp.window.resize({ x = 0,   y = 19,  relative = true}), { repeating = true } ) -- height of one terminal row
-b( m 'up',        hl.dsp.window.resize({ x = 0,   y = -19, relative = true}), { repeating = true } ) -- height of one terminal row
-b( m 'right',     hl.dsp.window.resize({ x = 24,   y = 0,  relative = true}), { repeating = true } ) -- width of one terminal col
-b( ms 'left',     hl.dsp.window.resize({ x = -1,  y = 0,   relative = true}), { repeating = true } )
-b( ms 'down',     hl.dsp.window.resize({ x = 0,   y = 1,   relative = true}), { repeating = true } )
-b( ms 'up',       hl.dsp.window.resize({ x = 0,   y = -1,  relative = true}), { repeating = true } )
-b( ms 'right',    hl.dsp.window.resize({ x = 1,  y = 0,    relative = true}), { repeating = true } )
-b( m 'mouse:273', hl.dsp.window.resize(), { mouse = true } )
+b( m..'left',      hl.dsp.window.resize({ x = -24,  y = 0,  relative = true}), { repeating = true } ) -- width of one terminal col
+b( m..'down',      hl.dsp.window.resize({ x = 0,   y = 19,  relative = true}), { repeating = true } ) -- height of one terminal row
+b( m..'up',        hl.dsp.window.resize({ x = 0,   y = -19, relative = true}), { repeating = true } ) -- height of one terminal row
+b( m..'right',     hl.dsp.window.resize({ x = 24,   y = 0,  relative = true}), { repeating = true } ) -- width of one terminal col
+b( m..s..'left',   hl.dsp.window.resize({ x = -1,  y = 0,   relative = true}), { repeating = true } )
+b( m..s..'down',   hl.dsp.window.resize({ x = 0,   y = 1,   relative = true}), { repeating = true } )
+b( m..s..'up',     hl.dsp.window.resize({ x = 0,   y = -1,  relative = true}), { repeating = true } )
+b( m..s..'right',  hl.dsp.window.resize({ x = 1,  y = 0,    relative = true}), { repeating = true } )
+b( m..'mouse:273', hl.dsp.window.resize(), { mouse = true } )
 
 -- Switch Workspace
-b( m 'code:59',    hl.dsp.focus({ workspace = 'e-1' }) ) -- ,
-b( m 'code:60',    hl.dsp.focus({ workspace = 'e+1' }) ) -- .
-b( m 'mouse_down', hl.dsp.focus({ workspace = 'e-1' }) )
-b( m 'mouse_up',   hl.dsp.focus({ workspace = 'e+1' }) )
+b( m..'code:59',    hl.dsp.focus({ workspace = 'e-1' }) ) -- ,
+b( m..'code:60',    hl.dsp.focus({ workspace = 'e+1' }) ) -- .
+b( m..'mouse_down', hl.dsp.focus({ workspace = 'e-1' }) )
+b( m..'mouse_up',   hl.dsp.focus({ workspace = 'e+1' }) )
 for i = 1, 10 do
-	b( m(i % 10),   hl.dsp.focus({ workspace = i }) )
-	b( ms(i % 10),  hl.dsp.window.move({ workspace = i, follow = false }) )
+	b( m..tostring(i % 10),     hl.dsp.focus({ workspace = i }) )
+	b( m..s..tostring(i % 10),  hl.dsp.window.move({ workspace = i, follow = false }) )
 end
 
 --<------------------
