@@ -380,6 +380,7 @@ b( 'XF86AudioLowerVolume',    e 'pamixer -d 1',                  { locked = true
 b( 'XF86AudioMute',           e 'pamixer -t',                    { locked = true } )
 b( s..'XF86AudioRaiseVolume', e 'pamixer --default-source -i 1', { locked = true, repeating = true } )
 b( s..'XF86AudioLowerVolume', e 'pamixer --default-source -d 1', { locked = true, repeating = true } )
+b( s..'XF86AudioMute',        e 'pamixer --default-source -t',   { locked = true } )
 b( 'XF86AudioMicMute',        e 'pamixer --default-source -t',   { locked = true } )
 b( 'XF86AudioNext',           e 'playerctl next',                { locked = true } )
 b( 'XF86AudioPlay',           e 'playerctl play-pause',          { locked = true } )
@@ -387,10 +388,12 @@ b( 'XF86AudioPause',          e 'playerctl play-pause',          { locked = true
 b( 'XF86AudioPrev',           e 'playerctl previous',            { locked = true } )
 
 -- Brightness
-b( 'XF86MonBrightnessUp',      e 'hyprctl hyprsunset gamma +10',        { locked = true, repeating = true } )
-b( 'XF86MonBrightnessDown',    e 'hyprctl hyprsunset gamma -10',        { locked = true, repeating = true } )
-b( s..'XF86MonBrightnessUp',   e 'hyprctl hyprsunset temperature +500', { locked = true, repeating = true } )
-b( s..'XF86MonBrightnessDown', e 'hyprctl hyprsunset temperature -500', { locked = true, repeating = true } )
+b( 'XF86MonBrightnessUp',      e 'brightnessctl set +5% ; hyprctl hyprsunset gamma +5', { locked = true, repeating = true } )
+b( 'XF86MonBrightnessDown',    e 'brightnessctl set -5% ; hyprctl hyprsunset gamma -5', { locked = true, repeating = true } )
+b( s..'XF86MonBrightnessUp',   e 'hyprctl hyprsunset temperature +500',                 { locked = true, repeating = true } )
+b( s..'XF86MonBrightnessDown', e 'hyprctl hyprsunset temperature -500',                 { locked = true, repeating = true } )
+b( m..'XF86MonBrightnessUp',   e 'hyprctl hyprsunset temperature 3500',                 { locked = true, repeating = true } )
+b( m..'XF86MonBrightnessDown', e 'hyprctl hyprsunset identity',                         { locked = true, repeating = true } )
 
 -- Hyprland Controls
 b( m..'x', hl.dsp.window.close() )
