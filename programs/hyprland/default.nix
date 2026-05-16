@@ -3,12 +3,10 @@
     imports = [
         ../../services/awww.nix
         ../../services/dunst.nix
-        ../../services/gammastep.nix
         ../../services/hypridle.nix
         ../../services/udiskie.nix
         ../feh.nix
         ../fuzzel.nix
-        ../hyprlock.nix
         ../swappy.nix
         ../waybar.nix
     ];
@@ -32,12 +30,15 @@
             easyeffects
             grim
             hyprcursor
+            hyprlock
             hyprpicker
             hyprshutdown
+            hyprsunset
             libnotify
             pavucontrol
             playerctl
             polkit_gnome
+            quickshell
             slurp
             tesseract
             wl-clipboard
@@ -47,10 +48,17 @@
             xwayland
         ];
 
-        services.cliphist.enable = true;
-        services.playerctld.enable = true;
+        services = {
+            cliphist.enable = true;
+            hyprsunset.enable = true;
+            playerctld.enable = true;
+        };
 
-        xdg.configFile."hypr/hyprland.lua".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/hyprland.lua";
+        xdg.configFile = {
+            "hypr/hyprland.lua".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/hyprland.lua";
+            "hypr/hyprlock.conf".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/hyprlock.conf";
+            "hypr/hyprsunset.conf".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/hyprsunset.conf";
+        };
 
         xdg.mimeApps.defaultApplications = lib.mkForce {
             "default-web-browser" = [ "helium.desktop" ];

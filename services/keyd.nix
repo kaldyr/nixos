@@ -39,29 +39,27 @@
 
 				# Extra functionality for 60% keyboard
 				"delete" = "insert";
-				"rightshift" = "print";
 
 			};
 
 			layerRightAlt = {
 
 				# F-keys
-				"1" = "f1";
-				"2" = "f2";
-				"3" = "f3";
-				"4" = "f4";
-				"5" = "f5";
-				"6" = "f6";
-				"7" = "f7";
-				"8" = "f8";
-				"9" = "f9";
-				"0" = "f10";
-				"minus" = "f11";
-				"equal" = "f12";
+				"1" = "brightnessdown";
+				"2" = "brightnessup";
+				"3" = "M-w";
+				"4" = "M-r";
+				"5" = "micmute";
+				"6" = "M-X";
+				"7" = "previoussong";
+				"8" = "playpause";
+				"9" = "nextsong";
+				"0" = "mute";
+				"minus" = "volumedown";
+				"equal" = "volumeup";
 
 				# Extra functionality for 60% keyboard
 				"delete" = "insert";
-				"rightshift" = "print";
 
 			};
 
@@ -69,6 +67,7 @@
 				capslock = "overload(layerCaps, esc)";
 				rightalt = "overload(layerRightAlt, rightalt)";
 				leftcontrol = "layer(control)";
+                rightshift = "print";
 			};
 
 			control = {

@@ -26,6 +26,7 @@
             doCheck = !prev.stdenv.hostPlatform.isi686;
         };
 
+        quickshell = inputs.quickshell.packages.${prev.stdenv.hostPlatform.system}.default;
         zmx = inputs.zmx.packages.${prev.stdenv.hostPlatform.system}.default;
 
     };

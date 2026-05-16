@@ -31,6 +31,10 @@
         # Hyprland
         hyprland.url = "github:hyprwm/Hyprland";
 
+        # Quickshell
+        quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+        quickshell.inputs.nixpkgs.follows = "nixpkgs";
+
         # zmx session persistence
         zmx.url = "github:neurosnap/zmx";
 
