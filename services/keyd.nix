@@ -44,10 +44,10 @@
 				# Media Keys (Mac order to match Nuphy Air60)
 				"1" = "brightnessdown";
 				"2" = "brightnessup";
-				"3" = "M-w";
+				"3" = "M-f";
 				"4" = "M-r";
 				"5" = "micmute";
-				"6" = "M-X";
+				"6" = "M-p";
 				"7" = "previoussong";
 				"8" = "playpause";
 				"9" = "nextsong";
