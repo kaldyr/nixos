@@ -56,17 +56,16 @@
 				"equal" = "volumeup";
 			};
 
-			layerCtrl = {
-                # For Neovim buffer switching
-				comma = "macro([b)";
-				"." = "macro(]b)";
-			};
-
 			main = {
 				capslock = "overload(layerCaps, esc)";
 				rightalt = "overload(layerRightAlt, rightalt)";
-				leftcontrol = "layer(layerCtrl)";
+				leftcontrol = "layer(control)";
                 rightshift = "print";
+			};
+
+			control = {
+				comma = "macro([b)";
+				"." = "macro(]b)";
 			};
 
 		};
