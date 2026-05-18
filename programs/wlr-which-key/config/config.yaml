@@ -3,15 +3,15 @@
 #-----------------------
 # vim:fdm=marker:fdl=0:foldmarker=-->,<--
 
-font: Maple Mono NF 12
+font: Maple Mono NF 11
 background: "#232634"
 border: "#81c8be"
-separator: " ➜ "
-border_width: 2
+separator: "  ➜  "
+border_width: 1
 corner_r: 10
 padding: 15
-rows_per_column: 6
-column_padding: 75
+rows_per_column: 8
+column_padding: 100
 
 anchor: bottom
 margin_bottom: 75
@@ -21,6 +21,64 @@ inhibit_compositor_keyboard_shortcuts: true
 auto_kbd_layout: true
 
 menu:
+#--<--------------------
+# Hyprland Controls   -->
+#-----------------------
+
+  - key: "`"
+    desc: "Hyprland Window Controls"
+    submenu:
+      - key: "h"
+        desc: "Focus Window Left"
+        cmd: hyprctl dispatch "hl.dsp.focus({direction='l'})
+      - key: "j"
+        desc: "Focus Window Down"
+        cmd: hyprctl dispatch "hl.dsp.focus({direction='d'})
+      - key: "k"
+        desc: "Focus Window Up"
+        cmd: hyprctl dispatch "hl.dsp.focus({direction='u'})
+      - key: "l"
+        desc: "Focus Window Right"
+        cmd: hyprctl dispatch "hl.dsp.focus({direction='r'})
+      - key: "H"
+        desc: "Move Window Left"
+        cmd: hyprctl dispatch "hl.dsp.focus({direction='l'})
+      - key: "J"
+        desc: "Move Window Down"
+        cmd: hyprctl dispatch "hl.dsp.focus({direction='d'})
+      - key: "K"
+        desc: "Move Window Up"
+        cmd: hyprctl dispatch "hl.dsp.focus({direction='u'})
+      - key: "L"
+        desc: "Move Window Right"
+        cmd: hyprctl dispatch "hl.dsp.focus({direction='r'})
+      - key: "Left"
+        desc: "Resize relative to Left edge of screen"
+        cmd: hl.dsp.window.resize({ x = -24,  y = 0,  relative = true})
+      - key: "Down"
+        desc: "Resize relative to Bottom edge of screen"
+        cmd: hl.dsp.window.resize({ x = 0,  y = 19,  relative = true})
+      - key: "Up"
+        desc: "Resize relative to Top edge of screen"
+        cmd: hl.dsp.window.resize({ x = 0,  y = -19,  relative = true})
+      - key: "Right"
+        desc: "Resize relative to Right edge of screen"
+        cmd: hl.dsp.window.resize({ x = 24,  y = 0,  relative = true})
+      - key: "Tab"
+        desc: "Switch Windows"
+        cmd: hyprctl dispatch "hl.dsp.window.cycle_next()" && hyprctl dispatch "hl.dsp.window.bring_to_top()"
+      - key: "f"
+        desc: "Toggle Fullscreen"
+        cmd: hyprctl dispatch "hl.dsp.window.fullscreen()"
+      - key: "o"
+        desc: "Toggle Pseudotile"
+        cmd: hyprctl dispatch "hl.dsp.window.pseudo()"
+      - key: "w"
+        desc: "Toggle Floating"
+        cmd: hyprctl dispatch "hl.dsp.window.float({action = 'toggle'})"
+      - key: "x"
+        desc: "Close Window"
+        cmd: hyprctl dispatch "hl.dsp.window.close()"
 
 #--<--------------------
 # Notifications       -->
@@ -104,6 +162,9 @@ menu:
   - key: "e"
     desc: "Fil[e] Manager"
     cmd: kitty --class "float-large" yazi
+  - key: "g"
+    desc: "Play Media in MPV"
+    cmd: /nix/config/scripts/yt-dlp.sh
   - key: "m"
     desc: "Password [M]anager"
     cmd: keepmenu
@@ -118,6 +179,6 @@ menu:
     cmd: hyprpicker -a
   - key: "v"
     desc: "'Paste' using wtype"
-    cmd: wlr-which-key --initial-keys "n"
+    cmd: wtype $(cliphist list | fuzzel -d | cliphist decode)
 
 #--<--------------------
