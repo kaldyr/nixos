@@ -1,0 +1,123 @@
+# Config
+# Settings            -->
+#-----------------------
+# vim:fdm=marker:fdl=0:foldmarker=-->,<--
+
+font: Maple Mono NF 12
+background: "#232634"
+border: "#81c8be"
+separator: " ➜ "
+border_width: 2
+corner_r: 10
+padding: 15
+rows_per_column: 6
+column_padding: 75
+
+anchor: bottom
+margin_bottom: 75
+
+inhibit_compositor_keyboard_shortcuts: true
+
+auto_kbd_layout: true
+
+menu:
+
+#--<--------------------
+# Notifications       -->
+#-----------------------
+
+  - key: "n"
+    desc: "[N]otification Menu"
+    submenu:
+      - key: "x"
+        desc: "Close"
+        cmd: dunstctl close
+      - key: "a"
+        desc: "Close [A]ll"
+        cmd: dunstctl close-all
+      - key: "p"
+        desc: "History [P]op"
+        cmd: dunstctl history-pop
+      - key: "c"
+        desc: "[C]ontext"
+        cmd: dunstctl context
+      - key: "BackSpace"
+        desc: "Previous Menu"
+        cmd: wlr-which-key
+
+#--<--------------------
+# Printscreen Menu    -->
+#-----------------------
+
+  - key: "Print"
+    desc: "[Print]screen Menu"
+    submenu:
+      - key: "s"
+        desc: "Entire [S]creen"
+        cmd: grim $(xdg-user-dir PICTURES)/Screenshots/$(date +"%Y%m%d%H%M%S.png")
+      - key: "a"
+        desc: "Catpure [A]rea"
+        cmd: slurp | grim -g - - | magick - -shave 1x1 PNG:- | swappy -f -
+      - key: "o"
+        desc: "[O]ptical Character Recognition"
+        cmd: slurp | grim -g - - | tesseract - - | wl-copy
+      - key: "r"
+        desc: "[R]ecord Screen"
+        cmd: /nix/config/scripts/screenRecord.sh
+      - key: "BackSpace"
+        desc: "Previous Menu"
+        cmd: wlr-which-key
+
+#--<--------------------
+# Power Menu          -->
+#-----------------------
+
+  - key: "p"
+    desc: "[P]ower Menu"
+    submenu:
+      - key: "l"
+        desc: "[L]ock Screen"
+        cmd: hyprlock
+      - key: "r"
+        desc: "[R]eboot"
+        cmd: reboot
+      - key: "s"
+        desc: "[S]leep"
+        cmd: systemctl suspend
+      - key: "o"
+        desc: "Power [O]ff"
+        cmd: poweroff
+      - key: "BackSpace"
+        desc: "Previous Menu"
+        cmd: wlr-which-key
+
+#--<--------------------
+# Top Level Launchers -->
+#-----------------------
+
+  - key: "b"
+    desc: "[B]top System Monitor"
+    cmd: kitty --class "float-large" btop
+  - key: "c"
+    desc: "[C]alculator"
+    cmd: kitty --class "float-small" qalc
+  - key: "e"
+    desc: "Fil[e] Manager"
+    cmd: kitty --class "float-large" yazi
+  - key: "m"
+    desc: "Password [M]anager"
+    cmd: keepmenu
+  - key: "q"
+    desc: "Terminal"
+    cmd: kitty
+  - key: "r"
+    desc: "[R]un Application"
+    cmd: fuzzel
+  - key: "u"
+    desc: "Color Picker"
+    cmd: hyprpicker -a
+  - key: "v"
+    desc: "'Paste' using wtype"
+    cmd: wlr-which-key --initial-keys "n"
+
+#--<--------------------

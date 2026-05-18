@@ -27,12 +27,13 @@
             # Language servers
             gopls
             htmx-lsp
+            kdePackages.qtdeclarative
             lua-language-server
             marksman
             nixd
             taplo
-            yaml-language-server
             vscode-langservers-extracted
+            yaml-language-server
             # Extras
             python312Packages.pylatexenc
         ];

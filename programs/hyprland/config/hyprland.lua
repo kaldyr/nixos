@@ -275,104 +275,26 @@ local b, e = hl.bind, hl.dsp.exec_cmd
 -- Shorthand for modifiers
 local m, s, c, a = 'SUPER + ', 'SHIFT + ', 'CTRL + ', 'ALT + '
 
-local function float_large()
-	local mon = hl.get_active_monitor() or ''
-
-	local w, h = 1152, 646
-	if     mon.width == 3440 then w, h = 1152, 855
-	elseif mon.width == 2256 then w, h = 1226, 880
-	end
-
-	return { w, h }
-end
-
-local function float_small()
-	local mon = hl.get_active_monitor() or ''
-
-	local w, h = 384, 323
-	if     mon.width == 3440 then w, h = 480, 323
-	elseif mon.width == 2256 then w, h = 485, 318
-	end
-
-	return { w, h }
-end
-
--- Events for creating subgroup notifications
-local submap_timeout = 15000
-hl.on( 'keybinds.submap', function(name)
-	if name == 'capture' then
-		hl.notification.create({
-			text = 'a - Select Area\ns - Entire Screen\no - OCR\nr - Screen Record Gif',
-			duration = submap_timeout,
-			color = 'rgb(81c8be)',
-		})
-		hl.timer( function() hl.dispatch( hl.dsp.submap('reset') ) end, { timeout = submap_timeout, type = 'oneshot' } )
-	elseif name == 'notify' then
-		hl.notification.create({
-			text = 'x - Dismiss\np - Pop Recent\nc - Context',
-			duration = submap_timeout,
-			color = 'rgb(81c8be)',
-		})
-		hl.timer( function() hl.dispatch( hl.dsp.submap('reset') ) end, { timeout = submap_timeout, type = 'oneshot' } )
-	elseif name == 'shutdown' then
-		hl.notification.create({
-			text = 'l - Lock Screen\ns - Suspend\np - Poweroff\nx - Exit Hyprland',
-			duration = submap_timeout,
-			color = 'rgb(81c8be)',
-		})
-		hl.timer( function() hl.dispatch( hl.dsp.submap('reset') ) end, { timeout = submap_timeout, type = 'oneshot' } )
-	elseif name == 'terminal' then
-		hl.notification.create({
-			text = 'Terminal Launcher\nb - Btop\nc - Calculator\nf - Floating Kitty\nq - Kitty\ny - Yazi File Manager',
-			duration = submap_timeout,
-			color = 'rgb(81c8be)',
-		})
-		hl.timer( function() hl.dispatch( hl.dsp.submap('reset') ) end, { timeout = submap_timeout, type = 'oneshot' } )
-	elseif name == '' then
-		hl.dispatch( e 'hyprctl dismissnotify' )
-	end
-end )
-
--- Terminal Launchers
-b( m..'q', hl.dsp.submap('terminal') )
-hl.define_submap( 'terminal', 'reset', function()
-	b( 'b',        e('kitty btop', { opacity = '0.85', float  = true, size = float_large() }) )
-	b( 'c',        e('kitty qalc', { opacity = '0.85', float  = true, size = float_small() }) )
-	b( 'f',        e('kitty',      { opacity = '0.85', float  = true, size = float_large() }) )
-	b( 'q',        e('kitty',      { opacity = '0.85' }) )
-	b( 'y',        e('kitty yazi', { opacity = '0.85', float  = true, size = float_large() }) )
-	b( 'catchall', hl.dsp.submap('reset') )
-end )
-
 -- Other Launchers
+b( m..'b', e 'kitty --class "float-large" btop' )
+b( m..'c', e 'kitty --class "float-small" qalc' )
+b( m..'e', e 'kitty --class "float-large" yazi' )
+b( m..'m', e 'keepmenu' )
+b( m..'q', e 'kitty' )
 b( m..'r', e 'fuzzel' )
 b( m..'u', e 'hyprpicker -a' )
-b( m..'m', e 'keepmenu' )
 
 -- Screen Capture
-b( m..'PRINT', hl.dsp.submap('capture') )
-hl.define_submap( 'capture', 'reset', function()
-	b( 's',        e 'grim $(xdg-user-dir PICTURES)/Screenshots/$(date +"%Y%m%d%H%M%S.png")' )
-	b( 'a',        e 'slurp | grim -g - - | magick - -shave 1x1 PNG:- | swappy -f -' )
-	b( 'o',        e 'slurp | grim -g - - | tesseract - - | wl-copy' )
-	b( 'r',        e '/nix/config/scripts/screenRecord.sh' )
-	b( 'catchall', hl.dsp.submap('reset') )
-end )
+b( m..'PRINT', e 'wlr-which-key --initial-keys "Print"' )
 
 -- Play Media
-b( m..'g', e '/nix/hhonfig/scripts/yt-dlp.sh' )
+b( m..'g', e '/nix/config/scripts/yt-dlp.sh' )
 
 -- Notification Controls
-b( m..'n', hl.dsp.submap('notify') )
-hl.define_submap( 'notify', 'reset', function()
-	b( 'x',        e 'dunstctl close' )
-	b( 'p',        e 'dunstctl history-pop' )
-	b( 'c',        e 'dunstctl context' )
-	b( 'catchall', hl.dsp.submap('reset') )
-end )
+b( m..'n', e 'wlr-which-key --initial-keys "n"' )
 
 -- Use wtype to paste into things that do not like to obey paste keybinds
-b( m..'v', e 'wtype $(cliphist list | fuzzel -d | cliphist decode' )
+b( m..'v', e 'wtype $(cliphist list | fuzzel -d | cliphist decode)' )
 
 -- Media controls
 b( 'XF86AudioRaiseVolume',    e 'pamixer -i 1',                  { locked = true, repeating = true } )
@@ -406,15 +328,11 @@ b( m..'Tab', function()
 	hl.dispatch( hl.dsp.window.bring_to_top() )
 end )
 
--- Shutdown Menu
-b( m..s..'x', hl.dsp.submap('shutdown') )
-hl.define_submap( 'shutdown', 'reset', function()
-	b( 'l',        e 'hyprlock' )
-	b( 's',        e 'systemctl suspend' )
-	b( 'p',        e 'poweroff' )
-	b( 'x',        e 'uwsm stop' )
-	b( 'catchall', hl.dsp.submap('reset') )
-end )
+-- Which Key (Show all the keybinds)
+b( m.."space", e 'wlr-which-key' )
+
+-- Power Menu
+b( m.."p", e 'wlr-which-key --initial-keys "p"' )
 
 -- Focus Windows
 b( m..'h', hl.dsp.focus({ direction = 'l' }) )
@@ -470,6 +388,28 @@ local suppressMaximizeRule = wr({
 })
 suppressMaximizeRule:set_enabled(true)
 
+local function float_large()
+	local mon = hl.get_active_monitor() or ''
+
+	local w, h = 1152, 646
+	if     mon.width == 3440 then w, h = 1152, 855
+	elseif mon.width == 2256 then w, h = 1226, 880
+	end
+
+	return { w, h }
+end
+
+local function float_small()
+	local mon = hl.get_active_monitor() or ''
+
+	local w, h = 384, 323
+	if     mon.width == 3440 then w, h = 480, 323
+	elseif mon.width == 2256 then w, h = 485, 318
+	end
+
+	return { w, h }
+end
+
 wr({
 	name  = 'fix-xwayland-drags',
 	match = {
@@ -481,6 +421,22 @@ wr({
 		pin        = false,
 	},
 	no_focus = true,
+})
+
+wr({
+	name = 'float-large',
+	match = { class = 'float-large' },
+	float = true,
+	opacity = '0.85',
+	size = float_large()
+})
+
+wr({
+	name = 'float-small',
+	match = { class = 'float-small' },
+	float = true,
+	opacity = '0.85',
+	size = float_small()
 })
 
 -- Specific     --

@@ -9,6 +9,7 @@
         ../fuzzel.nix
         ../swappy.nix
         ../waybar.nix
+        ../wlr-which-key
     ];
 
     environment.persistence = lib.mkIf sysConfig.homeImpermanence {
@@ -32,12 +33,12 @@
             hyprcursor
             hyprlock
             hyprpicker
+            hyprpolkitagent
             hyprshutdown
             hyprsunset
             libnotify
             pavucontrol
             playerctl
-            polkit_gnome
             quickshell
             slurp
             tesseract
@@ -110,13 +111,9 @@
 
         config.common.default = "*";
 
-        configPackages = with pkgs; [
-            xdg-desktop-portal-hyprland
-        ];
+        configPackages = with pkgs; [ xdg-desktop-portal-hyprland ];
 
-        extraPortals = with pkgs; [
-            xdg-desktop-portal-hyprland
-        ];
+        extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
 
         wlr.enable = true;
 

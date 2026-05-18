@@ -469,6 +469,17 @@ vim.lsp.config( 'templ', {
 vim.lsp.enable('templ')
 
 --<-------------------------
+-- Qml                    -->
+----------------------------
+
+vim.lsp.config( 'qmlls', {
+	cmd = { 'qmlls' },
+	filetypes = { 'qml' },
+})
+
+vim.lsp.enable('qmlls')
+
+--<-------------------------
 -- Yaml                   -->
 ----------------------------
 
