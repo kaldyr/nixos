@@ -29,8 +29,6 @@
 				"g" = "kpplus";
 				"v" = "kpdot";
 
-                "." = "s";
-
 				# For fast vim arrow movements without exiting insert mode
 				h = "left";
 				j = "down";
@@ -43,8 +41,7 @@
 			};
 
 			layerRightAlt = {
-
-				# F-keys
+				# Media Keys (Mac order to match Nuphy Air60)
 				"1" = "brightnessdown";
 				"2" = "brightnessup";
 				"3" = "M-w";
@@ -57,22 +54,19 @@
 				"0" = "mute";
 				"minus" = "volumedown";
 				"equal" = "volumeup";
+			};
 
-				# Extra functionality for 60% keyboard
-				"delete" = "insert";
-
+			layerCtrl = {
+                # For Neovim buffer switching
+				comma = "macro([b)";
+				"." = "macro(]b)";
 			};
 
 			main = {
 				capslock = "overload(layerCaps, esc)";
 				rightalt = "overload(layerRightAlt, rightalt)";
-				leftcontrol = "layer(control)";
+				leftcontrol = "layer(layerCtrl)";
                 rightshift = "print";
-			};
-
-			control = {
-				comma = "macro([b)";
-				"." = "macro(]b)";
 			};
 
 		};
