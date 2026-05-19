@@ -301,40 +301,42 @@ b( m..'a', function()
 	local ws  = hl.get_workspace( hl.get_active_workspace() or '' )
 	local mon = hl.get_active_monitor()
 
-	-- If you didn't get a monitor or workspace just give up
-	if ws == nil or mon == nil then return end
-
-	-- If there's no need for columns get out
-	if ws.windows < 2 then return end
+	-- Bail if you didn't get a monitor or workspace or no need to sort
+	if ws == nil or mon == nil or ws.windows <2 then return end
 
 	local windows = {}
 	for _, w in ipairs( hl.get_workspace_windows(ws) ) do
 		if not w.floating and not w.hidden then windows[#windows+1] = w end
 	end
-	table.sort( windows, function(i, j) return i.at.x > j.at.x end )
+	-- In order of position ltr
+	table.sort( windows, function(i, j) return i.at.x < j.at.x end )
 
+	--
 	local go = hl.get_config('general.gaps_out')
 	local gi = hl.get_config('general.gaps_in')
-	local space_x = (((mon.width/mon.scale) - go.left - go.right - 2 - ((gi.left + gi.right + 2) * (ws.windows - 1)) ) / ws.windows)
-	local space_y = (mon.height/mon.scale) - go.top - go.bottom - 24
+	local bsize = hl.get_config('general.border_size')
+	local width = ( (mon.width/mon.scale) - go.left - go.right - (bsize * 2) - ((gi.left + gi.right + (bsize * 2)) * (ws.windows - 1)) ) / ws.windows
+	local height = (mon.height/mon.scale) - go.top - go.bottom - 24 -- 24 is waybar height.
+	local focused_id = hl.get_active_window() or ''
 
+	-- [WARN] Only resizing the left-most window works correctly  https://github.com/hyprwm/Hyprland/discussions/14281
 	if ws.windows == 2 then
 		if windows[1].size.x ~= windows[2].size.x then
-			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = math.floor(space_x), y = space_y, relative = false }) )
-			hl.dispatch( hl.dsp.window.resize({ window = windows[2], x = math.floor(space_x), y = space_y, relative = false }) )
+			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = math.floor(width), y = height, relative = false }) )
 		else
-			local focused_id = hl.get_active_window() or ''
-			local inactive_id = windows[2]
-			if focused_id.address == windows[2].address then inactive_id = windows[1] end
-			hl.dispatch( hl.dsp.window.resize({ window = focused_id,  x = math.floor(space_x*2/3), y = space_y, relative = false }) )
-			hl.dispatch( hl.dsp.window.resize({ window = inactive_id, x = math.floor(space_x*4/3), y = space_y, relative = false }) )
+			local newWidth = math.floor( width * 4 / 3 ) - 2 -- [INFO] - 2 is to make window align to terminal col width
+			if focused_id.address == windows[1].address then
+				newWidth = math.floor( width * 2 / 3 ) + 3 -- [INFO] + 3 is to make window align to terminal col width
+			end
+			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = newWidth, y = height, relative = false }) )
 		end
 	elseif ws.windows == 3 then
-		hl.notification.create({ text = 'Before\nL: ' .. windows[1].size.x .. '\nC: ' .. windows[2].size.x .. '\nR: ' .. windows[3].size.x, duration = 10000})
-		hl.dispatch( hl.dsp.window.resize({ window = windows[3], x = math.floor(space_x), y = space_y, relative = false }) )
-		hl.dispatch( hl.dsp.window.resize({ window = windows[2], x = math.floor(space_x), y = space_y, relative = false }) )
-		hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = math.floor(space_x), y = space_y, relative = false }) )
-		hl.notification.create({ text = 'After\nL: ' .. windows[1].size.x .. '\nC: ' .. windows[2].size.x .. '\nR: ' .. windows[3].size.x, duration = 10000})
+		hl.notification.create({ text = 'Start x\n1: ' .. windows[1].at.x .. '\n2: ' .. windows[2].at.x .. '\n3: ' .. windows[3].at.x, duration = 10000 }) -- Debug
+		hl.notification.create({ text = 'Before Size\n1: ' .. windows[1].size.x .. '\n2: ' .. windows[2].size.x .. '\n3: ' .. windows[3].size.x, duration = 10000 }) -- Debug
+		hl.dispatch( hl.dsp.window.resize({ window = windows[3], x = math.ceil(width),  y = height, relative = false }) )
+		hl.dispatch( hl.dsp.window.resize({ window = windows[2], x = math.floor(width), y = height, relative = false }) )
+		hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = math.ceil(width),  y = height, relative = false }) )
+		hl.notification.create({ text = 'After Size\n1: ' .. windows[1].size.x .. '\n2: ' .. windows[2].size.x .. '\n3: ' .. windows[3].size.x, duration = 10000 }) -- Debug
 	end
 
 end )
