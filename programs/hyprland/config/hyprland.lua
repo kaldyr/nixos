@@ -296,6 +296,49 @@ b( m..'n', e 'wlr-which-key --initial-keys "n"' )
 -- Use wtype to paste into things that do not like to obey paste keybinds
 b( m..'v', e 'wtype $(cliphist list | fuzzel -d | cliphist decode)' )
 
+-- Arrange windows into columns for ultrawide monitor
+b( m..'a', function()
+	local ws  = hl.get_workspace( hl.get_active_workspace() or '' )
+	local mon = hl.get_active_monitor()
+
+	-- If you didn't get a monitor or workspace just give up
+	if ws == nil or mon == nil then return end
+
+	-- If there's no need for columns get out
+	if ws.windows < 2 then return end
+
+	local windows = {}
+	for _, w in ipairs( hl.get_workspace_windows(ws) ) do
+		if not w.floating and not w.hidden then windows[#windows+1] = w end
+	end
+	table.sort( windows, function(i, j) return i.at.x > j.at.x end )
+
+	local go = hl.get_config('general.gaps_out')
+	local gi = hl.get_config('general.gaps_in')
+	local space_x = (((mon.width/mon.scale) - go.left - go.right - 2 - ((gi.left + gi.right + 2) * (ws.windows - 1)) ) / ws.windows)
+	local space_y = (mon.height/mon.scale) - go.top - go.bottom - 24
+
+	if ws.windows == 2 then
+		if windows[1].size.x ~= windows[2].size.x then
+			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = math.floor(space_x), y = space_y, relative = false }) )
+			hl.dispatch( hl.dsp.window.resize({ window = windows[2], x = math.floor(space_x), y = space_y, relative = false }) )
+		else
+			local focused_id = hl.get_active_window() or ''
+			local inactive_id = windows[2]
+			if focused_id.address == windows[2].address then inactive_id = windows[1] end
+			hl.dispatch( hl.dsp.window.resize({ window = focused_id,  x = math.floor(space_x*2/3), y = space_y, relative = false }) )
+			hl.dispatch( hl.dsp.window.resize({ window = inactive_id, x = math.floor(space_x*4/3), y = space_y, relative = false }) )
+		end
+	elseif ws.windows == 3 then
+		hl.notification.create({ text = 'Before\nL: ' .. windows[1].size.x .. '\nC: ' .. windows[2].size.x .. '\nR: ' .. windows[3].size.x, duration = 10000})
+		hl.dispatch( hl.dsp.window.resize({ window = windows[3], x = math.floor(space_x), y = space_y, relative = false }) )
+		hl.dispatch( hl.dsp.window.resize({ window = windows[2], x = math.floor(space_x), y = space_y, relative = false }) )
+		hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = math.floor(space_x), y = space_y, relative = false }) )
+		hl.notification.create({ text = 'After\nL: ' .. windows[1].size.x .. '\nC: ' .. windows[2].size.x .. '\nR: ' .. windows[3].size.x, duration = 10000})
+	end
+
+end )
+
 -- Media controls
 b( 'XF86AudioRaiseVolume',    e 'pamixer -i 1',                  { locked = true, repeating = true } )
 b( 'XF86AudioLowerVolume',    e 'pamixer -d 1',                  { locked = true, repeating = true } )
