@@ -304,39 +304,46 @@ b( m..'a', function()
 	-- Bail if you didn't get a monitor or workspace or no need to sort
 	if ws == nil or mon == nil or ws.windows <2 then return end
 
+	local go        = hl.get_config('general.gaps_out')
+	local gi        = hl.get_config('general.gaps_in')
+	local bsize     = hl.get_config('general.border_size')
+
 	local windows = {}
 	for _, w in ipairs( hl.get_workspace_windows(ws) ) do
-		if not w.floating and not w.hidden then windows[#windows+1] = w end
+		-- Ignore floating, hidden, and windows that are not at the top
+		if not w.floating and not w.hidden and w.at.y == ( 24 + go.top + 2 ) then
+			windows[ #windows + 1 ] = w
+		end
 	end
 	-- In order of position ltr
 	table.sort( windows, function(i, j) return i.at.x < j.at.x end )
 
-	--
-	local go = hl.get_config('general.gaps_out')
-	local gi = hl.get_config('general.gaps_in')
-	local bsize = hl.get_config('general.border_size')
-	local width = ( (mon.width/mon.scale) - go.left - go.right - (bsize * 2) - ((gi.left + gi.right + (bsize * 2)) * (ws.windows - 1)) ) / ws.windows
-	local height = (mon.height/mon.scale) - go.top - go.bottom - 24 -- 24 is waybar height.
-	local focused_id = hl.get_active_window() or ''
+	local width   = ( (mon.width/mon.scale) - go.left - go.right - (bsize * 2) - ((gi.left + gi.right + (bsize * 2)) * (#windows - 1)) ) / #windows
+	local focused = hl.get_active_window() or ''
 
 	-- [WARN] Only resizing the left-most window works correctly  https://github.com/hyprwm/Hyprland/discussions/14281
-	if ws.windows == 2 then
+	if #windows == 2 then
 		if windows[1].size.x ~= windows[2].size.x then
-			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = math.floor(width), y = height, relative = false }) )
+			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = math.floor(width), y = windows[1].size.y, relative = false }) )
 		else
+			-- [FIXME] Next 6 lines are temporary to deal with the resize issue.
 			local newWidth = math.floor( width * 4 / 3 ) - 2 -- [INFO] - 2 is to make window align to terminal col width
-			if focused_id.address == windows[1].address then
+			if focused.address == windows[1].address then
 				newWidth = math.floor( width * 2 / 3 ) + 3 -- [INFO] + 3 is to make window align to terminal col width
 			end
-			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = newWidth, y = height, relative = false }) )
+			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = newWidth, y = windows[1].size.y, relative = false }) )
+			-- This is all that's needed when the resize issue is fixed
+			-- hl.dispatch( hl.dsp.window.resize({ window = focused, x = math.floor( width * 4 / 3 ) - 2, y = focused.size.y, relative = false }) )
 		end
-	elseif ws.windows == 3 then
-		hl.notification.create({ text = 'Start x\n1: ' .. windows[1].at.x .. '\n2: ' .. windows[2].at.x .. '\n3: ' .. windows[3].at.x, duration = 10000 }) -- Debug
-		hl.notification.create({ text = 'Before Size\n1: ' .. windows[1].size.x .. '\n2: ' .. windows[2].size.x .. '\n3: ' .. windows[3].size.x, duration = 10000 }) -- Debug
-		hl.dispatch( hl.dsp.window.resize({ window = windows[3], x = math.ceil(width),  y = height, relative = false }) )
-		hl.dispatch( hl.dsp.window.resize({ window = windows[2], x = math.floor(width), y = height, relative = false }) )
-		hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = math.ceil(width),  y = height, relative = false }) )
-		hl.notification.create({ text = 'After Size\n1: ' .. windows[1].size.x .. '\n2: ' .. windows[2].size.x .. '\n3: ' .. windows[3].size.x, duration = 10000 }) -- Debug
+	elseif #windows == 3 then
+		-- [HACK] This is so incredibly jank and windows are not equal size.  Fix when resize issue resolved.
+		if windows[3].size.x > width then
+			hl.dispatch( hl.dsp.window.move({ window = windows[3], direction = 'r' }) )
+		end
+		hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = math.ceil( width ),  y = windows[1].size.y, relative = false }) )
+		-- This is all that's needed when the resize issue is fixed
+		-- hl.dispatch( hl.dsp.window.resize({ window = windows[3], x = math.ceil( width ),  y = windows[3].size.y, relative = false }) )
+		-- hl.dispatch( hl.dsp.window.resize({ window = windows[2], x = math.floor( width ), y = windows[2].size.y, relative = false }) )
 	end
 
 end )
