@@ -35,6 +35,9 @@
         quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
         quickshell.inputs.nixpkgs.follows = "nixpkgs";
 
+        # Yazi file manager
+        yazi.url = "github:sxyazi/yazi";
+
         # zmx session persistence
         zmx.url = "github:neurosnap/zmx";
 

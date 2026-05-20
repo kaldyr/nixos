@@ -304,9 +304,9 @@ b( m..'a', function()
 	-- Bail if you didn't get a monitor or workspace or no need to sort
 	if ws == nil or mon == nil or ws.windows <2 then return end
 
-	local go        = hl.get_config('general.gaps_out')
-	local gi        = hl.get_config('general.gaps_in')
-	local bsize     = hl.get_config('general.border_size')
+	local go    = hl.get_config('general.gaps_out')
+	local gi    = hl.get_config('general.gaps_in')
+	local bsize = hl.get_config('general.border_size')
 
 	local windows = {}
 	for _, w in ipairs( hl.get_workspace_windows(ws) ) do
@@ -328,12 +328,12 @@ b( m..'a', function()
 		else
 			-- [FIXME] Next 6 lines are temporary to deal with the resize issue.
 			local newWidth = math.floor( width * 4 / 3 ) - 2 -- [INFO] - 2 is to make window align to terminal col width
-			if focused.address == windows[1].address then
+			if focused.at.x == windows[1].at.x then
 				newWidth = math.floor( width * 2 / 3 ) + 3 -- [INFO] + 3 is to make window align to terminal col width
 			end
 			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = newWidth, y = windows[1].size.y, relative = false }) )
 			-- This is all that's needed when the resize issue is fixed
-			-- hl.dispatch( hl.dsp.window.resize({ window = focused, x = math.floor( width * 4 / 3 ) - 2, y = focused.size.y, relative = false }) )
+			-- hl.dispatch( hl.dsp.window.resize({ window = focused, x = (math.floor( width * 2 / 3 ) + 3), y = focused.size.y, relative = false }) )
 		end
 	elseif #windows == 3 then
 		-- [HACK] This is so incredibly jank and windows are not equal size.  Fix when resize issue resolved.

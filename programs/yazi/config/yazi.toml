@@ -51,10 +51,10 @@ rules = [
 	{ mime = "inode/directory", use = [ "dev", "play", "foldersize" ] },
 	{ mime = "text/*", use = [ "edit", "exif" ] },
 	{ mime = "video/*", use = [ "play", "exif", "exifedit" ] },
-	{ name = "*.od{g,p,s,t}", use = [ "office", "exif" ] },
-	{ name = "*.doc{,x}", use = [ "office", "exif" ] },
-	{ name = "*.ppt{,x}", use = [ "office", "exif" ] },
-	{ name = "*.xls{,x}", use = [ "office", "exif" ] },
+	{ url  = "*.od{g,p,s,t}", use = [ "office", "exif" ] },
+	{ url  = "*.doc{,x}", use = [ "office", "exif" ] },
+	{ url  = "*.ppt{,x}", use = [ "office", "exif" ] },
+	{ url  = "*.xls{,x}", use = [ "office", "exif" ] },
 	{ mime = "*", use = [ "edit", "open", "exif" ] },
 ]
 

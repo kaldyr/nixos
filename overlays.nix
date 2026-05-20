@@ -7,7 +7,7 @@
         # PACKAGE = inputs.NIXPKGS-VERSION.legacyPackages.${prev.stdenv.hostPlatform.system}.PACKAGE;
 
         discord = (prev.discord.override {
-            withOpenASAR = true;
+            # withOpenASAR = true;
             withVencord = true;
         }).overrideAttrs (prevAttrs: {
             desktopItem = prevAttrs.desktopItem.override (prevDesktopAttrs: {
@@ -27,6 +27,7 @@
         };
 
         quickshell = inputs.quickshell.packages.${prev.stdenv.hostPlatform.system}.default;
+        yazi = inputs.yazi.packages.${prev.stdenv.hostPlatform.system}.yazi;
         zmx = inputs.zmx.packages.${prev.stdenv.hostPlatform.system}.default;
 
     };
