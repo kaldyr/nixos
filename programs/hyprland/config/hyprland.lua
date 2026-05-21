@@ -323,20 +323,21 @@ b( m..'a', function()
 
 	-- [WARN] Only resizing the left-most window works correctly  https://github.com/hyprwm/Hyprland/discussions/14281
 	if #windows == 2 then
+		-- Toggle between 50/50 and ~33/67
 		if windows[1].size.x ~= windows[2].size.x then
 			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = math.floor(width), y = windows[1].size.y, relative = false }) )
 		else
-			-- [FIXME] Next 6 lines are temporary to deal with the resize issue.
+			-- [HACK] Temporary to deal with the resize issue.
 			local newWidth = math.floor( width * 4 / 3 ) - 2 -- [INFO] - 2 is to make window align to terminal col width
 			if focused.at.x == windows[1].at.x then
 				newWidth = math.floor( width * 2 / 3 ) + 3 -- [INFO] + 3 is to make window align to terminal col width
 			end
 			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = newWidth, y = windows[1].size.y, relative = false }) )
 			-- This is all that's needed when the resize issue is fixed
-			-- hl.dispatch( hl.dsp.window.resize({ window = focused, x = (math.floor( width * 2 / 3 ) + 3), y = focused.size.y, relative = false }) )
+			-- hl.dispatch( hl.dsp.window.resize({ x = (math.floor( width * 2 / 3 ) + 3), y = focused.size.y, relative = false }) )
 		end
 	elseif #windows == 3 then
-		-- [HACK] This is so incredibly jank and windows are not equal size.  Fix when resize issue resolved.
+		-- [HACK] Windows are not equal size, but it's close enough for now.  Fix when resize issue resolved.
 		if windows[3].size.x > width then
 			hl.dispatch( hl.dsp.window.move({ window = windows[3], direction = 'r' }) )
 		end
