@@ -297,6 +297,7 @@ b( m..'n', e 'wlr-which-key --initial-keys "n"' )
 b( m..'v', e 'wtype $(cliphist list | fuzzel -d | cliphist decode)' )
 
 -- Arrange windows into columns for ultrawide monitor
+
 b( m..'a', function()
 	local ws  = hl.get_workspace( hl.get_active_workspace() or '' )
 	local mon = hl.get_active_monitor()
@@ -311,7 +312,7 @@ b( m..'a', function()
 	local windows = {}
 	for _, w in ipairs( hl.get_workspace_windows(ws) ) do
 		-- Ignore floating, hidden, and windows that are not at the top
-		if not w.floating and not w.hidden and w.at.y == ( 24 + go.top + 2 ) then
+		if not w.floating and not w.hidden and w.at.y == ( math.floor(24*mon.scale) + go.top + 2 ) then
 			windows[ #windows + 1 ] = w
 		end
 	end
@@ -325,18 +326,16 @@ b( m..'a', function()
 	if #windows == 2 then
 		-- Toggle between 50/50 and ~33/67
 		if windows[1].size.x ~= windows[2].size.x then
-			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = math.floor(width), y = windows[1].size.y, relative = false }) )
+			hl.dispatch( hl.dsp.layout( "splitratio 1.0 exact" ) )
 		else
-			-- [HACK] Temporary to deal with the resize issue.
-			local newWidth = math.floor( width * 4 / 3 ) - 2 -- [INFO] - 2 is to make window align to terminal col width
 			if focused.at.x == windows[1].at.x then
-				newWidth = math.floor( width * 2 / 3 ) + 3 -- [INFO] + 3 is to make window align to terminal col width
+				hl.dispatch( hl.dsp.layout( "splitratio 0.67 exact" ) )
+			else
+				hl.dispatch( hl.dsp.layout( "splitratio 1.33 exact" ) )
 			end
-			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = newWidth, y = windows[1].size.y, relative = false }) )
-			-- This is all that's needed when the resize issue is fixed
-			-- hl.dispatch( hl.dsp.window.resize({ x = (math.floor( width * 2 / 3 ) + 3), y = focused.size.y, relative = false }) )
 		end
 	elseif #windows == 3 then
+		hl.dispatch( hl.dsp.layout( "splitratio 0.67 exact" ) )
 		-- [HACK] Windows are not equal size, but it's close enough for now.  Fix when resize issue resolved.
 		if windows[3].size.x > width then
 			hl.dispatch( hl.dsp.window.move({ window = windows[3], direction = 'r' }) )
@@ -420,6 +419,24 @@ for i = 1, 10 do
 	b( m..tostring(i % 10),     hl.dsp.focus({ workspace = i }) )
 	b( m..s..tostring(i % 10),  hl.dsp.window.move({ workspace = i, follow = false }) )
 end
+
+-- Adjust layout
+b( m..'s', hl.dsp.layout("togglesplit") )
+
+--<------------------
+-- Custom Layouts  -->
+---------------------
+
+hl.layout.register("columns", {
+	recalculate = function(ctx)
+		local n = #ctx.targets
+		if n == 0 then return end
+
+		for i, target in ipairs(ctx.targets) do
+			target:place(ctx:column(i, n))
+		end
+	end,
+})
 
 --<------------------
 -- Workspace Rules -->
