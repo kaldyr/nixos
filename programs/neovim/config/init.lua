@@ -759,10 +759,12 @@ vim.schedule( function()
 
 	require('mini.hipatterns').setup({
 		highlighters = {
-			fixme = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
-			hack = { pattern = '%f[%w]()HACK()%f[%W]', group = 'MiniHipatternsHack' },
-			todo = { pattern = '%f[%w]()TODO()%f[%W]', group = 'MiniHipatternsTodo' },
-			note = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
+			fixme = { pattern = '%[FIXME%]', group = 'MiniHipatternsFixme' }, -- [FIXME]
+			warn  = { pattern = '%[WARN%]',  group = 'MiniHipatternsFixme' }, -- [WARN]
+			hack  = { pattern = '%[HACK%]',  group = 'MiniHipatternsHack' },  -- [HACK]
+			todo  = { pattern = '%[TODO%]',  group = 'MiniHipatternsTodo' },  -- [TODO]
+			note  = { pattern = '%[NOTE%]',  group = 'MiniHipatternsNote' },  -- [NOTE]
+			info  = { pattern = '%[INFO%]',  group = 'MiniHipatternsNote' },  -- [INFO]
 			hex_color = require('mini.hipatterns').gen_highlighter.hex_color()
 		}
 	})
