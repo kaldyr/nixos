@@ -757,6 +757,28 @@ vim.schedule( function() require('mini.ai').setup() end )
 
 vim.schedule( function()
 
+	local frappe = require('catppuccin.palettes').get_palette('frappe')
+	vim.api.nvim_set_hl(0, 'MiniHipatternsFixme', {
+		fg = frappe.red,
+		bg = frappe.base,
+		bold = true,
+	})
+	vim.api.nvim_set_hl(0, 'MiniHipatternsHack', {
+		fg = frappe.yellow,
+		bg = frappe.base,
+		bold = true,
+	})
+	vim.api.nvim_set_hl(0, 'MiniHipatternsTodo', {
+		fg = frappe.teal,
+		bg = frappe.base,
+		bold = true,
+	})
+	vim.api.nvim_set_hl(0, 'MiniHipatternsNote', {
+		fg = frappe.sapphire,
+		bg = frappe.base,
+		bold = true,
+	})
+
 	require('mini.hipatterns').setup({
 		highlighters = {
 			fixme = { pattern = '%[FIXME%]', group = 'MiniHipatternsFixme' }, -- [FIXME]
