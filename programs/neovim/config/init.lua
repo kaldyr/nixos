@@ -758,19 +758,23 @@ vim.schedule( function() require('mini.ai').setup() end )
 vim.schedule( function()
 
 	local frappe = require('catppuccin.palettes').get_palette('frappe')
-	vim.api.nvim_set_hl(0, 'MiniHipatternsFixme', { bg = frappe.base, bold = true, fg = frappe.red })
-	vim.api.nvim_set_hl(0, 'MiniHipatternsHack',  { bg = frappe.base, bold = true, fg = frappe.yellow })
-	vim.api.nvim_set_hl(0, 'MiniHipatternsTodo',  { bg = frappe.base, bold = true, fg = frappe.teal })
-	vim.api.nvim_set_hl(0, 'MiniHipatternsNote',  { bg = frappe.base, bold = true, fg = frappe.sapphire })
+	vim.api.nvim_set_hl(0, 'MiniHipatternsFixme',{ bold = true, bg = frappe.base, fg = frappe.red })
+	vim.api.nvim_set_hl(0, 'MiniHipatternsWarn', { bold = true, bg = frappe.base, fg = frappe.maroon })
+	vim.api.nvim_set_hl(0, 'MiniHipatternsHack', { bold = true, bg = frappe.base, fg = frappe.peach })
+	vim.api.nvim_set_hl(0, 'MiniHipatternsInfo', { bold = true, bg = frappe.base, fg = frappe.yellow })
+	vim.api.nvim_set_hl(0, 'MiniHipatternsTodo', { bold = true, bg = frappe.base, fg = frappe.teal })
+	vim.api.nvim_set_hl(0, 'MiniHipatternsNote', { bold = true, bg = frappe.base, fg = frappe.sapphire })
+	vim.api.nvim_set_hl(0, 'MiniHipatternsPerf', { bold = true, bg = frappe.base, fg = frappe.mauve })
 
 	require('mini.hipatterns').setup({
 		highlighters = {
-			fixme = { pattern = '%[FIXME%]', group = 'MiniHipatternsFixme' }, -- [FIXME]
-			warn  = { pattern = '%[WARN%]',  group = 'MiniHipatternsFixme' }, -- [WARN]
-			hack  = { pattern = '%[HACK%]',  group = 'MiniHipatternsHack' },  -- [HACK]
-			todo  = { pattern = '%[TODO%]',  group = 'MiniHipatternsTodo' },  -- [TODO]
-			note  = { pattern = '%[NOTE%]',  group = 'MiniHipatternsNote' },  -- [NOTE]
-			info  = { pattern = '%[INFO%]',  group = 'MiniHipatternsNote' },  -- [INFO]
+			fixme     = { pattern = '%[FIXME%]', group = 'MiniHipatternsFixme' }, -- [FIXME]
+			warn      = { pattern = '%[WARN%]',  group = 'MiniHipatternsWarn' },  -- [WARN]
+			hack      = { pattern = '%[HACK%]',  group = 'MiniHipatternsHack' },  -- [HACK]
+			info      = { pattern = '%[INFO%]',  group = 'MiniHipatternsInfo' },  -- [INFO]
+			todo      = { pattern = '%[TODO%]',  group = 'MiniHipatternsTodo' },  -- [TODO]
+			note      = { pattern = '%[NOTE%]',  group = 'MiniHipatternsNote' },  -- [NOTE] [TASK]
+			perf      = { pattern = '%[PERF%]',  group = 'MiniHipatternsOptim' }, -- [PERF] [BUG]
 			hex_color = require('mini.hipatterns').gen_highlighter.hex_color()
 		}
 	})
