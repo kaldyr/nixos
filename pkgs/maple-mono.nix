@@ -47,12 +47,15 @@
         "BUG"
         "FIXME"
         "HACK"
+        "IDEA"
         "INFO"
         "NOTE"
+        "OPTIM"
         "PERF"
         "TASK"
         "TODO"
         "WARN"
+        "WIP"
     ],
     # Remove alt pill syntax (`todo))`)
     disableAltPill ? true,
@@ -197,9 +200,9 @@ in
             mkdir -p $sourceRoot/source/cn/static
             ${lib.getExe unzip} ${cnBaseStatic} -d $sourceRoot/source/cn/static
         ''}
-        cp ${../scripts/patch_maple.hy} $sourceRoot/patch_maple.hy
+        cp ${../scripts/patch_maple.py} $sourceRoot/patch_maple.py
         pushd $sourceRoot
-        ${pythonEnv}/bin/hy patch_maple.hy \
+        ${pythonEnv}/bin/hy patch_maple.py \
             ${lib.escapeShellArg (lib.concatStringsSep "," extraEscapeChars)} \
             ${lib.escapeShellArg (lib.concatStringsSep "," pillKeywords)} \
             ${if disableAltPill then "1" else "0"}
@@ -220,7 +223,7 @@ in
         in # bash
         ''
             runHook preBuild
-            python build.py ${featFlag} ${styleFlag} --apply-fea-file --${no enableHinting}hinted --${no enableLigature}liga --${no enableNerdFont}nf --${no enableCN}cn
+            python build.py ${featFlag} ${styleFlag} --apply-fea-file --${no enableHinting}hinted --${no enableLigature}liga --${no enableNerdFont}nf --${no enableCN}cn --ttf-only
             runHook postBuild
         '';
 
