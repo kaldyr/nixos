@@ -31,6 +31,7 @@
             lua-language-server
             marksman
             nixd
+            python313Packages.python-lsp-server
             taplo
             vscode-langservers-extracted
             yaml-language-server

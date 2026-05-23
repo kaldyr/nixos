@@ -458,6 +458,17 @@ vim.lsp.config( 'nixd', {
 vim.lsp.enable('nixd')
 
 --<-------------------------
+-- Python                 -->
+----------------------------
+
+vim.lsp.config( 'pylsp', {
+	cmd = { 'pylsp' },
+	filetypes = { 'python' },
+})
+
+vim.lsp.enable('pylsp')
+
+--<-------------------------
 -- Templ                  -->
 ----------------------------
 
@@ -768,13 +779,13 @@ vim.schedule( function()
 
 	require('mini.hipatterns').setup({
 		highlighters = {
-			fixme     = { pattern = '%[FIXME%]', group = 'MiniHipatternsFixme' }, -- [FIXME]
-			warn      = { pattern = '%[WARN%]',  group = 'MiniHipatternsWarn' },  -- [WARN]
-			hack      = { pattern = '%[HACK%]',  group = 'MiniHipatternsHack' },  -- [HACK]
-			info      = { pattern = '%[INFO%]',  group = 'MiniHipatternsInfo' },  -- [INFO]
-			todo      = { pattern = '%[TODO%]',  group = 'MiniHipatternsTodo' },  -- [TODO]
-			note      = { pattern = '%[NOTE%]',  group = 'MiniHipatternsNote' },  -- [NOTE] [TASK]
-			perf      = { pattern = '%[PERF%]',  group = 'MiniHipatternsOptim' }, -- [PERF] [BUG]
+			fixme     = { pattern = '%[FIXME%]', group = 'MiniHipatternsFixme' },
+			warn      = { pattern = '%[WARN%]',  group = 'MiniHipatternsWarn' },
+			hack      = { pattern = '%[HACK%]',  group = 'MiniHipatternsHack' },
+			info      = { pattern = '%[INFO%]',  group = 'MiniHipatternsInfo' },
+			todo      = { pattern = '%[TODO%]',  group = 'MiniHipatternsTodo' },
+			note      = { pattern = '%[NOTE%]',  group = 'MiniHipatternsNote' },
+			perf      = { pattern = '%[PERF%]',  group = 'MiniHipatternsOptim' },
 			hex_color = require('mini.hipatterns').gen_highlighter.hex_color()
 		}
 	})
