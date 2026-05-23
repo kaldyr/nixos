@@ -22,7 +22,6 @@
 
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
-    nixpkgs.config.allowUnfree = true;
 
     programs = {
         dconf.enable = true;

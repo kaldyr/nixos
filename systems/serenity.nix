@@ -49,7 +49,6 @@
 
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
-    nixpkgs.config.allowUnfree = true;
     time.timeZone = "America/Los_Angeles";
 
 }

@@ -61,7 +61,6 @@
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
     networking.firewall.allowedUDPPortRanges = [ { from = 1000; to = 1005; } ];
-    nixpkgs.config.allowUnfree = true;
 
     # networking = {
     #     bridges."br0".interfaces = [ "enp1s0" ];

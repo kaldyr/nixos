@@ -123,6 +123,8 @@
 
     };
 
+    nixpkgs.config.allowUnfree = true;
+
     programs = {
 
         fuse.userAllowOther = true;
