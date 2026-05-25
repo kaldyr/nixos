@@ -573,10 +573,11 @@ wr({ -- System Tray Icon for Wine Applications
 	match       = { class = '^(explorer.exe)$' },
 	border_size = 1,
 	float       = true,
-	move        = '{0, 26}',
+	move        = '{0, 0}',
 	no_blur     = false,
-	no_shadow   = false,
+	no_shadow   = true,
 	opaque      = true,
+	rounding    = 10,
 	size        = '{20, 20}',
 })
 
