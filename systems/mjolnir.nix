@@ -72,7 +72,10 @@
     #     nameservers = [ "10.0.0.1" "9.9.9.9" ];
     # };
 
-	services.keyd.keyboards.default.settings.main.esc = "`";
+	services.keyd.keyboards.default.settings.main = {
+        esc = "`";
+        rightshift = "print";
+    };
 
     time.timeZone = "America/Los_Angeles";
 

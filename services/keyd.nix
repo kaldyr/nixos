@@ -60,7 +60,6 @@
 				capslock = "overload(layerCaps, esc)";
 				rightalt = "overload(layerRightAlt, rightalt)";
 				leftcontrol = "layer(control)";
-                rightshift = "print";
 			};
 
 			control = {
