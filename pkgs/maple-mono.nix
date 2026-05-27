@@ -11,7 +11,7 @@
     enableCN ? false,
     enableHinting ? true,
     enableLigature ? true,
-    # Frozen OpenType features (e.g. cvXX, ssXX)
+    # Frozen OpenType features
     features ? [
         "calt"
         "cv02"
@@ -28,7 +28,7 @@
         "ss11"
         "zero"
     ],
-    # Glyph names for characters that trigger thinned backslash (e.g. "one" for \1)
+    # Glyph names for characters that trigger thinned backslash
     extraEscapeChars ? [
         "zero"
         "one"
@@ -41,20 +41,26 @@
         "eight"
         "nine"
     ],
-    # Keywords to turn into pills (e.g. `["TASK" "DONE"]`)
-    # Automatically mapped to tag styles based on length (4, 5, or 7).
+    # Keywords to turn into pills
     pillKeywords ? [
         "BUG"
+        "CRITICAL"
+        "DEBUG"
+        "ERROR"
+        "FATAL"
         "FIXME"
         "HACK"
         "IDEA"
         "INFO"
+        "MARK"
         "NOTE"
         "OPTIM"
         "PERF"
         "TASK"
         "TODO"
+        "TRACE"
         "WARN"
+        "WARNING"
         "WIP"
     ],
     # Remove alt pill syntax (`todo))`)
@@ -202,7 +208,7 @@ in
         ''}
         cp ${../scripts/patch_maple.py} $sourceRoot/patch_maple.py
         pushd $sourceRoot
-        ${pythonEnv}/bin/hy patch_maple.py \
+        ${pythonEnv}/bin/python3 patch_maple.py \
             ${lib.escapeShellArg (lib.concatStringsSep "," extraEscapeChars)} \
             ${lib.escapeShellArg (lib.concatStringsSep "," pillKeywords)} \
             ${if disableAltPill then "1" else "0"}
@@ -237,6 +243,8 @@ in
                 -exec install -Dm444 -t "$out/share/fonts/truetype" {} \;
             find "fonts/${outDir}" -maxdepth 1 -type f -name '*.otf' \
                 -exec install -Dm444 -t "$out/share/fonts/opentype" {} \;
+
+            cp patch.log $out/share
 
             runHook postInstall
         '';
