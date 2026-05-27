@@ -327,6 +327,7 @@ b( m..'a', function()
 	if #windows == 2 then
 		-- Toggle between 50/50 and ~33/67
 		if windows[1].size.x ~= windows[2].size.x then
+			-- if focused.at.x == windows[1].at.x then
 			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = math.floor(width), y = windows[1].size.y, relative = false }) )
 		else
 			-- [HACK] Temporary to deal with the resize issue.
@@ -403,14 +404,14 @@ b( m..s..'l',      hl.dsp.window.move({ direction = 'r' }) )
 b( m..'mouse:272', hl.dsp.window.drag(), { mouse = true } )
 
 -- Resize Windows
-b( m..'left',      hl.dsp.window.resize({ x = -24,  y = 0,  relative = true}), { repeating = true } ) -- width of one terminal col
-b( m..'down',      hl.dsp.window.resize({ x = 0,   y = 19,  relative = true}), { repeating = true } ) -- height of one terminal row
-b( m..'up',        hl.dsp.window.resize({ x = 0,   y = -19, relative = true}), { repeating = true } ) -- height of one terminal row
-b( m..'right',     hl.dsp.window.resize({ x = 24,   y = 0,  relative = true}), { repeating = true } ) -- width of one terminal col
-b( m..s..'left',   hl.dsp.window.resize({ x = -1,  y = 0,   relative = true}), { repeating = true } )
-b( m..s..'down',   hl.dsp.window.resize({ x = 0,   y = 1,   relative = true}), { repeating = true } )
-b( m..s..'up',     hl.dsp.window.resize({ x = 0,   y = -1,  relative = true}), { repeating = true } )
-b( m..s..'right',  hl.dsp.window.resize({ x = 1,  y = 0,    relative = true}), { repeating = true } )
+b( m..'left',      hl.dsp.window.resize( { x = -24, y = 0,   relative = true}), { repeating = true } ) -- width of one terminal col
+b( m..'down',      hl.dsp.window.resize( { x = 0,   y = 19,  relative = true}), { repeating = true } ) -- height of one terminal row
+b( m..'up',        hl.dsp.window.resize( { x = 0,   y = -19, relative = true}), { repeating = true } ) -- height of one terminal row
+b( m..'right',     hl.dsp.window.resize( { x = 24,  y = 0,   relative = true}), { repeating = true } ) -- width of one terminal col
+b( m..s..'left',   hl.dsp.window.resize( { x = -1,  y = 0,   relative = true}), { repeating = true } )
+b( m..s..'down',   hl.dsp.window.resize( { x = 0,   y = 1,   relative = true}), { repeating = true } )
+b( m..s..'up',     hl.dsp.window.resize( { x = 0,   y = -1,  relative = true}), { repeating = true } )
+b( m..s..'right',  hl.dsp.window.resize( { x = 1,   y = 0,   relative = true}), { repeating = true } )
 b( m..'mouse:273', hl.dsp.window.resize(), { mouse = true } )
 
 -- Switch Workspace
@@ -422,6 +423,16 @@ for i = 1, 10 do
 	b( m..tostring(i % 10),     hl.dsp.focus({ workspace = i }) )
 	b( m..s..tostring(i % 10),  hl.dsp.window.move({ workspace = i, follow = false }) )
 end
+
+-- General mouse
+b( s..'mouse_up', function()
+	hl.dispatch( hl.dsp.send_key_state({ key = 'mouse_right', state = 'down', mods = '' }) )
+	hl.dispatch( hl.dsp.send_key_state({ key = 'mouse_right', state = 'up',   mods = '' }) )
+end )
+b( s..'mouse_down', function()
+	hl.dispatch( hl.dsp.send_key_state({ key = 'mouse_left', state = 'down', mods = '' }) )
+	hl.dispatch( hl.dsp.send_key_state({ key = 'mouse_left', state = 'up',   mods = '' }) )
+end )
 
 -- Adjust layout
 b( m..'s', hl.dsp.layout("togglesplit") )
