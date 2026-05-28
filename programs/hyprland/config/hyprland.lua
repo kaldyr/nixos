@@ -276,8 +276,8 @@ local b, e = hl.bind, hl.dsp.exec_cmd
 local m, s, c, a = 'SUPER + ', 'SHIFT + ', 'CTRL + ', 'ALT + '
 
 -- Other Launchers
-b( m..'b',    e 'kitty --class "float-large" btop' )
 b( m..'c',    e 'kitty --class "float-small" qalc' )
+b( m..'b',    e 'kitty --class "float-large" btop' )
 b( m..'e',    e 'kitty --class "float-large" yazi' )
 b( m..'m',    e 'keepmenu' )
 b( m..'q',    e 'kitty' )
@@ -406,14 +406,7 @@ b( m..s..'l',      hl.dsp.window.move({ direction = 'r' }) )
 b( m..'mouse:272', hl.dsp.window.drag(), { mouse = true } )
 
 -- Resize Windows
-b( m..'left',      hl.dsp.window.resize( { x = -24, y = 0,   relative = true}), { repeating = true } ) -- width of one terminal col
-b( m..'down',      hl.dsp.window.resize( { x = 0,   y = 19,  relative = true}), { repeating = true } ) -- height of one terminal row
-b( m..'up',        hl.dsp.window.resize( { x = 0,   y = -19, relative = true}), { repeating = true } ) -- height of one terminal row
-b( m..'right',     hl.dsp.window.resize( { x = 24,  y = 0,   relative = true}), { repeating = true } ) -- width of one terminal col
-b( m..s..'left',   hl.dsp.window.resize( { x = -1,  y = 0,   relative = true}), { repeating = true } )
-b( m..s..'down',   hl.dsp.window.resize( { x = 0,   y = 1,   relative = true}), { repeating = true } )
-b( m..s..'up',     hl.dsp.window.resize( { x = 0,   y = -1,  relative = true}), { repeating = true } )
-b( m..s..'right',  hl.dsp.window.resize( { x = 1,   y = 0,   relative = true}), { repeating = true } )
+b( m..s..'r',      e 'wlr-which-key --initial-keys "R"' )
 b( m..'mouse:273', hl.dsp.window.resize(), { mouse = true } )
 
 -- Switch Workspace
@@ -654,6 +647,12 @@ wr({
 	match = { class = '.*telegram.*' },
 	opacity = '0.85',
 	size = win_large_size()
+})
+
+wr({
+	name = 'wlr-which-key',
+	match = { class = 'wlr-which-key' },
+	opacity = '0.85',
 })
 
 --<------------------

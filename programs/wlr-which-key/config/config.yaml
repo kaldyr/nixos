@@ -4,7 +4,7 @@
 # vim:fdm=marker:fdl=0:foldmarker=-->,<--
 
 font: Maple Mono NF 11
-background: "#232634"
+background: "#232634d8"
 border: "#81c8be"
 separator: "  ➜  "
 border_width: 1
@@ -52,18 +52,6 @@ menu:
       - key: "L"
         desc: "Move Window Right"
         cmd: hyprctl dispatch "hl.dsp.focus({direction='r'})
-      - key: "Left"
-        desc: "Resize relative to Left edge of screen"
-        cmd: hl.dsp.window.resize({ x = -24,  y = 0,  relative = true})
-      - key: "Down"
-        desc: "Resize relative to Bottom edge of screen"
-        cmd: hl.dsp.window.resize({ x = 0,  y = 19,  relative = true})
-      - key: "Up"
-        desc: "Resize relative to Top edge of screen"
-        cmd: hl.dsp.window.resize({ x = 0,  y = -19,  relative = true})
-      - key: "Right"
-        desc: "Resize relative to Right edge of screen"
-        cmd: hl.dsp.window.resize({ x = 24,  y = 0,  relative = true})
       - key: "Tab"
         desc: "Switch Windows"
         cmd: hyprctl dispatch "hl.dsp.window.cycle_next()" && hyprctl dispatch "hl.dsp.window.bring_to_top()"
@@ -79,6 +67,62 @@ menu:
       - key: "x"
         desc: "Close Window"
         cmd: hyprctl dispatch "hl.dsp.window.close()"
+
+#--<--------------------
+# Resize Menu         -->
+#-----------------------
+
+  - key: "R"
+    desc: "[R]esize Menu"
+    submenu:
+    - key: ["Left", "h"]
+      desc: "Width  ---"
+      cmd: hyprctl dispatch "hl.dsp.window.resize({x=-240, y=0, relative=true})"
+      keep_open: true
+    - key: ["Down", "j"]
+      desc: "Height ---"
+      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=-190, relative=true})"
+      keep_open: true
+    - key: ["Up", "k"]
+      desc: "Height +++"
+      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=190, relative=true})"
+      keep_open: true
+    - key: ["Right", "l"]
+      desc: "Width  +++"
+      cmd: hyprctl dispatch "hl.dsp.window.resize({x=240, y=0, relative=true})"
+      keep_open: true
+    - key: ["Alt+Left", "Alt+h"]
+      desc: "Width  --"
+      cmd: hyprctl dispatch "hl.dsp.window.resize({x=-24, y=0, relative=true})"
+      keep_open: true
+    - key: ["Alt+Down", "Alt+j"]
+      desc: "Height --"
+      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=-19, relative=true})"
+      keep_open: true
+    - key: ["Alt+Up", "Alt+k"]
+      desc: "Height ++"
+      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=19, relative=true})"
+      keep_open: true
+    - key: ["Alt+Right", "Alt+l"]
+      desc: "Width  ++"
+      cmd: hyprctl dispatch "hl.dsp.window.resize({x=24, y=0, relative=true})"
+      keep_open: true
+    - key: ["Ctrl+Left", "Ctrl+h"]
+      desc: "Width  -"
+      cmd: hyprctl dispatch "hl.dsp.window.resize({x=-1, y=0, relative=true})"
+      keep_open: true
+    - key: ["Ctrl+Down", "Ctrl+j"]
+      desc: "Height -"
+      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=-1, relative=true})"
+      keep_open: true
+    - key: ["Ctrl+Up", "Ctrl+k"]
+      desc: "Height +"
+      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=1, relative=true})"
+      keep_open: true
+    - key: ["Ctrl+Right", "Ctrl+l"]
+      desc: "Width  +"
+      cmd: hyprctl dispatch "hl.dsp.window.resize({x=1, y=0, relative=true})"
+      keep_open: true
 
 #--<--------------------
 # Notifications       -->
@@ -180,5 +224,3 @@ menu:
   - key: "v"
     desc: "'Paste' using wtype"
     cmd: wtype $(cliphist list | fuzzel -d | cliphist decode)
-
-#--<--------------------
