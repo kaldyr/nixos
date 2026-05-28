@@ -27,7 +27,7 @@
         };
 
         quickshell = inputs.quickshell.packages.${prev.stdenv.hostPlatform.system}.default;
-        yazi = inputs.yazi.packages.${prev.stdenv.hostPlatform.system}.yazi;
+        # yazi = inputs.yazi.packages.${prev.stdenv.hostPlatform.system}.yazi;
         zmx = inputs.zmx.packages.${prev.stdenv.hostPlatform.system}.default;
 
     };

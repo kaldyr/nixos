@@ -36,7 +36,8 @@
         quickshell.inputs.nixpkgs.follows = "nixpkgs";
 
         # Yazi file manager
-        yazi.url = "github:sxyazi/yazi";
+        # Currently not building, but nixpkgs is finally current with latest release
+        # yazi.url = "github:sxyazi/yazi";
 
         # zmx session persistence
         zmx.url = "github:neurosnap/zmx";
