@@ -2,7 +2,6 @@ import sys
 import os
 import re
 import logging
-import shutil
 
 logger = logging.getLogger(__name__)
 logging.basicConfig( level=logging.INFO,
@@ -19,7 +18,7 @@ def patch_fea( file_path, extra_escape, pill_keywords, disable_alt_pill ):
     with open(file_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    # Patch Escape Lookup
+    # Patch escape lookup
     if extra_escape:
         escape_pattern = re.compile( r"(@Escape\s*=\s*\[)([^\]]*)(\];)", re.DOTALL )
         def add_escape(match):
@@ -43,22 +42,21 @@ def patch_fea( file_path, extra_escape, pill_keywords, disable_alt_pill ):
             lookup_name = f"tag_custom_{kw_lower}"
 
             if lookup_name not in content:
-                chars_all = " " + " ".join(kw) + " "
-                logger.info( f"chars_all = {chars_all}" )
+                chars_all = " ".join(kw)
                 l = f"  lookup {lookup_name} {{\n"
-                l += f"    sub bracketleft' {chars_all} bracketright by tag_todo.liga;\n"
+                l += f"    sub SPC bracketleft' {chars_all} bracketright by tag_todo.liga;\n"
                 l += f"  }} {lookup_name};\n"
                 new_lookups.append(l)
                 logger.info( f"Added [{kw}] → pill" )
 
-        if new_lookups:
-            joined = "".join(new_lookups)
-            insert_str = f"feature calt {{\n{joined}\n"
-            content = content.replace("feature calt {", insert_str, 1)
-            logger.info( f"Inserted {len(new_lookups)} lookups" )
+    if new_lookups:
+        joined = "".join(new_lookups)
+        insert_str = f"feature calt {{\n{joined}\n"
+        content = content.replace("feature calt {", insert_str, 1)
+        logger.info( f"Inserted {len(new_lookups)} lookups" )
 
-        with open(file_path, "w", encoding="utf-8") as f:
-            f.write(content)
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.write(content)
 
 def patch_build():
     logger.info( "Patching build.py..." )
