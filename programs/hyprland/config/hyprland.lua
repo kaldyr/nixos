@@ -276,13 +276,15 @@ local b, e = hl.bind, hl.dsp.exec_cmd
 local m, s, c, a = 'SUPER + ', 'SHIFT + ', 'CTRL + ', 'ALT + '
 
 -- Other Launchers
-b( m..'b', e 'kitty --class "float-large" btop' )
-b( m..'c', e 'kitty --class "float-small" qalc' )
-b( m..'e', e 'kitty --class "float-large" yazi' )
-b( m..'m', e 'keepmenu' )
-b( m..'q', e 'kitty' )
-b( m..'r', e 'fuzzel' )
-b( m..'u', e 'hyprpicker -a' )
+b( m..'b',    e 'kitty --class "float-large" btop' )
+b( m..'c',    e 'kitty --class "float-small" qalc' )
+b( m..'e',    e 'kitty --class "float-large" yazi' )
+b( m..'m',    e 'keepmenu' )
+b( m..'q',    e 'kitty' )
+b( m..s..'q', e 'kitty --class "float-large"' )
+b( m..c..'q', e 'kitty --class "pseudo-window"' )
+b( m..'r',    e 'fuzzel' )
+b( m..'u',    e 'hyprpicker -a' )
 
 -- Screen Capture
 b( m..'PRINT', e 'wlr-which-key --initial-keys "Print"' )
@@ -426,12 +428,16 @@ end
 
 -- General mouse
 b( s..'mouse_up', function()
-	hl.dispatch( hl.dsp.send_key_state({ key = 'mouse_right', state = 'down', mods = '' }) )
-	hl.dispatch( hl.dsp.send_key_state({ key = 'mouse_right', state = 'up',   mods = '' }) )
+	hl.dispatch( hl.dsp.send_key_state({ key = 'mouse_right', state = 'down', mods = '', window = 'activewindow' }) )
+	hl.timer( function()
+		hl.dispatch( hl.dsp.send_key_state({ key = 'mouse_right', state = 'up',   mods = '', window = 'activewindow' }) )
+	end, { timeout = 50, type = 'oneshot' } )
 end )
 b( s..'mouse_down', function()
-	hl.dispatch( hl.dsp.send_key_state({ key = 'mouse_left', state = 'down', mods = '' }) )
-	hl.dispatch( hl.dsp.send_key_state({ key = 'mouse_left', state = 'up',   mods = '' }) )
+	hl.dispatch( hl.dsp.send_key_state({ key = 'mouse_left', state = 'down', mods = '', window = 'activewindow' }) )
+	hl.timer( function()
+		hl.dispatch( hl.dsp.send_key_state({ key = 'mouse_left', state = 'up',   mods = '', window = 'activewindow' }) )
+	end, { timeout = 50, type = 'oneshot' } )
 end )
 
 -- Adjust layout
@@ -472,7 +478,7 @@ local suppressMaximizeRule = wr({
 })
 suppressMaximizeRule:set_enabled(true)
 
-local function float_large()
+local function win_large_size()
 	local mon = hl.get_active_monitor() or ''
 
 	local w, h = 1152, 646
@@ -483,7 +489,7 @@ local function float_large()
 	return { w, h }
 end
 
-local function float_small()
+local function win_small_size()
 	local mon = hl.get_active_monitor() or ''
 
 	local w, h = 384, 323
@@ -512,7 +518,7 @@ wr({
 	match = { class = 'float-large' },
 	float = true,
 	opacity = '0.85',
-	size = float_large()
+	size = win_large_size()
 })
 
 wr({
@@ -520,7 +526,15 @@ wr({
 	match = { class = 'float-small' },
 	float = true,
 	opacity = '0.85',
-	size = float_small()
+	size = win_small_size()
+})
+
+wr({
+	name = 'pseudo-window',
+	match = { class = 'pseudo-window' },
+	pseudo = true,
+	opacity = '0.85',
+	size = win_large_size()
 })
 
 -- Specific     --
@@ -614,6 +628,14 @@ wr({ -- Guild Wars 2
 })
 
 wr({ name = 'helium', match = { class = 'helium' }, opacity = '0.85' })
+
+wr({
+	name = 'kitty',
+	match = { class = 'kitty' },
+	opacity = '0.85',
+	size = win_large_size()
+})
+
 wr({ name = 'steam',  match = { class = 'steam$' }, opacity = '0.85' })
 
 wr({ -- Steam game
@@ -627,6 +649,11 @@ wr({ -- Steam game
 	opaque      = true,
 })
 
-wr({ name = 'telegram', match = { class = '.*telegram.*' }, opacity = '0.85' })
+wr({
+	name = 'telegram',
+	match = { class = '.*telegram.*' },
+	opacity = '0.85',
+	size = win_large_size()
+})
 
 --<------------------
