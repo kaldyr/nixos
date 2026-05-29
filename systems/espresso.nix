@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ inputs, lib, pkgs, ... }: {
 
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-amd
@@ -43,6 +43,7 @@
         "/nix".neededForBoot = true;
     };
 
+    hardware.bluetooth.enable = lib.mkForce false;
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
 
