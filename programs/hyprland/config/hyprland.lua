@@ -330,20 +330,24 @@ b( m..'a', function()
 	if #windows == 2 then
 		-- Toggle between 50/50, 33/67, 67/33
 		local newWidth = width
+		local narrow = math.floor( width * 2 / 3 ) + 3 -- [INFO] + 3 is to make window align to terminal col width
+		local wide   = math.floor( width * 4 / 3 ) - 2 -- [INFO] - 2 is to make window align to terminal col width
 		if windows[1].size.x ~= windows[2].size.x then
 			if focused.at.x == windows[1].at.x and windows[1].size.x < windows[2].size.x then
-				newWidth = math.floor( width * 4 / 3 ) - 2 -- [INFO] - 2 is to make window align to terminal col width
+				newWidth = wide
+			elseif focused.at.x == windows[2].at.x and windows[2].size.x < windows[1].size.x then
+				newWidth = narrow
 			end
 			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = newWidth, y = windows[1].size.y, relative = false }) )
 		else
-			newWidth = math.floor( width * 4 / 3 ) - 2 -- [INFO] - 2 is to make window align to terminal col width
+			newWidth = wide
 			if focused.at.x == windows[1].at.x then
-				newWidth = math.floor( width * 2 / 3 ) + 3 -- [INFO] + 3 is to make window align to terminal col width
+				newWidth = narrow
 			end
 			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = newWidth, y = windows[1].size.y, relative = false }) )
 		end
 	elseif #windows == 3 then
-		-- Align into 3 equal columns for ultrawide
+		-- Align into 3 equal (almost, center is 1px narrower) columns for ultrawide
 		if windows[3].size.x > width then
 			hl.dispatch( hl.dsp.window.move({ window = windows[3], direction = 'r' }) )
 		end
