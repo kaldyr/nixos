@@ -287,7 +287,7 @@ b( m..'r',    e 'fuzzel' )
 b( m..'u',    e 'hyprpicker -a' )
 
 -- Screen Capture
-b( m..'PRINT', e 'wlr-which-key --initial-keys "Print"' )
+b( 'PRINT', e 'wlr-which-key --initial-keys "Print"' )
 
 -- Play Media
 b( m..'g', e '/nix/config/scripts/yt-dlp.sh' )
@@ -324,32 +324,31 @@ b( m..'a', function()
 
 	local width   = ( (mon.width/mon.scale) - go.left - go.right - (bsize * 2) - ((gi.left + gi.right + (bsize * 2)) * (#windows - 1)) ) / #windows
 	local focused = hl.get_active_window() or ''
+	if focused == '' then hl.dispatch( hl.dsp.focus({ window = windows[1] }) ) end
 
 	-- [WARN] Only resizing the left-most window works correctly  https://github.com/hyprwm/Hyprland/discussions/14281
 	if #windows == 2 then
-		-- Toggle between 50/50 and ~33/67
+		-- Toggle between 50/50, 33/67, 67/33
+		local newWidth = width
 		if windows[1].size.x ~= windows[2].size.x then
-			-- if focused.at.x == windows[1].at.x then
-			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = math.floor(width), y = windows[1].size.y, relative = false }) )
+			if focused.at.x == windows[1].at.x and windows[1].size.x < windows[2].size.x then
+				newWidth = math.floor( width * 4 / 3 ) - 2 -- [INFO] - 2 is to make window align to terminal col width
+			end
+			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = newWidth, y = windows[1].size.y, relative = false }) )
 		else
-			-- [HACK] Temporary to deal with the resize issue.
-			local newWidth = math.floor( width * 4 / 3 ) - 2 -- [INFO] - 2 is to make window align to terminal col width
+			newWidth = math.floor( width * 4 / 3 ) - 2 -- [INFO] - 2 is to make window align to terminal col width
 			if focused.at.x == windows[1].at.x then
 				newWidth = math.floor( width * 2 / 3 ) + 3 -- [INFO] + 3 is to make window align to terminal col width
 			end
 			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = newWidth, y = windows[1].size.y, relative = false }) )
-			-- This is all that's needed when the resize issue is fixed
-			-- hl.dispatch( hl.dsp.window.resize({ x = (math.floor( width * 2 / 3 ) + 3), y = focused.size.y, relative = false }) )
 		end
 	elseif #windows == 3 then
-		-- [HACK] Windows are not equal size, but it's close enough for now.  Fix when resize issue resolved.
+		-- Align into 3 equal columns for ultrawide
 		if windows[3].size.x > width then
 			hl.dispatch( hl.dsp.window.move({ window = windows[3], direction = 'r' }) )
 		end
 		hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = math.ceil( width ),  y = windows[1].size.y, relative = false }) )
-		-- This is all that's needed when the resize issue is fixed
-		-- hl.dispatch( hl.dsp.window.resize({ window = windows[3], x = math.ceil( width ),  y = windows[3].size.y, relative = false }) )
-		-- hl.dispatch( hl.dsp.window.resize({ window = windows[2], x = math.floor( width ), y = windows[2].size.y, relative = false }) )
+		hl.dispatch( hl.dsp.window.resize({ window = windows[3], x = 5, y = 0, relative = true }) )
 	end
 
 end )
