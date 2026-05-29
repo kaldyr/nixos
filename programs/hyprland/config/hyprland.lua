@@ -299,14 +299,13 @@ b( m..'n', e 'wlr-which-key --initial-keys "n"' )
 b( m..'v', e 'wtype $(cliphist list | fuzzel -d | cliphist decode)' )
 
 -- Arrange windows into columns for ultrawide monitor
-
 b( m..'a', function()
 
 	local ws  = hl.get_workspace( hl.get_active_workspace() or '' )
 	local mon = hl.get_active_monitor()
 
 	-- Bail if you didn't get a monitor or workspace or no need to sort
-	if ws == nil or mon == nil or ws.windows <2 then return end
+	if ws == nil or mon == nil or ws.windows < 2 then return end
 
 	local go    = hl.get_config('general.gaps_out')
 	local gi    = hl.get_config('general.gaps_in')
@@ -319,40 +318,64 @@ b( m..'a', function()
 			windows[ #windows + 1 ] = w
 		end
 	end
-	-- In order of position ltr
-	table.sort( windows, function(i, j) return i.at.x < j.at.x end )
+	table.sort( windows, function(i, j) return i.at.x < j.at.x end ) -- In order of position ltr
 
-	local width   = ( (mon.width/mon.scale) - go.left - go.right - (bsize * 2) - ((gi.left + gi.right + (bsize * 2)) * (#windows - 1)) ) / #windows
+	local width   = (
+		(mon.width/mon.scale) - (go.left + go.right + (bsize * 2)) - ((gi.left + gi.right + (bsize * 2)) * (#windows - 1))
+		) / #windows
 	local focused = hl.get_active_window() or ''
 	if focused == '' then hl.dispatch( hl.dsp.focus({ window = windows[1] }) ) end
 
 	-- [WARN] Only resizing the left-most window works correctly  https://github.com/hyprwm/Hyprland/discussions/14281
 	if #windows == 2 then
+
 		-- Toggle between 50/50, 33/67, 67/33
 		local newWidth = width
-		local narrow = math.floor( width * 2 / 3 ) + 3 -- [INFO] + 3 is to make window align to terminal col width
-		local wide   = math.floor( width * 4 / 3 ) - 2 -- [INFO] - 2 is to make window align to terminal col width
+		local narrow   = math.floor( width * 2 / 3 ) + 3 -- [INFO] + 3 is to make window align to terminal col width
+		local wide     = math.floor( width * 4 / 3 ) - 2 -- [INFO] - 2 is to make window align to terminal col width
+
 		if windows[1].size.x ~= windows[2].size.x then
 			if focused.at.x == windows[1].at.x and windows[1].size.x < windows[2].size.x then
 				newWidth = wide
 			elseif focused.at.x == windows[2].at.x and windows[2].size.x < windows[1].size.x then
 				newWidth = narrow
 			end
-			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = newWidth, y = windows[1].size.y, relative = false }) )
+			hl.dispatch( hl.dsp.window.resize({
+				window = windows[1],
+				x = newWidth,
+				y = windows[1].size.y,
+				relative = false,
+			}) )
 		else
 			newWidth = wide
 			if focused.at.x == windows[1].at.x then
 				newWidth = narrow
 			end
-			hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = newWidth, y = windows[1].size.y, relative = false }) )
+			hl.dispatch( hl.dsp.window.resize({
+				window = windows[1],
+				x = newWidth,
+				y = windows[1].size.y,
+				relative = false,
+			}) )
 		end
+
 	elseif #windows == 3 then
 		-- Align into 3 equal (almost, center is 1px narrower) columns for ultrawide
 		if windows[3].size.x > width then
 			hl.dispatch( hl.dsp.window.move({ window = windows[3], direction = 'r' }) )
 		end
-		hl.dispatch( hl.dsp.window.resize({ window = windows[1], x = math.ceil( width ),  y = windows[1].size.y, relative = false }) )
-		hl.dispatch( hl.dsp.window.resize({ window = windows[3], x = 5, y = 0, relative = true }) )
+		hl.dispatch( hl.dsp.window.resize({
+			window = windows[1],
+			x = math.ceil( width ),
+			y = windows[1].size.y,
+			relative = false,
+		}) )
+		hl.dispatch( hl.dsp.window.resize({
+			window = windows[3],
+			x = 5,
+			y = 0,
+			relative = true,
+		}) )
 	end
 
 end )
