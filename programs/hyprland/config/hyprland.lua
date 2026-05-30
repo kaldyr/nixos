@@ -434,12 +434,12 @@ b( m..'equal', function() -->
 			end
 		end
 	end
-	local command      = 'hyprctl eval "hl.monitor({ '
-	command = command .. 'output=\\"' .. mon.name .. '\\", '
-	command = command .. 'mode=\\"' .. mon.width .. 'x' .. mon.height .. '@' .. mon.refresh_rate .. '\\", '
-	command = command .. 'position=\\"' .. mon.position.x .. 'x' .. mon.position.y .. '\\", '
-	command = command .. 'scale=\\"' .. new_scale .. '\\" })"'
-	hl.dispatch( e(command) )
+	local cmd  = 'hyprctl eval "hl.monitor({ '
+	cmd = cmd .. 'output=\\"' .. mon.name .. '\\", '
+	cmd = cmd .. 'mode=\\"' .. mon.width .. 'x' .. mon.height .. '@' .. mon.refresh_rate .. '\\", '
+	cmd = cmd .. 'position=\\"' .. mon.position.x .. 'x' .. mon.position.y .. '\\", '
+	cmd = cmd .. 'scale=\\"' .. new_scale .. '\\" })"'
+	hl.dispatch( e(cmd) )
 	hl.notification.create({ text = mon.name .. ' scale: ' .. string.format( '%.3f', new_scale ), duration = 2500 })
 end ) --<--
 b( m..'minus', function() -->
