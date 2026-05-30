@@ -489,7 +489,11 @@ b( m..'Tab', function() -->
 end ) --<--
 
 -- Which Key (Show all the keybinds)
-b( m.."space", e 'wlr-which-key' )
+b( m.."space", function() -->
+	hl.dispatch( e 'hyprctl reload' )
+	hl.dispatch( e 'systemctl --user restart waybar' )
+	hl.dispatch( e 'wlr-which-key' )
+end ) --<--
 
 -- Power Menu
 b( m.."p", e 'wlr-which-key --initial-keys "p"' )
