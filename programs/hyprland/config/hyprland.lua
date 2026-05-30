@@ -68,17 +68,25 @@ elseif hostname == 'hofud' then
 	}
 	hl.monitor({
 		output = 'eDP-1',
-		mode   = '2256x1504@60',
+		mode   = 'highres@highrr',
 		position = '0x0',
 		scale = usable_scales[3], -- Default to 1.33
 	})
 
 elseif hostname == 'mjolnir' then
+	usable_scales = {
+		'1.0',                -- 3440x1440
+		-- '1.0666667222976685', -- 3225x1350 really close to prev step
+		'1.25',               -- 2752x1152
+		'1.6000000238418579', -- 2150x900
+		-- '1.6666666269302368', -- 2064x864 really close to prev step
+		'2.0',                -- 1720x720
+	}
 	hl.monitor({
 		output = 'HDMI-A-1',
 		mode   = '3440x1440@84.97900',
 		position = 'auto',
-		scale = '1',
+		scale = usable_scales[1],
 		bitdepth = 10,
 		sdrbrightness = 1.2,
 		sdrsaturation = 0.98,
@@ -330,12 +338,10 @@ b( m..'a', function()
 	end
 	table.sort( windows, function(i, j) return i.at.x < j.at.x end ) -- In order of position ltr
 
-	local width   = ( (mon.width/mon.scale) - (go.left + go.right + (bsize * 2)) - ((gi.left + gi.right + (bsize * 2)) * (#windows - 1))) / #windows
-	-- local widthh  = mon.width/mon.scale
-	-- widthh = widthh - go.left - go.right - (bsize * 2)
-	-- widthh = widthh - (gi.left + gi.right + (bsize * 2)) * ( #windows - 1 )
-	-- widthh = widthh / #windows
-	-- hl.notification.create({ text = tostring(width) .. ':' .. tostring(widthh), duration = 5000 })
+	local width  = mon.width/mon.scale
+	width = width - go.left - go.right - (bsize * 2)
+	width = width - (gi.left + gi.right + (bsize * 2)) * ( #windows - 1 )
+	width = width / #windows
 	local focused = hl.get_active_window() or ''
 	if focused == '' then hl.dispatch( hl.dsp.focus({ window = windows[1] }) ) end
 
@@ -373,7 +379,7 @@ b( m..'a', function()
 		end
 
 	elseif #windows == 3 then
-		-- Align into 3 equal (almost, center is 1px narrower) columns for ultrawide
+		-- Align into 3 equal (almost, center window is 1px narrower) columns for ultrawide
 		if windows[3].size.x > width then
 			hl.dispatch( hl.dsp.window.move({ window = windows[3], direction = 'r' }) )
 		end
