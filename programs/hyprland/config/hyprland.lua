@@ -134,7 +134,12 @@ hl.config({
 			inactive_border = 0x8885c1dc, -- 0xff444444
 		},
 
-		gaps_in  = 12, -- 5
+		gaps_in  = {
+			top = 8,
+			left = 12,
+			right = 12,
+			bottom = 9,
+		}, -- 5
 		gaps_out = {
 			top = 8,
 			left = 18,
