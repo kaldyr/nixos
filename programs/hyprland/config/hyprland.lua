@@ -68,7 +68,7 @@ elseif hostname == 'hofud' then
 	}
 	hl.monitor({
 		output = 'eDP-1',
-		mode   = 'highres@highrr',
+		mode   = '2256x1504@60',
 		position = '0x0',
 		scale = usable_scales[3], -- Default to 1.33
 	})
@@ -519,27 +519,6 @@ end )
 
 -- Adjust layout
 b( m..'s', hl.dsp.layout("togglesplit") )
-
---<------------------
--- Custom Layouts  -->
----------------------
-
-hl.layout.register("columns", {
-	recalculate = function(ctx)
-		local n = #ctx.targets
-		if n == 0 then return end
-
-		for i, target in ipairs(ctx.targets) do
-			target:place(ctx:column(i, n))
-		end
-	end,
-})
-
---<------------------
--- Workspace Rules -->
----------------------
-
-
 
 --<------------------
 -- Window Rules    -->
