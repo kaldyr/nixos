@@ -81,11 +81,11 @@ menu:
       keep_open: true
     - key: ["Down", "j"]
       desc: "Height ---"
-      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=-190, relative=true})"
+      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=190, relative=true})"
       keep_open: true
     - key: ["Up", "k"]
       desc: "Height +++"
-      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=190, relative=true})"
+      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=-190, relative=true})"
       keep_open: true
     - key: ["Right", "l"]
       desc: "Width  +++"
@@ -97,11 +97,11 @@ menu:
       keep_open: true
     - key: ["Alt+Down", "Alt+j"]
       desc: "Height --"
-      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=-19, relative=true})"
+      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=19, relative=true})"
       keep_open: true
     - key: ["Alt+Up", "Alt+k"]
       desc: "Height ++"
-      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=19, relative=true})"
+      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=-19, relative=true})"
       keep_open: true
     - key: ["Alt+Right", "Alt+l"]
       desc: "Width  ++"
@@ -113,11 +113,11 @@ menu:
       keep_open: true
     - key: ["Ctrl+Down", "Ctrl+j"]
       desc: "Height -"
-      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=-1, relative=true})"
+      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=1, relative=true})"
       keep_open: true
     - key: ["Ctrl+Up", "Ctrl+k"]
       desc: "Height +"
-      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=1, relative=true})"
+      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=-1, relative=true})"
       keep_open: true
     - key: ["Ctrl+Right", "Ctrl+l"]
       desc: "Width  +"
