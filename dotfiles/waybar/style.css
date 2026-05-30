@@ -27,7 +27,7 @@
 
 * {
 	font-size: 11px;
-	font-family: "Maple Mono NF Bold", "Symbols Nerd Font", "Font Awesome 6 Free";
+	font-family: "Maple Mono NF", "Symbols Nerd Font", "Font Awesome 6 Free";
 	font-weight: bold;
 }
 
@@ -42,7 +42,7 @@ tooltip {
 
 #workspaces {
 	background: @mantle;
-	padding: 0 10px;
+	padding: 0 20px 0 8px;
 	border-radius: 0 0 16px 0;
 }
 
@@ -75,7 +75,7 @@ tooltip {
 	background: @mantle;
 	color: @sapphire;
 	border-radius: 0 0 0 16px;
-	padding: 0 10px 0 10px;
+	padding: 0 10px 0 20px;
 }
 
 #temperature.critical {
