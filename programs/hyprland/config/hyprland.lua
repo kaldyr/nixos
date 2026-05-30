@@ -77,14 +77,14 @@ elseif hostname == 'mjolnir' then
 	usable_scales = {
 		'1.0',                -- 3440x1440
 		-- '1.0666667222976685', -- 3225x1350 really close to prev step
-		'1.25',               -- 2752x1152
-		'1.6000000238418579', -- 2150x900
+		-- '1.25',               -- 2752x1152
+		-- '1.6000000238418579', -- 2150x900
 		-- '1.6666666269302368', -- 2064x864 really close to prev step
-		'2.0',                -- 1720x720
+		-- '2.0',                -- 1720x720
 	}
 	hl.monitor({
 		output = 'HDMI-A-1',
-		mode   = '3440x1440@84.97900',
+		mode   = '3440x1440@85',
 		position = 'auto',
 		scale = usable_scales[1],
 		bitdepth = 10,
@@ -288,21 +288,18 @@ hl.gesture({
 -- Keybindings     -->
 ---------------------
 
--- Shorthand for functions
+-- Shorthand
 local b, e = hl.bind, hl.dsp.exec_cmd
-
--- Shorthand for modifiers
 local m, s, c, a = 'SUPER + ', 'SHIFT + ', 'CTRL + ', 'ALT + '
 
--- Other Launchers
-b( m..'c',    e 'kitty --class "float-small" qalc' )
-b( m..'b',    e 'kitty --class "float-large" btop' )
-b( m..'e',    e 'kitty --class "float-large" yazi' )
-b( m..'m',    e 'keepmenu' )
-b( m..'q',    e 'kitty' )
-b( m..s..'q', e 'kitty --class "float-large"' )
-b( m..'r',    e 'fuzzel' )
-b( m..'u',    e 'hyprpicker -a' )
+-- Launchers
+b( m..'b', e 'kitty --class "float-large" btop' )
+b( m..'c', e 'kitty --class "float-small" qalc' )
+b( m..'e', e 'kitty --class "float-large" yazi' )
+b( m..'m', e 'keepmenu' )
+b( m..'q', e 'kitty' )
+b( m..'r', e 'fuzzel' )
+b( m..'u', e 'hyprpicker -a' )
 
 -- Screen Capture
 b( 'PRINT', e 'wlr-which-key --initial-keys "Print"' )
@@ -317,7 +314,7 @@ b( m..'n', e 'wlr-which-key --initial-keys "n"' )
 b( m..'v', e 'wtype $(cliphist list | fuzzel -d | cliphist decode)' )
 
 -- Arrange windows into columns for ultrawide monitor
-b( m..'a', function()
+b( m..'a', function() -->
 
 	local ws  = hl.get_workspace( hl.get_active_workspace() or '' )
 	local mon = hl.get_active_monitor()
@@ -342,6 +339,7 @@ b( m..'a', function()
 	width = width - go.left - go.right - (bsize * 2)
 	width = width - (gi.left + gi.right + (bsize * 2)) * ( #windows - 1 )
 	width = width / #windows
+
 	local focused = hl.get_active_window() or ''
 	if focused == '' then hl.dispatch( hl.dsp.focus({ window = windows[1] }) ) end
 
@@ -397,7 +395,7 @@ b( m..'a', function()
 		}) )
 	end
 
-end )
+end ) --<--
 
 -- Media controls
 b( 'XF86AudioRaiseVolume',    e 'pamixer -i 1',                  { locked = true, repeating = true } )
@@ -421,7 +419,7 @@ b( m..'XF86MonBrightnessUp',   e 'hyprctl hyprsunset temperature 3500',         
 b( m..'XF86MonBrightnessDown', e 'hyprctl hyprsunset identity',                         { locked = true } )
 
 -- Monitor Scaling
-b( m..'equal', function()
+b( m..'equal', function() -->
 	local mon = hl.get_active_monitor() or ''
 	local new_scale = '1.0'
 	for k,v in pairs(usable_scales) do
@@ -438,9 +436,8 @@ b( m..'equal', function()
 	command = command .. 'scale=\\"' .. new_scale .. '\\" })"'
 	hl.dispatch( e(command) )
 	hl.notification.create({ text = mon.name .. ' scale: ' .. string.format( '%.3f', new_scale ), duration = 2500 })
-end )
-
-b( m..'minus', function()
+end ) --<--
+b( m..'minus', function() -->
 	local mon = hl.get_active_monitor() or ''
 	local new_scale = '1.0'
 	for k,v in pairs(usable_scales) do
@@ -457,18 +454,18 @@ b( m..'minus', function()
 	command = command .. 'scale=\\"' .. new_scale .. '\\" })"'
 	hl.dispatch( e(command) )
 	hl.notification.create({ text = mon.name .. ' scale: ' .. string.format( '%.3f', new_scale ), duration = 2500 })
-end )
+end ) --<--
 
 -- Hyprland Controls
-b( m..'x', hl.dsp.window.close() )
-b( m..'w', hl.dsp.window.float({ action = 'toggle' }) )
-b( m..'o', hl.dsp.window.pseudo() )
-b( m..'f', hl.dsp.window.fullscreen() )
--- b( m 'code:691',  align_workspace() )
-b( m..'Tab', function()
+b( m..'x',   hl.dsp.window.close() )
+b( m..'w',   hl.dsp.window.float({ action = 'toggle' }) )
+b( m..'o',   hl.dsp.window.pseudo() )
+b( m..'f',   hl.dsp.window.fullscreen() )
+b( m..'s',   hl.dsp.layout("togglesplit") )
+b( m..'Tab', function() -->
 	hl.dispatch( hl.dsp.window.cycle_next() )
 	hl.dispatch( hl.dsp.window.bring_to_top() )
-end )
+end ) --<--
 
 -- Which Key (Show all the keybinds)
 b( m.."space", e 'wlr-which-key' )
@@ -499,26 +496,13 @@ b( m..'code:60',    hl.dsp.focus({ workspace = 'e+1' }) ) -- .
 b( m..'mouse_down', hl.dsp.focus({ workspace = 'e-1' }) )
 b( m..'mouse_up',   hl.dsp.focus({ workspace = 'e+1' }) )
 for i = 1, 10 do
-	b( m..tostring(i % 10),     hl.dsp.focus({ workspace = i }) )
-	b( m..s..tostring(i % 10),  hl.dsp.window.move({ workspace = i, follow = false }) )
+	b( m..tostring(i % 10),    hl.dsp.focus({ workspace = i }) )
+	b( m..s..tostring(i % 10), hl.dsp.window.move({ workspace = i, follow = false }) )
 end
 
 -- General mouse
-b( s..'mouse_up', function()
-	hl.dispatch( hl.dsp.send_key_state({ key = 'mouse_right', state = 'down', mods = '', window = 'activewindow' }) )
-	hl.timer( function()
-		hl.dispatch( hl.dsp.send_key_state({ key = 'mouse_right', state = 'up',   mods = '', window = 'activewindow' }) )
-	end, { timeout = 50, type = 'oneshot' } )
-end )
-b( s..'mouse_down', function()
-	hl.dispatch( hl.dsp.send_key_state({ key = 'mouse_left', state = 'down', mods = '', window = 'activewindow' }) )
-	hl.timer( function()
-		hl.dispatch( hl.dsp.send_key_state({ key = 'mouse_left', state = 'up',   mods = '', window = 'activewindow' }) )
-	end, { timeout = 50, type = 'oneshot' } )
-end )
-
--- Adjust layout
-b( m..'s', hl.dsp.layout("togglesplit") )
+b( c..'mouse_up',   hl.dsp.send_shortcut({ key = 'mouse_right', mods = '', window = 'activewindow' }) )
+b( c..'mouse_down', hl.dsp.send_shortcut({ key = 'mouse_left',  mods = '', window = 'activewindow' }) )
 
 --<------------------
 -- Window Rules    -->
