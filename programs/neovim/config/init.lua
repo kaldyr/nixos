@@ -769,23 +769,28 @@ vim.schedule( function() require('mini.ai').setup() end )
 vim.schedule( function()
 
 	local frappe = require('catppuccin.palettes').get_palette('frappe')
-	vim.api.nvim_set_hl(0, 'MiniHipatternsFixme',{ bold = true, bg = frappe.base, fg = frappe.red })
-	vim.api.nvim_set_hl(0, 'MiniHipatternsWarn', { bold = true, bg = frappe.base, fg = frappe.maroon })
-	vim.api.nvim_set_hl(0, 'MiniHipatternsHack', { bold = true, bg = frappe.base, fg = frappe.peach })
-	vim.api.nvim_set_hl(0, 'MiniHipatternsInfo', { bold = true, bg = frappe.base, fg = frappe.yellow })
-	vim.api.nvim_set_hl(0, 'MiniHipatternsTodo', { bold = true, bg = frappe.base, fg = frappe.teal })
-	vim.api.nvim_set_hl(0, 'MiniHipatternsNote', { bold = true, bg = frappe.base, fg = frappe.sapphire })
-	vim.api.nvim_set_hl(0, 'MiniHipatternsPerf', { bold = true, bg = frappe.base, fg = frappe.mauve })
+	vim.api.nvim_set_hl(0, 'MiniHipatternsRed',      { bold = true, bg = frappe.base, fg = frappe.red })
+	vim.api.nvim_set_hl(0, 'MiniHipatternsMaroon',   { bold = true, bg = frappe.base, fg = frappe.maroon })
+	vim.api.nvim_set_hl(0, 'MiniHipatternsPeach',    { bold = true, bg = frappe.base, fg = frappe.peach })
+	vim.api.nvim_set_hl(0, 'MiniHipatternsYellow',   { bold = true, bg = frappe.base, fg = frappe.yellow })
+	vim.api.nvim_set_hl(0, 'MiniHipatternsTeal',     { bold = true, bg = frappe.base, fg = frappe.teal })
+	vim.api.nvim_set_hl(0, 'MiniHipatternsSapphire', { bold = true, bg = frappe.base, fg = frappe.sapphire })
+	vim.api.nvim_set_hl(0, 'MiniHipatternsMauve',    { bold = true, bg = frappe.base, fg = frappe.mauve })
 
 	require('mini.hipatterns').setup({
 		highlighters = {
-			fixme     = { pattern = '%[FIXME%]', group = 'MiniHipatternsFixme' },
-			warn      = { pattern = '%[WARN%]',  group = 'MiniHipatternsWarn' },
-			hack      = { pattern = '%[HACK%]',  group = 'MiniHipatternsHack' },
-			info      = { pattern = '%[INFO%]',  group = 'MiniHipatternsInfo' },
-			todo      = { pattern = '%[TODO%]',  group = 'MiniHipatternsTodo' },
-			note      = { pattern = '%[NOTE%]',  group = 'MiniHipatternsNote' },
-			perf      = { pattern = '%[PERF%]',  group = 'MiniHipatternsOptim' },
+			debug     = { pattern = '%[DEBUG%]',   group = 'MiniHipatternsMaroon' },
+			error     = { pattern = '%[ERROR%]',   group = 'MiniHipatternsRed' },
+			fatal     = { pattern = '%[FATAL%]',   group = 'MiniHipatternsRed' },
+			fixme     = { pattern = '%[FIXME%]',   group = 'MiniHipatternsPeach' },
+			hack      = { pattern = '%[HACK%]',    group = 'MiniHipatternsMaroon' },
+			info      = { pattern = '%[INFO%]',    group = 'MiniHipatternsYellow' },
+			mark      = { pattern = '%[MARK%]',    group = 'MiniHipatternsMauve' },
+			note      = { pattern = '%[NOTE%]',    group = 'MiniHipatternsTeal' },
+			todo      = { pattern = '%[TODO%]',    group = 'MiniHipatternsSapphire' },
+			trace     = { pattern = '%[TRACE%]',   group = 'MiniHipatternsMauve' },
+			warn      = { pattern = '%[WARN%]',    group = 'MiniHipatternsMaroon' },
+			warning   = { pattern = '%[WARNING%]', group = 'MiniHipatternsMaroon' },
 			hex_color = require('mini.hipatterns').gen_highlighter.hex_color()
 		}
 	})

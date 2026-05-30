@@ -43,25 +43,17 @@
     ],
     # Keywords to turn into pills
     pillKeywords ? [
-        "BUG"
-        "CRITICAL"
         "DEBUG"
         "ERROR"
         "FATAL"
         "FIXME"
         "HACK"
-        "IDEA"
         "INFO"
         "MARK"
         "NOTE"
-        "OPTIM"
-        "PERF"
-        "TASK"
         "TODO"
         "TRACE"
         "WARN"
-        "WARNING"
-        "WIP"
     ],
     # Remove alt pill syntax (`todo))`)
     disableAltPill ? true,
