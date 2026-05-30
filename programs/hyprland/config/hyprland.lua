@@ -15,27 +15,26 @@ end
 hostname = string.gsub(hostname, '\n$', '')
 
 -- Startup applications
-local exe = hl.exec_cmd
+local launch = hl.exec_cmd
 hl.on( 'hyprland.start', function()
 
-	exe 'systemctl --user start wallpaper-change.timer'
-	exe 'wl-paste --type text --watch cliphist store'
-	exe 'wl-paste --type image --watch cliphist store'
-	exe 'waybar'
-	exe 'nm-applet'
-	exe 'tailscale systray'
+	launch 'systemctl --user start wallpaper-change.timer'
+	launch 'wl-paste --type text --watch cliphist store'
+	launch 'wl-paste --type image --watch cliphist store'
+	launch 'waybar'
+	launch 'nm-applet'
+	launch 'tailscale systray'
 
 	if hostname == 'espresso' then
-		exe 'wayland-push-to-talk-fix -k "grave" -n "grave" /dev/input/by-id/usb-04d9_daskeyboard-event-kbd'
+		launch 'wayland-push-to-talk-fix -k "grave" -n "grave" /dev/input/by-id/usb-04d9_daskeyboard-event-kbd'
 
 	elseif hostname == 'hofud' then
-		exe 'pamixer -m'
+		launch 'pamixer -m'
 
 	elseif hostname == 'mjolnir' then
-		exe 'wayland-push-to-talk-fix -k "BTN_MIDDLE" -n "XF86WheelButton" /dev/input/by-id/usb-Razer_Razer_DeathAdder_Essential-event-mouse'
-		exe 'nmcli radio wifi off'
-		exe 'pamixer --default-source -m'
-
+		launch 'wayland-push-to-talk-fix -k "BTN_MIDDLE" -n "XF86WheelButton" /dev/input/by-id/usb-Razer_Razer_DeathAdder_Essential-event-mouse'
+		launch 'nmcli radio wifi off'
+		launch 'pamixer --default-source -m'
 	end
 
 end )
@@ -333,20 +332,26 @@ b( m..'a', function() -->
 			windows[ #windows + 1 ] = w
 		end
 	end
+	-- Only continue if there are 2 or 3 columns of windows
+	if #windows < 2 or #windows > 3 then return end
+
 	table.sort( windows, function(i, j) return i.at.x < j.at.x end ) -- In order of position ltr
 
-	local width  = mon.width/mon.scale
-	width = width - go.left - go.right - (bsize * 2)
-	width = width - (gi.left + gi.right + (bsize * 2)) * ( #windows - 1 )
-	width = width / #windows
+	-- Window width
+	local width   = math.floor( mon.width / mon.scale ) -- Resolution adjusted by scale
+	width = width - go.left - go.right - (bsize * 2) -- One set of outer gaps and border
+	width = width - (gi.left + gi.right + (bsize * 2)) * ( #windows - 1 ) -- Sets of inner gaps and borders
+	width = width / #windows -- Split the total window width by number of columns
 
 	local focused = hl.get_active_window() or ''
-	if focused == '' then hl.dispatch( hl.dsp.focus({ window = windows[1] }) ) end
+	if focused == '' then
+		hl.dispatch( hl.dsp.focus({ window = windows[1] }) )
+	end
 
 	-- [WARN] Only resizing the left-most window works correctly  https://github.com/hyprwm/Hyprland/discussions/14281
 	if #windows == 2 then
 
-		-- Toggle between 50/50, 33/67, 67/33
+		-- Toggle between { 50/50, 33/67, 67/33 }
 		local newWidth = width
 		local narrow   = math.floor( width * 2 / 3 ) + 3 -- [INFO] + 3 is to make window align to terminal col width
 		local wide     = math.floor( width * 4 / 3 ) - 2 -- [INFO] - 2 is to make window align to terminal col width
@@ -500,7 +505,7 @@ for i = 1, 10 do
 	b( m..s..tostring(i % 10), hl.dsp.window.move({ workspace = i, follow = false }) )
 end
 
--- General mouse
+-- General mouse -- [FIXME] These do not work
 b( c..'mouse_up',   hl.dsp.send_shortcut({ key = 'mouse_right', mods = '', window = 'activewindow' }) )
 b( c..'mouse_down', hl.dsp.send_shortcut({ key = 'mouse_left',  mods = '', window = 'activewindow' }) )
 

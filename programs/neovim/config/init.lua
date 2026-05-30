@@ -179,7 +179,7 @@ map('v', '<', '<gv', { silent = true })
 map('v', '>', '>gv', { silent = true })
 
 -- Folding
-map('n', 'Z', 'zA', { desc = 'Toggle folds at cursor', silent = true })
+map('n', 'Z', 'za', { desc = 'Toggle folds at cursor', silent = true })
 map('n', '\\z', 'zi', { desc = 'Toggle folding', silent = true })
 map('n', 'zv', 'zMzvzz', { desc = 'Close all folds except current' })
 map('n', 'zj', 'zcjzOzz', { desc = 'Close current fold and open next' })
