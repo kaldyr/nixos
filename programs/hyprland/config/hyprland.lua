@@ -18,10 +18,8 @@ hostname = string.gsub(hostname, '\n$', '')
 local launch = hl.exec_cmd
 hl.on( 'hyprland.start', function()
 
-	launch 'systemctl --user start wallpaper-change.timer'
 	launch 'wl-paste --type text --watch cliphist store'
 	launch 'wl-paste --type image --watch cliphist store'
-	launch 'waybar'
 	launch 'nm-applet'
 	launch 'tailscale systray'
 
