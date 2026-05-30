@@ -38,7 +38,7 @@ hl.on( 'hyprland.start', function()
 end )
 
 --<------------------
--- Monitors        -->
+-- Monitors & Gaps -->
 ---------------------
 
 -- Main monitor
@@ -46,14 +46,21 @@ end )
 local usable_scales = {'1.0'}
 
 if hostname == 'espresso' then
+
 	hl.monitor({
 		output = 'HDMI-A-1',
 		mode   = '1920x1080@60',
 		position = 'auto',
-		scale = '1',
+		scale = usable_scales[1],
+	})
+
+	hl.config({
+		gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
+		gaps_out = { top = 8, left = 18, right = 18, bottom = 18 }, -- 20
 	})
 
 elseif hostname == 'hofud' then
+
 	usable_scales = {
 		'1.0',                -- 2256x1504
 		'1.1749999523162842', -- 1920x1280
@@ -63,6 +70,7 @@ elseif hostname == 'hofud' then
 		-- '1.9583333730697632', -- 1151x767 really close to next step
 		'2.0',                -- 1128x752
 	}
+
 	hl.monitor({
 		output = 'eDP-1',
 		mode   = '2256x1504@60',
@@ -70,15 +78,24 @@ elseif hostname == 'hofud' then
 		scale = usable_scales[3], -- Default to 1.33
 	})
 
+	hl.config({
+		general = {
+			gaps_in  = { top = 8, left = 14, right = 14, bottom = 9 }, -- 5
+			gaps_out = { top = 8, left = 20, right = 20, bottom = 20 }, -- 20
+		}
+	})
+
 elseif hostname == 'mjolnir' then
-	usable_scales = {
-		'1.0',                -- 3440x1440
-		-- '1.0666667222976685', -- 3225x1350 really close to prev step
-		-- '1.25',               -- 2752x1152
-		-- '1.6000000238418579', -- 2150x900
-		-- '1.6666666269302368', -- 2064x864 really close to prev step
-		-- '2.0',                -- 1720x720
-	}
+
+	-- usable_scales = {
+	-- 	'1.0',                -- 3440x1440
+	-- 	'1.0666667222976685', -- 3225x1350 really close to prev step
+	-- 	'1.25',               -- 2752x1152
+	-- 	'1.6000000238418579', -- 2150x900
+	-- 	'1.6666666269302368', -- 2064x864 really close to prev step
+	-- 	'2.0',                -- 1720x720
+	-- }
+
 	hl.monitor({
 		output = 'HDMI-A-1',
 		mode   = '3440x1440@85',
@@ -87,6 +104,13 @@ elseif hostname == 'mjolnir' then
 		bitdepth = 10,
 		sdrbrightness = 1.2,
 		sdrsaturation = 0.98,
+	})
+
+	hl.config({
+		general = {
+			gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
+			gaps_out = { top = 8, left = 18, right = 18, bottom = 18 }, -- 20
+		}
 	})
 
 end
@@ -133,19 +157,6 @@ hl.config({
 			},
 			inactive_border = 0x8885c1dc, -- 0xff444444
 		},
-
-		gaps_in  = {
-			top = 8,
-			left = 12,
-			right = 12,
-			bottom = 9,
-		}, -- 5
-		gaps_out = {
-			top = 8,
-			left = 18,
-			right = 18,
-			bottom = 18,
-		}, -- 20
 
 		layout           = 'dwindle', -- dwindle
 		resize_on_border = false, -- false
@@ -531,7 +542,7 @@ local function win_large_size()
 
 	local w, h = 1152, 646
 	if     mon.width == 3440 then w, h = 1152, 855
-	elseif mon.width == 2256 then w, h = 1226, 880
+	elseif mon.width == 2256 then w, h = 1155, 844
 	end
 
 	return { w, h }
@@ -542,7 +553,7 @@ local function win_small_size()
 
 	local w, h = 384, 323
 	if     mon.width == 3440 then w, h = 480, 323
-	elseif mon.width == 2256 then w, h = 485, 318
+	elseif mon.width == 2256 then w, h = 487, 319
 	end
 
 	return { w, h }
