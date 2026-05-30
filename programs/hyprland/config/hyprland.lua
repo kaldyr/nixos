@@ -46,6 +46,8 @@ end )
 
 -- Main monitor
 
+local usable_scales = {'1.0'}
+
 if hostname == 'espresso' then
 	hl.monitor({
 		output = 'HDMI-A-1',
@@ -55,11 +57,20 @@ if hostname == 'espresso' then
 	})
 
 elseif hostname == 'hofud' then
+	usable_scales = {
+		'1.0',                -- 2256x1504
+		'1.1749999523162842', -- 1920x1280
+		'1.3333333730697632', -- 1692x1128
+		-- '1.5666667222976685', -- 1437x958 really close to next step
+		'1.6000000238418579', -- 1410x940
+		-- '1.9583333730697632', -- 1151x767 really close to next step
+		'2.0',                -- 1128x752
+	}
 	hl.monitor({
 		output = 'eDP-1',
 		mode   = '2256x1504@60',
 		position = '0x0',
-		scale = '1.175000',
+		scale = usable_scales[3], -- Default to 1.33
 	})
 
 elseif hostname == 'mjolnir' then
@@ -282,7 +293,6 @@ b( m..'e',    e 'kitty --class "float-large" yazi' )
 b( m..'m',    e 'keepmenu' )
 b( m..'q',    e 'kitty' )
 b( m..s..'q', e 'kitty --class "float-large"' )
-b( m..c..'q', e 'kitty --class "pseudo-window"' )
 b( m..'r',    e 'fuzzel' )
 b( m..'u',    e 'hyprpicker -a' )
 
@@ -320,9 +330,12 @@ b( m..'a', function()
 	end
 	table.sort( windows, function(i, j) return i.at.x < j.at.x end ) -- In order of position ltr
 
-	local width   = (
-		(mon.width/mon.scale) - (go.left + go.right + (bsize * 2)) - ((gi.left + gi.right + (bsize * 2)) * (#windows - 1))
-		) / #windows
+	local width   = ( (mon.width/mon.scale) - (go.left + go.right + (bsize * 2)) - ((gi.left + gi.right + (bsize * 2)) * (#windows - 1))) / #windows
+	-- local widthh  = mon.width/mon.scale
+	-- widthh = widthh - go.left - go.right - (bsize * 2)
+	-- widthh = widthh - (gi.left + gi.right + (bsize * 2)) * ( #windows - 1 )
+	-- widthh = widthh / #windows
+	-- hl.notification.create({ text = tostring(width) .. ':' .. tostring(widthh), duration = 5000 })
 	local focused = hl.get_active_window() or ''
 	if focused == '' then hl.dispatch( hl.dsp.focus({ window = windows[1] }) ) end
 
@@ -398,8 +411,47 @@ b( 'XF86MonBrightnessUp',      e 'brightnessctl set +5% ; hyprctl hyprsunset gam
 b( 'XF86MonBrightnessDown',    e 'brightnessctl set -5% ; hyprctl hyprsunset gamma -5', { locked = true, repeating = true } )
 b( s..'XF86MonBrightnessUp',   e 'hyprctl hyprsunset temperature +500',                 { locked = true, repeating = true } )
 b( s..'XF86MonBrightnessDown', e 'hyprctl hyprsunset temperature -500',                 { locked = true, repeating = true } )
-b( m..'XF86MonBrightnessUp',   e 'hyprctl hyprsunset temperature 3500',                 { locked = true, repeating = true } )
-b( m..'XF86MonBrightnessDown', e 'hyprctl hyprsunset identity',                         { locked = true, repeating = true } )
+b( m..'XF86MonBrightnessUp',   e 'hyprctl hyprsunset temperature 3500',                 { locked = true } )
+b( m..'XF86MonBrightnessDown', e 'hyprctl hyprsunset identity',                         { locked = true } )
+
+-- Monitor Scaling
+b( m..'equal', function()
+	local mon = hl.get_active_monitor() or ''
+	local new_scale = '1.0'
+	for k,v in pairs(usable_scales) do
+		if tostring(v) == tostring(mon.scale) then
+			if k == #usable_scales then return
+			else new_scale = usable_scales[ k + 1 ]
+			end
+		end
+	end
+	local command      = 'hyprctl eval "hl.monitor({ '
+	command = command .. 'output=\\"' .. mon.name .. '\\", '
+	command = command .. 'mode=\\"' .. mon.width .. 'x' .. mon.height .. '@' .. mon.refresh_rate .. '\\", '
+	command = command .. 'position=\\"' .. mon.position.x .. 'x' .. mon.position.y .. '\\", '
+	command = command .. 'scale=\\"' .. new_scale .. '\\" })"'
+	hl.dispatch( e(command) )
+	hl.notification.create({ text = mon.name .. ' scale: ' .. string.format( '%.3f', new_scale ), duration = 2500 })
+end )
+
+b( m..'minus', function()
+	local mon = hl.get_active_monitor() or ''
+	local new_scale = '1.0'
+	for k,v in pairs(usable_scales) do
+		if tostring(v) == tostring(mon.scale) then
+			if k == 1 then return
+			else new_scale = usable_scales[ k - 1 ]
+			end
+		end
+	end
+	local command      = 'hyprctl eval "hl.monitor({ '
+	command = command .. 'output=\\"' .. mon.name .. '\\", '
+	command = command .. 'mode=\\"' .. mon.width .. 'x' .. mon.height .. '@' .. mon.refresh_rate .. '\\", '
+	command = command .. 'position=\\"' .. mon.position.x .. 'x' .. mon.position.y .. '\\", '
+	command = command .. 'scale=\\"' .. new_scale .. '\\" })"'
+	hl.dispatch( e(command) )
+	hl.notification.create({ text = mon.name .. ' scale: ' .. string.format( '%.3f', new_scale ), duration = 2500 })
+end )
 
 -- Hyprland Controls
 b( m..'x', hl.dsp.window.close() )
