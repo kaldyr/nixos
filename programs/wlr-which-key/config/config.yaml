@@ -67,6 +67,9 @@ menu:
       - key: "x"
         desc: "Close Window"
         cmd: hyprctl dispatch "hl.dsp.window.close()"
+      - key: "backslash"
+        desc: "Reload Hyprland and Waybar"
+        cmd: systemctl --user restart waybar && hyprctl reload
 
 #--<--------------------
 # Resize Menu         -->

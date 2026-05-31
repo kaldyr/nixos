@@ -478,22 +478,22 @@ b( m..'minus', function() -->
 end ) --<--
 
 -- Hyprland Controls
-b( m..'x',   hl.dsp.window.close() )
-b( m..'w',   hl.dsp.window.float({ action = 'toggle' }) )
-b( m..'o',   hl.dsp.window.pseudo() )
-b( m..'f',   hl.dsp.window.fullscreen() )
-b( m..'s',   hl.dsp.layout("togglesplit") )
-b( m..'Tab', function() -->
+b( m..'x',          hl.dsp.window.close() )
+b( m..'w',          hl.dsp.window.float({ action = 'toggle' }) )
+b( m..'o',          hl.dsp.window.pseudo() )
+b( m..'f',          hl.dsp.window.fullscreen() )
+b( m..'s',          hl.dsp.layout("togglesplit") )
+b( m..'backslash',  function() -->
+	hl.dispatch( e 'hyprctl reload' )
+	hl.dispatch( e 'systemctl --user restart waybar' )
+end ) --<--
+b( m..'Tab',        function() -->
 	hl.dispatch( hl.dsp.window.cycle_next() )
 	hl.dispatch( hl.dsp.window.bring_to_top() )
 end ) --<--
 
 -- Which Key (Show all the keybinds)
-b( m.."space", function() -->
-	hl.dispatch( e 'hyprctl reload' )
-	hl.dispatch( e 'systemctl --user restart waybar' )
-	hl.dispatch( e 'wlr-which-key' )
-end ) --<--
+b( m.."space", e 'wlr-which-key' )
 
 -- Power Menu
 b( m.."p", e 'wlr-which-key --initial-keys "p"' )
