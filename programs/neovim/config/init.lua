@@ -458,6 +458,17 @@ vim.lsp.config( 'nixd', {
 vim.lsp.enable('nixd')
 
 --<-------------------------
+-- Odin                   -->
+----------------------------
+
+vim.lsp.config( 'odin', {
+	cmd = { 'ols' },
+	filetypes = { 'odin' },
+})
+
+vim.lsp.enable('odin')
+
+--<-------------------------
 -- Python                 -->
 ----------------------------
 

@@ -25,12 +25,14 @@
             gnumake
             ripgrep
             # Language servers
+            emmet-ls
             gopls
             htmx-lsp
             kdePackages.qtdeclarative
             lua-language-server
             marksman
             nixd
+            ols
             python313Packages.python-lsp-server
             taplo
             vscode-langservers-extracted
