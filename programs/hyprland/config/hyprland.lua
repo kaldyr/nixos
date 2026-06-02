@@ -431,7 +431,7 @@ b( 'XF86AudioPlay',           e 'playerctl play-pause',          { locked = true
 b( 'XF86AudioPause',          e 'playerctl play-pause',          { locked = true } )
 b( 'XF86AudioPrev',           e 'playerctl previous',            { locked = true } )
 
--- Brightness
+-- Brightness & Temperature
 b( 'XF86MonBrightnessUp',      e 'brightnessctl set +5% ; hyprctl hyprsunset gamma +5', { locked = true, repeating = true } )
 b( 'XF86MonBrightnessDown',    e 'brightnessctl set -5% ; hyprctl hyprsunset gamma -5', { locked = true, repeating = true } )
 b( s..'XF86MonBrightnessUp',   e 'hyprctl hyprsunset temperature +500',                 { locked = true, repeating = true } )
@@ -700,6 +700,8 @@ wr({
 	opacity = '0.85',
 	size = win_large_size()
 })
+
+wr({ name = 'satty', match = { class = 'com.gabm.satty' }, float = true })
 
 wr({ name = 'steam',  match = { class = 'steam$' }, opacity = '0.85' })
 

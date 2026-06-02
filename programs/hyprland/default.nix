@@ -3,7 +3,6 @@
     imports = [
         ../../services/awww.nix
         ../../services/dunst.nix
-        ../../services/hypridle.nix
         ../../services/udiskie.nix
         ../feh.nix
         ../fuzzel.nix
@@ -31,6 +30,7 @@
             easyeffects
             grim
             hyprcursor
+            hypridle
             hyprlock
             hyprpicker
             hyprpolkitagent
@@ -40,6 +40,7 @@
             pavucontrol
             playerctl
             quickshell
+            satty
             slurp
             tesseract
             wl-clipboard
@@ -51,12 +52,14 @@
 
         services = {
             cliphist.enable = true;
+            hypridle.enable = true;
             hyprsunset.enable = true;
             playerctld.enable = true;
         };
 
         xdg.configFile = {
             "hypr/hyprland.lua".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/hyprland.lua";
+            "hypr/hypridle.conf".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/hypridle.conf";
             "hypr/hyprlock.conf".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/hyprlock.conf";
             "hypr/hyprsunset.conf".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/hyprsunset.conf";
         };
