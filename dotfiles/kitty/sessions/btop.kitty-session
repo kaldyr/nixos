@@ -1,0 +1,5 @@
+new_tab 󱒉
+layout splits
+enabled_layouts splits,stack
+launch 'kitty-unserialize-data={"id": 1, "cmd_at_shell_startup": "btop"}'
+focus
