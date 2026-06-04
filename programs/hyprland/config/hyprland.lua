@@ -308,9 +308,9 @@ local b, e = hl.bind, hl.dsp.exec_cmd
 local m, s, c, a = 'SUPER + ', 'SHIFT + ', 'CTRL + ', 'ALT + '
 
 -- Launchers
-b( m..'b', e 'kitty --class "float-large" btop' )
-b( m..'c', e 'kitty --class "float-small" qalc' )
-b( m..'e', e 'kitty --class "float-large" yazi' )
+b( m..'b', e 'kitty --class "float-large" --session ~/.config/kitty/sessions/btop.kitty-session' )
+b( m..'c', e 'kitty --class "float-small" --session ~/.config/kitty/sessions/qalc.kitty-session' )
+b( m..'e', e 'kitty --class "float-large" --session ~/.config/kitty/sessions/yazi.kitty-session' )
 b( m..'m', e 'keepmenu' )
 b( m..'q', e 'kitty' )
 b( m..'r', e 'fuzzel' )

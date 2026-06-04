@@ -1,5 +1,5 @@
-new_tab 󱒉
+new_tab 
 layout splits
 enabled_layouts splits,stack
-launch btop
+launch nvim /nix/config
 focus

@@ -1,0 +1,5 @@
+new_tab 
+layout splits
+enabled_layouts splits,stack
+launch nvim /nix/config/programs/neovim/config/init.lua
+focus
