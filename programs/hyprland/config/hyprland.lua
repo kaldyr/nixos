@@ -310,7 +310,7 @@ local m, s, c, a = 'SUPER + ', 'SHIFT + ', 'CTRL + ', 'ALT + '
 -- Launchers
 b( m..'b', e 'kitty --class "float-large" --session ~/.config/kitty/sessions/btop.kitty-session' )
 b( m..'c', e 'kitty --class "float-small" --session ~/.config/kitty/sessions/qalc.kitty-session' )
-b( m..'e', e 'kitty --class "float-large" --session ~/.config/kitty/sessions/yazi.kitty-session' )
+b( m..'y', e 'kitty --class "float-large" --session ~/.config/kitty/sessions/yazi.kitty-session' )
 b( m..'m', e 'keepmenu' )
 b( m..'q', e 'kitty' )
 b( m..'r', e 'fuzzel' )
