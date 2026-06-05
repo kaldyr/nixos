@@ -701,7 +701,7 @@ wr({
 	size = win_large_size()
 })
 
-wr({ name = 'satty', match = { class = 'com.gabm.satty' }, float = true })
+wr({ name = 'satty', match = { class = 'com.gabm.satty' }, float = true, size = win_large_size() })
 
 wr({ name = 'steam',  match = { class = 'steam$' }, opacity = '0.85' })
 

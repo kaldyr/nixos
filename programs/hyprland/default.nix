@@ -6,6 +6,7 @@
         ../../services/udiskie.nix
         ../feh.nix
         ../fuzzel.nix
+        ../satty
         ../swappy.nix
         ../waybar.nix
         ../wlr-which-key
@@ -39,7 +40,6 @@
             pavucontrol
             playerctl
             quickshell
-            satty
             slurp
             tesseract
             wl-clipboard

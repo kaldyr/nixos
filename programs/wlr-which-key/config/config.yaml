@@ -159,10 +159,10 @@ menu:
     submenu:
       - key: "s"
         desc: "Entire [S]creen"
-        cmd: grim $(xdg-user-dir PICTURES)/Screenshots/$(date +"%Y%m%d%H%M%S.png")
+        cmd: sleep 0.1 && grim - | satty --filename - --fullscreen
       - key: "a"
         desc: "Catpure [A]rea"
-        cmd: slurp | grim -g - - | magick - -shave 1x1 PNG:- | satty -f - --copy-command wl-copy -o "~/Pictures/Screenshots/%Y%m%d%H%M%S.png"
+        cmd: slurp | grim -g - - | magick - -shave 1x1 PNG:- | satty --filename -
       - key: "o"
         desc: "[O]ptical Character Recognition"
         cmd: slurp | grim -g - - | tesseract - - | wl-copy

@@ -56,6 +56,7 @@
             defaultFonts = {
                 emoji = [ "Noto Color Emoji" ];
                 monospace = [
+                    "Maple Mono NF"
                     "Liga Rec Mono Custom"
                     "JuliaMono"
                     "Noto Sans Mono CJK HK"
