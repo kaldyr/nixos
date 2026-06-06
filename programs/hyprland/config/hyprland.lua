@@ -525,10 +525,6 @@ for i = 1, 10 do
 	b( m..s..tostring(i % 10), hl.dsp.window.move({ workspace = i, follow = false }) )
 end
 
--- General mouse -- [FIXME] These do not work
-b( c..'mouse_up',   hl.dsp.send_shortcut({ key = 'mouse_right', mods = '', window = 'activewindow' }) )
-b( c..'mouse_down', hl.dsp.send_shortcut({ key = 'mouse_left',  mods = '', window = 'activewindow' }) )
-
 --<------------------
 -- Window Rules    -->
 ---------------------
