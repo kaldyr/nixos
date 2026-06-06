@@ -432,12 +432,12 @@ b( 'XF86AudioPause',          e 'playerctl play-pause',          { locked = true
 b( 'XF86AudioPrev',           e 'playerctl previous',            { locked = true } )
 
 -- Brightness & Temperature
-b( 'XF86MonBrightnessUp',      e 'brightnessctl set +5% ; hyprctl hyprsunset gamma +5', { locked = true, repeating = true } )
-b( 'XF86MonBrightnessDown',    e 'brightnessctl set -5% ; hyprctl hyprsunset gamma -5', { locked = true, repeating = true } )
-b( s..'XF86MonBrightnessUp',   e 'hyprctl hyprsunset temperature +500',                 { locked = true, repeating = true } )
-b( s..'XF86MonBrightnessDown', e 'hyprctl hyprsunset temperature -500',                 { locked = true, repeating = true } )
-b( m..'XF86MonBrightnessUp',   e 'hyprctl hyprsunset temperature 3500',                 { locked = true } )
-b( m..'XF86MonBrightnessDown', e 'hyprctl hyprsunset identity',                         { locked = true } )
+b( 'XF86MonBrightnessUp',      e 'brightnessctl set +5%',               { locked = true, repeating = true } )
+b( 'XF86MonBrightnessDown',    e 'brightnessctl set -5%',               { locked = true, repeating = true } )
+b( s..'XF86MonBrightnessUp',   e 'hyprctl hyprsunset temperature +500', { locked = true, repeating = true } )
+b( s..'XF86MonBrightnessDown', e 'hyprctl hyprsunset temperature -500', { locked = true, repeating = true } )
+b( m..'XF86MonBrightnessUp',   e 'hyprctl hyprsunset temperature 3500', { locked = true } )
+b( m..'XF86MonBrightnessDown', e 'hyprctl hyprsunset identity',         { locked = true } )
 
 -- Monitor Scaling
 b( m..'equal', function() -->
