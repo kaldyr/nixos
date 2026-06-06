@@ -57,7 +57,7 @@
         };
 
         xdg.configFile = {
-            "hypr/hyprland.lua".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/hyprland.lua";
+            "hypr/main.lua".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/hyprland.lua";
             "hypr/hypridle.conf".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/hypridle.conf";
             "hypr/hyprlock.conf".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/hyprlock.conf";
             "hypr/hyprsunset.conf".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/hyprsunset.conf";
@@ -80,10 +80,12 @@
         wayland.windowManager.hyprland = {
             enable = true;
             configType = "lua";
+            extraConfig = ''
+                require('main')
+            '';
             package = null;
             portalPackage = null;
             systemd.enable = true;
-            settings = {};
         };
 
     };

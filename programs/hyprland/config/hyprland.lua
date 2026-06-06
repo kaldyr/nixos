@@ -513,8 +513,15 @@ b( m..'mouse:272', hl.dsp.window.drag(), { mouse = true } )
 
 -- Resize Windows
 b( m..s..'r',      e 'wlr-which-key --initial-keys "R"' )
+b( m..'left',      hl.dsp.window.resize({ x = -24, y = 0,   relative = true}), { repeating = true } ) -- width of one terminal col
+b( m..'down',      hl.dsp.window.resize({ x = 0,   y = 19,  relative = true}), { repeating = true } ) -- height of one terminal row
+b( m..'up',        hl.dsp.window.resize({ x = 0,   y = -19, relative = true}), { repeating = true } ) -- height of one terminal row
+b( m..'right',     hl.dsp.window.resize({ x = 24,  y = 0,   relative = true}), { repeating = true } ) -- width of one terminal col
+b( m..s..'left',   hl.dsp.window.resize({ x = -1,  y = 0,   relative = true}), { repeating = true } )
+b( m..s..'down',   hl.dsp.window.resize({ x = 0,   y = 1,   relative = true}), { repeating = true } )
+b( m..s..'up',     hl.dsp.window.resize({ x = 0,   y = -1,  relative = true}), { repeating = true } )
+b( m..s..'right',  hl.dsp.window.resize({ x = 1,   y = 0,   relative = true}), { repeating = true } )
 b( m..'mouse:273', hl.dsp.window.resize(), { mouse = true } )
-
 -- Switch Workspace
 b( m..'code:59',    hl.dsp.focus({ workspace = 'e-1' }) ) -- ,
 b( m..'code:60',    hl.dsp.focus({ workspace = 'e+1' }) ) -- .
