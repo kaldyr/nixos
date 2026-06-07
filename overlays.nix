@@ -22,11 +22,6 @@
         hyprland = inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.hyprland;
         xdg-desktop-portal-hyprland = inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
-        openldap = prev.openldap.overrideAttrs {
-            doCheck = !prev.stdenv.hostPlatform.isi686;
-        };
-
-        openrazer = inputs.nixpkgs-openrazer.legacyPackages.${prev.stdenv.hostPlatform.system}.openrazer;
         quickshell = inputs.quickshell.packages.${prev.stdenv.hostPlatform.system}.default;
         yazi = inputs.yazi.packages.${prev.stdenv.hostPlatform.system}.yazi;
         zmx = inputs.zmx.packages.${prev.stdenv.hostPlatform.system}.default;

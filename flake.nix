@@ -19,7 +19,6 @@
         # Nixpkgs
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
         nixpkgs-floorp.url = "github:NixOS/nixpkgs/eabbe1044fbe014573ed5ed7f7523181f98d31ec";
-        nixpkgs-openrazer.url = "github:NixOS/nixpkgs/99643def59501d1eabb1ca01ef701b66d41908fe";
 
         # Sops - secret management
         sops-nix.url = "github:Mic92/sops-nix";
@@ -30,7 +29,7 @@
         helium.inputs.nixpkgs.follows = "nixpkgs";
 
         # Hyprland
-        hyprland.url = "github:hyprwm/Hyprland/20ee7553c95dd1fa30a00564561f40f7986ffbc7";
+        hyprland.url = "github:hyprwm/Hyprland/20ee7553c95dd1fa30a00564561f40f7986ffbc7"; # 2026-06-06
 
         # Quickshell
         quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";

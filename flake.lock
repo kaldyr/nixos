@@ -274,6 +274,7 @@
       "original": {
         "owner": "hyprwm",
         "repo": "Hyprland",
+        "rev": "20ee7553c95dd1fa30a00564561f40f7986ffbc7",
         "type": "github"
       }
     },
@@ -578,22 +579,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-openrazer": {
-      "locked": {
-        "lastModified": 1779533101,
-        "narHash": "sha256-GGsXHdmXIlI8q0qDYkelWsquTDhYzSAVmfWrwEoF73w=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "99643def59501d1eabb1ca01ef701b66d41908fe",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "99643def59501d1eabb1ca01ef701b66d41908fe",
-        "type": "github"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1768564909,
@@ -723,7 +708,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-floorp": "nixpkgs-floorp",
-        "nixpkgs-openrazer": "nixpkgs-openrazer",
         "quickshell": "quickshell",
         "sops-nix": "sops-nix",
         "yazi": "yazi",
