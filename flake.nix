@@ -29,7 +29,7 @@
         helium.inputs.nixpkgs.follows = "nixpkgs";
 
         # Hyprland
-        hyprland.url = "github:hyprwm/Hyprland/20ee7553c95dd1fa30a00564561f40f7986ffbc7"; # 2026-06-06
+        hyprland.url = "github:hyprwm/Hyprland/367beccd27df394461cc80ba845d0088b5f87690"; # 2026-06-07
 
         # Quickshell
         quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
