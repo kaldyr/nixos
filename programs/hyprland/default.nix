@@ -44,7 +44,6 @@
             tesseract
             wl-clipboard
             wl-screenrec
-            wtype
             xdg-desktop-portal-hyprland
             xwayland
         ];

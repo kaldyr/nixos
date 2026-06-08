@@ -325,8 +325,8 @@ b( m..'g', e '/nix/config/scripts/yt-dlp.sh' )
 -- Notification Controls
 b( m..'n', e 'wlr-which-key --initial-keys "n"' )
 
--- Use wtype to paste into things that do not like to obey paste keybinds
-b( m..'v', e 'wtype $(cliphist list | fuzzel -d | cliphist decode)' )
+-- Use dotool to paste into things that do not like to obey paste keybinds
+b( m..'v', e 'dotool $(cliphist list | fuzzel -d | cliphist decode)' )
 
 -- Arrange windows into columns for ultrawide monitor
 b( m..'a', function() -->

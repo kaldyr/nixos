@@ -225,5 +225,5 @@ menu:
     desc: "Color Picker"
     cmd: hyprpicker -a
   - key: "v"
-    desc: "'Paste' using wtype"
-    cmd: wtype $(cliphist list | fuzzel -d | cliphist decode)
+    desc: "'Paste' using dotool"
+    cmd: dotool $(cliphist list | fuzzel -d | cliphist decode)

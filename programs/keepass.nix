@@ -3,6 +3,7 @@
     home-manager.users.${sysConfig.user} = { config, ... }: {
 
         home.packages = with pkgs; [
+            dotool
             keepassxc
             keepmenu
         ];
