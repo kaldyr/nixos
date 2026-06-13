@@ -164,7 +164,7 @@ map('n', '<Left>', '"mxh"mP', { silent = true }) -- <Caps-h>
 map('n', '<Right>', '"mx"mp', { silent = true }) -- <Caps-l>
 
 -- Window management
-map('n', '<C-x>', '<Cmd>bd<CR>', { desc = 'Close Buffer', silent = true })
+map('n', '<C-x>', '<Cmd>bw<CR>', { desc = 'Close Buffer', silent = true })
 map('n', '<C-h>', ':wincmd h<CR>', { desc = 'Window Left', silent = true })
 map('n', '<C-j>', ':wincmd j<CR>', { desc = 'Window Down', silent = true })
 map('n', '<C-k>', ':wincmd k<CR>', { desc = 'Window Up', silent = true })

@@ -22,6 +22,7 @@
         hyprland = inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.hyprland;
         xdg-desktop-portal-hyprland = inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
+        openscad = inputs.nixpkgs-openscad.legacyPackages.${prev.stdenv.hostPlatform.system}.openscad;
         quickshell = inputs.quickshell.packages.${prev.stdenv.hostPlatform.system}.default;
         yazi = inputs.yazi.packages.${prev.stdenv.hostPlatform.system}.yazi;
         zmx = inputs.zmx.packages.${prev.stdenv.hostPlatform.system}.default;

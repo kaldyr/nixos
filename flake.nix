@@ -19,6 +19,7 @@
         # Nixpkgs
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
         nixpkgs-floorp.url = "github:NixOS/nixpkgs/eabbe1044fbe014573ed5ed7f7523181f98d31ec";
+        nixpkgs-openscad.url = "github:NixOS/nixpkgs/4d37e390e1c21abe7612a65fcc29e582eeed2d88";
 
         # Sops - secret management
         sops-nix.url = "github:Mic92/sops-nix";
@@ -29,14 +30,14 @@
         helium.inputs.nixpkgs.follows = "nixpkgs";
 
         # Hyprland
-        hyprland.url = "github:hyprwm/Hyprland/367beccd27df394461cc80ba845d0088b5f87690"; # 2026-06-07
+        hyprland.url = "github:hyprwm/Hyprland/f719bd67949aa92ad5a9b5dc0659cda8804ee39c"; # 2026-06-13
 
         # Quickshell
         quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
         quickshell.inputs.nixpkgs.follows = "nixpkgs";
 
         # Yazi file manager
-        yazi.url = "github:sxyazi/yazi/f6113d386539a07d4ae23d24595e603bc0be0343"; # 2026-06-07
+        yazi.url = "github:sxyazi/yazi/b37be0529aca0c49768f0ed731b83af108acd6fe"; # 2026-06-13
 
         # zmx session persistence
         zmx.url = "github:neurosnap/zmx";
