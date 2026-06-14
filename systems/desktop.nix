@@ -7,7 +7,7 @@
         ../programs/keepass.nix
         ../programs/kitty
         ../programs/libreoffice.nix
-        ../programs/mpv.nix
+        ../programs/mpv
         ../programs/newsboat.nix
         ../programs/obsidian.nix
         ../programs/telegram.nix

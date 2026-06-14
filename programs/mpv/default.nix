@@ -15,8 +15,7 @@
 
         };
 
-        xdg.configFile."mpv/input.conf".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/mpv/input.conf";
-        xdg.configFile."mpv/mpv.conf".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/dotfiles/mpv/mpv.conf";
+        xdg.configFile."mpv".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/mpv/config";
 
         xdg.mimeApps.associations.added = {
             "application/audio" = [ "mpv.desktop" ];
