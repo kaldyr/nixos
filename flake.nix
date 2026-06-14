@@ -32,10 +32,6 @@
         # Hyprland
         hyprland.url = "github:hyprwm/Hyprland/f719bd67949aa92ad5a9b5dc0659cda8804ee39c"; # 2026-06-13
 
-        # Quickshell
-        quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-        quickshell.inputs.nixpkgs.follows = "nixpkgs";
-
         # Yazi file manager
         yazi.url = "github:sxyazi/yazi/b37be0529aca0c49768f0ed731b83af108acd6fe"; # 2026-06-13
 
