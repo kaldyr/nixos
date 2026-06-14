@@ -808,6 +808,8 @@ vim.schedule( function()
 
 end )
 
+vim.schedule( function() require('mini.surround').setup() end )
+
 vim.schedule( function() require('mini.operators').setup() end )
 
 --<-------------------------
