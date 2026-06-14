@@ -776,6 +776,7 @@ require('lualine').setup({
 ----------------------------
 
 vim.schedule( function() require('mini.ai').setup() end )
+vim.schedule( function() require('mini.comment').setup() end )
 
 vim.schedule( function()
 
