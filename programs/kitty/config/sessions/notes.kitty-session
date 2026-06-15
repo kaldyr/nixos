@@ -1,0 +1,5 @@
+new_tab 󰹕
+layout splits
+enabled_layouts splits,stack
+launch nvim ~/Notes
+focus

@@ -310,6 +310,7 @@ local m, s, c, a = 'SUPER + ', 'SHIFT + ', 'CTRL + ', 'ALT + '
 -- Launchers
 b( m..'b', e 'kitty --class "float-large" --session ~/.config/kitty/sessions/btop.kitty-session' )
 b( m..'c', e 'kitty --class "float-small" --session ~/.config/kitty/sessions/qalc.kitty-session' )
+b( m..'o', e 'kitty --class "float-large" --session ~/.config/kitty/sessions/notes.kitty-session' )
 b( m..'y', e 'kitty --class "float-large" --session ~/.config/kitty/sessions/yazi.kitty-session' )
 b( m..'m', e 'keepmenu' )
 b( m..'q', e 'kitty' )
@@ -480,7 +481,7 @@ end ) --<--
 -- Hyprland Controls
 b( m..'x',          hl.dsp.window.close() )
 b( m..'w',          hl.dsp.window.float({ action = 'toggle' }) )
-b( m..'o',          hl.dsp.window.pseudo() )
+b( m..'p',          hl.dsp.window.pseudo() )
 b( m..'f',          hl.dsp.window.fullscreen() )
 b( m..'s',          hl.dsp.layout("togglesplit") )
 b( m..'backslash',  function() -->
@@ -496,7 +497,7 @@ end ) --<--
 b( m.."space", e 'wlr-which-key' )
 
 -- Power Menu
-b( m.."p", e 'wlr-which-key --initial-keys "p"' )
+b( m.."Backspace", e 'wlr-which-key --initial-keys "p"' )
 
 -- Focus Windows
 b( m..'h', hl.dsp.focus({ direction = 'l' }) )
