@@ -89,14 +89,14 @@ elseif hostname == 'hofud' then
 
 elseif hostname == 'mjolnir' then
 
-	-- usable_scales = {
-	-- 	'1.0',                -- 3440x1440
+	usable_scales = {
+		'1.0',                -- 3440x1440
 	-- 	'1.0666667222976685', -- 3225x1350 really close to prev step
-	-- 	'1.25',               -- 2752x1152
-	-- 	'1.6000000238418579', -- 2150x900
+		'1.25',               -- 2752x1152
+		'1.6000000238418579', -- 2150x900
 	-- 	'1.6666666269302368', -- 2064x864 really close to prev step
-	-- 	'2.0',                -- 1720x720
-	-- }
+		'2.0',                -- 1720x720
+	}
 
 	hl.monitor({
 		output = 'HDMI-A-1',
