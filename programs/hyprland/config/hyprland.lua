@@ -308,14 +308,16 @@ local b, e = hl.bind, hl.dsp.exec_cmd
 local m, s, c, a = 'SUPER + ', 'SHIFT + ', 'CTRL + ', 'ALT + '
 
 -- Launchers
-b( m..'b', e 'kitty --class "float-large" --session ~/.config/kitty/sessions/btop.kitty-session' )
-b( m..'c', e 'kitty --class "float-small" --session ~/.config/kitty/sessions/qalc.kitty-session' )
-b( m..'o', e 'kitty --class "float-large" --session ~/.config/kitty/sessions/notes.kitty-session' )
-b( m..'y', e 'kitty --class "float-large" --session ~/.config/kitty/sessions/yazi.kitty-session' )
-b( m..'m', e 'keepmenu' )
-b( m..'q', e 'kitty' )
-b( m..'r', e 'fuzzel' )
-b( m..'u', e 'hyprpicker -a' )
+b( m..'b',    e 'kitty --class "float-large" --session ~/.config/kitty/sessions/btop.kitty-session' )
+b( m..'c',    e 'kitty --class "float-small" --session ~/.config/kitty/sessions/qalc.kitty-session' )
+b( m..s..'c', e 'kitty --class "float-large" --session ~/.config/kitty/sessions/nixos.kitty-session' )
+b( m..'o',    e 'kitty --class "float-large" --session ~/.config/kitty/sessions/notes.kitty-session' )
+b( m..'y',    e 'kitty --class "float-large" --session ~/.config/kitty/sessions/yazi.kitty-session' )
+b( m..'m',    e 'keepmenu' )
+b( m..'q',    e 'kitty' )
+b( m..s..'q', e 'kitty --class "float-large"' )
+b( m..'r',    e 'fuzzel' )
+b( m..'u',    e 'hyprpicker -a' )
 
 -- Screen Capture
 b( 'PRINT', e 'wlr-which-key --initial-keys "Print"' )
