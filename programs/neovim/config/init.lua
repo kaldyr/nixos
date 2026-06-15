@@ -520,11 +520,7 @@ vim.lsp.enable('yamlls')
 local gh = function(repo) return 'https://github.com/' .. repo end
 ---@type (string|vim.pack.Spec)[]
 vim.pack.add({
-	{ src = gh 'saghen/blink.cmp', version = vim.version.range '1.*' },
 	{ src = gh 'catppuccin/nvim', name = 'catppuccin' },
-	gh 'rafamadriz/friendly-snippets',
-	gh 'ibhagwan/fzf-lua',
-	gh 'lewis6991/gitsigns.nvim',
 	gh 'folke/lazydev.nvim',
 	gh 'nvim-lualine/lualine.nvim',
 	gh 'yavorski/lualine-macro-recording.nvim',
@@ -618,115 +614,6 @@ require('catppuccin').setup({
 vim.cmd [[ colorscheme catppuccin ]]
 
 --<-------------------------
--- Blink.cmp              -->  Completion
-----------------------------
-
-vim.schedule( function()
-
-	require('blink.cmp').setup({
-
-		keymap = { preset = 'enter' },
-
-		appearance = {
-			nerd_font_variant = 'mono'
-		},
-
-		completion = { documentation = { auto_show = true } },
-
-		sources = {
-			default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
-			providers = {
-				lazydev = {
-					name = 'LazyDev',
-					module = 'lazydev.integrations.blink',
-					score_offset = 100,
-				},
-			},
-		},
-
-		fuzzy = { implementation = 'lua' }
-
-	})
-
-end )
-
---<-------------------------
--- Fzf-lua                -->  Fuzzy Pickers
-----------------------------
-
-require('fzf-lua').setup({
-
-	file_ignore_patterns = {
-		'%.nextcloudsync.log',
-		'%.obsidian/',
-		'%.sync_.*%.db.*',
-		'%.trash/',
-	},
-
-	grep = {
-		prompt = 'Grep> ',
-		input_prompt = 'Grep For> ',
-		multiprocess = true,
-		git_icons = true,
-		file_icons = true,
-		color_icons = true,
-	},
-
-})
-
-map( 'n', '<leader>b', function() require('fzf-lua').buffers() end, { silent = true, desc = 'Buffer Picker' } )
-map( 'n', '<leader>f', function() require('fzf-lua').files() end, { silent = true, desc = 'File Picker' } )
-map( 'n', '<leader>h', function() require('fzf-lua').git_bcommits() end, { silent = true, desc = 'Git History Picker' } )
-map( 'n', '<leader>q', function() require('fzf-lua').quickfix() end, { silent = true, desc = 'Quickfix Picker' } )
-map( 'n', '<leader>Q', function() require('fzf-lua').lgrep_quickfix({ multiprocess = true }) end, { silent = true, desc = 'Search Quickfix' } )
-map( 'n', '<leader>r', function() require('fzf-lua').resume() end, { silent = true, desc = 'Resume last Picker' } )
-map( 'n', '<leader>s', function() require('fzf-lua').grep() end, { silent = true, desc = 'Search file contents' } )
-map( 'n', '<leader>l', function() require('fzf-lua').live_grep_native() end, { silent = true, desc = 'Live grep file contents' } )
-map( 'n', '<leader>L', function() require('fzf-lua').live_grep_resume() end, { silent = true, desc = 'Resume live grep' } )
-
---<-------------------------
--- Gitsigns               -->  Indicators for git changes
-----------------------------
-
-vim.schedule( function()
-
-	require('gitsigns').setup({
-
-		signs = {
-			add = { text = '+' },
-			change = { text = '~' },
-			delete = { text = '_' },
-			topdelete = { text = '‾' },
-			changedelete = { text = '⨫' },
-			untracked = { text = '┆' },
-		},
-
-		preview_config = {
-			border = 'rounded',
-			style = 'minimal',
-		},
-
-		on_attach = function(bufnr)
-			require('which-key').add({ ' g', group = 'Git Actions' })
-			local gs = require('gitsigns')
-			map('n', '[g', function() gs.nav_hunk('prev') end, { buffer = bufnr, desc = 'Jump to previous Git hunk' })
-			map('n', ']g', function() gs.nav_hunk('next') end, { buffer = bufnr, desc = 'Jump to next Git hunk' })
-			map('n', '<leader>gs', gs.stage_hunk, { buffer = bufnr, desc = 'Stage hunk' })
-			map('n', '<leader>gS', gs.stage_buffer, { buffer = bufnr, desc = 'Stage entire buffer' })
-			map('n', '<leader>gr', gs.reset_hunk, { buffer = bufnr, desc = 'Reset hunk' })
-			map('n', '<leader>gR', gs.reset_buffer, { buffer = bufnr, desc = 'Reset buffer' })
-			map('n', '<leader>gp', gs.preview_hunk, { buffer = bufnr, desc = 'Preview hunk' })
-			map('n', '<leader>gb', gs.blame_line, { buffer = bufnr, desc = 'Show blame information' })
-			map('n', '<leader>gD', gs.diffthis, { buffer = bufnr, desc = 'Diff buffer' })
-			map('n', '<leader>gT', gs.toggle_current_line_blame, { buffer = bufnr, desc = 'Toggle current blame' })
-			map('n', '<leader>gd', gs.preview_hunk_inline, { buffer = bufnr, desc = 'Toggle deleted' })
-		end,
-
-	})
-
-end )
-
---<-------------------------
 -- Lazydev                -->  Teach lua lsp about neovim
 ----------------------------
 
@@ -775,9 +662,6 @@ require('lualine').setup({
 -- Mini                   -->  Collection of mini plugins
 ----------------------------
 
-vim.schedule( function() require('mini.ai').setup() end )
-vim.schedule( function() require('mini.comment').setup() end )
-
 vim.schedule( function()
 
 	local frappe = require('catppuccin.palettes').get_palette('frappe')
@@ -789,6 +673,15 @@ vim.schedule( function()
 	vim.api.nvim_set_hl(0, 'MiniHipatternsSapphire', { bold = true, bg = frappe.base, fg = frappe.sapphire })
 	vim.api.nvim_set_hl(0, 'MiniHipatternsMauve',    { bold = true, bg = frappe.base, fg = frappe.mauve })
 
+	require('mini.icons').setup()
+	require('mini.ai').setup()
+	require('mini.bracketed').setup()
+	require('mini.bufremove').setup()
+	require('mini.comment').setup()
+	require('mini.completion').setup()
+	require('mini.diff').setup()
+	require('mini.extra').setup()
+	require('mini.git').setup()
 	require('mini.hipatterns').setup({
 		highlighters = {
 			debug     = { pattern = '%[DEBUG%]',   group = 'MiniHipatternsMaroon' },
@@ -806,12 +699,22 @@ vim.schedule( function()
 			hex_color = require('mini.hipatterns').gen_highlighter.hex_color()
 		}
 	})
+	require('mini.operators').setup()
+	require('mini.pairs').setup()
+	require('mini.pick').setup()
+	require('mini.snippets').setup()
+	require('mini.surround').setup()
+
+	local pick, extra = require('mini.pick'), require('mini.extra')
+	map( 'n', '<leader>b', function() pick.builtin.buffers() end,                     { silent = true, desc = 'Buffer Picker' } )
+	map( 'n', '<leader>f', function() pick.builtin.files() end,                       { silent = true, desc = 'File Picker' } )
+	map( 'n', '<leader>h', function() extra.pickers.git_commits() end,                { silent = true, desc = 'Live grep file contents' } )
+	map( 'n', '<leader>l', function() pick.builtin.grep_live() end,                   { silent = true, desc = 'Live grep file contents' } )
+	map( 'n', '<leader>q', function() extra.pickers.list({ scope = 'quickfix' }) end, { silent = true, desc = 'Live grep file contents' } )
+	map( 'n', '<leader>r', function() pick.builtin.resume() end,                      { silent = true, desc = 'Live grep file contents' } )
+	map( 'n', '<leader>s', function() pick.buitlin.grep() end,                        { silent = true, desc = 'Search file contents' } )
 
 end )
-
-vim.schedule( function() require('mini.surround').setup() end )
-
-vim.schedule( function() require('mini.operators').setup() end )
 
 --<-------------------------
 -- Noice                  -->  UI for messages, cmdline, and popupmenu
@@ -907,7 +810,6 @@ end )
 require('snacks').setup({
 
 	bigfile = { enabled = true },
-	bufdelete = { enabled = true },
 	debug = { enabled = true },
 	dim = { enabled = true },
 	image = { enabled = true },
