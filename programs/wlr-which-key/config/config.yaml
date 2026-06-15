@@ -58,8 +58,8 @@ menu:
       - key: "f"
         desc: "Toggle Fullscreen"
         cmd: hyprctl dispatch "hl.dsp.window.fullscreen()"
-      - key: "o"
-        desc: "Toggle Pseudotile"
+      - key: "p"
+        desc: "Toggle [P]seudotile"
         cmd: hyprctl dispatch "hl.dsp.window.pseudo()"
       - key: "w"
         desc: "Toggle Floating"
@@ -177,8 +177,8 @@ menu:
 # Power Menu          -->
 #-----------------------
 
-  - key: "p"
-    desc: "[P]ower Menu"
+  - key: "BackSpace"
+    desc: "Power Menu"
     submenu:
       - key: "l"
         desc: "[L]ock Screen"
