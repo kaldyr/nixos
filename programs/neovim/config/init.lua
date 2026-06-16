@@ -706,13 +706,34 @@ vim.schedule( function()
 	require('mini.surround').setup()
 
 	local pick, extra = require('mini.pick'), require('mini.extra')
-	map( 'n', '<leader>b', function() pick.builtin.buffers() end,                     { silent = true, desc = 'Buffer Picker' } )
-	map( 'n', '<leader>f', function() pick.builtin.files() end,                       { silent = true, desc = 'File Picker' } )
-	map( 'n', '<leader>h', function() extra.pickers.git_commits() end,                { silent = true, desc = 'Live grep file contents' } )
-	map( 'n', '<leader>l', function() pick.builtin.grep_live() end,                   { silent = true, desc = 'Live grep file contents' } )
-	map( 'n', '<leader>q', function() extra.pickers.list({ scope = 'quickfix' }) end, { silent = true, desc = 'Live grep file contents' } )
-	map( 'n', '<leader>r', function() pick.builtin.resume() end,                      { silent = true, desc = 'Live grep file contents' } )
-	map( 'n', '<leader>s', function() pick.buitlin.grep() end,                        { silent = true, desc = 'Search file contents' } )
+	map( 'n', '<leader>b',
+		function() pick.builtin.buffers() end,
+		{ silent = true, desc = 'Buffer Picker' }
+	)
+	map( 'n', '<leader>f',
+		function() pick.builtin.files() end,
+		{ silent = true, desc = 'File Picker' }
+	)
+	map( 'n', '<leader>h',
+		function() extra.pickers.git_commits() end,
+		{ silent = true, desc = 'Git Commits Picker' }
+	)
+	map( 'n', '<leader>l',
+		function() pick.builtin.grep_live() end,
+		{ silent = true, desc = 'Live grep file contents Picker' }
+	)
+	map( 'n', '<leader>q',
+		function() extra.pickers.list({ scope = 'quickfix' }) end,
+		{ silent = true, desc = 'Quickfix List Picker' }
+	)
+	map( 'n', '<leader>r',
+		function() pick.builtin.resume() end,
+		{ silent = true, desc = 'Resume last Picker' }
+	)
+	map( 'n', '<leader>s',
+		function() pick.buitlin.grep() end,
+		{ silent = true, desc = 'Search file contents' }
+	)
 
 end )
 
@@ -933,10 +954,7 @@ end )
 
 vim.schedule( function()
 
-	require('yazi').setup({
-		floating_window_scaling_factor = 0.8
-	})
-
+	require('yazi').setup({ floating_window_scaling_factor = 0.8 })
 	map( 'n', '<leader>y', '<Cmd>Yazi cwd<CR>', { desc = 'Yazi File Manager' } )
 
 end )
