@@ -20,7 +20,7 @@
 		},
 		"exclusive": false,
 		"gtk-layer-shell": true,
-		"height": 28,
+		"height": 24,
 		"hyprland/window": {
 			"format": "{}",
 		},

@@ -43,81 +43,95 @@ end )
 
 -- Main monitor
 
-local usable_scales = {'1.0'}
-
 if hostname == 'espresso' then
 
 	hl.monitor({
 		output = 'HDMI-A-1',
 		mode   = '1920x1080@60',
 		position = 'auto',
-		scale = usable_scales[1],
+		scale = '1.0',
 	})
 
-	hl.config({
-		general = {
-			gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
-			gaps_out = { top = 8, left = 18, right = 18, bottom = 18 }, -- 20
-		}
-	})
+	hl.config({ general = {
+		gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
+		gaps_out = { top = 8, left = 18, right = 18, bottom = 18 }, -- 20
+	} })
 
 elseif hostname == 'hofud' then
-
-	usable_scales = {
-		'1.0',                -- 2256x1504
-		'1.1749999523162842', -- 1920x1280
-		'1.3333333730697632', -- 1692x1128
-		-- '1.5666667222976685', -- 1437x958 really close to next step
-		'1.6000000238418579', -- 1410x940
-		-- '1.9583333730697632', -- 1151x767 really close to next step
-		'2.0',                -- 1128x752
-	}
 
 	hl.monitor({
 		output = 'eDP-1',
 		mode   = '2256x1504@60',
-		position = '0x0',
-		scale = usable_scales[3], -- Default to 1.33
+		position = 'auto',
+		scale = '1.3333333730697632',
 	})
-
-	hl.config({
-		general = {
-			gaps_in  = { top = 8, left = 14, right = 14, bottom = 9 }, -- 5
-			gaps_out = { top = 8, left = 20, right = 20, bottom = 20 }, -- 20
-		}
-	})
-
-elseif hostname == 'mjolnir' then
-
-	usable_scales = {
-		'1.0',                -- 3440x1440
-	-- 	'1.0666667222976685', -- 3225x1350 really close to prev step
-		'1.25',               -- 2752x1152
-		'1.6000000238418579', -- 2150x900
-	-- 	'1.6666666269302368', -- 2064x864 really close to prev step
-		'2.0',                -- 1720x720
-	}
 
 	hl.monitor({
-		output = 'HDMI-A-1',
+		output = '',
 		mode   = '3440x1440@85',
-		position = 'auto',
-		scale = usable_scales[1],
+		position = '0x0',
+		scale = '1.0',
 		bitdepth = 10,
 		sdrbrightness = 1.2,
 		sdrsaturation = 0.98,
 	})
 
-	hl.config({
-		general = {
-			gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
-			gaps_out = { top = 8, left = 18, right = 18, bottom = 18 }, -- 20
-		}
+	hl.config({ general = {
+		gaps_in  = { top = 8, left = 14, right = 14, bottom = 9 }, -- 5
+		gaps_out = { top = 8, left = 20, right = 20, bottom = 24 }, -- 20
+	} })
+
+	hl.on( 'monitor.added', function()
+		local monitors = hl.get_monitors() or ''
+		if #monitors == 1 and monitors[1].name == 'FALLBACK' then
+			hl.config({ general = {
+				gaps_in  = { top = 8, left = 14, right = 14, bottom = 9 }, -- 5
+				gaps_out = { top = 8, left = 20, right = 20, bottom = 24 }, -- 20
+			} })
+			return
+		end
+		for _, mon in pairs(monitors) do
+			if mon.size.width == 3440 then -- Disable the internal screen if the ultrawide is plugged in
+				hl.monitor({ output = 'eDP-1', disabled = true })
+				hl.config({ general = {
+					gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
+					gaps_out = { top = 8, left = 18, right = 18, bottom = 18 }, -- 20
+				} })
+			end
+		end
+	end )
+
+	hl.on( 'monitor.removed', function()
+		local monitors = hl.get_monitors() or ''
+		if #monitors == 0 then
+			hl.monitor({
+				output = 'eDP-1',
+				mode   = '2256x1504@60',
+				position = 'auto',
+				scale = '1.3333333730697632',
+				disabled = false,
+			})
+		end
+	end )
+
+elseif hostname == 'mjolnir' then
+
+	hl.monitor({
+		output = 'HDMI-A-1',
+		mode   = '3440x1440@85',
+		position = 'auto',
+		scale = '1.0',
+		bitdepth = 10,
+		sdrbrightness = 1.2,
+		sdrsaturation = 0.98,
 	})
 
-end
+	hl.config({ general = {
+		gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
+		gaps_out = { top = 8, left = 18, right = 18, bottom = 18 }, -- 20
+	} })
 
-hl.monitor({ output = '', mode = 'preferred', position = 'auto', scale = '1' })
+end
 
 --<------------------
 -- Environment     -->
@@ -335,7 +349,7 @@ b( m..'v', e 'dotool $(cliphist list | fuzzel -d | cliphist decode)' )
 b( m..'a', function() -->
 
 	local ws  = hl.get_workspace( hl.get_active_workspace() or '' )
-	local mon = hl.get_active_monitor()
+	local mon = hl.get_active_monitor() or ''
 
 	-- Bail if you didn't get a monitor or workspace or no need to sort
 	if ws == nil or mon == nil or ws.windows < 2 then return end
@@ -347,7 +361,7 @@ b( m..'a', function() -->
 	local windows = {}
 	for _, w in ipairs( hl.get_workspace_windows(ws) ) do
 		-- Ignore floating, hidden, and windows that are not at the top
-		if not w.floating and not w.hidden and w.at.y == ( math.floor(24*mon.scale) + go.top + 2 ) then
+		if not w.floating and not w.hidden and w.at.y < 50  then
 			windows[ #windows + 1 ] = w
 		end
 	end
@@ -442,44 +456,6 @@ b( s..'XF86MonBrightnessDown', e 'hyprctl hyprsunset temperature -500', { locked
 b( m..'XF86MonBrightnessUp',   e 'hyprctl hyprsunset temperature 3500', { locked = true } )
 b( m..'XF86MonBrightnessDown', e 'hyprctl hyprsunset identity',         { locked = true } )
 
--- Monitor Scaling
-b( m..'equal', function() -->
-	local mon = hl.get_active_monitor() or ''
-	local new_scale = '1.0'
-	for k,v in pairs(usable_scales) do
-		if tostring(v) == tostring(mon.scale) then
-			if k == #usable_scales then return
-			else new_scale = usable_scales[ k + 1 ]
-			end
-		end
-	end
-	local cmd  = 'hyprctl eval "hl.monitor({ '
-	cmd = cmd .. 'output=\\"' .. mon.name .. '\\", '
-	cmd = cmd .. 'mode=\\"' .. mon.width .. 'x' .. mon.height .. '@' .. mon.refresh_rate .. '\\", '
-	cmd = cmd .. 'position=\\"' .. mon.position.x .. 'x' .. mon.position.y .. '\\", '
-	cmd = cmd .. 'scale=\\"' .. new_scale .. '\\" })"'
-	hl.dispatch( e(cmd) )
-	hl.notification.create({ text = mon.name .. ' scale: ' .. string.format( '%.3f', new_scale ), duration = 2500 })
-end ) --<--
-b( m..'minus', function() -->
-	local mon = hl.get_active_monitor() or ''
-	local new_scale = '1.0'
-	for k,v in pairs(usable_scales) do
-		if tostring(v) == tostring(mon.scale) then
-			if k == 1 then return
-			else new_scale = usable_scales[ k - 1 ]
-			end
-		end
-	end
-	local command      = 'hyprctl eval "hl.monitor({ '
-	command = command .. 'output=\\"' .. mon.name .. '\\", '
-	command = command .. 'mode=\\"' .. mon.width .. 'x' .. mon.height .. '@' .. mon.refresh_rate .. '\\", '
-	command = command .. 'position=\\"' .. mon.position.x .. 'x' .. mon.position.y .. '\\", '
-	command = command .. 'scale=\\"' .. new_scale .. '\\" })"'
-	hl.dispatch( e(command) )
-	hl.notification.create({ text = mon.name .. ' scale: ' .. string.format( '%.3f', new_scale ), duration = 2500 })
-end ) --<--
-
 -- Hyprland Controls
 b( m..'x',          hl.dsp.window.close() )
 b( m..'w',          hl.dsp.window.float({ action = 'toggle' }) )
@@ -496,10 +472,10 @@ b( m..'Tab',        function() -->
 end ) --<--
 
 -- Which Key (Show all the keybinds)
-b( m.."space", e 'wlr-which-key' )
+b( m..'space', e 'wlr-which-key' )
 
 -- Power Menu
-b( m.."Backspace", e 'wlr-which-key --initial-keys "p"' )
+b( m..'BackSpace', e 'wlr-which-key --initial-keys "BackSpace"' )
 
 -- Focus Windows
 b( m..'h', hl.dsp.focus({ direction = 'l' }) )
