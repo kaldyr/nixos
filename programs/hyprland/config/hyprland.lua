@@ -323,7 +323,7 @@ local function win_large_size()
 
 	local w, h = 1155, 844 -- Default
 	if mon.width == 3440 or hostname == 'mjolnir' then
-		w, h = 1152, 855
+		w, h = 1080, 855
 	end
 
 	return { w, h }
