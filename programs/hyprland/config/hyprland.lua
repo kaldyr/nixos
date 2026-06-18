@@ -15,7 +15,7 @@ end
 hostname = string.gsub(hostname, '\n$', '')
 
 -- Startup applications
-local launch = hl.exec_cmd
+local launch, e = hl.exec_cmd, hl.dsp.exec_cmd
 hl.on( 'hyprland.start', function()
 
 	launch 'wl-paste --type text --watch cliphist store'
@@ -26,13 +26,9 @@ hl.on( 'hyprland.start', function()
 	if hostname == 'espresso' then
 		launch 'wayland-push-to-talk-fix -k "grave" -n "grave" /dev/input/by-id/usb-04d9_daskeyboard-event-kbd'
 
-	elseif hostname == 'hofud' then
-		launch 'pamixer -m'
-
 	elseif hostname == 'mjolnir' then
 		launch 'wayland-push-to-talk-fix -k "BTN_MIDDLE" -n "XF86WheelButton" /dev/input/by-id/usb-Razer_Razer_DeathAdder_Essential-event-mouse'
 		launch 'nmcli radio wifi off'
-		launch 'pamixer --default-source -m'
 	end
 
 end )
@@ -318,15 +314,38 @@ hl.gesture({
 ---------------------
 
 -- Shorthand
-local b, e = hl.bind, hl.dsp.exec_cmd
+local b = hl.bind
 local m, s, c, a = 'SUPER + ', 'SHIFT + ', 'CTRL + ', 'ALT + '
 
+-- Size functions
+local function win_large_size()
+	local mon = hl.get_active_monitor() or ''
+
+	local w, h = 1155, 844 -- Default
+	if mon.width == 3440 or hostname == 'mjolnir' then
+		w, h = 1152, 855
+	end
+
+	return { w, h }
+end
+
+local function win_small_size()
+	local mon = hl.get_active_monitor() or ''
+
+	local w, h = 487, 319
+	if mon.width == 3440 or hostname == 'mjolnir' then
+		w, h = 480, 323
+	end
+
+	return { w, h }
+end
+
 -- Launchers
-b( m..'b',    e 'kitty --class "float-large" --session ~/.config/kitty/sessions/btop.kitty-session' )
-b( m..'c',    e 'kitty --class "float-small" --session ~/.config/kitty/sessions/qalc.kitty-session' )
-b( m..s..'c', e 'kitty --class "float-large" --session ~/.config/kitty/sessions/nixos.kitty-session' )
-b( m..'o',    e 'kitty --class "float-large" --session ~/.config/kitty/sessions/notes.kitty-session' )
-b( m..'y',    e 'kitty --class "float-large" --session ~/.config/kitty/sessions/yazi.kitty-session' )
+b( m..'b',    e('kitty --session ~/.config/kitty/sessions/btop.kitty-session', { float = true, size = win_large_size() }) )
+b( m..'c',    e('kitty --session ~/.config/kitty/sessions/qalc.kitty-session', { float = true, size = win_small_size() }) )
+b( m..s..'c', e('kitty --session ~/.config/kitty/sessions/nixos.kitty-session', { float = true, size = win_large_size() }) )
+b( m..'o',    e('kitty --session ~/.config/kitty/sessions/notes.kitty-session', { float = true, size = win_large_size() }) )
+b( m..'y',    e('kitty --session ~/.config/kitty/sessions/yazi.kitty-session', { float = true, size = win_large_size() }) )
 b( m..'m',    e 'keepmenu' )
 b( m..'q',    e 'kitty' )
 b( m..s..'q', e 'kitty --class "float-large"' )
@@ -345,15 +364,66 @@ b( m..'n', e 'wlr-which-key --initial-keys "n"' )
 -- Use dotool to paste into things that do not like to obey paste keybinds
 b( m..'v', e 'dotool $(cliphist list | fuzzel -d | cliphist decode)' )
 
--- Arrange windows into columns for ultrawide monitor
+-- Arrange windows into columns for ultrawide monitor or resize and center floating window
 b( m..'a', function() -->
 
-	local ws  = hl.get_workspace( hl.get_active_workspace() or '' )
-	local mon = hl.get_active_monitor() or ''
+	local ws     = hl.get_workspace( hl.get_active_workspace() or '' )
+	local mon    = hl.get_active_monitor() or ''
+	local actwin = hl.get_active_window() or ''
 
-	-- Bail if you didn't get a monitor or workspace or no need to sort
-	if ws == nil or mon == nil or ws.windows < 2 then return end
+	-- Bail if you didn't get a monitor or workspace
+	if ws == nil or mon == nil then return end
 
+	-- Deal with floating
+	if actwin.floating == true then
+		local floating = {}
+		for _, w in ipairs( hl.get_workspace_windows(ws) ) do
+			if w.floating then
+				floating[ #floating + 1 ] = w
+			end
+		end
+		if #floating > 4 then return
+		elseif #floating == 1 then
+			local size = win_large_size()
+			if actwin.size.x < 500 then
+				size = win_small_size()
+			end
+			hl.dispatch( hl.dsp.window.resize({
+				window = actwin,
+				x = size[1],
+				y = size[2],
+				relative = false,
+			}) )
+			hl.dispatch( hl.dsp.window.center({ window = actwin }))
+			return
+		else
+			if mon.width / mon.height < 2 then return end -- Only arrange if ultrawide
+			table.sort( floating, function(i, j) return i.at.x < j.at.x end ) -- In order of position ltr
+			local i = 1
+			for _, w in ipairs(floating) do
+				local size = win_large_size()
+				if w.size.x < 500 then
+					size = win_small_size()
+				end
+				hl.dispatch( hl.dsp.window.resize({
+					window = w,
+					x = size[1],
+					y = size[2],
+					relative = false,
+				}) )
+				hl.dispatch( hl.dsp.window.move({
+					window = w,
+					x = math.floor( (mon.width*i/#floating) - (mon.width/#floating/2) - (size[1]/2) ),
+					y = math.floor( (mon.height / 2) - (size[2] / 2) ),
+					relative = false,
+				}) )
+				i = i + 1
+			end
+			return
+		end
+	end
+
+	-- Deal with tiled
 	local go    = hl.get_config('general.gaps_out')
 	local gi    = hl.get_config('general.gaps_in')
 	local bsize = hl.get_config('general.border_size')
@@ -525,28 +595,6 @@ local suppressMaximizeRule = wr({
 })
 suppressMaximizeRule:set_enabled(true)
 
-local function win_large_size()
-	local mon = hl.get_active_monitor() or ''
-
-	local w, h = 1152, 646
-	if     mon.width == 3440 then w, h = 1152, 855
-	elseif mon.width == 2256 then w, h = 1155, 844
-	end
-
-	return { w, h }
-end
-
-local function win_small_size()
-	local mon = hl.get_active_monitor() or ''
-
-	local w, h = 384, 323
-	if     mon.width == 3440 then w, h = 480, 323
-	elseif mon.width == 2256 then w, h = 487, 319
-	end
-
-	return { w, h }
-end
-
 wr({
 	name  = 'fix-xwayland-drags',
 	match = {
@@ -558,30 +606,6 @@ wr({
 		pin        = false,
 	},
 	no_focus = true,
-})
-
-wr({
-	name = 'float-large',
-	match = { class = 'float-large' },
-	float = true,
-	opacity = '0.85',
-	size = win_large_size()
-})
-
-wr({
-	name = 'float-small',
-	match = { class = 'float-small' },
-	float = true,
-	opacity = '0.85',
-	size = win_small_size()
-})
-
-wr({
-	name = 'pseudo-window',
-	match = { class = 'pseudo-window' },
-	pseudo = true,
-	opacity = '0.85',
-	size = win_large_size()
 })
 
 -- Specific     --
@@ -629,6 +653,7 @@ wr({ -- Diablo II Resurrected
 	opaque           = true,
 	pseudo           = true,
 	render_unfocused = true,
+	rounding         = 6,
 	stay_focused     = false,
 	suppress_event   = 'fullscreen maximize',
 })
@@ -670,21 +695,14 @@ wr({ -- Guild Wars 2
 	no_shadow        = true,
 	opaque           = true,
 	render_unfocused = true,
+	rounding         = 6,
 	stay_focused     = false,
 	suppress_event   = 'fullscreen maximize',
 })
 
 wr({ name = 'helium', match = { class = 'helium' }, opacity = '0.85' })
-
-wr({
-	name = 'kitty',
-	match = { class = 'kitty' },
-	opacity = '0.85',
-	size = win_large_size()
-})
-
+wr({ name = 'kitty', match = { class = 'kitty' }, opacity = '0.85' })
 wr({ name = 'satty', match = { class = 'com.gabm.satty' }, float = true, size = win_large_size() })
-
 wr({ name = 'steam',  match = { class = 'steam$' }, opacity = '0.85' })
 
 wr({ -- Steam game
@@ -710,5 +728,9 @@ wr({
 	match = { class = 'wlr-which-key' },
 	opacity = '0.85',
 })
+
+--<------------------
+-- Events          -->
+---------------------
 
 --<------------------
