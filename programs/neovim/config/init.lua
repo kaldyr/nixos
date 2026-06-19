@@ -779,6 +779,9 @@ vim.schedule( function()
 	require('mini.snippets').setup()
 	require('mini.surround').setup()
 
+	map( 'i', '<Tab>', [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true, desc = 'Next completion item' })
+	map( 'i', '<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr = true, desc = 'Previous completion item' })
+
 end )
 
 --<-------------------------
