@@ -6,7 +6,7 @@
         ../disko/hofud.nix
         ./desktop.nix
         ../programs/hyprland
-        ../programs/librewolf.nix
+        # ../programs/librewolf.nix
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix
         ../programs/openscad.nix

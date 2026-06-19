@@ -8,9 +8,9 @@
         inputs.nixos-hardware.nixosModules.common-gpu-amd
         ../disko/mjolnir.nix
         ./desktop.nix
-        # ../services/openrazer.nix
+        ../services/openrazer.nix
         ../programs/hyprland
-        ../programs/librewolf.nix
+        # ../programs/librewolf.nix
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix
         ../programs/openscad.nix
