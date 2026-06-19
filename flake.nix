@@ -78,7 +78,7 @@
             # Espresso: Desktop 5700g
             "espresso" = let sysConfig = {
                 hostname = "espresso";
-                instalVersion = "25.11";
+                instalVersion = "26.05";
                 user = "matshkas";
                 systemImpermanence = true;
                 homeImpermanence = false;
