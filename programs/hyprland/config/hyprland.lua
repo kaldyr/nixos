@@ -348,7 +348,7 @@ b( m..'o',    e('kitty --session ~/.config/kitty/sessions/notes.kitty-session', 
 b( m..'y',    e('kitty --session ~/.config/kitty/sessions/yazi.kitty-session', { float = true, size = win_large_size() }) )
 b( m..'m',    e 'keepmenu' )
 b( m..'q',    e 'kitty' )
-b( m..s..'q', e 'kitty --class "float-large"' )
+b( m..s..'q', e('kitty', { float = true, size = win_large_size() }) )
 b( m..'r',    e 'fuzzel' )
 b( m..'u',    e 'hyprpicker -a' )
 
