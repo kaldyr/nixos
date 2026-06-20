@@ -390,134 +390,103 @@ b( m..'a', function() -->
 
 	local ws     = hl.get_workspace( hl.get_active_workspace() or '' )
 	local mon    = hl.get_active_monitor() or ''
-	local actwin = hl.get_active_window() or ''
 
 	-- Bail if you didn't get a monitor or workspace
 	if ws == nil or mon == nil then return end
 
-	-- Deal with floating
-	if actwin.floating == true then
-		local floating = {}
-		for _, w in ipairs( hl.get_workspace_windows(ws) ) do
-			if w.floating then
-				floating[ #floating + 1 ] = w
-			end
+	local floating, tiled = {}, {}
+	for _, w in ipairs( hl.get_workspace_windows(ws) ) do
+		if not w.floating and not w.hidden and w.at.y < 50  then
+			tiled[ #tiled + 1 ] = w
+		elseif w.floating and not w.hidden then
+			floating[ #floating + 1 ] = w
 		end
-		if #floating > 4 then return
-		elseif #floating == 1 then
+	end
+
+	-- Deal with floating
+	if #floating > 4 then return -- You're on your own
+	elseif #floating == 1 then
+		local size = win_large_size()
+		if floating[1].size.x < 500 then
+			size = win_small_size()
+		end
+		hl.dispatch( hl.dsp.window.resize({
+			window = floating[1],
+			x = size[1],
+			y = size[2],
+			relative = false,
+		}) )
+		hl.dispatch( hl.dsp.window.center({ window = floating[1] }))
+	else
+		table.sort( floating, function(i, j) return i.at.x < j.at.x end ) -- In order of position ltr
+		local i = 1
+		for _, w in ipairs(floating) do
 			local size = win_large_size()
-			if actwin.size.x < 500 then
+			if w.size.x < 500 then
 				size = win_small_size()
 			end
 			hl.dispatch( hl.dsp.window.resize({
-				window = actwin,
+				window = w,
 				x = size[1],
 				y = size[2],
 				relative = false,
 			}) )
-			hl.dispatch( hl.dsp.window.center({ window = actwin }))
-			return
-		else
-			if mon.width / mon.height < 2 then return end -- Only arrange if ultrawide
-			table.sort( floating, function(i, j) return i.at.x < j.at.x end ) -- In order of position ltr
-			local i = 1
-			for _, w in ipairs(floating) do
-				local size = win_large_size()
-				if w.size.x < 500 then
-					size = win_small_size()
-				end
-				hl.dispatch( hl.dsp.window.resize({
-					window = w,
-					x = size[1],
-					y = size[2],
-					relative = false,
-				}) )
-				hl.dispatch( hl.dsp.window.move({
-					window = w,
-					x = math.floor( (mon.width*i/#floating) - (mon.width/#floating/2) - (size[1]/2) ),
-					y = math.floor( (mon.height / 2) - (size[2] / 2) ),
-					relative = false,
-				}) )
-				i = i + 1
-			end
-			return
+			hl.dispatch( hl.dsp.window.move({
+				window = w,
+				x = math.floor( (mon.width*i/#floating/mon.scale) - (mon.width/#floating/2/mon.scale) - (size[1]/2) ),
+				y = math.floor( (mon.height/2/mon.scale) - (size[2] / 2) ),
+				relative = false,
+			}) )
+			i = i + 1
 		end
 	end
 
 	-- Deal with tiled
+	-- Only continue if there are 2 or 3 columns of windows
+	if #tiled < 2 or #tiled > 3 then return end
+
 	local go    = hl.get_config('general.gaps_out')
 	local gi    = hl.get_config('general.gaps_in')
 	local bsize = hl.get_config('general.border_size')
 
-	local windows = {}
-	for _, w in ipairs( hl.get_workspace_windows(ws) ) do
-		-- Ignore floating, hidden, and windows that are not at the top
-		if not w.floating and not w.hidden and w.at.y < 50  then
-			windows[ #windows + 1 ] = w
-		end
-	end
-	-- Only continue if there are 2 or 3 columns of windows
-	if #windows < 2 or #windows > 3 then return end
-
-	table.sort( windows, function(i, j) return i.at.x < j.at.x end ) -- In order of position ltr
+	table.sort( tiled, function(i, j) return i.at.x < j.at.x end ) -- In order of position ltr
 
 	-- Window width
-	local width   = math.floor( mon.width / mon.scale ) -- Resolution adjusted by scale
+	local width   = math.floor( ((mon.width / mon.scale)*10 + 0.5)/10 ) -- Resolution adjusted by scale
 	width = width - go.left - go.right - (bsize * 2) -- One set of outer gaps and border
-	width = width - (gi.left + gi.right + (bsize * 2)) * ( #windows - 1 ) -- Sets of inner gaps and borders
-	width = width / #windows -- Split the total window width by number of columns
+	width = width - (gi.left + gi.right + (bsize * 2)) * ( #tiled - 1 ) -- Sets of inner gaps and borders
+	width = width / #tiled -- Split the total window width by number of columns
 
-	local focused = hl.get_active_window() or ''
-	if focused == '' then
-		hl.dispatch( hl.dsp.focus({ window = windows[1] }) )
-	end
-
-	-- [WARN] Only resizing the left-most window works correctly  https://github.com/hyprwm/Hyprland/discussions/14281
-	if #windows == 2 then
-
+	if #tiled == 2 then
 		-- Toggle between { 50/50, 33/67, 67/33 }
 		local newWidth = width
 		local narrow   = math.floor( width * 2 / 3 ) + 3 -- [INFO] + 3 is to make window align to terminal col width
 		local wide     = math.floor( width * 4 / 3 ) - 2 -- [INFO] - 2 is to make window align to terminal col width
 
-		if windows[1].size.x ~= windows[2].size.x then
-			if focused.at.x == windows[1].at.x and windows[1].size.x < windows[2].size.x then
-				newWidth = wide
-			elseif focused.at.x == windows[2].at.x and windows[2].size.x < windows[1].size.x then
-				newWidth = narrow
-			end
-			hl.dispatch( hl.dsp.window.resize({
-				window = windows[1],
-				x = newWidth,
-				y = windows[1].size.y,
-				relative = false,
-			}) )
-		else
+		if tiled[1].size.x < tiled[2].size.x then
 			newWidth = wide
-			if focused.at.x == windows[1].at.x then
-				newWidth = narrow
-			end
-			hl.dispatch( hl.dsp.window.resize({
-				window = windows[1],
-				x = newWidth,
-				y = windows[1].size.y,
-				relative = false,
-			}) )
-		end
-
-	elseif #windows == 3 then
-		-- Align into 3 equal (almost, center window is 1px narrower) columns for ultrawide
-		if windows[3].size.x > width then
-			hl.dispatch( hl.dsp.window.move({ window = windows[3], direction = 'r' }) )
+		elseif tiled[1].size.x == tiled[2].size.x then
+			newWidth = narrow
 		end
 		hl.dispatch( hl.dsp.window.resize({
-			window = windows[1],
+			window = tiled[1],
+			x = newWidth,
+			y = tiled[1].size.y,
+			relative = false,
+		}) )
+	elseif #tiled == 3 then
+		-- Align into 3 equal (almost, center window is 1px narrower) columns for ultrawide
+		if tiled[3].size.x > width then
+			hl.dispatch( hl.dsp.window.move({ window = tiled[3], direction = 'r' }) )
+		end
+		hl.dispatch( hl.dsp.window.resize({
+			window = tiled[1],
 			x = math.ceil( width ),
-			y = windows[1].size.y,
+			y = tiled[1].size.y,
 			relative = false,
 		}) )
 		hl.dispatch( hl.dsp.window.resize({
-			window = windows[3],
+			window = tiled[3],
 			x = 5,
 			y = 0,
 			relative = true,
