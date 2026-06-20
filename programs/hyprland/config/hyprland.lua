@@ -99,6 +99,7 @@ elseif hostname == 'hofud' then
 		end
 		for _, mon in pairs(monitors) do
 			if mon.size.width == 3440 then -- Disable the internal screen if the ultrawide is plugged in
+				usable_scales = { '1.0' }
 				hl.monitor({ output = 'eDP-1', disabled = true })
 				hl.config({ general = {
 					gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
@@ -111,6 +112,15 @@ elseif hostname == 'hofud' then
 	hl.on( 'monitor.removed', function()
 		local monitors = hl.get_monitors() or ''
 		if #monitors == 0 then
+			usable_scales = {
+				'1.0',                -- 2256x1504
+				'1.1749999523162842', -- 1920x1280
+				'1.3333333730697632', -- 1692x1128
+				-- '1.5666667222976685', -- 1437x958 really close to next step
+				'1.6000000238418579', -- 1410x940
+				-- '1.9583333730697632', -- 1151x767 really close to next step
+				'2.0',                -- 1128x752
+			}
 			hl.monitor({
 				output = 'eDP-1',
 				mode   = '2256x1504@60',
