@@ -12,6 +12,7 @@
         ../programs/plymouth.nix
         ../programs/steam.nix
         ../services/keyd.nix
+        ../services/kmscon.nix
     ];
 
     boot = {
@@ -22,6 +23,7 @@
         kernelModules = [ "kvm-amd" ];
         kernelPackages = pkgs.linuxKernel.packages.linux_zen;
         kernelParams = [ "btrfs" "quiet" "preempt=full" ];
+        # kernelParams = [ "btrfs" "quiet" "preempt=full" "iommu=pt" ];
         loader.grub.gfxmodeEfi = "1920x1080";
     };
 

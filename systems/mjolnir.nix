@@ -19,6 +19,7 @@
         ../programs/steam.nix
         ../services/epson-et-8550.nix
         ../services/keyd.nix
+        ../services/kmscon.nix
     ];
 
     boot = {
