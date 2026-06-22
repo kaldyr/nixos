@@ -520,8 +520,10 @@ vim.lsp.enable('yamlls')
 local gh = function(repo) return 'https://github.com/' .. repo end
 ---@type (string|vim.pack.Spec)[]
 vim.pack.add({
+	{ src = gh 'saghen/blink.cmp', version = vim.version.range '1.*' },
 	{ src = gh 'catppuccin/nvim', name = 'catppuccin' },
 	gh 'folke/lazydev.nvim',
+	gh 'rafamadriz/friendly-snippets',
 	gh 'ibhagwan/fzf-lua',
 	gh 'lewis6991/gitsigns.nvim',
 	gh 'nvim-lualine/lualine.nvim',
@@ -570,6 +572,7 @@ require('catppuccin').setup({
 	},
 
 	integrations = {
+		blink_cmp = { style = 'bordered' },
 		fzf = true,
 		gitsigns = true,
 		mini = { enabled = true, },
@@ -614,6 +617,39 @@ require('catppuccin').setup({
 })
 
 vim.cmd [[ colorscheme catppuccin ]]
+
+--<-------------------------
+-- Blink.cmp              -->  Completion
+----------------------------
+
+vim.schedule( function()
+
+	require('blink.cmp').setup({
+
+		keymap = { preset = 'enter' },
+
+		appearance = {
+			nerd_font_variant = 'mono'
+		},
+
+		completion = { documentation = { auto_show = true } },
+
+		sources = {
+			default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+			providers = {
+				lazydev = {
+					name = 'LazyDev',
+					module = 'lazydev.integrations.blink',
+					score_offset = 100,
+				},
+			},
+		},
+
+		fuzzy = { implementation = 'lua' }
+
+	})
+
+end )
 
 --<-------------------------
 -- Fzf-lua                -->  Fuzzy Pickers
@@ -751,12 +787,7 @@ vim.schedule( function()
 	vim.api.nvim_set_hl(0, 'MiniHipatternsSapphire', { bold = true, bg = frappe.base, fg = frappe.sapphire })
 	vim.api.nvim_set_hl(0, 'MiniHipatternsMauve',    { bold = true, bg = frappe.base, fg = frappe.mauve })
 
-	require('mini.icons').setup()
 	require('mini.ai').setup()
-	require('mini.bracketed').setup()
-	require('mini.bufremove').setup()
-	require('mini.comment').setup()
-	require('mini.completion').setup()
 	require('mini.hipatterns').setup({
 		highlighters = {
 			debug     = { pattern = '%[DEBUG%]',   group = 'MiniHipatternsMaroon' },
@@ -775,12 +806,7 @@ vim.schedule( function()
 		}
 	})
 	require('mini.operators').setup()
-	require('mini.pairs').setup()
-	require('mini.snippets').setup()
 	require('mini.surround').setup()
-
-	map( 'i', '<Tab>', [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true, desc = 'Next completion item' })
-	map( 'i', '<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr = true, desc = 'Previous completion item' })
 
 end )
 
@@ -878,6 +904,7 @@ end )
 require('snacks').setup({
 
 	bigfile = { enabled = true },
+	bufdelete = { enabled = true },
 	debug = { enabled = true },
 	dim = { enabled = true },
 	image = { enabled = true },
