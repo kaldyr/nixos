@@ -15,7 +15,7 @@ end
 hostname = string.gsub(hostname, '\n$', '')
 
 -- Startup applications
-local launch, e = hl.exec_cmd, hl.dsp.exec_cmd
+local launch = hl.exec_cmd
 hl.on( 'hyprland.start', function()
 
 	launch 'wl-paste --type text --watch cliphist store'
@@ -335,7 +335,7 @@ hl.gesture({
 ---------------------
 
 -- Shorthand
-local b = hl.bind
+local b, e = hl.bind, hl.dsp.exec_cmd
 local m, s, c, a = 'SUPER + ', 'SHIFT + ', 'CTRL + ', 'ALT + '
 
 -- Size functions
@@ -758,9 +758,3 @@ wr({
 	match = { class = 'wlr-which-key' },
 	opacity = '0.85',
 })
-
---<------------------
--- Events          -->
----------------------
-
---<------------------
