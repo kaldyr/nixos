@@ -54,6 +54,7 @@
                 "/var/lib/systemd/coredump"
                 { directory = "/var/lib/tailscale"; mode = "0700"; }
                 "/var/log"
+                { directory = "/var/lib/fprint"; mode = "0700"; }
             ];
             files = [ "/etc/machine-id" ];
         };
