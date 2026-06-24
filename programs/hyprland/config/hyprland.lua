@@ -342,7 +342,7 @@ local m, s, c, a = 'SUPER + ', 'SHIFT + ', 'CTRL + ', 'ALT + '
 local function win_large_size()
 	local mon = hl.get_active_monitor() or ''
 
-	local w, h = 1155, 844 -- Default
+	local w, h = 1394, 1031 -- Default
 	if mon.width == 3440 or hostname == 'mjolnir' then
 		w, h = 1080, 855
 	end
@@ -388,15 +388,15 @@ b( m..'v', e 'dotool $(cliphist list | fuzzel -d | cliphist decode)' )
 -- Arrange windows into columns for ultrawide monitor or resize and center floating window
 b( m..'a', function() -->
 
-	local ws     = hl.get_workspace( hl.get_active_workspace() or '' )
-	local mon    = hl.get_active_monitor() or ''
+	local ws  = hl.get_workspace( hl.get_active_workspace() or '' )
+	local mon = hl.get_active_monitor() or ''
 
 	-- Bail if you didn't get a monitor or workspace
 	if ws == nil or mon == nil then return end
 
 	local floating, tiled = {}, {}
 	for _, w in ipairs( hl.get_workspace_windows(ws) ) do
-		if not w.floating and not w.hidden and w.at.y < 50  then
+		if not w.floating and not w.hidden and w.at.y < 80  then
 			tiled[ #tiled + 1 ] = w
 		elseif w.floating and not w.hidden then
 			floating[ #floating + 1 ] = w
@@ -443,6 +443,19 @@ b( m..'a', function() -->
 
 	-- Deal with tiled
 	-- Only continue if there are 2 or 3 columns of windows
+	if #tiled == 1 then
+		local w = tiled[1]
+		local size = win_large_size()
+		if w.size.x < 500 then
+			size = win_small_size()
+		end
+		hl.dispatch( hl.dsp.window.resize({
+			window = w,
+			x = size[1],
+			y = size[2],
+			relative = false,
+		}) )
+	end
 	if #tiled < 2 or #tiled > 3 then return end
 
 	local go    = hl.get_config('general.gaps_out')
@@ -559,7 +572,13 @@ end ) --<--
 -- Hyprland Controls
 b( m..'x',         hl.dsp.window.close() )
 b( m..'w',         hl.dsp.window.float({ action = 'toggle' }) )
-b( m..'p',         hl.dsp.window.pseudo() )
+b( m..'p',         function() -->
+	local w = hl.get_active_window() or ''
+	if w.floating then
+		hl.dispatch( hl.dsp.window.float({ action = 'toggle' }) )
+	end
+	hl.dispatch( hl.dsp.window.pseudo() )
+end ) --<--
 b( m..'f',         hl.dsp.window.fullscreen() )
 b( m..'s',         hl.dsp.layout("togglesplit") )
 b( m..'Tab',       function() -->
