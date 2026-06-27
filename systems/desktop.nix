@@ -280,7 +280,6 @@
         #     media-player-info
         # ];
 
-        power-profiles-daemon.enable = true;
         udisks2.enable = true;
         udisks2.mountOnMedia = true;
         upower.enable = true;
