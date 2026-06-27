@@ -233,7 +233,7 @@ hl.config({
 			passes             = 3, -- 1
 			popups             = false, -- false
 			popups_ignorealpha = 0.2, -- 0.2
-			size               = 12, -- 8
+			size               = 20, -- 8
 			special            = false, -- false
 			vibrancy           = 0.5, -- 0.1696
 			vibrancy_darkness  = 0.9, -- 0.0
@@ -749,9 +749,9 @@ wr({ -- Guild Wars 2
 	suppress_event   = 'fullscreen maximize',
 })
 
-wr({ name = 'helium', match = { class = 'helium' }, opacity = '0.85' })
+wr({ name = 'helium', match = { class = 'helium' }, opacity = '0.9' })
 wr({ name = 'kitty', match = { class = 'kitty' }, opacity = '0.85' })
-wr({ name = 'satty', match = { class = 'com.gabm.satty' }, float = true, size = win_large_size() })
+wr({ name = 'satty', match = { class = 'com.gabm.satty' }, float = true })
 wr({ name = 'steam',  match = { class = 'steam$' }, opacity = '0.85' })
 
 wr({ -- Steam game

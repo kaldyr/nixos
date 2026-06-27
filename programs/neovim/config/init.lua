@@ -148,27 +148,27 @@ map('n', 'Q', '<Nop>')
 map('n', '<ESC>', '<Cmd>nohls<CR>', { silent = true })
 
 -- LSP
-map('n', 'gd', vim.lsp.buf.definition, { silent = true, noremap = true })
+map('n', 'gd', vim.lsp.buf.definition,  { silent = true, noremap = true })
 map('n', 'gD', vim.lsp.buf.declaration, { silent = true, noremap = true })
 
 -- Line Movement
-map('n', '<Down>', '<Cmd>move .+1<CR>==', { silent = true, noremap = true }) -- <Caps-j>
-map('n', '<Up>', '<Cmd>move .-2<CR>==', { silent = true, noremap = true }) -- <Caps-k>
+map('n', '<Down>', '<Cmd>move .+1<CR>==',        { silent = true, noremap = true }) -- <Caps-j>
+map('n', '<Up>',   '<Cmd>move .-2<CR>==',        { silent = true, noremap = true }) -- <Caps-k>
 map('i', '<Down>', '<Esc><Cmd>move .+1<CR>==gi', { silent = true, noremap = true }) -- <Caps-j>
-map('i', '<Up>', '<Esc><Cmd>move .-2<CR>==gi', { silent = true, noremap = true }) -- <Caps-k>
-map('v', '<Down>', ":move '>+1<CR>gv=gv", { silent = true, noremap = true }) -- <Caps-j>
-map('v', '<Up>', ":move '<-2<CR>gv=gv", { silent = true, noremap = true }) -- <Caps-k>
+map('i', '<Up>',   '<Esc><Cmd>move .-2<CR>==gi', { silent = true, noremap = true }) -- <Caps-k>
+map('v', '<Down>', ":move '>+1<CR>gv=gv",        { silent = true, noremap = true }) -- <Caps-j>
+map('v', '<Up>',   ":move '<-2<CR>gv=gv",        { silent = true, noremap = true }) -- <Caps-k>
 
 -- Character movement
-map('n', '<Left>', '"mxh"mP', { silent = true }) -- <Caps-h>
-map('n', '<Right>', '"mx"mp', { silent = true }) -- <Caps-l>
+map('n', '<Left>',  '"mxh"mP', { silent = true }) -- <Caps-h>
+map('n', '<Right>', '"mx"mp',  { silent = true }) -- <Caps-l>
 
 -- Window management
-map('n', '<C-x>', '<Cmd>bw<CR>', { desc = 'Close Buffer', silent = true })
-map('n', '<C-h>', ':wincmd h<CR>', { desc = 'Window Left', silent = true })
-map('n', '<C-j>', ':wincmd j<CR>', { desc = 'Window Down', silent = true })
-map('n', '<C-k>', ':wincmd k<CR>', { desc = 'Window Up', silent = true })
-map('n', '<C-l>', ':wincmd l<CR>', { desc = 'Window Right', silent = true })
+map('n',          '<C-x>', '<Cmd>bw<CR>',            { desc = 'Close Buffer', silent = true })
+map({ 'i', 'n' }, '<C-h>', '<Cmd>wincmd h<CR><Esc>', { desc = 'Window Left',  silent = true })
+map({ 'i', 'n' }, '<C-j>', '<Cmd>wincmd j<CR><Esc>', { desc = 'Window Down',  silent = true })
+map({ 'i', 'n' }, '<C-k>', '<Cmd>wincmd k<CR><Esc>', { desc = 'Window Up',    silent = true })
+map({ 'i', 'n' }, '<C-l>', '<Cmd>wincmd l<CR><Esc>', { desc = 'Window Right', silent = true })
 
 -- Indentation
 map('n', '<', '<<', { silent = true, noremap = true })
@@ -179,28 +179,28 @@ map('v', '<', '<gv', { silent = true })
 map('v', '>', '>gv', { silent = true })
 
 -- Folding
-map('n', 'Z', 'za', { desc = 'Toggle folds at cursor', silent = true })
-map('n', '\\z', 'zi', { desc = 'Toggle folding', silent = true })
-map('n', 'zv', 'zMzvzz', { desc = 'Close all folds except current' })
-map('n', 'zj', 'zcjzOzz', { desc = 'Close current fold and open next' })
-map('n', 'zk', 'zckzOzz', { desc = 'Close current fold and open previous' })
+map('n', 'Z',   'za',      { desc = 'Toggle folds at cursor', silent = true })
+map('n', '\\z', 'zi',      { desc = 'Toggle folding',         silent = true })
+map('n', 'zv',  'zMzvzz',  { desc = 'Close all folds except current' })
+map('n', 'zj',  'zcjzOzz', { desc = 'Close current fold and open next' })
+map('n', 'zk',  'zckzOzz', { desc = 'Close current fold and open previous' })
 
 -- Selection
 map('n', '==', 'ggVG', { silent = true, noremap = true, desc = 'Select All' })
 
 -- Don't step on registers
 map('v', 'p', '"_dP', { silent = true, noremap = true })
-map('v', 'C', '"_c', { silent = true, noremap = true })
-map('v', 'D', '"_d', { silent = true, noremap = true })
-map('v', 'X', '"_x', { silent = true, noremap = true })
+map('v', 'C', '"_c',  { silent = true, noremap = true })
+map('v', 'D', '"_d',  { silent = true, noremap = true })
+map('v', 'X', '"_x',  { silent = true, noremap = true })
 
 -- Add undo breakpoints
-map( 'i', ',', ',<C-g>u', { silent = true, noremap = true })
-map( 'i', '.', '.<C-g>u', { silent = true, noremap = true })
-map( 'i', ';', ';<C-g>u', { silent = true, noremap = true })
+map('i', ',', ',<C-g>u', { silent = true, noremap = true })
+map('i', '.', '.<C-g>u', { silent = true, noremap = true })
+map('i', ';', ';<C-g>u', { silent = true, noremap = true })
 
 -- Execute/Replay Macro over selection
-map('x', '.', ':norm .<CR>', { silent = true, noremap = true })
+map('x', '.', ':norm .<CR>',  { silent = true, noremap = true })
 map('x', '@', ':norm @@<CR>', { silent = true, noremap = true })
 
 -- Plugins
@@ -657,6 +657,8 @@ end )
 
 require('fzf-lua').setup({
 
+	buffers = { prompt = ' > ' },
+
 	file_ignore_patterns = {
 		'%.nextcloudsync.log',
 		'%.obsidian/',
@@ -664,14 +666,18 @@ require('fzf-lua').setup({
 		'%.trash/',
 	},
 
+	git = { bcommits = { prompt = ' > ' } },
+
 	grep = {
-		prompt = 'Grep> ',
-		input_prompt = 'Grep For> ',
+		prompt = ' > ',
+		input_prompt = '  ',
 		multiprocess = true,
 		git_icons = true,
 		file_icons = true,
 		color_icons = true,
 	},
+
+	quickfix = { prompt = ' > ' },
 
 })
 

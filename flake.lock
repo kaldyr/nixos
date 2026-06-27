@@ -274,6 +274,7 @@
       "original": {
         "owner": "hyprwm",
         "repo": "Hyprland",
+        "rev": "ce36ee360ac0fe9e716c73e83dd7284f429c13ea",
         "type": "github"
       }
     },
@@ -869,6 +870,7 @@
       "original": {
         "owner": "sxyazi",
         "repo": "yazi",
+        "rev": "ef654f442060c3a4feae6d89f8b9ddf300d54ecc",
         "type": "github"
       }
     },
@@ -906,6 +908,7 @@
       "original": {
         "owner": "neurosnap",
         "repo": "zmx",
+        "rev": "4c2924c515414dfe23b26fd2a1cd5c55f9439f55",
         "type": "github"
       }
     }
