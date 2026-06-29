@@ -186,7 +186,7 @@ map('n', 'zj',  'zcjzOzz', { desc = 'Close current fold and open next' })
 map('n', 'zk',  'zckzOzz', { desc = 'Close current fold and open previous' })
 
 -- Selection
-map('n', '==', 'ggVG', { silent = true, noremap = true, desc = 'Select All' })
+map('n', '==', 'ggVGy<Esc>', { silent = true, noremap = true, desc = 'Select All' })
 
 -- Don't step on registers
 map('v', 'p', '"_dP', { silent = true, noremap = true })
@@ -497,6 +497,13 @@ vim.lsp.enable('templ')
 vim.lsp.config( 'qmlls', {
 	cmd = { 'qmlls' },
 	filetypes = { 'qml' },
+	settings = {
+		qml = {
+			importPaths = {
+				'/etc/profiles/per-user/matt/lib/qt-6/qml',
+			},
+		},
+	},
 })
 
 vim.lsp.enable('qmlls')
@@ -539,6 +546,7 @@ vim.pack.add({
 	gh 'folke/snacks.nvim',
 	gh 'rachartier/tiny-inline-diagnostic.nvim',
 	gh 'Wansmer/treesj',
+	gh 'aaronik/treewalker.nvim',
 	gh 'folke/which-key.nvim',
 	gh 'mikavilpas/yazi.nvim',
 })
@@ -1000,6 +1008,26 @@ vim.schedule( function()
 	})
 
 	map( 'n', 'gj', function() require('treesj').toggle() end, { desc = 'Toggle Join/Split code block' } )
+
+end )
+
+--<-------------------------
+-- Treewalker             -->  Stride around code
+----------------------------
+
+vim.schedule( function()
+
+	require('treewalker').setup()
+	-- Move
+	map({ 'n', 'v' }, '<S-Left>',  '<Cmd>Treewalker Left<CR>',  { silent = true })
+	map({ 'n', 'v' }, '<S-Down>',  '<Cmd>Treewalker Down<CR>',  { silent = true })
+	map({ 'n', 'v' }, '<S-Up>',    '<Cmd>Treewalker Up<CR>',    { silent = true })
+	map({ 'n', 'v' }, '<S-Right>', '<Cmd>Treewalker Right<CR>', { silent = true })
+	-- Swap
+	map('n', '<C-Left>',  '<Cmd>Treewalker SwapLeft<CR>',  { silent = true })
+	map('n', '<C-Down>',  '<Cmd>Treewalker SwapDown<CR>',  { silent = true })
+	map('n', '<C-Up>',    '<Cmd>Treewalker SwapUp<CR>',    { silent = true })
+	map('n', '<C-Right>', '<Cmd>Treewalker SwapRight<CR>', { silent = true })
 
 end )
 

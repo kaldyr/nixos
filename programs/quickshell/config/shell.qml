@@ -52,6 +52,17 @@ PanelWindow {
 					}
 				}
 			}
+
+			WheelHandler {
+				acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+				onWheel: function(e) {
+					if (e.angleDelta.y > 0) {
+						Hyprland.dispatch("hl.dsp.focus({workspace = 'e+1'})")
+					} else {
+						Hyprland.dispatch("hl.dsp.focus({workspace = 'e-1'})")
+					}
+				}
+			}
 		}
 	} // <--
 
@@ -72,7 +83,7 @@ PanelWindow {
 				id: clock
 				color: "#85c1dc"
 
-				property string fmt: "    hh:mm   ·   ddd, MMM dd    "
+				property string fmt: "   hh:mm · ddd, MMM dd   "
 
 				font { family: root.fontFamily; pixelSize: 12; bold: true }
 
