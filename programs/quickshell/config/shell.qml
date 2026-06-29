@@ -1,13 +1,15 @@
 //@ pragma UseQApplication
+//@ pragma IconTheme Papirus
 // vim:fdm=marker:fdl=0:foldmarker=-->,<--
+
 import Quickshell
+import Quickshell.Io
 import Quickshell.Hyprland
 import Quickshell.Services.SystemTray
+import Quickshell.Widgets
 import QtQuick
-import QtQuick.Layouts
 
 PanelWindow {
-
 	id: root
 
 	anchors {
@@ -17,96 +19,348 @@ PanelWindow {
 	}
 	color: "transparent"
 
-	implicitHeight: 24
+	implicitHeight: 32
+
+	SystemClock {
+		id: sysClock
+		precision: SystemClock.Seconds
+	}
+
+	Process { id: launchProc }
 
 	property string fontFamily: "Maple Mono NF"
 
+	// Colors -->
+	// Bar
+	property string colorBar:         "#303446"
+	property string colorBarBorder:   "#232634"
+	property string colorBarSecond:   "#292c3c"
+	// Worspaces
+	property string colorWSAc:        "#81c8be"
+	property string colorWSIn:        "#8caaee"
+	property string colorWSEm:        "#414559"
+	property string colorWSBorder:    "#292c3c"
+	property string colorWSOverview:  "#babbf1"
+	// Datetime
+	property string colorSunset:      "#ef9f76"
+	property string colorClock:       "#292c3c"
+	property string colorClockHands:  "#8caaee"
+	property string colorClockBorder: "#ca9ee6"
+	property string colorClockText:   "#c6d0f5"
+	property string colorCal:         "#292c3c"
+	property string colorCalText:     "#c6d0f5"
+	property string colorCalBorder:   "#ef9f76"
+	// <--
+
 	// Left -->
-	Rectangle {
+	Rectangle { // Transparent container
 		anchors.left: parent.left
+		anchors.verticalCenter: parent.verticalCenter
 		height: parent.height
-		width: leftBar.width + 24
-		bottomRightRadius: 16
-		color: "#292c3c"
-		opacity: 0.95
+		width: leftBar.width + 12
+		color: "transparent"
+
+		Rectangle { // Draw the bar
+			id: leftBar
+			anchors.verticalCenter: parent.verticalCenter
+			anchors.left: parent.left
+			height: parent.height - 8
+			width: workspaces.width + 6
+			topRightRadius: this.height / 2
+			bottomRightRadius: this.height / 2
+			color: colorBar
+			border.color: colorBarBorder
+			border.width: 2
+			opacity: 0.98
+
+			Row {
+				id: workspaces
+				anchors.verticalCenter: parent.verticalCenter
+
+				Rectangle { // Spacer for the launcher button
+					height: 1
+					width: launcher.width + 4
+					color: "transparent"
+				}
+
+				Repeater {
+					model: 10
+
+					Rectangle {
+						anchors.verticalCenter: root.verticalCenter
+						height: parent.height
+						width: 15
+						color: "transparent"
+
+						MouseArea {
+							anchors.fill: parent
+							onClicked: Hyprland.dispatch("hl.dsp.focus({workspace = " + (index + 1) + "})")
+						}
+
+						Rectangle {
+							property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
+							property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
+
+							anchors.centerIn: parent
+							height: isActive ? 12 : (ws ? 8 : 4)
+							width: this.height
+							radius: this.height / 2
+							color: isActive ? colorWSAc : (ws ? colorWSIn : colorWSEm)
+
+						}
+					}
+
+				}
+
+				WheelHandler {
+					acceptedDevices: PointerDevice.Mouse
+					onWheel: function(e) {
+						if (e.angleDelta.y > 0) {
+							Hyprland.dispatch("hl.dsp.focus({workspace = 'e-1'})")
+						} else {
+							Hyprland.dispatch("hl.dsp.focus({workspace = 'e+1'})")
+						}
+					}
+				}
+
+				Rectangle {
+					height: parent.height
+					width: 20
+					color: "transparent"
+
+					Text {
+						anchors.centerIn: parent
+						text: "󰡃"
+						color: colorWSOverview
+					}
+				}
+
+			}
+
+		}
+
+		Rectangle { // Launcher button -->
+			id: launcher
+			anchors.verticalCenter: parent.verticalCenter
+			anchors.left: parent.left
+			height: parent.height
+			width: parent.height + 4
+			topRightRadius: this.height / 2
+			bottomRightRadius: this.height / 2
+			color: colorBarSecond
+			border.color: colorBarBorder
+			border.width: 2
+
+			Row {
+				anchors.fill: parent
+				Rectangle {
+					height: 1
+					width: 3
+					color: "transparent"
+				}
+				IconImage {
+					anchors.verticalCenter: parent.verticalCenter
+					source: Quickshell.iconPath("distributor-logo-nixos")
+					height: 24
+					width: 24
+					smooth: true
+				}
+			}
+
+			MouseArea {
+				anchors.fill: parent
+				hoverEnabled: true
+				onClicked: Hyprland.dispatch("hl.dsp.exec_cmd('fuzzel')")
+			}
+		} // <--
+
+	} // <--
+
+	// LeftMid -->
+	// Media controls
+	// Volume
+	// <--
+
+	// Center -->
+	// hyprsunset indicator (active, inactive, disabled)
+	// Alarm Launcher
+	// clock face (Large)
+	// date time text
+	// Calendar (Large)
+	// Notification (active, inactive, disabled)
+	// hypridle indicator (active, disabled)
+	Rectangle {
+		anchors.centerIn: parent
+		height: parent.height - 6
+		width: centerBar.width + 72
+		topLeftRadius: this.height / 2
+		topRightRadius: this.height / 2
+		bottomLeftRadius: this.height / 2
+		bottomRightRadius: this.height / 2
+		color: colorBarSecond
+		border.color: colorBarBorder
+		border.width: 2
+		opacity: 0.98
 
 		Row {
 			anchors.centerIn: parent
-			id: leftBar
-			spacing: 8
-			Repeater {
-				model: 10
-
-				Text {
-					property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
-					property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
-
-					font { family: root.fontFamily; pixelSize: 16; bold: true }
-					color: isActive ? "#81c8be" : (ws ? "#8caaee" : "#414559")
-
-					text: isActive ? '' : (ws ? '' : '')
-
-					MouseArea {
-						anchors.fill: parent
-						onClicked: Hyprland.dispatch("hl.dsp.focus({workspace = " + (index + 1) + "})")
-					}
-				}
+			Text {
+				anchors.verticalCenter: parent.verticalCenter
+				anchors.right: centerSpacer.left
+				color: colorSunset
+				font { family: fontFamily; pixelSize: 16; }
+				text: ""
 			}
-
-			WheelHandler {
-				acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
-				onWheel: function(e) {
-					if (e.angleDelta.y > 0) {
-						Hyprland.dispatch("hl.dsp.focus({workspace = 'e-1'})")
-					} else {
-						Hyprland.dispatch("hl.dsp.focus({workspace = 'e+1'})")
-					}
-				}
+			Rectangle {
+				id: centerSpacer
+				anchors.centerIn: parent
+				height: 2
+				width: centerBar.width + 16
+				color: "transparent"
+			}
+			IconImage {
+				anchors.verticalCenter: parent.verticalCenter
+				anchors.left: centerSpacer.right
+				source: Quickshell.iconPath('notification-inactive')
+				height: 16
+				width: 16
 			}
 		}
-	} // <--
+	}
 
-	// Center -->
 	Rectangle {
 		anchors.centerIn: parent
-		height: parent.height
-		width: centerBar.width + 36
-		bottomLeftRadius: 16
-		bottomRightRadius: 16
-		color: "#292c3c"
-		opacity: 0.95
+		height: parent.height - 2
+		width: centerBar.width + 4
+		topLeftRadius: this.height / 2
+		topRightRadius: this.height / 2
+		bottomLeftRadius: this.height / 2
+		bottomRightRadius: this.height / 2
+		color: colorBar
+		border.color: colorBarBorder
+		border.width: 2
+		opacity: 0.98
 
 		Row {
 			id: centerBar
 			anchors.centerIn: parent
-			Text {
-				id: clock
-				color: "#85c1dc"
 
-				property string fmt: "   hh:mm · ddd, MMM dd   "
+			Rectangle { // Clock    -->
+				anchors.verticalCenter: parent.verticalCenter
+				id: clockFace
+				height: 26
+				width: 26
+				radius: 13
+				color: colorClock
+				border.color: colorClockBorder
+				border.width: 1
 
-				font { family: root.fontFamily; pixelSize: 12; bold: true }
+				Rectangle { // Minute Hand
+					anchors.bottom: clockFace.verticalCenter
+					anchors.horizontalCenter: clockFace.horizontalCenter
+					height: 12
+					width: 1
+					color: colorClockHands
+					antialiasing: true
+					transformOrigin: Item.Bottom
+					rotation: {
+						const d = sysClock.date;
+						return d.getMinutes() * 6;
+					}
+					Behavior on rotation { RotationAnimation { duration: 200; direction: RotationAnimation.Shortest } }
+				}
 
-				text: Qt.formatDateTime(new Date(), clock.fmt)
+				Rectangle { // Hour Hand
+					anchors.bottom: clockFace.verticalCenter
+					anchors.horizontalCenter: clockFace.horizontalCenter
+					height: 7
+					width: 2
+					color: colorClockHands
+					antialiasing: true
+					transformOrigin: Item.Bottom
+					rotation: {
+						const d = sysClock.date;
+						return ((d.getHours() % 12) + (d.getMinutes() / 60)) * 30;
+					}
+					Behavior on rotation { RotationAnimation { duration: 200; direction: RotationAnimation.Shortest } }
+				}
 
-				Timer {
-					interval: 1000
-					running: true
-					repeat: true
-					onTriggered: clock.text = Qt.formatDateTime(new Date(), clock.fmt)
+			}
+			// <--
+			Rectangle { // Spacer   -->
+				height: parent.height
+				width: 10
+				color: "transparent"
+			}
+			// <--
+			Text      { // Time     -->
+				id: time
+				anchors.verticalCenter: parent.verticalCenter
+				color: colorClockText
+				font { family: fontFamily; pixelSize: 12; }
+				text: Qt.formatDateTime( sysClock.date, "HH:mm" )
+			}
+			// <--
+			Rectangle { // Spacer   -->
+				height: parent.height
+				width: 16
+				color: "transparent"
+			}
+			// <--
+			Text      { // Date     -->
+				id: date
+				anchors.verticalCenter: parent.verticalCenter
+				color: colorCalText
+				font { family: fontFamily; pixelSize: 12; }
+				text: Qt.formatDateTime( sysClock.date, "ddd, MMM dd" )
+			}
+			// <--
+			Rectangle { // Spacer   -->
+				height: parent.height
+				width: 10
+				color: "transparent"
+			}
+			// <--
+			Rectangle { // Calendar -->
+				anchors.verticalCenter: parent.verticalCenter
+				height: 26
+				width: 26
+				radius: 13
+				color: colorCal
+				border.color: colorCalBorder
+				border.width: 1
+
+				IconImage {
+					anchors.centerIn: parent
+					source: Quickshell.iconPath('calendar')
+					height: 13
+					width: 13
 				}
 			}
+			// <--
 		}
 	} // <--
 
+	// RightMid -->
+	// Network (wired/wireless)
+	// Tailscale
+	// Bluetooth
+	// <--
+
 	// Right -->
+	// System Tray
+	// Power/lock menu launcher (Large)
 	Rectangle {
 		anchors.right: parent.right
-		height: parent.height
-		width: rightBar.width + 24
-		bottomLeftRadius: 16
-		color: "#292c3c"
-		opacity: 0.95
+		anchors.verticalCenter: parent.verticalCenter
+		height: parent.height - 8
+		width: rightBar.width + parent.height / 2
+		topLeftRadius: this.height / 2
+		bottomLeftRadius: this.height / 2
+		color: colorBar
+		border.color: colorBarBorder
+		border.width: 2
+		opacity: 0.98
 
 		Row {
 			id: rightBar
@@ -118,16 +372,15 @@ PanelWindow {
 
 				Item {
 					id: trayItem
+					anchors.verticalCenter: parent.verticalCenter
 					required property var modelData
-					implicitHeight: 16
-					implicitWidth: 16
+					height: 16
+					width: 16
 
-					Image {
+					IconImage {
 						anchors.fill: parent
 						source: trayItem.modelData.icon
-						sourceSize: Qt.size(16, 16)
 						smooth: true
-
 					}
 
 					MouseArea {

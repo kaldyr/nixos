@@ -25,7 +25,7 @@ in
             };
 
             Service = {
-                Environment = "PATH=/run/wrappers/bin QML2_IMPORT_PATH=${QML2_IMPORT_PATH} QSG_RHI_BACKEND=vulkan QS_ICON_THEME=Papirus";
+                Environment = "PATH=/run/wrappers/bin QML2_IMPORT_PATH=${QML2_IMPORT_PATH} QSG_RHI_BACKEND=vulkan";
                 ExecStart = lib.getExe pkgs.quickshell;
                 Restart = "on-failure";
             };

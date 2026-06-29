@@ -51,7 +51,7 @@ if hostname == 'espresso' then
 
 	hl.config({ general = {
 		gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
-		gaps_out = { top = 8, left = 18, right = 18, bottom = 18 }, -- 20
+		gaps_out = { top = 1, left = 18, right = 18, bottom = 18 }, -- 20
 	} })
 
 elseif hostname == 'hofud' then
@@ -85,7 +85,7 @@ elseif hostname == 'hofud' then
 
 	hl.config({ general = {
 		gaps_in  = { top = 8, left = 14, right = 14, bottom = 9 }, -- 5
-		gaps_out = { top = 9, left = 20, right = 20, bottom = 24 }, -- 20
+		gaps_out = { top = 1, left = 20, right = 20, bottom = 24 }, -- 20
 	} })
 
 	hl.on( 'monitor.added', function()
@@ -93,7 +93,7 @@ elseif hostname == 'hofud' then
 		if #monitors == 1 and monitors[1].name == 'FALLBACK' then
 			hl.config({ general = {
 				gaps_in  = { top = 8, left = 14, right = 14, bottom = 9 }, -- 5
-				gaps_out = { top = 9, left = 20, right = 20, bottom = 24 }, -- 20
+				gaps_out = { top = 1, left = 20, right = 20, bottom = 24 }, -- 20
 			} })
 			return
 		end
@@ -103,7 +103,7 @@ elseif hostname == 'hofud' then
 				hl.monitor({ output = 'eDP-1', disabled = true })
 				hl.config({ general = {
 					gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
-					gaps_out = { top = 9, left = 18, right = 18, bottom = 18 }, -- 20
+					gaps_out = { top = 1, left = 18, right = 18, bottom = 18 }, -- 20
 				} })
 			end
 		end
@@ -145,7 +145,7 @@ elseif hostname == 'mjolnir' then
 
 	hl.config({ general = {
 		gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
-		gaps_out = { top = 9, left = 18, right = 18, bottom = 18 }, -- 20
+		gaps_out = { top = 1, left = 18, right = 18, bottom = 18 }, -- 20
 	} })
 
 end
@@ -220,9 +220,9 @@ hl.config({
 		dim_inactive          = true, -- false
 		dim_modal             = true, -- true
 		dim_special           = 0.2, -- 0.2
-		dim_strength          = 0.15, -- 0.5
-		rounding              = 16, -- 0
-		rounding_power        = 5, -- 2.0
+		dim_strength          = 0.1, -- 0.5
+		rounding              = 12, -- 0
+		rounding_power        = 2, -- 2.0
 
 		blur = {
 			enabled            = true, -- true
@@ -230,15 +230,15 @@ hl.config({
 			contrast           = 0.8916, -- 0.8916
 			ignore_opacity     = true, -- true
 			new_optimizations  = true, -- true
-			noise              = 0.05, -- 0.0117
+			noise              = 0.0117, -- 0.0117
 			passes             = 3, -- 1
 			popups             = false, -- false
 			popups_ignorealpha = 0.2, -- 0.2
-			size               = 20, -- 8
+			size               = 24, -- 8
 			special            = false, -- false
 			vibrancy           = 0.5, -- 0.1696
-			vibrancy_darkness  = 0.9, -- 0.0
-			xray               = false, -- false
+			vibrancy_darkness  = 0.8, -- 0.0
+			xray               = true, -- false
 		},
 
 		glow = {
