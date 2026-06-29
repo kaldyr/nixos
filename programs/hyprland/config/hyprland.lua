@@ -161,6 +161,7 @@ hl.env( 'NIXOS_OZONE_WL', '1' )
 hl.env( 'PROTON_ENABLE_WAYLAND', '1' )
 hl.env( 'WLR_NO_HARDWARE_CURSORS', '1' )
 hl.env( 'XCURSOR_SIZE', '24' )
+hl.env( 'QS_ICON_THEME', 'Papirus' )
 
 --<------------------
 -- General         -->
@@ -587,7 +588,7 @@ b( m..'Tab',       function() -->
 end ) --<--
 b( m..'backslash', function() -->
 	hl.dispatch( e 'hyprctl reload' )
-	hl.dispatch( e 'systemctl --user restart waybar' )
+	hl.dispatch( e 'systemctl --user restart quickshell' )
 end ) --<--
 
 -- Which Key (Show all the keybinds)

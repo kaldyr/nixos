@@ -6,9 +6,9 @@
         ../../services/udiskie.nix
         ../feh.nix
         ../fuzzel.nix
+        ../quickshell
         ../satty
         ../swappy.nix
-        ../waybar.nix
         ../wlr-which-key
     ];
 
@@ -39,7 +39,6 @@
             libnotify
             pavucontrol
             playerctl
-            quickshell
             slurp
             tesseract
             wl-clipboard
