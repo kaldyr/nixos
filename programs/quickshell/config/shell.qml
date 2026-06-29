@@ -7,7 +7,6 @@ import QtQuick
 import QtQuick.Layouts
 
 PanelWindow {
-
 	id: root
 
 	anchors {
@@ -19,21 +18,29 @@ PanelWindow {
 
 	implicitHeight: 24
 
+	SystemClock {
+		id: sysClock
+		precision: SystemClock.Minutes
+	}
+
 	property string fontFamily: "Maple Mono NF"
 
 	// Left -->
 	Rectangle {
 		anchors.left: parent.left
-		height: parent.height
+		anchors.verticalCenter: parent.verticalCenter
+		height: parent.height - 2
 		width: leftBar.width + 24
-		bottomRightRadius: 16
+		topRightRadius: 12
+		bottomRightRadius: 12
 		color: "#292c3c"
 		opacity: 0.95
 
 		Row {
-			anchors.centerIn: parent
 			id: leftBar
-			spacing: 8
+			anchors.centerIn: parent
+			spacing: 6
+
 			Repeater {
 				model: 10
 
@@ -69,21 +76,72 @@ PanelWindow {
 	// Center -->
 	Rectangle {
 		anchors.centerIn: parent
-		height: parent.height
-		width: centerBar.width + 36
-		bottomLeftRadius: 16
-		bottomRightRadius: 16
+		height: parent.height - 2
+		width: centerBar.width + 8
+		topLeftRadius: 12
+		topRightRadius: 12
+		bottomLeftRadius: 12
+		bottomRightRadius: 12
 		color: "#292c3c"
 		opacity: 0.95
 
 		Row {
 			id: centerBar
 			anchors.centerIn: parent
-			Text {
+
+			Rectangle { // Clock -->
+				anchors.verticalCenter: parent.verticalCenter
+				id: clockFace
+				height: 16
+				width: 16
+				radius: 8
+				color: "#232634"
+				border.color: "#ca9ee6"
+				border.width: 1
+
+				Rectangle { // Minute Hand
+					anchors.bottom: clockFace.verticalCenter
+					anchors.horizontalCenter: clockFace.horizontalCenter
+					height: 7
+					width: 1
+					color: "#ca9ee6"
+					antialiasing: true
+					transformOrigin: Item.Bottom
+					rotation: {
+						const d = sysClock.date;
+						return d.getMinutes() * 6;
+					}
+					Behavior on rotation { RotationAnimation { duration: 200; direction: RotationAnimation.Shortest } }
+				}
+
+				Rectangle { // Hour Hand
+					anchors.bottom: clockFace.verticalCenter
+					anchors.horizontalCenter: clockFace.horizontalCenter
+					height: 4
+					width: 1
+					color: "#ca9ee6"
+					antialiasing: true
+					transformOrigin: Item.Bottom
+					rotation: {
+						const d = sysClock.date;
+						return ((d.getHours() % 12) + d.getMinutes() / 60) * 30;
+					}
+					Behavior on rotation { RotationAnimation { duration: 200; direction: RotationAnimation.Shortest } }
+				}
+
+			}
+			// <--
+			Rectangle { // Spacer -->
+				height: parent.height
+				width: 18
+				color: "transparent"
+			}
+			// <--
+			Text {      // Time and Date text -->
 				id: clock
 				color: "#85c1dc"
 
-				property string fmt: "   hh:mm · ddd, MMM dd   "
+				property string fmt: "hh:mm · ddd, MMM dd"
 
 				font { family: root.fontFamily; pixelSize: 12; bold: true }
 
@@ -96,15 +154,41 @@ PanelWindow {
 					onTriggered: clock.text = Qt.formatDateTime(new Date(), clock.fmt)
 				}
 			}
+			// <--
+			Rectangle { // Spacer -->
+				height: parent.height
+				width: 18
+				color: "transparent"
+			}
+			// <--
+			Rectangle { // Calendar -->
+				anchors.verticalCenter: parent.verticalCenter
+				height: 16
+				width: 16
+				radius: 8
+				color: "#232634"
+				border.color: "#ef9f76"
+				border.width: 1
+
+				Text {
+					anchors.centerIn: parent
+					font { family: root.fontFamily; pixelSize: 8; bold: true }
+					color: "#ef9f76"
+					text: ""
+				}
+			}
+			// <--
 		}
 	} // <--
 
 	// Right -->
 	Rectangle {
 		anchors.right: parent.right
-		height: parent.height
+		anchors.verticalCenter: parent.verticalCenter
+		height: parent.height - 2
 		width: rightBar.width + 24
-		bottomLeftRadius: 16
+		topLeftRadius: 12
+		bottomLeftRadius: 12
 		color: "#292c3c"
 		opacity: 0.95
 

@@ -222,7 +222,7 @@ hl.config({
 		dim_special           = 0.2, -- 0.2
 		dim_strength          = 0.15, -- 0.5
 		rounding              = 16, -- 0
-		rounding_power        = 5, -- 2.0
+		rounding_power        = 2, -- 2.0
 
 		blur = {
 			enabled            = true, -- true
