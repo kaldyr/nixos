@@ -57,9 +57,9 @@ PanelWindow {
 				acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
 				onWheel: function(e) {
 					if (e.angleDelta.y > 0) {
-						Hyprland.dispatch("hl.dsp.focus({workspace = 'e+1'})")
-					} else {
 						Hyprland.dispatch("hl.dsp.focus({workspace = 'e-1'})")
+					} else {
+						Hyprland.dispatch("hl.dsp.focus({workspace = 'e+1'})")
 					}
 				}
 			}
