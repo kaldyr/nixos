@@ -4,7 +4,6 @@ import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Services.SystemTray
 import QtQuick
-import QtQuick.Layouts
 
 PanelWindow {
 	id: root
@@ -20,7 +19,7 @@ PanelWindow {
 
 	SystemClock {
 		id: sysClock
-		precision: SystemClock.Minutes
+		precision: SystemClock.Seconds
 	}
 
 	property string fontFamily: "Maple Mono NF"
@@ -29,17 +28,19 @@ PanelWindow {
 	Rectangle {
 		anchors.left: parent.left
 		anchors.verticalCenter: parent.verticalCenter
-		height: parent.height - 2
-		width: leftBar.width + 24
+		height: parent.height - 4
+		width: leftBar.width + 8
 		topRightRadius: 12
 		bottomRightRadius: 12
-		color: "#292c3c"
-		opacity: 0.95
+		color: "#303446"
+		border.color: "#292c3c"
+		border.width: 2
+		opacity: 0.98
 
 		Row {
 			id: leftBar
 			anchors.centerIn: parent
-			spacing: 6
+			spacing: 4
 
 			Repeater {
 				model: 10
@@ -76,26 +77,28 @@ PanelWindow {
 	// Center -->
 	Rectangle {
 		anchors.centerIn: parent
-		height: parent.height - 2
-		width: centerBar.width + 8
+		height: parent.height - 4
+		width: centerBar.width + 4
 		topLeftRadius: 12
 		topRightRadius: 12
 		bottomLeftRadius: 12
 		bottomRightRadius: 12
-		color: "#292c3c"
-		opacity: 0.95
+		color: "#303446"
+		border.color: "#292c3c"
+		border.width: 2
+		opacity: 0.98
 
 		Row {
 			id: centerBar
 			anchors.centerIn: parent
 
-			Rectangle { // Clock -->
+			Rectangle { // Clock    -->
 				anchors.verticalCenter: parent.verticalCenter
 				id: clockFace
 				height: 16
 				width: 16
 				radius: 8
-				color: "#232634"
+				color: "#414559"
 				border.color: "#ca9ee6"
 				border.width: 1
 
@@ -124,40 +127,44 @@ PanelWindow {
 					transformOrigin: Item.Bottom
 					rotation: {
 						const d = sysClock.date;
-						return ((d.getHours() % 12) + d.getMinutes() / 60) * 30;
+						return ((d.getHours() % 12) + (d.getMinutes() / 60)) * 30;
 					}
 					Behavior on rotation { RotationAnimation { duration: 200; direction: RotationAnimation.Shortest } }
 				}
 
 			}
 			// <--
-			Rectangle { // Spacer -->
+			Rectangle { // Spacer   -->
 				height: parent.height
-				width: 18
+				width: 8
 				color: "transparent"
 			}
 			// <--
-			Text {      // Time and Date text -->
-				id: clock
-				color: "#85c1dc"
-
-				property string fmt: "hh:mm · ddd, MMM dd"
-
-				font { family: root.fontFamily; pixelSize: 12; bold: true }
-
-				text: Qt.formatDateTime(new Date(), clock.fmt)
-
-				Timer {
-					interval: 1000
-					running: true
-					repeat: true
-					onTriggered: clock.text = Qt.formatDateTime(new Date(), clock.fmt)
-				}
+			Text      { // Time     -->
+				id: time
+				anchors.verticalCenter: parent.verticalCenter
+				color: "#ca9ee6"
+				font { family: root.fontFamily; pixelSize: 12; }
+				text: Qt.formatDateTime( sysClock.date, "HH:mm" )
 			}
 			// <--
-			Rectangle { // Spacer -->
+			Rectangle { // Spacer   -->
 				height: parent.height
-				width: 18
+				width: 24
+				color: "transparent"
+			}
+			// <--
+			Text      { // Date     -->
+				id: date
+				anchors.verticalCenter: parent.verticalCenter
+				color: "#ef9f76"
+				font { family: root.fontFamily; pixelSize: 12; }
+				text: Qt.formatDateTime( sysClock.date, "ddd, MMM dd" )
+			}
+			// <--
+			Rectangle { // Spacer   -->
+				height: parent.height
+				width: 8
 				color: "transparent"
 			}
 			// <--
@@ -166,7 +173,7 @@ PanelWindow {
 				height: 16
 				width: 16
 				radius: 8
-				color: "#232634"
+				color: "#414559"
 				border.color: "#ef9f76"
 				border.width: 1
 
@@ -185,12 +192,14 @@ PanelWindow {
 	Rectangle {
 		anchors.right: parent.right
 		anchors.verticalCenter: parent.verticalCenter
-		height: parent.height - 2
-		width: rightBar.width + 24
+		height: parent.height - 4
+		width: rightBar.width + 6
 		topLeftRadius: 12
 		bottomLeftRadius: 12
-		color: "#292c3c"
-		opacity: 0.95
+		color: "#303446"
+		border.color: "#292c3c"
+		border.width: 2
+		opacity: 0.98
 
 		Row {
 			id: rightBar
@@ -203,15 +212,13 @@ PanelWindow {
 				Item {
 					id: trayItem
 					required property var modelData
-					implicitHeight: 16
-					implicitWidth: 16
+					implicitHeight: 14
+					implicitWidth: 14
 
 					Image {
 						anchors.fill: parent
 						source: trayItem.modelData.icon
-						sourceSize: Qt.size(16, 16)
 						smooth: true
-
 					}
 
 					MouseArea {

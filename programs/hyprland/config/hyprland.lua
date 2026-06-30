@@ -220,8 +220,8 @@ hl.config({
 		dim_inactive          = true, -- false
 		dim_modal             = true, -- true
 		dim_special           = 0.2, -- 0.2
-		dim_strength          = 0.15, -- 0.5
-		rounding              = 16, -- 0
+		dim_strength          = 0.1, -- 0.5
+		rounding              = 12, -- 0
 		rounding_power        = 2, -- 2.0
 
 		blur = {
@@ -230,15 +230,15 @@ hl.config({
 			contrast           = 0.8916, -- 0.8916
 			ignore_opacity     = true, -- true
 			new_optimizations  = true, -- true
-			noise              = 0.05, -- 0.0117
+			noise              = 0.0117, -- 0.0117
 			passes             = 3, -- 1
 			popups             = false, -- false
 			popups_ignorealpha = 0.2, -- 0.2
-			size               = 20, -- 8
+			size               = 24, -- 8
 			special            = false, -- false
 			vibrancy           = 0.5, -- 0.1696
-			vibrancy_darkness  = 0.9, -- 0.0
-			xray               = false, -- false
+			vibrancy_darkness  = 0.8, -- 0.0
+			xray               = true, -- false
 		},
 
 		glow = {
