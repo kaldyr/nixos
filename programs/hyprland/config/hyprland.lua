@@ -51,7 +51,7 @@ if hostname == 'espresso' then
 
 	hl.config({ general = {
 		gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
-		gaps_out = { top = 8, left = 18, right = 18, bottom = 18 }, -- 20
+		gaps_out = { top = 1, left = 18, right = 18, bottom = 18 }, -- 20
 	} })
 
 elseif hostname == 'hofud' then
@@ -85,7 +85,7 @@ elseif hostname == 'hofud' then
 
 	hl.config({ general = {
 		gaps_in  = { top = 8, left = 14, right = 14, bottom = 9 }, -- 5
-		gaps_out = { top = 9, left = 20, right = 20, bottom = 24 }, -- 20
+		gaps_out = { top = 1, left = 20, right = 20, bottom = 24 }, -- 20
 	} })
 
 	hl.on( 'monitor.added', function()
@@ -93,7 +93,7 @@ elseif hostname == 'hofud' then
 		if #monitors == 1 and monitors[1].name == 'FALLBACK' then
 			hl.config({ general = {
 				gaps_in  = { top = 8, left = 14, right = 14, bottom = 9 }, -- 5
-				gaps_out = { top = 9, left = 20, right = 20, bottom = 24 }, -- 20
+				gaps_out = { top = 1, left = 20, right = 20, bottom = 24 }, -- 20
 			} })
 			return
 		end
@@ -103,7 +103,7 @@ elseif hostname == 'hofud' then
 				hl.monitor({ output = 'eDP-1', disabled = true })
 				hl.config({ general = {
 					gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
-					gaps_out = { top = 9, left = 18, right = 18, bottom = 18 }, -- 20
+					gaps_out = { top = 1, left = 18, right = 18, bottom = 18 }, -- 20
 				} })
 			end
 		end
@@ -145,7 +145,7 @@ elseif hostname == 'mjolnir' then
 
 	hl.config({ general = {
 		gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
-		gaps_out = { top = 9, left = 18, right = 18, bottom = 18 }, -- 20
+		gaps_out = { top = 1, left = 18, right = 18, bottom = 18 }, -- 20
 	} })
 
 end

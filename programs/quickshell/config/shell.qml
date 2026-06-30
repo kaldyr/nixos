@@ -15,7 +15,7 @@ PanelWindow {
 	}
 	color: "transparent"
 
-	implicitHeight: 24
+	implicitHeight: 32
 
 	SystemClock {
 		id: sysClock
@@ -24,35 +24,55 @@ PanelWindow {
 
 	property string fontFamily: "Maple Mono NF"
 
+	// Colors -->
+	// Bar
+	property string colorBar:         "#303446"
+	property string colorBarBorder:   "#232634"
+	// Worspaces
+	property string colorWSAc:        "#81c8be"
+	property string colorWSIn:        "#8caaee"
+	property string colorWSEm:        "#414559"
+	property string colorWSBorder:    "#292c3c"
+	// Datetime
+	property string colorClock:       "#292c3c"
+	property string colorClockHands:  "#8caaee"
+	property string colorClockBorder: "#ca9ee6"
+	property string colorClockText:   "#c6d0f5"
+	property string colorCal:         "#292c3c"
+	property string colorCalText:     "#c6d0f5"
+	property string colorCalBorder:   "#ef9f76"
+	// <--
+
 	// Left -->
 	Rectangle {
 		anchors.left: parent.left
 		anchors.verticalCenter: parent.verticalCenter
-		height: parent.height - 4
-		width: leftBar.width + 8
-		topRightRadius: 12
-		bottomRightRadius: 12
-		color: "#303446"
-		border.color: "#292c3c"
+		height: parent.height - 8
+		width: leftBar.width + (this.height / 2)
+		topRightRadius: this.height / 2
+		bottomRightRadius: this.height / 2
+		color: colorBar
+		border.color: colorBarBorder
 		border.width: 2
 		opacity: 0.98
 
 		Row {
 			id: leftBar
 			anchors.centerIn: parent
-			spacing: 4
+			spacing: 8
 
 			Repeater {
 				model: 10
 
-				Text {
+				Rectangle {
 					property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
 					property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
 
-					font { family: root.fontFamily; pixelSize: 16; bold: true }
-					color: isActive ? "#81c8be" : (ws ? "#8caaee" : "#414559")
-
-					text: isActive ? '' : (ws ? '' : '')
+					anchors.verticalCenter: parent.verticalCenter
+					height: isActive ? 12 : (ws ? 8 : 4)
+					width: isActive ? 12 : (ws ? 8 : 4)
+					color: isActive ? colorWSAc : (ws ? colorWSIn : colorWSEm)
+					radius: this.width / 2
 
 					MouseArea {
 						anchors.fill: parent
@@ -77,14 +97,14 @@ PanelWindow {
 	// Center -->
 	Rectangle {
 		anchors.centerIn: parent
-		height: parent.height - 4
+		height: parent.height - 8
 		width: centerBar.width + 4
-		topLeftRadius: 12
-		topRightRadius: 12
-		bottomLeftRadius: 12
-		bottomRightRadius: 12
-		color: "#303446"
-		border.color: "#292c3c"
+		topLeftRadius: this.height / 2
+		topRightRadius: this.height / 2
+		bottomLeftRadius: this.height / 2
+		bottomRightRadius: this.height / 2
+		color: colorBar
+		border.color: colorBarBorder
 		border.width: 2
 		opacity: 0.98
 
@@ -95,19 +115,19 @@ PanelWindow {
 			Rectangle { // Clock    -->
 				anchors.verticalCenter: parent.verticalCenter
 				id: clockFace
-				height: 16
-				width: 16
-				radius: 8
-				color: "#414559"
-				border.color: "#ca9ee6"
+				height: 20
+				width: 20
+				radius: 10
+				color: colorClock
+				border.color: colorClockBorder
 				border.width: 1
 
 				Rectangle { // Minute Hand
 					anchors.bottom: clockFace.verticalCenter
 					anchors.horizontalCenter: clockFace.horizontalCenter
-					height: 7
-					width: 1
-					color: "#ca9ee6"
+					height: 9
+					width: 2
+					color: colorClockHands
 					antialiasing: true
 					transformOrigin: Item.Bottom
 					rotation: {
@@ -120,9 +140,9 @@ PanelWindow {
 				Rectangle { // Hour Hand
 					anchors.bottom: clockFace.verticalCenter
 					anchors.horizontalCenter: clockFace.horizontalCenter
-					height: 4
-					width: 1
-					color: "#ca9ee6"
+					height: 5
+					width: 2
+					color: colorClockHands
 					antialiasing: true
 					transformOrigin: Item.Bottom
 					rotation: {
@@ -143,8 +163,8 @@ PanelWindow {
 			Text      { // Time     -->
 				id: time
 				anchors.verticalCenter: parent.verticalCenter
-				color: "#ca9ee6"
-				font { family: root.fontFamily; pixelSize: 12; }
+				color: colorClockText
+				font { family: fontFamily; pixelSize: 12; }
 				text: Qt.formatDateTime( sysClock.date, "HH:mm" )
 			}
 			// <--
@@ -157,8 +177,8 @@ PanelWindow {
 			Text      { // Date     -->
 				id: date
 				anchors.verticalCenter: parent.verticalCenter
-				color: "#ef9f76"
-				font { family: root.fontFamily; pixelSize: 12; }
+				color: colorCalText
+				font { family: fontFamily; pixelSize: 12; }
 				text: Qt.formatDateTime( sysClock.date, "ddd, MMM dd" )
 			}
 			// <--
@@ -170,17 +190,17 @@ PanelWindow {
 			// <--
 			Rectangle { // Calendar -->
 				anchors.verticalCenter: parent.verticalCenter
-				height: 16
-				width: 16
-				radius: 8
-				color: "#414559"
-				border.color: "#ef9f76"
+				height: 20
+				width: 20
+				radius: 10
+				color: colorCal
+				border.color: colorCalBorder
 				border.width: 1
 
 				Text {
 					anchors.centerIn: parent
-					font { family: root.fontFamily; pixelSize: 8; bold: true }
-					color: "#ef9f76"
+					font { family: root.fontFamily; pixelSize: 11; bold: true }
+					color: colorCalText
 					text: ""
 				}
 			}
@@ -192,12 +212,12 @@ PanelWindow {
 	Rectangle {
 		anchors.right: parent.right
 		anchors.verticalCenter: parent.verticalCenter
-		height: parent.height - 4
-		width: rightBar.width + 6
-		topLeftRadius: 12
-		bottomLeftRadius: 12
-		color: "#303446"
-		border.color: "#292c3c"
+		height: parent.height - 8
+		width: rightBar.width + parent.height / 2
+		topLeftRadius: this.height / 2
+		bottomLeftRadius: this.height / 2
+		color: colorBar
+		border.color: colorBarBorder
 		border.width: 2
 		opacity: 0.98
 
@@ -211,9 +231,10 @@ PanelWindow {
 
 				Item {
 					id: trayItem
+					anchors.verticalCenter: parent.verticalCenter
 					required property var modelData
-					implicitHeight: 14
-					implicitWidth: 14
+					implicitHeight: 16
+					implicitWidth: 16
 
 					Image {
 						anchors.fill: parent
