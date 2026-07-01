@@ -34,7 +34,7 @@ PanelWindow {
 	// Bar
 	property string colorBar:         "#303446"
 	property string colorBarBorder:   "#232634"
-	property string colorBarSecond:   "#414559"
+	property string colorBarSecond:   "#292c3c"
 	// Worspaces
 	property string colorWSAc:        "#81c8be"
 	property string colorWSIn:        "#8caaee"
@@ -56,7 +56,7 @@ PanelWindow {
 	Rectangle { // Transparent container
 		anchors.left: parent.left
 		anchors.verticalCenter: parent.verticalCenter
-		height: parent.height - 2
+		height: parent.height
 		width: leftBar.width + 12
 		color: "transparent"
 
@@ -64,7 +64,7 @@ PanelWindow {
 			id: leftBar
 			anchors.verticalCenter: parent.verticalCenter
 			anchors.left: parent.left
-			height: parent.height - 6
+			height: parent.height - 8
 			width: workspaces.width + 6
 			topRightRadius: this.height / 2
 			bottomRightRadius: this.height / 2
@@ -79,7 +79,7 @@ PanelWindow {
 
 				Rectangle { // Spacer for the launcher button
 					height: 1
-					width: launcher.width
+					width: launcher.width + 4
 					color: "transparent"
 				}
 
@@ -88,8 +88,8 @@ PanelWindow {
 
 					Rectangle {
 						anchors.verticalCenter: root.verticalCenter
-						height: 20
-						width: 16
+						height: parent.height
+						width: 15
 						color: "transparent"
 
 						MouseArea {
@@ -103,9 +103,9 @@ PanelWindow {
 
 							anchors.centerIn: parent
 							height: isActive ? 12 : (ws ? 8 : 4)
-							width: isActive ? 12 : (ws ? 8 : 4)
+							width: this.height
+							radius: this.height / 2
 							color: isActive ? colorWSAc : (ws ? colorWSIn : colorWSEm)
-							radius: this.width / 2
 
 						}
 					}
@@ -170,7 +170,6 @@ PanelWindow {
 			MouseArea {
 				anchors.fill: parent
 				hoverEnabled: true
-				cursorShape: Qt.PointingHandCursor
 				onClicked: Hyprland.dispatch("hl.dsp.exec_cmd('fuzzel')")
 			}
 		} // <--
