@@ -3,6 +3,7 @@
 // vim:fdm=marker:fdl=0:foldmarker=-->,<--
 
 import Quickshell
+import Quickshell.Io
 import Quickshell.Hyprland
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
@@ -25,6 +26,8 @@ PanelWindow {
 		precision: SystemClock.Seconds
 	}
 
+	Process { id: launchProc }
+
 	property string fontFamily: "Maple Mono NF"
 
 	// Colors -->
@@ -32,13 +35,14 @@ PanelWindow {
 	property string colorBar:         "#303446"
 	property string colorBarBorder:   "#232634"
 	property string colorBarSecond:   "#414559"
-	property string colorBarThird:    "#a6d189"
 	// Worspaces
 	property string colorWSAc:        "#81c8be"
 	property string colorWSIn:        "#8caaee"
 	property string colorWSEm:        "#414559"
 	property string colorWSBorder:    "#292c3c"
+	property string colorWSOverview:  "#babbf1"
 	// Datetime
+	property string colorSunset:      "#ef9f76"
 	property string colorClock:       "#292c3c"
 	property string colorClockHands:  "#8caaee"
 	property string colorClockBorder: "#ca9ee6"
@@ -49,90 +53,128 @@ PanelWindow {
 	// <--
 
 	// Left -->
-	// Application Launcher (distro icon) (Large)
-	// Workspace Switcher
-	// Overview Launcher
-	// Rectangle transparent container
-	// Row
-	// Rectangle large button
-	// Rectangle workspaces repeater
-	// Overview button
-	Rectangle {
+	Rectangle { // Transparent container
 		anchors.left: parent.left
 		anchors.verticalCenter: parent.verticalCenter
 		height: parent.height - 2
 		width: leftBar.width + 12
 		color: "transparent"
 
-		Rectangle {
-			anchors.left: parent.left
+		Rectangle { // Draw the bar
+			id: leftBar
 			anchors.verticalCenter: parent.verticalCenter
-			height: parent.height
-			width: leftBar.width + 12
+			anchors.left: parent.left
+			height: parent.height - 6
+			width: workspaces.width + 6
 			topRightRadius: this.height / 2
 			bottomRightRadius: this.height / 2
 			color: colorBar
 			border.color: colorBarBorder
 			border.width: 2
 			opacity: 0.98
-		}
 
-		Row {
-			id: leftBar
-			anchors.centerIn: parent
-
-			IconImage {
+			Row {
+				id: workspaces
 				anchors.verticalCenter: parent.verticalCenter
-				source: Quickshell.iconPath('distributor-logo-nixos')
-				height: 20
-				width: 20
-			}
 
-			Rectangle {
-				width: 10
-				height: 1
-				color: "transparent"
-			}
-
-			Repeater {
-				model: 10
-
-				Rectangle {
-					anchors.verticalCenter: root.verticalCenter
-					height: 20
-					width: 16
+				Rectangle { // Spacer for the launcher button
+					height: 1
+					width: launcher.width
 					color: "transparent"
+				}
 
-					MouseArea {
-						anchors.fill: parent
-						onClicked: Hyprland.dispatch("hl.dsp.focus({workspace = " + (index + 1) + "})")
-					}
+				Repeater {
+					model: 10
 
 					Rectangle {
-						property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
-						property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
+						anchors.verticalCenter: root.verticalCenter
+						height: 20
+						width: 16
+						color: "transparent"
 
+						MouseArea {
+							anchors.fill: parent
+							onClicked: Hyprland.dispatch("hl.dsp.focus({workspace = " + (index + 1) + "})")
+						}
+
+						Rectangle {
+							property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
+							property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
+
+							anchors.centerIn: parent
+							height: isActive ? 12 : (ws ? 8 : 4)
+							width: isActive ? 12 : (ws ? 8 : 4)
+							color: isActive ? colorWSAc : (ws ? colorWSIn : colorWSEm)
+							radius: this.width / 2
+
+						}
+					}
+
+				}
+
+				WheelHandler {
+					acceptedDevices: PointerDevice.Mouse
+					onWheel: function(e) {
+						if (e.angleDelta.y > 0) {
+							Hyprland.dispatch("hl.dsp.focus({workspace = 'e-1'})")
+						} else {
+							Hyprland.dispatch("hl.dsp.focus({workspace = 'e+1'})")
+						}
+					}
+				}
+
+				Rectangle {
+					height: parent.height
+					width: 20
+					color: "transparent"
+
+					Text {
 						anchors.centerIn: parent
-						height: isActive ? 12 : (ws ? 8 : 4)
-						width: isActive ? 12 : (ws ? 8 : 4)
-						color: isActive ? colorWSAc : (ws ? colorWSIn : colorWSEm)
-						radius: this.width / 2
-
+						text: "󰡃"
+						color: colorWSOverview
 					}
 				}
+
 			}
 
-			WheelHandler {
-				acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
-				onWheel: function(e) {
-					if (e.angleDelta.y > 0) {
-						Hyprland.dispatch("hl.dsp.focus({workspace = 'e-1'})")
-					} else {
-						Hyprland.dispatch("hl.dsp.focus({workspace = 'e+1'})")
-					}
-				}
-			}
 		}
+
+		Rectangle { // Launcher button -->
+			id: launcher
+			anchors.verticalCenter: parent.verticalCenter
+			anchors.left: parent.left
+			height: parent.height
+			width: parent.height + 4
+			topRightRadius: this.height / 2
+			bottomRightRadius: this.height / 2
+			color: colorBarSecond
+			border.color: colorBarBorder
+			border.width: 2
+
+			Row {
+				anchors.fill: parent
+				Rectangle {
+					height: 1
+					width: 3
+					color: "transparent"
+				}
+				IconImage {
+					anchors.verticalCenter: parent.verticalCenter
+					source: Quickshell.iconPath("distributor-logo-nixos")
+					height: 24
+					width: 24
+					smooth: true
+				}
+			}
+
+			MouseArea {
+				anchors.fill: parent
+				hoverEnabled: true
+				cursorShape: Qt.PointingHandCursor
+				onClicked: Hyprland.dispatch("hl.dsp.exec_cmd('fuzzel')")
+			}
+		} // <--
+
 	} // <--
 
 	// LeftMid -->
@@ -166,7 +208,7 @@ PanelWindow {
 			Text {
 				anchors.verticalCenter: parent.verticalCenter
 				anchors.right: centerSpacer.left
-				color: "#ef9f76"
+				color: colorSunset
 				font { family: fontFamily; pixelSize: 16; }
 				text: ""
 			}
