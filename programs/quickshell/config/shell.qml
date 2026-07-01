@@ -62,9 +62,9 @@ PanelWindow {
 
 		Rectangle { // Draw the bar
 			id: leftBar
-			anchors.verticalCenter: parent.verticalCenter
 			anchors.left: parent.left
-			height: parent.height - 8
+			anchors.verticalCenter: parent.verticalCenter
+			height: parent.height - 10
 			width: workspaces.width + 6
 			topRightRadius: this.height / 2
 			bottomRightRadius: this.height / 2
@@ -153,13 +153,14 @@ PanelWindow {
 
 			Row {
 				anchors.fill: parent
-				Rectangle {
-					height: 1
-					width: 3
-					color: "transparent"
-				}
+				// Rectangle {
+				// 	height: 1
+				// 	width: 3
+				// 	color: "transparent"
+				// }
 				IconImage {
-					anchors.verticalCenter: parent.verticalCenter
+					anchors.centerIn: parent
+					// anchors.verticalCenter: parent.verticalCenter
 					source: Quickshell.iconPath("distributor-logo-nixos")
 					height: 24
 					width: 24

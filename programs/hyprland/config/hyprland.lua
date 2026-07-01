@@ -363,11 +363,11 @@ local function win_small_size()
 end
 
 -- Launchers
-b( m..'b',    e('kitty --session ~/.config/kitty/sessions/btop.kitty-session', { float = true, size = win_large_size() }) )
-b( m..'c',    e('kitty --session ~/.config/kitty/sessions/qalc.kitty-session', { float = true, size = win_small_size() }) )
+b( m..'b',    e('kitty --session ~/.config/kitty/sessions/btop.kitty-session',  { float = true, size = win_large_size() }) )
+b( m..'c',    e('kitty --session ~/.config/kitty/sessions/qalc.kitty-session',  { float = true, size = win_small_size() }) )
 b( m..s..'c', e('kitty --session ~/.config/kitty/sessions/nixos.kitty-session', { float = true, size = win_large_size() }) )
 b( m..'o',    e('kitty --session ~/.config/kitty/sessions/notes.kitty-session', { float = true, size = win_large_size() }) )
-b( m..'y',    e('kitty --session ~/.config/kitty/sessions/yazi.kitty-session', { float = true, size = win_large_size() }) )
+b( m..'y',    e('kitty --session ~/.config/kitty/sessions/yazi.kitty-session',  { float = true, size = win_large_size() }) )
 b( m..'m',    e 'keepmenu' )
 b( m..'q',    e 'kitty' )
 b( m..s..'q', e('kitty', { float = true, size = win_large_size() }) )
@@ -621,6 +621,7 @@ b( m..s..'down',   hl.dsp.window.resize({ x = 0,   y = 1,   relative = true}), {
 b( m..s..'up',     hl.dsp.window.resize({ x = 0,   y = -1,  relative = true}), { repeating = true } )
 b( m..s..'right',  hl.dsp.window.resize({ x = 1,   y = 0,   relative = true}), { repeating = true } )
 b( m..'mouse:273', hl.dsp.window.resize(), { mouse = true } )
+
 -- Switch Workspace
 b( m..'code:59',    hl.dsp.focus({ workspace = 'e-1' }) ) -- ,
 b( m..'code:60',    hl.dsp.focus({ workspace = 'e+1' }) ) -- .
