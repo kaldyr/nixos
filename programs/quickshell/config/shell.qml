@@ -1,8 +1,11 @@
 //@ pragma UseQApplication
+//@ pragma IconTheme Papirus
 // vim:fdm=marker:fdl=0:foldmarker=-->,<--
+
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Services.SystemTray
+import Quickshell.Widgets
 import QtQuick
 
 PanelWindow {
@@ -28,6 +31,8 @@ PanelWindow {
 	// Bar
 	property string colorBar:         "#303446"
 	property string colorBarBorder:   "#232634"
+	property string colorBarSecond:   "#414559"
+	property string colorBarThird:    "#a6d189"
 	// Worspaces
 	property string colorWSAc:        "#81c8be"
 	property string colorWSIn:        "#8caaee"
@@ -44,39 +49,75 @@ PanelWindow {
 	// <--
 
 	// Left -->
+	// Application Launcher (distro icon) (Large)
+	// Workspace Switcher
+	// Overview Launcher
+	// Rectangle transparent container
+	// Row
+	// Rectangle large button
+	// Rectangle workspaces repeater
+	// Overview button
 	Rectangle {
 		anchors.left: parent.left
 		anchors.verticalCenter: parent.verticalCenter
-		height: parent.height - 8
-		width: leftBar.width + (this.height / 2)
-		topRightRadius: this.height / 2
-		bottomRightRadius: this.height / 2
-		color: colorBar
-		border.color: colorBarBorder
-		border.width: 2
-		opacity: 0.98
+		height: parent.height - 2
+		width: leftBar.width + 12
+		color: "transparent"
+
+		Rectangle {
+			anchors.left: parent.left
+			anchors.verticalCenter: parent.verticalCenter
+			height: parent.height
+			width: leftBar.width + 12
+			topRightRadius: this.height / 2
+			bottomRightRadius: this.height / 2
+			color: colorBar
+			border.color: colorBarBorder
+			border.width: 2
+			opacity: 0.98
+		}
 
 		Row {
 			id: leftBar
 			anchors.centerIn: parent
-			spacing: 8
+
+			IconImage {
+				anchors.verticalCenter: parent.verticalCenter
+				source: Quickshell.iconPath('distributor-logo-nixos')
+				height: 20
+				width: 20
+			}
+
+			Rectangle {
+				width: 10
+				height: 1
+				color: "transparent"
+			}
 
 			Repeater {
 				model: 10
 
 				Rectangle {
-					property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
-					property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
-
-					anchors.verticalCenter: parent.verticalCenter
-					height: isActive ? 12 : (ws ? 8 : 4)
-					width: isActive ? 12 : (ws ? 8 : 4)
-					color: isActive ? colorWSAc : (ws ? colorWSIn : colorWSEm)
-					radius: this.width / 2
+					anchors.verticalCenter: root.verticalCenter
+					height: 20
+					width: 16
+					color: "transparent"
 
 					MouseArea {
 						anchors.fill: parent
 						onClicked: Hyprland.dispatch("hl.dsp.focus({workspace = " + (index + 1) + "})")
+					}
+
+					Rectangle {
+						property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
+						property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
+
+						anchors.centerIn: parent
+						height: isActive ? 12 : (ws ? 8 : 4)
+						width: isActive ? 12 : (ws ? 8 : 4)
+						color: isActive ? colorWSAc : (ws ? colorWSIn : colorWSEm)
+						radius: this.width / 2
+
 					}
 				}
 			}
@@ -94,10 +135,61 @@ PanelWindow {
 		}
 	} // <--
 
+	// LeftMid -->
+	// Media controls
+	// Volume
+	// <--
+
 	// Center -->
+	// hyprsunset indicator (active, inactive, disabled)
+	// Alarm Launcher
+	// clock face (Large)
+	// date time text
+	// Calendar (Large)
+	// Notification (active, inactive, disabled)
+	// hypridle indicator (active, disabled)
 	Rectangle {
 		anchors.centerIn: parent
-		height: parent.height - 8
+		height: parent.height - 6
+		width: centerBar.width + 72
+		topLeftRadius: this.height / 2
+		topRightRadius: this.height / 2
+		bottomLeftRadius: this.height / 2
+		bottomRightRadius: this.height / 2
+		color: colorBarSecond
+		border.color: colorBarBorder
+		border.width: 2
+		opacity: 0.98
+
+		Row {
+			anchors.centerIn: parent
+			Text {
+				anchors.verticalCenter: parent.verticalCenter
+				anchors.right: centerSpacer.left
+				color: "#ef9f76"
+				font { family: fontFamily; pixelSize: 16; }
+				text: ""
+			}
+			Rectangle {
+				id: centerSpacer
+				anchors.centerIn: parent
+				height: 2
+				width: centerBar.width + 16
+				color: "transparent"
+			}
+			IconImage {
+				anchors.verticalCenter: parent.verticalCenter
+				anchors.left: centerSpacer.right
+				source: Quickshell.iconPath('notification-inactive')
+				height: 16
+				width: 16
+			}
+		}
+	}
+
+	Rectangle {
+		anchors.centerIn: parent
+		height: parent.height - 2
 		width: centerBar.width + 4
 		topLeftRadius: this.height / 2
 		topRightRadius: this.height / 2
@@ -115,9 +207,9 @@ PanelWindow {
 			Rectangle { // Clock    -->
 				anchors.verticalCenter: parent.verticalCenter
 				id: clockFace
-				height: 20
-				width: 20
-				radius: 10
+				height: 26
+				width: 26
+				radius: 13
 				color: colorClock
 				border.color: colorClockBorder
 				border.width: 1
@@ -125,8 +217,8 @@ PanelWindow {
 				Rectangle { // Minute Hand
 					anchors.bottom: clockFace.verticalCenter
 					anchors.horizontalCenter: clockFace.horizontalCenter
-					height: 9
-					width: 2
+					height: 12
+					width: 1
 					color: colorClockHands
 					antialiasing: true
 					transformOrigin: Item.Bottom
@@ -140,7 +232,7 @@ PanelWindow {
 				Rectangle { // Hour Hand
 					anchors.bottom: clockFace.verticalCenter
 					anchors.horizontalCenter: clockFace.horizontalCenter
-					height: 5
+					height: 7
 					width: 2
 					color: colorClockHands
 					antialiasing: true
@@ -156,7 +248,7 @@ PanelWindow {
 			// <--
 			Rectangle { // Spacer   -->
 				height: parent.height
-				width: 8
+				width: 10
 				color: "transparent"
 			}
 			// <--
@@ -170,7 +262,7 @@ PanelWindow {
 			// <--
 			Rectangle { // Spacer   -->
 				height: parent.height
-				width: 24
+				width: 16
 				color: "transparent"
 			}
 			// <--
@@ -184,31 +276,39 @@ PanelWindow {
 			// <--
 			Rectangle { // Spacer   -->
 				height: parent.height
-				width: 8
+				width: 10
 				color: "transparent"
 			}
 			// <--
 			Rectangle { // Calendar -->
 				anchors.verticalCenter: parent.verticalCenter
-				height: 20
-				width: 20
-				radius: 10
+				height: 26
+				width: 26
+				radius: 13
 				color: colorCal
 				border.color: colorCalBorder
 				border.width: 1
 
-				Text {
+				IconImage {
 					anchors.centerIn: parent
-					font { family: root.fontFamily; pixelSize: 11; bold: true }
-					color: colorCalText
-					text: ""
+					source: Quickshell.iconPath('calendar')
+					height: 13
+					width: 13
 				}
 			}
 			// <--
 		}
 	} // <--
 
+	// RightMid -->
+	// Network (wired/wireless)
+	// Tailscale
+	// Bluetooth
+	// <--
+
 	// Right -->
+	// System Tray
+	// Power/lock menu launcher (Large)
 	Rectangle {
 		anchors.right: parent.right
 		anchors.verticalCenter: parent.verticalCenter
@@ -233,10 +333,10 @@ PanelWindow {
 					id: trayItem
 					anchors.verticalCenter: parent.verticalCenter
 					required property var modelData
-					implicitHeight: 16
-					implicitWidth: 16
+					height: 16
+					width: 16
 
-					Image {
+					IconImage {
 						anchors.fill: parent
 						source: trayItem.modelData.icon
 						smooth: true
