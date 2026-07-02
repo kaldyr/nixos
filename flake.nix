@@ -29,13 +29,13 @@
         helium.inputs.nixpkgs.follows = "nixpkgs";
 
         # Hyprland
-        hyprland.url = "github:hyprwm/Hyprland/ce36ee360ac0fe9e716c73e83dd7284f429c13ea"; # 2026-06-18
+        hyprland.url = "github:hyprwm/Hyprland";
 
         # Yazi file manager
-        yazi.url = "github:sxyazi/yazi/ef654f442060c3a4feae6d89f8b9ddf300d54ecc"; # 2026-06-18
+        yazi.url = "github:sxyazi/yazi"; # 2026-06-18
 
         # zmx session persistence
-        zmx.url = "github:neurosnap/zmx/4c2924c515414dfe23b26fd2a1cd5c55f9439f55"; # 2026-06-18
+        zmx.url = "github:neurosnap/zmx"; # 2026-06-18
 
     };
 

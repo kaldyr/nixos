@@ -192,6 +192,9 @@ menu:
       - key: "o"
         desc: "Power [O]ff"
         cmd: poweroff
+      - key: "x"
+        desc: "E[x]it Hyprland"
+        cmd: hyprctl dispatch 'hl.dsp.exit()'
       - key: "BackSpace"
         desc: "Previous Menu"
         cmd: wlr-which-key

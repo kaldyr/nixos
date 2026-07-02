@@ -1,11 +1,12 @@
 //@ pragma UseQApplication
 //@ pragma IconTheme Papirus
+// pragma ComponentBehavior: Bound
 // vim:fdm=marker:fdl=0:foldmarker=-->,<--
 
 import Quickshell
-import Quickshell.Io
 import Quickshell.Hyprland
 import Quickshell.Services.SystemTray
+// import Quickshell.Services.UPower
 import Quickshell.Widgets
 import QtQuick
 
@@ -26,30 +27,35 @@ PanelWindow {
 		precision: SystemClock.Seconds
 	}
 
-	Process { id: launchProc }
-
-	property string fontFamily: "Maple Mono NF"
+	readonly property string fontFamily: "Maple Mono NF"
 
 	// Colors -->
-	// Bar
-	property string colorBar:         "#303446"
-	property string colorBarBorder:   "#232634"
-	property string colorBarSecond:   "#292c3c"
-	// Worspaces
-	property string colorWSAc:        "#81c8be"
-	property string colorWSIn:        "#8caaee"
-	property string colorWSEm:        "#414559"
-	property string colorWSBorder:    "#292c3c"
-	property string colorWSOverview:  "#babbf1"
-	// Datetime
-	property string colorSunset:      "#ef9f76"
-	property string colorClock:       "#292c3c"
-	property string colorClockHands:  "#8caaee"
-	property string colorClockBorder: "#ca9ee6"
-	property string colorClockText:   "#c6d0f5"
-	property string colorCal:         "#292c3c"
-	property string colorCalText:     "#c6d0f5"
-	property string colorCalBorder:   "#ef9f76"
+	property var theme: ({
+		bar: ({
+			bg:       "#303446",
+			border:   "#232634",
+			alt:      "#292c3c",
+		}),
+		ws: ({
+			active:   "#81c8be",
+			inactive: "#8caaee",
+			urgent:   "#e78284",
+			empty:    "#414559",
+			overview: "#babbf1",
+		}),
+		clock: ({
+			bg:       "#292c3c",
+			border:   "#ca9ee6",
+			hands:    "#8caaee",
+			text:     "#c6d0f5",
+		}),
+		cal: ({
+			bg:       "#292c3c",
+			border:   "#ef9f76",
+			text:     "#c6d0f5",
+		}),
+		sunset:      "#ef9f76"
+	})
 	// <--
 
 	// Left -->
@@ -68,8 +74,9 @@ PanelWindow {
 			width: workspaces.width + 6
 			topRightRadius: this.height / 2
 			bottomRightRadius: this.height / 2
-			color: colorBar
-			border.color: colorBarBorder
+			bottomLeftRadius: this.height / 2
+			color: root.theme.bar.bg
+			border.color: root.theme.bar.border
 			border.width: 2
 			opacity: 0.98
 
@@ -77,6 +84,9 @@ PanelWindow {
 				id: workspaces
 				anchors.verticalCenter: parent.verticalCenter
 
+				// function updateWorkspaces() {
+				//
+				// }
 				Rectangle { // Spacer for the launcher button
 					height: 1
 					width: launcher.width + 4
@@ -87,8 +97,8 @@ PanelWindow {
 					model: 10
 
 					Rectangle {
-						anchors.verticalCenter: root.verticalCenter
-						height: parent.height
+						anchors.verticalCenter: leftBar.verticalCenter
+						height: leftBar.height
 						width: 15
 						color: "transparent"
 
@@ -100,30 +110,22 @@ PanelWindow {
 						Rectangle {
 							property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
 							property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
+							// Urgent
 
 							anchors.centerIn: parent
 							height: isActive ? 12 : (ws ? 8 : 4)
 							width: this.height
 							radius: this.height / 2
-							color: isActive ? colorWSAc : (ws ? colorWSIn : colorWSEm)
-
-						}
-					}
-
-				}
-
-				WheelHandler {
-					acceptedDevices: PointerDevice.Mouse
-					onWheel: function(e) {
-						if (e.angleDelta.y > 0) {
-							Hyprland.dispatch("hl.dsp.focus({workspace = 'e-1'})")
-						} else {
-							Hyprland.dispatch("hl.dsp.focus({workspace = 'e+1'})")
+							color: {
+								if (isActive) { return root.theme.ws.active }
+								if (ws) { return root.theme.ws.inactive }
+								return root.theme.ws.empty
+							}
 						}
 					}
 				}
 
-				Rectangle {
+				Rectangle { // Overview Button
 					height: parent.height
 					width: 20
 					color: "transparent"
@@ -131,12 +133,10 @@ PanelWindow {
 					Text {
 						anchors.centerIn: parent
 						text: "󰡃"
-						color: colorWSOverview
+						color: root.theme.ws.overview
 					}
 				}
-
 			}
-
 		}
 
 		Rectangle { // Launcher button -->
@@ -147,25 +147,17 @@ PanelWindow {
 			width: parent.height + 4
 			topRightRadius: this.height / 2
 			bottomRightRadius: this.height / 2
-			color: colorBarSecond
-			border.color: colorBarBorder
+			bottomLeftRadius: this.height / 2
+			color: root.theme.bar.alt
+			border.color: root.theme.bar.border
 			border.width: 2
 
-			Row {
-				anchors.fill: parent
-				// Rectangle {
-				// 	height: 1
-				// 	width: 3
-				// 	color: "transparent"
-				// }
-				IconImage {
-					anchors.centerIn: parent
-					// anchors.verticalCenter: parent.verticalCenter
-					source: Quickshell.iconPath("distributor-logo-nixos")
-					height: 24
-					width: 24
-					smooth: true
-				}
+			IconImage {
+				anchors.centerIn: parent
+				source: Quickshell.iconPath("distributor-logo-nixos")
+				height: 24
+				width: 24
+				smooth: true
 			}
 
 			MouseArea {
@@ -174,6 +166,17 @@ PanelWindow {
 				onClicked: Hyprland.dispatch("hl.dsp.exec_cmd('fuzzel')")
 			}
 		} // <--
+
+		WheelHandler {
+			acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+			onWheel: function(e) {
+				if (e.angleDelta.y > 0) {
+					Hyprland.dispatch("hl.dsp.focus({workspace = 'e-1'})")
+				} else {
+					Hyprland.dispatch("hl.dsp.focus({workspace = 'e+1'})")
+				}
+			}
+		}
 
 	} // <--
 
@@ -184,12 +187,12 @@ PanelWindow {
 
 	// Center -->
 	// hyprsunset indicator (active, inactive, disabled)
-	// Alarm Launcher
+	// brightness indicator
 	// clock face (Large)
 	// date time text
 	// Calendar (Large)
-	// Notification (active, inactive, disabled)
 	// hypridle indicator (active, disabled)
+	// Notification (active, inactive, disabled)
 	Rectangle {
 		anchors.centerIn: parent
 		height: parent.height - 6
@@ -198,8 +201,8 @@ PanelWindow {
 		topRightRadius: this.height / 2
 		bottomLeftRadius: this.height / 2
 		bottomRightRadius: this.height / 2
-		color: colorBarSecond
-		border.color: colorBarBorder
+		color: root.theme.bar.bg
+		border.color: root.theme.bar.border
 		border.width: 2
 		opacity: 0.98
 
@@ -208,8 +211,8 @@ PanelWindow {
 			Text {
 				anchors.verticalCenter: parent.verticalCenter
 				anchors.right: centerSpacer.left
-				color: colorSunset
-				font { family: fontFamily; pixelSize: 16; }
+				color: root.theme.sunset
+				font { family: root.fontFamily; pixelSize: 16; }
 				text: ""
 			}
 			Rectangle {
@@ -237,8 +240,8 @@ PanelWindow {
 		topRightRadius: this.height / 2
 		bottomLeftRadius: this.height / 2
 		bottomRightRadius: this.height / 2
-		color: colorBar
-		border.color: colorBarBorder
+		color: root.theme.bar.bg
+		border.color: root.theme.bar.border
 		border.width: 2
 		opacity: 0.98
 
@@ -252,8 +255,8 @@ PanelWindow {
 				height: 26
 				width: 26
 				radius: 13
-				color: colorClock
-				border.color: colorClockBorder
+				color: root.theme.clock.bg
+				border.color: root.theme.clock.border
 				border.width: 1
 
 				Rectangle { // Minute Hand
@@ -261,7 +264,7 @@ PanelWindow {
 					anchors.horizontalCenter: clockFace.horizontalCenter
 					height: 12
 					width: 1
-					color: colorClockHands
+					color: root.theme.clock.hands
 					antialiasing: true
 					transformOrigin: Item.Bottom
 					rotation: {
@@ -276,7 +279,7 @@ PanelWindow {
 					anchors.horizontalCenter: clockFace.horizontalCenter
 					height: 7
 					width: 2
-					color: colorClockHands
+					color: root.theme.clock.hands
 					antialiasing: true
 					transformOrigin: Item.Bottom
 					rotation: {
@@ -297,8 +300,8 @@ PanelWindow {
 			Text      { // Time     -->
 				id: time
 				anchors.verticalCenter: parent.verticalCenter
-				color: colorClockText
-				font { family: fontFamily; pixelSize: 12; }
+				color: root.theme.clock.text
+				font { family: root.fontFamily; pixelSize: 12; }
 				text: Qt.formatDateTime( sysClock.date, "HH:mm" )
 			}
 			// <--
@@ -311,8 +314,8 @@ PanelWindow {
 			Text      { // Date     -->
 				id: date
 				anchors.verticalCenter: parent.verticalCenter
-				color: colorCalText
-				font { family: fontFamily; pixelSize: 12; }
+				color: root.theme.cal.text
+				font { family: root.fontFamily; pixelSize: 12; }
 				text: Qt.formatDateTime( sysClock.date, "ddd, MMM dd" )
 			}
 			// <--
@@ -327,8 +330,8 @@ PanelWindow {
 				height: 26
 				width: 26
 				radius: 13
-				color: colorCal
-				border.color: colorCalBorder
+				color: root.theme.cal.bg
+				border.color: root.theme.cal.bg
 				border.width: 1
 
 				IconImage {
@@ -343,8 +346,7 @@ PanelWindow {
 	} // <--
 
 	// RightMid -->
-	// Network (wired/wireless)
-	// Tailscale
+	// Network Wired/Wireless/VPN
 	// Bluetooth
 	// <--
 
@@ -355,18 +357,17 @@ PanelWindow {
 		anchors.right: parent.right
 		anchors.verticalCenter: parent.verticalCenter
 		height: parent.height - 8
-		width: rightBar.width + parent.height / 2
+		width: rightBar.width + 8
 		topLeftRadius: this.height / 2
 		bottomLeftRadius: this.height / 2
-		color: colorBar
-		border.color: colorBarBorder
+		color: root.theme.bar.bg
+		border.color: root.theme.bar.border
 		border.width: 2
 		opacity: 0.98
 
 		Row {
 			id: rightBar
 			anchors.centerIn: parent
-			spacing: 8
 
 			Repeater {
 				model: SystemTray.items
@@ -376,10 +377,13 @@ PanelWindow {
 					anchors.verticalCenter: parent.verticalCenter
 					required property var modelData
 					height: 16
-					width: 16
+					width: 20
 
 					IconImage {
-						anchors.fill: parent
+						anchors.verticalCenter: parent.verticalCenter
+						anchors.left: parent.left
+						height: 16
+						width: this.height
 						source: trayItem.modelData.icon
 						smooth: true
 					}
@@ -389,11 +393,10 @@ PanelWindow {
 						hoverEnabled: true
 						acceptedButtons: Qt.LeftButton | Qt.RightButton
 						onClicked: (m) => m.button === Qt.RightButton
-							? modelData.display(root, root.width - 24, rightBar.height + 12)
-							: modelData.activate()
+							? trayItem.modelData.display(root, root.width - 24, rightBar.height + 12)
+							: trayItem.modelData.activate()
 					}
 				}
-
 			}
 		}
 	} // <--

@@ -499,11 +499,12 @@ vim.lsp.config( 'qmlls', {
 	filetypes = { 'qml' },
 	settings = {
 		qml = {
-			importPaths = {
-				'/etc/profiles/per-user/matt/lib/qt-6/qml',
+			lint = {
+				ignoreWarnings = { 'uncreatable-type' },
 			},
 		},
 	},
+	single_file_support = true,
 })
 
 vim.lsp.enable('qmlls')
