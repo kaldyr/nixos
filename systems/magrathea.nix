@@ -5,6 +5,7 @@
         ../disko/magrathea.nix
         ../services/forgejo.nix
         ../services/nextcloud.nix
+        ../services/openstarbound.nix
         ../services/pipewire.nix
         ../services/technitium.nix
         ../programs/kodi.nix

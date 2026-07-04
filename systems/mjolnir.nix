@@ -14,6 +14,7 @@
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix
         ../programs/openscad.nix
+        ../programs/openstarbound.nix
         ../programs/plymouth.nix
         ../programs/retroarch.nix
         ../programs/steam.nix

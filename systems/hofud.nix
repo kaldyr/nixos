@@ -10,6 +10,7 @@
         ../programs/lutris.nix
         ../programs/nextcloud-desktop.nix
         ../programs/openscad.nix
+        ../programs/openstarbound.nix
         ../programs/plymouth.nix
         ../programs/steam.nix
         ../services/epson-et-8550.nix

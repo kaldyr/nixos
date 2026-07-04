@@ -1,37 +1,37 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "65559fd"
+rev = "5d461d8"
 hash = "5b1c276b75cae91cbbdbe7863f39a540"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "598cdb6"
+rev = "5d461d8"
 hash = "7b625412411be411153886894d9acaf"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:jump-to-char"
-rev = "598cdb6"
+rev = "5d461d8"
 hash = "7a4b4237223aaa94e589d1c01a23542a"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "598cdb6"
+rev = "5d461d8"
 hash = "e3260d0b1feded8c8e3ae3afa1169e30"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:piper"
-rev = "598cdb6"
-hash = "d99cfbc3812e7738505f9e4bedb759cd"
+rev = "5d461d8"
+hash = "12126fca34f9f1802bb57b88292f57af"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "598cdb6"
+rev = "5d461d8"
 hash = "187cc58ba7ac3befd49c342129e6f1b6"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "598cdb6"
-hash = "c887903a63a2ff520081b6d90a4b3392"
+rev = "5d461d8"
+hash = "d6f7351ea25a43c9b5f4315fa1e23935"
 
 [[plugin.deps]]
 use = "ndtoan96/ouch"
@@ -45,8 +45,8 @@ hash = "8c1b36103121a66b37308afaf7124575"
 
 [[plugin.deps]]
 use = "Rolv-Apneseth/starship"
-rev = "a837101"
-hash = "635b0feb9215772d22020eb0abf0bb34"
+rev = "159eaba"
+hash = "7de446280b1ba8c49ffd86dbc24bbbe6"
 
 [flavor]
 deps = []
