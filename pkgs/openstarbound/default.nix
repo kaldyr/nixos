@@ -24,9 +24,9 @@ pkgs.clangStdenv.mkDerivation {
     src = pkgs.fetchFromGitHub {
         owner = "OpenStarbound";
         repo = "OpenStarbound";
-        rev = "f0abd78";
+        rev = "cd2d804f6feaa4c588df822f01eb5504ebd4ba55";
         fetchSubmodules = false;
-        hash = "sha256-kXAZdwppiWSbWzYsjAT+O12kVxolDwGKTGhl0YlzGfs=";
+        hash = "sha256-dwZgsMYPsIxdokdkMhwvdM3GIC9YJhJeP8oH47IB1BA=";
     };
 
     sourceRoot = "source/source";
