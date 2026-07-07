@@ -72,8 +72,10 @@ pkgs.clangStdenv.mkDerivation {
     installPhase = ''
         runHook preInstall
 
-        mkdir -p $out/bin/
+        mkdir -p $out/bin/ $out/libexec
         echo "${defaultConfig}" > $out/bin/sbinit.config
+
+        cp  -r ../dist/* $out/libexec >/dev/null 2>&1 || true
 
         if [ -f ../dist/starbound ]; then
             install -Dm755 ../dist/starbound $out/bin/starbound
