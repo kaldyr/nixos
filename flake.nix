@@ -32,10 +32,10 @@
         hyprland.url = "github:hyprwm/Hyprland";
 
         # Yazi file manager
-        yazi.url = "github:sxyazi/yazi"; # 2026-06-18
+        yazi.url = "github:sxyazi/yazi";
 
         # zmx session persistence
-        zmx.url = "github:neurosnap/zmx"; # 2026-06-18
+        zmx.url = "github:neurosnap/zmx";
 
     };
 
