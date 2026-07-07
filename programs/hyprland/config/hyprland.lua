@@ -178,7 +178,7 @@ hl.config({
 
 	ecosystem = {
 		no_donation_nag = true, -- false
-		no_update_news = true, -- false
+		no_update_news  = true, -- false
 	},
 
 	general = {
@@ -187,7 +187,7 @@ hl.config({
 		col = {
 			active_border = {
 				colors = { 0xee85c1dc, 0xee81c8be }, -- 0xffffffff
-				angle = 45,
+				angle  = 45,
 			},
 			inactive_border = 0x8885c1dc, -- 0xff444444
 		},
@@ -197,9 +197,11 @@ hl.config({
 	},
 
 	misc = {
-		disable_hyprland_logo   = true, -- false
-		force_default_wallpaper = 0, -- -1
-		vrr                     = vrr, -- 0
+		disable_hyprland_logo    = true, -- false
+		disable_splash_rendering = true, -- false
+		force_default_wallpaper  = 0, -- -1
+		key_press_enables_dpms   = true,
+		vrr                      = vrr, -- 0
 	},
 
 })

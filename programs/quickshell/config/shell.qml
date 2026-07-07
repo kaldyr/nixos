@@ -84,9 +84,17 @@ PanelWindow {
 				id: workspaces
 				anchors.verticalCenter: parent.verticalCenter
 
-				// function updateWorkspaces() {
-				//
-				// }
+				readonly property var hyprWS: {
+					let ws = []
+					const open = Hyprland.workspaces.values
+					for (let i = 1; i <= 10; i++)
+						if (open[i] == i)
+							ws.push(Hyprland.workspaces.values.find(w => w.id === i))
+						else
+							ws.push('')
+					return ws
+				}
+
 				Rectangle { // Spacer for the launcher button
 					height: 1
 					width: launcher.width + 4
@@ -94,7 +102,7 @@ PanelWindow {
 				}
 
 				Repeater {
-					model: 10
+					model: workspaces.hyprWS
 
 					Rectangle {
 						anchors.verticalCenter: leftBar.verticalCenter
@@ -109,14 +117,20 @@ PanelWindow {
 
 						Rectangle {
 							property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
-							property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
-							// Urgent
+							property bool isActive: ws.focused
+							property bool isUrgent: ws.urgent
 
 							anchors.centerIn: parent
-							height: isActive ? 12 : (ws ? 8 : 4)
+							height: {
+								if (isActive) { return 12 }
+								if (isUrgent) { return 10 }
+								if (ws)       { return  8 }
+								return 4
+							}
 							width: this.height
 							radius: this.height / 2
 							color: {
+								if (isUrgent) { return root.theme.ws.urgent }
 								if (isActive) { return root.theme.ws.active }
 								if (ws) { return root.theme.ws.inactive }
 								return root.theme.ws.empty
@@ -331,7 +345,7 @@ PanelWindow {
 				width: 26
 				radius: 13
 				color: root.theme.cal.bg
-				border.color: root.theme.cal.bg
+				border.color: root.theme.cal.border
 				border.width: 1
 
 				IconImage {
