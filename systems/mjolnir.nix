@@ -18,6 +18,7 @@
         ../programs/plymouth.nix
         ../programs/retroarch.nix
         ../programs/steam.nix
+        ../programs/virtualmachines.nix
         ../services/epson-et-8550.nix
         ../services/keyd.nix
         ../services/kmscon.nix
@@ -39,11 +40,13 @@
         directories = [
             "DnD"
             "Homeschool"
-            "Machines"
         ];
     };
 
     environment.systemPackages = with pkgs; [
+        dnsmasq
+        gnome-boxes
+        phodav
         quickemu
         quickgui
         virglrenderer
@@ -80,11 +83,5 @@
     };
 
     time.timeZone = "America/Los_Angeles";
-
-    # virtualisation.libvirtd = {
-    #     enable = true;
-    #     allowedBridges = [ "br0" ];
-    # };
-
 
 }
