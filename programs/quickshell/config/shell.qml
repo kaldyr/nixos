@@ -1,5 +1,5 @@
 //@ pragma UseQApplication
-//@ pragma IconTheme Papirus
+//@ pragma IconTheme Papirus-Dark
 // pragma ComponentBehavior: Bound
 // vim:fdm=marker:fdl=0:foldmarker=-->,<--
 
@@ -14,20 +14,20 @@ PanelWindow {
 	id: root
 
 	anchors {
-		top: true
-		left: true
+		top:   true
+		left:  true
 		right: true
 	}
-	color: "transparent"
 
-	implicitHeight: 32
-
-	SystemClock {
-		id: sysClock
-		precision: SystemClock.Seconds
-	}
+	height: 32
+	color:  "transparent"
 
 	readonly property string fontFamily: "Maple Mono NF"
+
+	SystemClock {
+		id:        sysClock
+		precision: SystemClock.Seconds
+	}
 
 	// Colors -->
 	property var theme: ({
@@ -60,28 +60,32 @@ PanelWindow {
 
 	// Left -->
 	Rectangle { // Transparent container
-		anchors.left: parent.left
+		anchors.left:           parent.left
 		anchors.verticalCenter: parent.verticalCenter
+
 		height: parent.height
-		width: leftBar.width + 12
-		color: "transparent"
+		width:  leftBar.width + 12
+		color:  "transparent"
 
 		Rectangle { // Draw the bar
 			id: leftBar
-			anchors.left: parent.left
+
+			anchors.left:           parent.left
 			anchors.verticalCenter: parent.verticalCenter
-			height: parent.height - 10
-			width: workspaces.width + 6
-			topRightRadius: this.height / 2
+
+			height:            parent.height - 10
+			width:             workspaces.width + 6
+			topRightRadius:    this.height / 2
 			bottomRightRadius: this.height / 2
-			bottomLeftRadius: this.height / 2
-			color: root.theme.bar.bg
-			border.color: root.theme.bar.border
-			border.width: 2
-			opacity: 0.98
+			bottomLeftRadius:  this.height / 2
+			color:             root.theme.bar.bg
+			border.color:      root.theme.bar.border
+			border.width:      2
+			opacity:           0.98
 
 			Row {
 				id: workspaces
+
 				anchors.verticalCenter: parent.verticalCenter
 
 				readonly property var hyprWS: {
@@ -95,10 +99,11 @@ PanelWindow {
 					return ws
 				}
 
-				Rectangle { // Spacer for the launcher button
+				Rectangle { // Placeholder for Launcher button
+					id:     phLauncher
 					height: 1
-					width: launcher.width + 4
-					color: "transparent"
+					width:  launcher.width + 4
+					color:  "transparent"
 				}
 
 				Repeater {
@@ -106,33 +111,38 @@ PanelWindow {
 
 					Rectangle {
 						anchors.verticalCenter: leftBar.verticalCenter
+
 						height: leftBar.height
-						width: 15
-						color: "transparent"
+						width:  15
+						color:  "transparent"
 
 						MouseArea {
 							anchors.fill: parent
-							onClicked: Hyprland.dispatch("hl.dsp.focus({workspace = " + (index + 1) + "})")
+							onClicked:    Hyprland.dispatch("hl.dsp.focus({workspace = " + (index + 1) + "})")
 						}
 
 						Rectangle {
 							property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
+
 							property bool isActive: ws.focused
 							property bool isUrgent: ws.urgent
 
 							anchors.centerIn: parent
+
 							height: {
 								if (isActive) { return 12 }
 								if (isUrgent) { return 10 }
-								if (ws)       { return  8 }
+								if (ws)       { return 8 }
 								return 4
 							}
-							width: this.height
+
+							width:  this.height
 							radius: this.height / 2
+
 							color: {
 								if (isUrgent) { return root.theme.ws.urgent }
 								if (isActive) { return root.theme.ws.active }
-								if (ws) { return root.theme.ws.inactive }
+								if (ws)       { return root.theme.ws.inactive }
 								return root.theme.ws.empty
 							}
 						}
@@ -140,14 +150,20 @@ PanelWindow {
 				}
 
 				Rectangle { // Overview Button
-					height: parent.height
-					width: 20
-					color: "transparent"
+					anchors.verticalCenter: parent.verticalCenter
 
-					Text {
+					height: 16
+					width:  16
+					radius: this.height / 2
+					color:  root.theme.bar.border
+
+					IconImage {
 						anchors.centerIn: parent
-						text: "󰡃"
-						color: root.theme.ws.overview
+
+						source: Quickshell.iconPath("preferences-system-windows-move")
+						height: 10
+						width:  10
+						smooth: true
 					}
 				}
 			}
@@ -155,29 +171,32 @@ PanelWindow {
 
 		Rectangle { // Launcher button -->
 			id: launcher
+
 			anchors.verticalCenter: parent.verticalCenter
-			anchors.left: parent.left
-			height: parent.height
-			width: parent.height + 4
-			topRightRadius: this.height / 2
+			anchors.left:           parent.left
+
+			height:            parent.height
+			width:             parent.height + 4
+			topRightRadius:    this.height / 2
 			bottomRightRadius: this.height / 2
-			bottomLeftRadius: this.height / 2
-			color: root.theme.bar.alt
-			border.color: root.theme.bar.border
-			border.width: 2
+			bottomLeftRadius:  this.height / 2
+			color:             root.theme.bar.alt
+			border.color:      root.theme.bar.border
+			border.width:      2
 
 			IconImage {
 				anchors.centerIn: parent
+
 				source: Quickshell.iconPath("distributor-logo-nixos")
 				height: 24
-				width: 24
+				width:  24
 				smooth: true
 			}
 
 			MouseArea {
 				anchors.fill: parent
 				hoverEnabled: true
-				onClicked: Hyprland.dispatch("hl.dsp.exec_cmd('fuzzel')")
+				onClicked:    Hyprland.dispatch("hl.dsp.exec_cmd('fuzzel')")
 			}
 		} // <--
 
@@ -209,97 +228,114 @@ PanelWindow {
 	// Notification (active, inactive, disabled)
 	Rectangle {
 		anchors.centerIn: parent
-		height: parent.height - 6
-		width: centerBar.width + 72
-		topLeftRadius: this.height / 2
-		topRightRadius: this.height / 2
-		bottomLeftRadius: this.height / 2
+
+		height:            parent.height - 6
+		width:             centerBar.width + 72
+		topLeftRadius:     this.height / 2
+		topRightRadius:    this.height / 2
+		bottomLeftRadius:  this.height / 2
 		bottomRightRadius: this.height / 2
-		color: root.theme.bar.bg
-		border.color: root.theme.bar.border
-		border.width: 2
-		opacity: 0.98
+		color:             root.theme.bar.bg
+		border.color:      root.theme.bar.border
+		border.width:      2
+		opacity:           0.98
 
 		Row {
 			anchors.centerIn: parent
+
 			Text {
 				anchors.verticalCenter: parent.verticalCenter
-				anchors.right: centerSpacer.left
-				color: root.theme.sunset
+				anchors.right:          centerSpacer.left
+
 				font { family: root.fontFamily; pixelSize: 16; }
-				text: ""
+
+				color: root.theme.sunset
+				text:  ""
 			}
+
 			Rectangle {
 				id: centerSpacer
+
 				anchors.centerIn: parent
+
 				height: 2
-				width: centerBar.width + 16
-				color: "transparent"
+				width:  centerBar.width + 16
+				color:  "transparent"
 			}
+
 			IconImage {
 				anchors.verticalCenter: parent.verticalCenter
-				anchors.left: centerSpacer.right
+				anchors.left:           centerSpacer.right
+
 				source: Quickshell.iconPath('notification-inactive')
 				height: 16
-				width: 16
+				width:  16
 			}
 		}
 	}
 
 	Rectangle {
 		anchors.centerIn: parent
-		height: parent.height - 2
-		width: centerBar.width + 4
-		topLeftRadius: this.height / 2
-		topRightRadius: this.height / 2
-		bottomLeftRadius: this.height / 2
+
+		height:            parent.height - 2
+		width:             centerBar.width + 4
+		topLeftRadius:     this.height / 2
+		topRightRadius:    this.height / 2
+		bottomLeftRadius:  this.height / 2
 		bottomRightRadius: this.height / 2
-		color: root.theme.bar.bg
-		border.color: root.theme.bar.border
-		border.width: 2
-		opacity: 0.98
+		color:             root.theme.bar.bg
+		border.color:      root.theme.bar.border
+		border.width:      2
+		opacity:           0.98
 
 		Row {
 			id: centerBar
+
 			anchors.centerIn: parent
 
 			Rectangle { // Clock    -->
-				anchors.verticalCenter: parent.verticalCenter
 				id: clockFace
-				height: 26
-				width: 26
-				radius: 13
-				color: root.theme.clock.bg
+
+				anchors.verticalCenter: parent.verticalCenter
+
+				height:       26
+				width:        26
+				radius:       13
+				color:        root.theme.clock.bg
 				border.color: root.theme.clock.border
 				border.width: 1
 
 				Rectangle { // Minute Hand
 					anchors.bottom: clockFace.verticalCenter
 					anchors.horizontalCenter: clockFace.horizontalCenter
-					height: 12
-					width: 1
-					color: root.theme.clock.hands
-					antialiasing: true
+
+					height:          12
+					width:           1
+					color:           root.theme.clock.hands
+					antialiasing:    true
 					transformOrigin: Item.Bottom
 					rotation: {
 						const d = sysClock.date;
 						return d.getMinutes() * 6;
 					}
+
 					Behavior on rotation { RotationAnimation { duration: 200; direction: RotationAnimation.Shortest } }
 				}
 
 				Rectangle { // Hour Hand
-					anchors.bottom: clockFace.verticalCenter
+					anchors.bottom:           clockFace.verticalCenter
 					anchors.horizontalCenter: clockFace.horizontalCenter
-					height: 7
-					width: 2
-					color: root.theme.clock.hands
-					antialiasing: true
+
+					height:          7
+					width:           2
+					color:           root.theme.clock.hands
+					antialiasing:    true
 					transformOrigin: Item.Bottom
 					rotation: {
 						const d = sysClock.date;
 						return ((d.getHours() % 12) + (d.getMinutes() / 60)) * 30;
 					}
+
 					Behavior on rotation { RotationAnimation { duration: 200; direction: RotationAnimation.Shortest } }
 				}
 
@@ -307,52 +343,60 @@ PanelWindow {
 			// <--
 			Rectangle { // Spacer   -->
 				height: parent.height
-				width: 10
-				color: "transparent"
+				width:  10
+				color:  "transparent"
 			}
 			// <--
 			Text      { // Time     -->
 				id: time
+
 				anchors.verticalCenter: parent.verticalCenter
-				color: root.theme.clock.text
+
 				font { family: root.fontFamily; pixelSize: 12; }
-				text: Qt.formatDateTime( sysClock.date, "HH:mm" )
+
+				color: root.theme.clock.text
+				text:  Qt.formatDateTime( sysClock.date, "HH:mm" )
 			}
 			// <--
 			Rectangle { // Spacer   -->
 				height: parent.height
-				width: 16
-				color: "transparent"
+				width:  16
+				color:  "transparent"
 			}
 			// <--
 			Text      { // Date     -->
 				id: date
+
 				anchors.verticalCenter: parent.verticalCenter
-				color: root.theme.cal.text
+
 				font { family: root.fontFamily; pixelSize: 12; }
-				text: Qt.formatDateTime( sysClock.date, "ddd, MMM dd" )
+
+				color: root.theme.cal.text
+				text:  Qt.formatDateTime( sysClock.date, "ddd, MMM dd" )
 			}
 			// <--
 			Rectangle { // Spacer   -->
 				height: parent.height
-				width: 10
-				color: "transparent"
+				width:  10
+				color:  "transparent"
 			}
 			// <--
 			Rectangle { // Calendar -->
 				anchors.verticalCenter: parent.verticalCenter
-				height: 26
-				width: 26
-				radius: 13
-				color: root.theme.cal.bg
+
+				height:       26
+				width:        26
+				radius:       13
+				color:        root.theme.cal.bg
 				border.color: root.theme.cal.border
 				border.width: 1
 
 				IconImage {
 					anchors.centerIn: parent
+
+					height: 12
+					width:  12
 					source: Quickshell.iconPath('calendar')
-					height: 13
-					width: 13
 				}
 			}
 			// <--
@@ -368,19 +412,21 @@ PanelWindow {
 	// System Tray
 	// Power/lock menu launcher (Large)
 	Rectangle {
-		anchors.right: parent.right
 		anchors.verticalCenter: parent.verticalCenter
-		height: parent.height - 8
-		width: rightBar.width + 8
-		topLeftRadius: this.height / 2
+		anchors.right:          parent.right
+
+		height:           parent.height - 8
+		width:            rightBar.width + 8
+		topLeftRadius:    this.height / 2
 		bottomLeftRadius: this.height / 2
-		color: root.theme.bar.bg
-		border.color: root.theme.bar.border
-		border.width: 2
-		opacity: 0.98
+		color:            root.theme.bar.bg
+		border.color:     root.theme.bar.border
+		border.width:     2
+		opacity:          0.98
 
 		Row {
 			id: rightBar
+
 			anchors.centerIn: parent
 
 			Repeater {
@@ -388,24 +434,30 @@ PanelWindow {
 
 				Item {
 					id: trayItem
+
 					anchors.verticalCenter: parent.verticalCenter
-					required property var modelData
+
 					height: 16
-					width: 20
+					width:  20
+
+					required property var modelData
 
 					IconImage {
 						anchors.verticalCenter: parent.verticalCenter
-						anchors.left: parent.left
+						anchors.left:           parent.left
+
 						height: 16
-						width: this.height
+						width:  this.height
 						source: trayItem.modelData.icon
 						smooth: true
 					}
 
 					MouseArea {
 						anchors.fill: parent
-						hoverEnabled: true
+
+						hoverEnabled:    true
 						acceptedButtons: Qt.LeftButton | Qt.RightButton
+
 						onClicked: (m) => m.button === Qt.RightButton
 							? trayItem.modelData.display(root, root.width - 24, rightBar.height + 12)
 							: trayItem.modelData.activate()
