@@ -20,7 +20,7 @@ PanelWindow {
 		right: true
 	}
 
-	height: 32
+	implicitHeight: 32
 	color:  "transparent"
 
 	readonly property string fontFamily: "Maple Mono NF"
@@ -38,28 +38,66 @@ PanelWindow {
 		property bool isActive: true
 
 		function toggle() {
-			if (hyprsunsetControl.isActive) {
-				hyprsunsetControl.isActive = false
+			if (this.isActive) {
+				this.isActive = false
 				Quickshell.execDetached(["sh", "-c", "systemctl --user stop hyprsunset.service"])
 			} else {
-				hyprsunsetControl.isActive = true
+				this.isActive = true
 				Quickshell.execDetached(["sh", "-c", "systemctl --user start hyprsunset.service"])
 			}
-		}
-
-		function getState() {
-			hyprsunsetStateProcess.exec()
 		}
 
 		Process {
 			id:      hyprsunsetStateProcess
 			running: true
-			command: ["sh", "-c", "systelmctl --user is-active hyprsunset.service"]
+			command: ["sh", "-c", "systemctl --user is-active hyprsunset.service"]
 			stdout:  StdioCollector {
 				onStreamFinished: {
 					hyprsunsetControl.isActive = (this.text.trim() === "active")
 				}
 			}
+		}
+
+		Timer {
+			interval:    1000
+			running:     true
+			repeat:      true
+			onTriggered: hyprsunsetStateProcess.running = true
+		}
+	}
+	// <--
+	// Hypridle  -->
+	Singleton {
+		id: hypridleControl
+
+		property bool isActive: true
+
+		function toggle() {
+			if (this.isActive) {
+				this.isActive = false
+				Quickshell.execDetached(["sh", "-c", "systemctl --user stop hypridle.service"])
+			} else {
+				this.isActive = true
+				Quickshell.execDetached(["sh", "-c", "systemctl --user start hypridle.service"])
+			}
+		}
+
+		Process {
+			id:      hypridleStateProcess
+			running: true
+			command: ["sh", "-c", "systemctl --user is-active hypridle.service"]
+			stdout:  StdioCollector {
+				onStreamFinished: {
+					hypridleControl.isActive = (this.text.trim() === "active")
+				}
+			}
+		}
+
+		Timer {
+			interval:    1000
+			running:     true
+			repeat:      true
+			onTriggered: hypridleStateProcess.running = true
 		}
 	}
 	// <--
@@ -91,6 +129,10 @@ PanelWindow {
 		}),
 		sunset: ({
 			active:   "#ef9f76",
+			inactive: "#414559",
+		}),
+		idle: ({
+			active:   "#85c1dc",
 			inactive: "#414559",
 		})
 	})
@@ -148,7 +190,6 @@ PanelWindow {
 					model: workspaces.hyprWS
 
 					Rectangle {
-						anchors.verticalCenter: leftBar.verticalCenter
 
 						height: leftBar.height
 						width:  15
@@ -268,14 +309,7 @@ PanelWindow {
 		opacity:           0.98
 
 		Row {
-			anchors.centerIn: parent
-
 			Text {
-				id: sunsetText
-
-				anchors.verticalCenter: parent.verticalCenter
-				anchors.right:          centerSpacer.left
-
 				font { family: root.fontFamily; pixelSize: 16; }
 
 				color: {
@@ -293,10 +327,26 @@ PanelWindow {
 				}
 			}
 
+			Text {
+				font { family: root.fontFamily; pixelSize: 16; }
+
+				color: {
+					if (hypridleControl.isActive) {
+						return root.theme.idle.inactive
+					}
+					return root.theme.idle.active
+				}
+				text:  "󱠛"
+
+				MouseArea {
+					anchors.fill: parent
+					hoverEnabled:    true
+					onClicked: hypridleControl.toggle()
+				}
+			}
+
 			Rectangle {
 				id: centerSpacer
-
-				anchors.centerIn: parent
 
 				height: 2
 				width:  centerBar.width + 16
@@ -304,9 +354,6 @@ PanelWindow {
 			}
 
 			IconImage {
-				anchors.verticalCenter: parent.verticalCenter
-				anchors.left:           centerSpacer.right
-
 				source: Quickshell.iconPath('notification-inactive')
 				height: 16
 				width:  16
