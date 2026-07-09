@@ -29,7 +29,7 @@ PanelWindow {
 		precision: SystemClock.Seconds
 	}
 
-	// Colors -->
+	// Colorscheme -->
 	property var theme: ({
 		bar: ({
 			bg:       "#303446",
@@ -58,7 +58,7 @@ PanelWindow {
 	})
 	// <--
 
-	// Left -->
+	// Left        -->  Launcher, Workspaces, Overview
 	Rectangle { // Transparent container
 		anchors.left:           parent.left
 		anchors.verticalCenter: parent.verticalCenter
@@ -212,20 +212,9 @@ PanelWindow {
 		}
 
 	} // <--
-
-	// LeftMid -->
-	// Media controls
-	// Volume
+	// LeftMid     -->  Volume, Media Controls
 	// <--
-
-	// Center -->
-	// hyprsunset indicator (active, inactive, disabled)
-	// brightness indicator
-	// clock face (Large)
-	// date time text
-	// Calendar (Large)
-	// hypridle indicator (active, disabled)
-	// Notification (active, inactive, disabled)
+	// Center      -->  Hyprsunset, Brightness, Clock, Time, Date, Calendar, Hypridle, Notifications
 	Rectangle {
 		anchors.centerIn: parent
 
@@ -402,15 +391,9 @@ PanelWindow {
 			// <--
 		}
 	} // <--
-
-	// RightMid -->
-	// Network Wired/Wireless/VPN
-	// Bluetooth
+	// RightMid    -->  Network, Bluetooth
 	// <--
-
-	// Right -->
-	// System Tray
-	// Power/lock menu launcher (Large)
+	// Right       -->  System Tray, Power Menu
 	Rectangle {
 		anchors.verticalCenter: parent.verticalCenter
 		anchors.right:          parent.right
@@ -466,5 +449,4 @@ PanelWindow {
 			}
 		}
 	} // <--
-
 }
