@@ -26,8 +26,15 @@ in
             };
 
             Service = {
-                Environment = "PATH=/run/wrappers/bin QML2_IMPORT_PATH=${QML2_IMPORT_PATH} QSG_RHI_BACKEND=vulkan";
+                Environment = [
+                    "PATH=/run/wrappers/bin:/run/current-system/sw/bin"
+                    "QSG_RHI_BACKEND=vulkan"
+                ];
                 ExecStart = lib.getExe pkgs.quickshell;
+                PassEnvironment = [
+                    "DBUS_SESSION_BUS_ADDRESS"
+                    "QML2_IMPORT_PATH"
+                ];
                 Restart = "on-failure";
             };
         };

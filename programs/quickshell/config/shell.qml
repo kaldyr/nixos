@@ -8,6 +8,7 @@ import Quickshell.Hyprland
 import Quickshell.Services.SystemTray
 // import Quickshell.Services.UPower
 import Quickshell.Widgets
+import Quickshell.Io
 import QtQuick
 
 PanelWindow {
@@ -28,6 +29,40 @@ PanelWindow {
 		id:        sysClock
 		precision: SystemClock.Seconds
 	}
+
+	// Controls
+	// Hyprsunset  -->
+	Singleton {
+		id: hyprsunsetControl
+
+		property bool isActive: true
+
+		function toggle() {
+			if (hyprsunsetControl.isActive) {
+				hyprsunsetControl.isActive = false
+				Quickshell.execDetached(["sh", "-c", "systemctl --user stop hyprsunset.service"])
+			} else {
+				hyprsunsetControl.isActive = true
+				Quickshell.execDetached(["sh", "-c", "systemctl --user start hyprsunset.service"])
+			}
+		}
+
+		function getState() {
+			hyprsunsetStateProcess.exec()
+		}
+
+		Process {
+			id:      hyprsunsetStateProcess
+			running: true
+			command: ["sh", "-c", "systelmctl --user is-active hyprsunset.service"]
+			stdout:  StdioCollector {
+				onStreamFinished: {
+					hyprsunsetControl.isActive = (this.text.trim() === "active")
+				}
+			}
+		}
+	}
+	// <--
 
 	// Colorscheme -->
 	property var theme: ({
@@ -54,7 +89,10 @@ PanelWindow {
 			border:   "#ef9f76",
 			text:     "#c6d0f5",
 		}),
-		sunset:      "#ef9f76"
+		sunset: ({
+			active:   "#ef9f76",
+			inactive: "#414559",
+		})
 	})
 	// <--
 
@@ -233,13 +271,26 @@ PanelWindow {
 			anchors.centerIn: parent
 
 			Text {
+				id: sunsetText
+
 				anchors.verticalCenter: parent.verticalCenter
 				anchors.right:          centerSpacer.left
 
 				font { family: root.fontFamily; pixelSize: 16; }
 
-				color: root.theme.sunset
+				color: {
+					if (hyprsunsetControl.isActive) {
+						return root.theme.sunset.active
+					}
+					return root.theme.sunset.inactive
+				}
 				text:  ""
+
+				MouseArea {
+					anchors.fill: parent
+					hoverEnabled:    true
+					onClicked: hyprsunsetControl.toggle()
+				}
 			}
 
 			Rectangle {
