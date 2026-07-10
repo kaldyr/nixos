@@ -1,6 +1,5 @@
 //@ pragma UseQApplication
 //@ pragma IconTheme Papirus-Dark
-// pragma ComponentBehavior: Bound
 // vim:fdm=marker:fdl=0:foldmarker=-->,<--
 
 import Quickshell
@@ -64,9 +63,8 @@ PanelWindow {
 			repeat:      true
 			onTriggered: hyprsunsetStateProcess.running = true
 		}
-	}
-	// <--
-	// Hypridle  -->
+	} // <--
+	// Hypridle    -->
 	Singleton {
 		id: hypridleControl
 
@@ -99,8 +97,7 @@ PanelWindow {
 			repeat:      true
 			onTriggered: hypridleStateProcess.running = true
 		}
-	}
-	// <--
+	} // <--
 
 	// Colorscheme -->
 	property var theme: ({
@@ -135,240 +132,49 @@ PanelWindow {
 			active:   "#85c1dc",
 			inactive: "#414559",
 		})
-	})
-	// <--
+	}) // <--
 
 	// Left        -->  Launcher, Workspaces, Overview
-	Rectangle { // Transparent container
-		anchors.left:           parent.left
+	Rectangle { // Launcher button
+		id: launcher
+
 		anchors.verticalCenter: parent.verticalCenter
+		anchors.left:           parent.left
 
-		height: parent.height
-		width:  leftBar.width + 12
-		color:  "transparent"
-
-		Rectangle { // Draw the bar
-			id: leftBar
-
-			anchors.left:           parent.left
-			anchors.verticalCenter: parent.verticalCenter
-
-			height:            parent.height - 10
-			width:             workspaces.width + 6
-			topRightRadius:    this.height / 2
-			bottomRightRadius: this.height / 2
-			bottomLeftRadius:  this.height / 2
-			color:             root.theme.bar.bg
-			border.color:      root.theme.bar.border
-			border.width:      2
-			opacity:           0.98
-
-			Row {
-				id: workspaces
-
-				anchors.verticalCenter: parent.verticalCenter
-
-				readonly property var hyprWS: {
-					let ws = []
-					const open = Hyprland.workspaces.values
-					for (let i = 1; i <= 10; i++)
-						if (open[i] == i)
-							ws.push(Hyprland.workspaces.values.find(w => w.id === i))
-						else
-							ws.push('')
-					return ws
-				}
-
-				Rectangle { // Placeholder for Launcher button
-					id:     phLauncher
-					height: 1
-					width:  launcher.width + 4
-					color:  "transparent"
-				}
-
-				Repeater {
-					model: workspaces.hyprWS
-
-					Rectangle {
-
-						height: leftBar.height
-						width:  15
-						color:  "transparent"
-
-						MouseArea {
-							anchors.fill: parent
-							onClicked:    Hyprland.dispatch("hl.dsp.focus({workspace = " + (index + 1) + "})")
-						}
-
-						Rectangle {
-							property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
-
-							property bool isActive: ws.focused
-							property bool isUrgent: ws.urgent
-
-							anchors.centerIn: parent
-
-							height: {
-								if (isActive) { return 12 }
-								if (isUrgent) { return 10 }
-								if (ws)       { return 8 }
-								return 4
-							}
-
-							width:  this.height
-							radius: this.height / 2
-
-							color: {
-								if (isUrgent) { return root.theme.ws.urgent }
-								if (isActive) { return root.theme.ws.active }
-								if (ws)       { return root.theme.ws.inactive }
-								return root.theme.ws.empty
-							}
-						}
-					}
-				}
-
-				Rectangle { // Overview Button
-					anchors.verticalCenter: parent.verticalCenter
-
-					height: 16
-					width:  16
-					radius: this.height / 2
-					color:  root.theme.bar.border
-
-					IconImage {
-						anchors.centerIn: parent
-
-						source: Quickshell.iconPath("preferences-system-windows-move")
-						height: 10
-						width:  10
-						smooth: true
-					}
-				}
-			}
-		}
-
-		Rectangle { // Launcher button -->
-			id: launcher
-
-			anchors.verticalCenter: parent.verticalCenter
-			anchors.left:           parent.left
-
-			height:            parent.height
-			width:             parent.height + 4
-			topRightRadius:    this.height / 2
-			bottomRightRadius: this.height / 2
-			bottomLeftRadius:  this.height / 2
-			color:             root.theme.bar.alt
-			border.color:      root.theme.bar.border
-			border.width:      2
-
-			IconImage {
-				anchors.centerIn: parent
-
-				source: Quickshell.iconPath("distributor-logo-nixos")
-				height: 24
-				width:  24
-				smooth: true
-			}
-
-			MouseArea {
-				anchors.fill: parent
-				hoverEnabled: true
-				onClicked:    Hyprland.dispatch("hl.dsp.exec_cmd('fuzzel')")
-			}
-		} // <--
-
-		WheelHandler {
-			acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
-			onWheel: function(e) {
-				if (e.angleDelta.y > 0) {
-					Hyprland.dispatch("hl.dsp.focus({workspace = 'e-1'})")
-				} else {
-					Hyprland.dispatch("hl.dsp.focus({workspace = 'e+1'})")
-				}
-			}
-		}
-
-	} // <--
-	// LeftMid     -->  Volume, Media Controls
-	// <--
-	// Center      -->  Hyprsunset, Brightness, Clock, Time, Date, Calendar, Hypridle, Notifications
-	Rectangle {
-		anchors.centerIn: parent
-
-		height:            parent.height - 6
-		width:             centerBar.width + 72
-		topLeftRadius:     this.height / 2
+		implicitHeight:    parent.height
+		implicitWidth:     parent.height + 4
 		topRightRadius:    this.height / 2
-		bottomLeftRadius:  this.height / 2
 		bottomRightRadius: this.height / 2
-		color:             root.theme.bar.bg
+		bottomLeftRadius:  this.height / 2
+		color:             root.theme.bar.alt
 		border.color:      root.theme.bar.border
 		border.width:      2
-		opacity:           0.98
+		z:                 2
 
-		Row {
-			Text {
-				font { family: root.fontFamily; pixelSize: 16; }
+		IconImage {
+			anchors.centerIn: parent
 
-				color: {
-					if (hyprsunsetControl.isActive) {
-						return root.theme.sunset.active
-					}
-					return root.theme.sunset.inactive
-				}
-				text:  ""
+			source: Quickshell.iconPath("distributor-logo-nixos")
+			height: 24
+			width:  24
+			smooth: true
+		}
 
-				MouseArea {
-					anchors.fill: parent
-					hoverEnabled:    true
-					onClicked: hyprsunsetControl.toggle()
-				}
-			}
-
-			Text {
-				font { family: root.fontFamily; pixelSize: 16; }
-
-				color: {
-					if (hypridleControl.isActive) {
-						return root.theme.idle.inactive
-					}
-					return root.theme.idle.active
-				}
-				text:  "󱠛"
-
-				MouseArea {
-					anchors.fill: parent
-					hoverEnabled:    true
-					onClicked: hypridleControl.toggle()
-				}
-			}
-
-			Rectangle {
-				id: centerSpacer
-
-				height: 2
-				width:  centerBar.width + 16
-				color:  "transparent"
-			}
-
-			IconImage {
-				source: Quickshell.iconPath('notification-inactive')
-				height: 16
-				width:  16
-			}
+		MouseArea {
+			anchors.fill: parent
+			hoverEnabled: true
+			onClicked:    Hyprland.dispatch("hl.dsp.exec_cmd('fuzzel')")
 		}
 	}
 
 	Rectangle {
-		anchors.centerIn: parent
+		anchors.verticalCenter: parent.verticalCenter
+		anchors.left:           launcher.right
+		anchors.leftMargin:     -6
 
-		height:            parent.height - 2
-		width:             centerBar.width + 4
-		topLeftRadius:     this.height / 2
+		implicitHeight:    parent.height - 10
+		implicitWidth:     workspaces.width + 16
 		topRightRadius:    this.height / 2
-		bottomLeftRadius:  this.height / 2
 		bottomRightRadius: this.height / 2
 		color:             root.theme.bar.bg
 		border.color:      root.theme.bar.border
@@ -376,65 +182,222 @@ PanelWindow {
 		opacity:           0.98
 
 		Row {
-			id: centerBar
+			id: workspaces
 
-			anchors.centerIn: parent
+			anchors.verticalCenter: parent.verticalCenter
+			anchors.left:           parent.left
+			anchors.leftMargin:     8
 
-			Rectangle { // Clock    -->
-				id: clockFace
+			readonly property var hyprWS: {
+				let ws = []
+				const open = Hyprland.workspaces.values
+				for (let i = 1; i <= 10; i++)
+					if (open[i] == i)
+						ws.push(Hyprland.workspaces.values.find(w => w.id === i))
+					else
+						ws.push('')
+				return ws
+			}
 
+			WheelHandler {
+				acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+
+				onWheel: function(e) {
+					if (e.angleDelta.y > 0) {
+						Hyprland.dispatch("hl.dsp.focus({workspace = 'e-1'})")
+					} else {
+						Hyprland.dispatch("hl.dsp.focus({workspace = 'e+1'})")
+					}
+				}
+			}
+
+			Repeater { // Workspace Buttons
+				model: workspaces.hyprWS
+
+				Rectangle {
+					anchors.verticalCenter: parent.verticalCenter
+
+					implicitHeight: parent.height - 10
+					implicitWidth:  14
+					color:          "transparent"
+
+					MouseArea {
+						anchors.fill: parent
+						onClicked:    Hyprland.dispatch("hl.dsp.focus({workspace = " + (index + 1) + "})")
+					}
+
+					Rectangle {
+						property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
+
+						property bool isActive: (ws.focused || false)
+						property bool isUrgent: (ws.urgent || false)
+
+						anchors.centerIn: parent
+
+						implicitHeight: {
+							if (isActive) { return 12 }
+							if (isUrgent) { return 10 }
+							if (ws)       { return 8 }
+							return 4
+						}
+
+						implicitWidth:  this.height
+						radius: this.height / 2
+
+						color: {
+							if (isUrgent) { return root.theme.ws.urgent }
+							if (isActive) { return root.theme.ws.active }
+							if (ws)       { return root.theme.ws.inactive }
+							return root.theme.ws.empty
+						}
+					}
+				}
+			}
+
+			Rectangle { // Overview
+				anchors.verticalCenter: workspaces.verticalCenter
+
+				implicitHeight: 20
+				implicitWidth:  20
+				color:          "transparent"
+
+				Text {
+					anchors.centerIn: parent
+
+					font { family: root.fontFamily; pixelSize: 18; }
+
+					color: root.theme.ws.overview
+					text:  "󱒉"
+
+					// MouseArea {
+					// 	anchors.fill: parent
+					// 	hoverEnabled: true
+					// 	onClicked:
+					// }
+				}
+			}
+		}
+	} // <--
+	// LeftMid     -->  Volume, Media Controls
+	// <--
+	// Center      -->  Brightness, Hyprsunset, Clock, Time, Date, Calendar, Hypridle, Notifications
+	Rectangle { // Left Toggles
+		anchors.verticalCenter: parent.verticalCenter
+		anchors.right:          clockFace.left
+		anchors.rightMargin:    -6
+
+		implicitHeight:    parent.height - 10
+		implicitWidth:     toggleLeft.width + 24
+		topLeftRadius:     this.height / 2
+		bottomLeftRadius:  this.height / 2
+		color:             root.theme.bar.bg
+		border.color:      root.theme.bar.border
+		border.width:      2
+
+		Row {
+			id: toggleLeft
+
+			anchors.verticalCenter: parent.verticalCenter
+			anchors.right:          parent.right
+			anchors.rightMargin:    12
+
+			spacing: 6
+
+			Rectangle { // Hyprsunset
 				anchors.verticalCenter: parent.verticalCenter
 
-				height:       26
-				width:        26
-				radius:       13
-				color:        root.theme.clock.bg
-				border.color: root.theme.clock.border
-				border.width: 1
+				implicitHeight: parent.height - 2
+				implicitWidth:  20
+				color:          "transparent"
 
-				Rectangle { // Minute Hand
-					anchors.bottom: clockFace.verticalCenter
-					anchors.horizontalCenter: clockFace.horizontalCenter
+				Text {
+					anchors.centerIn: parent
+					font { family: root.fontFamily; pixelSize: 16; }
 
-					height:          12
-					width:           1
-					color:           root.theme.clock.hands
-					antialiasing:    true
-					transformOrigin: Item.Bottom
-					rotation: {
-						const d = sysClock.date;
-						return d.getMinutes() * 6;
+					color: {
+						if (hyprsunsetControl.isActive) {
+							return root.theme.sunset.active
+						}
+						return root.theme.sunset.inactive
 					}
+					text:  ""
 
-					Behavior on rotation { RotationAnimation { duration: 200; direction: RotationAnimation.Shortest } }
-				}
-
-				Rectangle { // Hour Hand
-					anchors.bottom:           clockFace.verticalCenter
-					anchors.horizontalCenter: clockFace.horizontalCenter
-
-					height:          7
-					width:           2
-					color:           root.theme.clock.hands
-					antialiasing:    true
-					transformOrigin: Item.Bottom
-					rotation: {
-						const d = sysClock.date;
-						return ((d.getHours() % 12) + (d.getMinutes() / 60)) * 30;
+					MouseArea {
+						anchors.fill: parent
+						hoverEnabled: true
+						onClicked:    hyprsunsetControl.toggle()
 					}
-
-					Behavior on rotation { RotationAnimation { duration: 200; direction: RotationAnimation.Shortest } }
 				}
+			}
 
+		}
+	}
+
+	Rectangle { // Clock
+		id: clockFace
+
+		anchors.verticalCenter: parent.verticalCenter
+		anchors.right:          datetime.left
+		anchors.rightMargin:    -5
+
+		implicitHeight: parent.height - 2
+		implicitWidth:  parent.height - 1
+		radius:         this.height / 2
+		color:          root.theme.clock.bg
+		border.color:   root.theme.bar.border
+		border.width:   2
+		z:              2
+
+		Rectangle { // Minute Hand
+			anchors.bottom:           clockFace.verticalCenter
+			anchors.horizontalCenter: clockFace.horizontalCenter
+
+			implicitHeight:  12
+			implicitWidth:   1
+			color:           root.theme.clock.hands
+			antialiasing:    true
+			transformOrigin: Item.Bottom
+			rotation: {
+				const d = sysClock.date;
+				return d.getMinutes() * 6;
 			}
-			// <--
-			Rectangle { // Spacer   -->
-				height: parent.height
-				width:  10
-				color:  "transparent"
+
+			Behavior on rotation { RotationAnimation { duration: 200; direction: RotationAnimation.Shortest } }
+		}
+
+		Rectangle { // Hour Hand
+			anchors.bottom:           clockFace.verticalCenter
+			anchors.horizontalCenter: clockFace.horizontalCenter
+
+			implicitHeight:  7
+			implicitWidth:   2
+			color:           root.theme.clock.hands
+			antialiasing:    true
+			transformOrigin: Item.Bottom
+			rotation: {
+				const d = sysClock.date;
+				return ((d.getHours() % 12) + (d.getMinutes() / 60)) * 30;
 			}
-			// <--
-			Text      { // Time     -->
+
+			Behavior on rotation { RotationAnimation { duration: 200; direction: RotationAnimation.Shortest } }
+		}
+	}
+
+	Rectangle { // Center Bar
+		id: datetime
+
+		anchors.centerIn: parent
+
+		implicitHeight: parent.height - 10
+		implicitWidth:  180
+		color:          root.theme.bar.bg
+		border.color:   root.theme.bar.border
+		border.width:   2
+
+		Row {
+			anchors.centerIn: parent
+
+			Text { // Time
 				id: time
 
 				anchors.verticalCenter: parent.verticalCenter
@@ -444,14 +407,14 @@ PanelWindow {
 				color: root.theme.clock.text
 				text:  Qt.formatDateTime( sysClock.date, "HH:mm" )
 			}
-			// <--
-			Rectangle { // Spacer   -->
+
+			Rectangle { // Spacer
 				height: parent.height
-				width:  16
+				implicitWidth:  22
 				color:  "transparent"
 			}
-			// <--
-			Text      { // Date     -->
+
+			Text { // Date
 				id: date
 
 				anchors.verticalCenter: parent.verticalCenter
@@ -461,32 +424,81 @@ PanelWindow {
 				color: root.theme.cal.text
 				text:  Qt.formatDateTime( sysClock.date, "ddd, MMM dd" )
 			}
-			// <--
-			Rectangle { // Spacer   -->
-				height: parent.height
-				width:  10
-				color:  "transparent"
-			}
-			// <--
-			Rectangle { // Calendar -->
+		}
+	}
+
+	Rectangle { // Calendar
+		id: calendar
+
+		anchors.verticalCenter: parent.verticalCenter
+		anchors.left:           datetime.right
+		anchors.leftMargin:     -5
+
+		implicitHeight: parent.height - 2
+		implicitWidth:  parent.height - 1
+		radius:         this.height / 2
+		color:          root.theme.bar.bg
+		border.color:   root.theme.bar.border
+		border.width:   2
+		z:              2
+
+		IconImage {
+			anchors.centerIn: parent
+
+			height: 12
+			width:  12
+			source: Quickshell.iconPath('calendar')
+		}
+	}
+
+	Rectangle { // Right Toggles
+		anchors.verticalCenter: parent.verticalCenter
+		anchors.left:           calendar.right
+		anchors.leftMargin:     -6
+
+		implicitHeight:    parent.height - 10
+		implicitWidth:     toggleRight.width + 24
+		topRightRadius:    this.height / 2
+		bottomRightRadius: this.height / 2
+		color:             root.theme.bar.bg
+		border.color:      root.theme.bar.border
+		border.width:      2
+
+		Row {
+			id: toggleRight
+
+			anchors.verticalCenter: parent.verticalCenter
+			anchors.right:          parent.right
+			anchors.rightMargin:    12
+
+			spacing: 6
+
+			Rectangle { // Hypridle
 				anchors.verticalCenter: parent.verticalCenter
 
-				height:       26
-				width:        26
-				radius:       13
-				color:        root.theme.cal.bg
-				border.color: root.theme.cal.border
-				border.width: 1
+				implicitHeight: parent.height - 2
+				implicitWidth:  20
+				color:          "transparent"
 
-				IconImage {
+				Text {
 					anchors.centerIn: parent
+					font { family: root.fontFamily; pixelSize: 16; }
 
-					height: 12
-					width:  12
-					source: Quickshell.iconPath('calendar')
+					color: {
+						if (hypridleControl.isActive) {
+							return root.theme.idle.inactive
+						}
+						return root.theme.idle.active
+					}
+					text:  "󱂟"
+
+					MouseArea {
+						anchors.fill: parent
+						hoverEnabled: true
+						onClicked:    hypridleControl.toggle()
+					}
 				}
 			}
-			// <--
 		}
 	} // <--
 	// RightMid    -->  Network, Bluetooth
@@ -497,7 +509,7 @@ PanelWindow {
 		anchors.right:          parent.right
 
 		height:           parent.height - 8
-		width:            rightBar.width + 8
+		width:            rightBar.width + 16
 		topLeftRadius:    this.height / 2
 		bottomLeftRadius: this.height / 2
 		color:            root.theme.bar.bg
@@ -510,6 +522,8 @@ PanelWindow {
 
 			anchors.centerIn: parent
 
+			spacing: 4
+
 			Repeater {
 				model: SystemTray.items
 
@@ -518,8 +532,8 @@ PanelWindow {
 
 					anchors.verticalCenter: parent.verticalCenter
 
-					height: 16
-					width:  20
+					implicitHeight: 16
+					implicitWidth:  20
 
 					required property var modelData
 
@@ -527,10 +541,10 @@ PanelWindow {
 						anchors.verticalCenter: parent.verticalCenter
 						anchors.left:           parent.left
 
-						height: 16
-						width:  this.height
-						source: trayItem.modelData.icon
-						smooth: true
+						implicitHeight: parent.height
+						implicitWidth:  parent.height
+						source:         trayItem.modelData.icon
+						smooth:         true
 					}
 
 					MouseArea {
