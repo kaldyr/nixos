@@ -9,9 +9,12 @@ let
 in
 {
 
-    home-manager.users.${sysConfig.user} = { config, ... }: {
+    environment.systemPackages = with pkgs; [
+        quickshell
+        upower
+    ];
 
-        home.packages = with pkgs; [ quickshell ];
+    home-manager.users.${sysConfig.user} = { config, ... }: {
 
         home.sessionVariables.QML2_IMPORT_PATH = QML2_IMPORT_PATH;
 

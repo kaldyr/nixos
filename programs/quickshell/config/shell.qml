@@ -672,8 +672,8 @@ PanelWindow {
 	// Right         -->  System Tray, Power Menu
 	Rectangle {
 		anchors.verticalCenter: parent.verticalCenter
-		anchors.right:          powerButton.right
-		anchors.rightMargin:    6
+		anchors.right:          powerButton.left
+		anchors.rightMargin:    -6
 
 		height:           parent.height - 10
 		width:            rightBar.width + 16
@@ -737,7 +737,7 @@ PanelWindow {
 
 		implicitHeight:    parent.height
 		implicitWidth:     parent.height + 4
-		topLeftRadius:    this.height / 2
+		topLeftRadius:     this.height / 2
 		bottomRightRadius: this.height / 2
 		bottomLeftRadius:  this.height / 2
 		color:             root.theme.bar.alt
@@ -754,6 +754,5 @@ PanelWindow {
 			smooth: true
 		}
 	}
-
 	// <--
 }
