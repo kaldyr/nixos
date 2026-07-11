@@ -5,7 +5,7 @@
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Services.SystemTray
-// import Quickshell.Services.UPower
+import Quickshell.Services.UPower
 import Quickshell.Widgets
 import Quickshell.Io
 import QtQuick
@@ -158,7 +158,7 @@ PanelWindow {
 		}
 	} // <--
 
-	// Colorscheme -->
+	// Colorscheme   -->
 	property var theme: ({
 		bar: ({
 			bg:       "#303446",
@@ -193,7 +193,7 @@ PanelWindow {
 		})
 	}) // <--
 
-	// Left        -->  Launcher, Workspaces, Overview
+	// Left          -->  Launcher, Workspaces, Overview
 	Rectangle { // Launcher button
 		id: launcher
 
@@ -337,9 +337,9 @@ PanelWindow {
 			}
 		}
 	} // <--
-	// LeftMid     -->  Volume, Media Controls
+	// LeftMid       -->  Volume, Media Controls
 	// <--
-	// Center      -->  Brightness, Hyprsunset, Clock, Time, Date, Calendar, Hypridle, Notifications
+	// Center        -->  Brightness, Hyprsunset, Clock, Time, Date, Calendar, Hypridle, Notifications
 	Rectangle { // Left Toggles
 		id: leftToggleBar
 		anchors.verticalCenter: parent.verticalCenter
@@ -417,7 +417,7 @@ PanelWindow {
 		anchors.right:          datetime.left
 		anchors.rightMargin:    -5
 
-		implicitHeight: parent.height - 2
+		implicitHeight: parent.height - 1
 		implicitWidth:  parent.height - 1
 		radius:         this.height / 2
 		color:          root.theme.clock.bg
@@ -438,7 +438,7 @@ PanelWindow {
 				ctx.strokeStyle = root.theme.clock.border
 				ctx.globalAlpha = 0.5
 
-				ctx.lineWidth = 0.8
+				ctx.lineWidth = 1
 				ctx.beginPath()
 				ctx.arc(cx, cy, r, 0, 2 * Math.PI)
 				ctx.stroke()
@@ -544,7 +544,7 @@ PanelWindow {
 		anchors.left:           datetime.right
 		anchors.leftMargin:     -5
 
-		implicitHeight: parent.height - 2
+		implicitHeight: parent.height - 1
 		implicitWidth:  parent.height - 1
 		radius:         this.height / 2
 		color:          root.theme.bar.alt
@@ -667,14 +667,15 @@ PanelWindow {
 			}
 		}
 	} // <--
-	// RightMid    -->  Network, Bluetooth
+	// RightMid      -->  Network, Bluetooth
 	// <--
-	// Right       -->  System Tray, Power Menu
+	// Right         -->  System Tray, Power Menu
 	Rectangle {
 		anchors.verticalCenter: parent.verticalCenter
-		anchors.right:          parent.right
+		anchors.right:          powerButton.right
+		anchors.rightMargin:    6
 
-		height:           parent.height - 8
+		height:           parent.height - 10
 		width:            rightBar.width + 16
 		topLeftRadius:    this.height / 2
 		bottomLeftRadius: this.height / 2
@@ -726,5 +727,33 @@ PanelWindow {
 				}
 			}
 		}
-	} // <--
+	}
+
+	Rectangle { // Power Button
+		id: powerButton
+
+		anchors.verticalCenter: parent.verticalCenter
+		anchors.right:          parent.right
+
+		implicitHeight:    parent.height
+		implicitWidth:     parent.height + 4
+		topLeftRadius:    this.height / 2
+		bottomRightRadius: this.height / 2
+		bottomLeftRadius:  this.height / 2
+		color:             root.theme.bar.alt
+		border.color:      root.theme.bar.border
+		border.width:      2
+		z:                 2
+
+		IconImage {
+			anchors.centerIn: parent
+
+			source: Quickshell.iconPath("battery_plugged")
+			height: 24
+			width:  24
+			smooth: true
+		}
+	}
+
+	// <--
 }
