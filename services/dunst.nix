@@ -1,8 +1,8 @@
 { pkgs, sysConfig, ... }: {
 
-    home-manager.users.${sysConfig.user} = {
+    environment.systemPackages = with pkgs; [ dunst ];
 
-        home.packages = with pkgs; [ dunst ];
+    home-manager.users.${sysConfig.user} = {
 
         services.dunst = {
 

@@ -30,7 +30,7 @@ PanelWindow {
 	}
 
 	// Controls
-	// Hyprsunset  -->
+	// Hyprsunset    -->
 	Singleton {
 		id: hyprsunsetControl
 
@@ -64,7 +64,7 @@ PanelWindow {
 			onTriggered: hyprsunsetStateProcess.running = true
 		}
 	} // <--
-	// Hypridle    -->
+	// Hypridle      -->
 	Singleton {
 		id: hypridleControl
 
@@ -96,6 +96,65 @@ PanelWindow {
 			running:     true
 			repeat:      true
 			onTriggered: hypridleStateProcess.running = true
+		}
+	} // <--
+	// Notifications -->
+	Singleton {
+		id: notificationControl
+
+		property bool isActive:   true
+		property bool hasWaiting: false
+
+		function toggle() {
+			if (this.isActive) {
+				this.isActive = false
+				Quickshell.execDetached(["sh", "-c", "dunstctl set-paused true"])
+			} else {
+				this.isActive = true
+				Quickshell.execDetached(["sh", "-c", "dunstctl set-paused false"])
+			}
+		}
+
+		Process {
+			id:      notificationStateProcess
+			running: true
+			command: ["sh", "-c", "dunstctl get-pause-level"]
+			stdout:  StdioCollector {
+				onStreamFinished: {
+					const output = this.text.trim()
+					if (output === "0") {
+						notificationControl.isActive = true
+					} else {
+						notificationControl.isActive = false
+					}
+				}
+			}
+		}
+
+		Process {
+			id:      notificationWaitingProcess
+			running: true
+			command: ["sh", "-c", "dunstctl count waiting"]
+			stdout:  StdioCollector {
+				onStreamFinished: {
+					const output = this.text.trim()
+					if (output === "0") {
+						notificationControl.hasWaiting = false
+					} else {
+						notificationControl.hasWaiting = true
+					}
+				}
+			}
+		}
+
+		Timer {
+			interval:    1000
+			running:     true
+			repeat:      true
+			onTriggered: {
+				notificationStateProcess.running = true
+				notificationWaitingProcess.running = true
+			}
 		}
 	} // <--
 
@@ -282,12 +341,13 @@ PanelWindow {
 	// <--
 	// Center      -->  Brightness, Hyprsunset, Clock, Time, Date, Calendar, Hypridle, Notifications
 	Rectangle { // Left Toggles
+		id: leftToggleBar
 		anchors.verticalCenter: parent.verticalCenter
 		anchors.right:          clockFace.left
 		anchors.rightMargin:    -6
 
 		implicitHeight:    parent.height - 10
-		implicitWidth:     toggleLeft.width + 24
+		implicitWidth:     leftToggleButtons.width + 24
 		topLeftRadius:     this.height / 2
 		bottomLeftRadius:  this.height / 2
 		color:             root.theme.bar.bg
@@ -295,7 +355,7 @@ PanelWindow {
 		border.width:      2
 
 		Row {
-			id: toggleLeft
+			id: leftToggleButtons
 
 			anchors.verticalCenter: parent.verticalCenter
 			anchors.right:          parent.right
@@ -303,16 +363,34 @@ PanelWindow {
 
 			spacing: 6
 
+			Rectangle { // Brightness
+				anchors.verticalCenter: parent.verticalCenter
+
+				implicitHeight: leftToggleBar.height - 2
+				implicitWidth:  this.height
+				color:          root.theme.bar.alt
+				radius:         this.height / 2
+
+				IconImage {
+					anchors.centerIn: parent
+
+					height: 12
+					width:  12
+					source: Quickshell.iconPath('brightnesssettings')
+				}
+			}
+
 			Rectangle { // Hyprsunset
 				anchors.verticalCenter: parent.verticalCenter
 
-				implicitHeight: parent.height - 2
-				implicitWidth:  20
-				color:          "transparent"
+				implicitHeight: leftToggleBar.height - 2
+				implicitWidth:  this.height
+				color:          root.theme.bar.alt
+				radius:         this.height / 2
 
 				Text {
 					anchors.centerIn: parent
-					font { family: root.fontFamily; pixelSize: 16; }
+					font { family: root.fontFamily; pixelSize: 13; }
 
 					color: {
 						if (hyprsunsetControl.isActive) {
@@ -329,7 +407,6 @@ PanelWindow {
 					}
 				}
 			}
-
 		}
 	}
 
@@ -348,6 +425,39 @@ PanelWindow {
 		border.width:   2
 		z:              2
 
+		Canvas {
+			anchors.fill: parent
+			antialiasing: true
+
+			onPaint: {
+				const ctx = getContext("2d")
+				const cx  = parent.width / 2
+				const cy  = parent.height / 2
+				const r   = Math.min( parent.width, parent.height ) / 2 - 2
+				ctx.reset()
+				ctx.strokeStyle = root.theme.clock.border
+				ctx.globalAlpha = 0.5
+
+				ctx.lineWidth = 0.8
+				ctx.beginPath()
+				ctx.arc(cx, cy, r, 0, 2 * Math.PI)
+				ctx.stroke()
+
+				for (let i = 0; i < 12; i++) {
+					const isOrth    = i % 3 === 0
+					const angle     = i * 30 * Math.PI / 180
+					const inner     = r - (isOrth ? 5 : 3)
+					const outer     = r
+					ctx.globalAlpha = isOrth ? 1 : 0.5
+					ctx.lineWidth   = 1
+					ctx.beginPath()
+					ctx.moveTo( cx + inner * Math.sin(angle), cy - inner * Math.cos(angle) )
+					ctx.lineTo( cx + outer * Math.sin(angle), cy - outer * Math.cos(angle) )
+					ctx.stroke()
+				}
+				ctx.globalAlpha = 1;
+			}
+		}
 		Rectangle { // Minute Hand
 			anchors.bottom:           clockFace.verticalCenter
 			anchors.horizontalCenter: clockFace.horizontalCenter
@@ -437,7 +547,7 @@ PanelWindow {
 		implicitHeight: parent.height - 2
 		implicitWidth:  parent.height - 1
 		radius:         this.height / 2
-		color:          root.theme.bar.bg
+		color:          root.theme.bar.alt
 		border.color:   root.theme.bar.border
 		border.width:   2
 		z:              2
@@ -445,19 +555,21 @@ PanelWindow {
 		IconImage {
 			anchors.centerIn: parent
 
-			height: 12
-			width:  12
+			height: 15
+			width:  15
 			source: Quickshell.iconPath('calendar')
 		}
 	}
 
 	Rectangle { // Right Toggles
+		id: rightToggleBar
+
 		anchors.verticalCenter: parent.verticalCenter
 		anchors.left:           calendar.right
 		anchors.leftMargin:     -6
 
 		implicitHeight:    parent.height - 10
-		implicitWidth:     toggleRight.width + 24
+		implicitWidth:     rightToggleButtons.width + 24
 		topRightRadius:    this.height / 2
 		bottomRightRadius: this.height / 2
 		color:             root.theme.bar.bg
@@ -465,7 +577,7 @@ PanelWindow {
 		border.width:      2
 
 		Row {
-			id: toggleRight
+			id: rightToggleButtons
 
 			anchors.verticalCenter: parent.verticalCenter
 			anchors.right:          parent.right
@@ -476,13 +588,14 @@ PanelWindow {
 			Rectangle { // Hypridle
 				anchors.verticalCenter: parent.verticalCenter
 
-				implicitHeight: parent.height - 2
-				implicitWidth:  20
-				color:          "transparent"
+				implicitHeight: rightToggleBar.height - 2
+				implicitWidth:  this.height
+				color:          root.theme.bar.alt
+				radius:         this.height / 2
 
 				Text {
 					anchors.centerIn: parent
-					font { family: root.fontFamily; pixelSize: 16; }
+					font { family: root.fontFamily; pixelSize: 12; }
 
 					color: {
 						if (hypridleControl.isActive) {
@@ -490,12 +603,65 @@ PanelWindow {
 						}
 						return root.theme.idle.active
 					}
-					text:  "󱂟"
+					text:  {
+						if (hypridleControl.isActive) {
+							return "󰾪"
+						}
+						return ""
+					}
 
 					MouseArea {
 						anchors.fill: parent
 						hoverEnabled: true
 						onClicked:    hypridleControl.toggle()
+					}
+				}
+			}
+
+			Rectangle { // Notifications
+				anchors.verticalCenter: parent.verticalCenter
+
+				implicitHeight: rightToggleBar.height - 2
+				implicitWidth:  this.height
+				color:          root.theme.bar.alt
+				radius:         this.height / 2
+
+				IconImage {
+					anchors.centerIn: parent
+
+					height: 12
+					width:  12
+					source: {
+						if (notificationControl.isActive) {
+							return Quickshell.iconPath('notification-inactive')
+						} else {
+							if (notificationControl.hasWaiting) {
+								return Quickshell.iconPath('notification-active')
+							}
+							return Quickshell.iconPath('notification-disabled')
+						}
+					}
+				}
+
+				MouseArea {
+					anchors.fill:    parent
+					hoverEnabled:    true
+					acceptedButtons: Qt.LeftButton | Qt.RightButton
+
+					onClicked: (m) => m.button === Qt.RightButton
+						? Quickshell.execDetached(["dunstctl", "close-all"])
+						: notificationControl.toggle()
+				}
+
+				WheelHandler {
+					acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+
+					onWheel: function(e) {
+						if (e.angleDelta.y > 0) {
+							Quickshell.execDetached(["dunstctl", "history-pop"])
+						} else {
+							Quickshell.execDetached(["dunstctl", "close"])
+						}
 					}
 				}
 			}
