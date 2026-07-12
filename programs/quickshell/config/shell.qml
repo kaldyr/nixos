@@ -254,12 +254,14 @@ PanelWindow {
 					stdout:  StdioCollector {
 						onStreamFinished: {
 							const output = this.text.trim().split(',')
+							const level  = (output[1]/output[2])*100
 							brightnessTimer.interval = (output[0] === "backlight")
 								? 1000
 								: 10000
 							brightnessControl.brightness = (output[0] === "backlight")
-								? (output[1]/output[2])*100
+								? level
 								: 100
+							brightnessSlider.implicitWidth = brightnessControl.brightness
 						}
 					}
 				}
@@ -341,10 +343,10 @@ PanelWindow {
 								Quickshell.execDetached(["brightnessctl", "set", "100%"])
 							}
 						} else {
-							if (brightnessSlider.width >= 5) {
+							if (brightnessSlider.width > 5) {
 								Quickshell.execDetached(["brightnessctl", "set", "5%-"])
 							} else {
-								Quickshell.execDetached(["brightnessctl", "set", "0%"])
+								Quickshell.execDetached(["brightnessctl", "set", "1%"])
 							}
 						}
 					}
