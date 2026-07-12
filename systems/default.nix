@@ -59,31 +59,29 @@
             files = [ "/etc/machine-id" ];
         };
 
-        systemPackages = with pkgs; [ tailscale ];
+        systemPackages = with pkgs; [
+            age
+            duf
+            exiftool
+            eza
+            ffmpeg
+            ffmpegthumbnailer
+            gdu
+            gnupg
+            jq
+            lazyjournal
+            p7zip
+            sops
+            ssh-to-age
+            tailscale
+            unrar
+            unzip
+            yt-dlp
+            zip
+            zmx
+        ];
 
     };
-
-    home-manager.users.${sysConfig.user}.home.packages = with pkgs; [
-        age
-        duf
-        exiftool
-        eza
-        ffmpeg
-        ffmpegthumbnailer
-        gdu
-        gnupg
-        jq
-        lazyjournal
-        p7zip
-        sops
-        superfile
-        ssh-to-age
-        unrar
-        unzip
-        yt-dlp
-        zip
-        zmx
-    ];
 
     networking = {
         firewall.enable = true;

@@ -209,6 +209,7 @@
             ];
 
             pointerCursor = {
+                enable = true;
                 name = "catppuccin-frappe-sapphire-cursors";
                 package = pkgs.catppuccin-cursors.frappeSapphire;
                 size = 24;

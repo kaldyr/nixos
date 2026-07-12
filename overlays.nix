@@ -23,7 +23,6 @@
         xdg-desktop-portal-hyprland = inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
         yazi = inputs.yazi.packages.${prev.stdenv.hostPlatform.system}.yazi;
-        zmx = inputs.zmx.packages.${prev.stdenv.hostPlatform.system}.default;
 
     };
 

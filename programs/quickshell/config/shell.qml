@@ -7,7 +7,6 @@ pragma ComponentBehavior: Bound
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Services.SystemTray
-// import Quickshell.Services.UPower
 import Quickshell.Widgets
 import Quickshell.Io
 import QtQuick

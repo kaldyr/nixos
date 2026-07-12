@@ -27,7 +27,7 @@ in
 
             Service = {
                 Environment = [
-                    "PATH=/run/wrappers/bin:/run/current-system/sw/bin"
+                    "PATH=/run/wrappers/bin:/run/current-system/sw/bin:${config.home.profileDirectory}/bin"
                     "QSG_RHI_BACKEND=vulkan"
                 ];
                 ExecStart = lib.getExe pkgs.quickshell;
