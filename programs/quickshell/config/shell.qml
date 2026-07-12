@@ -255,6 +255,7 @@ PanelWindow {
 						onStreamFinished: {
 							const output = this.text.trim().split(',')
 							const level  = (output[1]/output[2])*100
+							console.log(output + "    |    " + level)
 							brightnessTimer.interval = (output[0] === "backlight")
 								? 1000
 								: 10000
@@ -337,13 +338,13 @@ PanelWindow {
 					onWheel: function(e) {
 						brightnessLevelProcess.running = true
 						if (e.angleDelta.y > 0) {
-							if (brightnessSlider.width <= 95) {
+							if (brightnessControl.brightness < 95) {
 								Quickshell.execDetached(["brightnessctl", "set", "+5%"])
 							} else {
 								Quickshell.execDetached(["brightnessctl", "set", "100%"])
 							}
 						} else {
-							if (brightnessSlider.width > 5) {
+							if (brightnessControl.brightness > 5) {
 								Quickshell.execDetached(["brightnessctl", "set", "5%-"])
 							} else {
 								Quickshell.execDetached(["brightnessctl", "set", "1%"])
