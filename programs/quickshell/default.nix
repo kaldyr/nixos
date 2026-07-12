@@ -9,10 +9,7 @@ let
 in
 {
 
-    environment.systemPackages = with pkgs; [
-        quickshell
-        upower
-    ];
+    environment.systemPackages = with pkgs; [ quickshell ];
 
     home-manager.users.${sysConfig.user} = { config, ... }: {
 

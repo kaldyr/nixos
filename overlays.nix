@@ -8,7 +8,7 @@
 
         discord = (prev.discord.override {
             # withOpenASAR = true;
-            # withVencord = true;  # Disabled 2026-06-30 when sections of interface stopped working
+            withVencord = true;  # Disabled 2026-06-30 when sections of interface stopped working
         }).overrideAttrs (prevAttrs: {
             desktopItem = prevAttrs.desktopItem.override (prevDesktopAttrs: {
                 exec = "env NIXOS_OZONE_WL=1 ELECTRON_PLATFORM_HINT=wayland ${prevDesktopAttrs.exec} --enable-blink-features=MiddleClickAutoscroll --enable-features=WebRTCPipeWireCapturer";

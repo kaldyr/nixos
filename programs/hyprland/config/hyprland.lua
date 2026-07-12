@@ -161,7 +161,6 @@ hl.env( 'NIXOS_OZONE_WL', '1' )
 hl.env( 'PROTON_ENABLE_WAYLAND', '1' )
 hl.env( 'WLR_NO_HARDWARE_CURSORS', '1' )
 hl.env( 'XCURSOR_SIZE', '24' )
-hl.env( 'QS_ICON_THEME', 'Papirus' )
 
 --<------------------
 -- General         -->
@@ -527,8 +526,8 @@ b( 'XF86AudioPrev',           e 'playerctl previous',            { locked = true
 -- Brightness & Temperature
 b( 'XF86MonBrightnessUp',      e 'brightnessctl set +5%',               { locked = true, repeating = true } )
 b( 'XF86MonBrightnessDown',    e 'brightnessctl set 5%-',               { locked = true, repeating = true } )
-b( s..'XF86MonBrightnessUp',   e 'hyprctl hyprsunset temperature +500', { locked = true, repeating = true } )
-b( s..'XF86MonBrightnessDown', e 'hyprctl hyprsunset temperature -500', { locked = true, repeating = true } )
+b( s..'XF86MonBrightnessUp',   e 'hyprctl hyprsunset temperature +125', { locked = true, repeating = true } )
+b( s..'XF86MonBrightnessDown', e 'hyprctl hyprsunset temperature -125', { locked = true, repeating = true } )
 b( m..'XF86MonBrightnessUp',   e 'hyprctl hyprsunset temperature 3500', { locked = true } )
 b( m..'XF86MonBrightnessDown', e 'hyprctl hyprsunset identity',         { locked = true } )
 

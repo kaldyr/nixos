@@ -1,15 +1,18 @@
+// Quickshell bar for Hyprland
+// vim:fdm=marker:fdl=0:foldmarker=-->,<--
 //@ pragma UseQApplication
 //@ pragma IconTheme Papirus-Dark
-// vim:fdm=marker:fdl=0:foldmarker=-->,<--
+pragma ComponentBehavior: Bound
 
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Services.SystemTray
-import Quickshell.Services.UPower
+// import Quickshell.Services.UPower
 import Quickshell.Widgets
 import Quickshell.Io
 import QtQuick
 
+// qmllint disable uncreatable-type
 PanelWindow {
 	id: root
 
@@ -29,141 +32,13 @@ PanelWindow {
 		precision: SystemClock.Seconds
 	}
 
-	// Controls
-	// Hyprsunset    -->
-	Singleton {
-		id: hyprsunsetControl
-
-		property bool isActive: true
-
-		function toggle() {
-			if (this.isActive) {
-				this.isActive = false
-				Quickshell.execDetached(["sh", "-c", "systemctl --user stop hyprsunset.service"])
-			} else {
-				this.isActive = true
-				Quickshell.execDetached(["sh", "-c", "systemctl --user start hyprsunset.service"])
-			}
-		}
-
-		Process {
-			id:      hyprsunsetStateProcess
-			running: true
-			command: ["sh", "-c", "systemctl --user is-active hyprsunset.service"]
-			stdout:  StdioCollector {
-				onStreamFinished: {
-					hyprsunsetControl.isActive = (this.text.trim() === "active")
-				}
-			}
-		}
-
-		Timer {
-			interval:    1000
-			running:     true
-			repeat:      true
-			onTriggered: hyprsunsetStateProcess.running = true
-		}
-	} // <--
-	// Hypridle      -->
-	Singleton {
-		id: hypridleControl
-
-		property bool isActive: true
-
-		function toggle() {
-			if (this.isActive) {
-				this.isActive = false
-				Quickshell.execDetached(["sh", "-c", "systemctl --user stop hypridle.service"])
-			} else {
-				this.isActive = true
-				Quickshell.execDetached(["sh", "-c", "systemctl --user start hypridle.service"])
-			}
-		}
-
-		Process {
-			id:      hypridleStateProcess
-			running: true
-			command: ["sh", "-c", "systemctl --user is-active hypridle.service"]
-			stdout:  StdioCollector {
-				onStreamFinished: {
-					hypridleControl.isActive = (this.text.trim() === "active")
-				}
-			}
-		}
-
-		Timer {
-			interval:    1000
-			running:     true
-			repeat:      true
-			onTriggered: hypridleStateProcess.running = true
-		}
-	} // <--
-	// Notifications -->
-	Singleton {
-		id: notificationControl
-
-		property bool isActive:   true
-		property bool hasWaiting: false
-
-		function toggle() {
-			if (this.isActive) {
-				this.isActive = false
-				Quickshell.execDetached(["sh", "-c", "dunstctl set-paused true"])
-			} else {
-				this.isActive = true
-				Quickshell.execDetached(["sh", "-c", "dunstctl set-paused false"])
-			}
-		}
-
-		Process {
-			id:      notificationStateProcess
-			running: true
-			command: ["sh", "-c", "dunstctl get-pause-level"]
-			stdout:  StdioCollector {
-				onStreamFinished: {
-					const output = this.text.trim()
-					if (output === "0") {
-						notificationControl.isActive = true
-					} else {
-						notificationControl.isActive = false
-					}
-				}
-			}
-		}
-
-		Process {
-			id:      notificationWaitingProcess
-			running: true
-			command: ["sh", "-c", "dunstctl count waiting"]
-			stdout:  StdioCollector {
-				onStreamFinished: {
-					const output = this.text.trim()
-					if (output === "0") {
-						notificationControl.hasWaiting = false
-					} else {
-						notificationControl.hasWaiting = true
-					}
-				}
-			}
-		}
-
-		Timer {
-			interval:    1000
-			running:     true
-			repeat:      true
-			onTriggered: {
-				notificationStateProcess.running = true
-				notificationWaitingProcess.running = true
-			}
-		}
-	} // <--
-
 	// Colorscheme   -->
 	property var theme: ({
 		bar: ({
 			bg:       "#303446",
 			border:   "#232634",
 			alt:      "#292c3c",
+			fill:     "#c6d0f5",
 		}),
 		ws: ({
 			active:   "#81c8be",
@@ -238,7 +113,6 @@ PanelWindow {
 		color:             root.theme.bar.bg
 		border.color:      root.theme.bar.border
 		border.width:      2
-		opacity:           0.98
 
 		Row {
 			id: workspaces
@@ -260,21 +134,19 @@ PanelWindow {
 
 			WheelHandler {
 				acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
-
-				onWheel: function(e) {
-					if (e.angleDelta.y > 0) {
-						Hyprland.dispatch("hl.dsp.focus({workspace = 'e-1'})")
-					} else {
-						Hyprland.dispatch("hl.dsp.focus({workspace = 'e+1'})")
-					}
-				}
+				onWheel:         (e) => e.angleDelta.y > 0
+					? Hyprland.dispatch("hl.dsp.focus({workspace = 'e-1'})")
+					: Hyprland.dispatch("hl.dsp.focus({workspace = 'e+1'})")
 			}
 
 			Repeater { // Workspace Buttons
 				model: workspaces.hyprWS
 
 				Rectangle {
+					id: wsButton
 					anchors.verticalCenter: parent.verticalCenter
+
+					required property int index
 
 					implicitHeight: parent.height - 10
 					implicitWidth:  14
@@ -282,14 +154,14 @@ PanelWindow {
 
 					MouseArea {
 						anchors.fill: parent
-						onClicked:    Hyprland.dispatch("hl.dsp.focus({workspace = " + (index + 1) + "})")
+						onClicked:    Hyprland.dispatch("hl.dsp.focus({workspace = " + (wsButton.index + 1) + "})")
 					}
 
 					Rectangle {
-						property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
+						property var ws: Hyprland.workspaces.values.find(w => w.id === wsButton.index + 1) ?? null
 
-						property bool isActive: (ws.focused || false)
-						property bool isUrgent: (ws.urgent || false)
+						property bool isActive: this.ws?.focused ?? false
+						property bool isUrgent: this.ws?.urgent ?? false
 
 						anchors.centerIn: parent
 
@@ -342,6 +214,7 @@ PanelWindow {
 	// Center        -->  Brightness, Hyprsunset, Clock, Time, Date, Calendar, Hypridle, Notifications
 	Rectangle { // Left Toggles
 		id: leftToggleBar
+
 		anchors.verticalCenter: parent.verticalCenter
 		anchors.right:          clockFace.left
 		anchors.rightMargin:    -6
@@ -364,6 +237,7 @@ PanelWindow {
 			spacing: 6
 
 			Rectangle { // Brightness
+				id: brightnessControl
 				anchors.verticalCenter: parent.verticalCenter
 
 				implicitHeight: leftToggleBar.height - 2
@@ -371,16 +245,115 @@ PanelWindow {
 				color:          root.theme.bar.alt
 				radius:         this.height / 2
 
+				property int  brightness: 100
+
+				Process {
+					id:      brightnessLevelProcess
+					running: true
+					command: ["sh", "-c", "brightnessctl -m | awk -F, '{print $2 \",\" $3 \",\" $5}'"]
+					stdout:  StdioCollector {
+						onStreamFinished: {
+							const output = this.text.trim().split(',')
+							brightnessTimer.interval = (output[0] === "backlight")
+								? 1000
+								: 10000
+							brightnessControl.brightness = (output[0] === "backlight")
+								? (output[1]/output[2])*100
+								: 100
+						}
+					}
+				}
+
+				Timer {
+					id:          brightnessTimer
+					interval:    1000
+					running:     true
+					repeat:      true
+					onTriggered: {
+						brightnessLevelProcess.running =  true
+					}
+				}
+
 				IconImage {
-					anchors.centerIn: parent
+					id: brightnessIcon
+					anchors.verticalCenter: parent.verticalCenter
+					anchors.right:          parent.right
+					anchors.rightMargin:    4
 
 					height: 12
 					width:  12
 					source: Quickshell.iconPath('brightnesssettings')
 				}
+
+				Rectangle {
+					anchors.verticalCenter: parent.verticalCenter
+					anchors.right:          parent.left
+
+					implicitHeight: 20
+					implicitWidth:  118
+					radius:         this.height / 2
+					color:          root.theme.bar.bg
+					border.color:   root.theme.bar.border
+					border.width:   2
+					opacity:        brightnessPointer.hovered ? 1 : 0
+					visible:        opacity > 0
+					z:              3
+
+					Rectangle {
+						anchors.centerIn: parent
+						implicitHeight:   6
+						implicitWidth:    102
+						radius:           this.height / 2
+						color:            root.theme.bar.alt
+						border.color:     root.theme.bar.fill
+						border.width:     1
+
+						Rectangle {
+							id: brightnessSlider
+
+							anchors.verticalCenter: parent.verticalCenter
+							anchors.left:           parent.left
+							anchors.leftMargin:     1
+
+							implicitHeight: parent.height - 2
+							implicitWidth:  100
+							radius:         this.height / 2
+							color:          root.theme.bar.fill
+						}
+					}
+
+					Behavior on opacity { NumberAnimation { duration: 150 } }
+				}
+
+				HoverHandler {
+					id: brightnessPointer
+					acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+				}
+
+				WheelHandler {
+					acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+					onWheel: function(e) {
+						brightnessLevelProcess.running = true
+						if (e.angleDelta.y > 0) {
+							if (brightnessSlider.width <= 95) {
+								Quickshell.execDetached(["brightnessctl", "set", "+5%"])
+							} else {
+								Quickshell.execDetached(["brightnessctl", "set", "100%"])
+							}
+						} else {
+							if (brightnessSlider.width >= 5) {
+								Quickshell.execDetached(["brightnessctl", "set", "5%-"])
+							} else {
+								Quickshell.execDetached(["brightnessctl", "set", "0%"])
+							}
+						}
+					}
+				}
 			}
 
-			Rectangle { // Hyprsunset
+			Rectangle { // Hyprsunset -->
+				id: hyprsunsetControl
+
 				anchors.verticalCenter: parent.verticalCenter
 
 				implicitHeight: leftToggleBar.height - 2
@@ -388,25 +361,148 @@ PanelWindow {
 				color:          root.theme.bar.alt
 				radius:         this.height / 2
 
+				property bool isActive:   true
+				property int  temp:       6000
+				property int  tempSlider: 100
+
+				function toggle() {
+					if (this.isActive) {
+						this.isActive = false
+						Quickshell.execDetached(["sh", "-c", "systemctl --user stop hyprsunset.service"])
+					} else {
+						this.isActive = true
+						Quickshell.execDetached(["sh", "-c", "systemctl --user start hyprsunset.service"])
+					}
+				}
+
+				Process {
+					id:      hyprsunsetStateProcess
+					running: true
+					command: ["sh", "-c", "systemctl --user is-active hyprsunset.service"]
+					stdout:  StdioCollector {
+						onStreamFinished: {
+							hyprsunsetControl.isActive = (this.text.trim() === "active")
+						}
+					}
+				}
+
+				Process {
+					id:      hyprsunsetTempProcess
+					running: true
+					command: ["sh", "-c", "hyprctl hyprsunset temperature"]
+					stdout:  StdioCollector {
+						onStreamFinished: {
+							const output = this.text.trim()
+							hyprsunsetControl.temp = (output > 6000) ? 6000 : (output < 3500) ? 3500 : output
+							hyprsunsetSlider.implicitWidth = (hyprsunsetControl.temp - 3500) / 25
+						}
+					}
+				}
+
+				Timer {
+					interval:    1000
+					running:     true
+					repeat:      true
+					onTriggered: {
+						hyprsunsetStateProcess.running = true
+						hyprsunsetTempProcess.running =  true
+					}
+				}
+
 				Text {
-					anchors.centerIn: parent
+					id: hyprsunsetIcon
+
+					anchors.verticalCenter: parent.verticalCenter
+					anchors.right: parent.right
+					anchors.rightMargin: 2
+
 					font { family: root.fontFamily; pixelSize: 13; }
 
-					color: {
-						if (hyprsunsetControl.isActive) {
-							return root.theme.sunset.active
-						}
-						return root.theme.sunset.inactive
-					}
-					text:  ""
+					color: (hyprsunsetControl.isActive)
+						? root.theme.sunset.active
+						: root.theme.sunset.inactive
 
-					MouseArea {
-						anchors.fill: parent
-						hoverEnabled: true
-						onClicked:    hyprsunsetControl.toggle()
+					text:  ""
+				}
+
+				Rectangle { // Slider
+					anchors.verticalCenter: parent.verticalCenter
+					anchors.right:          parent.left
+
+					implicitHeight: 20
+					implicitWidth:  118
+					radius:         this.height / 2
+					color:          root.theme.bar.bg
+					border.color:   root.theme.bar.border
+					border.width:   2
+					opacity:        hyprsunsetPointer.hovered ? 1 : 0
+					visible:        opacity > 0
+					z:              3
+
+					Rectangle {
+						anchors.centerIn: parent
+						implicitHeight:   6
+						implicitWidth:    102
+						radius:           this.height / 2
+						color:            root.theme.bar.alt
+						border.color:     root.theme.bar.fill
+						border.width:     1
+
+						Rectangle {
+							id: hyprsunsetSlider
+
+							anchors.verticalCenter: parent.verticalCenter
+							anchors.left:           parent.left
+							anchors.leftMargin:     1
+
+							implicitHeight: parent.height - 2
+							implicitWidth:  85
+							radius:         this.height / 2
+							color:          root.theme.bar.fill
+						}
+					}
+
+					Behavior on opacity { NumberAnimation { duration: 150 } }
+				}
+
+				MouseArea {
+					anchors.fill:    parent
+					hoverEnabled:    true
+					acceptedButtons: Qt.LeftButton | Qt.RightButton
+					onClicked:       (m) => m.button === Qt.RightButton
+						? (hyprsunsetControl.temp === 6000)
+							? Quickshell.execDetached(["hyprctl", "hyprsunset", "temperature", "3500"])
+							: Quickshell.execDetached(["hyprctl", "hyprsunset", "temperature", "6000"])
+						: hyprsunsetControl.toggle()
+				}
+
+				HoverHandler {
+					id: hyprsunsetPointer
+					acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+				}
+
+				WheelHandler {
+					acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+
+					onWheel: function(e) {
+						hyprsunsetTempProcess.running = true
+						if (e.angleDelta.y > 0) {
+							if (hyprsunsetSlider.width >= 95) {
+								Quickshell.execDetached(["hyprctl", "hyprsunset", "temperature", "6000"])
+							} else {
+								Quickshell.execDetached(["hyprctl", "hyprsunset", "temperature", "+125"])
+							}
+						} else {
+							if (hyprsunsetSlider.width <= 5) {
+								Quickshell.execDetached(["hyprctl", "hyprsunset", "temperature", "3500"])
+							} else {
+								Quickshell.execDetached(["hyprctl", "hyprsunset", "temperature", "-125"])
+							}
+						}
 					}
 				}
 			}
+			// <--
 		}
 	}
 
@@ -418,7 +514,7 @@ PanelWindow {
 		anchors.rightMargin:    -5
 
 		implicitHeight: parent.height - 1
-		implicitWidth:  parent.height - 1
+		implicitWidth:  parent.height + 1
 		radius:         this.height / 2
 		color:          root.theme.clock.bg
 		border.color:   root.theme.bar.border
@@ -509,7 +605,6 @@ PanelWindow {
 
 			Text { // Time
 				id: time
-
 				anchors.verticalCenter: parent.verticalCenter
 
 				font { family: root.fontFamily; pixelSize: 12; }
@@ -545,7 +640,7 @@ PanelWindow {
 		anchors.leftMargin:     -5
 
 		implicitHeight: parent.height - 1
-		implicitWidth:  parent.height - 1
+		implicitWidth:  parent.height + 1
 		radius:         this.height / 2
 		color:          root.theme.bar.alt
 		border.color:   root.theme.bar.border
@@ -586,6 +681,10 @@ PanelWindow {
 			spacing: 6
 
 			Rectangle { // Hypridle
+				id: hypridleControl
+
+				property bool isActive: true
+
 				anchors.verticalCenter: parent.verticalCenter
 
 				implicitHeight: rightToggleBar.height - 2
@@ -593,22 +692,43 @@ PanelWindow {
 				color:          root.theme.bar.alt
 				radius:         this.height / 2
 
+				function toggle() {
+					if (this.isActive) {
+						this.isActive = false
+						Quickshell.execDetached(["sh", "-c", "systemctl --user stop hypridle.service"])
+					} else {
+						this.isActive = true
+						Quickshell.execDetached(["sh", "-c", "systemctl --user start hypridle.service"])
+					}
+				}
+
+				Process {
+					id:      hypridleStateProcess
+					running: true
+					command: ["sh", "-c", "systemctl --user is-active hypridle.service"]
+					stdout:  StdioCollector {
+						onStreamFinished: {
+							hypridleControl.isActive = (this.text.trim() === "active")
+						}
+					}
+				}
+
+				Timer {
+					interval:    1000
+					running:     true
+					repeat:      true
+					onTriggered: hypridleStateProcess.running = true
+				}
+
 				Text {
 					anchors.centerIn: parent
 					font { family: root.fontFamily; pixelSize: 12; }
 
-					color: {
-						if (hypridleControl.isActive) {
-							return root.theme.idle.inactive
-						}
-						return root.theme.idle.active
-					}
-					text:  {
-						if (hypridleControl.isActive) {
-							return "󰾪"
-						}
-						return ""
-					}
+					color: (hypridleControl.isActive)
+						? root.theme.idle.inactive
+						: root.theme.idle.active
+
+					text: (hypridleControl.isActive) ? "󰾪" : ""
 
 					MouseArea {
 						anchors.fill: parent
@@ -619,6 +739,8 @@ PanelWindow {
 			}
 
 			Rectangle { // Notifications
+				id: notificationControl
+
 				anchors.verticalCenter: parent.verticalCenter
 
 				implicitHeight: rightToggleBar.height - 2
@@ -626,43 +748,77 @@ PanelWindow {
 				color:          root.theme.bar.alt
 				radius:         this.height / 2
 
+				property bool isActive:   true
+				property bool hasWaiting: false
+
+				function toggle() {
+					if (this.isActive) {
+						this.isActive = false
+						Quickshell.execDetached(["sh", "-c", "dunstctl set-paused true"])
+					} else {
+						this.isActive = true
+						Quickshell.execDetached(["sh", "-c", "dunstctl set-paused false"])
+					}
+				}
+
+				Process {
+					id:      notificationStateProcess
+					running: true
+					command: ["sh", "-c", "dunstctl get-pause-level"]
+					stdout:  StdioCollector {
+						onStreamFinished: {
+							notificationControl.isActive = (this.text.trim() === "0")
+						}
+					}
+				}
+
+				Process {
+					id:      notificationWaitingProcess
+					running: true
+					command: ["sh", "-c", "dunstctl count waiting"]
+					stdout:  StdioCollector {
+						onStreamFinished: {
+							notificationControl.hasWaiting = (this.text.trim() !== "0")
+						}
+					}
+				}
+
+				Timer {
+					interval:    1000
+					running:     true
+					repeat:      true
+					onTriggered: {
+						notificationStateProcess.running = true
+						notificationWaitingProcess.running = true
+					}
+				}
+
 				IconImage {
 					anchors.centerIn: parent
 
 					height: 12
 					width:  12
-					source: {
-						if (notificationControl.isActive) {
-							return Quickshell.iconPath('notification-inactive')
-						} else {
-							if (notificationControl.hasWaiting) {
-								return Quickshell.iconPath('notification-active')
-							}
-							return Quickshell.iconPath('notification-disabled')
-						}
-					}
+					source: (notificationControl.isActive)
+						? Quickshell.iconPath('notification-inactive')
+						: (notificationControl.hasWaiting)
+							? Quickshell.iconPath('notification-active')
+							: Quickshell.iconPath('notification-disabled')
 				}
 
 				MouseArea {
 					anchors.fill:    parent
 					hoverEnabled:    true
 					acceptedButtons: Qt.LeftButton | Qt.RightButton
-
-					onClicked: (m) => m.button === Qt.RightButton
+					onClicked:       (m) => m.button === Qt.RightButton
 						? Quickshell.execDetached(["dunstctl", "close-all"])
 						: notificationControl.toggle()
 				}
 
 				WheelHandler {
 					acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
-
-					onWheel: function(e) {
-						if (e.angleDelta.y > 0) {
-							Quickshell.execDetached(["dunstctl", "history-pop"])
-						} else {
-							Quickshell.execDetached(["dunstctl", "close"])
-						}
-					}
+					onWheel:         (e) => e.angleDelta.y > 0
+						? Quickshell.execDetached(["dunstctl", "history-pop"])
+						: Quickshell.execDetached(["dunstctl", "close"])
 				}
 			}
 		}
@@ -673,7 +829,7 @@ PanelWindow {
 	Rectangle {
 		anchors.verticalCenter: parent.verticalCenter
 		anchors.right:          powerButton.left
-		anchors.rightMargin:    -6
+		anchors.rightMargin:    -10
 
 		height:           parent.height - 10
 		width:            rightBar.width + 16
@@ -682,14 +838,11 @@ PanelWindow {
 		color:            root.theme.bar.bg
 		border.color:     root.theme.bar.border
 		border.width:     2
-		opacity:          0.98
 
 		Row {
 			id: rightBar
 
 			anchors.centerIn: parent
-
-			spacing: 4
 
 			Repeater {
 				model: SystemTray.items
@@ -699,7 +852,7 @@ PanelWindow {
 
 					anchors.verticalCenter: parent.verticalCenter
 
-					implicitHeight: 16
+					implicitHeight: 12
 					implicitWidth:  20
 
 					required property var modelData
