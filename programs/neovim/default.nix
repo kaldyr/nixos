@@ -1,5 +1,4 @@
 { lib, pkgs, sysConfig, ... }: {
-
     environment.persistence = lib.mkIf sysConfig.homeImpermanence {
         "/nix".users.${sysConfig.user}.directories = [
             ".cache/nvim"
@@ -9,7 +8,6 @@
     };
 
     home-manager.users.${sysConfig.user} = { config, ... }: {
-
         home.file.".local/share/nvim/grammars".source = pkgs.symlinkJoin {
             name = "nvim-treesitter-grammars";
             paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
@@ -46,7 +44,5 @@
             desktopEntries.nvim = { name = "Neovim Wrapper"; noDisplay = true; };
             mimeApps.associations.added."text/plain" = [ "nvim.desktop" ];
         };
-
     };
-
 }

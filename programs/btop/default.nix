@@ -1,11 +1,8 @@
 { pkgs, sysConfig, ... }: {
-
     home-manager.users.${sysConfig.user} = { config, ... }: {
-
-        home.packages = with pkgs; [ btop ];
+        programs.btop.enable = true;
 
         xdg = {
-
             configFile."btop/btop.conf".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/btop/config/btop.conf";
 
             configFile."btop/themes/catppuccin_frappe.theme".source = pkgs.fetchFromGitHub {
@@ -16,9 +13,6 @@
             } + "/themes/catppuccin_frappe.theme";
 
             desktopEntries.btop = { name = "btop++"; noDisplay = true; };
-
         };
-
     };
-
 }

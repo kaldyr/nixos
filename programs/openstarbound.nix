@@ -1,5 +1,4 @@
 { pkgs, sysConfig, ... }: {
-
     environment = {
         persistence."/nix/system".directories = [
             {
@@ -20,7 +19,6 @@
     };
 
     users = {
-
         groups."starbound" = { };
 
         users.${sysConfig.user}.extraGroups = [ "starbound" ];
@@ -30,7 +28,5 @@
             home = "/var/lib/openstarbound";
             isSystemUser = true;
         };
-
     };
-
 }

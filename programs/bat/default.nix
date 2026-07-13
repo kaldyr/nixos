@@ -1,8 +1,6 @@
 { pkgs, sysConfig, ... }: {
-
     home-manager.users.${sysConfig.user} = { config, ... }: {
-
-        home.packages = with pkgs; [ bat ];
+        programs.bat.enable = true;
 
         xdg.configFile."bat/config".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/bat/config/config";
 
@@ -12,8 +10,6 @@
             rev = "6810349b28055dce54076712fc05fc68da4b8ec0";
             sha256 = "sha256-lJapSgRVENTrbmpVyn+UQabC9fpV1G1e+CdlJ090uvg=";
         } + "/themes/Catppuccin Frappe.tmTheme";
-
     };
-
 }
 

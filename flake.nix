@@ -1,5 +1,4 @@
 {
-
     inputs = {
 
         # Disko - Declarative partition management
@@ -72,7 +71,6 @@
             };
 
         in {
-
             # Espresso: Desktop 5700g
             "espresso" = let sysConfig = {
                 hostname = "espresso";
@@ -128,7 +126,5 @@
             }; in buildSystem sysConfig;
 
         };
-
     };
-
 }

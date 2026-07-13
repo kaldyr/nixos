@@ -1,5 +1,4 @@
 { lib, ... }: {
-
     environment.persistence."/state/system".directories = [ {
         directory = "/var/lib/technitium-dns-server";
         user = "technitium";
@@ -28,5 +27,4 @@
     };
 
     users.groups."technitium" = { };
-
 }

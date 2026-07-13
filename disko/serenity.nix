@@ -1,5 +1,4 @@
 {
-
     # Manual interventions required!!!
     # Disko cannot apply chattr settings
     # Disko cannot yet handle multiple device btrfs
@@ -10,13 +9,10 @@
         type = "disk";
 
         content = {
-
             type = "gpt";
 
             partitions = {
-
                 ESP = {
-
                     name = "ESP";
                     type = "EF00";
                     start = "1MiB";
@@ -29,15 +25,12 @@
                         mountpoint = "/boot";
                         mountOptions = [ "defaults" ];
                     };
-
                 };
 
                 main = {
-
                     size = "100%";
 
                     content = {
-
                         type = "btrfs";
                         extraArgs = [ "-f" ];
 
@@ -56,15 +49,9 @@
                             # Swapfile
                             "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "8G"; };
                         };
-
                     };
-
                 };
-
             };
-
         };
-
     };
-
 }

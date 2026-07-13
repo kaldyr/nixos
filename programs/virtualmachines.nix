@@ -1,5 +1,4 @@
 { lib, pkgs, sysConfig, ... }: {
-
     environment.persistence."/nix".users.${sysConfig.user} = lib.mkIf sysConfig.homeImpermanence {
         directories = [
             ".config/libvirt"
@@ -8,6 +7,8 @@
     };
 
     environment.systemPackages = with pkgs; [
+        dnsmasq
+        phodav
         quickemu
         quickgui
         virglrenderer
@@ -17,6 +18,7 @@
     ];
 
     networking.firewall.trustedInterfaces = [ "virbr0" ];
+
     virtualisation = {
         libvirtd = {
             enable = true;
@@ -28,9 +30,9 @@
         };
         spiceUSBRedirection.enable = true;
     };
+
     users.users.${sysConfig.user}.extraGroups = [
         "kvm"
         "libvirtd"
     ];
-
 }

@@ -1,21 +1,16 @@
 {
-
     # Manual interventions required!!!
     # Disko cannot yet handle multiple device btrfs
     # The storage array should not be managed by Disko to preserve data
     disko.devices.disk.main = {
-
         device = "/dev/disk/by-id/wwn-0x500a0751e6e1bdd7";
         type = "disk";
 
         content = {
-
             type = "gpt";
 
             partitions = {
-
                 ESP = {
-
                     name = "ESP";
                     type = "EF00";
                     start = "1MiB";
@@ -28,15 +23,12 @@
                         mountpoint = "/boot";
                         mountOptions = [ "defaults" ];
                     };
-
                 };
 
                 main = {
-
                     size = "100%";
 
                     content = {
-
                         type = "btrfs";
                         extraArgs = [ "-f" ];
 
@@ -44,7 +36,6 @@
                             # btrfs subvolumes must all have the same mount options for now.
                             driveOptions = [ "noatime" "discard=async" "compress-force=zstd:3" ];
                         in {
-
                             # SSH subvolume.  Race condition when symlinking and/or persisting with sops-nix
                             "@etc_ssh" = { mountpoint = "/etc/ssh"; mountOptions = driveOptions; };
                             # Files to be preserved between boots that can be regenerated easily
@@ -64,17 +55,10 @@
                             #   chattr +C /var/lib.postgresql
                             "@mysql" = { mountpoint = "/var/lib/postgresql"; mountOptions = driveOptions; };
                             # FIXME: Change name from @mysql to @sql next install
-
                         };
-
                     };
-
                 };
-
             };
-
         };
-
     };
-
 }

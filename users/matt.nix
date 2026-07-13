@@ -1,5 +1,4 @@
 { config, pkgs, ...}: {
-
     home-manager.users."matt".home = {
         sessionVariables.EDITOR = "nvim";
         sessionVariables.VISUAL = "nvim";
@@ -9,11 +8,9 @@
     sops.secrets.matt-password.neededForUsers = true;
 
     users = {
-
         mutableUsers = false;
 
         users."matt" = {
-
             description = "Matt";
             extraGroups = [ "libvirtd" "networkmanager" "video" "wheel" ];
             hashedPasswordFile = config.sops.secrets.matt-password.path;
@@ -26,9 +23,6 @@
             ];
 
             shell = pkgs.fish;
-
         };
-
     };
-
 }

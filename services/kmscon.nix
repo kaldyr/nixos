@@ -1,7 +1,7 @@
 {
-
     services.kmscon = {
         enable = true;
+
         config = {
             hwaccel = true;
             libseat = true;
@@ -29,5 +29,4 @@
             palette-background="48,52,70";
         };
     };
-
 }

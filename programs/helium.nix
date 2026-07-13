@@ -1,5 +1,4 @@
 { lib, pkgs, sysConfig, ... }: {
-
     environment.persistence = lib.mkIf sysConfig.homeImpermanence {
         "/nix".users.${sysConfig.user}.directories = [
             { directory = ".config/net.imput.helium"; mode = "0700"; }
@@ -17,5 +16,4 @@
             "x-scheme-handler/https" = [ "helium.desktop" ];
         };
     };
-
 }

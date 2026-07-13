@@ -1,19 +1,13 @@
 {
-
     disko.devices.disk.main = {
-
         device = "/dev/disk/by-id/nvme-SPCC_M.2_PCIe_SSD_230165515150004";
-        # device = "/dev/disk/by-id/nvme-ADATA_SWORDFISH_2L212L1J2JLE";
         type = "disk";
 
         content = {
-
             type = "gpt";
 
             partitions = {
-
                 ESP = {
-
                     name = "ESP";
                     type = "EF00";
                     start = "1MiB";
@@ -26,21 +20,17 @@
                         mountpoint = "/boot";
                         mountOptions = [ "defaults" ];
                     };
-
                 };
 
                 luks = {
-
                     size = "100%";
 
                     content = {
-
                         type = "luks";
                         name = "crypted";
                         settings.allowDiscards = true;
 
                         content = {
-
                             type = "btrfs";
                             extraArgs = [ "-f" ];
 
@@ -58,15 +48,10 @@
                                 "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "16G"; };
                             };
                         };
-
                     };
-
                 };
-
             };
-
         };
-
     };
 
     fileSystems = {
@@ -80,5 +65,4 @@
         "/home".neededForBoot = true;
         "/nix".neededForBoot = true;
     };
-
 }

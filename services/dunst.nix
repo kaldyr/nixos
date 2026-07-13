@@ -1,21 +1,15 @@
 { pkgs, sysConfig, ... }: {
-
-    environment.systemPackages = with pkgs; [ dunst ];
-
     home-manager.users.${sysConfig.user} = {
-
         services.dunst = {
-
             enable = true;
 
             iconTheme = {
-                name = "Papirus";
+                name = "Papirus-Dark";
                 package = pkgs.catppuccin-papirus-folders;
                 size = "16x16";
             };
 
             settings = {
-
                 global = {
                     corner_radius = 10;
                     font = "Recursive Sans Casual Static 11";
@@ -44,11 +38,7 @@
                     foreground = "#C6D0F5";
                     timeout = 4;
                 };
-
             };
-
         };
-
     };
-
 }

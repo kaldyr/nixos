@@ -1,22 +1,20 @@
 { lib, pkgs, sysConfig, ... }: {
-
     imports = [
         ../programs/cava
         ../programs/discord.nix
         ../programs/helium.nix
-        ../programs/keepass.nix
+        ../programs/keepass
         ../programs/kitty
         ../programs/libreoffice.nix
         ../programs/mpv
-        ../programs/newsboat.nix
+        ../programs/newsboat
         ../programs/obsidian.nix
         ../programs/telegram.nix
-        ../programs/zathura.nix
+        ../programs/zathura
         ../services/pipewire.nix
     ];
 
     environment = {
-
         etc."fuse.conf".text = /* bash */ ''
             user_allow_other
         '';
@@ -42,15 +40,12 @@
                 ];
             };
         };
-
     };
 
     fonts = {
-
         enableDefaultPackages = false;
 
         fontconfig = {
-
             antialias = true;
 
             defaultFonts = {
@@ -140,11 +135,9 @@
             noto-fonts-color-emoji # Symbols
             recursive # System sans font
         ];
-
     };
 
     home-manager.users.${sysConfig.user} = {
-
         fonts.fontconfig.enable = true;
 
         gtk = {
@@ -183,11 +176,9 @@
                     variant = "frappe";
                 };
             };
-
         };
 
         home = {
-
             packages = with pkgs; [
                 android-tools
                 gimp
@@ -222,14 +213,12 @@
                 XCURSOR_THEME = "catppuccin-frappe-sapphire-cursors";
                 XCURSOR_SIZE = 24;
             };
-
         };
 
         services.blueman-applet.enable = true;
         services.network-manager-applet.enable = true;
 
         xdg = {
-
             configFile."mimeapps.list".force = true;
             mimeApps.enable = true;
 
@@ -241,18 +230,14 @@
                 setSessionVariables = true;
                 templates = null;
             };
-
         };
-
     };
 
     hardware = {
-
         bluetooth.enable = true;
         bluetooth.settings.General.Enable = "Source,Sink,Media,Socket";
 
         graphics = {
-
             enable = true;
 
             extraPackages = with pkgs; [
@@ -261,9 +246,7 @@
                 libva-utils
                 libva-vdpau-driver
             ];
-
         };
-
     };
 
     programs.dconf.enable = true;
@@ -271,7 +254,6 @@
     security.polkit.enable = true;
 
     services = {
-
         dbus.enable = true;
         gnome.gnome-keyring.enable = true;
 
@@ -290,7 +272,5 @@
             xkb.layout = "us";
             xkb.variant = "";
         };
-
     };
-
 }

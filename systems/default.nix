@@ -1,5 +1,4 @@
 { config, inputs, lib, pkgs, sysConfig, ... }: {
-
     imports = [
         ../programs/bat
         ../programs/btop
@@ -7,16 +6,15 @@
         ../programs/fish.nix
         ../programs/fzf.nix
         ../programs/git.nix
-        ../programs/lazygit.nix
+        ../programs/lazygit
         ../programs/neovim
-        ../programs/qalculate.nix
-        ../programs/starship.nix
+        ../programs/qalculate
+        ../programs/starship
         ../programs/yazi
         ../programs/zoxide.nix
     ];
 
     boot.loader = {
-
         efi.efiSysMountPoint = "/boot";
 
         grub = {
@@ -27,11 +25,9 @@
             theme = pkgs.catppuccin-grub.override { flavor = "frappe"; };
             useOSProber = false;
         };
-
     };
 
     environment = {
-
         defaultPackages = lib.mkForce [];
 
         # Home files that aren't declarative and need to be preserved
@@ -58,30 +54,28 @@
             ];
             files = [ "/etc/machine-id" ];
         };
-
-        systemPackages = with pkgs; [
-            age
-            duf
-            exiftool
-            eza
-            ffmpeg
-            ffmpegthumbnailer
-            gdu
-            gnupg
-            jq
-            lazyjournal
-            p7zip
-            sops
-            ssh-to-age
-            tailscale
-            unrar
-            unzip
-            yt-dlp
-            zip
-            zmx
-        ];
-
     };
+
+    home-manager.users.${sysConfig.user}.home.packages = with pkgs; [
+        age
+        duf
+        exiftool
+        eza
+        ffmpeg
+        ffmpegthumbnailer
+        gdu
+        gnupg
+        jq
+        lazyjournal
+        p7zip
+        sops
+        ssh-to-age
+        unrar
+        unzip
+        yt-dlp
+        zip
+        zmx
+    ];
 
     networking = {
         firewall.enable = true;
@@ -104,7 +98,6 @@
     };
 
     nix = {
-
         gc = {
             automatic = true;
             dates = "daily";
@@ -119,13 +112,11 @@
             download-buffer-size = 524288000;
             experimental-features = "nix-command flakes";
         };
-
     };
 
     nixpkgs.config.allowUnfree = true;
 
     programs = {
-
         fuse.userAllowOther = true;
 
         gnupg.agent = {
@@ -182,11 +173,9 @@
                     ControlPersist 10m
             ";
         };
-
     };
 
     security.sudo = {
-
         execWheelOnly = true;
 
         extraConfig = /* bash */ ''
@@ -196,17 +185,14 @@
             Defaults passprompt="[31m sudo[0m: password for [36m%p[0m, running as [31m%U[0m: "
             Defaults pwfeedback
         '';
-
     };
 
     services = {
-
         fwupd.enable = true;
         irqbalance.enable = true;
         libinput.enable = true;
 
         openssh = {
-
             enable = true;
 
             allowSFTP = true;
@@ -224,12 +210,10 @@
                 PasswordAuthentication = false;
                 PermitRootLogin = lib.mkForce "no";
             };
-
         };
 
         tailscale.enable = true;
         timesyncd.enable = true;
-
     };
 
     sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
@@ -238,5 +222,4 @@
     system.stateVersion = sysConfig.instalVersion;
 
     systemd.settings.Manager.DefaultTimeoutStopSec = "10s";
-
 }

@@ -3,7 +3,6 @@
     imports = [ ./postgresql.nix ];
 
     environment = {
-
         persistence."/state/system".directories = [ {
             directory = "/var/lib/nextcloud";
             user = "nextcloud";
@@ -18,7 +17,6 @@
             msmtp
             nodejs_22
         ];
-
     };
 
     networking.firewall.allowedTCPPorts = [ 9000 ];
@@ -36,9 +34,7 @@
     };
 
     services = {
-
         nextcloud = {
-
             enable = true;
             package = pkgs.nextcloud33;
 
@@ -103,7 +99,6 @@
                 trusted_domains = [ "magrathea.brill-godzilla.ts.net" ];
                 trusted_proxies = [ "100.109.171.26" "127.0.0.1" "192.168.1.2" ];
             };
-
         };
 
         nginx.virtualHosts."localhost" = {
@@ -116,7 +111,6 @@
         postgresql.ensureDatabases = [ "nextcloud" ];
         postgresql.ensureUsers = [ { name = "nextcloud"; ensureDBOwnership = true; } ];
         postgresqlBackup.databases = [ "nextcloud" ];
-
     };
 
     sops.secrets."nextcloud-admin".owner = "nextcloud";
@@ -134,5 +128,4 @@
     };
 
     users.groups."nextcloud" = { };
-
 }

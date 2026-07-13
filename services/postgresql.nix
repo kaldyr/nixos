@@ -1,7 +1,5 @@
 { pkgs, ... }: {
-
     services = {
-
         postgresql = {
             enable = true;
             package = pkgs.postgresql_16;
@@ -14,11 +12,9 @@
             location = "/state/system/dbbackup";
             startAt = "*-*-* 01:15:00";
         };
-
     };
 
     users = {
-
         extraUsers."postgres" = {
             group = "postgres";
             home = "/var/lib/postgresql/16";
@@ -26,7 +22,5 @@
         };
 
         groups.postgres = {};
-
     };
-
 }

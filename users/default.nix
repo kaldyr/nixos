@@ -1,13 +1,10 @@
 { inputs, sysConfig, ...}: {
-
     home-manager = {
-
         extraSpecialArgs = { inherit inputs sysConfig; };
         useGlobalPkgs = true;
         useUserPackages = true;
 
         users.${sysConfig.user} = {
-
             home = {
                 homeDirectory = "/home/${sysConfig.user}";
                 stateVersion = sysConfig.instalVersion;
@@ -20,9 +17,6 @@
             systemd.user.startServices = "sd-switch";
 
             xdg.enable = true;
-
         };
-
     };
-
 }

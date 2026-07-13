@@ -1,7 +1,5 @@
 { pkgs, sysConfig, ... }: {
-
     home-manager.users.${sysConfig.user} = {
-
         home.packages = with pkgs; [
             udiskie
             udisks
@@ -13,7 +11,5 @@
             notify = true;
             tray = "auto";
         };
-
     };
-
 }

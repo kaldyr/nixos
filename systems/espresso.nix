@@ -1,5 +1,4 @@
 { inputs, lib, pkgs, ... }: {
-
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-amd
         inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
@@ -63,5 +62,4 @@
     services.tumbler.enable = true;
 
     time.timeZone = "America/Los_Angeles";
-
 }

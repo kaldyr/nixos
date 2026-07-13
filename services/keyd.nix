@@ -1,11 +1,8 @@
 {
-
 	services.keyd = {
-
 		enable = true;
 
 		keyboards.default.settings = {
-
 			layerCaps = {
 
 				# For WASD games, turn instead of strafe when layer active
@@ -37,7 +34,6 @@
 
 				# Extra functionality for 60% keyboard
 				"delete" = "insert";
-
 			};
 
 			layerRightAlt = {
@@ -66,9 +62,6 @@
 				comma = "macro([b)";
 				"." = "macro(]b)";
 			};
-
 		};
 	};
-
-
 }

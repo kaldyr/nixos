@@ -1,5 +1,4 @@
 { inputs, pkgs, ... }: {
-
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-intel
         ../disko/oolong.nix
@@ -55,7 +54,5 @@
         libinput.touchpad.accelSpeed = "-0.5";
         thermald.enable = true;
         tumbler.enable = true;
-
     };
-
 }

@@ -1,5 +1,4 @@
 { pkgs, ... }: {
-
     imports = [ ./postgresql.nix ];
 
     environment.persistence."/state/system".directories = [ {
@@ -13,9 +12,7 @@
     networking.firewall.allowedUDPPorts = [ 2222 9001 ];
 
     services = {
-
         forgejo = {
-
             enable = true;
             package = pkgs.forgejo;
 
@@ -34,7 +31,6 @@
             lfs.enable = true;
 
             settings = {
-
                 DEFAULT.APP_NAME = "Project Forge";
 
                 log.LEVEL = "Warn";
@@ -60,17 +56,14 @@
 
                 service.DISABLE_REGISTRATION = true; # Comment out for initial install
                 session.COOKIE_SECURE = true;
-
             };
 
             useWizard = false;
-
         };
 
         postgresql.ensureDatabases = [ "forgejo" ];
         postgresql.ensureUsers = [ { name = "forgejo"; ensureDBOwnership = true; } ];
         postgresqlBackup.databases = [ "forgejo" ];
-
     };
 
     users.extraUsers."forgejo" = {
@@ -81,5 +74,4 @@
     };
 
     users.groups."forgejo" = {};
-
 }

@@ -1,5 +1,4 @@
 { lib, inputs, pkgs, sysConfig, ... }: {
-
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-amd
         inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
@@ -8,11 +7,10 @@
         inputs.nixos-hardware.nixosModules.common-gpu-amd
         ../disko/mjolnir.nix
         ./desktop.nix
-        ../services/openrazer.nix
+        ../services/openrazer
         ../programs/hyprland
-        # ../programs/librewolf.nix
         ../programs/lutris.nix
-        ../programs/nextcloud-desktop.nix
+        ../programs/nextcloud
         ../programs/openscad.nix
         ../programs/openstarbound.nix
         ../programs/plymouth.nix
@@ -37,20 +35,8 @@
     };
 
     environment.persistence."/nix".users.${sysConfig.user} = lib.mkIf sysConfig.homeImpermanence {
-        directories = [
-            "DnD"
-            "Homeschool"
-        ];
+        directories = [ "DnD" ];
     };
-
-    environment.systemPackages = with pkgs; [
-        dnsmasq
-        gnome-boxes
-        phodav
-        quickemu
-        quickgui
-        virglrenderer
-    ];
 
     fileSystems = {
         "/" = {
@@ -83,5 +69,4 @@
     };
 
     time.timeZone = "America/Los_Angeles";
-
 }

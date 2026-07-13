@@ -5,10 +5,9 @@
         ../../services/dunst.nix
         ../../services/udiskie.nix
         ../feh.nix
-        ../fuzzel.nix
+        ../fuzzel
         ../quickshell
         ../satty
-        ../swappy.nix
         ../wlr-which-key
     ];
 
@@ -20,36 +19,32 @@
         ];
     };
 
-    environment.systemPackages = with pkgs; [
-        brightnessctl
-        cliphist
-        easyeffects
-        grim
-        hyprcursor
-        hypridle
-        hyprlock
-        hyprpicker
-        hyprpolkitagent
-        hyprshutdown
-        hyprsunset
-        libnotify
-        pavucontrol
-        playerctl
-        slurp
-        tesseract
-        wl-clipboard
-        wl-screenrec
-        xdg-desktop-portal-hyprland
-        xwayland
-    ];
-
     home-manager.users.${sysConfig.user} = { config, ... }: {
-
         home.file.".local/share/nvim/stubs/hl.meta.lua".source = "${pkgs.hyprland}/share/hypr/stubs/hl.meta.lua";
+
+        home.packages = with pkgs; [
+            brightnessctl
+            grim
+            hyprpicker
+            hyprshutdown
+            libnotify
+            pavucontrol
+            slurp
+            tesseract
+            wl-clipboard
+            wl-screenrec
+            xwayland
+        ];
+
+        home.pointerCursor.hyprcursor.enable = true;
+
+        programs.hyprlock.enable = true;
 
         services = {
             cliphist.enable = true;
+            easyeffects.enable = true;
             hypridle.enable = true;
+            hyprpolkitagent.enable = true;
             hyprsunset.enable = true;
             playerctld.enable = true;
         };
@@ -96,7 +91,6 @@
     };
 
     services.greetd = {
-
         enable = true;
 
         settings = rec {
@@ -104,21 +98,14 @@
             initial_session.command = "uwsm start hyprland.desktop";
             initial_session.user = sysConfig.user;
         };
-
     };
 
     xdg.portal = {
-
         enable = true;
 
         config.common.default = "*";
-
         configPackages = with pkgs; [ xdg-desktop-portal-hyprland ];
-
         extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
-
         wlr.enable = true;
-
     };
-
 }

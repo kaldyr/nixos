@@ -1,18 +1,13 @@
 {
-
     disko.devices.disk.main = {
-
         device = "/dev/disk/by-id/ata-Dell_WR202KD032G_E70290F5_P02702KD2G1042b8e66b";
         type = "disk";
 
         content = {
-
             type = "gpt";
 
             partitions = {
-
                 ESP = {
-
                     name = "ESP";
                     type = "EF00";
                     start = "1MiB";
@@ -25,21 +20,17 @@
                         mountpoint = "/boot";
                         mountOptions = [ "defaults" ];
                     };
-
                 };
 
                 luks = {
-
                     size = "100%";
 
                     content = {
-
                         type = "luks";
                         name = "crypted";
                         settings.allowDiscards = true;
 
                         content = {
-
                             type = "btrfs";
                             extraArgs = [ "-f" ];
 
@@ -53,15 +44,9 @@
                                 "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "4G"; };
                             };
                         };
-
                     };
-
                 };
-
             };
-
         };
-
     };
-
 }

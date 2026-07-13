@@ -1,5 +1,4 @@
 { inputs, pkgs, ... }: {
-
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-amd
         inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
@@ -20,7 +19,6 @@
     };
 
     fileSystems = {
-
         "/" = {
             device = "none";
             fsType = "tmpfs";
@@ -44,11 +42,9 @@
             fsType = "btrfs";
             options = [ "subvol=@snaps" "noatime" "compress-force=zstd:8" ];
         };
-
     };
 
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
     time.timeZone = "America/Los_Angeles";
-
 }

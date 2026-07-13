@@ -1,5 +1,4 @@
 { inputs, pkgs, ... }: {
-
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-intel
         ../disko/magrathea.nix
@@ -29,7 +28,6 @@
     } ];
 
     fileSystems = {
-
         "/" = {
             device = "none";
             fsType = "tmpfs";
@@ -52,7 +50,6 @@
             fsType = "btrfs";
             options = [ "subvol=@snaps" "noatime" "compress-force=zstd:8" ];
         };
-
     };
 
     hardware.enableRedistributableFirmware = true;
@@ -60,16 +57,13 @@
     time.timeZone = "America/Los_Angeles";
 
     services = {
-
         samba = {
-
             enable = true;
             package = pkgs.samba;
 
             openFirewall = true;
 
             settings = {
-
                 global = {
                     "encrypt passwords" = true;
                     "invalid users" = [ "root" ];
@@ -93,20 +87,16 @@
                     "create mask" = "0664";
                     "directory mask" = "0775";
                 };
-
             };
-
         };
 
         samba-wsdd.enable = true;
         samba-wsdd.openFirewall = true;
 
         tailscale.useRoutingFeatures = "server";
-
     };
 
     systemd.services."tailscale-certs" = {
-
         description = "Automatic renewal of Tailscale certificates";
 
         after = [ "network-pre.target" "tailscale.service" ];
@@ -130,11 +120,9 @@
             chown :webservice /var/lib/certs/magrathea.brill-godzilla.ts.net.{crt,key}
             chmod 0640 /var/lib/certs/magrathea.brill-godzilla.ts.net.{crt,key}
         '';
-
     };
 
     systemd.timers."tailscale-certs" = {
-
         description = "Automatic renewal of Tailscale certificates";
 
         after = [ "network-pre.target" "tailscale.service" ];
@@ -146,10 +134,8 @@
             Persistent = "true";
             Unit = "tailscale-certs.service";
         };
-
     };
 
     # Group that can access tailscale certificates
     users.groups."webservice" = {};
-
 }

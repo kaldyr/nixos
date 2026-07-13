@@ -21,5 +21,4 @@
             ${pkgs.openstarbound}/bin/starbound_server -bootconfig /var/lib/openstarbound/sbinit.config
         '';
     };
-
 }

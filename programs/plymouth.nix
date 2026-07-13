@@ -1,7 +1,5 @@
 { pkgs, ... }: {
-
     boot = {
-
         initrd.systemd.enable = true;
 
         kernelParams = [ "splash" ];
@@ -11,7 +9,5 @@
             themePackages = with pkgs; [ (catppuccin-plymouth.override { variant = "frappe"; }) ];
             theme = "catppuccin-frappe";
         };
-
     };
-
 }

@@ -1,18 +1,14 @@
 {
-
     disko.devices.disk.main = {
 
         device = "/dev/disk/by-id/nvme-SOLIDIGM_SSDPFKKW020X7_SSC1N514010901I6Z";
         type = "disk";
 
         content = {
-
             type = "gpt";
 
             partitions = {
-
                 ESP = {
-
                     name = "ESP";
                     type = "EF00";
                     start = "1MiB";
@@ -25,21 +21,17 @@
                         mountpoint = "/boot";
                         mountOptions = [ "defaults" ];
                     };
-
                 };
 
                 luks = {
-
                     size = "100%";
 
                     content = {
-
                         type = "luks";
                         name = "crypted";
                         settings.allowDiscards = true;
 
                         content = {
-
                             type = "btrfs";
                             extraArgs = [ "-f" ];
 
@@ -58,17 +50,10 @@
                                 # Swapfile
                                 "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "16G"; };
                             };
-
                         };
-
                     };
-
                 };
-
             };
-
         };
-
     };
-
 }

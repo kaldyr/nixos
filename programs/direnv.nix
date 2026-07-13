@@ -1,5 +1,4 @@
 { lib, sysConfig, ... }: {
-
     environment.persistence = lib.mkIf sysConfig.homeImpermanence {
         "/nix".users.${sysConfig.user}.directories = [
             ".local/share/direnv"
@@ -12,5 +11,4 @@
         programs.direnv.enable = true;
         programs.direnv.nix-direnv.enable = true;
     };
-
 }

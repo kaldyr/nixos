@@ -1,5 +1,4 @@
 { pkgs, sysConfig, ... }: {
-
     home-manager.users.${sysConfig.user}.home.packages = with pkgs; [ pamixer ];
 
     security.rtkit.enable = true;
@@ -22,5 +21,4 @@
             };
         };
     };
-
 }

@@ -1,5 +1,4 @@
 { config, pkgs, ...}: {
-
     home-manager.users."matshkas".home = {
         sessionVariables.EDITOR = "nano";
         sessionVariables.VISUAL = "nano";
@@ -8,11 +7,9 @@
     sops.secrets.matshkas-password.neededForUsers = true;
 
     users = {
-
         mutableUsers = false;
 
         users."matshkas" = {
-
             description = "Matshkas";
             extraGroups = [ "wheel" "networkmanager" "video" ];
             hashedPasswordFile = config.sops.secrets.matshkas-password.path;
@@ -24,9 +21,6 @@
             ];
 
             shell = pkgs.fish;
-
         };
-
     };
-
 }

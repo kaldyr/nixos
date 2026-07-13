@@ -1,21 +1,18 @@
 {
-
     disko.devices.disk.main = {
-
         device = "/dev/disk/by-id/nvme-CT500P3PSSD8_240746F1F0AC";
         type = "disk";
 
         content = {
-
             type = "gpt";
 
             partitions = {
-
                 ESP = {
                     name = "ESP";
                     type = "EF00";
                     start = "1MiB";
                     size = "2G";
+
                     content = {
                         type = "filesystem";
                         format = "vfat";
@@ -27,10 +24,12 @@
 
                 luks = {
                     size = "100%";
+
                     content = {
                         type = "luks";
                         name = "crypted";
                         settings.allowDiscards = true;
+
                         content = {
                             type = "btrfs";
                             extraArgs = [ "-f" ];
@@ -48,11 +47,7 @@
                         };
                     };
                 };
-
             };
-
         };
-
     };
-
 }

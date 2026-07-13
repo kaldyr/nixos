@@ -1,14 +1,12 @@
 { inputs, lib, pkgs, sysConfig, ... }: {
-
     imports = [
         inputs.nixos-hardware.nixosModules.common-hidpi
         inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
         ../disko/hofud.nix
         ./desktop.nix
         ../programs/hyprland
-        # ../programs/librewolf.nix
         ../programs/lutris.nix
-        ../programs/nextcloud-desktop.nix
+        ../programs/nextcloud
         ../programs/openscad.nix
         ../programs/openstarbound.nix
         ../programs/plymouth.nix
@@ -70,5 +68,4 @@
         thermald.enable = true;
         xserver.videoDrivers = [ "i915" ];
     };
-
 }

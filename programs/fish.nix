@@ -1,5 +1,4 @@
 { lib, pkgs, sysConfig, ... }: {
-
     environment.persistence = lib.mkIf sysConfig.homeImpermanence {
         "/nix".users.${sysConfig.user}.directories = [
             ".cache/fish/generated_completions"
@@ -9,9 +8,7 @@
     };
 
     home-manager.users.${sysConfig.user} = {
-
         programs.fish = {
-
             enable = true;
 
             functions.fish_greeting = "";
@@ -63,11 +60,9 @@
             shellInit = /* fish */ ''
                 fish_config theme choose "Catppuccin Frappe"
             '';
-
         };
 
         xdg = {
-
             configFile."fish/themes/Catppuccin Frappe.theme".source = pkgs.fetchFromGitHub {
                 owner = "catppuccin";
                 repo = "fish";
@@ -76,9 +71,7 @@
             } + "/themes/Catppuccin Frappe.theme";
 
             desktopEntries.fish = { name = "Fish Shell"; noDisplay = true; };
-
         };
-
     };
 
     programs.fish.enable = true;
