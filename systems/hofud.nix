@@ -5,15 +5,15 @@
         ../disko/hofud.nix
         ./desktop.nix
         ../programs/hyprland
-        ../programs/lutris.nix
+        ../programs/lutris
         ../programs/nextcloud
-        ../programs/openscad.nix
-        ../programs/openstarbound.nix
-        ../programs/plymouth.nix
-        ../programs/steam.nix
-        ../services/epson-et-8550.nix
-        ../services/keyd.nix
-        ../services/kmscon.nix
+        ../programs/openscad
+        ../programs/openstarbound
+        ../programs/plymouth
+        ../programs/steam
+        ../services/epson-et-8550
+        ../services/keyd
+        ../services/kmscon
     ];
 
     boot = {

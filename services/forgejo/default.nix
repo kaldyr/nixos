@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-    imports = [ ./postgresql.nix ];
+    imports = [ ./postgresql ];
 
     environment.persistence."/state/system".directories = [ {
         directory = "/var/lib/forgejo";

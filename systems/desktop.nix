@@ -1,17 +1,17 @@
 { lib, pkgs, sysConfig, ... }: {
     imports = [
         ../programs/cava
-        ../programs/discord.nix
-        ../programs/helium.nix
+        ../programs/discord
+        ../programs/helium
         ../programs/keepass
         ../programs/kitty
-        ../programs/libreoffice.nix
+        ../programs/libreoffice
         ../programs/mpv
         ../programs/newsboat
-        ../programs/obsidian.nix
-        ../programs/telegram.nix
+        ../programs/obsidian
+        ../programs/telegram
         ../programs/zathura
-        ../services/pipewire.nix
+        ../services/pipewire
     ];
 
     environment = {

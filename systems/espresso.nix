@@ -7,11 +7,11 @@
         ../disko/espresso.nix
         ./desktop.nix
         ../programs/hyprland
-        ../programs/lutris.nix
-        ../programs/plymouth.nix
-        ../programs/steam.nix
-        ../services/keyd.nix
-        ../services/kmscon.nix
+        ../programs/lutris
+        ../programs/plymouth
+        ../programs/steam
+        ../services/keyd
+        ../services/kmscon
     ];
 
     boot = {

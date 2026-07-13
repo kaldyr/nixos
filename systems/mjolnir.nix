@@ -7,19 +7,19 @@
         inputs.nixos-hardware.nixosModules.common-gpu-amd
         ../disko/mjolnir.nix
         ./desktop.nix
-        ../services/openrazer
         ../programs/hyprland
-        ../programs/lutris.nix
+        ../programs/lutris
         ../programs/nextcloud
-        ../programs/openscad.nix
-        ../programs/openstarbound.nix
-        ../programs/plymouth.nix
-        ../programs/retroarch.nix
-        ../programs/steam.nix
-        ../programs/virtualmachines.nix
-        ../services/epson-et-8550.nix
-        ../services/keyd.nix
-        ../services/kmscon.nix
+        ../programs/openscad
+        ../programs/openstarbound
+        ../programs/plymouth
+        ../programs/retroarch
+        ../programs/steam
+        ../programs/virtualmachines
+        ../services/epson-et-8550
+        ../services/keyd
+        ../services/kmscon
+        ../services/openrazer
     ];
 
     boot = {

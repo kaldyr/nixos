@@ -5,7 +5,7 @@
         inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
         inputs.nixos-hardware.nixosModules.common-gpu-amd
         ../disko/serenity.nix
-        ../programs/kodi.nix
+        ../programs/kodi
     ];
 
     boot = {

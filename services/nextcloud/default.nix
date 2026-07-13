@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
 
-    imports = [ ./postgresql.nix ];
+    imports = [ ./postgresql ];
 
     environment = {
         persistence."/state/system".directories = [ {

@@ -2,16 +2,16 @@
     imports = [
         ../programs/bat
         ../programs/btop
-        ../programs/direnv.nix
-        ../programs/fish.nix
-        ../programs/fzf.nix
-        ../programs/git.nix
+        ../programs/direnv
+        ../programs/fish
+        ../programs/fzf
+        ../programs/git
         ../programs/lazygit
         ../programs/neovim
         ../programs/qalculate
         ../programs/starship
         ../programs/yazi
-        ../programs/zoxide.nix
+        ../programs/zoxide
     ];
 
     boot.loader = {

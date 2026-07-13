@@ -3,8 +3,8 @@
         inputs.nixos-hardware.nixosModules.common-cpu-intel
         ../disko/oolong.nix
         ./desktop.nix
-        ../programs/hyprland.nix
-        ../programs/plymouth.nix
+        ../programs/hyprland
+        ../programs/plymouth
     ];
 
     boot = {

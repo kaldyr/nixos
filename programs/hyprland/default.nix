@@ -1,14 +1,14 @@
 { lib, pkgs, sysConfig, ... }: {
 
     imports = [
-        ../../services/awww.nix
-        ../../services/dunst.nix
-        ../../services/udiskie.nix
-        ../feh.nix
-        ../fuzzel
-        ../quickshell
-        ../satty
-        ../wlr-which-key
+        ../../programs/feh
+        ../../programs/fuzzel
+        ../../programs/quickshell
+        ../../programs/satty
+        ../../programs/wlr-which-key
+        ../../services/awww
+        ../../services/dunst
+        ../../services/udiskie
     ];
 
     environment.persistence = lib.mkIf sysConfig.homeImpermanence {

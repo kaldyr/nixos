@@ -2,12 +2,12 @@
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-intel
         ../disko/magrathea.nix
-        ../services/forgejo.nix
-        ../services/nextcloud.nix
-        ../services/openstarbound.nix
-        ../services/pipewire.nix
-        ../services/technitium.nix
-        ../programs/kodi.nix
+        ../programs/kodi
+        ../services/forgejo
+        ../services/nextcloud
+        ../services/openstarbound
+        ../services/pipewire
+        ../services/technitium
     ];
 
     boot = {
