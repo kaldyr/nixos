@@ -249,19 +249,17 @@ PanelWindow {
 				Process {
 					id:      brightnessLevelProcess
 					running: true
-					command: ["sh", "-c", "brightnessctl -m | awk -F, '{print $2 \",\" $3 \",\" $5}'"]
+					command: ["sh", "-c", "brightnessctl -m | awk -F, '{print $2 \",\" $4}' | tr -d '%'"]
 					stdout:  StdioCollector {
 						onStreamFinished: {
 							const output = this.text.trim().split(',')
-							const level  = (output[1]/output[2])*100
-							console.log(output + "    |    " + level)
-							brightnessTimer.interval = (output[0] === "backlight")
-								? 1000
-								: 10000
-							brightnessControl.brightness = (output[0] === "backlight")
-								? level
-								: 100
-							brightnessSlider.implicitWidth = brightnessControl.brightness
+							if (output.length !== 2) return;
+
+							const level  = parseInt(output[1], 10)
+
+							brightnessTimer.interval = (output[0] === "backlight") ? 1000 : 10000
+							brightnessControl.brightness = (output[0] === "backlight") ? level : 100
+							brightnessSlider.width = brightnessControl.brightness
 						}
 					}
 				}
@@ -337,16 +335,16 @@ PanelWindow {
 					onWheel: function(e) {
 						brightnessLevelProcess.running = true
 						if (e.angleDelta.y > 0) {
-							if (brightnessControl.brightness < 95) {
-								Quickshell.execDetached(["brightnessctl", "set", "+5%"])
-							} else {
+							if (brightnessControl.brightness >= 95) {
 								Quickshell.execDetached(["brightnessctl", "set", "100%"])
-							}
-						} else {
-							if (brightnessControl.brightness > 5) {
-								Quickshell.execDetached(["brightnessctl", "set", "5%-"])
 							} else {
+								Quickshell.execDetached(["brightnessctl", "set", "+5%"])
+							}
+						} else if (e.angleDelta.y < 0) {
+							if (brightnessControl.brightness <= 6) {
 								Quickshell.execDetached(["brightnessctl", "set", "1%"])
+							} else {
+								Quickshell.execDetached(["brightnessctl", "set", "5%-"])
 							}
 						}
 					}
@@ -494,7 +492,7 @@ PanelWindow {
 							} else {
 								Quickshell.execDetached(["hyprctl", "hyprsunset", "temperature", "+125"])
 							}
-						} else {
+						} else if (e.angleDelta.y < 0) {
 							if (hyprsunsetSlider.width <= 5) {
 								Quickshell.execDetached(["hyprctl", "hyprsunset", "temperature", "3500"])
 							} else {
