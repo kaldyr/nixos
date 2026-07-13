@@ -1,7 +1,18 @@
 { lib, pkgs, sysConfig, ... }: {
     home-manager.users.${sysConfig.user} = {
-        services.awww.enable = true;
-        services.awww.extraArgs = [ "--format" "xrgb" ];
+        home.packages = with pkgs; [ awww ];
+
+        systemd.user.services.awww = {
+            Install.WantedBy = [ "graphical-session.target" ];
+            Unit.Description = "Wayland wallpaper daemon";
+            Unit.PartOf = [ "graphical-session.target" ];
+
+            Service = {
+                ExecStartPre = "${lib.getExe' pkgs.coreutils "sleep"} 0.5";
+                ExecStart = "${lib.getExe' pkgs.awww "awww-daemon"} --format xrgb";
+                Restart = "on-failure";
+            };
+        };
 
         systemd.user.services.wallpaper-change = {
             Install.WantedBy = [ "graphical-session.target" ];
