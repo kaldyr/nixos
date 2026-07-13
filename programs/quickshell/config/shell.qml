@@ -26,6 +26,8 @@ PanelWindow {
 
 	readonly property string fontFamily: "Maple Mono NF"
 
+	property bool sliderLocked: false
+
 	SystemClock {
 		id:        sysClock
 		precision: SystemClock.Seconds
@@ -211,7 +213,7 @@ PanelWindow {
 	// LeftMid       -->  Volume, Media Controls
 	// <--
 	// Center        -->  Brightness, Hyprsunset, Clock, Time, Date, Calendar, Hypridle, Notifications
-	Rectangle { // Left Toggles
+	Rectangle {       // Left Toggles
 		id: leftToggleBar
 
 		anchors.verticalCenter: parent.verticalCenter
@@ -235,7 +237,7 @@ PanelWindow {
 
 			spacing: 6
 
-			Rectangle { // Brightness
+			Rectangle { // Brightness -->
 				id: brightnessControl
 				anchors.verticalCenter: parent.verticalCenter
 
@@ -244,7 +246,8 @@ PanelWindow {
 				color:          root.theme.bar.alt
 				radius:         this.height / 2
 
-				property int  brightness: 100
+				property int  brightness:    100
+				property bool sliderVisible: false
 
 				Process {
 					id:      brightnessLevelProcess
@@ -274,8 +277,17 @@ PanelWindow {
 					}
 				}
 
+				Timer {
+					id:          brightnessSliderTimeout
+					interval:    1000
+					repeat:      false
+					onTriggered: {
+						brightnessControl.sliderVisible = false
+						root.sliderLocked               = false
+					}
+				}
+
 				IconImage {
-					id: brightnessIcon
 					anchors.verticalCenter: parent.verticalCenter
 					anchors.right:          parent.right
 					anchors.rightMargin:    4
@@ -285,9 +297,9 @@ PanelWindow {
 					source: Quickshell.iconPath('brightnesssettings')
 				}
 
-				Rectangle {
-					anchors.verticalCenter: parent.verticalCenter
-					anchors.right:          parent.left
+				Rectangle { // Slider
+					anchors.verticalCenter: brightnessControl.verticalCenter
+					anchors.right:          brightnessControl.left
 
 					implicitHeight: 20
 					implicitWidth:  118
@@ -295,7 +307,7 @@ PanelWindow {
 					color:          root.theme.bar.bg
 					border.color:   root.theme.bar.border
 					border.width:   2
-					opacity:        brightnessPointer.hovered ? 1 : 0
+					opacity:        brightnessControl.sliderVisible ? 1 : 0
 					visible:        opacity > 0
 					z:              3
 
@@ -320,14 +332,63 @@ PanelWindow {
 							radius:         this.height / 2
 							color:          root.theme.bar.fill
 						}
+
+						MouseArea {
+							anchors.fill:      parent
+							hoverEnabled:      true
+							acceptedButtons:   Qt.LeftButton | Qt.RightButton
+							onEntered:         brightnessSliderTimeout.stop()
+							onPositionChanged: brightnessSliderTimeout.stop()
+							onExited:          brightnessSliderTimeout.restart()
+							onClicked:         (m) => {
+								Quickshell.execDetached(["brightnessctl", "set", m.x.toString() + "%"])
+								brightnessLevelProcess.running = true
+							}
+						}
+					}
+
+					WheelHandler {
+						acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+						onWheel: function(e) {
+							brightnessLevelProcess.running = true
+							if (e.angleDelta.y > 0) {
+								if (brightnessControl.brightness >= 95) {
+									Quickshell.execDetached(["brightnessctl", "set", "100%"])
+								} else {
+									Quickshell.execDetached(["brightnessctl", "set", "+5%"])
+								}
+							} else if (e.angleDelta.y < 0) {
+								if (brightnessControl.brightness <= 6) {
+									Quickshell.execDetached(["brightnessctl", "set", "1%"])
+								} else {
+									Quickshell.execDetached(["brightnessctl", "set", "5%-"])
+								}
+							}
+						}
 					}
 
 					Behavior on opacity { NumberAnimation { duration: 150 } }
 				}
 
-				HoverHandler {
-					id: brightnessPointer
-					acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+				MouseArea {
+					anchors.fill:      parent
+					hoverEnabled:      true
+					acceptedButtons:   Qt.LeftButton | Qt.RightButton
+					onEntered:         {
+						if (!root.sliderLocked) {
+							root.sliderLocked               = true
+							brightnessControl.sliderVisible = true
+							brightnessSliderTimeout.stop()
+						}
+					}
+					onPositionChanged: {
+						if (!root.sliderLocked) {
+							root.sliderLocked               = true
+							brightnessControl.sliderVisible = true
+						}
+						brightnessSliderTimeout.stop()
+					}
+					onExited:          brightnessSliderTimeout.restart()
 				}
 
 				WheelHandler {
@@ -350,7 +411,7 @@ PanelWindow {
 					}
 				}
 			}
-
+			// <--
 			Rectangle { // Hyprsunset -->
 				id: hyprsunsetControl
 
@@ -361,9 +422,9 @@ PanelWindow {
 				color:          root.theme.bar.alt
 				radius:         this.height / 2
 
-				property bool isActive:   true
-				property int  temp:       6000
-				property int  tempSlider: 100
+				property bool isActive:      true
+				property int  temp:          6000
+				property bool sliderVisible: false
 
 				function toggle() {
 					if (this.isActive) {
@@ -409,9 +470,17 @@ PanelWindow {
 					}
 				}
 
-				Text {
-					id: hyprsunsetIcon
+				Timer {
+					id:          hyprsunsetSliderTimeout
+					interval:    1000
+					repeat:      false
+					onTriggered: {
+						hyprsunsetControl.sliderVisible = false
+						root.sliderLocked               = false
+					}
+				}
 
+				Text {
 					anchors.verticalCenter: parent.verticalCenter
 					anchors.right: parent.right
 					anchors.rightMargin: 2
@@ -426,8 +495,8 @@ PanelWindow {
 				}
 
 				Rectangle { // Slider
-					anchors.verticalCenter: parent.verticalCenter
-					anchors.right:          parent.left
+					anchors.verticalCenter: hyprsunsetControl.verticalCenter
+					anchors.right:          hyprsunsetControl.left
 
 					implicitHeight: 20
 					implicitWidth:  118
@@ -435,7 +504,7 @@ PanelWindow {
 					color:          root.theme.bar.bg
 					border.color:   root.theme.bar.border
 					border.width:   2
-					opacity:        hyprsunsetPointer.hovered ? 1 : 0
+					opacity:        hyprsunsetControl.sliderVisible ? 1 : 0
 					visible:        opacity > 0
 					z:              3
 
@@ -460,30 +529,74 @@ PanelWindow {
 							radius:         this.height / 2
 							color:          root.theme.bar.fill
 						}
+
+						MouseArea {
+							anchors.fill:      parent
+							hoverEnabled:      true
+							acceptedButtons:   Qt.LeftButton | Qt.RightButton
+							onEntered:         hyprsunsetSliderTimeout.stop()
+							onPositionChanged: hyprsunsetSliderTimeout.stop()
+							onExited:          hyprsunsetSliderTimeout.restart()
+							onClicked:         (m) => {
+								const level = Math.round(3500 + (m.x * 25))
+								Quickshell.execDetached(["hyprctl", "hyprsunset", "temperature", level.toString()])
+								hyprsunsetTempProcess.running = true
+							}
+						}
+					}
+
+					WheelHandler {
+						acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+
+						onWheel: function(e) {
+							hyprsunsetTempProcess.running = true
+							if (e.angleDelta.y > 0) {
+								if (hyprsunsetSlider.width >= 95) {
+									Quickshell.execDetached(["hyprctl", "hyprsunset", "temperature", "6000"])
+								} else {
+									Quickshell.execDetached(["hyprctl", "hyprsunset", "temperature", "+125"])
+								}
+							} else if (e.angleDelta.y < 0) {
+								if (hyprsunsetSlider.width <= 5) {
+									Quickshell.execDetached(["hyprctl", "hyprsunset", "temperature", "3500"])
+								} else {
+									Quickshell.execDetached(["hyprctl", "hyprsunset", "temperature", "-125"])
+								}
+							}
+						}
 					}
 
 					Behavior on opacity { NumberAnimation { duration: 150 } }
 				}
 
 				MouseArea {
-					anchors.fill:    parent
-					hoverEnabled:    true
-					acceptedButtons: Qt.LeftButton | Qt.RightButton
-					onClicked:       (m) => m.button === Qt.RightButton
+					anchors.fill:      parent
+					hoverEnabled:      true
+					acceptedButtons:   Qt.LeftButton | Qt.RightButton
+					onClicked:         (m) => m.button === Qt.RightButton
 						? (hyprsunsetControl.temp === 6000)
 							? Quickshell.execDetached(["hyprctl", "hyprsunset", "temperature", "3500"])
 							: Quickshell.execDetached(["hyprctl", "hyprsunset", "temperature", "6000"])
 						: hyprsunsetControl.toggle()
-				}
-
-				HoverHandler {
-					id: hyprsunsetPointer
-					acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+					onEntered:         {
+						if (!root.sliderLocked) {
+							root.sliderLocked               = true
+							hyprsunsetControl.sliderVisible = true
+							hyprsunsetSliderTimeout.stop()
+						}
+					}
+					onPositionChanged: {
+						if (!root.sliderLocked) {
+							root.sliderLocked               = true
+							hyprsunsetControl.sliderVisible = true
+						}
+						hyprsunsetSliderTimeout.stop()
+					}
+					onExited:          hyprsunsetSliderTimeout.restart()
 				}
 
 				WheelHandler {
 					acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
-
 					onWheel: function(e) {
 						hyprsunsetTempProcess.running = true
 						if (e.angleDelta.y > 0) {
@@ -505,8 +618,7 @@ PanelWindow {
 			// <--
 		}
 	}
-
-	Rectangle { // Clock
+	Rectangle {       // Clock      -->
 		id: clockFace
 
 		anchors.verticalCenter: parent.verticalCenter
@@ -554,6 +666,7 @@ PanelWindow {
 				ctx.globalAlpha = 1;
 			}
 		}
+
 		Rectangle { // Minute Hand
 			anchors.bottom:           clockFace.verticalCenter
 			anchors.horizontalCenter: clockFace.horizontalCenter
@@ -588,8 +701,8 @@ PanelWindow {
 			Behavior on rotation { RotationAnimation { duration: 200; direction: RotationAnimation.Shortest } }
 		}
 	}
-
-	Rectangle { // Center Bar
+	// <--
+	Rectangle {       // Center Bar -->
 		id: datetime
 
 		anchors.centerIn: parent
@@ -631,8 +744,8 @@ PanelWindow {
 			}
 		}
 	}
-
-	Rectangle { // Calendar
+	// <--
+	Rectangle {       // Calendar   -->
 		id: calendar
 
 		anchors.verticalCenter: parent.verticalCenter
@@ -655,8 +768,8 @@ PanelWindow {
 			source: Quickshell.iconPath('calendar')
 		}
 	}
-
-	Rectangle { // Right Toggles
+	// <--
+	Rectangle {       // Right Toggles
 		id: rightToggleBar
 
 		anchors.verticalCenter: parent.verticalCenter
@@ -680,7 +793,7 @@ PanelWindow {
 
 			spacing: 6
 
-			Rectangle { // Hypridle
+			Rectangle { // Hypridle   -->
 				id: hypridleControl
 
 				property bool isActive: true
@@ -737,8 +850,8 @@ PanelWindow {
 					}
 				}
 			}
-
-			Rectangle { // Notifications
+			// <--
+			Rectangle { // Notifications -->
 				id: notificationControl
 
 				anchors.verticalCenter: parent.verticalCenter
@@ -823,6 +936,7 @@ PanelWindow {
 			}
 		}
 	} // <--
+	// <--
 	// RightMid      -->  Network, Bluetooth
 	// <--
 	// Right         -->  System Tray, Power Menu
