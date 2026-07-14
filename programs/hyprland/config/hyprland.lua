@@ -451,13 +451,13 @@ b( m..'a', function() -->
 	end
 
 	-- Deal with tiled
-	-- Only continue if there are 2 or 3 columns of windows
 	if #tiled == 1 then
 		local w = tiled[1]
 		local size = win_large_size()
 		if w.size.x < 500 then
 			size = win_small_size()
 		end
+		hl.dispatch( hl.dsp.window.pseudo({ window = w }) )
 		hl.dispatch( hl.dsp.window.resize({
 			window = w,
 			x = size[1],
