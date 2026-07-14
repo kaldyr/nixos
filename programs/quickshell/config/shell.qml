@@ -11,6 +11,8 @@ import Quickshell.Widgets
 import Quickshell.Io
 import QtQuick
 
+import "Theme"
+
 // qmllint disable uncreatable-type
 PanelWindow {
 	id: root
@@ -24,50 +26,12 @@ PanelWindow {
 	implicitHeight: 32
 	color:  "transparent"
 
-	readonly property string fontFamily: "Maple Mono NF"
-
 	property bool sliderLocked: false
 
 	SystemClock {
 		id:        sysClock
 		precision: SystemClock.Seconds
 	}
-
-	// Colorscheme   -->
-	property var theme: ({
-		bar: ({
-			bg:       "#303446",
-			border:   "#232634",
-			alt:      "#292c3c",
-			fill:     "#c6d0f5",
-		}),
-		ws: ({
-			active:   "#81c8be",
-			inactive: "#8caaee",
-			urgent:   "#e78284",
-			empty:    "#414559",
-			overview: "#babbf1",
-		}),
-		clock: ({
-			bg:       "#292c3c",
-			border:   "#ca9ee6",
-			hands:    "#8caaee",
-			text:     "#c6d0f5",
-		}),
-		cal: ({
-			bg:       "#292c3c",
-			border:   "#ef9f76",
-			text:     "#c6d0f5",
-		}),
-		sunset: ({
-			active:   "#ef9f76",
-			inactive: "#414559",
-		}),
-		idle: ({
-			active:   "#85c1dc",
-			inactive: "#414559",
-		})
-	}) // <--
 
 	// Left          -->  Launcher, Workspaces, Overview
 	Rectangle { // Launcher button
@@ -81,8 +45,8 @@ PanelWindow {
 		topRightRadius:    this.height / 2
 		bottomRightRadius: this.height / 2
 		bottomLeftRadius:  this.height / 2
-		color:             root.theme.bar.alt
-		border.color:      root.theme.bar.border
+		color:             Theme.bar.alt
+		border.color:      Theme.bar.border
 		border.width:      2
 		z:                 2
 
@@ -111,8 +75,8 @@ PanelWindow {
 		implicitWidth:     workspaces.width + 16
 		topRightRadius:    this.height / 2
 		bottomRightRadius: this.height / 2
-		color:             root.theme.bar.bg
-		border.color:      root.theme.bar.border
+		color:             Theme.bar.bg
+		border.color:      Theme.bar.border
 		border.width:      2
 
 		Row {
@@ -145,9 +109,9 @@ PanelWindow {
 
 				Rectangle {
 					id: wsButton
-					anchors.verticalCenter: parent.verticalCenter
 
 					required property int index
+					anchors.verticalCenter: parent.verticalCenter
 
 					implicitHeight: parent.height - 10
 					implicitWidth:  14
@@ -177,10 +141,10 @@ PanelWindow {
 						radius: this.height / 2
 
 						color: {
-							if (isUrgent) { return root.theme.ws.urgent }
-							if (isActive) { return root.theme.ws.active }
-							if (ws)       { return root.theme.ws.inactive }
-							return root.theme.ws.empty
+							if (isUrgent) { return Theme.ws.urgent }
+							if (isActive) { return Theme.ws.active }
+							if (ws)       { return Theme.ws.inactive }
+							return Theme.ws.empty
 						}
 					}
 				}
@@ -196,9 +160,9 @@ PanelWindow {
 				Text {
 					anchors.centerIn: parent
 
-					font { family: root.fontFamily; pixelSize: 18; }
+					font { family: Theme.font; pixelSize: 18; }
 
-					color: root.theme.ws.overview
+					color: Theme.ws.overview
 					text:  "󱒉"
 
 					// MouseArea {
@@ -224,8 +188,8 @@ PanelWindow {
 		implicitWidth:     leftToggleButtons.width + 24
 		topLeftRadius:     this.height / 2
 		bottomLeftRadius:  this.height / 2
-		color:             root.theme.bar.bg
-		border.color:      root.theme.bar.border
+		color:             Theme.bar.bg
+		border.color:      Theme.bar.border
 		border.width:      2
 
 		Row {
@@ -241,9 +205,9 @@ PanelWindow {
 				id: brightnessControl
 				anchors.verticalCenter: parent.verticalCenter
 
-				implicitHeight: leftToggleBar.height - 2
+				implicitHeight: leftToggleBar.height - 6
 				implicitWidth:  this.height
-				color:          root.theme.bar.alt
+				color:          Theme.bar.alt
 				radius:         this.height / 2
 
 				property int  brightness:    100
@@ -292,8 +256,8 @@ PanelWindow {
 					anchors.right:          parent.right
 					anchors.rightMargin:    4
 
-					height: 12
-					width:  12
+					height: 13
+					width:  13
 					source: Quickshell.iconPath('brightnesssettings')
 				}
 
@@ -304,8 +268,8 @@ PanelWindow {
 					implicitHeight: 20
 					implicitWidth:  118
 					radius:         this.height / 2
-					color:          root.theme.bar.bg
-					border.color:   root.theme.bar.border
+					color:          Theme.bar.bg
+					border.color:   Theme.bar.border
 					border.width:   2
 					opacity:        brightnessControl.sliderVisible ? 1 : 0
 					visible:        opacity > 0
@@ -316,21 +280,21 @@ PanelWindow {
 						implicitHeight:   6
 						implicitWidth:    102
 						radius:           this.height / 2
-						color:            root.theme.bar.alt
-						border.color:     root.theme.bar.fill
+						color:            Theme.bar.alt
+						border.color:     Theme.bar.fill
 						border.width:     1
 
 						Rectangle {
 							id: brightnessSlider
 
 							anchors.verticalCenter: parent.verticalCenter
-							anchors.left:           parent.left
-							anchors.leftMargin:     1
+							anchors.right:          parent.right
+							anchors.rightMargin:    1
 
 							implicitHeight: parent.height - 2
 							implicitWidth:  100
 							radius:         this.height / 2
-							color:          root.theme.bar.fill
+							color:          Theme.bar.fill
 						}
 
 						MouseArea {
@@ -414,12 +378,11 @@ PanelWindow {
 			// <--
 			Rectangle { // Hyprsunset -->
 				id: hyprsunsetControl
-
 				anchors.verticalCenter: parent.verticalCenter
 
-				implicitHeight: leftToggleBar.height - 2
+				implicitHeight: leftToggleBar.height - 6
 				implicitWidth:  this.height
-				color:          root.theme.bar.alt
+				color:          Theme.bar.alt
 				radius:         this.height / 2
 
 				property bool isActive:      true
@@ -483,13 +446,13 @@ PanelWindow {
 				Text {
 					anchors.verticalCenter: parent.verticalCenter
 					anchors.right: parent.right
-					anchors.rightMargin: 2
+					anchors.rightMargin: 1
 
-					font { family: root.fontFamily; pixelSize: 13; }
+					font { family: Theme.font; pixelSize: 11; }
 
 					color: (hyprsunsetControl.isActive)
-						? root.theme.sunset.active
-						: root.theme.sunset.inactive
+						? Theme.sunset.active
+						: Theme.sunset.inactive
 
 					text:  ""
 				}
@@ -501,8 +464,8 @@ PanelWindow {
 					implicitHeight: 20
 					implicitWidth:  118
 					radius:         this.height / 2
-					color:          root.theme.bar.bg
-					border.color:   root.theme.bar.border
+					color:          Theme.bar.bg
+					border.color:   Theme.bar.border
 					border.width:   2
 					opacity:        hyprsunsetControl.sliderVisible ? 1 : 0
 					visible:        opacity > 0
@@ -513,8 +476,8 @@ PanelWindow {
 						implicitHeight:   6
 						implicitWidth:    102
 						radius:           this.height / 2
-						color:            root.theme.bar.alt
-						border.color:     root.theme.bar.fill
+						color:            Theme.bar.alt
+						border.color:     Theme.bar.fill
 						border.width:     1
 
 						Rectangle {
@@ -527,7 +490,7 @@ PanelWindow {
 							implicitHeight: parent.height - 2
 							implicitWidth:  85
 							radius:         this.height / 2
-							color:          root.theme.bar.fill
+							color:          Theme.bar.fill
 						}
 
 						MouseArea {
@@ -628,8 +591,8 @@ PanelWindow {
 		implicitHeight: parent.height - 1
 		implicitWidth:  parent.height + 1
 		radius:         this.height / 2
-		color:          root.theme.clock.bg
-		border.color:   root.theme.bar.border
+		color:          Theme.clock.face
+		border.color:   Theme.bar.border
 		border.width:   2
 		z:              2
 
@@ -643,7 +606,7 @@ PanelWindow {
 				const cy  = parent.height / 2
 				const r   = Math.min( parent.width, parent.height ) / 2 - 2
 				ctx.reset()
-				ctx.strokeStyle = root.theme.clock.border
+				ctx.strokeStyle = Theme.clock.border
 				ctx.globalAlpha = 0.5
 
 				ctx.lineWidth = 1
@@ -673,7 +636,7 @@ PanelWindow {
 
 			implicitHeight:  12
 			implicitWidth:   1
-			color:           root.theme.clock.hands
+			color:           Theme.clock.hands
 			antialiasing:    true
 			transformOrigin: Item.Bottom
 			rotation: {
@@ -690,7 +653,7 @@ PanelWindow {
 
 			implicitHeight:  7
 			implicitWidth:   2
-			color:           root.theme.clock.hands
+			color:           Theme.clock.hands
 			antialiasing:    true
 			transformOrigin: Item.Bottom
 			rotation: {
@@ -709,8 +672,8 @@ PanelWindow {
 
 		implicitHeight: parent.height - 10
 		implicitWidth:  180
-		color:          root.theme.bar.bg
-		border.color:   root.theme.bar.border
+		color:          Theme.bar.bg
+		border.color:   Theme.bar.border
 		border.width:   2
 
 		Row {
@@ -720,9 +683,9 @@ PanelWindow {
 				id: time
 				anchors.verticalCenter: parent.verticalCenter
 
-				font { family: root.fontFamily; pixelSize: 12; }
+				font { family: Theme.font; pixelSize: 12; }
 
-				color: root.theme.clock.text
+				color: Theme.clock.text
 				text:  Qt.formatDateTime( sysClock.date, "HH:mm" )
 			}
 
@@ -737,9 +700,9 @@ PanelWindow {
 
 				anchors.verticalCenter: parent.verticalCenter
 
-				font { family: root.fontFamily; pixelSize: 12; }
+				font { family: Theme.font; pixelSize: 12; }
 
-				color: root.theme.cal.text
+				color: Theme.cal.text
 				text:  Qt.formatDateTime( sysClock.date, "ddd, MMM dd" )
 			}
 		}
@@ -755,8 +718,8 @@ PanelWindow {
 		implicitHeight: parent.height - 1
 		implicitWidth:  parent.height + 1
 		radius:         this.height / 2
-		color:          root.theme.bar.alt
-		border.color:   root.theme.bar.border
+		color:          Theme.bar.alt
+		border.color:   Theme.bar.border
 		border.width:   2
 		z:              2
 
@@ -780,8 +743,8 @@ PanelWindow {
 		implicitWidth:     rightToggleButtons.width + 24
 		topRightRadius:    this.height / 2
 		bottomRightRadius: this.height / 2
-		color:             root.theme.bar.bg
-		border.color:      root.theme.bar.border
+		color:             Theme.bar.bg
+		border.color:      Theme.bar.border
 		border.width:      2
 
 		Row {
@@ -800,9 +763,9 @@ PanelWindow {
 
 				anchors.verticalCenter: parent.verticalCenter
 
-				implicitHeight: rightToggleBar.height - 2
+				implicitHeight: rightToggleBar.height - 6
 				implicitWidth:  this.height
-				color:          root.theme.bar.alt
+				color:          Theme.bar.alt
 				radius:         this.height / 2
 
 				function toggle() {
@@ -835,11 +798,11 @@ PanelWindow {
 
 				Text {
 					anchors.centerIn: parent
-					font { family: root.fontFamily; pixelSize: 12; }
+					font { family: Theme.font; pixelSize: 10; }
 
 					color: (hypridleControl.isActive)
-						? root.theme.idle.inactive
-						: root.theme.idle.active
+						? Theme.idle.inactive
+						: Theme.idle.active
 
 					text: (hypridleControl.isActive) ? "󰾪" : ""
 
@@ -856,9 +819,9 @@ PanelWindow {
 
 				anchors.verticalCenter: parent.verticalCenter
 
-				implicitHeight: rightToggleBar.height - 2
+				implicitHeight: rightToggleBar.height - 6
 				implicitWidth:  this.height
-				color:          root.theme.bar.alt
+				color:          Theme.bar.alt
 				radius:         this.height / 2
 
 				property bool isActive:   true
@@ -907,10 +870,8 @@ PanelWindow {
 				}
 
 				IconImage {
-					anchors.centerIn: parent
+					anchors.fill: parent
 
-					height: 12
-					width:  12
 					source: (notificationControl.isActive)
 						? Quickshell.iconPath('notification-inactive')
 						: (notificationControl.hasWaiting)
@@ -949,8 +910,8 @@ PanelWindow {
 		width:            rightBar.width + 16
 		topLeftRadius:    this.height / 2
 		bottomLeftRadius: this.height / 2
-		color:            root.theme.bar.bg
-		border.color:     root.theme.bar.border
+		color:            Theme.bar.bg
+		border.color:     Theme.bar.border
 		border.width:     2
 
 		Row {
@@ -1007,8 +968,8 @@ PanelWindow {
 		topLeftRadius:     this.height / 2
 		bottomRightRadius: this.height / 2
 		bottomLeftRadius:  this.height / 2
-		color:             root.theme.bar.alt
-		border.color:      root.theme.bar.border
+		color:             Theme.bar.alt
+		border.color:      Theme.bar.border
 		border.width:      2
 		z:                 2
 
