@@ -254,10 +254,10 @@ PanelWindow {
 				IconImage {
 					anchors.verticalCenter: parent.verticalCenter
 					anchors.right:          parent.right
-					anchors.rightMargin:    4
+					anchors.rightMargin:    2
 
-					height: 13
-					width:  13
+					height: 12
+					width:  12
 					source: Quickshell.iconPath('brightnesssettings')
 				}
 
@@ -288,7 +288,7 @@ PanelWindow {
 							id: brightnessSlider
 
 							anchors.verticalCenter: parent.verticalCenter
-							anchors.right:          parent.right
+							anchors.left:           parent.left
 							anchors.rightMargin:    1
 
 							implicitHeight: parent.height - 2
