@@ -2,6 +2,7 @@
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-amd
         inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
+        inputs.nixos-hardware.nixosModules.common-cpu-amd-raphael-igpu
         inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
         inputs.nixos-hardware.nixosModules.common-gpu-amd
         ../disko/espresso.nix
@@ -16,13 +17,14 @@
 
     boot = {
         extraModulePackages = with pkgs; [ btrfs-progs ];
-        initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
+        initrd.availableKernelModules = [ "nvme" "xhci_pci" "ehci_pci" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" ];
+        # initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" "sr_mod" ]; # 5700g
         initrd.kernelModules = [ "amdgpu" ];
         kernel.sysctl."vm.max_map_count" = 16777216;
         kernelModules = [ "kvm-amd" ];
         kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-        kernelParams = [ "btrfs" "quiet" "preempt=full" ];
-        # kernelParams = [ "btrfs" "quiet" "preempt=full" "iommu=pt" ];
+        # kernelParams = [ "btrfs" "quiet" "preempt=full" ]; # 5700g
+        kernelParams = [ "btrfs" "quiet" "preempt=full" "iommu=pt" ];
         loader.grub.gfxmodeEfi = "1920x1080";
     };
 
