@@ -15,7 +15,6 @@
             });
         });
 
-        floorp-bin = inputs.nixpkgs-floorp.legacyPackages.${prev.stdenv.hostPlatform.system}.floorp-bin;
         helium = inputs.helium.packages.${prev.stdenv.hostPlatform.system}.default;
 
         # Hyprland flake
