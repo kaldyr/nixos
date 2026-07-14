@@ -54,6 +54,13 @@ if hostname == 'espresso' then
 		gaps_out = { top = 1, left = 18, right = 18, bottom = 18 }, -- 20
 	} })
 
+	hl.monitor({
+		output = '',
+		mode   = 'preferred',
+		position = 'auto',
+		scale = '1.0',
+	})
+
 elseif hostname == 'hofud' then
 
 	usable_scales = {
