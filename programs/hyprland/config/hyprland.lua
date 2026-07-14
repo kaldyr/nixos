@@ -43,8 +43,8 @@ local usable_scales = { '1.0' }
 if hostname == 'espresso' then
 
 	hl.monitor({
-		output = 'HDMI-A-1',
-		mode   = '1920x1080@60',
+		output = '',
+		mode   = 'preferred',
 		position = 'auto',
 		scale = '1.0',
 	})
@@ -53,13 +53,6 @@ if hostname == 'espresso' then
 		gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
 		gaps_out = { top = 1, left = 18, right = 18, bottom = 18 }, -- 20
 	} })
-
-	hl.monitor({
-		output = '',
-		mode   = 'preferred',
-		position = 'auto',
-		scale = '1.0',
-	})
 
 elseif hostname == 'hofud' then
 
