@@ -42,7 +42,7 @@
 
         services = {
             cliphist.enable = true;
-            easyeffects.enable = true;
+            easyeffects.enable = lib.mkIf (sysConfig.hostname == "hofud") true;
             hypridle.enable = true;
             hyprpolkitagent.enable = true;
             hyprsunset.enable = true;
