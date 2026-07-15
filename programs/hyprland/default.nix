@@ -42,8 +42,7 @@
 
         services = {
             cliphist.enable = true;
-            easyeffects.enable = lib.mkIf (sysConfig.hostname == "hofud") true;
-            hypridle.enable = true;
+            hypridle.enable = lib.mkIf (sysConfig.hostname != "espresso") true;
             hyprpolkitagent.enable = true;
             hyprsunset.enable = true;
             playerctld.enable = true;

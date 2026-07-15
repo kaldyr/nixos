@@ -2,6 +2,7 @@
     imports = [
         ../programs/cava
         ../programs/discord
+        ../programs/easyeffects
         ../programs/helium
         ../programs/keepass
         ../programs/kitty
@@ -215,11 +216,14 @@
             };
         };
 
-        services.blueman-applet.enable = true;
-        services.network-manager-applet.enable = true;
+        services = {
+            blueman-applet.enable = true;
+            network-manager-applet.enable = true;
+        };
 
         xdg = {
             configFile."mimeapps.list".force = true;
+
             mimeApps.enable = true;
 
             userDirs = {
