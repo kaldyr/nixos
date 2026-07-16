@@ -21,8 +21,8 @@
 
     boot = {
         extraModulePackages = with pkgs; [ btrfs-progs ];
-        initrd.availableKernelModules = [  ]; # Fill out
-        initrd.kernelModules = [ ]; # Fill out
+        initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod"  ]; # Fill out
+        initrd.kernelModules = [ "i915" ]; # Fill out
         kernel.sysctl."vm.max_map_count" = 16777216;
         kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 1000; # AoeO
         kernelModules = [ "kvm-intel" ];
@@ -47,6 +47,7 @@
     };
 
     hardware = {
+        cpu.intel.npu.enable = true;
         cpu.intel.updateMicrocode = true;
         enableAllFirmware = true;
         enableRedistributableFirmware = true;

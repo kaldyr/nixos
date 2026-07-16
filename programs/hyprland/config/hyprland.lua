@@ -25,10 +25,8 @@ hl.on( 'hyprland.start', function()
 
 	if hostname == 'espresso' then
 		launch 'wayland-push-to-talk-fix -k "grave" -n "grave" /dev/input/by-id/usb-04d9_daskeyboard-event-kbd'
-
 	elseif hostname == 'mjolnir' then
 		launch 'wayland-push-to-talk-fix -k "BTN_MIDDLE" -n "XF86WheelButton" /dev/input/by-id/usb-Razer_Razer_DeathAdder_Essential-event-mouse'
-		launch 'nmcli radio wifi off'
 	end
 
 end )
@@ -54,7 +52,7 @@ if hostname == 'espresso' then
 		gaps_out = { top = 1, left = 18, right = 18, bottom = 18 }, -- 20
 	} })
 
-elseif hostname == 'hofud' then
+elseif hostname == 'mjolnir' then
 
 	usable_scales = {
 		'1.0',                -- 2256x1504
@@ -130,24 +128,6 @@ elseif hostname == 'hofud' then
 			})
 		end
 	end )
-
-elseif hostname == 'mjolnir' then
-
-	hl.monitor({
-		output = 'HDMI-A-1',
-		mode   = '3440x1440@85',
-		position = 'auto',
-		scale = '1.0',
-		bitdepth = 10,
-		sdrbrightness = 1.2,
-		sdrsaturation = 0.98,
-	})
-
-	hl.config({ general = {
-		gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
-		gaps_out = { top = 1, left = 18, right = 18, bottom = 18 }, -- 20
-	} })
-
 end
 
 --<------------------
@@ -345,7 +325,7 @@ local function win_large_size()
 	local mon = hl.get_active_monitor() or ''
 
 	local w, h = 1394, 1031 -- Default
-	if mon.width == 3440 or hostname == 'mjolnir' then
+	if mon.width == 3440 then
 		w, h = 1080, 855
 	end
 
@@ -356,7 +336,7 @@ local function win_small_size()
 	local mon = hl.get_active_monitor() or ''
 
 	local w, h = 487, 319
-	if mon.width == 3440 or hostname == 'mjolnir' then
+	if mon.width == 3440 then
 		w, h = 480, 323
 	end
 

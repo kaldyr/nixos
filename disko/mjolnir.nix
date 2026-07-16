@@ -44,7 +44,7 @@
                                 # Files to be preserved between boots
                                 "@nix" = { mountpoint = "/nix"; mountOptions = driveOptions; };
                                 # Swapfile
-                                "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "16G"; };
+                                "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "48G"; };
                             };
                         };
                     };
