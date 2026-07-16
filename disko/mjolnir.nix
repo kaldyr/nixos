@@ -43,10 +43,6 @@
                                 "@etc_ssh" = { mountpoint = "/etc/ssh"; mountOptions = driveOptions; };
                                 # Files to be preserved between boots
                                 "@nix" = { mountpoint = "/nix"; mountOptions = driveOptions; };
-                                # FIXME: No longer needed.  Everything is synced or regenerated
-                                "@state" = { mountpoint = "/state"; mountOptions = driveOptions; };
-                                # FIXME: No longer needed.  Everything is synced or regenerated
-                                "@snaps" = { mountpoint = "/snaps"; mountOptions = driveOptions; };
                                 # Swapfile
                                 "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "16G"; };
                             };

@@ -775,6 +775,8 @@ wr({
 	size = win_large_size()
 })
 
+wr({ name = 'udiskie', match = { class = 'udiskie' }, float = true })
+
 wr({
 	name = 'wlr-which-key',
 	match = { class = 'wlr-which-key' },
