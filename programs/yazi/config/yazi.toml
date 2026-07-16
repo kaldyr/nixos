@@ -22,22 +22,22 @@ tab_size = 2
 wrap = "no"
 
 [opener]
-edit = [ { run = 'nvim "$@"', desc = "Edit", block = true } ]
-exif = [ { run = 'exiftool "$1"; echo "Press enter to exit"; read _', desc = "Show EXIF data", block = true } ]
+edit = [ { run = 'nvim %s', desc = "Edit", block = true } ]
+exif = [ { run = 'exiftool %s; echo "Press enter to exit"; read _', desc = "Show EXIF data", block = true } ]
 exifedit = [
-	{ run = 'exiftool -overwrite_original "-alldates<filename" -S -m -q "$1"', desc = "Set EXIF datetime from Filename" },
-	{ run = 'exiftool "-filename<CreateDate" -d "_%Y%m%d_%H%M%S.%%e" -S -m -ee -q "$1"', desc = "Set Filename from EXIF datetime" },
+	{ run = 'exiftool -overwrite_original "-alldates<filename" -S -m -q %s', desc = "Set EXIF datetime from Filename" },
+	{ run = 'exiftool "-filename<CreateDate" -d "_%Y%m%d_%H%M%S.%%e" -S -m -ee -q %s', desc = "Set Filename from EXIF datetime" },
 ]
 extract = [
-	{ run = 'ouch d -y "$@"', desc = "Extract here with ouch" },
+	{ run = 'ouch d -y %s', desc = "Extract here with ouch" },
 ]
-foldersize = [ { run = 'du -hs "$@"; echo "Press enter to exit"; read _', desc = "Folder size", block = true } ]
-image = [ { run = 'feh -. -Z "$@"', desc = "Open with feh", orphan = true } ]
-office = [ { run = 'libreoffice "$@"', desc = "Open with LibreOffice", orphan = true } ]
-open = [ { run = 'xdg-open "$1"', desc = "XDG Open", orphan = true } ]
-pdf = [ { run = 'zathura "$@"', desc = "Open with Zathura", orphan = true } ]
+foldersize = [ { run = 'du -hs %s; echo "Press enter to exit"; read _', desc = "Folder size", block = true } ]
+image = [ { run = 'feh -. -Z %s', desc = "Open with feh", orphan = true } ]
+office = [ { run = 'libreoffice %s', desc = "Open with LibreOffice", orphan = true } ]
+open = [ { run = 'xdg-open %s', desc = "XDG Open", orphan = true } ]
+pdf = [ { run = 'zathura %s', desc = "Open with Zathura", orphan = true } ]
 play = [
-	{ run = 'mpv --force-window "$@"', desc = "Play with mpv", orphan = true },
+	{ run = 'mpv --force-window %s', desc = "Play with mpv", orphan = true },
 	{ run = 'mediainfo "$1"; echo "Press enter to exit"; read _', desc = "Show media info", block = true },
 ]
 
