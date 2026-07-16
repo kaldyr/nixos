@@ -28,10 +28,7 @@
     };
 
     environment.persistence."/nix".users.${sysConfig.user} = lib.mkIf sysConfig.homeImpermanence {
-        directories = [
-            "DnD"
-            "Homeschool"
-        ];
+        directories = [ "DnD" ];
     };
 
     fileSystems = {

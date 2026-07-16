@@ -1,6 +1,5 @@
 {
     inputs = {
-
         # Disko - Declarative partition management
         disko.url = "github:nix-community/disko";
         disko.inputs.nixpkgs.follows = "nixpkgs";
@@ -32,22 +31,17 @@
 
         # Yazi file manager
         yazi.url = "github:sxyazi/yazi";
-
     };
 
     outputs = { nixpkgs, ... }@inputs: {
-
         nixosConfigurations = let
-
             overlays = import ./overlays.nix { inherit inputs; };
 
             buildSystem = sysConfig: nixpkgs.lib.nixosSystem {
-
                 system = "x86_64-linux";
                 specialArgs = { inherit inputs sysConfig; };
 
                 modules = [
-
                     # Load overlays
                     { nixpkgs.overlays = with overlays; [ additions modifications ]; }
 
@@ -64,16 +58,13 @@
                     # System Config
                     ./systems/default.nix # Defaults for all systems
                     ./systems/${sysConfig.hostname}.nix # Specific for this machine
-
                 ];
-
             };
-
         in {
-            # Espresso: Desktop 5700g
+            # Espresso: MinisForum UM790 Pro
             "espresso" = let sysConfig = {
                 hostname = "espresso";
-                instalVersion = "26.05";
+                instalVersion = "26.05"; # Fresh install July 14th, 2026
                 user = "matshkas";
                 systemImpermanence = true;
                 homeImpermanence = false;
@@ -97,10 +88,10 @@
                 homeImpermanence = true;
             }; in buildSystem sysConfig;
 
-            # Mjolnir: MinisForum UM790 Pro
+            # Mjolnir: Framework 13 Core Ultra Series 3 x7 358H
             "mjolnir" = let sysConfig = {
                 hostname = "mjolnir";
-                instalVersion = "23.05";
+                instalVersion = "26.05"; # Fresh install July 16th, 2026
                 user = "matt";
                 systemImpermanence = true;
                 homeImpermanence = true;
@@ -123,7 +114,6 @@
                 systemImpermanence = true;
                 homeImpermanence = true;
             }; in buildSystem sysConfig;
-
         };
     };
 }

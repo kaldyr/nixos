@@ -1,10 +1,7 @@
 { lib, inputs, pkgs, sysConfig, ... }: {
     imports = [
-        inputs.nixos-hardware.nixosModules.common-cpu-amd
-        inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
-        inputs.nixos-hardware.nixosModules.common-cpu-amd-raphael-igpu
-        inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
-        inputs.nixos-hardware.nixosModules.common-gpu-amd
+        inputs.nixos-hardware.nixosModules.common-hidpi
+        inputs.nixos-hardware.nixosModules.framework-intel-core-ultra-series3
         ../disko/mjolnir.nix
         ./desktop.nix
         ../programs/hyprland
@@ -24,14 +21,14 @@
 
     boot = {
         extraModulePackages = with pkgs; [ btrfs-progs ];
-        initrd.availableKernelModules = [ "nvme" "xhci_pci" "ehci_pci" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" ];
-        initrd.kernelModules = [ "amdgpu" ];
+        initrd.availableKernelModules = [  ]; # Fill out
+        initrd.kernelModules = [ ]; # Fill out
         kernel.sysctl."vm.max_map_count" = 16777216;
-        kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 1000;
-        kernelModules = [ "kvm-amd" ];
+        kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 1000; # AoeO
+        kernelModules = [ "kvm-intel" ];
         kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-        kernelParams = [ "btrfs" "quiet" "preempt=full" "iommu=pt" ];
-        loader.grub.gfxmodeEfi = "3440x1440,1920x1080";
+        kernelParams = [ "btrfs" "quiet" ]; # Fill out
+        loader.grub.gfxmodeEfi = "3440x1440,2256x1504,1920x1080";
     };
 
     environment.persistence."/nix".users.${sysConfig.user} = lib.mkIf sysConfig.homeImpermanence {
@@ -49,9 +46,13 @@
         "/nix".neededForBoot = true;
     };
 
-    hardware.enableRedistributableFirmware = true;
-    hardware.enableAllFirmware = true;
-    networking.firewall.allowedUDPPortRanges = [ { from = 1000; to = 1005; } ];
+    hardware = {
+        cpu.intel.updateMicrocode = true;
+        enableAllFirmware = true;
+        enableRedistributableFirmware = true;
+    };
+
+    networking.firewall.allowedUDPPortRanges = [ { from = 1000; to = 1005; } ]; # AoeO
 
     # networking = {
     #     bridges."br0".interfaces = [ "enp1s0" ];
@@ -63,9 +64,20 @@
     #     nameservers = [ "10.0.0.1" "9.9.9.9" ];
     # };
 
-	services.keyd.keyboards.default.settings.main = {
-        esc = "`";
-        rightshift = "print";
+    services = {
+        auto-cpufreq = {
+            enable = true;
+            settings = {
+                battery.governor = "powersave";
+                battery.turbo = "never";
+                charger.governor = "performance";
+                charger.turbo = "auto";
+            };
+        };
+        libinput.touchpad.scrollMethod = "twofinger";
+        libinput.touchpad.accelSpeed = "-0.5";
+        thermald.enable = true;
+        xserver.videoDrivers = [ "i915" ];
     };
 
     time.timeZone = "America/Los_Angeles";
