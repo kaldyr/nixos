@@ -21,13 +21,13 @@
 
     boot = {
         extraModulePackages = with pkgs; [ btrfs-progs ];
-        initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod"  ]; # Fill out
-        initrd.kernelModules = [ "i915" ]; # Fill out
+        initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod"  ];
+        initrd.kernelModules = [ "xe" ];
         kernel.sysctl."vm.max_map_count" = 16777216;
         kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 1000; # AoeO
         kernelModules = [ "kvm-intel" ];
         kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-        kernelParams = [ "btrfs" "quiet" ]; # Fill out
+        kernelParams = [ "btrfs" "quiet" "xe.enable_psr=0" ];
         loader.grub.gfxmodeEfi = "3440x1440,2256x1504,1920x1080";
     };
 
