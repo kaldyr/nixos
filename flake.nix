@@ -15,8 +15,7 @@
         nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
         # Nixpkgs
-        # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-        nixpkgs.url = "github:NixOS/nixpkgs/5c54aeaa1b1e88b3fc67bf04b90710dc2601bb2a";
+        nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
         # Sops - secret management
         sops-nix.url = "github:Mic92/sops-nix";

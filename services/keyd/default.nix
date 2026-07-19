@@ -61,7 +61,7 @@ in {
                     layerRightAlt = {
                         "1" = "brightnessdown";
                         "2" = "brightnessup";
-                        "3" = "M-f";
+                        "3" = "M-a";
                         "4" = "M-r";
                         "5" = "micmute";
                         "6" = "M-p";

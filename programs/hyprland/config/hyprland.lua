@@ -40,12 +40,7 @@ end )
 local usable_scales = { '1.0' }
 if hostname == 'espresso' then
 
-	hl.monitor({
-		output = '',
-		mode   = 'preferred',
-		position = 'auto',
-		scale = '1.0',
-	})
+	hl.monitor({ output = '', vrr = true })
 
 	hl.config({ general = {
 		gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
@@ -65,20 +60,24 @@ elseif hostname == 'mjolnir' then
 	}
 
 	hl.monitor({
-		output = 'eDP-1',
+		output = 'desc:BOE 0x095F',
 		mode   = '2256x1504@60',
 		position = 'auto',
-		scale = '1.3333333730697632',
+		scale = usable_scales[3],
+		vrr = false
 	})
 
 	hl.monitor({
-		output = '',
+		output = 'desc:LG Electronics LG HDR WQHD 304NTPCBM192',
 		mode   = '3440x1440@85',
-		position = '0x0',
+		position = 'auto',
 		scale = '1.0',
 		bitdepth = 10,
 		sdrbrightness = 1.2,
 		sdrsaturation = 0.98,
+		supports_hdr = 1,
+		supports_wide_color = 1,
+		vrr = true
 	})
 
 	hl.config({ general = {
@@ -98,7 +97,7 @@ elseif hostname == 'mjolnir' then
 		for _, mon in pairs(monitors) do
 			if mon.size.width == 3440 then -- Disable the internal screen if the ultrawide is plugged in
 				usable_scales = { '1.0' }
-				hl.monitor({ output = 'eDP-1', disabled = true })
+				hl.monitor({ output = 'desc:BOE 0x095F', disabled = true })
 				hl.config({ general = {
 					gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
 					gaps_out = { top = 1, left = 18, right = 18, bottom = 18 }, -- 20
@@ -119,13 +118,11 @@ elseif hostname == 'mjolnir' then
 				-- '1.9583333730697632', -- 1151x767 really close to next step
 				'2.0',                -- 1128x752
 			}
-			hl.monitor({
-				output = 'eDP-1',
-				mode   = '2256x1504@60',
-				position = 'auto',
-				scale = '1.3333333730697632',
-				disabled = false,
-			})
+			hl.monitor({ output = 'desc:BOE 0x095F', disabled = false })
+			hl.config({ general = {
+				gaps_in  = { top = 8, left = 14, right = 14, bottom = 9 }, -- 5
+				gaps_out = { top = 1, left = 20, right = 20, bottom = 24 }, -- 20
+			} })
 		end
 	end )
 end
@@ -146,11 +143,7 @@ hl.env( 'XCURSOR_SIZE', '24' )
 -- General         -->
 ---------------------
 
-local vrr = 0
-if hostname == 'mjolnir' or hostname == 'espresso' then vrr = 1 end
-
 hl.config({
-
 	dwindle = {
 		preserve_split = true,
 	},
@@ -180,9 +173,12 @@ hl.config({
 		disable_splash_rendering = true, -- false
 		force_default_wallpaper  = 0, -- -1
 		key_press_enables_dpms   = true,
-		vrr                      = vrr, -- 0
+		vrr                      = 1, -- 0
 	},
 
+	render = {
+		cm_auto_hdr = 2,
+	},
 })
 
 --<------------------
@@ -240,7 +236,7 @@ hl.config({
 	},
 
 	misc = {
-		font_family = 'Maple Mono NF',
+		font_family = 'Recursive Sans Casual Static',
 	},
 
 })
