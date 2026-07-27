@@ -117,7 +117,7 @@ Rectangle {
 		hoverEnabled:      true
 		acceptedButtons:   Qt.LeftButton | Qt.RightButton
 		onClicked:         (m) => (m.button === Qt.LeftButton)
-			? sinkControl.sink.audio.muted = !sinkControl.sink.audio.muted
+			? sourceControl.source.audio.muted = !sourceControl.source.audio.muted
 			: Quickshell.execDetached(["pavucontrol"])
 		onEntered:         {
 			sourceControl.sliderVisible = true

@@ -1,3 +1,4 @@
+import Quickshell.Services.Mpris
 import Quickshell.Services.Pipewire
 import QtQuick
 
@@ -51,10 +52,19 @@ Rectangle {
 			Text {
 				anchors.centerIn: parent
 
+				property var player: Mpris.players.values.find(p => p.isPlaying) || Mpris.players.values[0]
+
 				font { family: Theme.font; pixelSize: 17; }
 
-				color: Theme.ltgrey
+				color: Theme.white
 				text:  "󰒮"
+
+				MouseArea {
+					anchors.fill: parent
+
+					property var player: parent.player
+					onClicked: player.prev()
+				}
 			}
 		}
 
@@ -68,10 +78,19 @@ Rectangle {
 			Text {
 				anchors.centerIn: parent
 
-				font { family: Theme.font; pixelSize: 17; }
+				property var player: Mpris.players.values.find(p => p.isPlaying) || Mpris.players.values[0]
 
-				color: Theme.ltgrey
-				text:  "󰐊"
+				font { family: Theme.font; pixelSize: 15; }
+
+				color: Theme.white
+				text:  (player.isPlaying) ? "󰏤" : "󰐊"
+
+				MouseArea {
+					anchors.fill: parent
+
+					property var player: parent.player
+					onClicked: player.isPlaying ? player.pause() : player.play()
+				}
 			}
 		}
 
@@ -85,10 +104,19 @@ Rectangle {
 			Text {
 				anchors.centerIn: parent
 
+				property var player: Mpris.players.values.find(p => p.isPlaying) || Mpris.players.values[0]
+
 				font { family: Theme.font; pixelSize: 17; }
 
-				color: Theme.ltgrey
+				color: Theme.white
 				text:  "󰒭"
+
+				MouseArea {
+					anchors.fill: parent
+
+					property var player: parent.player
+					onClicked: player.next()
+				}
 			}
 		}
 
