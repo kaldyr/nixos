@@ -40,7 +40,13 @@ end )
 local usable_scales = { '1.0' }
 if hostname == 'espresso' then
 
-	hl.monitor({ output = '', vrr = true })
+	hl.monitor({
+		output   = 'desc:LG Electronics MP59G 708NTGYGY135',
+		mode     = '1920x1080@75',
+		position = 'auto',
+		scale    = '1.0',
+		vrr      = 1,
+	})
 
 	hl.config({ general = {
 		gaps_in  = { top = 8, left = 12, right = 12, bottom = 9 }, -- 5
@@ -60,24 +66,24 @@ elseif hostname == 'mjolnir' then
 	}
 
 	hl.monitor({
-		output = 'desc:BOE 0x095F',
-		mode   = '2256x1504@60',
+		output   = 'desc:BOE 0x095F',
+		mode     = '2256x1504@60',
 		position = 'auto',
-		scale = usable_scales[3],
-		vrr = false
+		scale    = '1.3333333730697632',
+		vrr      = 0,
 	})
 
 	hl.monitor({
-		output = 'desc:LG Electronics LG HDR WQHD 304NTPCBM192',
-		mode   = '3440x1440@85',
-		position = 'auto',
-		scale = '1.0',
-		bitdepth = 10,
-		sdrbrightness = 1.2,
-		sdrsaturation = 0.98,
-		supports_hdr = 1,
+		output              = 'desc:LG Electronics LG HDR WQHD 304NTPCBM192',
+		mode                = '3440x1440@85',
+		position            = 'auto',
+		scale               = '1.0',
+		bitdepth            = 10,
+		sdrbrightness       = 1.2,
+		sdrsaturation       = 0.98,
+		supports_hdr        = 1,
 		supports_wide_color = 1,
-		vrr = true
+		vrr                 = 1,
 	})
 
 	hl.config({ general = {
@@ -126,6 +132,9 @@ elseif hostname == 'mjolnir' then
 		end
 	end )
 end
+
+-- Generic monitor plug in
+hl.monitor({ output = '', mode = 'preferred', position = 'auto', scale = '1.0' })
 
 --<------------------
 -- Environment     -->
@@ -361,7 +370,7 @@ b( m..'g', e '/nix/config/scripts/yt-dlp.sh' )
 b( m..'n', e 'wlr-which-key --initial-keys "n"' )
 
 -- Use dotool to paste into things that do not like to obey paste keybinds
-b( m..'v', e 'dotool $(cliphist list | fuzzel -d | cliphist decode)' )
+b( m..'v', e 'echo "type $(cliphist list | fuzzel -d | cliphist decode)" | dotool' )
 
 -- Arrange windows into columns for ultrawide monitor or resize and center floating window
 b( m..'a', function() -->
@@ -487,25 +496,21 @@ b( m..'a', function() -->
 end ) --<--
 
 -- Media controls
-b( 'XF86AudioRaiseVolume',    e 'pamixer -i 1',                  { locked = true, repeating = true } )
-b( 'XF86AudioLowerVolume',    e 'pamixer -d 1',                  { locked = true, repeating = true } )
-b( 'XF86AudioMute',           e 'pamixer -t',                    { locked = true } )
-b( s..'XF86AudioRaiseVolume', e 'pamixer --default-source -i 1', { locked = true, repeating = true } )
-b( s..'XF86AudioLowerVolume', e 'pamixer --default-source -d 1', { locked = true, repeating = true } )
-b( s..'XF86AudioMute',        e 'pamixer --default-source -t',   { locked = true } )
-b( 'XF86AudioMicMute',        e 'pamixer --default-source -t',   { locked = true } )
-b( 'XF86AudioNext',           e 'playerctl next',                { locked = true } )
-b( 'XF86AudioPlay',           e 'playerctl play-pause',          { locked = true } )
-b( 'XF86AudioPause',          e 'playerctl play-pause',          { locked = true } )
-b( 'XF86AudioPrev',           e 'playerctl previous',            { locked = true } )
+b( 'XF86AudioRaiseVolume',    e 'wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+',    { locked = true, repeating = true } )
+b( 'XF86AudioLowerVolume',    e 'wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-',    { locked = true, repeating = true } )
+b( 'XF86AudioMute',           e 'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle',   { locked = true } )
+b( s..'XF86AudioRaiseVolume', e 'wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 1%+',  { locked = true, repeating = true } )
+b( s..'XF86AudioLowerVolume', e 'wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 1%-',  { locked = true, repeating = true } )
+b( s..'XF86AudioMute',        e 'wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle', { locked = true } )
+b( 'XF86AudioMicMute',        e 'wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle', { locked = true } )
+b( 'XF86AudioNext',           e 'playerctl next',                               { locked = true } )
+b( 'XF86AudioPlay',           e 'playerctl play-pause',                         { locked = true } )
+b( 'XF86AudioPause',          e 'playerctl play-pause',                         { locked = true } )
+b( 'XF86AudioPrev',           e 'playerctl previous',                           { locked = true } )
 
 -- Brightness & Temperature
-b( 'XF86MonBrightnessUp',      e 'brightnessctl set +5%',               { locked = true, repeating = true } )
-b( 'XF86MonBrightnessDown',    e 'brightnessctl set 5%-',               { locked = true, repeating = true } )
-b( s..'XF86MonBrightnessUp',   e 'hyprctl hyprsunset temperature +125', { locked = true, repeating = true } )
-b( s..'XF86MonBrightnessDown', e 'hyprctl hyprsunset temperature -125', { locked = true, repeating = true } )
-b( m..'XF86MonBrightnessUp',   e 'hyprctl hyprsunset temperature 3500', { locked = true } )
-b( m..'XF86MonBrightnessDown', e 'hyprctl hyprsunset identity',         { locked = true } )
+b( 'XF86MonBrightnessUp',   e 'brightnessctl set +5%', { locked = true, repeating = true } )
+b( 'XF86MonBrightnessDown', e 'brightnessctl set 5%-', { locked = true, repeating = true } )
 
 -- Monitor Scaling
 b( m..'equal', function() -->
@@ -565,6 +570,7 @@ b( m..'Tab',       function() -->
 end ) --<--
 b( m..'backslash', function() -->
 	hl.dispatch( e 'hyprctl reload' )
+	hl.dispatch( e 'systemctl --user restart awww' )
 	hl.dispatch( e 'systemctl --user restart quickshell' )
 end ) --<--
 
@@ -607,6 +613,22 @@ b( m..'mouse_up',   hl.dsp.focus({ workspace = 'e-1' }) )
 for i = 1, 10 do
 	b( m..tostring(i % 10),    hl.dsp.focus({ workspace = i }) )
 	b( m..s..tostring(i % 10), hl.dsp.window.move({ workspace = i, follow = false }) )
+end
+
+-- Push to talk at the system level for Espresso
+if hostname == 'espresso' then
+	b( 'grave', function()
+		if hl.get_active_window().class ~= 'kitty' then
+			hl.dispatch( e('wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0') )
+		else
+			hl.dispatch( hl.dsp.send_shortcut({ mods = '', key = 'grave' }) )
+		end
+	end )
+	b( 'grave', function()
+		if hl.get_active_window().class ~= 'kitty' then
+			hl.dispatch( e('wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1') )
+		end
+	end, { release = true })
 end
 
 --<------------------
@@ -728,10 +750,22 @@ wr({ -- Guild Wars 2
 	suppress_event   = 'fullscreen maximize',
 })
 
-wr({ name = 'helium', match = { class = 'helium' }, opacity = '0.9' })
-wr({ name = 'kitty', match = { class = 'kitty' }, opacity = '0.85' })
-wr({ name = 'satty', match = { class = 'com.gabm.satty' }, float = true })
-wr({ name = 'steam',  match = { class = 'steam$' }, opacity = '0.85' })
+wr({ name = 'helium', match = { class = 'helium' },         opacity = '0.9' })
+wr({ name = 'kitty',  match = { class = 'kitty' },          opacity = '0.85' })
+wr({ name = 'satty',  match = { class = 'com.gabm.satty' }, float = true })
+
+wr({ -- Steam window popups
+	name  = 'steam-popups',
+	match = { class = '^steam$', title = "^(?!Steam$).*$" },
+	float = true,
+})
+
+wr({
+	name = 'steam',
+	match = { class = '^steam$', title = '^Steam$' },
+	float = false,
+	opacity = '0.85',
+})
 
 wr({ -- Steam game
 	name        = 'steam-app',

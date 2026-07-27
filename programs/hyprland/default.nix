@@ -46,6 +46,7 @@
             hyprpolkitagent.enable = true;
             hyprsunset.enable = true;
             playerctld.enable = true;
+            xembed-sni-proxy.enable = true;
         };
 
         xdg.configFile = {
@@ -89,13 +90,21 @@
         withUWSM = true;
     };
 
-    services.greetd = {
-        enable = true;
+    services = {
+        greetd = {
+            enable = true;
 
-        settings = rec {
-            default_session = initial_session;
-            initial_session.command = "uwsm start hyprland.desktop";
-            initial_session.user = sysConfig.user;
+            settings = rec {
+                default_session = initial_session;
+                initial_session.command = "uwsm start hyprland.desktop";
+                initial_session.user = sysConfig.user;
+            };
+        };
+
+        logind.settings.Login = {
+            HandleLidSwitch = "lock";
+            HandlePowerKey = "suspend";
+            HandlePowerKeyLongPress = "hibernate";
         };
     };
 

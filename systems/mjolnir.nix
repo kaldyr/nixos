@@ -35,6 +35,10 @@
         directories = [ "DnD" ];
     };
 
+    environment.sessionVariables = {
+        LIBVA_DRIVER_NAME = "iHD";
+    };
+
     fileSystems = {
         "/" = {
             device = "none";
@@ -49,6 +53,11 @@
     hardware = {
         cpu.intel.npu.enable = true;
         cpu.intel.updateMicrocode = true;
+        graphics.extraPackages = with pkgs; [
+            intel-media-driver
+            intel-compute-runtime
+            vpl-gpu-rt
+        ];
         enableAllFirmware = true;
         enableRedistributableFirmware = true;
     };
@@ -75,10 +84,25 @@
                 charger.turbo = "auto";
             };
         };
+
         libinput.touchpad.scrollMethod = "twofinger";
         libinput.touchpad.accelSpeed = "-0.5";
+
+        pipewire.extraConfig.pipewire = {
+            "50-audio-device-priority" = {
+                "context.properties" = {
+                    "device.profile.priority" = {
+                        "bluez_output.*" = 1000;
+                        "analog-output-headphones" = 900;
+                        "hdmi-output-*" = 800;
+                        "analog-output-speaker" = 100;
+                    };
+                };
+            };
+        };
+
         thermald.enable = true;
-        xserver.videoDrivers = [ "i915" ];
+        xserver.videoDrivers = [ "modesetting" ];
     };
 
     time.timeZone = "America/Los_Angeles";

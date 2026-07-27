@@ -12,26 +12,35 @@
 
 This is a multi-system and multi-user flake.  It has laptops, desktops, and home server.
 - ☕ Espresso  
-Desktop: Ryzen 5700g  
+Desktop: Minisforum UM790 Pro  
 Hyprland  
+
 - ⚔ Hofud  
-Laptop: Framework 13 11th Gen i5-1135G7 
+Laptop: Framework 13 11th Gen i5-1135G7 motherboard standalone
 Hyprland  
+
 - 🪐 Magrathea  
 Home server: Intel i5-2500k still kicking  
 Nextcloud  
 Forgejo (Gitea)  
+Technitium  
+Open Starbound  
 Kodi  
+NAS with Samba  
+
 - 🔨 Mjolnir  
-Desktop: Minisforum UM790 Pro  
+Laptop: Framework 13 Intel Core Ultra x7 358H in 1st gen chassis  
 Hyprland  
+
 - 🍵Oolong  
 Laptop: Dell Inspiron  
 Budgie  
+
 - 🚀 Serenity  
 Home server: Ryzen 2400g  
 Off-site backup  
 Kodi  
+NAS with Samba  
 
 Notable customizations
 - Keybinds  

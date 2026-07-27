@@ -186,8 +186,11 @@ menu:
       - key: "r"
         desc: "[R]eboot"
         cmd: reboot
+      - key: "h"
+        desc: "[H]ibernate"
+        cmd: systemctl hibernate
       - key: "s"
-        desc: "[S]leep"
+        desc: "[S]uspend"
         cmd: systemctl suspend
       - key: "o"
         desc: "Power [O]ff"

@@ -29,6 +29,7 @@
                 users.${sysConfig.user}.directories = [
                     ".config/gnome-games"
                     ".local/share/applications"
+                    ".local/share/icons"
                     "Books"
                     "Documents"
                     "Downloads"
@@ -142,7 +143,6 @@
         fonts.fontconfig.enable = true;
 
         gtk = {
-
             enable = true;
 
             cursorTheme = {
@@ -213,6 +213,18 @@
                 GTK_THEME = "catppuccin-frappe-sapphire-standard";
                 XCURSOR_THEME = "catppuccin-frappe-sapphire-cursors";
                 XCURSOR_SIZE = 24;
+            };
+        };
+
+        qt = {
+            enable = true;
+
+            style = {
+                name = "kvantum";
+                package = pkgs.catppuccin-kvantum.override {
+                    accent = "sapphire";
+                    variant = "frappe";
+                };
             };
         };
 

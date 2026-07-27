@@ -867,6 +867,8 @@ ac( 'Filetype', 'markdown', function()
 
 		legacy_commands = false,
 
+		ui = { enable = false },
+
 		workspaces = {
 			{ name = 'Notes', path = vim.fn.expand '~' .. '/Notes' },
 			{
@@ -922,7 +924,10 @@ require('snacks').setup({
 	bufdelete = { enabled = true },
 	debug = { enabled = true },
 	dim = { enabled = true },
-	image = { enabled = true },
+	-- image = {
+	-- 	enabled = true,
+	-- 	math = { enabled = false },
+	-- },
 	indent = {
 		enabled = true,
 		indent = {

@@ -1,0 +1,16 @@
+Brightness     Brightness.qml
+CalendarButton CalendarButton.qml
+ClockAnalog    ClockAnalog.qml
+DateTimeBar    DateTimeBar.qml
+Hypridle       Hypridle.qml
+Hyprsunset     Hyprsunset.qml
+Launcher       Launcher.qml
+MediaButtons   MediaButtons.qml
+Notifications  Notifications.qml
+PowerButton    PowerButton.qml
+Systemtray     Systemtray.qml
+VolumeSink     VolumeSink.qml
+VolumeSource   VolumeSource.qml
+Workspaces     Workspaces.qml
+
+singleton Theme 1.0 Theme.qml
