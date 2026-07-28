@@ -31,10 +31,6 @@
         loader.grub.gfxmodeEfi = "3440x1440,2256x1504,1920x1080";
     };
 
-    environment.persistence."/nix".users.${sysConfig.user} = lib.mkIf sysConfig.homeImpermanence {
-        directories = [ "DnD" ];
-    };
-
     environment.sessionVariables = {
         LIBVA_DRIVER_NAME = "iHD";
     };
@@ -96,17 +92,21 @@
         libinput.touchpad.scrollMethod = "twofinger";
         libinput.touchpad.accelSpeed = "-0.5";
 
-        pipewire.extraConfig.pipewire = {
-            "50-audio-device-priority" = {
-                "context.properties" = {
-                    "device.profile.priority" = {
-                        "bluez_output.*" = 1000;
-                        "analog-output-headphones" = 900;
-                        "hdmi-output-*" = 800;
-                        "analog-output-speaker" = 100;
-                    };
-                };
-            };
+        pipewire.wireplumber.extraConfig."50-device-priority" = {
+            "monitor.alsa.rules" = [
+                {
+                    matches = [{ "node.name" = "alsa_output.pci-0000_00_1f.3.analog-stereo"; }];
+                    actions."update-props"."priority.session" = 1000;
+                }
+                {
+                    matches = [{ "node.name" = "alsa_output.pci-0000_00_1f.3.hdmi-stereo"; }];
+                    actions."update-props"."priority.session" = 1500;
+                }
+            ];
+            "monitor.bluez.rules" = [{
+                matches = [{ "node.name" = "~bluez_output.*"; }];
+                actions."update-props"."priority.session" = 2000;
+            }];
         };
 
         thermald.enable = true;
