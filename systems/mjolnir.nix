@@ -74,6 +74,14 @@
     #     nameservers = [ "10.0.0.1" "9.9.9.9" ];
     # };
 
+    security.sudo.extraRules = [{
+        groups = [ "wheel" ];
+        commands = [{
+            command = "/run/current-system/sw/bin/framework_tool";
+            options = [ "NOPASSWD" ];
+        }];
+    }];
+
     services = {
         auto-cpufreq = {
             enable = true;

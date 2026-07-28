@@ -54,7 +54,7 @@ Rectangle {
 
 				property var player: Mpris.players.values.find(p => p.isPlaying) || Mpris.players.values[0]
 
-				font { family: Theme.font; pixelSize: 17; }
+				font { family: Theme.font; pixelSize: 13; }
 
 				color: Theme.white
 				text:  "󰒮"
@@ -63,7 +63,8 @@ Rectangle {
 					anchors.fill: parent
 
 					property var player: parent.player
-					onClicked: player.prev()
+
+					onClicked: (player?.canGoPrevious) ? player.previous() : undefined
 				}
 			}
 		}
@@ -80,7 +81,7 @@ Rectangle {
 
 				property var player: Mpris.players.values.find(p => p.isPlaying) || Mpris.players.values[0]
 
-				font { family: Theme.font; pixelSize: 15; }
+				font { family: Theme.font; pixelSize: 17; }
 
 				color: Theme.white
 				text:  (player.isPlaying) ? "󰏤" : "󰐊"
@@ -89,7 +90,8 @@ Rectangle {
 					anchors.fill: parent
 
 					property var player: parent.player
-					onClicked: player.isPlaying ? player.pause() : player.play()
+
+					onClicked: player?.isPlaying ? player.pause() : player.play()
 				}
 			}
 		}
@@ -106,7 +108,7 @@ Rectangle {
 
 				property var player: Mpris.players.values.find(p => p.isPlaying) || Mpris.players.values[0]
 
-				font { family: Theme.font; pixelSize: 17; }
+				font { family: Theme.font; pixelSize: 13; }
 
 				color: Theme.white
 				text:  "󰒭"
@@ -115,7 +117,8 @@ Rectangle {
 					anchors.fill: parent
 
 					property var player: parent.player
-					onClicked: player.next()
+
+					onClicked: (player?.canGoNext) ? player.next() : undefined
 				}
 			}
 		}

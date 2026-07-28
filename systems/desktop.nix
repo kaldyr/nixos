@@ -228,11 +228,6 @@
             };
         };
 
-        services = {
-            blueman-applet.enable = true;
-            network-manager-applet.enable = true;
-        };
-
         xdg = {
             configFile."mimeapps.list".force = true;
 
@@ -250,8 +245,13 @@
     };
 
     hardware = {
-        bluetooth.enable = true;
-        bluetooth.settings.General.Enable = "Source,Sink,Media,Socket";
+        bluetooth = {
+            enable = true;
+            settings.General = {
+                Enable = "Source,Sink,Media,Socket";
+                Experimental = true;
+            };
+        };
 
         graphics = {
             enable = true;

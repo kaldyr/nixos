@@ -605,6 +605,8 @@ b( m..s..'up',     hl.dsp.window.resize({ x = 0,   y = -1,  relative = true}), {
 b( m..s..'right',  hl.dsp.window.resize({ x = 1,   y = 0,   relative = true}), { repeating = true } )
 b( m..'mouse:273', hl.dsp.window.resize(), { mouse = true } )
 
+b( m..s..'p', hl.dsp.window.pin() )
+
 -- Switch Workspace
 b( m..'code:59',    hl.dsp.focus({ workspace = 'e-1' }) ) -- ,
 b( m..'code:60',    hl.dsp.focus({ workspace = 'e+1' }) ) -- .
