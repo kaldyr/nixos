@@ -16,6 +16,7 @@
         ../services/epson-et-8550
         ../services/keyd
         ../services/kmscon
+        ../services/llama-cpp
         ../services/openrazer
     ];
 
@@ -102,6 +103,10 @@
                     matches = [{ "node.name" = "alsa_output.pci-0000_00_1f.3.hdmi-stereo"; }];
                     actions."update-props"."priority.session" = 1500;
                 }
+                # {
+                #     matches = [{ "node.name" = "alsa_output.pci-0000_00_1f.3.hdmi-stereo"; }];
+                #     actions."update-props"."priority.session" = 1500;
+                # }
             ];
             "monitor.bluez.rules" = [{
                 matches = [{ "node.name" = "~bluez_output.*"; }];

@@ -26,7 +26,7 @@
         helium.inputs.nixpkgs.follows = "nixpkgs";
 
         # Hyprland
-        hyprland.url = "github:hyprwm/Hyprland";
+        # hyprland.url = "github:hyprwm/Hyprland";
 
         # Yazi file manager
         yazi.url = "github:sxyazi/yazi";

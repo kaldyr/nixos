@@ -3,6 +3,13 @@
 ---------------------
 -- vim:fdm=marker:fdl=0:foldmarker=-->,<--
 
+hl.config({
+	debug = {
+		enable_stdout_logs = true,
+		disable_logs = false,
+	},
+})
+
 -- Get the hostname for machine specific configs
 local hostname = ''
 do
@@ -756,11 +763,11 @@ wr({ name = 'helium', match = { class = 'helium' },         opacity = '0.9' })
 wr({ name = 'kitty',  match = { class = 'kitty' },          opacity = '0.85' })
 wr({ name = 'satty',  match = { class = 'com.gabm.satty' }, float = true })
 
-wr({ -- Steam window popups
-	name  = 'steam-popups',
-	match = { class = '^steam$', title = "^(?!Steam$).*$" },
-	float = true,
-})
+-- wr({ -- Steam window popups
+-- 	name  = 'steam-popups',
+-- 	match = { class = '^steam$', title = "^(?!Steam$).*$" },
+-- 	float = true,
+-- })
 
 wr({
 	name = 'steam',

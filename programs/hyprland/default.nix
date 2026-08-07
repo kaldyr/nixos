@@ -19,6 +19,8 @@
         ];
     };
 
+    environment.sessionVariables."WLR_RENDERER" = "vulkan";
+
     home-manager.users.${sysConfig.user} = { config, ... }: {
         home.file.".local/share/nvim/stubs/hl.meta.lua".source = "${pkgs.hyprland}/share/hypr/stubs/hl.meta.lua";
 
@@ -78,7 +80,7 @@
             '';
             package = null;
             portalPackage = null;
-            systemd.enable = true;
+            systemd.enable = false;
         };
 
     };
@@ -104,7 +106,7 @@
         logind.settings.Login = {
             HandleLidSwitch = "lock";
             HandlePowerKey = "suspend";
-            HandlePowerKeyLongPress = "hibernate";
+            HandlePowerKeyLongPress = "poweroff";
         };
     };
 

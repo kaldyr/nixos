@@ -7,6 +7,14 @@
     programs.nano.enable = false;
     sops.secrets.matt-password.neededForUsers = true;
 
+    security.polkit.extraConfig = ''
+        polkit.addRule(function(action, subject) {
+            if (subject.user == "matt" && action.id == "org.freedesktop.systemd1.manage-units") {
+                return polkit.Result.YES;
+            }
+        });
+    '';
+
     users = {
         mutableUsers = false;
 

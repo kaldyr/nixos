@@ -310,7 +310,7 @@ ac( 'FileType', 'help', function()
 	vim.cmd [[wincmd L]]
 end )
 
-ac( 'Filetype', { 'gitcommit', 'markdown', 'text' }, function()
+ac( 'Filetype', { 'gitcommit', 'markdown', 'text', 'codecompanion' }, function()
 	vim.cmd [[ set nolist ]]
 end )
 
@@ -332,7 +332,7 @@ vim.lsp.config( 'gopls', {
 			analyses = {
 				shadow = true,
 				unusedwrite = true,
-				unuseedvariable = true,
+				unusedvariable = true,
 				unusedparams = true,
 			},
 			-- codelenses = {
@@ -530,6 +530,7 @@ local gh = function(repo) return 'https://github.com/' .. repo end
 vim.pack.add({
 	{ src = gh 'saghen/blink.cmp', version = vim.version.range '1.*' },
 	{ src = gh 'catppuccin/nvim', name = 'catppuccin' },
+	gh 'olimorris/codecompanion.nvim',
 	gh 'folke/lazydev.nvim',
 	gh 'rafamadriz/friendly-snippets',
 	gh 'ibhagwan/fzf-lua',
@@ -553,11 +554,10 @@ vim.pack.add({
 })
 
 --<-------------------------
--- Catppuccin             -->  Colorscheme
+-- Catppuccin             -->  Colorscheme, load first
 ----------------------------
 
 require('catppuccin').setup({
-
 	flavour = 'auto',
 
 	background = {
@@ -622,19 +622,16 @@ require('catppuccin').setup({
 	},
 
 	term_colors = true,
-
 })
 
-vim.cmd [[ colorscheme catppuccin ]]
+vim.cmd [[ colorscheme catppuccin-nvim ]]
 
 --<-------------------------
 -- Blink.cmp              -->  Completion
 ----------------------------
 
 vim.schedule( function()
-
 	require('blink.cmp').setup({
-
 		keymap = { preset = 'enter' },
 
 		appearance = {
@@ -655,17 +652,74 @@ vim.schedule( function()
 		},
 
 		fuzzy = { implementation = 'lua' }
-
 	})
-
 end )
+
+--<-------------------------
+-- CodeCompanion          -->  Code Companion local llm
+----------------------------
+
+if vim.fn.executable('llama-server') then
+	vim.schedule( function()
+		require('codecompanion').setup({
+			adapters = {
+				http = {
+					llama = function()
+						return require('codecompanion.adapters').extend('openai_compatible', {
+							env = {
+								url = 'http://127.0.0.1:8012',
+								api_key = 'TERM',
+								chat_url = '/v1/chat/completions',
+							},
+							handlers = {
+								parse_message_meta = function(self, data)
+									local extra = data.extra
+									if extra and extra.reasoning_content then
+										data.output.reasoning = {
+											content = extra.reasoning_content
+										}
+									end
+									-- if extra and extra.reasoning_content then
+									-- 	data.output.reasoning = { content = extra.reasoning_content }
+									-- 	if data.output.content == "" then
+									-- 		data.output.content = nil
+									-- 	end
+									-- end
+									return data
+								end,
+							},
+						})
+					end,
+				},
+			},
+			interactions = {
+				chat = {
+					adapter = 'llama',
+				},
+				inline = {
+					adapter = 'llama',
+				},
+			},
+			schema = {
+				reasoning = {
+					default = 'none',
+					mapping = 'parameters',
+				},
+			},
+			opts = {
+				log_level = 'DEBUG',
+			},
+		})
+	end )
+
+	map( 'n', '<leader>c', ':CodeCompanionActions', { desc = 'CodeCompanion', silent = true  })
+end
 
 --<-------------------------
 -- Fzf-lua                -->  Fuzzy Pickers
 ----------------------------
 
 require('fzf-lua').setup({
-
 	buffers = { prompt = ' > ' },
 
 	file_ignore_patterns = {
@@ -687,7 +741,6 @@ require('fzf-lua').setup({
 	},
 
 	quickfix = { prompt = ' > ' },
-
 })
 
 map( 'n', '<leader>b', function() require('fzf-lua').buffers() end, { silent = true, desc = 'Buffer Picker' } )
@@ -705,9 +758,7 @@ map( 'n', '<leader>L', function() require('fzf-lua').live_grep_resume() end, { s
 ----------------------------
 
 vim.schedule( function()
-
 	require('gitsigns').setup({
-
 		signs = {
 			add = { text = '+' },
 			change = { text = '~' },
@@ -737,9 +788,7 @@ vim.schedule( function()
 			map('n', '<leader>gT', gs.toggle_current_line_blame, { buffer = bufnr, desc = 'Toggle current blame' })
 			map('n', '<leader>gd', gs.preview_hunk_inline,       { buffer = bufnr, desc = 'Toggle deleted' })
 		end,
-
 	})
-
 end )
 
 --<-------------------------
@@ -747,13 +796,11 @@ end )
 ----------------------------
 
 ac( 'Filetype', 'lua', function()
-
 	require('lazydev').setup({
 		library = {
 			{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 		}
 	})
-
 end )
 
 --<-------------------------
@@ -761,7 +808,6 @@ end )
 ----------------------------
 
 require('lualine').setup({
-
 	options = {
 		show_filename_only = false,
 		theme = 'auto',
@@ -784,7 +830,6 @@ require('lualine').setup({
 			{ 'location', separator = { left = '', right = '█' }, left_padding = 2 },
 		}
 	}
-
 })
 
 --<-------------------------
@@ -792,8 +837,8 @@ require('lualine').setup({
 ----------------------------
 
 vim.schedule( function()
-
 	local frappe = require('catppuccin.palettes').get_palette('frappe')
+
 	vim.api.nvim_set_hl(0, 'MiniHipatternsRed',      { bold = true, bg = frappe.base, fg = frappe.red })
 	vim.api.nvim_set_hl(0, 'MiniHipatternsMaroon',   { bold = true, bg = frappe.base, fg = frappe.maroon })
 	vim.api.nvim_set_hl(0, 'MiniHipatternsPeach',    { bold = true, bg = frappe.base, fg = frappe.peach })
@@ -803,6 +848,7 @@ vim.schedule( function()
 	vim.api.nvim_set_hl(0, 'MiniHipatternsMauve',    { bold = true, bg = frappe.base, fg = frappe.mauve })
 
 	require('mini.ai').setup()
+
 	require('mini.hipatterns').setup({
 		highlighters = {
 			debug     = { pattern = '%[DEBUG%]',   group = 'MiniHipatternsMaroon' },
@@ -820,9 +866,9 @@ vim.schedule( function()
 			hex_color = require('mini.hipatterns').gen_highlighter.hex_color()
 		}
 	})
+
 	require('mini.operators').setup()
 	require('mini.surround').setup()
-
 end )
 
 --<-------------------------
@@ -830,15 +876,14 @@ end )
 ----------------------------
 
 vim.schedule( function()
-
 	require('noice').setup({
-
 		lsp = {
 			override = {
 				["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 				["vim.lsp.util.stylize_markdown"] = true,
 			},
 		},
+
 		presets = {
 			bottom_search = true,
 			command_palette = true,
@@ -846,9 +891,7 @@ vim.schedule( function()
 			inc_rename = false,
 			lsp_doc_border = false,
 		},
-
 	})
-
 end )
 
 --<-------------------------
@@ -856,9 +899,7 @@ end )
 ----------------------------
 
 ac( 'Filetype', 'markdown', function()
-
 	require('obsidian').setup({
-
 		checkbox = {
 			enabled = true,
 			create_new = true,
@@ -895,23 +936,21 @@ ac( 'Filetype', 'markdown', function()
 		end,
 		{ buffer = true, expr = true, desc = 'Obsidian smart action' }
 	)
-
 end )
 
 --<-------------------------
 -- Render Markdown        -->  Make markdown look great
 ----------------------------
 
-ac( 'Filetype', 'markdown', function()
-
+ac( 'Filetype', { 'markdown', 'codecompanion' }, function()
 	require('render-markdown').setup({
 		anti_conceal = {
 			enabled = false,
 		},
+		file_types = { 'markdown', 'codecompanion' },
 	})
 
 	map( 'n', '\\m', '<Cmd>RenderMarkdown toggle<CR>', { desc = "Toggle 'RenderMarkdown'", silent = true } )
-
 end )
 
 --<-------------------------
@@ -919,7 +958,6 @@ end )
 ----------------------------
 
 require('snacks').setup({
-
 	bigfile = { enabled = true },
 	bufdelete = { enabled = true },
 	debug = { enabled = true },
@@ -996,10 +1034,8 @@ end )
 ----------------------------
 
 vim.schedule( function()
-
 	require('tiny-inline-diagnostic').setup()
 	vim.diagnostic.config({ virtual_text = false })
-
 end )
 
 --<-------------------------
@@ -1007,14 +1043,12 @@ end )
 ----------------------------
 
 vim.schedule( function()
-
 	require('treesj').setup({
 		use_default_keymaps = false,
 		max_join_length = 240,
 	})
 
 	map( 'n', 'gj', function() require('treesj').toggle() end, { desc = 'Toggle Join/Split code block' } )
-
 end )
 
 --<-------------------------
@@ -1022,7 +1056,6 @@ end )
 ----------------------------
 
 vim.schedule( function()
-
 	require('treewalker').setup()
 	-- Move
 	map({ 'n', 'v' }, '<S-Left>',  '<Cmd>Treewalker Left<CR>',  { silent = true })
@@ -1034,7 +1067,6 @@ vim.schedule( function()
 	map('n', '<C-Down>',  '<Cmd>Treewalker SwapDown<CR>',  { silent = true })
 	map('n', '<C-Up>',    '<Cmd>Treewalker SwapUp<CR>',    { silent = true })
 	map('n', '<C-Right>', '<Cmd>Treewalker SwapRight<CR>', { silent = true })
-
 end )
 
 --<-------------------------
@@ -1042,7 +1074,6 @@ end )
 ----------------------------
 
 vim.schedule( function()
-
 	require('which-key').setup({ preset = 'helix' })
 
 	require('which-key').add({
@@ -1059,7 +1090,6 @@ vim.schedule( function()
 		end,
 		{ desc = 'Buffer Local Keymaps (which-key)' }
 	)
-
 end )
 
 --<-------------------------
@@ -1067,13 +1097,11 @@ end )
 ----------------------------
 
 vim.schedule( function()
-
 	require('yazi').setup({
 		floating_window_scaling_factor = 0.8
 	})
 
 	map( 'n', '<leader>y', '<Cmd>Yazi cwd<CR>', { desc = 'Yazi File Manager' } )
-
 end )
 
 --<-------------------------
