@@ -157,54 +157,31 @@
       pinentryPackage = pkgs.pinentry-curses;
     };
 
-    ssh = {
-      extraConfig = "
-                Host = espresso
-                    HostName espresso
-                    User matshkas
-                Host = espresso.*
-                    HostName espresso
-                    User matshkas
-                    RemoteCommand zmx attach %k
-                    RequestTTY yes
-                    ControlPath ~/.ssh/cm-%r@%h:%p
-                    ControlMaster auto
-                    ControlPersist 10m
-                Host = hofud
-                    HostName hofud
-                    User matt
-                Host = hofud.*
-                    HostName hofud
-                    User matt
-                    RemoteCommand zmx attach %k
-                    RequestTTY yes
-                    ControlPath ~/.ssh/cm-%r@%h:%p
-                    ControlMaster auto
-                    ControlPersist 10m
-                Host = magrathea
-                    HostName magrathea
-                    User matt
-                Host = magrathea.*
-                    HostName magrathea
-                    User matt
-                    RemoteCommand zmx attach %k
-                    RequestTTY yes
-                    ControlPath ~/.ssh/cm-%r@%h:%p
-                    ControlMaster auto
-                    ControlPersist 10m
-                Host = mjolnir
-                    HostName mjolnir
-                    User matt
-                Host = mjolnir.*
-                    HostName mjolnir
-                    User matt
-                    RemoteCommand zmx attach %k
-                    RequestTTY yes
-                    ControlPath ~/.ssh/cm-%r@%h:%p
-                    ControlMaster auto
-                    ControlPersist 10m
-            ";
-    };
+    ssh.extraConfig =
+      let
+        machines = {
+          espresso = "matshkas";
+          hofud = "matt";
+          magrathea = "matt";
+          mjolnir = "matt";
+          serenity = "matt";
+        };
+      in
+      lib.concatStringsSep "\n" (
+        lib.mapAttrsToList (hostname: username: ''
+          Host ${hostname}
+            User ${username}
+          Host ${hostname}.*
+            HostName ${hostname}
+            User ${username}
+            RemoteCommand zmx attach %k
+            RequestTTY yes
+            ControlPath ~/.ssh/cm-%C
+            ControlMaster auto
+            ControlPersist 10m
+        '') machines
+        ++ [ "Include ${config.sops.secrets.ssh-config-extra-hosts.path}" ]
+      );
   };
 
   security.sudo = {
@@ -255,6 +232,7 @@
 
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
   sops.defaultSopsFile = ../secrets.yaml;
+  sops.secrets.ssh-config-extra-hosts.mode = "0444";
 
   system.stateVersion = sysConfig.stateVersion;
 
