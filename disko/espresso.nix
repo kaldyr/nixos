@@ -74,20 +74,4 @@
       };
     };
   };
-
-  fileSystems = {
-    "/" = {
-      device = "none";
-      fsType = "tmpfs";
-      neededForBoot = true;
-      options = [
-        "defaults"
-        "size=16G"
-        "mode=755"
-      ];
-    };
-    "/etc/ssh".neededForBoot = true;
-    "/home".neededForBoot = true;
-    "/nix".neededForBoot = true;
-  };
 }
