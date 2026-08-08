@@ -1,6 +1,8 @@
 { sysConfig, ... }: {
-    home-manager.users.${sysConfig.user} = { config, ... }: {
-        programs.cava.enable = true;
-        xdg.configFile."cava/config".source = config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/cava/config/config";
-    };
+  home-manager.users.${sysConfig.user} = { config, ... }: {
+    programs.cava.enable = true;
+
+    xdg.configFile."cava/config".source =
+      config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/cava/config/config";
+  };
 }

@@ -1,27 +1,28 @@
-{ pkgs, ... }: pkgs.stdenv.mkDerivation {
+{ pkgs, ... }:
+pkgs.stdenv.mkDerivation {
 
-    pname = "wayland-push-to-talk-fix";
-    version = "0.1";
+  pname = "wayland-push-to-talk-fix";
+  version = "0.1";
 
-    src = pkgs.fetchFromGitHub {
-        owner = "Rush";
-        repo = "wayland-push-to-talk-fix";
-        rev = "fecb045c90916ae0cd0414948e0af561dd9ea579";
-        hash = "sha256-nvoeeOVBVm0GhTpsf8LkYUBXeRWDqdWuEO9FV8La13g=";
-    };
+  src = pkgs.fetchFromGitHub {
+    owner = "Rush";
+    repo = "wayland-push-to-talk-fix";
+    rev = "fecb045c90916ae0cd0414948e0af561dd9ea579";
+    hash = "sha256-nvoeeOVBVm0GhTpsf8LkYUBXeRWDqdWuEO9FV8La13g=";
+  };
 
-    nativeBuildInputs = with pkgs; [ pkg-config ];
+  nativeBuildInputs = with pkgs; [ pkg-config ];
 
-    buildInputs = with pkgs; [
-        libevdev
-        xdotool
-        libX11
-        xorgproto
-    ];
+  buildInputs = with pkgs; [
+    libevdev
+    xdotool
+    libX11
+    xorgproto
+  ];
 
-    installPhase = ''
-        mkdir -p $out/bin
-        cp push-to-talk $out/bin/wayland-push-to-talk-fix
-    '';
+  installPhase = ''
+    mkdir -p $out/bin
+    cp push-to-talk $out/bin/wayland-push-to-talk-fix
+  '';
 
 }

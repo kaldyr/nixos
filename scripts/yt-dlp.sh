@@ -23,4 +23,4 @@ eval $CMD
 DATE="$(date '+%Y-%m-%dT%H:%M:%S')"
 TITLE="$(yt-dlp --simulate --print "%(title)s" $URL 2>/dev/null)"
 CHANNEL="$(yt-dlp --simulate --print "%(channel)s" $URL 2>/dev/null)"
-jq -n --arg date "$DATE" --arg channel "$CHANNEL" --arg title "$TITLE" --arg url "$URL" '{date: $date, channel: $channel, title: $title, url: $url}' >> ~/Documents/mpv_history.json
+jq -n --arg date "$DATE" --arg channel "$CHANNEL" --arg title "$TITLE" --arg url "$URL" '{date: $date, channel: $channel, title: $title, url: $url}' >>~/Documents/mpv_history.json

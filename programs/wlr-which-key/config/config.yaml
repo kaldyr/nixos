@@ -21,9 +21,9 @@ inhibit_compositor_keyboard_shortcuts: true
 auto_kbd_layout: true
 
 menu:
-#--<--------------------
-# Hyprland Controls   -->
-#-----------------------
+  #--<--------------------
+  # Hyprland Controls   -->
+  #-----------------------
 
   - key: "`"
     desc: "Hyprland Window Controls"
@@ -71,65 +71,65 @@ menu:
         desc: "Reload Hyprland and Waybar"
         cmd: systemctl --user restart waybar && hyprctl reload
 
-#--<--------------------
-# Resize Menu         -->
-#-----------------------
+  #--<--------------------
+  # Resize Menu         -->
+  #-----------------------
 
   - key: "R"
     desc: "[R]esize Menu"
     submenu:
-    - key: ["Left", "h"]
-      desc: "Width  ---"
-      cmd: hyprctl dispatch "hl.dsp.window.resize({x=-240, y=0, relative=true})"
-      keep_open: true
-    - key: ["Down", "j"]
-      desc: "Height ---"
-      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=190, relative=true})"
-      keep_open: true
-    - key: ["Up", "k"]
-      desc: "Height +++"
-      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=-190, relative=true})"
-      keep_open: true
-    - key: ["Right", "l"]
-      desc: "Width  +++"
-      cmd: hyprctl dispatch "hl.dsp.window.resize({x=240, y=0, relative=true})"
-      keep_open: true
-    - key: ["Alt+Left", "Alt+h"]
-      desc: "Width  --"
-      cmd: hyprctl dispatch "hl.dsp.window.resize({x=-24, y=0, relative=true})"
-      keep_open: true
-    - key: ["Alt+Down", "Alt+j"]
-      desc: "Height --"
-      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=19, relative=true})"
-      keep_open: true
-    - key: ["Alt+Up", "Alt+k"]
-      desc: "Height ++"
-      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=-19, relative=true})"
-      keep_open: true
-    - key: ["Alt+Right", "Alt+l"]
-      desc: "Width  ++"
-      cmd: hyprctl dispatch "hl.dsp.window.resize({x=24, y=0, relative=true})"
-      keep_open: true
-    - key: ["Ctrl+Left", "Ctrl+h"]
-      desc: "Width  -"
-      cmd: hyprctl dispatch "hl.dsp.window.resize({x=-1, y=0, relative=true})"
-      keep_open: true
-    - key: ["Ctrl+Down", "Ctrl+j"]
-      desc: "Height -"
-      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=1, relative=true})"
-      keep_open: true
-    - key: ["Ctrl+Up", "Ctrl+k"]
-      desc: "Height +"
-      cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=-1, relative=true})"
-      keep_open: true
-    - key: ["Ctrl+Right", "Ctrl+l"]
-      desc: "Width  +"
-      cmd: hyprctl dispatch "hl.dsp.window.resize({x=1, y=0, relative=true})"
-      keep_open: true
+      - key: ["Left", "h"]
+        desc: "Width  ---"
+        cmd: hyprctl dispatch "hl.dsp.window.resize({x=-240, y=0, relative=true})"
+        keep_open: true
+      - key: ["Down", "j"]
+        desc: "Height ---"
+        cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=190, relative=true})"
+        keep_open: true
+      - key: ["Up", "k"]
+        desc: "Height +++"
+        cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=-190, relative=true})"
+        keep_open: true
+      - key: ["Right", "l"]
+        desc: "Width  +++"
+        cmd: hyprctl dispatch "hl.dsp.window.resize({x=240, y=0, relative=true})"
+        keep_open: true
+      - key: ["Alt+Left", "Alt+h"]
+        desc: "Width  --"
+        cmd: hyprctl dispatch "hl.dsp.window.resize({x=-24, y=0, relative=true})"
+        keep_open: true
+      - key: ["Alt+Down", "Alt+j"]
+        desc: "Height --"
+        cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=19, relative=true})"
+        keep_open: true
+      - key: ["Alt+Up", "Alt+k"]
+        desc: "Height ++"
+        cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=-19, relative=true})"
+        keep_open: true
+      - key: ["Alt+Right", "Alt+l"]
+        desc: "Width  ++"
+        cmd: hyprctl dispatch "hl.dsp.window.resize({x=24, y=0, relative=true})"
+        keep_open: true
+      - key: ["Ctrl+Left", "Ctrl+h"]
+        desc: "Width  -"
+        cmd: hyprctl dispatch "hl.dsp.window.resize({x=-1, y=0, relative=true})"
+        keep_open: true
+      - key: ["Ctrl+Down", "Ctrl+j"]
+        desc: "Height -"
+        cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=1, relative=true})"
+        keep_open: true
+      - key: ["Ctrl+Up", "Ctrl+k"]
+        desc: "Height +"
+        cmd: hyprctl dispatch "hl.dsp.window.resize({x=0, y=-1, relative=true})"
+        keep_open: true
+      - key: ["Ctrl+Right", "Ctrl+l"]
+        desc: "Width  +"
+        cmd: hyprctl dispatch "hl.dsp.window.resize({x=1, y=0, relative=true})"
+        keep_open: true
 
-#--<--------------------
-# Notifications       -->
-#-----------------------
+  #--<--------------------
+  # Notifications       -->
+  #-----------------------
 
   - key: "n"
     desc: "[N]otification Menu"
@@ -150,9 +150,9 @@ menu:
         desc: "Previous Menu"
         cmd: wlr-which-key
 
-#--<--------------------
-# Printscreen Menu    -->
-#-----------------------
+  #--<--------------------
+  # Printscreen Menu    -->
+  #-----------------------
 
   - key: "Print"
     desc: "[Print]screen Menu"
@@ -173,9 +173,9 @@ menu:
         desc: "Previous Menu"
         cmd: wlr-which-key
 
-#--<--------------------
-# Power Menu          -->
-#-----------------------
+  #--<--------------------
+  # Power Menu          -->
+  #-----------------------
 
   - key: "BackSpace"
     desc: "Power Menu"
@@ -202,9 +202,9 @@ menu:
         desc: "Previous Menu"
         cmd: wlr-which-key
 
-#--<--------------------
-# Top Level Launchers -->
-#-----------------------
+  #--<--------------------
+  # Top Level Launchers -->
+  #-----------------------
 
   - key: "b"
     desc: "[B]top System Monitor"

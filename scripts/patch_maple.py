@@ -1,7 +1,7 @@
-import sys
+import logging
 import os
 import re
-import logging
+import sys
 
 logger = logging.getLogger(__name__)
 logging.basicConfig( level=logging.INFO,

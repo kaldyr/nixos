@@ -531,6 +531,7 @@ vim.pack.add({
 	{ src = gh 'saghen/blink.cmp', version = vim.version.range '1.*' },
 	{ src = gh 'catppuccin/nvim', name = 'catppuccin' },
 	gh 'olimorris/codecompanion.nvim',
+	gh 'stevearc/conform.nvim',
 	gh 'folke/lazydev.nvim',
 	gh 'rafamadriz/friendly-snippets',
 	gh 'ibhagwan/fzf-lua',
@@ -712,8 +713,40 @@ if vim.fn.executable('llama-server') then
 		})
 	end )
 
-	map( 'n', '<leader>c', ':CodeCompanionActions', { desc = 'CodeCompanion', silent = true  })
+	map( 'n', '<leader>ca', ':CodeCompanionActions<CR>', { desc = 'CodeCompanion Actions', silent = true  })
 end
+
+--<-------------------------
+-- Conform                -->  Conform formatters
+----------------------------
+
+vim.schedule(function()
+	require('conform').setup({
+		formatters_by_ft = {
+			bash     = { 'shfmt' },
+			css      = { 'prettier' },
+			go       = { 'gofumpt' },
+			html     = { 'prettier' },
+			json     = { 'prettier' },
+			jsonc    = { 'prettier' },
+			lua      = { 'stylua' },
+			markdown = { 'prettier' },
+			nix      = { 'nixfmt' },
+			python   = { 'ruff' },
+			qml      = { 'qmlformat' },
+			sh       = { 'shfmt' },
+			toml     = { 'taplo' },
+			yaml     = { 'prettier' },
+		},
+	})
+
+	map('n', '<leader>cf', function()
+		require('conform').format({
+			async = true,
+			lsp_format = 'fallback',
+		})
+	end, { desc = 'Conform Format Buffer', silent = true })
+end)
 
 --<-------------------------
 -- Fzf-lua                -->  Fuzzy Pickers

@@ -1,24 +1,30 @@
 { lib, pkgs, ... }: {
 
-    imports = [ ../programs/openstarbound ];
+  imports = [ ../programs/openstarbound ];
 
-    networking.firewall.allowedTCPPorts = [ 21025 ];
+  networking.firewall.allowedTCPPorts = [ 21025 ];
 
-    systemd.services."starbound" = {
-        description = "OpenStarbound server";
+  systemd.services."starbound" = {
+    description = "OpenStarbound server";
 
-        after = [ "network-pre.target" "tailscale.service" ];
-        wants = [ "network-pre.target" "tailscale.service" ];
-        wantedBy = [ "multi-user.target" ];
+    after = [
+      "network-pre.target"
+      "tailscale.service"
+    ];
+    wants = [
+      "network-pre.target"
+      "tailscale.service"
+    ];
+    wantedBy = [ "multi-user.target" ];
 
-        serviceConfig = {
-            User = "starbound";
-            Group = "starbound";
-            DynamicUser = lib.mkForce false;
-        };
-
-        script = /* bash */ ''
-            ${pkgs.openstarbound}/bin/starbound_server -bootconfig /var/lib/openstarbound/sbinit.config
-        '';
+    serviceConfig = {
+      User = "starbound";
+      Group = "starbound";
+      DynamicUser = lib.mkForce false;
     };
+
+    script = /* bash */ ''
+      ${pkgs.openstarbound}/bin/starbound_server -bootconfig /var/lib/openstarbound/sbinit.config
+    '';
+  };
 }

@@ -1,44 +1,44 @@
 { pkgs, sysConfig, ... }: {
-    home-manager.users.${sysConfig.user} = {
-        services.dunst = {
-            enable = true;
+  home-manager.users.${sysConfig.user} = {
+    services.dunst = {
+      enable = true;
 
-            iconTheme = {
-                name = "Papirus-Dark";
-                package = pkgs.catppuccin-papirus-folders;
-                size = "16x16";
-            };
+      iconTheme = {
+        name = "Papirus-Dark";
+        package = pkgs.catppuccin-papirus-folders;
+        size = "16x16";
+      };
 
-            settings = {
-                global = {
-                    corner_radius = 10;
-                    font = "Recursive Sans Casual Static 11";
-                    frame_color = "#8CAAEE";
-                    mouse_left_click = "close_current";
-                    mouse_middle_click = "do_action";
-                    mouse_right_click = "close_all";
-                    separator_color = "frame";
-                };
-
-                urgency_critical = {
-                    background = "#303446";
-                    foreground = "#C6D0F5";
-                    frame_color = "#EF9F76";
-                    timeout = 10;
-                };
-
-                urgency_low = {
-                    background = "#303446";
-                    foreground = "#C6D0F5";
-                    timeout = 4;
-                };
-
-                urgency_normal = {
-                    background = "#303446";
-                    foreground = "#C6D0F5";
-                    timeout = 4;
-                };
-            };
+      settings = {
+        global = {
+          corner_radius = 10;
+          font = "Recursive Sans Casual Static 11";
+          frame_color = "#8CAAEE";
+          mouse_left_click = "close_current";
+          mouse_middle_click = "do_action";
+          mouse_right_click = "close_all";
+          separator_color = "frame";
         };
+
+        urgency_critical = {
+          background = "#303446";
+          foreground = "#C6D0F5";
+          frame_color = "#EF9F76";
+          timeout = 10;
+        };
+
+        urgency_low = {
+          background = "#303446";
+          foreground = "#C6D0F5";
+          timeout = 4;
+        };
+
+        urgency_normal = {
+          background = "#303446";
+          foreground = "#C6D0F5";
+          timeout = 4;
+        };
+      };
     };
+  };
 }

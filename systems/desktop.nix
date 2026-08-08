@@ -1,292 +1,298 @@
-{ lib, pkgs, sysConfig, ... }: {
-    imports = [
-        ../programs/cava
-        ../programs/discord
-        ../programs/easyeffects
-        ../programs/helium
-        ../programs/keepass
-        ../programs/kitty
-        ../programs/libreoffice
-        ../programs/mpv
-        ../programs/newsboat
-        ../programs/obsidian
-        ../programs/telegram
-        ../programs/zathura
-        ../services/pipewire
-    ];
+{
+  lib,
+  pkgs,
+  sysConfig,
+  ...
+}:
+{
+  imports = [
+    ../programs/cava
+    ../programs/discord
+    ../programs/easyeffects
+    ../programs/helium
+    ../programs/keepass
+    ../programs/kitty
+    ../programs/libreoffice
+    ../programs/mpv
+    ../programs/newsboat
+    ../programs/obsidian
+    ../programs/telegram
+    ../programs/zathura
+    ../services/pipewire
+  ];
 
-    environment = {
-        etc."fuse.conf".text = /* bash */ ''
-            user_allow_other
-        '';
+  environment = {
+    etc."fuse.conf".text = /* bash */ ''
+      user_allow_other
+    '';
 
-        # Home files that need to be preserved between boots
-        #  These files are synced and do not need to be in snapshots
+    # Home files that need to be preserved between boots
+    #  These files are synced and do not need to be in snapshots
 
-        persistence = lib.mkIf sysConfig.homeImpermanence {
-            "/nix" = {
-                hideMounts = true;
-                users.${sysConfig.user}.directories = [
-                    ".config/gnome-games"
-                    ".local/share/applications"
-                    ".local/share/icons"
-                    "Books"
-                    "Documents"
-                    "Downloads"
-                    "Music"
-                    "Notes"
-                    "Pictures"
-                    "Projects"
-                    "Roms"
-                    "Videos"
-                ];
-            };
-        };
-    };
-
-    fonts = {
-        enableDefaultPackages = false;
-
-        fontconfig = {
-            antialias = true;
-
-            defaultFonts = {
-                emoji = [ "Noto Color Emoji" ];
-                monospace = [
-                    "Maple Mono NF"
-                    "Liga Rec Mono Custom"
-                    "JuliaMono"
-                    "Noto Sans Mono CJK HK"
-                    "Noto Sans Mono CJK JP"
-                    "Noto Sans Mono CJK KR"
-                    "Noto Sans Mono CJK SC"
-                    "Noto Sans Mono CJK TC"
-                ];
-                sansSerif = [
-                    "Recursive Sans Casual Static"
-                    "Inter"
-                    "Liberation Sans"
-                    "Noto Color Emoji"
-                    "Noto Sans CJK HK"
-                    "Noto Sans CJK JP"
-                    "Noto Sans CJK KR"
-                    "Noto Sans CJK SC"
-                    "Noto Sans CJK TC"
-                ];
-                serif = [
-                    "Libertinus Serif"
-                    "Liberation Serif"
-                    "Noto Serif CJK HK"
-                    "Noto Serif CJK JP"
-                    "Noto Serif CJK KR"
-                    "Noto Serif CJK SC"
-                    "Noto Serif CJK TC"
-                ];
-            };
-
-            hinting.enable = true;
-
-            localConf = /* xml */ ''
-                <?xml version='1.0'?>
-                <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
-                <fontconfig>
-                    <match target="font">
-                        <test qual="any" name="family" compare="contains"><string>Inter</string></test>
-                        <!-- https://rsms.me/inter/#features -->
-                        <edit name="fontfeatures" mode="assign_replace">
-                            <string>calt</string> <!-- Contextural alternatives -->
-                            <string>case</string> <!-- Case alternates -->
-                            <string>ccmp</string> <!-- Compositions -->
-                            <string>cv02</string> <!-- Open four -->
-                            <string>cv03</string> <!-- Open six -->
-                            <string>cv04</string> <!-- Open nine -->
-                            <string>cv05</string> <!-- Lower case L with tail -->
-                            <string>cv06</string> <!-- Simplified U -->
-                            <string>cv08</string> <!-- Upper case i with serif -->
-                            <string>ss03</string> <!-- Round quotes & commas -->
-                            <string>tnum</string> <!-- Tabular numbers -->
-                            <string>zero</string> <!-- Slashed zero -->
-                        </edit>
-                    </match>
-                    <match target="font">
-                        <test qual="any" name="family" compare="contains"><string>Recursive</string></test>
-                        <!-- https://github.com/arrowtype/recursive#opentype-features -->
-                        <edit name="fontfeatures" mode="assign_replace">
-                            <string>ss20</string>
-                            <string>case</string>
-                            <string>liga</string>
-                        </edit>
-                    </match>
-                </fontconfig>
-            '';
-
-            subpixel.rgba = "rgb";
-            subpixel.lcdfilter = "default";
-
-        };
-
-        packages = with pkgs; [
-            font-awesome # Symbols
-            inter # Sans Font
-            julia-mono # Math font
-            liberation_ttf # Open versions of MS fonts
-            libertinus # System Serif Font and Math
-            maple-mono-custom # Mono Font
-            noto-fonts-cjk-sans # Display of Chinese/Japanese/Korean characters
-            noto-fonts-cjk-serif # Display of Chinese/Japanese/Korean characters
-            noto-fonts-color-emoji # Symbols
-            recursive # System sans font
+    persistence = lib.mkIf sysConfig.homeImpermanence {
+      "/nix" = {
+        hideMounts = true;
+        users.${sysConfig.user}.directories = [
+          ".config/gnome-games"
+          ".local/share/applications"
+          ".local/share/icons"
+          "Books"
+          "Documents"
+          "Downloads"
+          "Music"
+          "Notes"
+          "Pictures"
+          "Projects"
+          "Roms"
+          "Videos"
         ];
+      };
+    };
+  };
+
+  fonts = {
+    enableDefaultPackages = false;
+
+    fontconfig = {
+      antialias = true;
+
+      defaultFonts = {
+        emoji = [ "Noto Color Emoji" ];
+        monospace = [
+          "Maple Mono NF"
+          "Liga Rec Mono Custom"
+          "JuliaMono"
+          "Noto Sans Mono CJK HK"
+          "Noto Sans Mono CJK JP"
+          "Noto Sans Mono CJK KR"
+          "Noto Sans Mono CJK SC"
+          "Noto Sans Mono CJK TC"
+        ];
+        sansSerif = [
+          "Recursive Sans Casual Static"
+          "Inter"
+          "Liberation Sans"
+          "Noto Color Emoji"
+          "Noto Sans CJK HK"
+          "Noto Sans CJK JP"
+          "Noto Sans CJK KR"
+          "Noto Sans CJK SC"
+          "Noto Sans CJK TC"
+        ];
+        serif = [
+          "Libertinus Serif"
+          "Liberation Serif"
+          "Noto Serif CJK HK"
+          "Noto Serif CJK JP"
+          "Noto Serif CJK KR"
+          "Noto Serif CJK SC"
+          "Noto Serif CJK TC"
+        ];
+      };
+
+      hinting.enable = true;
+
+      localConf = /* xml */ ''
+        <?xml version='1.0'?>
+        <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+        <fontconfig>
+            <match target="font">
+                <test qual="any" name="family" compare="contains"><string>Inter</string></test>
+                <!-- https://rsms.me/inter/#features -->
+                <edit name="fontfeatures" mode="assign_replace">
+                    <string>calt</string> <!-- Contextural alternatives -->
+                    <string>case</string> <!-- Case alternates -->
+                    <string>ccmp</string> <!-- Compositions -->
+                    <string>cv02</string> <!-- Open four -->
+                    <string>cv03</string> <!-- Open six -->
+                    <string>cv04</string> <!-- Open nine -->
+                    <string>cv05</string> <!-- Lower case L with tail -->
+                    <string>cv06</string> <!-- Simplified U -->
+                    <string>cv08</string> <!-- Upper case i with serif -->
+                    <string>ss03</string> <!-- Round quotes & commas -->
+                    <string>tnum</string> <!-- Tabular numbers -->
+                    <string>zero</string> <!-- Slashed zero -->
+                </edit>
+            </match>
+            <match target="font">
+                <test qual="any" name="family" compare="contains"><string>Recursive</string></test>
+                <!-- https://github.com/arrowtype/recursive#opentype-features -->
+                <edit name="fontfeatures" mode="assign_replace">
+                    <string>ss20</string>
+                    <string>case</string>
+                    <string>liga</string>
+                </edit>
+            </match>
+        </fontconfig>
+      '';
+
+      subpixel.rgba = "rgb";
+      subpixel.lcdfilter = "default";
+
     };
 
-    home-manager.users.${sysConfig.user} = {
-        fonts.fontconfig.enable = true;
+    packages = with pkgs; [
+      font-awesome # Symbols
+      inter # Sans Font
+      julia-mono # Math font
+      liberation_ttf # Open versions of MS fonts
+      libertinus # System Serif Font and Math
+      maple-mono-custom # Mono Font
+      noto-fonts-cjk-sans # Display of Chinese/Japanese/Korean characters
+      noto-fonts-cjk-serif # Display of Chinese/Japanese/Korean characters
+      noto-fonts-color-emoji # Symbols
+      recursive # System sans font
+    ];
+  };
 
-        gtk = {
-            enable = true;
+  home-manager.users.${sysConfig.user} = {
+    fonts.fontconfig.enable = true;
 
-            cursorTheme = {
-                name = "catppuccin-frappe-sapphire-cursors";
-                package = pkgs.catppuccin-cursors.frappeSapphire;
-                size = 24;
-            };
+    gtk = {
+      enable = true;
 
-            font = {
-                name = "Recursive Sans Casual Static";
-                package = pkgs.recursive;
-                size = 11;
-            };
+      cursorTheme = {
+        name = "catppuccin-frappe-sapphire-cursors";
+        package = pkgs.catppuccin-cursors.frappeSapphire;
+        size = 24;
+      };
 
-            gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
-            gtk4.theme = null;
-            gtk4.extraConfig.gtk-applications-prefer-dark-theme = true;
+      font = {
+        name = "Recursive Sans Casual Static";
+        package = pkgs.recursive;
+        size = 11;
+      };
 
-            iconTheme = {
-                name = "Papirus";
-                package = pkgs.catppuccin-papirus-folders.override {
-                    accent = "sapphire";
-                    flavor = "frappe";
-                };
-            };
+      gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+      gtk4.theme = null;
+      gtk4.extraConfig.gtk-applications-prefer-dark-theme = true;
 
-            theme = {
-                name = "catppuccin-frappe-sapphire-standard";
-                package = pkgs.catppuccin-gtk.override {
-                    accents = [ "sapphire" ];
-                    size = "standard";
-                    variant = "frappe";
-                };
-            };
+      iconTheme = {
+        name = "Papirus";
+        package = pkgs.catppuccin-papirus-folders.override {
+          accent = "sapphire";
+          flavor = "frappe";
         };
+      };
 
-        home = {
-            packages = with pkgs; [
-                android-tools
-                gimp
-                gnome-keyring
-                gnumeric
-                gnuplot
-                hunspell
-                hunspellDicts.en_US
-                imagemagick
-                inkscape
-                kew
-                kjv
-                libsecret
-                networkmanagerapplet
-                papirus-folders
-                vulkan-tools
-                xdg-user-dirs
-                xdg-utils
-            ];
-
-            pointerCursor = {
-                enable = true;
-                name = "catppuccin-frappe-sapphire-cursors";
-                package = pkgs.catppuccin-cursors.frappeSapphire;
-                size = 24;
-                gtk.enable = true;
-                x11.enable = true;
-            };
-
-            sessionVariables = {
-                GTK_THEME = "catppuccin-frappe-sapphire-standard";
-                XCURSOR_THEME = "catppuccin-frappe-sapphire-cursors";
-                XCURSOR_SIZE = 24;
-            };
+      theme = {
+        name = "catppuccin-frappe-sapphire-standard";
+        package = pkgs.catppuccin-gtk.override {
+          accents = [ "sapphire" ];
+          size = "standard";
+          variant = "frappe";
         };
-
-        qt = {
-            enable = true;
-
-            style = {
-                name = "kvantum";
-                package = pkgs.catppuccin-kvantum.override {
-                    accent = "sapphire";
-                    variant = "frappe";
-                };
-            };
-        };
-
-        xdg = {
-            configFile."mimeapps.list".force = true;
-
-            mimeApps.enable = true;
-
-            userDirs = {
-                enable = true;
-                createDirectories = true;
-                desktop = null;
-                publicShare = null;
-                setSessionVariables = true;
-                templates = null;
-            };
-        };
+      };
     };
 
-    hardware = {
-        bluetooth = {
-            enable = true;
-            settings.General = {
-                Enable = "Source,Sink,Media,Socket";
-                Experimental = true;
-            };
-        };
+    home = {
+      packages = with pkgs; [
+        android-tools
+        gimp
+        gnome-keyring
+        gnumeric
+        gnuplot
+        hunspell
+        hunspellDicts.en_US
+        imagemagick
+        inkscape
+        kew
+        kjv
+        libsecret
+        networkmanagerapplet
+        papirus-folders
+        vulkan-tools
+        xdg-user-dirs
+        xdg-utils
+      ];
 
-        graphics = {
-            enable = true;
+      pointerCursor = {
+        enable = true;
+        name = "catppuccin-frappe-sapphire-cursors";
+        package = pkgs.catppuccin-cursors.frappeSapphire;
+        size = 24;
+        gtk.enable = true;
+        x11.enable = true;
+      };
 
-            extraPackages = with pkgs; [
-                libdrm
-                libva
-                libva-utils
-                libva-vdpau-driver
-            ];
-        };
+      sessionVariables = {
+        GTK_THEME = "catppuccin-frappe-sapphire-standard";
+        XCURSOR_THEME = "catppuccin-frappe-sapphire-cursors";
+        XCURSOR_SIZE = 24;
+      };
     };
 
-    programs.dconf.enable = true;
-    security.pam.services.login.enableGnomeKeyring = true;
-    security.polkit.enable = true;
+    qt = {
+      enable = true;
 
-    services = {
-        dbus.enable = true;
-        gnome.gnome-keyring.enable = true;
-
-        # Work towards automount phone for file copy
-        # udev.packages = with pkgs; [
-        #     libmtp
-        #     media-player-info
-        # ];
-
-        udisks2.enable = true;
-        udisks2.mountOnMedia = true;
-        upower.enable = true;
-
-        xserver = {
-            excludePackages = with pkgs; [ xterm ];
-            xkb.layout = "us";
-            xkb.variant = "";
+      style = {
+        name = "kvantum";
+        package = pkgs.catppuccin-kvantum.override {
+          accent = "sapphire";
+          variant = "frappe";
         };
+      };
     };
+
+    xdg = {
+      configFile."mimeapps.list".force = true;
+
+      mimeApps.enable = true;
+
+      userDirs = {
+        enable = true;
+        createDirectories = true;
+        desktop = null;
+        publicShare = null;
+        setSessionVariables = true;
+        templates = null;
+      };
+    };
+  };
+
+  hardware = {
+    bluetooth = {
+      enable = true;
+      settings.General = {
+        Enable = "Source,Sink,Media,Socket";
+        Experimental = true;
+      };
+    };
+
+    graphics = {
+      enable = true;
+
+      extraPackages = with pkgs; [
+        libdrm
+        libva
+        libva-utils
+        libva-vdpau-driver
+      ];
+    };
+  };
+
+  programs.dconf.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
+  security.polkit.enable = true;
+
+  services = {
+    dbus.enable = true;
+    gnome.gnome-keyring.enable = true;
+
+    # Work towards automount phone for file copy
+    # udev.packages = with pkgs; [
+    #     libmtp
+    #     media-player-info
+    # ];
+
+    udisks2.enable = true;
+    udisks2.mountOnMedia = true;
+    upower.enable = true;
+
+    xserver = {
+      excludePackages = with pkgs; [ xterm ];
+      xkb.layout = "us";
+      xkb.variant = "";
+    };
+  };
 }
