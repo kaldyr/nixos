@@ -122,6 +122,19 @@
     libinput.touchpad.accelSpeed = "-0.5";
 
     pipewire.wireplumber.extraConfig."50-device-priority" = {
+      "wireplumber.settings" = {
+        "node.restore-default-targets" = false;
+        "device.restore-profile" = false;
+      };
+
+      "device.profile.priority.rules" = [ {
+        matches = [ { "device.name" = "alsa_card.pci-0000_00_1f.3"; } ];
+        priorities = [
+          "hdmi-stereo"
+          "analog-stereo"
+        ];
+      } ];
+
       "monitor.alsa.rules" = [
         {
           matches = [ { "node.name" = "alsa_output.pci-0000_00_1f.3.analog-stereo"; } ];
@@ -131,11 +144,8 @@
           matches = [ { "node.name" = "alsa_output.pci-0000_00_1f.3.hdmi-stereo"; } ];
           actions."update-props"."priority.session" = 1500;
         }
-        # {
-        #     matches = [{ "node.name" = "alsa_output.pci-0000_00_1f.3.hdmi-stereo"; }];
-        #     actions."update-props"."priority.session" = 1500;
-        # }
       ];
+
       "monitor.bluez.rules" = [
         {
           matches = [ { "node.name" = "~bluez_output.*"; } ];
