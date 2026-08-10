@@ -78,12 +78,7 @@
     enableRedistributableFirmware = true;
   };
 
-  networking.firewall.allowedUDPPortRanges = [
-    {
-      from = 1000;
-      to = 1005;
-    }
-  ]; # AoeO
+  networking.firewall.allowedUDPPortRanges = [ { from = 1000; to = 1005; } ]; # AoeO
 
   # networking = {
   #     bridges."br0".interfaces = [ "enp1s0" ];

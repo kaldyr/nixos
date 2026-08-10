@@ -44,12 +44,7 @@
 
               modules = [
                 # Load overlays
-                {
-                  nixpkgs.overlays = with overlays; [
-                    additions
-                    modifications
-                  ];
-                }
+                { nixpkgs.overlays = with overlays; [ additions modifications ]; }
 
                 # Load in Modules from Libraries
                 inputs.disko.nixosModules.disko
@@ -86,8 +81,8 @@
             let
               sysConfig = {
                 hostname = "hofud";
-                stateVersion = "25.05";
-                user = "matt";
+                stateVersion = ""; # In Limbo, waiting on parts
+                user = "";
                 systemImpermanence = true;
                 homeImpermanence = true;
               };
@@ -120,6 +115,19 @@
             in
             buildSystem sysConfig;
 
+          # Normandy: Ryzen 3700X RX 7600 Desktop
+          "normandy" =
+            let
+              sysConfig = {
+                hostname = "mjolnir";
+                stateVersion = "26.05"; # Fresh install
+                user = "nic";
+                systemImpermanence = true;
+                homeImpermanence = true;
+              };
+            in
+            buildSystem sysConfig;
+
           # Oolong: Dell Inspiron 14 3473 - 4GB RAM, 32GB SSD
           "oolong" =
             let
@@ -138,7 +146,7 @@
             let
               sysConfig = {
                 hostname = "serenity";
-                stateVersion = "";
+                stateVersion = ""; # Haven't installed yet
                 user = "matt";
                 systemImpermanence = true;
                 homeImpermanence = true;

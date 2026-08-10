@@ -68,20 +68,6 @@
         config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/hyprsunset.conf";
     };
 
-    xdg.mimeApps.defaultApplications = lib.mkForce {
-      "default-web-browser" = [ "helium.desktop" ];
-      "text/html" = [ "helium.desktop" ];
-      "text/plain" = [ "nvim.desktop" ];
-      "x-scheme-handler/ftp" = [ "helium.desktop" ];
-      "x-scheme-handler/http" = [ "helium.desktop" ];
-      "x-scheme-handler/https" = [ "helium.desktop" ];
-      "application/md" = [ "helium.desktop" ];
-      "application/pdf" = [ "org.pwmt.zathura.desktop" ];
-      "application/image" = [ "feh.desktop" ];
-      "application/video" = [ "mpv.desktop" ];
-      "application/audio" = [ "mpv.desktop" ];
-    };
-
     wayland.windowManager.hyprland = {
       enable = true;
       configType = "lua";

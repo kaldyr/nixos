@@ -151,6 +151,8 @@
     gtk = {
       enable = true;
 
+      colorScheme = "dark";
+
       cursorTheme = {
         name = "catppuccin-frappe-sapphire-cursors";
         package = pkgs.catppuccin-cursors.frappeSapphire;
@@ -163,9 +165,31 @@
         size = 11;
       };
 
-      gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
-      gtk4.theme = null;
-      gtk4.extraConfig.gtk-applications-prefer-dark-theme = true;
+      gtk3 = {
+        extraConfig.gtk-application-prefer-dark-theme = true;
+
+        theme = {
+          name = "catppuccin-frappe-sapphire-standard";
+          package = pkgs.catppuccin-gtk.override {
+            accents = [ "sapphire" ];
+            size = "standard";
+            variant = "frappe";
+          };
+        };
+      };
+
+      gtk4 = {
+        extraConfig.gtk-applications-prefer-dark-theme = true;
+
+        theme = {
+          name = "catppuccin-frappe-sapphire-standard";
+          package = pkgs.catppuccin-gtk.override {
+            accents = [ "sapphire" ];
+            size = "standard";
+            variant = "frappe";
+          };
+        };
+      };
 
       iconTheme = {
         name = "Papirus";
@@ -190,7 +214,6 @@
         android-tools
         gimp
         gnome-keyring
-        gnumeric
         gnuplot
         hunspell
         hunspellDicts.en_US

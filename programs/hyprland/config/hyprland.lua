@@ -744,6 +744,13 @@ wr({
 	pseudo  =  true,
 })
 
+wr({
+	name = 'gedit',
+	match = { class = 'gedit' },
+	opacity = '0.9',
+	size = win_large_size()
+})
+
 wr({ -- Guild Wars 2
 	name             = 'guild-wars-2',
 	match            = { title = '^(Guild Wars 2)$' },
@@ -768,6 +775,13 @@ wr({ name = 'satty',  match = { class = 'com.gabm.satty' }, float = true })
 -- 	match = { class = '^steam$', title = "^(?!Steam$).*$" },
 -- 	float = true,
 -- })
+
+wr({
+	name = 'nautilus',
+	match = { class = 'org.gnome.Nautilus' },
+	opacity = '0.9',
+	size = win_large_size()
+})
 
 wr({
 	name = 'steam',
