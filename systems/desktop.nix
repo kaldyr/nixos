@@ -170,6 +170,7 @@
 
         theme = {
           name = "catppuccin-frappe-sapphire-standard";
+
           package = pkgs.catppuccin-gtk.override {
             accents = [ "sapphire" ];
             size = "standard";
@@ -183,6 +184,7 @@
 
         theme = {
           name = "catppuccin-frappe-sapphire-standard";
+
           package = pkgs.catppuccin-gtk.override {
             accents = [ "sapphire" ];
             size = "standard";
@@ -193,6 +195,7 @@
 
       iconTheme = {
         name = "Papirus";
+
         package = pkgs.catppuccin-papirus-folders.override {
           accent = "sapphire";
           flavor = "frappe";
@@ -201,6 +204,7 @@
 
       theme = {
         name = "catppuccin-frappe-sapphire-standard";
+
         package = pkgs.catppuccin-gtk.override {
           accents = [ "sapphire" ];
           size = "standard";
@@ -219,7 +223,6 @@
         hunspellDicts.en_US
         imagemagick
         inkscape
-        kew
         kjv
         libsecret
         networkmanagerapplet

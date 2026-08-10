@@ -119,11 +119,11 @@
           "normandy" =
             let
               sysConfig = {
-                hostname = "mjolnir";
+                hostname = "normandy";
                 stateVersion = "26.05"; # Fresh install
                 user = "nic";
                 systemImpermanence = true;
-                homeImpermanence = true;
+                homeImpermanence = false;
               };
             in
             buildSystem sysConfig;

@@ -35,6 +35,10 @@ The goal is a simple configuration where possible and application native config 
   Laptop: Framework 13 Intel Core Ultra x7 358H in 1st gen chassis  
   Hyprland
 
+-  Normandy  
+  Desktop: Ryzen 7 3700X, Radeon RX 7600
+  Hyprland
+
 - 🍵Oolong  
   Laptop: Dell Inspiron  
   Budgie

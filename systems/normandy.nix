@@ -19,7 +19,6 @@
     ../programs/steam
     ../programs/virtualmachines
     ../services/epson-et-8550
-    ../services/keyd
     ../services/kmscon
   ];
 
@@ -41,6 +40,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    evince
     orca-slicer
   ];
 

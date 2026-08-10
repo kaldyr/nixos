@@ -1,7 +1,7 @@
 {
   disko.devices.disk.main = {
 
-    device = "";
+    device = "/dev/disk/by-id/nvme-CT500P3PSSD8_240746F1F0AC"; # Temporarily using Hofud's drive
     type = "disk";
 
     content = {
