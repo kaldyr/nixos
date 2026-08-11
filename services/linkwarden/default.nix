@@ -34,7 +34,7 @@
       port = 9002;
       openFirewall = true;
 
-      secretFiles.NEXTAUTH_SECRET = config.sops.secrets.linkwarden-nextauth-secret;
+      secretFiles.NEXTAUTH_SECRET = config.sops.secrets.linkwarden-nextauth-secret.path;
       storageLocation = "/var/lib/linkwarden";
     };
 
