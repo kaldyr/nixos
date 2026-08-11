@@ -21,13 +21,16 @@
         createLocally = true;
       };
 
-      environment.NEXTAUTH_SECRET = config.sops.secrets.linkwarden-nextauth-secret.path;
+      environment = {
+        NEXTAUTH_SECRET = config.sops.secrets.linkwarden-nextauth-secret.path;
+        NEXTAUTH_URL = "http://links.brill-godzilla.ts.net/api/v1/auth";
+      };
 
       enableRegistration = true;
       user = "linkwarden";
       group = "linkwarden";
 
-      host = "magrathea.brill-godzilla.ts.net";
+      host = "127.0.0.1";
       port = 9002;
       openFirewall = true;
 
