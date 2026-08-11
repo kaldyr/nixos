@@ -10,14 +10,8 @@
     }
   ];
 
-  networking.firewall.allowedTCPPorts = [
-    2222
-    9001
-  ];
-  networking.firewall.allowedUDPPorts = [
-    2222
-    9001
-  ];
+  networking.firewall.allowedTCPPorts = [ 2222 ];
+  networking.firewall.allowedUDPPorts = [ 2222 ];
 
   services = {
     forgejo = {
@@ -47,13 +41,11 @@
         repository.DEFAULT_BRANCH = "main";
 
         server = {
-          CERT_FILE = "/var/lib/certs/magrathea.brill-godzilla.ts.net.crt";
-          KEY_FILE = "/var/lib/certs/magrathea.brill-godzilla.ts.net.key";
-          DOMAIN = "magrathea.brill-godzilla.ts.net";
-          HTTP_ADDR = "0.0.0.0";
+          DOMAIN = "git.brill-godzilla.ts.net";
+          HTTP_ADDR = "127.0.0.1";
           HTTP_PORT = 9001;
-          PROTOCOL = "https";
-          ROOT_URL = "https://magrathea.brill-godzilla.ts.net:9001";
+          PROTOCOL = "http";
+          ROOT_URL = "http://git.brill-godzilla.ts.net";
           BUILTIN_SSH_SERVER_USER = "git";
           SSH_CREATE_AUTHORIZED_KEYS_FILE = true;
           SSH_LISTEN_HOST = "0.0.0.0";
@@ -63,7 +55,6 @@
         };
 
         service.DISABLE_REGISTRATION = true; # Comment out for initial install
-        session.COOKIE_SECURE = true;
       };
 
       useWizard = false;

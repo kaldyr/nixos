@@ -15,22 +15,19 @@
       enable = true;
 
       database = {
-        host = "localhost";
+        host = "/run/postgresql";
         name = "linkwarden";
         user = "linkwarden";
         createLocally = true;
       };
 
-      environment = {
-        DATABASE_URL = "postgresql://linkwarden@localhost:5432/linkwarden";
-        NEXTAUTH_SECRET = config.sops.secrets.linkwarden-nextauth-secret.path;
-        NEXTAUTH_URL = "http://localhost:9002/api/v1/auth";
-      };
+      environment.NEXTAUTH_SECRET = config.sops.secrets.linkwarden-nextauth-secret.path;
 
       enableRegistration = true;
       user = "linkwarden";
       group = "linkwarden";
 
+      host = "magrathea.brill-godzilla.ts.net";
       port = 9002;
       openFirewall = true;
 
@@ -51,6 +48,11 @@
     owner = "linkwarden";
     group = "linkwarden";
     mode = "0400";
+  };
+
+  systemd.services.linkwarden = {
+    requires = [ "postgresql.service" ];
+    after = [ "postgresql.service" ];
   };
 
   users.extraUsers."linkwarden" = {
