@@ -1,5 +1,5 @@
 {
-  import = [ ../postgresql ];
+  imports = [ ../postgresql ];
 
   environment.persistence."/state/system".directories = [
     {
