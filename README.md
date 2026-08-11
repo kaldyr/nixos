@@ -3,6 +3,7 @@
 ## Table of Contents
 
 1. [Description](#description)
+1. Notable Customizations
 1. [Boot Install Media](#boot-install-media)
 1. [Partition the Drive](#partition-the-drive)
 1. [Setup the Config Folder](#setup-the-config-folder)
@@ -14,48 +15,54 @@
 This is a multi-system and multi-user flake. It has laptops, desktops, and home server.  
 The goal is a simple configuration where possible and application native config for more involved apps.
 
-- ☕ Espresso  
-  Desktop: Minisforum UM790 Pro  
-  Hyprland
+### ☕ Espresso
+- Desktop: Minisforum UM790 Pro
+- Hyprland
 
-- ⚔ Hofud  
-  Laptop: Framework 13 11th Gen i5-1135G7 motherboard standalone
-  Hyprland
+### ⚔ Hofud
+- Desktop: Framework 13 11th Gen i5-1135G7 motherboard
+- Currently down while waiting for parts
+- Hyprland
 
-- 🪐 Magrathea  
-  Home server: Intel i5-2500k still kicking  
-  Nextcloud  
-  Forgejo (Gitea)  
-  Technitium  
-  Open Starbound  
-  Kodi  
-  NAS with Samba
+### 🪐 Magrathea
+- Home server: Intel i5-2500k still kicking
+- Nextcloud  (Remove soon)
+- Immich  (Soon, to replace nextcloud)
+- Radicale  (Soon, to replace nextcloud)
+- Syncthing  (Soon, to replace nextcloud)
+- Forgejo (Gitea)
+- Linkwarden
+- Technitium
+- Open Starbound
+- Kodi
+- NAS with Samba
 
-- 🔨 Mjolnir  
-  Laptop: Framework 13 Intel Core Ultra x7 358H in 1st gen chassis  
-  Hyprland
+### 🔨 Mjolnir
+- Laptop: Framework 13 Intel Core Ultra x7 358H in 1st gen chassis
+- Hyprland
 
--  Normandy  
-  Desktop: Ryzen 7 3700X, Radeon RX 7600
-  Hyprland
+### 🚀 Normandy
+- Desktop: Ryzen 7 3700X, Radeon RX 7600
+- Trial to save this machine from windows hell
+- Hyprland
 
-- 🍵Oolong  
-  Laptop: Dell Inspiron  
-  Budgie
+### 🍵Oolong
+- Laptop: Dell Inspiron
+- Budgie
 
-- 🚀 Serenity  
-  Home server: Ryzen 2400g  
-  Off-site backup  
-  Kodi  
-  NAS with Samba
+### 🚀 Serenity
+- Home server: Ryzen 2400g
+- Off-site backup
+- Kodi
+- NAS with Samba
 
-Notable customizations
+## Notable customizations
 
-- Keybinds  
-  Keyd used to remap capslock to escape and a custom layer  
-  Unified keybinds between applications
+### Keybinds  
+- Keyd used to remap capslock to escape and a custom layer
+- Unified keybinds between applications
 
-Modifiers:  
+- Modifiers:  
 Hyprland: META/Windows/Whatever key  
 Terminal: Alt (leftalt)  
 Applications: Ctrl
@@ -64,6 +71,25 @@ hjkl - movement
 Caps+hjkl - arrow keys  
 , - tab previous  
 . - tab next
+
+## [TODO]
+
+### Installation Media
+
+- Custom Installation media
+- Has full nix store pre built for every machine output
+- Fully offline install capable
+- Hyprland environment with all familiar customiazations
+- All tools required to build pre-installed (disko, etc)
+
+### Replace Nextcloud
+
+- Radicale for CalDAV + CardDAV
+- Immich for photo management, sync from phones, sharing with family
+- Syncthing for file/folder syncing, browser profile backup
+- Linkwarden for bookmarks
+
+### Finally work with snapshots
 
 ## Boot Install Media
 

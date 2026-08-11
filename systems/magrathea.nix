@@ -4,6 +4,7 @@
     ../disko/magrathea.nix
     ../programs/kodi
     ../services/forgejo
+    ../services/linkwarden
     ../services/nextcloud
     ../services/openstarbound
     ../services/pipewire
