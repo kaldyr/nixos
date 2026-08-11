@@ -1,4 +1,6 @@
 {
+  import = [ ../postgresql ];
+
   environment.persistence."/state/system".directories = [
     {
       directory = "/var/lib/linkwarden";
@@ -8,25 +10,34 @@
     }
   ];
 
-  services.linkwarden = {
-    enable = true;
+  services = {
+    linkwarden = {
+      enable = true;
 
-    database = {
-      host = "localhost";
-      name = "linkwarden";
+      database = {
+        host = "localhost";
+        name = "linkwarden";
+        user = "linkwarden";
+        createLocally = true;
+      };
+
+      enableRegistration = true;
       user = "linkwarden";
-      createLocally = true;
+      group = "linkwarden";
+
+      port = 9002;
+      openFirewall = true;
+
+      storageLocation = "/var/lib/linkwarden";
     };
 
-    enableRegistration = true;
-    user = "linkwarden";
-    group = "linkwarden";
+    postgresql.ensureDatabases = [ "linkwarden" ];
+    postgresql.ensureUsers = [ {
+      name = "linkwarden";
+      ensureDBOwnership = true;
+    } ];
 
-    port = 9002;
-    openFirewall = true;
-
-    storageLocation = "/var/lib/linkwarden";
-
+    postgresqlBackup.databases = [ "linkwarden" ];
   };
 
   users.extraUsers."linkwarden" = {

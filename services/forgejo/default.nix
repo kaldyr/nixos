@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./postgresql ];
+  imports = [ ../postgresql ];
 
   environment.persistence."/state/system".directories = [
     {
@@ -70,12 +70,11 @@
     };
 
     postgresql.ensureDatabases = [ "forgejo" ];
-    postgresql.ensureUsers = [
-      {
-        name = "forgejo";
-        ensureDBOwnership = true;
-      }
-    ];
+    postgresql.ensureUsers = [ {
+      name = "forgejo";
+      ensureDBOwnership = true;
+    } ];
+
     postgresqlBackup.databases = [ "forgejo" ];
   };
 

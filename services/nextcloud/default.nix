@@ -6,7 +6,7 @@
 }:
 {
 
-  imports = [ ./postgresql ];
+  imports = [ ../postgresql ];
 
   environment = {
     persistence."/state/system".directories = [
@@ -133,12 +133,11 @@
     };
 
     postgresql.ensureDatabases = [ "nextcloud" ];
-    postgresql.ensureUsers = [
-      {
-        name = "nextcloud";
-        ensureDBOwnership = true;
-      }
-    ];
+    postgresql.ensureUsers = [ {
+      name = "nextcloud";
+      ensureDBOwnership = true;
+    } ];
+
     postgresqlBackup.databases = [ "nextcloud" ];
   };
 
