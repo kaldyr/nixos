@@ -1,6 +1,6 @@
 { lib, pkgs, ... }: {
 
-  imports = [ ../programs/openstarbound ];
+  imports = [ ../../programs/openstarbound ];
 
   networking.firewall.allowedTCPPorts = [ 21025 ];
 
