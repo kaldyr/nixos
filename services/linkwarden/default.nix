@@ -1,4 +1,4 @@
-{
+{ config, ... }: {
   imports = [ ../postgresql ];
 
   environment.persistence."/state/system".directories = [
@@ -21,6 +21,12 @@
         createLocally = true;
       };
 
+      environment = {
+        DATABASE_URL = "postgresql://linkwarden@localhost:5432/linkwarden";
+        NEXTAUTH_SECRET = config.sops.secrets.linkwarden-nextauth-secret.path;
+        NEXTAUTH_URL = "http://localhost:9002/api/v1/auth";
+      };
+
       enableRegistration = true;
       user = "linkwarden";
       group = "linkwarden";
@@ -38,6 +44,12 @@
     } ];
 
     postgresqlBackup.databases = [ "linkwarden" ];
+  };
+
+  sops.secrets.linkwarden-nextauth-secret = {
+    owner = "linkwarden";
+    group = "linkwarden";
+    mode = "0400";
   };
 
   users.extraUsers."linkwarden" = {
