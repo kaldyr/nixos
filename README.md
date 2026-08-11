@@ -3,7 +3,7 @@
 ## Table of Contents
 
 1. [Description](#description)
-1. Notable Customizations
+1. [Notable Customizations](#notable-customizations)
 1. [Boot Install Media](#boot-install-media)
 1. [Partition the Drive](#partition-the-drive)
 1. [Setup the Config Folder](#setup-the-config-folder)
