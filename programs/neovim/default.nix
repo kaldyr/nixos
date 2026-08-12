@@ -56,10 +56,12 @@
     xdg = {
       configFile."nvim".source =
         config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/neovim/config/";
+
       desktopEntries.nvim = {
         name = "Neovim Wrapper";
         noDisplay = true;
       };
+
       mimeApps.associations.added."text/plain" = [ "nvim.desktop" ];
     };
   };

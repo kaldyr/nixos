@@ -1,9 +1,11 @@
-# NixOS Installation
+# NixOS Config
 
 ## Table of Contents
 
-1. [Description](#description)
+1. [Machines](#machines)
 1. [Notable Customizations](#notable-customizations)
+1. [TODO](#todo)
+1. [Install](#install)
 1. [Boot Install Media](#boot-install-media)
 1. [Partition the Drive](#partition-the-drive)
 1. [Setup the Config Folder](#setup-the-config-folder)
@@ -15,16 +17,18 @@
 This is a multi-system and multi-user flake. It has laptops, desktops, and home server.  
 The goal is a simple configuration where possible and application native config for more involved apps.
 
-### ☕ Espresso
+# Machines
+
+## ☕ Espresso
 - Desktop: Minisforum UM790 Pro
 - Hyprland
 
-### ⚔ Hofud
+## ⚔ Hofud
 - Desktop: Framework 13 11th Gen i5-1135G7 motherboard
 - Currently down while waiting for parts
 - Hyprland
 
-### 🪐 Magrathea
+## 🪐 Magrathea
 - Home server: Intel i5-2500k still kicking
 - Nextcloud  (Remove soon)
 - Immich  (Soon, to replace nextcloud)
@@ -37,28 +41,28 @@ The goal is a simple configuration where possible and application native config 
 - Kodi
 - NAS with Samba
 
-### 🔨 Mjolnir
+## 🔨 Mjolnir
 - Laptop: Framework 13 Intel Core Ultra x7 358H in 1st gen chassis
 - Hyprland
 
-### 🚀 Normandy
+## 🚀 Normandy
 - Desktop: Ryzen 7 3700X, Radeon RX 7600
 - Trial to save this machine from windows hell
 - Hyprland
 
-### 🍵Oolong
+## 🍵Oolong
 - Laptop: Dell Inspiron
 - Budgie
 
-### 🚀 Serenity
+## 🚀 Serenity
 - Home server: Ryzen 2400g
 - Off-site backup
 - Kodi
 - NAS with Samba
 
-## Notable customizations
+# Notable customizations
 
-### Keybinds  
+## Keybinds  
 - Keyd used to remap capslock to escape and a custom layer
 - Unified keybinds between applications
 
@@ -72,9 +76,9 @@ Caps+hjkl - arrow keys
 , - tab previous  
 . - tab next
 
-## [TODO]
+# [TODO]
 
-### Installation Media
+## Installation Media
 
 - Custom Installation media
 - Has full nix store pre built for every machine output
@@ -82,14 +86,16 @@ Caps+hjkl - arrow keys
 - Hyprland environment with all familiar customiazations
 - All tools required to build pre-installed (disko, etc)
 
-### Replace Nextcloud
+## Replace Nextcloud
 
 - Radicale for CalDAV + CardDAV
 - Immich for photo management, sync from phones, sharing with family
 - Syncthing for file/folder syncing, browser profile backup
 - ~Linkwarden for bookmarks~ DONE
 
-### Finally work with snapshots
+## Finally work with snapshots
+
+# Install
 
 ## Boot Install Media
 
@@ -137,7 +143,7 @@ umount /storage
 nixos-generate-config --root /mnt
 ```
 
-### Install the configuration
+## Install the configuration
 
 ```fish
 mkdir /mnt/nix/config
@@ -166,7 +172,7 @@ nixos-enter
 
 ### Manual Interventions
 
-#### Samba
+#### Samba Servers
 
 ```fish
 sudo smbpasswd -a USERNAME

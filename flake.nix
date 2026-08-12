@@ -80,17 +80,17 @@
             buildSystem sysConfig;
 
           # Hofud: Framework 13 11th gen Intel i5-1135G7
-          "hofud" =
-            let
-              sysConfig = {
-                hostname = "hofud";
-                stateVersion = ""; # In Limbo, waiting on parts
-                user = "";
-                systemImpermanence = true;
-                homeImpermanence = true;
-              };
-            in
-            buildSystem sysConfig;
+          # "hofud" =
+          #   let
+          #     sysConfig = {
+          #       hostname = "hofud";
+          #       stateVersion = ""; # In Limbo, waiting on parts
+          #       user = "";
+          #       systemImpermanence = true;
+          #       homeImpermanence = true;
+          #     };
+          #   in
+          #   buildSystem sysConfig;
 
           # Magrathea: Intel i5-2500K Nextcloud server with Kodi, media storage, and snapshot backups
           "magrathea" =
@@ -145,17 +145,17 @@
             buildSystem sysConfig;
 
           # Serenity: Ryzen 5 2400g Kodi, media storage, and off-site snapshot backups
-          "serenity" =
-            let
-              sysConfig = {
-                hostname = "serenity";
-                stateVersion = ""; # Haven't installed yet
-                user = "matt";
-                systemImpermanence = true;
-                homeImpermanence = true;
-              };
-            in
-            buildSystem sysConfig;
+          # "serenity" =
+          #   let
+          #     sysConfig = {
+          #       hostname = "serenity";
+          #       stateVersion = ""; # Haven't installed yet
+          #       user = "matt";
+          #       systemImpermanence = true;
+          #       homeImpermanence = true;
+          #     };
+          #   in
+          #   buildSystem sysConfig;
         };
     };
 }
