@@ -78,7 +78,12 @@
     enableRedistributableFirmware = true;
   };
 
-  networking.firewall.allowedUDPPortRanges = [ { from = 1000; to = 1005; } ]; # AoeO
+  networking.firewall.allowedUDPPortRanges = [
+    {
+      from = 1000;
+      to = 1005;
+    }
+  ]; # AoeO
 
   # networking = {
   #     bridges."br0".interfaces = [ "enp1s0" ];
@@ -118,19 +123,18 @@
 
     pipewire.wireplumber.extraConfig."50-device-priority" = {
       "wireplumber.settings" = {
-        "node.restore-default-targets" = false;
         "device.restore-profile" = false;
+        "node.restore-default-targets" = false;
       };
 
-      "device.profile.priority.rules" = [ {
-        matches = [ { "device.name" = "alsa_card.pci-0000_00_1f.3"; } ];
-        priorities = [
-          "hdmi-stereo"
-          "analog-stereo"
-        ];
-      } ];
-
       "monitor.alsa.rules" = [
+        {
+          matches = [ { "device.name" = "alsa_card.pci-0000_00_1f.3"; } ];
+          actions.update-props = {
+            "api.acp.auto-profile" = true;
+            "api.acp.auto-port" = true;
+          };
+        }
         {
           matches = [ { "node.name" = "alsa_output.pci-0000_00_1f.3.analog-stereo"; } ];
           actions."update-props"."priority.session" = 1000;

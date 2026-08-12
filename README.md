@@ -30,9 +30,9 @@ The goal is a simple configuration where possible and application native config 
 - Immich  (Soon, to replace nextcloud)
 - Radicale  (Soon, to replace nextcloud)
 - Syncthing  (Soon, to replace nextcloud)
-- Forgejo (Gitea)
-- Linkwarden
-- Technitium
+- Forgejo (Gitea) served to tailnet
+- Linkwarden served to tailnet
+- Technitium dns for tailnet
 - Open Starbound
 - Kodi
 - NAS with Samba
@@ -87,7 +87,7 @@ Caps+hjkl - arrow keys
 - Radicale for CalDAV + CardDAV
 - Immich for photo management, sync from phones, sharing with family
 - Syncthing for file/folder syncing, browser profile backup
-- Linkwarden for bookmarks
+- ~Linkwarden for bookmarks~ DONE
 
 ### Finally work with snapshots
 

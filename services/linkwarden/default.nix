@@ -32,7 +32,7 @@
 
       host = "127.0.0.1";
       port = 9002;
-      openFirewall = true;
+      openFirewall = false;
 
       secretFiles.NEXTAUTH_SECRET = config.sops.secrets.linkwarden-nextauth-secret.path;
       storageLocation = "/var/lib/linkwarden";
