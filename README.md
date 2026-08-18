@@ -47,7 +47,7 @@ The goal is a simple configuration where possible and application native config 
 
 ## 🚀 Normandy
 - Desktop: Ryzen 7 3700X, Radeon RX 7600
-- Trial to save this machine from windows hell
+- Trial to save wife's machine from windows hell
 - Hyprland
 
 ## 🚀 Serenity
@@ -88,8 +88,6 @@ Caps+hjkl - arrow keys
 - Immich for photo management, sync from phones, sharing with family
 - Syncthing for file/folder syncing, browser profile backup
 - ~Linkwarden for bookmarks~ DONE
-
-## Finally work with snapshots
 
 # Install
 
