@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }: {
+{
+  inputs,
+  pkgs,
+  ...
+}:
+{
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     ../disko/magrathea.nix
@@ -48,10 +53,6 @@
         "mode=755"
       ];
     };
-
-    "/etc/ssh".neededForBoot = true;
-    "/nix".neededForBoot = true;
-    "/state".neededForBoot = true;
 
     "/storage/media" = {
       device = "/dev/disk/by-uuid/c3cb725e-8cee-4690-a44d-114100497133";

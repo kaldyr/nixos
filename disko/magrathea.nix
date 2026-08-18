@@ -45,43 +45,19 @@
                 ];
               in
               {
-                # SSH subvolume.  Race condition when symlinking and/or persisting with sops-nix
-                "@etc_ssh" = {
-                  mountpoint = "/etc/ssh";
-                  mountOptions = driveOptions;
-                };
-                # Files to be preserved between boots that can be regenerated easily
-                "@nix" = {
-                  mountpoint = "/nix";
-                  mountOptions = driveOptions;
-                };
-                # Files to be preserved between boots and be backed up to restore machine state
-                "@state" = {
-                  mountpoint = "/state";
-                  mountOptions = driveOptions;
-                };
-                # Snapshot storage
-                "@snaps" = {
-                  mountpoint = "/snaps";
-                  mountOptions = driveOptions;
-                };
-                # Swapfile
-                "@swap" = {
-                  mountpoint = "/swap";
-                  swap.swapfile.size = "16G";
-                };
+                "@data" = { mountpoint = "/data"; mountOptions = driveOptions; };
+                "@home" = { mountpoint = "/home"; mountOptions = driveOptions; };
+                "@nix" = { mountpoint = "/nix"; mountOptions = driveOptions; };
+                "@state" = { mountpoint = "/state"; mountOptions = driveOptions; };
+                "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "16G"; };
 
-                # Mysql
+                # Postgres
                 # Databases should not be stored with CoW property
                 # This will disable CoW, checksums, and compression for the database
                 # Do not snapshot this subvolume!
                 # After Disko does its thing, and before installing nixos, run the following:
-                #   chattr +C /var/lib.postgresql
-                "@mysql" = {
-                  mountpoint = "/var/lib/postgresql";
-                  mountOptions = driveOptions;
-                };
-                # FIXME: Change name from @mysql to @sql next install
+                #   chattr +C /var/lib/postgresql
+                "@postgres" = { mountpoint = "/var/lib/postgresql"; mountOptions = driveOptions; };
               };
           };
         };

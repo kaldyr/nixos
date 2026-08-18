@@ -1,5 +1,4 @@
 {
-  lib,
   pkgs,
   sysConfig,
   ...
@@ -12,43 +11,16 @@
     ../programs/helium
     ../programs/keepass
     ../programs/kitty
-    ../programs/libreoffice
     ../programs/mpv
+    ../programs/nautilus
     ../programs/newsboat
-    ../programs/obsidian
-    ../programs/telegram
     ../programs/zathura
     ../services/pipewire
   ];
 
-  environment = {
-    etc."fuse.conf".text = /* bash */ ''
-      user_allow_other
-    '';
-
-    # Home files that need to be preserved between boots
-    #  These files are synced and do not need to be in snapshots
-
-    persistence = lib.mkIf sysConfig.homeImpermanence {
-      "/nix" = {
-        hideMounts = true;
-        users.${sysConfig.user}.directories = [
-          ".config/gnome-games"
-          ".local/share/applications"
-          ".local/share/icons"
-          "Books"
-          "Documents"
-          "Downloads"
-          "Music"
-          "Notes"
-          "Pictures"
-          "Projects"
-          "Roms"
-          "Videos"
-        ];
-      };
-    };
-  };
+  environment.etc."fuse.conf".text = /* bash */ ''
+    user_allow_other
+  '';
 
   fonts = {
     enableDefaultPackages = false;
@@ -216,6 +188,7 @@
     home = {
       packages = with pkgs; [
         android-tools
+        evince
         gimp
         gnome-keyring
         gnuplot
@@ -224,9 +197,12 @@
         imagemagick
         inkscape
         kjv
+        libreoffice
         libsecret
         networkmanagerapplet
+        obsidian
         papirus-folders
+        telegram-desktop
         vulkan-tools
         xdg-user-dirs
         xdg-utils

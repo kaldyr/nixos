@@ -1,17 +1,18 @@
 {
-  lib,
   pkgs,
-  sysConfig,
   ...
 }:
 {
-  environment.persistence."/nix/system" = lib.mkIf sysConfig.systemImpermanence {
+  environment.persistence."/state" = {
     directories = [
-      "/var/lib/cups"
-      "/var/spool/cups"
       "/var/cache/cups"
+      "/var/lib/cups/ppd"
+      "/var/lib/cups/ssl"
       "/var/log/cups"
+      "/var/spool/cups"
     ];
+
+    files = [ "/var/lib/cups/printers.conf" ];
   };
 
   services.printing.enable = true;

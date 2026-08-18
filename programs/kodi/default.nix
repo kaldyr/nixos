@@ -1,12 +1,5 @@
 { pkgs, ... }: {
-  environment.persistence."/state".users.matt.directories = [
-    {
-      directory = ".cache";
-      mode = "0700";
-    }
-    ".compose-cache"
-    ".kodi"
-  ];
+  environment.persistence."/state".directories = [ "/var/lib/kodi/.kodi" ];
 
   networking.firewall.allowedTCPPorts = [
     8080
@@ -19,7 +12,7 @@
 
   services = {
     displayManager.autoLogin.enable = true;
-    displayManager.autoLogin.user = "matt";
+    displayManager.autoLogin.user = "kodi";
     pipewire.systemWide = true;
 
     xserver = {
@@ -40,10 +33,15 @@
     };
   };
 
-  users.extraUsers.kodi.isNormalUser = true;
-  users.extraUsers.kodi.extraGroups = [
-    "audio"
-    "pipewire"
-    "video"
-  ];
+  users.extraUsers.kodi = {
+    isNormalUser = true;
+
+    home = "/var/lib/kodi";
+
+    extraGroups = [
+      "audio"
+      "pipewire"
+      "video"
+    ];
+  };
 }

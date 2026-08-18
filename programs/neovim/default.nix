@@ -1,18 +1,9 @@
 {
-  lib,
   pkgs,
   sysConfig,
   ...
 }:
 {
-  environment.persistence = lib.mkIf sysConfig.homeImpermanence {
-    "/nix".users.${sysConfig.user}.directories = [
-      ".cache/nvim"
-      ".local/share/nvim"
-      ".local/state/nvim"
-    ];
-  };
-
   home-manager.users.${sysConfig.user} = { config, ... }: {
     home.file.".local/share/nvim/grammars".source = pkgs.symlinkJoin {
       name = "nvim-treesitter-grammars";

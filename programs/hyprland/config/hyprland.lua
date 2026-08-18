@@ -783,10 +783,22 @@ wr({
 	size = win_large_size()
 })
 
+wr({ -- Starbound
+	name             = 'starbound',
+	match            = { class = 'starbound' },
+	content          = 'game',
+	no_blur          = true,
+	no_shadow        = true,
+	opaque           = true,
+	render_unfocused = true,
+	rounding         = 6,
+	stay_focused     = false,
+})
+
 wr({
-	name = 'steam',
-	match = { class = '^steam$', title = '^Steam$' },
-	float = false,
+	name    = 'steam',
+	match   = { class = '^steam$', title = '^Steam$' },
+	float   = false,
 	opacity = '0.85',
 })
 

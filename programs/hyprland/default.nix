@@ -16,14 +16,6 @@
     ../../services/udiskie
   ];
 
-  environment.persistence = lib.mkIf sysConfig.homeImpermanence {
-    "/nix".users.${sysConfig.user}.directories = [
-      ".cache/hyprland"
-      ".config/easyeffects"
-      ".local/share/godot"
-    ];
-  };
-
   environment.sessionVariables."WLR_RENDERER" = "vulkan";
 
   home-manager.users.${sysConfig.user} = { config, ... }: {

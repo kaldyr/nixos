@@ -35,58 +35,22 @@
     };
   };
 
-  environment = {
-    defaultPackages = lib.mkForce [ ];
+  environment.defaultPackages = lib.mkForce [ ];
 
-    # Home files that aren't declarative and need to be preserved
-    persistence."/nix" = lib.mkIf sysConfig.homeImpermanence {
-      hideMounts = true;
-      users.${sysConfig.user}.directories = [
-        {
-          directory = ".config/sops/age";
-          mode = "0700";
-        }
-        {
-          directory = ".gnupg";
-          mode = "0700";
-        }
-        {
-          directory = ".local/share/keyrings";
-          mode = "0700";
-        }
-        {
-          directory = ".ssh";
-          mode = "0700";
-        }
-      ];
-    };
-
-    # System files that aren't declarative and need to be preserved
-    persistence."/nix/system" = lib.mkIf sysConfig.systemImpermanence {
-      directories = [
-        {
-          directory = "/etc/NetworkManager/system-connections";
-          mode = "0700";
-        }
-        {
-          directory = "/var/lib/bluetooth";
-          mode = "0700";
-        }
-        "/var/lib/nixos"
-        "/var/lib/systemd/coredump"
-        {
-          directory = "/var/lib/tailscale";
-          mode = "0700";
-        }
-        "/var/log"
-        {
-          directory = "/var/lib/fprint";
-          mode = "0700";
-        }
-      ];
-      files = [ "/etc/machine-id" ];
-    };
+  environment.persistence."/state" = {
+    directories = [
+      "/etc/NetworkManager/system-connections"
+      "/var/lib/bluetooth"
+      "/var/lib/nixos"
+      { directory = "/var/lib/tailscale"; mode = "0700"; }
+      "/var/log"
+    ];
+    files = [ "/etc/machine-id" ];
   };
+
+
+  fileSystems."/nix".neededForBoot = true;
+  fileSystems."/state".neededForBoot = true;
 
   home-manager.users.${sysConfig.user}.home.packages = with pkgs; [
     age
@@ -98,7 +62,6 @@
     gdu
     gnupg
     jq
-    lazyjournal
     p7zip
     sops
     ssh-to-age
@@ -161,10 +124,8 @@
       let
         machines = {
           espresso = "matshkas";
-          hofud = "matt";
           magrathea = "matt";
           mjolnir = "matt";
-          serenity = "matt";
         };
       in
       lib.concatStringsSep "\n" (
@@ -180,7 +141,7 @@
             ControlMaster auto
             ControlPersist 10m
         '') machines
-        ++ [ "Include ${config.sops.secrets.ssh-config-extra-hosts.path}" ]
+        # ++ [ "Include ${config.sops.secrets.ssh-config-extra-hosts.path}" ]
       );
   };
 
@@ -199,24 +160,30 @@
   services = {
     fwupd.enable = true;
     irqbalance.enable = true;
+
+    journald.extraConfig = ''
+      MaxRetentionSec=7day
+    '';
+
     libinput.enable = true;
 
     openssh = {
       enable = true;
 
       allowSFTP = true;
+      hostKeys = [{
+        path = "/state/ssh/ssh_host_ed25519_key";
+        type = "ed25519";
+      }];
+
 
       knownHosts = {
         "espresso".publicKey =
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICKugLnV4qqCMN5dhN4BWEx9Q7OG+BAk0a+2RzNmzFhr root@espresso";
-        "hofud".publicKey =
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGYN+zwhYvBqGaKgxSPEVLj6KE2uGdbPUR1se1hN+1NG root@hofud";
         "magrathea".publicKey =
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKymXBmxO/Yb9lFRyW+w1O3mZ7I6iLgnxW0kgI/4e1O3 root@magrathea";
         "mjolnir".publicKey =
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEsWi8zGLMuMJM+2wawmRFEE6Qmnabq3kA4Rj3bLBBJ6 root@mjolnir";
-        "oolong".publicKey =
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIECVKXiwEIQDR5+EJKCDXYNWAE7QZsAmakeDj+htH4FU root@oolong";
       };
 
       settings = {
@@ -230,9 +197,12 @@
     timesyncd.enable = true;
   };
 
-  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-  sops.defaultSopsFile = ../secrets.yaml;
-  sops.secrets.ssh-config-extra-hosts.mode = "0444";
+  sops = {
+    age.keyFile = "/state/age/keys.txt";
+    age.sshKeyPaths = lib.mkForce [];
+    defaultSopsFile = ../secrets.yaml;
+    secrets.ssh-config-extra-hosts.mode = "0444";
+  };
 
   system.stateVersion = sysConfig.stateVersion;
 

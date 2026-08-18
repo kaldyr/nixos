@@ -1,13 +1,13 @@
 {
   lib,
   pkgs,
-  sysConfig,
   ...
 }:
 {
-  environment.persistence."/nix/system" = lib.mkIf sysConfig.systemImpermanence {
-    directories = [ "/var/cache/private/llama-cpp" ];
-  };
+  environment.persistence."/state".directories = [ {
+    directory = "/var/cache/private";
+    mode = "0700";
+  } ];
 
   services.llama-cpp = {
     enable = true;
@@ -42,9 +42,5 @@
 
   systemd.services.llama-cpp = {
     wantedBy = lib.mkForce [ ];
-    # environment = {
-    #     GGML_VK_DISABLE_COOPMAT = "0";
-    #     GGML_VK_FORCE_MMQ = "1";
-    # };
   };
 }

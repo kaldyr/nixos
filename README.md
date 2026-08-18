@@ -50,10 +50,6 @@ The goal is a simple configuration where possible and application native config 
 - Trial to save this machine from windows hell
 - Hyprland
 
-## 🍵Oolong
-- Laptop: Dell Inspiron
-- Budgie
-
 ## 🚀 Serenity
 - Home server: Ryzen 2400g
 - Off-site backup
@@ -122,6 +118,12 @@ cd ..
 umount /storage
 ```
 
+After disko runs and mounts the SSD partitions, but before installing the system:
+
+```fish
+chattr +C /var/lib/postgresql
+```
+
 #### Serenity
 
 ```fish
@@ -176,6 +178,14 @@ nixos-enter
 
 ```fish
 sudo smbpasswd -a USERNAME
+```
+
+#### Virtual Machines
+
+If you don't need to snapshot the VMs, disable COW for the image folder BEFORE any files are in the folder
+
+```fish
+chattr +C /local/Machines
 ```
 
 ## Reboot into the New System

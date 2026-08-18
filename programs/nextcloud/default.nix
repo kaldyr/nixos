@@ -1,8 +1,8 @@
-{ lib, sysConfig, ... }: {
-  environment.persistence = lib.mkIf sysConfig.homeImpermanence {
-    "/nix".users.${sysConfig.user}.directories = [ ".config/Nextcloud" ];
-  };
-
+{
+  sysConfig,
+  ...
+}:
+{
   home-manager.users.${sysConfig.user} = { config, ... }: {
     services.nextcloud-client.enable = true;
     services.nextcloud-client.startInBackground = true;

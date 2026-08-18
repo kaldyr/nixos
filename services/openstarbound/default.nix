@@ -1,7 +1,4 @@
 { lib, pkgs, ... }: {
-
-  imports = [ ../../programs/openstarbound ];
-
   networking.firewall.allowedTCPPorts = [ 21025 ];
 
   systemd.services."starbound" = {
@@ -21,10 +18,43 @@
       User = "starbound";
       Group = "starbound";
       DynamicUser = lib.mkForce false;
+      ProtectHome = true;
     };
 
     script = /* bash */ ''
-      ${pkgs.openstarbound}/bin/starbound_server -bootconfig /var/lib/openstarbound/sbinit.config
+      assets="/state/openstarbound";
+      storage="/state/openstarbound/storage";
+      logs="/state/openstarbound/logs";
+      config="$assets/sbinit.config"
+
+      mkdir -p "$assets/assets" \
+               "$assets/mods" \
+               "$storage" \
+               "$logs"
+
+      cat > "$config" <<EOF
+      {
+          "assetDirectories" : [
+              "$assets/assets/",
+              "$assets/mods/",
+              "${pkgs.openstarbound}/assets/"
+          ],
+
+          "storageDirectory" : "$storage/",
+          "logDirectory" : "$logs/"
+      }
+      EOF
+
+      exec ${pkgs.openstarbound}/bin/starbound_server -bootconfig "$config"
     '';
+  };
+
+  users = {
+    groups."starbound" = { };
+
+    extraUsers."starbound" = {
+      group = "starbound";
+      isSystemUser = true;
+    };
   };
 }

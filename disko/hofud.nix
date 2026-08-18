@@ -46,21 +46,10 @@
                   ];
                 in
                 {
-                  # SSH subvolume.  Race condition when symlinking and/or persisting with sops-nix
-                  "@etc_ssh" = {
-                    mountpoint = "/etc/ssh";
-                    mountOptions = driveOptions;
-                  };
-                  # Files to be preserved between boots that can be regenerated easily
-                  "@nix" = {
-                    mountpoint = "/nix";
-                    mountOptions = driveOptions;
-                  };
-                  # Swapfile
-                  "@swap" = {
-                    mountpoint = "/swap";
-                    swap.swapfile.size = "8G";
-                  };
+                  "@home" = { mountpoint = "/home"; mountOptions = driveOptions; };
+                  "@nix" = { mountpoint = "/nix"; mountOptions = driveOptions; };
+                  "@state" = { mountpoint = "/state"; mountOptions = driveOptions; };
+                  "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "8G"; };
                 };
             };
           };

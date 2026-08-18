@@ -1,32 +1,35 @@
-{ pkgs, sysConfig, ... }: {
-  environment = {
-    persistence."/nix/system".directories = [
+{ pkgs, ... }:
+let
+  openstarboundClient = pkgs.writeShellApplication {
+    name = "openstarbound";
+
+    text = ''
+      assets="$HOME/.local/share/openstarbound"
+      storage="$HOME/.local/state/openstarbound/storage"
+      logs="$HOME/.local/state/openstarbound/logs"
+      config="$assets/sbinit.config"
+
+      mkdir -p "$assets/assets" \
+               "$assets/mods" \
+               "$storage" \
+               "$logs"
+
+      cat > "$config" <<EOF
       {
-        directory = "/var/lib/openstarbound";
-        user = "starbound";
-        group = "starbound";
-        mode = "0775";
+          "assetDirectories" : [
+              "$assets/assets/",
+              "$assets/mods/",
+              "${pkgs.openstarbound}/assets/"
+          ],
+          "storageDirectory" : "$storage/",
+          "logDirectory" : "$logs/"
       }
-      {
-        directory = "/var/log/openstarbound";
-        user = "starbound";
-        group = "starbound";
-        mode = "0775";
-      }
-    ];
+      EOF
 
-    systemPackages = with pkgs; [ openstarbound ];
+      exec ${pkgs.openstarbound}/bin/starbound -bootconfig "$config" "$@"
+    '';
   };
-
-  users = {
-    groups."starbound" = { };
-
-    users.${sysConfig.user}.extraGroups = [ "starbound" ];
-
-    extraUsers."starbound" = {
-      group = "starbound";
-      home = "/var/lib/openstarbound";
-      isSystemUser = true;
-    };
-  };
+in
+{
+  environment.systemPackages = [ openstarboundClient ];
 }

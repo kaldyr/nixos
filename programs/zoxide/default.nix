@@ -1,8 +1,8 @@
-{ lib, sysConfig, ... }: {
-  environment.persistence = lib.mkIf sysConfig.homeImpermanence {
-    "/nix".users.${sysConfig.user}.directories = [ ".local/share/zoxide" ];
-  };
-
+{
+  sysConfig,
+  ...
+}:
+{
   home-manager.users.${sysConfig.user} = {
     programs.zoxide.enable = true;
     programs.zoxide.enableFishIntegration = true;

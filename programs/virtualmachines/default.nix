@@ -5,13 +5,6 @@
   ...
 }:
 {
-  environment.persistence."/nix".users.${sysConfig.user} = lib.mkIf sysConfig.homeImpermanence {
-    directories = [
-      ".config/libvirt"
-      "Machines"
-    ];
-  };
-
   environment.systemPackages = with pkgs; [
     dnsmasq
     phodav

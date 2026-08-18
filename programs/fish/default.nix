@@ -1,18 +1,9 @@
 {
-  lib,
   pkgs,
   sysConfig,
   ...
 }:
 {
-  environment.persistence = lib.mkIf sysConfig.homeImpermanence {
-    "/nix".users.${sysConfig.user}.directories = [
-      ".cache/fish/generated_completions"
-      ".config/fish"
-      ".local/share/fish"
-    ];
-  };
-
   home-manager.users.${sysConfig.user} = {
     programs.fish = {
       enable = true;
@@ -39,22 +30,10 @@
       '';
 
       plugins = [
-        {
-          name = "autopair";
-          src = pkgs.fishPlugins.autopair;
-        }
-        {
-          name = "fzf-fish";
-          src = pkgs.fishPlugins.fzf-fish;
-        }
-        {
-          name = "puffer";
-          src = pkgs.fishPlugins.puffer;
-        }
-        {
-          name = "sponge";
-          src = pkgs.fishPlugins.sponge;
-        }
+        { name = "autopair"; src = pkgs.fishPlugins.autopair; }
+        { name = "fzf-fish"; src = pkgs.fishPlugins.fzf-fish; }
+        { name = "puffer"; src = pkgs.fishPlugins.puffer; }
+        { name = "sponge"; src = pkgs.fishPlugins.sponge; }
       ];
 
       shellAliases = {

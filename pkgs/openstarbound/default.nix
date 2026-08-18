@@ -1,20 +1,6 @@
 { lib, pkgs, ... }:
 let
   imgui = pkgs.callPackage ../imgui { };
-
-  defaultConfig = ''
-    {
-        \"assetDirectories\" : [
-            \"/var/lib/openstarbound/assets/\",
-            \"/var/lib/openstarbound/mods/\",
-            \"$out/assets/\"
-        ],
-
-        \"storageDirectory\" : \"/var/lib/openstarbound/storage/\",
-        \"logDirectory\" : \"/var/log/openstarbound/\"
-    }
-  '';
-
 in
 pkgs.clangStdenv.mkDerivation {
 
@@ -75,7 +61,6 @@ pkgs.clangStdenv.mkDerivation {
     runHook preInstall
 
     mkdir -p $out/bin/ $out/libexec
-    echo "${defaultConfig}" > $out/bin/sbinit.config
 
     cp  -r ../dist/* $out/libexec >/dev/null 2>&1 || true
 

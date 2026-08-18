@@ -1,19 +1,9 @@
 {
-  lib,
   pkgs,
   sysConfig,
   ...
 }:
 {
-  environment.persistence = lib.mkIf sysConfig.homeImpermanence {
-    "/nix".users.${sysConfig.user}.directories = [
-      {
-        directory = ".config/net.imput.helium";
-        mode = "0700";
-      }
-    ];
-  };
-
   home-manager.users.${sysConfig.user} = {
     home.packages = with pkgs; [ helium ];
 

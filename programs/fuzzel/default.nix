@@ -1,8 +1,8 @@
-{ lib, sysConfig, ... }: {
-  environment.persistence = lib.mkIf sysConfig.homeImpermanence {
-    "/nix".users.${sysConfig.user}.files = [ ".cache/fuzzel" ];
-  };
-
+{
+  sysConfig,
+  ...
+}:
+{
   home-manager.users.${sysConfig.user} = { config, ... }: {
     programs.fuzzel.enable = true;
 

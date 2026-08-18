@@ -11,6 +11,7 @@
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     ../disko/normandy.nix
     ./desktop.nix
+    ../programs/ageofempiresonline
     ../programs/hyprland
     ../programs/lutris
     ../programs/nextcloud
@@ -39,31 +40,21 @@
     loader.grub.gfxmodeEfi = "2560x1440";
   };
 
-  environment.systemPackages = with pkgs; [
-    evince
-    orca-slicer
-  ];
+  environment.systemPackages = with pkgs; [ orca-slicer ];
 
-  fileSystems = {
-    "/" = {
-      device = "none";
-      fsType = "tmpfs";
-      neededForBoot = true;
-      options = [
-        "defaults"
-        "size=16G"
-        "mode=755"
-      ];
-    };
-    "/etc/ssh".neededForBoot = true;
-    "/home".neededForBoot = true;
-    "/nix".neededForBoot = true;
+  fileSystems."/" = {
+    device = "none";
+    fsType = "tmpfs";
+    neededForBoot = true;
+    options = [
+      "defaults"
+      "size=16G"
+      "mode=755"
+    ];
   };
 
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;
-
-  networking.firewall.allowedUDPPortRanges = [ { from = 1000; to = 1005; } ]; # AoeO
 
   time.timeZone = "America/Los_Angeles";
 }

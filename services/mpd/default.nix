@@ -1,19 +1,9 @@
 {
-  lib,
   pkgs,
   sysConfig,
   ...
 }:
 {
-  environment.persistence = lib.mkIf sysConfig.homeImpermanence {
-    "/nix".users.${sysConfig.user}.directories = [
-      {
-        directory = ".local/share/mpd";
-        mode = "0700";
-      }
-    ];
-  };
-
   home-manager.users.${sysConfig.user} = {
     home.packages = with pkgs; [
       mpd

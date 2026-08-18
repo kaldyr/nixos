@@ -71,10 +71,8 @@
             let
               sysConfig = {
                 hostname = "espresso";
-                stateVersion = "26.05"; # Fresh install July 14th, 2026
                 user = "matshkas";
-                systemImpermanence = true;
-                homeImpermanence = false;
+                stateVersion = "26.05"; # Fresh install July 14th, 2026
               };
             in
             buildSystem sysConfig;
@@ -84,10 +82,8 @@
           #   let
           #     sysConfig = {
           #       hostname = "hofud";
-          #       stateVersion = ""; # In Limbo, waiting on parts
           #       user = "";
-          #       systemImpermanence = true;
-          #       homeImpermanence = true;
+          #       stateVersion = ""; # In Limbo, waiting on parts
           #     };
           #   in
           #   buildSystem sysConfig;
@@ -97,10 +93,8 @@
             let
               sysConfig = {
                 hostname = "magrathea";
-                stateVersion = "24.05";
                 user = "matt";
-                systemImpermanence = true;
-                homeImpermanence = true;
+                stateVersion = "24.05";
               };
             in
             buildSystem sysConfig;
@@ -110,10 +104,8 @@
             let
               sysConfig = {
                 hostname = "mjolnir";
-                stateVersion = "26.05"; # Fresh install July 16th, 2026
                 user = "matt";
-                systemImpermanence = true;
-                homeImpermanence = true;
+                stateVersion = "26.05"; # Fresh install July 16th, 2026
               };
             in
             buildSystem sysConfig;
@@ -123,23 +115,8 @@
             let
               sysConfig = {
                 hostname = "normandy";
-                stateVersion = "26.05"; # Fresh install
                 user = "nic";
-                systemImpermanence = true;
-                homeImpermanence = false;
-              };
-            in
-            buildSystem sysConfig;
-
-          # Oolong: Dell Inspiron 14 3473 - 4GB RAM, 32GB SSD
-          "oolong" =
-            let
-              sysConfig = {
-                hostname = "oolong";
-                stateVersion = "24.11"; # Fresh install on December 17th, 2024
-                user = "matshkas";
-                systemImpermanence = false;
-                homeImpermanence = false;
+                stateVersion = "26.05"; # Fresh install
               };
             in
             buildSystem sysConfig;
@@ -149,10 +126,8 @@
           #   let
           #     sysConfig = {
           #       hostname = "serenity";
-          #       stateVersion = ""; # Haven't installed yet
           #       user = "matt";
-          #       systemImpermanence = true;
-          #       homeImpermanence = true;
+          #       stateVersion = ""; # Haven't installed yet
           #     };
           #   in
           #   buildSystem sysConfig;
