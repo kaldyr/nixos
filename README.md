@@ -26,23 +26,25 @@ The goal is a simple configuration where possible and application native config 
 ## ⚔ Hofud
 - Desktop: Framework 13 11th Gen i5-1135G7 motherboard
 - Currently down while waiting for parts
-- Hyprland
+- Computer for homeschooling
 
 ## 🪐 Magrathea
 - Home server: Intel i5-2500k still kicking
+- Potential upgrade:  Odroid H5 HDMI-CEC and m.2280 -> 6 SATA ports
 - Nextcloud  (Remove soon)
-- Immich  (Soon, to replace nextcloud)
-- Radicale  (Soon, to replace nextcloud)
-- Syncthing  (Soon, to replace nextcloud)
-- Forgejo (Gitea) served to tailnet
-- Linkwarden served to tailnet
+- Immich  (Will replace nextcloud)
+- Radicale  (Will replace nextcloud)
+- Syncthing  (Will replace nextcloud)
+- Forgejo (Private Git) served to tailnet
+- Linkwarden served to tailnet (Bookmarks and Site Archiving)
+- Kodi Media Center to TV and streaming media to devices
 - Technitium dns for tailnet
 - Open Starbound
-- Kodi
 - NAS with Samba
 
 ## 🔨 Mjolnir
 - Laptop: Framework 13 Intel Core Ultra x7 358H in 1st gen chassis
+- Future upgrades:  Pro input cover kit (haptic trackpad), 4.0kg hinge kit, Wi-Fi 7 module
 - Hyprland
 
 ## 🚀 Normandy
