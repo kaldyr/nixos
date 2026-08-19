@@ -1,5 +1,6 @@
 {
   inputs,
+  lib,
   pkgs,
   ...
 }:
@@ -7,12 +8,11 @@
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     ../disko/magrathea.nix
-    ../programs/kodi
     ../services/forgejo
+    ../services/kodi
     ../services/linkwarden
     ../services/nextcloud
     ../services/openstarbound
-    ../services/pipewire
     ../services/technitium
   ];
 
@@ -75,11 +75,22 @@
     };
   };
 
-  hardware.enableRedistributableFirmware = true;
-  hardware.enableAllFirmware = true;
-  time.timeZone = "America/Los_Angeles";
+  hardware = {
+    alsa.enable = true;
+
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [ intel-media-driver ];
+    };
+
+    enableRedistributableFirmware = true;
+    enableAllFirmware = true;
+  };
 
   services = {
+    pipewire.enable = lib.mkForce false;
+    pulseaudio.enable = lib.mkForce false;
+
     samba = {
       enable = true;
       package = pkgs.samba;
@@ -173,4 +184,7 @@
 
   # Group that can access tailscale certificates
   users.groups."webservice" = { };
+
+  time.timeZone = "America/Los_Angeles";
 }
+
