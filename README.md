@@ -74,7 +74,7 @@ Caps+hjkl - arrow keys
 , - tab previous  
 . - tab next
 
-# [TODO]
+# TODO
 
 ## Installation Media
 
@@ -86,6 +86,7 @@ Caps+hjkl - arrow keys
 
 ## Replace Nextcloud
 
+- Migrate Espresso to new impermanence disk layout
 - Radicale for CalDAV + CardDAV
 - Immich for photo management, sync from phones, sharing with family
 - Syncthing for file/folder syncing, browser profile backup
