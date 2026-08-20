@@ -25,11 +25,6 @@
     #  Can remove when it becomes available in nixpkgs.
     helium.url = "github:schembriaiden/helium-browser-nix-flake";
     helium.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Yazi file manager
-    #  Locked 2026-08-07 for Drag & Drop support.
-    #  Remove when merged into a release and nixpkgs has new version.
-    yazi.url = "github:sxyazi/yazi/f42a0df4df829b3c774e8f6dd03e10353269a23b";
   };
 
   outputs =

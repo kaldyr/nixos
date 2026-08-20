@@ -3,11 +3,21 @@
   sysConfig,
   ...
 }:
+let
+  discord = pkgs.discord.override {
+    withVencord = true;
+
+    commandLineArgs =
+      "--enable-blink-features=MiddleClickAutoscroll "
+      + "--enable-features=WebRTCPipeWireCapturer,UseOzonePlatform "
+      + "--ozone-platform=x11";
+  };
+in
 {
   home-manager.users.${sysConfig.user} = {
     home.packages = with pkgs; [
-      libevdev
       discord
+      libevdev
       wayland-push-to-talk-fix
       xdotool
     ];
