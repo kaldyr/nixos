@@ -156,22 +156,22 @@ Immutable media library
 
 ## Create @state, generate new age key, convert to new method
 
-- [x] Mount the btrfs partition without subvol flag
-- [x] Create a new subvolume @state
-- [x] Umount the partition
-- [x] Add the partition to the disko definition
-- [x] Add the needed for boot flag
-- [x] Mount @state to /state
-- [x] Create a folder (root:root:0700) /state/age
-- [x] Generate keys.txt 'age-keygen -o keys.txt'
-- [x] Put public key in the unlock list for .sops.yaml
-- [x] sops update keys
-- [x] Move the current sops key definition from /systems/default.nix to each individual machine
-- [x] Only for current machine: change the sops.age.keyFile to /state/age/keys.txt
+- [ ] Mount the btrfs partition without subvol flag
+- [ ] Create a new subvolume @state
+- [ ] Umount the partition
+- [ ] Add the partition to the disko definition
+- [ ] Add the needed for boot flag
+- [ ] Mount @state to /state
+- [ ] Create a folder (root:root:0700) /state/age
+- [ ] Generate keys.txt 'age-keygen -o keys.txt'
+- [ ] Put public key in the unlock list for .sops.yaml
+- [ ] sops update keys
+- [ ] Move the current sops key definition from /systems/default.nix to each individual machine
+- [ ] Only for current machine: change the sops.age.keyFile to /state/age/keys.txt
 - [ ] Remove the needed for boot flag to /etc/ssh
-- [x] Create a folder (root:root:0755) /state/ssh
-- [x] cp /etc/ssh/ssh_host_ed25519_key /state/ssh
-- [x] Update machine.nix to have services.openssh.hostKeys.path = "/state/ssh/ssh_host_ed25519_key";
+- [ ] Create a folder (root:root:0755) /state/ssh
+- [ ] cp /etc/ssh/ssh_host_ed25519_key /state/ssh
+- [ ] Update machine.nix to have services.openssh.hostKeys.path = "/state/ssh/ssh_host_ed25519_key";
 - [ ] Reboot and verify
 - [ ] Remove the disko @etc_ssh declaration
 - [ ] Unmount /etc/ssh
