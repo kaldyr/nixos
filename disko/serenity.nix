@@ -1,6 +1,5 @@
 {
   # Manual interventions required!!!
-  # Disko cannot apply chattr settings
   # Disko cannot yet handle multiple device btrfs
   # The storage array should not be managed by Disko to preserve data
   disko.devices.disk.main = {
