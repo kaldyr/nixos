@@ -21,6 +21,10 @@
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Chroncal
+    chroncal.url = "github:DouglasdeMoura/chroncal";
+    chroncal.inputs.nixpkgs.follows = "nixpkgs";
+
     # Helium Browser
     #  Can remove when it becomes available in nixpkgs.
     helium.url = "github:schembriaiden/helium-browser-nix-flake";
