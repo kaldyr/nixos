@@ -1,17 +1,19 @@
 keys:
+  - &aziraphale age1gue0qepft3r6x09fdche537klxqt4vtvjep5z53f9rhjh2t0cdms45xe26
   - &espresso age17245y07suqz07qaxwtn49sp9syug97zlqdd4v5hw3l8q3g2wmalsm3q3y7
   - &installer age12w6w86sxqwgp9pvm9r5l42fszjcj7td8zj868ju7v2mz2tskrgzswvzaf8
   - &magrathea age1pwtg5har25xq2l30cpwzsm0hpusgc4ujftnr2ugvk2nnu9mhjdjq4935g4
   - &mjolnir age1h758rkcy7rf9sgcrs39rr9a8snrdsrh9xq7ph99stsytgpjw8smqd6q66y
-  - &matt_magrathea age1g99w2utuz4d2psf5y2pjld5ezhuuhjwvynmp5j762qw7znu6wvhsq8mwhf
-  - &matt_mjolnir age1um585taq4ea4dayx23mjkqehqty2f76n23yk39v7q4c24zyfjq0qqmxl20
+  - &normandy age19q0xv44m0m0qlf3vcy9hwnmw5katzldxp9mwtgsjl9txttksuvusv828z4
+  - &serenity age15uynj4qkewqz3ut9hu2ud7h4f8s5d928qhrwkjw5652ncxa9xc5qafsvs3
 creation_rules:
   - path_regex: secrets.yaml
     key_groups:
     - age:
+      - *aziraphale
       - *espresso
       - *installer
       - *magrathea
       - *mjolnir
-      - *matt_magrathea
-      - *matt_mjolnir
+      - *normandy
+      - *serenity
