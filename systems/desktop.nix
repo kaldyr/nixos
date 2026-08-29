@@ -7,12 +7,12 @@
   imports = [
     ../programs/cava
     ../programs/easyeffects
+    ../programs/evince
     ../programs/helium
     ../programs/keepass
     ../programs/kitty
     ../programs/mpv
     ../programs/nautilus
-    ../programs/newsboat
     ../programs/zathura
     ../services/pipewire
   ];
@@ -187,7 +187,6 @@
     home = {
       packages = with pkgs; [
         android-tools
-        evince
         gimp
         gnome-keyring
         gnuplot
