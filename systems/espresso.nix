@@ -13,8 +13,10 @@
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     ../disko/espresso.nix
     ./desktop.nix
+    ../programs/discord
     ../programs/hyprland
     ../programs/lutris
+    ../programs/newsboat
     ../programs/plymouth
     ../programs/steam
     ../services/keyd

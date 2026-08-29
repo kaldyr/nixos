@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  ...
+}:
 let
   openstarboundClient = pkgs.writeShellApplication {
     name = "openstarbound";

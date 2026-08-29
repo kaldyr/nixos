@@ -12,6 +12,7 @@
     ../disko/normandy.nix
     ./desktop.nix
     ../programs/ageofempiresonline
+    ../programs/discord
     ../programs/gedit
     ../programs/hyprland
     ../programs/lutris

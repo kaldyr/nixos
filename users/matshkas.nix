@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   home-manager.users."matshkas" = {
     home.sessionVariables = {
       EDITOR = "nano";
@@ -29,9 +35,10 @@
     users."matshkas" = {
       description = "Matshkas";
       extraGroups = [
-        "wheel"
+        "input"
         "networkmanager"
         "video"
+        "wheel"
       ];
       hashedPasswordFile = config.sops.secrets.matshkas-password.path;
       isNormalUser = true;

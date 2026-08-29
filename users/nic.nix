@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   home-manager.users."nic" = {
     home.sessionVariables = {
       EDITOR = "nano";
@@ -9,19 +15,19 @@
       "application/audio" = [ "mpv.desktop" ];
       "application/image" = [ "feh.desktop" ];
       "application/md" = [ "helium.desktop" ];
-      "application/pdf" = [ "org.pwmt.zathura.desktop" ];
+      "application/pdf" = [ "org.gnome.Evince.desktop" ];
       "application/video" = [ "mpv.desktop" ];
       "default-web-browser" = [ "helium.desktop" ];
       "inode/directory" = [ "nautilus.desktop" ];
       "text/html" = [ "helium.desktop" ];
-      "text/plain" = [ "gedit.desktop" ];
+      "text/plain" = [ "org.gnome.gedit.desktop" ];
       "x-scheme-handler/ftp" = [ "helium.desktop" ];
       "x-scheme-handler/http" = [ "helium.desktop" ];
       "x-scheme-handler/https" = [ "helium.desktop" ];
     };
   };
 
-  sops.secrets.matshkas-password.neededForUsers = true;
+  sops.secrets.nic-password.neededForUsers = true;
 
   users = {
     mutableUsers = false;
@@ -29,11 +35,12 @@
     users."nic" = {
       description = "Nichole";
       extraGroups = [
-        "wheel"
+        "input"
         "networkmanager"
         "video"
+        "wheel"
       ];
-      hashedPasswordFile = config.sops.secrets.matshkas-password.path;
+      hashedPasswordFile = config.sops.secrets.nic-password.path;
       isNormalUser = true;
 
       openssh.authorizedKeys.keys = [

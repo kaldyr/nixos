@@ -1,4 +1,9 @@
-{ pkgs, sysConfig, ... }: {
+{
+  pkgs,
+  sysConfig,
+  ...
+}:
+{
   environment.systemPackages = with pkgs; [ nautilus ];
 
   home-manager.users.${sysConfig.user} = {

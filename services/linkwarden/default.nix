@@ -1,4 +1,8 @@
-{ config, ... }: {
+{
+  config,
+  ...
+}:
+{
   imports = [ ../postgresql ];
 
   environment.persistence."/state/system".directories = [
@@ -39,10 +43,12 @@
     };
 
     postgresql.ensureDatabases = [ "linkwarden" ];
-    postgresql.ensureUsers = [ {
-      name = "linkwarden";
-      ensureDBOwnership = true;
-    } ];
+    postgresql.ensureUsers = [
+      {
+        name = "linkwarden";
+        ensureDBOwnership = true;
+      }
+    ];
 
     postgresqlBackup.databases = [ "linkwarden" ];
   };

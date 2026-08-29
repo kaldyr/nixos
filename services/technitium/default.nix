@@ -1,4 +1,8 @@
-{ lib, ... }: {
+{
+  lib,
+  ...
+}:
+{
   environment.persistence."/state/system".directories = [
     {
       directory = "/var/lib/technitium-dns-server";

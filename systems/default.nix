@@ -13,7 +13,6 @@
     ../programs/direnv
     ../programs/fish
     ../programs/fzf
-    ../programs/git
     ../programs/lazygit
     ../programs/neovim
     ../programs/qalculate
@@ -54,7 +53,6 @@
 
   home-manager.users.${sysConfig.user}.home.packages = with pkgs; [
     age
-    chroncal
     duf
     exiftool
     eza

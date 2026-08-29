@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }: {
+{
+  lib,
+  pkgs,
+  ...
+}:
+{
   networking.firewall.allowedTCPPorts = [ 21025 ];
 
   systemd.services."starbound" = {

@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  ...
+}:
 pkgs.stdenv.mkDerivation {
 
   pname = "wayland-push-to-talk-fix";

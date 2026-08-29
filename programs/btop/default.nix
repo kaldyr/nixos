@@ -1,4 +1,9 @@
-{ pkgs, sysConfig, ... }: {
+{
+  pkgs,
+  sysConfig,
+  ...
+}:
+{
   home-manager.users.${sysConfig.user} = { config, ... }: {
     programs.btop.enable = true;
 

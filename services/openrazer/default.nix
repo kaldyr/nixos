@@ -1,4 +1,8 @@
-{ sysConfig, ... }: {
+{
+  sysConfig,
+  ...
+}:
+{
   hardware.openrazer.enable = true;
   hardware.openrazer.devicesOffOnScreensaver = true;
 

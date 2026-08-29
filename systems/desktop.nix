@@ -6,7 +6,6 @@
 {
   imports = [
     ../programs/cava
-    ../programs/discord
     ../programs/easyeffects
     ../programs/helium
     ../programs/keepass

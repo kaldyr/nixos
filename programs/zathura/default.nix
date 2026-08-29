@@ -1,4 +1,8 @@
-{ sysConfig, ... }: {
+{
+  sysConfig,
+  ...
+}:
+{
   home-manager.users.${sysConfig.user} = { config, ... }: {
     programs.zathura.enable = true;
 

@@ -1,4 +1,9 @@
-{ inputs, sysConfig, ... }: {
+{
+  inputs,
+  sysConfig,
+  ...
+}:
+{
   home-manager = {
     extraSpecialArgs = { inherit inputs sysConfig; };
     useGlobalPkgs = true;
@@ -11,6 +16,7 @@
         username = sysConfig.user;
       };
 
+      programs.git.enable = true;
       programs.home-manager.enable = true;
 
       # Nicely reload system units when changing configs

@@ -1,9 +1,21 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   home-manager.users."matt" = {
     home.sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
       SOPS_AGE_KEY_FILE = "/state/age/keys.txt";
+    };
+
+    programs.git = {
+      settings.user.email = "kaldyr@gmail.com";
+      settings.user.name = "kaldyr";
+      signing.format = "openpgp";
     };
 
     xdg.mimeApps.defaultApplications = lib.mkForce {
@@ -38,7 +50,7 @@
     users."matt" = {
       description = "Matt";
       extraGroups = [
-        "libvirtd"
+        "input"
         "networkmanager"
         "video"
         "wheel"

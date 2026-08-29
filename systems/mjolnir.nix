@@ -11,9 +11,11 @@
     ../disko/mjolnir.nix
     ./desktop.nix
     ../programs/ageofempiresonline
+    ../programs/discord
     ../programs/gedit
     ../programs/hyprland
     ../programs/lutris
+    ../programs/newsboat
     ../programs/nextcloud
     ../programs/openstarbound
     ../programs/plymouth
@@ -76,7 +78,10 @@
     enableRedistributableFirmware = true;
   };
 
-  home-manager.users.${sysConfig.user}.home.packages = with pkgs; [ openscad ];
+  home-manager.users.${sysConfig.user}.home.packages = with pkgs; [
+    chroncal
+    openscad
+  ];
 
   security.sudo.extraRules = [
     {
