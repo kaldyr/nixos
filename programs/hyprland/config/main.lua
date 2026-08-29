@@ -3,14 +3,6 @@
 ---------------------
 -- vim:fdm=marker:fdl=0:foldmarker=-->,<--
 
-hl.config({
-	debug = {
-		enable_stdout_logs = true,
-		disable_logs = false,
-	},
-})
-
--- Startup applications
 local launch = hl.exec_cmd
 hl.on( 'hyprland.start', function()
 	launch 'wl-paste --type text --watch cliphist store'
@@ -241,20 +233,13 @@ end
 -- Launchers
 b( m..'b',    e('kitty --session ~/.config/kitty/sessions/btop.kitty-session',  { float = true, size = win_large_size() }) )
 b( m..'c',    e('kitty --session ~/.config/kitty/sessions/qalc.kitty-session',  { float = true, size = win_small_size() }) )
-b( m..s..'c', e('kitty --session ~/.config/kitty/sessions/nixos.kitty-session', { float = true, size = win_large_size() }) )
-b( m..'o',    e('kitty --session ~/.config/kitty/sessions/notes.kitty-session', { float = true, size = win_large_size() }) )
-b( m..'y',    e('kitty --session ~/.config/kitty/sessions/yazi.kitty-session',  { float = true, size = win_large_size() }) )
 b( m..'m',    e 'keepmenu' )
 b( m..'q',    e 'kitty' )
-b( m..s..'q', e('kitty', { float = true, size = win_large_size() }) )
 b( m..'r',    e 'fuzzel' )
 b( m..'u',    e 'hyprpicker -a' )
 
 -- Screen Capture
 b( 'PRINT', e 'wlr-which-key --initial-keys "Print"' )
-
--- Play Media
-b( m..'g', e '/nix/config/scripts/yt-dlp.sh' )
 
 -- Notification Controls
 b( m..'n', e 'wlr-which-key --initial-keys "n"' )
@@ -549,19 +534,6 @@ wr({ -- Discord
 	match        = { class = 'discord' },
 	allows_input = true,
 	opacity      = '0.9',
-})
-
-wr({ -- System Tray Icon for Wine Applications
-	name        = 'explorer-exe',
-	match       = { class = '^(explorer.exe)$' },
-	border_size = 1,
-	float       = true,
-	move        = '{0, 0}',
-	no_blur     = false,
-	no_shadow   = true,
-	opaque      = true,
-	rounding    = 10,
-	size        = '{20, 20}',
 })
 
 wr({
