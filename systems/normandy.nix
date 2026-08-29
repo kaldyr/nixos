@@ -26,7 +26,7 @@
 
   boot = {
     extraModulePackages = with pkgs; [ btrfs-progs ];
-    initrd.availableKernelModules = [ ];
+    initrd.availableKernelModules = [ ]; # Fill out
     initrd.kernelModules = [ "amdgpu" ];
     kernel.sysctl."vm.max_map_count" = 16777216;
     kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 1000; # AoeO

@@ -2,6 +2,15 @@
   pkgs,
   ...
 }:
+let
+  kodi = pkgs.kodi-gbm.withPackages (
+    kodiPackages: with kodiPackages; [
+      inputstream-adaptive
+      inputstreamhelper
+      youtube
+    ]
+  );
+in
 {
   environment.persistence."/state".directories = [{
     directory = "/var/lib/kodi/.kodi";
@@ -9,16 +18,6 @@
     group = "kodi";
     mode = "0700";
   }];
-
-  environment.systemPackages = [
-    (pkgs.kodi-gbm.withPackages (
-      kodiPackages: with kodiPackages; [
-        inputstream-adaptive
-        inputstream-ffmpegdirect
-        youtube
-      ]
-    ))
-  ];
 
   networking.firewall.allowedTCPPorts = [
     8080
@@ -30,7 +29,7 @@
 
     settings = rec {
       default_session = initial_session;
-      initial_session.command = "${pkgs.kodi-gbm}/bin/kodi-standalone";
+      initial_session.command = "${kodi}/bin/kodi-standalone";
       initial_session.user = "kodi";
     };
   };

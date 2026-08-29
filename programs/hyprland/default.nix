@@ -51,7 +51,9 @@
 
     xdg.configFile = {
       "hypr/main.lua".source =
-        config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/hyprland.lua";
+        config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/main.lua";
+      "hypr/systems".source =
+        config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/systems";
       "hypr/hypridle.conf".source =
         config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/hyprland/config/hypridle.conf";
       "hypr/hyprlock.conf".source =
@@ -64,6 +66,7 @@
       enable = true;
       configType = "lua";
       extraConfig = ''
+        require('systems.${sysConfig.hostname}')
         require('main')
       '';
       package = null;
