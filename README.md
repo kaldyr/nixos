@@ -76,21 +76,11 @@ Caps+hjkl - arrow keys
 
 # TODO
 
-## Installation Media
-
-- Custom Installation media
-- Has full nix store pre built for every machine output
-- Fully offline install capable
-- Hyprland environment with all familiar customiazations
-- All tools required to build pre-installed (disko, etc)
-
 ## Replace Nextcloud
 
-- Migrate Espresso to new impermanence disk layout
 - Radicale for CalDAV + CardDAV
 - Immich for photo management, sync from phones, sharing with family
 - Syncthing for file/folder syncing, browser profile backup
-- ~Linkwarden for bookmarks~ DONE
 
 # Install
 
@@ -99,7 +89,7 @@ Caps+hjkl - arrow keys
 ## Partition the Drive
 
 ```fish
-sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount /path/to/[system].nix
+disko --mode destroy,format,mount /nix/config/disko/[system].nix
 ```
 
 ### Manual Interventions
@@ -163,7 +153,7 @@ git clone https://github.com/kaldyr/nixos /mnt/nix/config
 
 - Drop the keys in the /mnt system for system and user
 - Generate public keys and user sops key
-- If generating new keys, add them into the .sops.yaml and `sops updatekeys secrets.yaml`
+- If generating new keys, add them into the .sops.yaml and `sudo -E sops updatekeys secrets.yaml`
 
 ## Build the Base System
 

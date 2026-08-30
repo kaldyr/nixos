@@ -1,3 +1,8 @@
+---
+id: STRUCTURE
+aliases: []
+tags: []
+---
 # Desktop layout
 
 - Single SSD
@@ -26,8 +31,8 @@
 - Notes - Syncthing
 - Pictures - Syncthing
 - Projects - Git
-- Roms Syncthing
-- Videos Syncthing
+- Roms - Syncthing
+- Videos - Syncthing
 - User keyrings or keys - ?
 
 ### @nix
@@ -151,43 +156,3 @@ Immutable media library
 - Videos
 
 ### @snaps (snapshot storage)
-
-# Migrating
-
-## Create @state, generate new age key, convert to new method
-
-- [ ] Mount the btrfs partition without subvol flag
-- [ ] Create a new subvolume @state
-- [ ] Umount the partition
-- [ ] Add the partition to the disko definition
-- [ ] Add the needed for boot flag
-- [ ] Mount @state to /state
-- [ ] Create a folder (root:root:0700) /state/age
-- [ ] Generate keys.txt 'age-keygen -o keys.txt'
-- [ ] Put public key in the unlock list for .sops.yaml
-- [ ] sops update keys
-- [ ] Move the current sops key definition from /systems/default.nix to each individual machine
-- [ ] Only for current machine: change the sops.age.keyFile to /state/age/keys.txt
-- [ ] Remove the needed for boot flag to /etc/ssh
-- [ ] Create a folder (root:root:0755) /state/ssh
-- [ ] cp /etc/ssh/ssh_host_ed25519_key /state/ssh
-- [ ] Update machine.nix to have services.openssh.hostKeys.path = "/state/ssh/ssh_host_ed25519_key";
-- [ ] Reboot and verify
-- [ ] Remove the disko @etc_ssh declaration
-- [ ] Unmount /etc/ssh
-- [ ] Mount the btrfs partition without subvol flag
-- [ ] Delete the @etc_ssh subvol
-- [ ] Rebuild and reboot
-
-## machine-id
-
-- [ ] cp /etc/machine-id /state
-- [ ] Remove the environment.persistence file /etc/machine-id
-- [ ] Define the Bind
-- [ ] Rebuild
-- [ ] Reboot
-
-## The rest of /nix/system
-- [ ] copy the folders from /nix/system to /state
-- [ ] Change the config to be "/state"
-- [ ] Rebuild
