@@ -1,4 +1,6 @@
 {
+  fonts.fontconfig.enable = true;
+
   services.kmscon = {
     enable = true;
 
