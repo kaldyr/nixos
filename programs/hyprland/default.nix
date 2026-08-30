@@ -13,7 +13,7 @@
     ../../programs/wlr-which-key
     ../../services/awww
     ../../services/dunst
-    ../../services/udiskie
+    # ../../services/udiskie
   ];
 
   environment.sessionVariables."WLR_RENDERER" = "vulkan";

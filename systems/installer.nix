@@ -1,5 +1,6 @@
 {
   inputs,
+  lib,
   pkgs,
   ...
 }:
@@ -14,7 +15,9 @@
   ];
 
   boot.initrd = {
-    luks.devices."age".device = "/dev/disk/by-uuid/65a8e53b-98f9-4ef2-91c2-a4834825555e";
+    luks.devices = lib.mkForce {
+      "age".device = "/dev/disk/by-uuid/65a8e53b-98f9-4ef2-91c2-a4834825555e";
+    };
     systemd.enable = true;
   };
 
@@ -28,16 +31,14 @@
     sops
   ];
 
-  fileSystems."/nix/config" = {
+  fileSystems."/nix/config" = lib.mkForce {
     device = "/dev/disk/by-uuid/1c20b92b-8bbc-4b15-94f6-a8f9619dccf8";
     fsType = "ext2";
-    neededForBoot = true;
   };
 
-  fileSystems."/state/age" = {
+  fileSystems."/state/age" = lib.mkForce {
     device = "/dev/mapper/age";
     fsType = "ext2";
-    neededForBoot = true;
   };
 
   time.timeZone = "America/Los_Angeles";
