@@ -41,7 +41,7 @@
     sops
   ];
 
-  fileSystems."/state" = {
+  fileSystems."/state/age" = {
     device = "/dev/mapper/state";
     fsType = "btrfs";
     neededForBoot = true;

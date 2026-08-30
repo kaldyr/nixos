@@ -73,8 +73,8 @@
         let
           sysConfig = {
             hostname = "installer";
-            user = "matt";
-            stateVersion = "26.05"; # Fresh install SOON
+            user = "nixos";
+            stateVersion = "26.11"; # Fresh install SOON
           };
         in
         (buildSystem sysConfig).config.system.build.isoImage;

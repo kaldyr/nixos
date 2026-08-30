@@ -63,9 +63,6 @@
         "mode=755"
       ];
     };
-    "/etc/ssh".neededForBoot = true;
-    "/home".neededForBoot = true;
-    "/nix".neededForBoot = true;
   };
 
   hardware.bluetooth.enable = lib.mkForce false;
