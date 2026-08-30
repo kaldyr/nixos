@@ -144,6 +144,9 @@ local map = vim.keymap.set
 map('', '<Space>', '<Nop>')
 map('n', 'Q', '<Nop>')
 
+-- Disable ctrl-z
+map({'n', 'v', 'i', 'x'}, '<c-z>', '<Nop>')
+
 -- Escape removes highlights
 map('n', '<ESC>', '<Cmd>nohls<CR>', { silent = true })
 

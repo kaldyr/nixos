@@ -9,26 +9,13 @@
     ./desktop.nix
     ../programs/gedit
     ../programs/hyprland
-    ../programs/plymouth
     ../services/keyd
     ../services/kmscon
   ];
 
-  boot = {
-    initrd = {
-      availableKernelModules = [
-        "dm_mod"
-        "xts"
-        "aesni_intel"
-      ];
-
-      luks.devices."state" = {
-        device = "/dev/disk/by-uuid/3ad6da6c-7cd9-4480-91fa-83dc1fa40e5f";
-        allowDiscards = false;
-      };
-    };
-
-    zfs.forceImportRoot = false;
+  boot.initrd = {
+    luks.devices."age".device = "/dev/disk/by-uuid/65a8e53b-98f9-4ef2-91c2-a4834825555e";
+    systemd.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -41,15 +28,16 @@
     sops
   ];
 
-  fileSystems."/state/age" = {
-    device = "/dev/mapper/state";
-    fsType = "btrfs";
+  fileSystems."/nix/config" = {
+    device = "/dev/disk/by-uuid/1c20b92b-8bbc-4b15-94f6-a8f9619dccf8";
+    fsType = "ext2";
     neededForBoot = true;
   };
 
-  services = {
-    libinput.touchpad.scrollMethod = "twofinger";
-    libinput.touchpad.accelSpeed = "-0.5";
+  fileSystems."/state/age" = {
+    device = "/dev/mapper/age";
+    fsType = "ext2";
+    neededForBoot = true;
   };
 
   time.timeZone = "America/Los_Angeles";
