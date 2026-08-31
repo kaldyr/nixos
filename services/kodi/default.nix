@@ -1,5 +1,6 @@
 {
   pkgs,
+  sysConfig,
   ...
 }:
 let
@@ -41,6 +42,7 @@ in
     extraGroups = [
       "audio"
       "input"
+      "media"
       "render"
       "video"
     ];
@@ -49,6 +51,8 @@ in
     home = "/var/lib/kodi";
     isSystemUser = true;
   };
+
+  users.users.${sysConfig.user}.extraGroups = [ "kodi" ];
 
   users.groups."kodi" = { };
 }
