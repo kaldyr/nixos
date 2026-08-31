@@ -285,8 +285,6 @@
     #     media-player-info
     # ];
 
-    # udisks2.enable = true;
-    # udisks2.mountOnMedia = true;
     upower.enable = true;
 
     xserver = {
