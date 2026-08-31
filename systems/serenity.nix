@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   lib,
   pkgs,
@@ -10,13 +11,13 @@
     inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
     inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
     inputs.nixos-hardware.nixosModules.common-gpu-amd
-    ../disko/serentiy.nix
+    ../disko/serenity.nix
     ../services/kodi
   ];
 
   boot = {
     extraModulePackages = with pkgs; [ btrfs-progs ];
-    initrd.availableKernelModules = [];
+    initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
     initrd.kernelModules = [ "amdgpu" ];
     kernel.sysctl."vm.max_map_count" = 16777216;
     kernelModules = [ "kvm-amd" ];
@@ -24,6 +25,8 @@
     kernelParams = [ "btrfs" ];
     loader.grub.gfxmodeEfi = "3840x2160,1920x1080";
   };
+
+  environment.systemPackages = with pkgs; [ usbutils ];
 
   fileSystems = {
     "/" = {
@@ -38,7 +41,7 @@
     };
 
     "/media" = {
-      device = "/dev/disk/by-uuid/CHANGEME";
+      device = "/dev/disk/by-uuid/27fb138d-b3c1-4b8f-9110-04a28bcda82c";
       fsType = "btrfs";
       options = [
         "subvol=@media"
@@ -48,7 +51,7 @@
     };
 
     "/snaps" = {
-      device = "/dev/disk/by-uuid/CHANGEME";
+      device = "/dev/disk/by-uuid/27fb138d-b3c1-4b8f-9110-04a28bcda82c";
       fsType = "btrfs";
       options = [
         "subvol=@snaps"
@@ -60,6 +63,7 @@
 
   hardware = {
     alsa.enable = true;
+    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     graphics.enable = true;
     enableRedistributableFirmware = true;
     enableAllFirmware = true;

@@ -183,6 +183,8 @@
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKymXBmxO/Yb9lFRyW+w1O3mZ7I6iLgnxW0kgI/4e1O3 root@magrathea";
         "mjolnir".publicKey =
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEsWi8zGLMuMJM+2wawmRFEE6Qmnabq3kA4Rj3bLBBJ6 root@mjolnir";
+        "serenity".publicKey =
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIENWaDdqWL60ieh/i8at2PzhMPiCreBeKHYBQ5f0kNYA root@serenity";
       };
 
       settings = {

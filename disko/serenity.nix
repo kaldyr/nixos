@@ -4,7 +4,7 @@
   # The storage array should not be managed by Disko to preserve data
   disko.devices.disk.main = {
 
-    device = "";
+    device = "/dev/disk/by-id/ata-KINGSTON_SA400S37120G_50026B76832D3433";
     type = "disk";
 
     content = {
