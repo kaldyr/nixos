@@ -26,7 +26,6 @@
     chroncal.inputs.nixpkgs.follows = "nixpkgs";
 
     # Helium Browser
-    #  Can remove when it becomes available in nixpkgs.
     helium.url = "github:schembriaiden/helium-browser-nix-flake";
     helium.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -48,12 +47,7 @@
 
               modules = [
                 # Load overlays
-                {
-                  nixpkgs.overlays = with overlays; [
-                    additions
-                    modifications
-                  ];
-                }
+                { nixpkgs.overlays = with overlays; [ additions modifications ]; }
 
                 # Load in Modules from Libraries
                 inputs.disko.nixosModules.disko
@@ -72,17 +66,6 @@
             };
         in
         {
-          # Aziraphale: Acer Aspire 3 A314-36P-35UU Intel Core i3-N305
-          "aziraphale" =
-            let
-              sysConfig = {
-                hostname = "aziraphale";
-                user = "janice";
-                stateVersion = "26.05"; # Fresh install SOON
-              };
-            in
-            buildSystem sysConfig;
-
           # Espresso: MinisForum UM790 Pro
           "espresso" =
             let
@@ -93,17 +76,6 @@
               };
             in
             buildSystem sysConfig;
-
-          # Hofud: Framework 13 11th gen Intel i5-1135G7
-          # "hofud" =
-          #   let
-          #     sysConfig = {
-          #       hostname = "hofud";
-          #       user = "";
-          #       stateVersion = ""; # In Limbo, waiting on parts
-          #     };
-          #   in
-          #   buildSystem sysConfig;
 
           # Installer: Custom NixOS ISO for installing systems with my environment and unlock keys
           "installer" =
@@ -155,7 +127,7 @@
               sysConfig = {
                 hostname = "serenity";
                 user = "matt";
-                stateVersion = "26.05"; # Fresh Install SOON
+                stateVersion = "26.11"; # Fresh Install SOON
               };
             in
             buildSystem sysConfig;

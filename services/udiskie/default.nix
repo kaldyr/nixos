@@ -4,17 +4,18 @@
   ...
 }:
 {
-  home-manager.users.${sysConfig.user} = {
-    home.packages = with pkgs; [
-      udiskie
-      udisks
-    ];
+  environment.systemPackages = with pkgs; [
+    udiskie
+    udisks
+  ];
 
-    services.udiskie = {
-      enable = true;
-      automount = true;
-      notify = true;
-      tray = "auto";
-    };
+  home-manager.users.${sysConfig.user}.services.udiskie = {
+    enable = true;
+    automount = false;
+    notify = true;
+    tray = "auto";
   };
+
+  services.udisks2.enable = true;
+  services.udisks2.mountOnMedia = true;
 }

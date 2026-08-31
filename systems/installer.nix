@@ -31,14 +31,26 @@
     sops
   ];
 
-  fileSystems."/nix/config" = lib.mkForce {
-    device = "/dev/disk/by-uuid/1c20b92b-8bbc-4b15-94f6-a8f9619dccf8";
-    fsType = "ext2";
-  };
+  systemd = {
+    mounts = [
+      {
+        what = "/dev/disk/by-uuid/1c20b92b-8bbc-4b15-94f6-a8f9619dccf8";
+        where = "/nix/config";
+        type = "ext2";
+        wantedBy = [ "local-fs.target" ];
+      }
+      {
+        what = "/dev/mapper/age";
+        where = "/state/age";
+        type = "ext2";
+        wantedBy = [ "local-fs.target" ];
+      }
+    ];
 
-  fileSystems."/state/age" = lib.mkForce {
-    device = "/dev/mapper/age";
-    fsType = "ext2";
+    targets.graphical.requires = [
+      "nix-config.mount"
+      "state-age.mount"
+    ];
   };
 
   time.timeZone = "America/Los_Angeles";
