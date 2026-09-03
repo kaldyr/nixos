@@ -51,7 +51,10 @@
     loader.grub.gfxmodeEfi = "2560x1440";
   };
 
-  environment.systemPackages = with pkgs; [ orca-slicer ];
+  environment.systemPackages = with pkgs; [
+    openrgb-with-all-plugins
+    orca-slicer
+  ];
 
   fileSystems."/" = {
     device = "none";
