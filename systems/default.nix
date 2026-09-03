@@ -146,7 +146,7 @@
             ControlMaster auto
             ControlPersist 10m
         '') machines
-        # ++ [ "Include ${config.sops.secrets.ssh-config-extra-hosts.path}" ]
+        ++ [ "Include ${config.sops.secrets.ssh-config-extra-hosts.path}" ]
       );
   };
 
