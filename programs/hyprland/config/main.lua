@@ -180,6 +180,7 @@ hl.animation({ leaf = 'zoomFactor',    enabled = true, speed = 7,    bezier = 'q
 ---------------------
 hl.config({
 	input = {
+		accel_profile = 'flat',
 		follow_mouse = 2,
 		kb_layout  = 'us',
 		kb_variant = '',

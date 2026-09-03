@@ -22,6 +22,7 @@
     ../programs/virtualmachines
     ../services/epson-et-8550
     ../services/kmscon
+    ../services/openrgb
   ];
 
   boot = {
@@ -52,7 +53,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    openrgb-with-all-plugins
     orca-slicer
   ];
 
