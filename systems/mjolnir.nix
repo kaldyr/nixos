@@ -40,7 +40,6 @@
     ];
     initrd.kernelModules = [ "xe" ];
     kernel.sysctl."vm.max_map_count" = 16777216;
-    kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 1000; # AoeO
     kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     kernelParams = [

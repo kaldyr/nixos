@@ -116,7 +116,7 @@
               sysConfig = {
                 hostname = "normandy";
                 user = "nic";
-                stateVersion = "26.05"; # Fresh install SOON
+                stateVersion = "26.11"; # Fresh install September 2nd, 2026
               };
             in
             buildSystem sysConfig;
@@ -127,7 +127,7 @@
               sysConfig = {
                 hostname = "serenity";
                 user = "matt";
-                stateVersion = "26.11"; # Fresh Install SOON
+                stateVersion = "26.11"; # Fresh Install August 31st, 2026
               };
             in
             buildSystem sysConfig;

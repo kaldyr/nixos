@@ -21,15 +21,26 @@
     systemd.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    age
-    cryptsetup
-    disko
-    git
-    gptfdisk
-    util-linux
-    sops
-  ];
+  environment = {
+    shellAliases = {
+        "disko" = "sudo nix run github:nix-community/disko/latest --";
+        "install" = "sudo nixos-install --no-root-password --flake";
+    };
+
+    systemPackages = with pkgs; [
+      age
+      cryptsetup
+      git
+      gptfdisk
+      util-linux
+      sops
+    ];
+  };
+
+  services.openssh.hostKeys = lib.mkForce [] ++ [{
+    path = "/state/ssh/ssh_host_ed25519_key";
+    type = "ed25519";
+  }];
 
   systemd = {
     mounts = [

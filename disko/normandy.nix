@@ -1,7 +1,7 @@
 {
   disko.devices.disk.main = {
 
-    device = "/dev/disk/by-id/"; # Get the drive id
+    device = "/dev/disk/by-id/nvme-Sabrent_Rocket_Q_203E079C1B1500055577";
     type = "disk";
 
     content = {

@@ -1,5 +1,5 @@
 hl.monitor({
-	output   = '',
+	output   = 'desc:Viewteck Co. Ltd. VIOTEK GN27DW',
 	mode     = '2560x1440@144',
 	position = 'auto',
 	scale    = '1.0',

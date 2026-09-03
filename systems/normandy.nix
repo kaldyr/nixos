@@ -16,7 +16,6 @@
     ../programs/gedit
     ../programs/hyprland
     ../programs/lutris
-    ../programs/nextcloud
     ../programs/openstarbound
     ../programs/plymouth
     ../programs/steam
@@ -27,18 +26,28 @@
 
   boot = {
     extraModulePackages = with pkgs; [ btrfs-progs ];
-    initrd.availableKernelModules = [ ]; # Fill out
+
+    initrd.availableKernelModules = [
+      "nvme"
+      "xhci_pci"
+      "ahci"
+      "usbhid"
+      "usb_storage"
+      "sd_mod"
+    ];
+
     initrd.kernelModules = [ "amdgpu" ];
     kernel.sysctl."vm.max_map_count" = 16777216;
-    kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 1000; # AoeO
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+
     kernelParams = [
       "btrfs"
       "quiet"
       "preempt=full"
       "iommu=pt"
     ];
+
     loader.grub.gfxmodeEfi = "2560x1440";
   };
 

@@ -555,14 +555,14 @@ wr({ -- Guild Wars 2
 	match            = { title = '^(Guild Wars 2)$' },
 	border_size      = 0,
 	content          = 'game',
-	float            = true,
+	-- float            = true,
 	no_blur          = true,
 	no_shadow        = true,
 	opaque           = true,
 	render_unfocused = true,
 	rounding         = 6,
 	stay_focused     = false,
-	suppress_event   = 'fullscreen maximize',
+	-- suppress_event   = 'fullscreen maximize',
 })
 
 wr({ name = 'helium', match = { class = 'helium' },         opacity = '0.9' })
