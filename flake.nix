@@ -94,7 +94,7 @@
               sysConfig = {
                 hostname = "magrathea";
                 user = "matt";
-                stateVersion = "24.05";
+                stateVersion = "24.05"; # Fresh install August 16th, 2024
               };
             in
             buildSystem sysConfig;
