@@ -1,5 +1,6 @@
 {
   pkgs,
+  sysConfig,
   ...
 }:
 let
@@ -34,5 +35,17 @@ let
   };
 in
 {
-  environment.systemPackages = [ openstarboundClient ];
+  home-manager.users.${sysConfig.user} = {
+    home.packages = [ openstarboundClient ];
+
+    xdg.desktopEntries."Open Starbound" = {
+      name = "Open Starbound";
+      comment = "Open Starbound Client";
+      exec = "openstarbound";
+      icon = "steam_icon_211820";
+      terminal = false;
+      type = "Application";
+      categories = [ "Game" ];
+    };
+  };
 }

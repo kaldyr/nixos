@@ -391,7 +391,8 @@ b( 'XF86MonBrightnessDown', e 'brightnessctl set 5%-', { locked = true, repeatin
 -- Hyprland Controls
 b( m..'x',         hl.dsp.window.close() )
 b( m..'w',         hl.dsp.window.float({ action = 'toggle' }) )
-b( m..'p',         function() -->
+b( m..'p', hl.dsp.window.pin() )
+b( m..'t',         function() -->
 	local w = hl.get_active_window() or ''
 	if w.floating then
 		hl.dispatch( hl.dsp.window.float({ action = 'toggle' }) )
@@ -440,8 +441,6 @@ b( m..s..'down',   hl.dsp.window.resize({ x = 0,   y = 1,   relative = true}), {
 b( m..s..'up',     hl.dsp.window.resize({ x = 0,   y = -1,  relative = true}), { repeating = true } )
 b( m..s..'right',  hl.dsp.window.resize({ x = 1,   y = 0,   relative = true}), { repeating = true } )
 b( m..'mouse:273', hl.dsp.window.resize(), { mouse = true } )
-
-b( m..s..'p', hl.dsp.window.pin() )
 
 -- Switch Workspace
 b( m..'code:59',    hl.dsp.focus({ workspace = 'e-1' }) ) -- ,
