@@ -30,11 +30,8 @@
     helium.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs =
-    { nixpkgs, ... }@inputs:
-    rec {
-      packages.x86_64-linux.installer-iso = nixosConfigurations.installer.config.system.build.isoImage;
-
+  outputs = { nixpkgs, ... }@inputs:
+    {
       nixosConfigurations =
         let
           overlays = import ./overlays.nix { inherit inputs; };
@@ -77,13 +74,13 @@
             in
             buildSystem sysConfig;
 
-          # Installer: Custom NixOS ISO for installing systems with my environment and unlock keys
+          # Installer: Custom NixOS USB for installing systems with my environment and unlock keys
           "installer" =
             let
               sysConfig = {
                 hostname = "installer";
-                user = "nixos";
-                stateVersion = "26.11"; # Fresh install SOON
+                user = "matt";
+                stateVersion = "26.11"; # Fresh install September 5th, 2026
               };
             in
             buildSystem sysConfig;

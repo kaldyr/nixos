@@ -1,68 +1,110 @@
 {
-  inputs,
-  lib,
   pkgs,
+  sysConfig,
   ...
 }:
 {
   imports = [
-    "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+    ../disko/installer.nix
     ./desktop.nix
-    ../programs/gedit
     ../programs/hyprland
     ../services/keyd
     ../services/kmscon
   ];
 
-  boot.initrd = {
-    luks.devices = lib.mkForce {
-      "age".device = "/dev/disk/by-uuid/65a8e53b-98f9-4ef2-91c2-a4834825555e";
+  boot = {
+    initrd.systemd.enable = true;
+
+    kernelParams = [
+      "zswap.enabled=1"
+      "zswap.max_pool_percent=50"
+      "zswap.compressor=zstd"
+      "zswap.zpool.zsmalloc"
+    ];
+
+    loader.grub = {
+      enable = true;
+      memtest86.enable = true;
     };
-    systemd.enable = true;
+
+    supportedFilesystems = [
+      "btrfs"
+      "ntfs"
+    ];
   };
 
   environment = {
     shellAliases = {
-        "disko" = "sudo nix run github:nix-community/disko/latest --";
-        "install" = "sudo nixos-install --no-root-password --flake";
+      "disko" = "sudo nix run github:nix-community/disko/latest --";
+      "installnix" = "sudo nixos-install --no-root-password --flake";
     };
 
     systemPackages = with pkgs; [
       age
+      btrfs-progs
       cryptsetup
+      dosfstools
+      e2fsprogs
+      exfatprogs
       git
+      gparted
       gptfdisk
-      util-linux
+      libva-utils
+      mesa-demos
+      nixos-install-tools
+      ntfs3g
+      parted
+      pciutils
       sops
+      usbutils
+      util-linux
+      xfsprogs
     ];
   };
 
-  services.openssh.hostKeys = lib.mkForce [] ++ [{
-    path = "/state/ssh/ssh_host_ed25519_key";
-    type = "ed25519";
-  }];
-
-  systemd = {
-    mounts = [
-      {
-        what = "/dev/disk/by-uuid/1c20b92b-8bbc-4b15-94f6-a8f9619dccf8";
-        where = "/nix/config";
-        type = "ext2";
-        wantedBy = [ "local-fs.target" ];
-      }
-      {
-        what = "/dev/mapper/age";
-        where = "/state/age";
-        type = "ext2";
-        wantedBy = [ "local-fs.target" ];
-      }
-    ];
-
-    targets.graphical.requires = [
-      "nix-config.mount"
-      "state-age.mount"
+  fileSystems."/" = {
+    device = "none";
+    fsType = "tmpfs";
+    neededForBoot = true;
+    options = [
+      "defaults"
+      "size=4G"
+      "mode=755"
     ];
   };
+
+  environment.persistence."/state".directories = [
+    {
+      directory = "/home/${sysConfig.user}/.cache/yazi/packages";
+      user = "matt";
+      group = "users";
+      mode = "0750";
+    }
+    {
+      directory = "/home/${sysConfig.user}/.local/share/nvim/site/pack/core/opt";
+      user = "matt";
+      group = "users";
+      mode = "0750";
+    }
+    {
+      directory = "/home/${sysConfig.user}/.passwords";
+      user = "matt";
+      group = "users";
+      mode = "0700";
+    }
+    {
+      directory = "/home/${sysConfig.user}/.ssh";
+      user = "matt";
+      group = "users";
+      mode = "0700";
+    }
+    {
+      directory = "/home/${sysConfig.user}/Pictures/Wallpapers";
+      user = "matt";
+      group = "users";
+      mode = "0750";
+    }
+  ];
 
   time.timeZone = "America/Los_Angeles";
 }
