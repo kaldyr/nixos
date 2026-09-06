@@ -14,7 +14,11 @@
 
   boot = {
     extraModulePackages = with pkgs; [ btrfs-progs ];
-    initrd.systemd.enable = true;
+
+    initrd.systemd = {
+      enable = true;
+      emergencyAccess = true;
+    };
 
     kernelParams = [
       "zswap.enabled=1"
@@ -74,37 +78,12 @@
     ];
   };
 
-  environment.persistence."/state".directories = [
-    {
-      directory = "/home/${sysConfig.user}/.cache/yazi/packages";
-      user = "matt";
-      group = "users";
-      mode = "0750";
-    }
-    {
-      directory = "/home/${sysConfig.user}/.local/share/nvim/site/pack/core/opt";
-      user = "matt";
-      group = "users";
-      mode = "0750";
-    }
-    {
-      directory = "/home/${sysConfig.user}/.passwords";
-      user = "matt";
-      group = "users";
-      mode = "0700";
-    }
-    {
-      directory = "/home/${sysConfig.user}/.ssh";
-      user = "matt";
-      group = "users";
-      mode = "0700";
-    }
-    {
-      directory = "/home/${sysConfig.user}/Pictures/Wallpapers";
-      user = "matt";
-      group = "users";
-      mode = "0750";
-    }
+  home-manager.users.${sysConfig.user}.home.persistence."/state".directories = [
+    "/home/${sysConfig.user}/.cache/yazi/packages"
+    "/home/${sysConfig.user}/.local/share/nvim/site/pack/core/opt"
+    "/home/${sysConfig.user}/.passwords"
+    "/home/${sysConfig.user}/.ssh"
+    "/home/${sysConfig.user}/Pictures/Wallpapers"
   ];
 
   time.timeZone = "America/Los_Angeles";
