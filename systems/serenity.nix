@@ -16,8 +16,14 @@
   ];
 
   boot = {
-    extraModulePackages = with pkgs; [ btrfs-progs ];
-    initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "ahci"
+      "usbhid"
+      "usb_storage"
+      "sd_mod"
+    ];
+
     initrd.kernelModules = [ "amdgpu" ];
     kernel.sysctl."vm.max_map_count" = 16777216;
     kernelModules = [ "kvm-amd" ];

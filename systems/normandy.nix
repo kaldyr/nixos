@@ -26,8 +26,6 @@
   ];
 
   boot = {
-    extraModulePackages = with pkgs; [ btrfs-progs ];
-
     initrd.availableKernelModules = [
       "nvme"
       "xhci_pci"

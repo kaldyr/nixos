@@ -17,7 +17,7 @@
   ];
 
   boot = {
-    extraModulePackages = with pkgs; [ btrfs-progs ];
+
     initrd.availableKernelModules = [
       "xhci_pci"
       "ehci_pci"
@@ -26,6 +26,7 @@
       "usb_storage"
       "sd_mod"
     ];
+
     initrd.kernelModules = [ "i915" ];
     kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
