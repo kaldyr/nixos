@@ -13,6 +13,7 @@
   ];
 
   boot = {
+    extraModulePackages = with pkgs; [ btrfs-progs ];
     initrd.systemd.enable = true;
 
     kernelParams = [
