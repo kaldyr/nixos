@@ -17,6 +17,7 @@
           content = {
             type = "filesystem";
             format = "vfat";
+
             extraArgs = [
               "-F"
               "32"
@@ -44,6 +45,7 @@
                 let
                   driveOptions = [
                     "noatime"
+                    "discard=async"
                     "compress=zstd:3"
                   ];
                 in
