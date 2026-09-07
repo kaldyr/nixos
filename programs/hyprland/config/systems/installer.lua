@@ -17,7 +17,3 @@ end
 b( m..s..'c', e('kitty --session ~/.config/kitty/sessions/nixos.kitty-session', { float = true, size = win_large_size() }) )
 b( m..'o',    e('kitty --session ~/.config/kitty/sessions/notes.kitty-session', { float = true, size = win_large_size() }) )
 b( m..'y',    e('kitty --session ~/.config/kitty/sessions/yazi.kitty-session',  { float = true, size = win_large_size() }) )
-
--- Play Media
-b( m..'g', e '/nix/config/scripts/yt-dlp.sh' )
-

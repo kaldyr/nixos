@@ -12,6 +12,8 @@
   ];
 
   boot = {
+    blacklistedKernelModules = [ "xe" ];
+
     initrd = {
       luks.devices.usbcrypted = {
         device = "/dev/disk/by-id/usb-Samsung_Flash_Drive_FIT_0321821050004118-0:0-part2";
@@ -24,26 +26,13 @@
       };
 
       availableKernelModules = [
-        "ahci"
-        "cryptd"
         "dm_crypt"
         "dm_mod"
-        "ehci_pci"
-        "nvme"
-        "ohci_pci"
-        "sd_mod"
-        "sr_mod"
-        "uas"
-        "uhci_hcd"
         "usb_storage"
-        "usbcore"
-        "usbhid"
-        "xhci_pci"
       ];
     };
 
     kernelParams = [
-      "btrfs"
       "zswap.enabled=1"
       "zswap.max_pool_percent=50"
       "zswap.compressor=zstd"
@@ -128,17 +117,22 @@
     "/storage" = {
       device = "/dev/mapper/usbcrypted";
       fsType = "btrfs";
-      neededForBoot = true;
       options = [ "subvol=@usbstorage" ] ++ driveOptions;
     };
   };
 
+  hardware = {
+    graphics.enable = true;
+    enableRedistributableFirmware = true;
+    enableAllFirmware = true;
+  };
+
   home-manager.users.${sysConfig.user}.home.persistence."/state".directories = [
-    "/home/${sysConfig.user}/.cache/yazi/packages"
-    "/home/${sysConfig.user}/.local/share/nvim/site/pack/core/opt"
-    "/home/${sysConfig.user}/.passwords"
-    "/home/${sysConfig.user}/.ssh"
-    "/home/${sysConfig.user}/Pictures/Wallpapers"
+    ".cache/yazi/packages"
+    ".local/share/nvim/site/pack/core/opt"
+    ".passwords"
+    ".ssh"
+    "Pictures/Wallpapers"
   ];
 
   time.timeZone = "America/Los_Angeles";

@@ -34,6 +34,8 @@
     };
   };
 
+  documentation.man.generateCaches = false;
+
   environment.defaultPackages = lib.mkForce [ ];
 
   environment.persistence."/state" = {
@@ -51,25 +53,29 @@
   fileSystems."/nix".neededForBoot = true;
   fileSystems."/state".neededForBoot = true;
 
-  home-manager.users.${sysConfig.user}.home.packages = with pkgs; [
-    age
-    duf
-    exiftool
-    eza
-    ffmpeg
-    ffmpegthumbnailer
-    gdu
-    gnupg
-    jq
-    p7zip
-    sops
-    ssh-to-age
-    unrar
-    unzip
-    yt-dlp
-    zip
-    zmx
-  ];
+  home-manager.users.${sysConfig.user} = {
+    home.packages = with pkgs; [
+      age
+      duf
+      exiftool
+      eza
+      ffmpeg
+      ffmpegthumbnailer
+      gdu
+      gnupg
+      jq
+      p7zip
+      sops
+      ssh-to-age
+      unrar
+      unzip
+      yt-dlp
+      zip
+      zmx
+    ];
+
+    programs.man.generateCaches = false;
+  };
 
   networking = {
     firewall.enable = true;
