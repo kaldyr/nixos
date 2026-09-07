@@ -11,11 +11,6 @@ let
     };
 
     layerCaps = {
-      # For WASD games, turn instead of strafe when layer active
-      a = "left";
-      d = "right";
-      w = "up";
-      s = "down";
       # For fast vim arrow movements without exiting insert mode
       h = "left";
       j = "down";
@@ -77,11 +72,12 @@ in
             "minus" = "volumedown";
             "equal" = "volumeup";
           };
-
-          layerCaps = {
-            "delete" = "insert";
-          };
         };
+      };
+
+      magma = {
+        ids = [ "1e7d:3124:37a054cc" ];
+        settings.main.capslock = "overload(leftalt, capslock)";
       };
     };
   };

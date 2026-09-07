@@ -21,6 +21,7 @@
     ../programs/steam
     ../programs/virtualmachines
     ../services/epson-et-8550
+    ../services/keyd
     ../services/kmscon
     ../services/openrgb
   ];
