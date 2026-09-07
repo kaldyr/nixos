@@ -5,7 +5,6 @@
 }:
 {
   imports = [
-    ../disko/installer.nix
     ./desktop.nix
     ../programs/hyprland
     ../services/keyd
@@ -13,19 +12,35 @@
   ];
 
   boot = {
-    initrd.availableKernelModules = [
-      "ahci"
-      "ehci_pci"
-      "nvme"
-      "ohci_pci"
-      "sd_mod"
-      "sr_mod"
-      "uas"
-      "uhci_hcd"
-      "usb_storage"
-      "usbhid"
-      "xhci_pci"
-    ];
+    initrd = {
+      luks.devices.usbcrypted = {
+        device = "/dev/disk/by-id/usb-Samsung_Flash_Drive_FIT_0321821050004118-0:0-part2";
+        allowDiscards = true;
+      };
+
+      systemd = {
+        enable = true;
+        emergencyAccess = true;
+      };
+
+      availableKernelModules = [
+        "ahci"
+        "cryptd"
+        "dm_crypt"
+        "dm_mod"
+        "ehci_pci"
+        "nvme"
+        "ohci_pci"
+        "sd_mod"
+        "sr_mod"
+        "uas"
+        "uhci_hcd"
+        "usb_storage"
+        "usbcore"
+        "usbhid"
+        "xhci_pci"
+      ];
+    };
 
     kernelParams = [
       "btrfs"
@@ -39,11 +54,6 @@
       enable = true;
       memtest86.enable = true;
     };
-
-    supportedFilesystems = [
-      "btrfs"
-      "ntfs"
-    ];
   };
 
   environment = {
@@ -75,15 +85,52 @@
     ];
   };
 
-  fileSystems."/" = {
-    device = "none";
-    fsType = "tmpfs";
-    neededForBoot = true;
-    options = [
-      "defaults"
-      "size=4G"
-      "mode=755"
-    ];
+  fileSystems =
+    let
+      driveOptions = [
+        "noatime"
+        "discard=async"
+        "compress=zstd:3"
+      ];
+    in
+  {
+    "/" = {
+      device = "none";
+      fsType = "tmpfs";
+      neededForBoot = true;
+
+      options = [
+        "defaults"
+        "size=4G"
+        "mode=755"
+      ];
+    };
+
+    "/boot" = {
+      device = "/dev/disk/by-id/usb-Samsung_Flash_Drive_FIT_0321821050004118-0:0-part1";
+      fsType = "vfat";
+    };
+
+    "/nix" = {
+      device = "/dev/mapper/usbcrypted";
+      fsType = "btrfs";
+      neededForBoot = true;
+      options = [ "subvol=@usbnix" ] ++ driveOptions;
+    };
+
+    "/state" = {
+      device = "/dev/mapper/usbcrypted";
+      fsType = "btrfs";
+      neededForBoot = true;
+      options = [ "subvol=@usbstate" ] ++ driveOptions;
+    };
+
+    "/storage" = {
+      device = "/dev/mapper/usbcrypted";
+      fsType = "btrfs";
+      neededForBoot = true;
+      options = [ "subvol=@usbstorage" ] ++ driveOptions;
+    };
   };
 
   home-manager.users.${sysConfig.user}.home.persistence."/state".directories = [

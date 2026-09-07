@@ -34,7 +34,15 @@
           content = {
             type = "luks";
             name = "usbcrypted";
-            settings.allowDiscards = true;
+            settings = {
+              allowDiscards = true;
+
+              crypttabExtraOpts = [
+                "discard"
+                "no-read-workqueue"
+                "no-write-workqueue"
+              ];
+            };
 
             content = {
               type = "btrfs";
