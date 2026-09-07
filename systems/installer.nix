@@ -13,26 +13,19 @@
   ];
 
   boot = {
-    initrd = {
-      systemd = {
-        enable = true;
-        emergencyAccess = true;
-      };
-
-      availableKernelModules = [
-        "ahci"
-        "ehci_pci"
-        "nvme"
-        "ohci_pci"
-        "sd_mod"
-        "sr_mod"
-        "uas"
-        "uhci_hcd"
-        "usb_storage"
-        "usbhid"
-        "xhci_pci"
-      ];
-    };
+    initrd.availableKernelModules = [
+      "ahci"
+      "ehci_pci"
+      "nvme"
+      "ohci_pci"
+      "sd_mod"
+      "sr_mod"
+      "uas"
+      "uhci_hcd"
+      "usb_storage"
+      "usbhid"
+      "xhci_pci"
+    ];
 
     kernelParams = [
       "btrfs"

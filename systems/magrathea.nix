@@ -17,7 +17,6 @@
   ];
 
   boot = {
-
     initrd.availableKernelModules = [
       "xhci_pci"
       "ehci_pci"
