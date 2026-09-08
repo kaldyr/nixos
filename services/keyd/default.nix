@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  sysConfig,
   ...
 }:
 let
@@ -40,7 +41,32 @@ let
 in
 {
 
-  environment.systemPackages = with pkgs; [ keyd ];
+  home-manager.users.${sysConfig.user} = {
+    home.packages = with pkgs; [ keyd ];
+
+    systemd.user.services.keyd-application-mapper = {
+      Install.WantedBy = [ "graphical-session.target" ];
+
+      Unit = {
+        Description = "Keyd Application Mapper";
+        After = [ "graphical-session.target" ];
+      };
+
+      Service = {
+        ExecStart = "${pkgs.keyd}/bin/keyd-application-mapper";
+        Restart = "on-failure";
+        RestartSec = 1;
+      };
+    };
+
+    xdg.configFile."keyd/app.conf".text = lib.mkIf (sysConfig.user == "nic") ''
+      [kitty]
+      capslock = esc
+
+      [gw2-64-exe]
+      capslock = leftalt
+    '';
+  };
 
   services.keyd = {
     enable = true;
@@ -77,8 +103,29 @@ in
 
       magma = {
         ids = [ "1e7d:3124:37a054cc" ];
-        settings.main.capslock = "overload(leftalt, capslock)";
+        settings.main = { };
       };
     };
   };
+
+  systemd.services.keyd.serviceConfig = {
+    Group = "keyd";
+
+    NoNewPrivileges = lib.mkForce false;
+    RestrictSUIDSGID = lib.mkForce false;
+
+    CapabilityBoundingSet = lib.mkForce [
+      "CAP_SYS_NICE"
+      "CAP_IPC_LOCK"
+      "CAP_SETGID"
+    ];
+
+    SystemCallFilter = lib.mkForce [
+      "nice"
+      "@system-service"
+    ];
+  };
+
+  users.users.${sysConfig.user}.extraGroups = [ "keyd" ];
+  users.groups.keyd.gid = 985;
 }
