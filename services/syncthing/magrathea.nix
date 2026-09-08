@@ -3,7 +3,7 @@
     matt-notes = {
       path = "/data/matt/Notes";
       type = "receiveonly";
-      devices = [ "mjolnir" ];
+      devices = [ "gungnir" "mjolnir" ];
     };
   };
 }
