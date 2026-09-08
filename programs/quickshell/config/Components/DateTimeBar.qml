@@ -18,7 +18,7 @@ Rectangle {
 			font { family: Theme.font; pixelSize: 12; }
 
 			color: Theme.clock.text
-			text:  Qt.formatDateTime( sysClock.date, "HH:mm" )
+			text:  Qt.formatDateTime( sysClock.date, "h:mm ap" )
 		}
 
 		Rectangle { // Spacer
