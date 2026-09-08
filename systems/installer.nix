@@ -76,23 +76,14 @@
 
   fileSystems =
     let
-      driveOptions = [
-        "noatime"
-        "discard=async"
-        "compress=zstd:3"
-      ];
+      driveOptions = [ "noatime" "discard=async" "compress=zstd:3" ];
     in
   {
     "/" = {
       device = "none";
       fsType = "tmpfs";
       neededForBoot = true;
-
-      options = [
-        "defaults"
-        "size=4G"
-        "mode=755"
-      ];
+      options = [ "defaults" "size=4G" "mode=755" ];
     };
 
     "/boot" = {
