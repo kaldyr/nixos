@@ -38,13 +38,14 @@
         "sd_mod"
       ];
 
+      kernelModules = [ "xe" ];
+
       luks.devices.crypted = {
         device = "/dev/disk/by-uuid/77f7f926-a508-49cc-bb44-3534b7269186";
         allowDiscards = true;
       };
     };
 
-    initrd.kernelModules = [ "xe" ];
     kernel.sysctl."vm.max_map_count" = 16777216;
     kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
@@ -64,23 +65,14 @@
 
   fileSystems =
     let
-      driveOptions = [
-        "noatime"
-        "discard=async"
-        "compress=zstd:1"
-      ];
+      driveOptions = [ "noatime" "discard=async" "compress=zstd:1" ];
     in
   {
     "/" = {
       device = "none";
       fsType = "tmpfs";
       neededForBoot = true;
-
-      options = [
-        "defaults"
-        "size=16G"
-        "mode=755"
-      ];
+      options = [ "defaults" "size=16G" "mode=755" ];
     };
 
     "/boot" = {
