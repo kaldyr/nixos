@@ -9,6 +9,7 @@
     ../programs/hyprland
     ../services/keyd
     ../services/kmscon
+    ../services/pipewire
   ];
 
   boot = {
@@ -26,8 +27,6 @@
       };
 
       availableKernelModules = [
-        "dm_crypt"
-        "dm_mod"
         "usb_storage"
       ];
     };
