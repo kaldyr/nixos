@@ -26,6 +26,7 @@
     ../services/kmscon
     ../services/llama-cpp
     ../services/openrazer
+    ../services/syncthing
   ];
 
   boot = {

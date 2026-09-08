@@ -13,6 +13,7 @@
     ../services/linkwarden
     ../services/nextcloud
     ../services/openstarbound
+    ../services/syncthing
     ../services/technitium
   ];
 
