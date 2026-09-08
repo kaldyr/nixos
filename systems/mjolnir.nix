@@ -8,7 +8,6 @@
   imports = [
     inputs.nixos-hardware.nixosModules.common-hidpi
     inputs.nixos-hardware.nixosModules.framework-intel-core-ultra-series3
-    ../disko/mjolnir.nix
     ./desktop.nix
     ../programs/ageofempiresonline
     ../programs/discord
@@ -30,13 +29,20 @@
   ];
 
   boot = {
-    initrd.availableKernelModules = [
-      "xhci_pci"
-      "thunderbolt"
-      "nvme"
-      "usb_storage"
-      "sd_mod"
-    ];
+    initrd = {
+      availableKernelModules = [
+        "xhci_pci"
+        "thunderbolt"
+        "nvme"
+        "usb_storage"
+        "sd_mod"
+      ];
+
+      luks.devices.crypted = {
+        device = "/dev/disk/by-uuid/77f7f926-a508-49cc-bb44-3534b7269186";
+        allowDiscards = true;
+      };
+    };
 
     initrd.kernelModules = [ "xe" ];
     kernel.sysctl."vm.max_map_count" = 16777216;
@@ -56,15 +62,57 @@
 
   environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
 
-  fileSystems."/" = {
-    device = "none";
-    fsType = "tmpfs";
-    neededForBoot = true;
-    options = [
-      "defaults"
-      "size=16G"
-      "mode=755"
-    ];
+  fileSystems =
+    let
+      driveOptions = [
+        "noatime"
+        "discard=async"
+        "compress=zstd:1"
+      ];
+    in
+  {
+    "/" = {
+      device = "none";
+      fsType = "tmpfs";
+      neededForBoot = true;
+
+      options = [
+        "defaults"
+        "size=16G"
+        "mode=755"
+      ];
+    };
+
+    "/boot" = {
+      device = "/dev/disk/by-uuid/70FD-B91F";
+      fsType = "vfat";
+    };
+
+    "/home" = {
+      device = "/dev/disk/by-uuid/8dbbf02f-0bc0-4833-b5cf-c05eb59a9221";
+      fsType = "btrfs";
+      options = [ "subvol=@home" ] ++ driveOptions;
+    };
+
+    "/nix" = {
+      device = "/dev/disk/by-uuid/8dbbf02f-0bc0-4833-b5cf-c05eb59a9221";
+      fsType = "btrfs";
+      neededForBoot = true;
+      options = [ "subvol=@nix" ] ++ driveOptions;
+    };
+
+    "/state" = {
+      device = "/dev/disk/by-uuid/8dbbf02f-0bc0-4833-b5cf-c05eb59a9221";
+      fsType = "btrfs";
+      neededForBoot = true;
+      options = [ "subvol=@state" ] ++ driveOptions;
+    };
+
+    "/swap" = {
+      device = "/dev/disk/by-uuid/8dbbf02f-0bc0-4833-b5cf-c05eb59a9221";
+      fsType = "btrfs";
+      options = [ "subvol=@swap" ] ++ driveOptions;
+    };
   };
 
   hardware = {
@@ -146,5 +194,6 @@
     xserver.videoDrivers = [ "modesetting" ];
   };
 
+  swapDevices = [{ device = "/swap/swapfile"; }];
   time.timeZone = "America/Los_Angeles";
 }

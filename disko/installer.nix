@@ -1,5 +1,5 @@
 {
-  disko.devices.disk.main = {
+  disko.devices.disk."flash" = {
 
     device = "/dev/disk/by-id/usb-Samsung_Flash_Drive_FIT_0321821050004118-0:0";
     type = "disk";

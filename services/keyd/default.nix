@@ -59,13 +59,15 @@ in
       };
     };
 
-    xdg.configFile."keyd/app.conf".text = lib.mkIf (sysConfig.user == "nic") ''
-      [kitty]
-      capslock = esc
+    xdg.configFile = lib.mkIf (sysConfig.user == "nic") {
+      "keyd/app.conf".text = ''
+        [kitty]
+        capslock = esc
 
-      [gw2-64-exe]
-      capslock = leftalt
-    '';
+        [gw2-64-exe]
+        capslock = leftalt
+      '';
+    };
   };
 
   services.keyd = {
