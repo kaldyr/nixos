@@ -24,6 +24,12 @@
       devices = [ "gungnir" "mjolnir" ];
       type = "receiveonly";
     };
+
+    matt-passwords = {
+      path = "/data/sync/matt/Passwords";
+      devices = [ "gungnir" "mjolnir" ];
+      type = "receiveonly";
+    };
   };
 
   systemd.tmpfiles.rules = [ "d /data/sync - syncthing syncthing 0755 -" ];

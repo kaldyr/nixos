@@ -20,6 +20,11 @@
         path = "/home/matt/Notes";
         devices = [ "gungnir" "magrathea" ];
       };
+
+      matt-passwords = {
+        path = "/home/matt/.passwords";
+        devices = [ "gungnir" "magrathea" ];
+      };
     };
   };
 }
