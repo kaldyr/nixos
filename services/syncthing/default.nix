@@ -4,7 +4,7 @@
   ...
 }:
 {
-  imports = [ ./${sysConfig}.nix ];
+  imports = [ ./${sysConfig.hostname}.nix ];
 
   services.syncthing = {
     enable = true;
