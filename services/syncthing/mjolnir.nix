@@ -6,6 +6,11 @@
     databaseDir = "/home/matt/.local/state/syncthing";
 
     settings.folders = {
+      matt-browser = {
+        path = "/home/matt/.config/net.imput.helium";
+        devices = [ "magrathea" ];
+      };
+
       matt-notes = {
         path = "/home/matt/Notes";
         devices = [ "gungnir" "magrathea" ];

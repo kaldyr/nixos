@@ -7,14 +7,18 @@
   }];
 
   services.syncthing.settings.folders = {
+    matt-browser = {
+      path = "/data/sync/matt/Browser";
+      devices = [ "mjolnir" ];
+      type = "receiveonly";
+    };
+
     matt-notes = {
       path = "/data/sync/matt/Notes";
-      type = "receiveonly";
       devices = [ "gungnir" "mjolnir" ];
+      type = "receiveonly";
     };
   };
 
-  systemd.tmpfiles.rules = [
-    "d /data/sync - syncthing syncthing 0755 -"
-  ];
+  systemd.tmpfiles.rules = [ "d /data/sync - syncthing syncthing 0755 -" ];
 }
