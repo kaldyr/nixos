@@ -16,7 +16,7 @@
 
     initrd = {
       luks.devices.usbcrypted = {
-        device = "/dev/disk/by-id/usb-Samsung_Flash_Drive_FIT_0321821050004118-0:0-part2";
+        device = "/dev/disk/by-uuid/d92dbb21-4cc0-499a-ba4a-4068013b0d24";
         allowDiscards = true;
       };
 
@@ -96,26 +96,26 @@
     };
 
     "/boot" = {
-      device = "/dev/disk/by-id/usb-Samsung_Flash_Drive_FIT_0321821050004118-0:0-part1";
+      device = "/dev/disk/by-uuid/7584-2D95";
       fsType = "vfat";
     };
 
     "/nix" = {
-      device = "/dev/mapper/usbcrypted";
+      device = "/dev/disk/by-uuid/3a06b88b-5747-4f76-a4d8-8dc52bf284bc";
       fsType = "btrfs";
       neededForBoot = true;
       options = [ "subvol=@usbnix" ] ++ driveOptions;
     };
 
     "/state" = {
-      device = "/dev/mapper/usbcrypted";
+      device = "/dev/disk/by-uuid/3a06b88b-5747-4f76-a4d8-8dc52bf284bc";
       fsType = "btrfs";
       neededForBoot = true;
       options = [ "subvol=@usbstate" ] ++ driveOptions;
     };
 
     "/storage" = {
-      device = "/dev/mapper/usbcrypted";
+      device = "/dev/disk/by-uuid/3a06b88b-5747-4f76-a4d8-8dc52bf284bc";
       fsType = "btrfs";
       options = [ "subvol=@usbstorage" ] ++ driveOptions;
     };
