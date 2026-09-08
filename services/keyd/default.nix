@@ -129,5 +129,5 @@ in
   };
 
   users.users.${sysConfig.user}.extraGroups = [ "keyd" ];
-  users.groups.keyd.gid = 985;
+  users.groups.keyd = {};
 }
