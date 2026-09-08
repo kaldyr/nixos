@@ -3,7 +3,7 @@
     user = "matt";
     group = "users";
     configDir = "/home/matt/.config/syncthing";
-    dataDir = "/home/matt/.local/state/syncthing";
+    databaseDir = "/home/matt/.local/state/syncthing";
 
     settings.folders = {
       matt-notes = {
