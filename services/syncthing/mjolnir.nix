@@ -11,6 +11,11 @@
         devices = [ "magrathea" ];
       };
 
+      matt-documents = {
+        path = "/home/matt/Documents";
+        devices = [ "magrathea" ];
+      };
+
       matt-notes = {
         path = "/home/matt/Notes";
         devices = [ "gungnir" "magrathea" ];

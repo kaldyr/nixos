@@ -13,6 +13,12 @@
       type = "receiveonly";
     };
 
+    matt-documents = {
+      path = "/data/sync/matt/Documents";
+      devices = [ "mjolnir" ];
+      type = "receiveonly";
+    };
+
     matt-notes = {
       path = "/data/sync/matt/Notes";
       devices = [ "gungnir" "mjolnir" ];
