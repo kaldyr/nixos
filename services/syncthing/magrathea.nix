@@ -25,6 +25,12 @@
       type = "receiveonly";
     };
 
+    matt-openstarbound = {
+      path = "/data/sync/matt/Openstarbound";
+      devices = [ "mjolnir" ];
+      type = "receiveonly";
+    };
+
     matt-passwords = {
       path = "/data/sync/matt/Passwords";
       devices = [ "gungnir" "mjolnir" ];

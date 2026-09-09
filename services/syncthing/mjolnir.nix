@@ -21,6 +21,11 @@
         devices = [ "gungnir" "magrathea" ];
       };
 
+      matt-openstarbound = {
+        path = "/home/matt/.local/state/openstarbound/storage";
+        devices = [ "magrathea" ];
+      };
+
       matt-passwords = {
         path = "/home/matt/.passwords";
         devices = [ "gungnir" "magrathea" ];
