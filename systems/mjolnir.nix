@@ -15,7 +15,6 @@
     ../programs/hyprland
     ../programs/lutris
     ../programs/newsboat
-    ../programs/nextcloud
     ../programs/openstarbound
     ../programs/plymouth
     ../programs/retroarch
