@@ -43,6 +43,12 @@
       type = "receiveonly";
     };
 
+    shared-music = {
+      path = "/storage/media/Music";
+      devices = [ "mjolnir" ];
+      type = "sendonly";
+    };
+
     shared-roms = {
       path = "/storage/media/Roms";
       devices = [ "mjolnir" ];

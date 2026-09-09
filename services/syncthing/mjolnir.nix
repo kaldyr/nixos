@@ -40,6 +40,12 @@
         devices = [ "gungnir" "magrathea" ];
       };
 
+      shared-music = {
+        path = "/home/matt/Music";
+        devices = [ "magrathea" ];
+        type = "receiveonly";
+      };
+
       shared-roms = {
         path = "/home/matt/Roms";
         devices = [ "magrathea" ];
@@ -93,6 +99,7 @@
       "d /home/matt/Notes - matt users 0755 -"
       "d /home/matt/.local/state/openstarbound/storage - matt users 0755 -"
       "d /home/matt/.passwords - matt users 0755 -"
+      "d /home/matt/Music - matt users 0755 -"
       "d /home/matt/Roms - matt users 0755 -"
     ];
   };
