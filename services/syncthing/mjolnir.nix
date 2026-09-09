@@ -73,16 +73,22 @@
       syncthing-stignore-files = {
         before = [ "syncthing.service" ];
         wantedBy = [ "multi-user.target" ];
-        serviceConfig.Type = "oneshot";
+
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+        };
 
         script = ''
-          install -o matt -g users -m 0400 \
+          install -D -o matt -g users -m 0400 \
             ${config.sops.secrets."syncthing/mjolnir/music-stignore".path} \
             /home/matt/Music/.stignore
+          chown matt:users /home/matt/Music
 
-          install -o matt -g users -m 0400 \
+          install -D -o matt -g users -m 0400 \
             ${config.sops.secrets."syncthing/mjolnir/roms-stignore".path} \
             /home/matt/Roms/.stignore
+          chown matt:users /home/matt/Roms
         '';
       };
 
@@ -91,16 +97,5 @@
         after = [ "syncthing-stignore-files.service" ];
       };
     };
-
-    tmpfiles.rules = [
-      "d /home/matt/.config/net.imput.helium - matt users 0755 -"
-      "d /home/matt/Documents - matt users 0755 -"
-      "d /home/matt/.wine/guild-wars-2/drive_c/Program Files/Guild Wars 2/addons - matt users 0755 -"
-      "d /home/matt/Notes - matt users 0755 -"
-      "d /home/matt/.local/state/openstarbound/storage - matt users 0755 -"
-      "d /home/matt/.passwords - matt users 0755 -"
-      "d /home/matt/Music - matt users 0755 -"
-      "d /home/matt/Roms - matt users 0755 -"
-    ];
   };
 }
