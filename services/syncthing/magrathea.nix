@@ -51,4 +51,6 @@
   };
 
   systemd.tmpfiles.rules = [ "d /data/sync - syncthing syncthing 0755 -" ];
+
+  users.users.syncthing.extraGroups = [ "media" ];
 }

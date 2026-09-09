@@ -183,9 +183,9 @@
     };
   };
 
-  # Group that can access tailscale certificates
+  users.groups."media" = { };
   users.groups."webservice" = { };
-
+  users.users.matt.extraGroups = [ "media" ];
   time.timeZone = "America/Los_Angeles";
 }
 

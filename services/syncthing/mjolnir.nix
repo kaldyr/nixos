@@ -62,26 +62,38 @@
     };
   };
 
-  systemd.services = {
-    syncthing-stignore-files = {
-      before = [ "syncthing.service" ];
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig.Type = "oneshot";
+  systemd = {
+    services = {
+      syncthing-stignore-files = {
+        before = [ "syncthing.service" ];
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig.Type = "oneshot";
 
-      script = ''
-        install -o matt -g users -m 0400 \
-          ${config.sops.secrets."syncthing/mjolnir/music-stignore".path} \
-          /home/matt/Music/.stignore
+        script = ''
+          install -o matt -g users -m 0400 \
+            ${config.sops.secrets."syncthing/mjolnir/music-stignore".path} \
+            /home/matt/Music/.stignore
 
-        install -o matt -g users -m 0400 \
-          ${config.sops.secrets."syncthing/mjolnir/roms-stignore".path} \
-          /home/matt/Roms/.stignore
-      '';
+          install -o matt -g users -m 0400 \
+            ${config.sops.secrets."syncthing/mjolnir/roms-stignore".path} \
+            /home/matt/Roms/.stignore
+        '';
+      };
+
+      syncthing = {
+        wants = [ "syncthing-stignore-files.service" ];
+        after = [ "syncthing-stignore-files.service" ];
+      };
     };
 
-    syncthing = {
-      wants = [ "syncthing-stignore-files.service" ];
-      after = [ "syncthing-stignore-files.service" ];
-    };
+    tmpfiles.rules = [
+      "d /home/matt/.config/net.imput.helium - matt users 0755 -"
+      "d /home/matt/Documents - matt users 0755 -"
+      "d /home/matt/.wine/guild-wars-2/drive_c/Program Files/Guild Wars 2/addons - matt users 0755 -"
+      "d /home/matt/Notes - matt users 0755 -"
+      "d /home/matt/.local/state/openstarbound/storage - matt users 0755 -"
+      "d /home/matt/.passwords - matt users 0755 -"
+      "d /home/matt/Roms - matt users 0755 -"
+    ];
   };
 }
