@@ -16,6 +16,11 @@
         devices = [ "magrathea" ];
       };
 
+      matt-guildwars2 = {
+        path = "/home/matt/.wine/guild-wars-2/drive_c/Program Files/Guild Wars 2/addons";
+        devices = [ "magrathea" ];
+      };
+
       matt-notes = {
         path = "/home/matt/Notes";
         devices = [ "gungnir" "magrathea" ];

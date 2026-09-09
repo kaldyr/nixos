@@ -19,6 +19,12 @@
       type = "receiveonly";
     };
 
+    matt-guildwars2 = {
+      path = "/data/sync/matt/GuildWars2";
+      devices = [ "mjolnir" ];
+      type = "receiveonly";
+    };
+
     matt-notes = {
       path = "/data/sync/matt/Notes";
       devices = [ "gungnir" "mjolnir" ];
