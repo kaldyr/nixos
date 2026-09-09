@@ -15,6 +15,15 @@
     matt-documents = {
       path = "/data/sync/matt/Documents";
       devices = [ "mjolnir" ];
+
+      versioning = {
+        type = "staggered";
+
+        params = {
+          cleanInterval = "3600";
+          maxAge = "604800"; # 7 days
+        };
+      };
     };
 
     matt-guildwars2 = {
@@ -25,6 +34,15 @@
     matt-notes = {
       path = "/data/sync/matt/Notes";
       devices = [ "gungnir" "mjolnir" ];
+
+      versioning = {
+        type = "staggered";
+
+        params = {
+          cleanInterval = "3600";
+          maxAge = "604800"; # 7 days
+        };
+      };
     };
 
     matt-openstarbound = {
