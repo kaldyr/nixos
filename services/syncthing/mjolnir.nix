@@ -1,4 +1,8 @@
 {
+  config,
+  ...
+}:
+{
   services.syncthing = {
     user = "matt";
     group = "users";
@@ -35,6 +39,49 @@
         path = "/home/matt/.passwords";
         devices = [ "gungnir" "magrathea" ];
       };
+
+      shared-roms = {
+        path = "/home/matt/Roms";
+        devices = [ "magrathea" ];
+        type = "receiveonly";
+      };
+    };
+  };
+
+  sops.secrets = {
+    "syncthing/mjolnir/music-stignore" = {
+      owner = "matt";
+      group = "users";
+      mode = "0400";
+    };
+
+    "syncthing/mjolnir/roms-stignore" = {
+      owner = "matt";
+      group = "users";
+      mode = "0400";
+    };
+  };
+
+  systemd.services = {
+    syncthing-stignore-files = {
+      before = [ "syncthing.service" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig.Type = "oneshot";
+
+      script = ''
+        install -o matt -g users -m 0400 \
+          ${config.sops.secrets."syncthing/mjolnir/music-stignore".path} \
+          /home/matt/Music/.stignore
+
+        install -o matt -g users -m 0400 \
+          ${config.sops.secrets."syncthing/mjolnir/roms-stignore".path} \
+          /home/matt/Roms/.stignore
+      '';
+    };
+
+    syncthing = {
+      wants = [ "syncthing-stignore-files.service" ];
+      after = [ "syncthing-stignore-files.service" ];
     };
   };
 }

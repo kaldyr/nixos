@@ -42,6 +42,12 @@
       devices = [ "gungnir" "mjolnir" ];
       type = "receiveonly";
     };
+
+    shared-roms = {
+      path = "/storage/media/Roms";
+      devices = [ "mjolnir" ];
+      type = "sendonly";
+    };
   };
 
   systemd.tmpfiles.rules = [ "d /data/sync - syncthing syncthing 0755 -" ];
