@@ -6,57 +6,61 @@
     mode = "0700";
   }];
 
-  services.syncthing.settings.folders = {
-    matt-browser = {
-      path = "/data/sync/matt/Browser";
-      devices = [ "mjolnir" ];
-    };
+  services.syncthing.settings = {
+    gui.insecureSkipHostcheck = true;
 
-    matt-documents = {
-      path = "/data/sync/matt/Documents";
-      devices = [ "mjolnir" ];
-
-      versioning = {
-        type = "simple";
-        params.keep = "10";
+    folders = {
+      matt-browser = {
+        path = "/data/sync/matt/Browser";
+        devices = [ "mjolnir" ];
       };
-    };
 
-    matt-guildwars2 = {
-      path = "/data/sync/matt/GuildWars2";
-      devices = [ "mjolnir" ];
-    };
+      matt-documents = {
+        path = "/data/sync/matt/Documents";
+        devices = [ "mjolnir" ];
 
-    matt-notes = {
-      path = "/data/sync/matt/Notes";
-      devices = [ "gungnir" "mjolnir" ];
-
-      versioning = {
-        type = "simple";
-        params.keep = "10";
+        versioning = {
+          type = "simple";
+          params.keep = "10";
+        };
       };
-    };
 
-    matt-openstarbound = {
-      path = "/data/sync/matt/Openstarbound";
-      devices = [ "mjolnir" ];
-    };
+      matt-guildwars2 = {
+        path = "/data/sync/matt/GuildWars2";
+        devices = [ "mjolnir" ];
+      };
 
-    matt-passwords = {
-      path = "/data/sync/matt/Passwords";
-      devices = [ "gungnir" "mjolnir" ];
-    };
+      matt-notes = {
+        path = "/data/sync/matt/Notes";
+        devices = [ "gungnir" "mjolnir" ];
 
-    shared-music = {
-      path = "/storage/media/Music";
-      devices = [ "mjolnir" ];
-      type = "sendonly";
-    };
+        versioning = {
+          type = "simple";
+          params.keep = "10";
+        };
+      };
 
-    shared-roms = {
-      path = "/storage/media/Roms";
-      devices = [ "mjolnir" ];
-      type = "sendonly";
+      matt-openstarbound = {
+        path = "/data/sync/matt/Openstarbound";
+        devices = [ "mjolnir" ];
+      };
+
+      matt-passwords = {
+        path = "/data/sync/matt/Passwords";
+        devices = [ "gungnir" "mjolnir" ];
+      };
+
+      shared-music = {
+        path = "/storage/media/Music";
+        devices = [ "mjolnir" ];
+        type = "sendonly";
+      };
+
+      shared-roms = {
+        path = "/storage/media/Roms";
+        devices = [ "mjolnir" ];
+        type = "sendonly";
+      };
     };
   };
 
