@@ -17,12 +17,8 @@
       devices = [ "mjolnir" ];
 
       versioning = {
-        type = "staggered";
-
-        params = {
-          cleanInterval = "3600";
-          maxAge = "604800"; # 7 days
-        };
+        type = "simple";
+        params.keep = "10";
       };
     };
 
@@ -36,12 +32,8 @@
       devices = [ "gungnir" "mjolnir" ];
 
       versioning = {
-        type = "staggered";
-
-        params = {
-          cleanInterval = "3600";
-          maxAge = "604800"; # 7 days
-        };
+        type = "simple";
+        params.keep = "10";
       };
     };
 
