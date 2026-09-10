@@ -13,6 +13,7 @@
     settings.folders.matt-passwords = {
       path = "/home/matt/.passwords";
       devices = [ "gungnir" "installer" "magrathea" ];
+      type = "receiveonly";
     };
   };
 }

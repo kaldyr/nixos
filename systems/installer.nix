@@ -10,6 +10,7 @@
     ../services/keyd
     ../services/kmscon
     ../services/pipewire
+    ../services/syncthing
   ];
 
   boot = {
