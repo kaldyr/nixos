@@ -6,6 +6,8 @@
     mode = "0700";
   }];
 
+  networking.firewall.allowedTCPPorts = [ 8384 ];
+
   services.syncthing.settings = {
     gui.insecureSkipHostcheck = true;
 
