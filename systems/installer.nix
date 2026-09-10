@@ -119,6 +119,7 @@
 
   home-manager.users.${sysConfig.user}.home.persistence."/state".directories = [
     ".cache/yazi/packages"
+    ".local/share/keyrings"
     ".local/share/nvim/site/pack/core/opt"
     ".passwords"
     ".ssh"
