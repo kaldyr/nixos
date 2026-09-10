@@ -49,7 +49,7 @@
 
       matt-passwords = {
         path = "/data/sync/matt/Passwords";
-        devices = [ "gungnir" "mjolnir" ];
+        devices = [ "gungnir" "installer" "mjolnir" ];
       };
 
       shared-music = {

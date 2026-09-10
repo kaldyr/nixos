@@ -37,7 +37,7 @@
 
       matt-passwords = {
         path = "/home/matt/.passwords";
-        devices = [ "gungnir" "magrathea" ];
+        devices = [ "gungnir" "installer" "magrathea" ];
       };
 
       shared-music = {
