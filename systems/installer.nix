@@ -61,6 +61,7 @@
       git
       gparted
       gptfdisk
+      inxi
       libva-utils
       mesa-demos
       nixos-install-tools
@@ -126,6 +127,11 @@
     ".ssh"
     "Pictures/Wallpapers"
   ];
+
+  security.sudo.extraRules = [{
+    groups = [ "wheel" ];
+    options = [ "NOPASSWD" ];
+  }];
 
   time.timeZone = "America/Los_Angeles";
 }
