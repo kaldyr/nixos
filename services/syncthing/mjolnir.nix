@@ -26,7 +26,7 @@
       };
 
       matt-notes = {
-        path = "/home/matt/Notes";
+        path = "/home/matt/Vaults/Notes";
         devices = [ "gungnir" "magrathea" ];
       };
 

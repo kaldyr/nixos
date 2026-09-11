@@ -12,6 +12,41 @@
     gui.insecureSkipHostcheck = true;
 
     folders = {
+      # matshkas-browser = {
+      #   path = "/data/sync/matshkas/Browser";
+      #   devices = [ "espresso" ];
+      # };
+      #
+      # matshkas-documents = {
+      #   path = "/data/sync/matshkas/Documents";
+      #   devices = [ "espresso" ];
+      #
+      #   versioning = {
+      #     type = "simple";
+      #     params.keep = "10";
+      #   };
+      # };
+      #
+      # matshkas-guildwars2 = {
+      #   path = "/data/sync/matshkas/GuildWars2";
+      #   devices = [ "espresso" ];
+      # };
+      #
+      # matshkas-notes = {
+      #   path = "/data/sync/matshkas/Notes";
+      #   devices = [ "espresso" ];
+      #
+      #   versioning = {
+      #     type = "simple";
+      #     params.keep = "10";
+      #   };
+      # };
+      #
+      # matshkas-passwords = {
+      #   path = "/data/sync/matshkas/Passwords";
+      #   devices = [ "espresso" ];
+      # };
+
       matt-browser = {
         path = "/data/sync/matt/Browser";
         devices = [ "mjolnir" ];
@@ -51,6 +86,36 @@
         path = "/data/sync/matt/Passwords";
         devices = [ "gungnir" "installer" "mjolnir" ];
       };
+
+      # nic-browser = {
+      #   path = "/data/sync/nic/Browser";
+      #   devices = [ "normandy" ];
+      # };
+      #
+      # nic-documents = {
+      #   path = "/data/sync/nic/Documents";
+      #   devices = [ "normandy" ];
+      #
+      #   versioning = {
+      #     type = "simple";
+      #     params.keep = "10";
+      #   };
+      # };
+      #
+      # nic-notes = {
+      #   path = "/data/sync/nic/Notes";
+      #   devices = [ "normandy" ];
+      #
+      #   versioning = {
+      #     type = "simple";
+      #     params.keep = "10";
+      #   };
+      # };
+      #
+      # nic-openstarbound = {
+      #   path = "/home/nic/.local/state/openstarbound/storage";
+      #   devices = [ "normandy" ];
+      # };
 
       shared-music = {
         path = "/storage/media/Music";
