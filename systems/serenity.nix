@@ -13,6 +13,7 @@
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     ../disko/serenity.nix
     ../services/kodi
+    ../services/syncthing
   ];
 
   boot = {
