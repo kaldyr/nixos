@@ -34,7 +34,7 @@
     };
   };
 
-  documentation.man.generateCaches = false;
+  documentation.man.cache.enable = false;
 
   environment.defaultPackages = lib.mkForce [ ];
 
@@ -171,11 +171,7 @@
   services = {
     fwupd.enable = true;
     irqbalance.enable = true;
-
-    journald.extraConfig = ''
-      MaxRetentionSec=7day
-    '';
-
+    journald.settings.Journal.MaxRetentionSec = "7day";
     libinput.enable = true;
 
     openssh = {
