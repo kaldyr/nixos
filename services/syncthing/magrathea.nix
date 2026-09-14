@@ -87,35 +87,35 @@
         devices = [ "gungnir" "installer" "mjolnir" ];
       };
 
-      # nic-browser = {
-      #   path = "/data/sync/nic/Browser";
-      #   devices = [ "normandy" ];
-      # };
-      #
-      # nic-documents = {
-      #   path = "/data/sync/nic/Documents";
-      #   devices = [ "normandy" ];
-      #
-      #   versioning = {
-      #     type = "simple";
-      #     params.keep = "10";
-      #   };
-      # };
-      #
-      # nic-notes = {
-      #   path = "/data/sync/nic/Notes";
-      #   devices = [ "normandy" ];
-      #
-      #   versioning = {
-      #     type = "simple";
-      #     params.keep = "10";
-      #   };
-      # };
-      #
-      # nic-openstarbound = {
-      #   path = "/home/nic/.local/state/openstarbound/storage";
-      #   devices = [ "normandy" ];
-      # };
+      nic-browser = {
+        path = "/data/sync/nic/Browser";
+        devices = [ "normandy" ];
+      };
+
+      nic-documents = {
+        path = "/data/sync/nic/Documents";
+        devices = [ "normandy" ];
+
+        versioning = {
+          type = "simple";
+          params.keep = "10";
+        };
+      };
+
+      nic-notes = {
+        path = "/data/sync/nic/Notes";
+        devices = [ "normandy" ];
+
+        versioning = {
+          type = "simple";
+          params.keep = "10";
+        };
+      };
+
+      nic-openstarbound = {
+        path = "/home/nic/.local/state/openstarbound/storage";
+        devices = [ "normandy" ];
+      };
 
       shared-music = {
         path = "/storage/media/Music";

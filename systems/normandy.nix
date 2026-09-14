@@ -22,7 +22,9 @@
     ../services/epson-et-8550
     ../services/keyd
     ../services/kmscon
+    ../services/openrazer
     ../services/openrgb
+    ../services/syncthing
   ];
 
   boot = {
