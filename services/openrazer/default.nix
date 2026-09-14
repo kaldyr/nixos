@@ -1,4 +1,5 @@
 {
+  pkgs,
   sysConfig,
   ...
 }:
@@ -7,6 +8,7 @@
   hardware.openrazer.devicesOffOnScreensaver = true;
 
   home-manager.users.${sysConfig.user} = { config, ... }: {
+    home.file = with pkgs; [ polychromatic ];
     xdg.configFile."openrazer/persistence.conf".source =
       config.lib.file.mkOutOfStoreSymlink "/nix/config/services/openrazer/config/persistence.conf";
   };
