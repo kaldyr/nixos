@@ -113,7 +113,7 @@
       };
 
       nic-openstarbound = {
-        path = "/home/nic/.local/state/openstarbound/storage";
+        path = "/data/sync/nic/Openstarbound";
         devices = [ "normandy" ];
       };
 
