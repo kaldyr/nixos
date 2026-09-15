@@ -130,7 +130,10 @@
 
   security.sudo.extraRules = [{
     groups = [ "wheel" ];
-    options = [ "NOPASSWD" ];
+    commands = [{
+      command = "ALL";
+      options = [ "NOPASSWD" ];
+    }];
   }];
 
   time.timeZone = "America/Los_Angeles";
