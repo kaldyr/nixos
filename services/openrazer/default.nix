@@ -10,7 +10,7 @@
   home-manager.users.${sysConfig.user} = { config, ... }: {
     home.packages = with pkgs; [ polychromatic ];
     xdg.configFile."openrazer/persistence.conf".source =
-      config.lib.file.mkOutOfStoreSymlink "/nix/config/services/openrazer/config/persistence.conf";
+      config.lib.file.mkOutOfStoreSymlink "/nix/config/services/openrazer/config/${sysConfig.hostname}.conf";
   };
 
   users.users.${sysConfig.user}.extraGroups = [ "openrazer" ];
