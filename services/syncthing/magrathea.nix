@@ -12,40 +12,40 @@
     gui.insecureSkipHostcheck = true;
 
     folders = {
-      # matshkas-browser = {
-      #   path = "/data/sync/matshkas/Browser";
-      #   devices = [ "espresso" ];
-      # };
-      #
-      # matshkas-documents = {
-      #   path = "/data/sync/matshkas/Documents";
-      #   devices = [ "espresso" ];
-      #
-      #   versioning = {
-      #     type = "simple";
-      #     params.keep = "10";
-      #   };
-      # };
-      #
-      # matshkas-guildwars2 = {
-      #   path = "/data/sync/matshkas/GuildWars2";
-      #   devices = [ "espresso" ];
-      # };
-      #
-      # matshkas-notes = {
-      #   path = "/data/sync/matshkas/Notes";
-      #   devices = [ "espresso" ];
-      #
-      #   versioning = {
-      #     type = "simple";
-      #     params.keep = "10";
-      #   };
-      # };
-      #
-      # matshkas-passwords = {
-      #   path = "/data/sync/matshkas/Passwords";
-      #   devices = [ "espresso" ];
-      # };
+      matshkas-browser = {
+        path = "/data/sync/matshkas/Browser";
+        devices = [ "espresso" ];
+      };
+
+      matshkas-documents = {
+        path = "/data/sync/matshkas/Documents";
+        devices = [ "espresso" ];
+
+        versioning = {
+          type = "simple";
+          params.keep = "10";
+        };
+      };
+
+      matshkas-guildwars2 = {
+        path = "/data/sync/matshkas/GuildWars2";
+        devices = [ "espresso" ];
+      };
+
+      matshkas-notes = {
+        path = "/data/sync/matshkas/Notes";
+        devices = [ "espresso" ];
+
+        versioning = {
+          type = "simple";
+          params.keep = "10";
+        };
+      };
+
+      matshkas-passwords = {
+        path = "/data/sync/matshkas/Passwords";
+        devices = [ "espresso" ];
+      };
 
       matt-browser = {
         path = "/data/sync/matt/Browser";

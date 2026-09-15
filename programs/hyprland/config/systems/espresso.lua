@@ -30,4 +30,3 @@ b( 'grave', function()
 		hl.dispatch( e('wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1') )
 	end
 end, { release = true } )
-

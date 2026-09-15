@@ -11,7 +11,6 @@
     inputs.nixos-hardware.nixosModules.common-cpu-amd-raphael-igpu
     inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
     inputs.nixos-hardware.nixosModules.common-gpu-amd
-    ../disko/espresso.nix
     ./desktop.nix
     ../programs/discord
     ../programs/hyprland
@@ -21,19 +20,28 @@
     ../programs/steam
     ../services/keyd
     ../services/kmscon
+    ../services/syncthing
   ];
 
   boot = {
-    initrd.availableKernelModules = [
-      "nvme"
-      "xhci_pci"
-      "ehci_pci"
-      "usb_storage"
-      "sd_mod"
-      "rtsx_usb_sdmmc"
-    ];
+    initrd = {
+      availableKernelModules = [
+        "nvme"
+        "xhci_pci"
+        "ehci_pci"
+        "usb_storage"
+        "sd_mod"
+        "rtsx_usb_sdmmc"
+      ];
 
-    initrd.kernelModules = [ "amdgpu" ];
+      kernelModules = [ "amdgpu" ];
+
+      luks.devices.crypted = {
+        device = "/dev/disk/by-uuid/2cce94ea-7cec-4f93-97f9-72e21c73aedf";
+        allowDiscards = true;
+      };
+    };
+
     kernel.sysctl."vm.max_map_count" = 16777216;
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
@@ -54,16 +62,45 @@
     xarchiver
   ];
 
-  fileSystems = {
+  fileSystems =
+    let
+      driveOptions = [ "noatime" "discard=async" "compress=zstd:1" ];
+    in
+  {
     "/" = {
       device = "none";
       fsType = "tmpfs";
       neededForBoot = true;
-      options = [
-        "defaults"
-        "size=16G"
-        "mode=755"
-      ];
+      options = [ "defaults" "size=16G" "mode=755" ];
+    };
+
+    "/boot" = {
+      device = "/dev/disk/by-uuid/025C-BF4E";
+      fsType = "vfat";
+    };
+
+    "/home" = {
+      device = "/dev/disk/by-uuid/804a850d-5c93-41a8-87fe-b88fcad48b6f";
+      fsType = "btrfs";
+      options = [ "subvol=@home" ] ++ driveOptions;
+    };
+
+    "/nix" = {
+      device = "/dev/disk/by-uuid/804a850d-5c93-41a8-87fe-b88fcad48b6f";
+      fsType = "btrfs";
+      options = [ "subvol=@nix" ] ++ driveOptions;
+    };
+
+    "/state" = {
+      device = "/dev/disk/by-uuid/804a850d-5c93-41a8-87fe-b88fcad48b6f";
+      fsType = "btrfs";
+      options = [ "subvol=@state" ] ++ driveOptions;
+    };
+
+    "/swap" = {
+      device = "/dev/disk/by-uuid/804a850d-5c93-41a8-87fe-b88fcad48b6f";
+      fsType = "btrfs";
+      options = [ "subvol=@swap" ] ++ driveOptions;
     };
   };
 
