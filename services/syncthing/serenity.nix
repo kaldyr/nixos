@@ -6,14 +6,16 @@
     mode = "0700";
   }];
 
-  networking.firewall.allowedTCPPorts = [ 8384 ];
-
   services.syncthing.settings = {
-    gui.insecureSkipHostcheck = true;
+    devices = {
+      magrathea.id = "F2KB4T5-CFF752T-AWEUVKW-ZUC4JJF-4YZWTLF-KZZE4E6-ZJ3LU3Q-7JC7IQ6";
+    };
 
     # folders = {
     #
     # };
+
+    gui.insecureSkipHostcheck = true;
   };
 
   users.users.syncthing.extraGroups = [ "media" ];

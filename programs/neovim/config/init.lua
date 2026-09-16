@@ -760,6 +760,7 @@ require('fzf-lua').setup({
 
 	file_ignore_patterns = {
 		'%.nextcloudsync.log',
+		'%.stfolder',
 		'%.obsidian/',
 		'%.sync_.*%.db.*',
 		'%.trash/',

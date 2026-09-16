@@ -129,31 +129,27 @@
       pinentryPackage = pkgs.pinentry-curses;
     };
 
-    ssh.extraConfig =
-      let
-        machines = {
-          espresso = "matshkas";
-          magrathea = "matt";
-          mjolnir = "matt";
-          normandy = "nic";
-          serenity = "matt";
-        };
-      in
-      lib.concatStringsSep "\n" (
-        lib.mapAttrsToList (hostname: username: ''
-          Host ${hostname}
-            User ${username}
-          Host ${hostname}.*
-            HostName ${hostname}
-            User ${username}
-            RemoteCommand zmx attach %k
-            RequestTTY yes
-            ControlPath ~/.ssh/cm-%C
-            ControlMaster auto
-            ControlPersist 10m
-        '') machines
-        ++ [ "Include ${config.sops.secrets.ssh-config-extra-hosts.path}" ]
-      );
+    ssh.extraConfig = lib.concatStringsSep "\n" (
+      lib.mapAttrsToList (hostname: username: ''
+        Host ${hostname}
+          User ${username}
+        Host ${hostname}.*
+          HostName ${hostname}
+          User ${username}
+          RemoteCommand zmx attach %k
+          RequestTTY yes
+          ControlPath ~/.ssh/cm-%C
+          ControlMaster auto
+          ControlPersist 10m
+      '') {
+        espresso = "matshkas";
+        installer = "matt";
+        magrathea = "matt";
+        mjolnir = "matt";
+        normandy = "nic";
+        serenity = "matt";
+      } ++ [ "Include ${config.sops.secrets.ssh-config-extra-hosts.path}" ]
+    );
   };
 
   security.sudo = {
