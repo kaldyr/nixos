@@ -11,6 +11,7 @@
     ./desktop.nix
     ../programs/ageofempiresonline
     ../programs/discord
+    ../programs/easyeffects
     ../programs/gedit
     ../programs/hyprland
     ../programs/lutris

@@ -6,7 +6,6 @@
 {
   imports = [
     ../programs/cava
-    ../programs/easyeffects
     ../programs/evince
     ../programs/helium
     ../programs/keepass
