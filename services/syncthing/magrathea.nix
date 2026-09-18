@@ -108,6 +108,11 @@
         };
       };
 
+      nic-enshrouded = {
+        path = "/data/sync/nic/Enshrouded";
+        devices = [ "normandy" ];
+      };
+
       nic-notes = {
         path = "/data/sync/nic/Notes";
         devices = [ "normandy" ];
