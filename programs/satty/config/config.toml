@@ -1,11 +1,12 @@
 [general]
 fullscreen = false
 resize = { mode="smart" }
+floating-hack = true
 corner-roundness = 16
 initial-tool = "brush"
 copy-command = "wl-copy"
 annotation-size-factor = 1
-output-filename = "$HOME/Pictures/Screenshots/%Y%m%d%H%M%S.png"
+output-filename = "~/Pictures/Screenshots/%Y%m%d%H%M%S.png"
 save-after-copy = false
 default-hide-toolbars = false
 focus-toggles-toolbars = false
@@ -22,7 +23,7 @@ brush-smooth-history-size = 20
 pan-step-size = 50.0
 zoom-factor = 1
 text-move-length = 50.0
-input-scale = 2.0
+input-scale = 1.0
 
 [keybinds]
 pointer = "p"
