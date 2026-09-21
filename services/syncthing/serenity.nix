@@ -15,12 +15,12 @@
     folders = {
       janice-browser = {
         path = "/data/sync/janice/Browser";
-        devices = [ "aziraphale" "serenity" ];
+        devices = [ "aziraphale" "magrathea" ];
       };
 
       janice-documents = {
         path = "/data/sync/janice/Documents";
-        devices = [ "aziraphale" "serenity" ];
+        devices = [ "aziraphale" "magrathea" ];
 
         versioning = {
           type = "simple";
@@ -30,7 +30,7 @@
 
       janice-passwords = {
         path = "/data/sync/janice/Passwords";
-        devices = [ "aziraphale" "serenity" ];
+        devices = [ "aziraphale" "magrathea" ];
       };
     };
 
