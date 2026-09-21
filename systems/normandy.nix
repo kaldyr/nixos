@@ -111,7 +111,6 @@
 
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;
-
   swapDevices = [{ device = "/swap/swapfile"; }];
   time.timeZone = "America/Los_Angeles";
 }

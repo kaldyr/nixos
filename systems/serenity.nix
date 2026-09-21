@@ -53,7 +53,7 @@
       options = [
         "subvol=@media"
         "noatime"
-        "compress-force=zstd:8"
+        "compress=zstd:8"
       ];
     };
 
@@ -63,7 +63,7 @@
       options = [
         "subvol=@snaps"
         "noatime"
-        "compress-force=zstd:8"
+        "compress=zstd:8"
       ];
     };
   };

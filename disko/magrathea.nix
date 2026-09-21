@@ -19,10 +19,7 @@
           content = {
             type = "filesystem";
             format = "vfat";
-            extraArgs = [
-              "-F"
-              "32"
-            ];
+            extraArgs = [ "-F" "32" ];
             mountpoint = "/boot";
             mountOptions = [ "defaults" ];
           };
@@ -37,12 +34,7 @@
 
             subvolumes =
               let
-                # btrfs subvolumes must all have the same mount options for now.
-                driveOptions = [
-                  "noatime"
-                  "discard=async"
-                  "compress-force=zstd:3"
-                ];
+                driveOptions = [ "noatime" "discard=async" "compress=zstd:3" ];
               in
               {
                 "@data" = { mountpoint = "/data"; mountOptions = driveOptions; };

@@ -63,68 +63,72 @@
             };
         in
         {
-          # Espresso: MinisForum UM790 Pro
+          "aziraphale" =
+            let
+              sysConfig = {
+                hostname = "aziraphale";
+                user = "janice";
+                stateVersion = "26.11";
+              };
+            in
+            buildSystem sysConfig;
+
           "espresso" =
             let
               sysConfig = {
                 hostname = "espresso";
                 user = "matshkas";
-                stateVersion = "26.05"; # Fresh install July 14th, 2026
+                stateVersion = "26.05";
               };
             in
             buildSystem sysConfig;
 
-          # Installer: Custom NixOS USB for installing systems with my environment and unlock keys
           "installer" =
             let
               sysConfig = {
                 hostname = "installer";
                 user = "matt";
-                stateVersion = "26.11"; # Fresh install September 5th, 2026
+                stateVersion = "26.11";
               };
             in
             buildSystem sysConfig;
 
-          # Magrathea: Intel i5-2500K Nextcloud server with Kodi, media storage, and snapshot backups
           "magrathea" =
             let
               sysConfig = {
                 hostname = "magrathea";
                 user = "matt";
-                stateVersion = "24.05"; # Fresh install August 16th, 2024
+                stateVersion = "24.05";
               };
             in
             buildSystem sysConfig;
 
-          # Mjolnir: Framework 13 Core Ultra Series 3 x7 358H
           "mjolnir" =
             let
               sysConfig = {
                 hostname = "mjolnir";
                 user = "matt";
-                stateVersion = "26.05"; # Fresh install July 16th, 2026
+                stateVersion = "26.05";
               };
             in
             buildSystem sysConfig;
 
-          # Normandy: Ryzen 3700X RX 7600 Desktop
           "normandy" =
             let
               sysConfig = {
                 hostname = "normandy";
                 user = "nic";
-                stateVersion = "26.11"; # Fresh install September 2nd, 2026
+                stateVersion = "26.11";
               };
             in
             buildSystem sysConfig;
 
-          # Serenity: Ryzen 5 2400g Kodi, media storage, and off-site snapshot backups
           "serenity" =
             let
               sysConfig = {
                 hostname = "serenity";
                 user = "matt";
-                stateVersion = "26.11"; # Fresh Install August 31st, 2026
+                stateVersion = "26.11";
               };
             in
             buildSystem sysConfig;

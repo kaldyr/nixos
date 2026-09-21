@@ -1,6 +1,6 @@
 {
   disko.devices.disk.main = {
-    device = "/dev/disk/by-id/nvme-Sabrent_Rocket_Q_203E079C1B1500055577";
+    device = "/dev/disk/by-id/";
     type = "disk";
 
     content = {
@@ -42,7 +42,7 @@
                   "@home" = { mountpoint = "/home"; mountOptions = driveOptions; };
                   "@nix" = { mountpoint = "/nix"; mountOptions = driveOptions; };
                   "@state" = { mountpoint = "/state"; mountOptions = driveOptions; };
-                  "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "8G"; };
+                  "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "16G"; };
                 };
             };
           };

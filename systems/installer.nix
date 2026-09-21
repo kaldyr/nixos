@@ -55,6 +55,7 @@
       age
       btrfs-progs
       cryptsetup
+      dislocker
       dosfstools
       e2fsprogs
       exfatprogs
@@ -71,6 +72,7 @@
       sops
       usbutils
       util-linux
+      wimlib
       xfsprogs
     ];
   };

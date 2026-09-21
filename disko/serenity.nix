@@ -3,7 +3,6 @@
   # Disko cannot yet handle multiple device btrfs
   # The storage array should not be managed by Disko to preserve data
   disko.devices.disk.main = {
-
     device = "/dev/disk/by-id/ata-KINGSTON_SA400S37120G_50026B76832D3433";
     type = "disk";
 
@@ -20,10 +19,7 @@
           content = {
             type = "filesystem";
             format = "vfat";
-            extraArgs = [
-              "-F"
-              "32"
-            ];
+            extraArgs = [ "-F" "32" ];
             mountpoint = "/boot";
             mountOptions = [ "defaults" ];
           };
@@ -38,12 +34,7 @@
 
             subvolumes =
               let
-                # btrfs subvolumes must all have the same mount options for now.
-                driveOptions = [
-                  "noatime"
-                  "discard=async"
-                  "compress-force=zstd:3"
-                ];
+                driveOptions = [ "noatime" "discard=async" "compress=zstd:3" ];
               in
               {
                 "@data" = { mountpoint = "/data"; mountOptions = driveOptions; };

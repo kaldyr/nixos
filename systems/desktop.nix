@@ -185,7 +185,6 @@
 
     home = {
       packages = with pkgs; [
-        android-tools
         gimp
         gnome-keyring
         gnuplot
@@ -196,6 +195,7 @@
         kjv
         libreoffice
         libsecret
+        loupe
         networkmanagerapplet
         obsidian
         papirus-folders
@@ -235,7 +235,6 @@
 
     xdg = {
       configFile."mimeapps.list".force = true;
-
       mimeApps.enable = true;
 
       userDirs = {
@@ -277,13 +276,6 @@
   services = {
     dbus.enable = true;
     gnome.gnome-keyring.enable = true;
-
-    # Work towards automount phone for file copy
-    # udev.packages = with pkgs; [
-    #     libmtp
-    #     media-player-info
-    # ];
-
     upower.enable = true;
 
     xserver = {

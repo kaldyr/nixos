@@ -121,6 +121,7 @@
   };
 
   home-manager.users.${sysConfig.user}.home.packages = with pkgs; [
+    android-tools
     chroncal
     openscad
   ];

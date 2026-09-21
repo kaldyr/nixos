@@ -1,6 +1,5 @@
 {
   disko.devices.disk.main = {
-
     device = "/dev/disk/by-id/nvme-SOLIDIGM_SSDPFKKW020X7_SSC1N514010901I6Z";
     type = "disk";
 
@@ -17,12 +16,7 @@
           content = {
             type = "filesystem";
             format = "vfat";
-
-            extraArgs = [
-              "-F"
-              "32"
-            ];
-
+            extraArgs = [ "-F" "32" ];
             mountpoint = "/boot";
             mountOptions = [ "defaults" ];
           };
@@ -40,14 +34,9 @@
               type = "btrfs";
               extraArgs = [ "-f" ];
 
-              # btrfs subvolumes must all have the same mount options for now.
               subvolumes =
                 let
-                  driveOptions = [
-                    "noatime"
-                    "discard=async"
-                    "compress-force=zstd:1"
-                  ];
+                  driveOptions = [ "noatime" "discard=async" "compress=zstd:1" ];
                 in
                 {
                   "@home" = { mountpoint = "/home"; mountOptions = driveOptions; };

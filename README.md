@@ -15,26 +15,57 @@
 ## Description
 
 This is a multi-system and multi-user flake. It has laptops, desktops, and home server.  
-The goal is a simple configuration where possible and application native config for more involved apps.
+The goal is a simple configuration where possible and application native config for more involved apps.  
+Syncthing is used to clone user data to the servers for snapshots.  
+Re-installing a machine automatically syncs data back from servers.
 
 # Machines
 
-## ☕ Espresso
+## Aziraphale
+- Laptop: Dell 14 D14260 Intel Core Ultra 5 225U
+- Fresh Install: September 19th, 2026
+- Updated: September 19th, 2026
+
+### TODO
+- [ ] Get everything setup
+
+## Espresso
 - Desktop: Minisforum UM790 Pro
-- Hyprland
+- Fresh Install: July 14th, 2026
+- Updated: 2026-09-14
 
-## ⚔ Hofud
+### TODO
+- [ ] Add razer mouse profile
+
+## Hofud
 - Desktop: Framework 13 11th Gen i5-1135G7 motherboard
-- Currently down while waiting for parts
-- Computer for homeschooling
+- Fresh Install: (Down, waiting on parts)
+- Updated: 2026-09-14
 
-## 🪐 Magrathea
+### TODO
+- [ ] Figure out the HDMI issue
+- [ ] Fresh install
+- [ ] Congigure as homeschool computer
+
+## Installer
+- USB Flash Drive (Actual install, not ISO)
+- Fresh Install: September 5th, 2026
+- Updated: 2026-09-14
+
+### Tools
+- Everything needed to install and troubleshoot machines
+- Memtest
+
+## Magrathea
 - Home server: Intel i5-2500k still kicking
-- Potential upgrade:  Odroid H5 HDMI-CEC and m.2280 -> 6 SATA ports
-- Nextcloud  (Remove soon)
-- Immich  (Will replace nextcloud)
-- Radicale  (Will replace nextcloud)
-- Syncthing  (Will replace nextcloud)
+- Fresh Install: August 16th, 2024
+- Updated: 2026-09-14
+
+### Services
+- Nextcloud (Remove soon)
+- Immich (Will replace nextcloud)
+- Radicale (Will replace nextcloud)
+- Syncthing
 - Forgejo (Private Git) served to tailnet
 - Linkwarden served to tailnet (Bookmarks and Site Archiving)
 - Kodi Media Center to TV and streaming media to devices
@@ -42,21 +73,48 @@ The goal is a simple configuration where possible and application native config 
 - Open Starbound
 - NAS with Samba
 
-## 🔨 Mjolnir
-- Laptop: Framework 13 Intel Core Ultra x7 358H in 1st gen chassis
-- Future upgrades:  Pro input cover kit (haptic trackpad), 4.0kg hinge kit, Wi-Fi 7 module
-- Hyprland
+### TODO
+- [ ] Migrate drive definitions
+- [ ] Configure automatic snapshots
+- [ ] Install and configure Immich
+- [ ] Install and configure Radicale
+- [ ] Install and configure Vikunja
 
-## 🚀 Normandy
+## Mjolnir
+- Laptop: First generation Framework 13
+- Fresh Install: July 16th, 2026
+- Updated: 2026-09-14
+
+### Upgrades
+- Panther Lake Ultra x7 358H with B390 Mainboard
+- 32GB LPCAMM2 7500 RAM
+- BE211 Wi-Fi 7 Module
+- 4.0kg Hinge Kit
+
+### TODO
+- [ ] Work on Quickshell setup
+
+## Normandy
 - Desktop: Ryzen 7 3700X, Radeon RX 7600
-- Trial to save wife's machine from windows hell
-- Hyprland
+- Fresh Install: September 2nd, 2026
+- Updated: 2026-09-14
 
-## 🚀 Serenity
+### TODO
+- [ ] Stabilize OpenRGB
+
+## Serenity
 - Home server: Ryzen 2400g
+- Fresh Install: August 31st, 2026
+- Updated: 2026-09-14
+
+### Services
 - Off-site backup
 - Kodi
 - NAS with Samba
+
+### TODO
+- [ ] Migrate drive definitions (In person, must use installer)
+- [ ] Set up snapshot archiving from Magrathea
 
 # Notable customizations
 
@@ -78,9 +136,9 @@ Caps+hjkl - arrow keys
 
 ## Replace Nextcloud
 
-- Radicale for CalDAV + CardDAV
-- Immich for photo management, sync from phones, sharing with family
-- Syncthing for file/folder syncing, browser profile backup
+- [ ] Radicale for CalDAV + CardDAV
+- [ ] Immich for photo management, sync from phones, sharing with family
+- [x] Syncthing for file/folder syncing, browser profile backup
 
 # Install
 
