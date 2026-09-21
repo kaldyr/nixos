@@ -23,8 +23,8 @@ Re-installing a machine automatically syncs data back from servers.
 
 ## Aziraphale
 - Laptop: Dell 14 D14260 Intel Core Ultra 5 225U
-- Fresh Install: September 19th, 2026
-- Updated: September 19th, 2026
+- Fresh Install: 
+- Updated: 
 
 ### TODO
 - [ ] Get everything setup
@@ -32,7 +32,7 @@ Re-installing a machine automatically syncs data back from servers.
 ## Espresso
 - Desktop: Minisforum UM790 Pro
 - Fresh Install: July 14th, 2026
-- Updated: 2026-09-14
+- Updated: 2026-09-20
 
 ### TODO
 - [ ] Add razer mouse profile
@@ -40,7 +40,7 @@ Re-installing a machine automatically syncs data back from servers.
 ## Hofud
 - Desktop: Framework 13 11th Gen i5-1135G7 motherboard
 - Fresh Install: (Down, waiting on parts)
-- Updated: 2026-09-14
+- Updated: 
 
 ### TODO
 - [ ] Figure out the HDMI issue
@@ -50,7 +50,7 @@ Re-installing a machine automatically syncs data back from servers.
 ## Installer
 - USB Flash Drive (Actual install, not ISO)
 - Fresh Install: September 5th, 2026
-- Updated: 2026-09-14
+- Updated: 2026-09-20
 
 ### Tools
 - Everything needed to install and troubleshoot machines
@@ -59,7 +59,7 @@ Re-installing a machine automatically syncs data back from servers.
 ## Magrathea
 - Home server: Intel i5-2500k still kicking
 - Fresh Install: August 16th, 2024
-- Updated: 2026-09-14
+- Updated: 2026-09-20
 
 ### Services
 - Nextcloud (Remove soon)
@@ -83,7 +83,7 @@ Re-installing a machine automatically syncs data back from servers.
 ## Mjolnir
 - Laptop: First generation Framework 13
 - Fresh Install: July 16th, 2026
-- Updated: 2026-09-14
+- Updated: 2026-09-20
 
 ### Upgrades
 - Panther Lake Ultra x7 358H with B390 Mainboard
@@ -97,7 +97,7 @@ Re-installing a machine automatically syncs data back from servers.
 ## Normandy
 - Desktop: Ryzen 7 3700X, Radeon RX 7600
 - Fresh Install: September 2nd, 2026
-- Updated: 2026-09-14
+- Updated: 2026-09-20
 
 ### TODO
 - [ ] Stabilize OpenRGB
@@ -105,7 +105,7 @@ Re-installing a machine automatically syncs data back from servers.
 ## Serenity
 - Home server: Ryzen 2400g
 - Fresh Install: August 31st, 2026
-- Updated: 2026-09-14
+- Updated: 2026-09-20
 
 ### Services
 - Off-site backup
