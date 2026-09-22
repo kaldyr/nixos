@@ -151,7 +151,7 @@
 
       shared-music = {
         path = "/storage/media/Music";
-        devices = [ "mjolnir" ];
+        devices = [ "gungnir" "mjolnir" ];
         type = "sendonly";
       };
 
