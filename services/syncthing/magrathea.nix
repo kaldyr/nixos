@@ -160,6 +160,12 @@
         devices = [ "mjolnir" ];
         type = "sendonly";
       };
+
+      shared-videos-offline = {
+        path = "/storage/media/Videos/Offline";
+        devices = [ "gungnir" ];
+        type = "sendonly";
+      };
     };
 
     gui.insecureSkipHostcheck = true;
