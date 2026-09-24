@@ -20,6 +20,7 @@
     ../programs/steam
     ../services/keyd
     ../services/kmscon
+    ../services/openrazer
     ../services/syncthing
   ];
 
