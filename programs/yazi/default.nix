@@ -17,6 +17,7 @@ in
       glow
       mediainfo
       ouch
+      poppler-utils
       sshfs
       yazi
     ];

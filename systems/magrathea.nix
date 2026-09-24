@@ -91,43 +91,6 @@
   services = {
     pipewire.enable = lib.mkForce false;
     pulseaudio.enable = lib.mkForce false;
-
-    samba = {
-      enable = true;
-      package = pkgs.samba;
-
-      openFirewall = true;
-
-      settings = {
-        global = {
-          "encrypt passwords" = true;
-          "invalid users" = [ "root" ];
-          "guest account" = "nobody";
-          "map to guest" = "bad user";
-          "netbios name" = "magrathea";
-          "security" = "user";
-          "server string" = "magrathea";
-          "workgroup" = "WORKGROUP";
-        };
-
-        "media" = {
-          path = "/storage/media";
-          comment = "Media";
-          browsable = "yes";
-          public = "yes";
-          "read only" = "no";
-          "guest ok" = "yes";
-          "force user" = "matt";
-          "force group" = "users";
-          "create mask" = "0664";
-          "directory mask" = "0775";
-        };
-      };
-    };
-
-    samba-wsdd.enable = true;
-    samba-wsdd.openFirewall = true;
-
     tailscale.useRoutingFeatures = "server";
   };
 

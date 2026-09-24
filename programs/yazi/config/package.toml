@@ -48,5 +48,15 @@ use = "Rolv-Apneseth/starship"
 rev = "ea92cf4"
 hash = "9776f378459072b6c2875eae5addc49d"
 
+[[plugin.deps]]
+use = "ettom/openscad"
+rev = "4397564"
+hash = "996ad1c3b9260026ecdb2d8e7d454c50"
+
+[[plugin.deps]]
+use = "bjnobre/office"
+rev = "f9acd4b1398c402d47656a24802ee79f0701f76c"
+hash = "ba7abba4ef791d2d588538947f908cf5"
+
 [flavor]
 deps = []

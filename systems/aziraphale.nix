@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  sysConfig,
   ...
 }:
 {
@@ -87,6 +88,10 @@
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
   };
+
+  home-manager.users.${sysConfig.user}.home.packages = with pkgs; [
+    onlyoffice-desktopeditors
+  ];
 
   services = {
     auto-cpufreq = {

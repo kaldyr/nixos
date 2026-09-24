@@ -45,7 +45,7 @@ Re-installing a machine automatically syncs data back from servers.
 ### TODO
 - [ ] Figure out the HDMI issue
 - [ ] Fresh install
-- [ ] Congigure as homeschool computer
+- [ ] Configure as homeschool computer
 
 ## Installer
 - USB Flash Drive (Actual install, not ISO)
@@ -68,17 +68,17 @@ Re-installing a machine automatically syncs data back from servers.
 - Syncthing
 - Forgejo (Private Git) served to tailnet
 - Linkwarden served to tailnet (Bookmarks and Site Archiving)
-- Kodi Media Center to TV and streaming media to devices
+- Kodi Media Center via HDMI to TV
 - Technitium dns for tailnet
 - Open Starbound
-- NAS with Samba
 
 ### TODO
 - [ ] Migrate drive definitions
 - [ ] Configure automatic snapshots
+- [ ] Install and configure AudioBookShelf
+- [ ] Install and configure Vikunja
 - [ ] Install and configure Immich
 - [ ] Install and configure Radicale
-- [ ] Install and configure Vikunja
 
 ## Mjolnir
 - Laptop: First generation Framework 13
@@ -222,12 +222,6 @@ nixos-enter
 ```
 
 ### Manual Interventions
-
-#### Samba Servers
-
-```fish
-sudo smbpasswd -a USERNAME
-```
 
 #### Virtual Machines
 

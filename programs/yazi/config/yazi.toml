@@ -1,6 +1,6 @@
 [mgr]
 linemode = "size_and_mtime"
-mouse_events = [ "click", "scroll" ]
+mouse_events = ["click", "scroll"]
 ratio = [0, 2, 3]
 scrolloff = 5
 show_hidden = false
@@ -22,40 +22,44 @@ tab_size = 2
 wrap = "no"
 
 [opener]
-edit = [ { run = 'nvim %s', desc = "Edit", block = true } ]
-exif = [ { run = 'exiftool %s; echo "Press enter to exit"; read _', desc = "Show EXIF data", block = true } ]
+edit = [{ run = 'nvim %s', desc = "Edit", block = true }]
+exif = [
+  { run = 'exiftool %s; echo "Press enter to exit"; read _', desc = "Show EXIF data", block = true },
+]
 exifedit = [
-	{ run = 'exiftool -overwrite_original "-alldates<filename" -S -m -q %s', desc = "Set EXIF datetime from Filename" },
-	{ run = 'exiftool "-filename<CreateDate" -d "_%Y%m%d_%H%M%S.%%e" -S -m -ee -q %s', desc = "Set Filename from EXIF datetime" },
+  { run = 'exiftool -overwrite_original "-alldates<filename" -S -m -q %s', desc = "Set EXIF datetime from Filename" },
+  { run = 'exiftool "-filename<CreateDate" -d "_%Y%m%d_%H%M%S.%%e" -S -m -ee -q %s', desc = "Set Filename from EXIF datetime" },
 ]
-extract = [
-	{ run = 'ouch d -y %s', desc = "Extract here with ouch" },
+extract = [{ run = 'ouch d -y %s', desc = "Extract here with ouch" }]
+foldersize = [
+  { run = 'du -hs %s; echo "Press enter to exit"; read _', desc = "Folder size", block = true },
 ]
-foldersize = [ { run = 'du -hs %s; echo "Press enter to exit"; read _', desc = "Folder size", block = true } ]
-image = [ { run = 'feh -. -Z %s', desc = "Open with feh", orphan = true } ]
-office = [ { run = 'libreoffice %s', desc = "Open with LibreOffice", orphan = true } ]
-open = [ { run = 'xdg-open %s', desc = "XDG Open", orphan = true } ]
-pdf = [ { run = 'zathura %s', desc = "Open with Zathura", orphan = true } ]
+image = [{ run = 'feh -. -Z %s', desc = "Open with feh", orphan = true }]
+office = [
+  { run = 'libreoffice %s', desc = "Open with LibreOffice", orphan = true },
+]
+open = [{ run = 'xdg-open %s', desc = "XDG Open", orphan = true }]
+pdf = [{ run = 'zathura %s', desc = "Open with Zathura", orphan = true }]
 play = [
-	{ run = 'mpv --force-window %s', desc = "Play with mpv", orphan = true },
-	{ run = 'mediainfo "$1"; echo "Press enter to exit"; read _', desc = "Show media info", block = true },
+  { run = 'mpv --force-window %s', desc = "Play with mpv", orphan = true },
+  { run = 'mediainfo "$1"; echo "Press enter to exit"; read _', desc = "Show media info", block = true },
 ]
 
 [open]
 rules = [
-	{ mime = "application/{,g}zip", use = [ "extract", "exif" ] },
-	{ mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", use = [ "extract", "exif" ] },
-	{ mime = "application/pdf", use = [ "pdf", "exif" ] },
-	{ mime = "audio/*", use = [ "play", "exif" ] },
-	{ mime = "image/*", use = [ "image", "exif", "exifedit" ] },
-	{ mime = "inode/directory", use = [ "dev", "play", "foldersize" ] },
-	{ mime = "text/*", use = [ "edit", "exif" ] },
-	{ mime = "video/*", use = [ "play", "exif", "exifedit" ] },
-	{ url  = "*.od{g,p,s,t}", use = [ "office", "exif" ] },
-	{ url  = "*.doc{,x}", use = [ "office", "exif" ] },
-	{ url  = "*.ppt{,x}", use = [ "office", "exif" ] },
-	{ url  = "*.xls{,x}", use = [ "office", "exif" ] },
-	{ mime = "*", use = [ "edit", "open", "exif" ] },
+  { mime = "application/{,g}zip", use = [ "extract", "exif" ] },
+  { mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", use = [ "extract", "exif" ] },
+  { mime = "application/pdf", use = [ "pdf", "exif" ] },
+  { mime = "audio/*", use = [ "play", "exif" ] },
+  { mime = "image/*", use = [ "image", "exif", "exifedit" ] },
+  { mime = "inode/directory", use = [ "dev", "play", "foldersize" ] },
+  { mime = "text/*", use = [ "edit", "exif" ] },
+  { mime = "video/*", use = [ "play", "exif", "exifedit" ] },
+  { url = "*.od{g,p,s,t}", use = [ "office", "exif" ] },
+  { url = "*.doc{,x}", use = [ "office", "exif" ] },
+  { url = "*.ppt{,x}", use = [ "office", "exif" ] },
+  { url = "*.xls{,x}", use = [ "office", "exif" ] },
+  { mime = "*", use = [ "edit", "open", "exif" ] },
 ]
 
 [tasks]
@@ -63,17 +67,32 @@ micro_workers = 10
 macro_workers = 25
 bizarre_retry = 5
 image_alloc = 536870912  # 512MB
-image_bound = [ 0, 0 ]
+image_bound = [0, 0]
 suppress_preload = false
 
 [log]
 enabled = false
 
 [plugin]
+prepend_preloaders = [
+  { mime = "application/openxmlformats-officedocument.*", run = "office" },
+  { mime = "application/oasis.opendocument.*", run = "office" },
+  { mime = "application/ms-*", run = "office" },
+  { mime = "application/msword", run = "office" },
+  { url = "*.docx", run = "office" },
+  { url = "*.{scad,csg,3mf,amf,dxf,off,stl}", run = "openscad" },
+]
+
 prepend_previewers = [
-	{ url = "*/", run = 'piper -- eza -TL=3 --color=always --icons=always --group-directories-first --no-quotes "$1"' },
-	{ url = "*.csv", run = 'piper -- bat -p --color=always "$1"' },
-	{ url = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w$w -s=dark "$1"' },
-	{ mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}", run = "ouch --archive-icon='🗄️ '" },
-	{ mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}", run = "ouch --show-file-icons" },
+  { url = "*/", run = 'piper -- eza -TL=3 --color=always --icons=always --group-directories-first --no-quotes "$1"' },
+  { url = "*.csv", run = 'piper -- bat -p --color=always "$1"' },
+  { url = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w$w -s=dark "$1"' },
+  { url = "*.{scad,csg,3mf,amf,dxf,off,stl}", run = "openscad" },
+  { url = "*.docx", run = "office" },
+  { mime = "application/openxmlformats-officedocument.*", run = "office" },
+  { mime = "application/oasis.opendocument.*", run = "office" },
+  { mime = "application/ms-*", run = "office" },
+  { mime = "application/msword", run = "office" },
+  { mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}", run = "ouch --archive-icon='🗄️ '" },
+  { mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}", run = "ouch --show-file-icons" },
 ]
