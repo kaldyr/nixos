@@ -13,7 +13,6 @@
 
     settings = {
       Address = "127.0.0.1";
-      BaseUrl = "http://music";
       Port = 4533;
       MusicFolder = "/storage/media/Music";
     };

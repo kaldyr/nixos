@@ -49,7 +49,7 @@
           HTTP_ADDR = "127.0.0.1";
           HTTP_PORT = 9001;
           PROTOCOL = "http";
-          ROOT_URL = "http://git";
+          ROOT_URL = "https://git.brill-godzilla.ts.net";
           BUILTIN_SSH_SERVER_USER = "git";
           SSH_CREATE_AUTHORIZED_KEYS_FILE = true;
           SSH_LISTEN_HOST = "0.0.0.0";
