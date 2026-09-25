@@ -76,7 +76,7 @@ Re-installing a machine automatically syncs data back from servers.
 - [ ] Migrate drive definitions
 - [ ] Configure automatic snapshots
 - [ ] AudioBookShelf
-- [ ] Navidrome
+- [x] Navidrome
 - [ ] Vikunja
 - [ ] Immich
 - [ ] Radicale

@@ -35,6 +35,11 @@
     loader.grub.gfxmodeEfi = "1920x1080";
   };
 
+  environment.systemPackages = with pkgs; [
+    picard
+    flac
+  ];
+
   environment.persistence."/state/system".directories = [
     {
       directory = "/var/lib/certs";
