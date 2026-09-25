@@ -8,6 +8,7 @@
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     ../disko/magrathea.nix
+    ../services/audiobookshelf
     ../services/forgejo
     ../services/kodi
     ../services/linkwarden
