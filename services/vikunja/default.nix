@@ -1,6 +1,11 @@
 {
   environment.persistence."/state".directories = [
-      "/var/lib/vikunja"
+    {
+      directory = "/var/lib/vikunja";
+      user = "vikunja";
+      group = "vikunja";
+      mode = "0750";
+    }
   ];
 
   services = {
@@ -33,6 +38,15 @@
       };
 
       settings.database.sslmode = "disable";
+    };
+  };
+
+  users = {
+    groups.vikunja = { };
+
+    users.vikunja = {
+      isSystemUser = true;
+      group = "vikunja";
     };
   };
 }
