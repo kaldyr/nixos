@@ -35,7 +35,6 @@
         host = "/run/postgresql";
         user = "vikunja";
         database = "vikunja";
-        sslmode = "disable";
       };
 
       settings.database.sslmode = "disable";
