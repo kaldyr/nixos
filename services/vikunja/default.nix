@@ -1,11 +1,6 @@
 {
   environment.persistence."/state".directories = [
-    {
-      directory = "/var/lib/vikunja";
-      user = "vikunja";
-      group = "vikunja";
-      mode = "0750";
-    }
+      "/var/lib/vikunja"
   ];
 
   services = {
