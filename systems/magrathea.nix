@@ -11,6 +11,7 @@
     ../services/forgejo
     ../services/kodi
     ../services/linkwarden
+    ../services/navidrome
     ../services/nextcloud
     ../services/openstarbound
     ../services/syncthing
