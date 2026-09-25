@@ -25,23 +25,20 @@
     vikunja = {
       enable = true;
 
+      address = "127.0.0.1";
+      port = 3456;
       frontendScheme = "https";
       frontendHostname = "tasks.brill-godzilla.ts.net";
 
-      settings = {
-        service = {
-          interface = "127.0.0.1:3456";
-          publicurl = "https://tasks.brill-godzilla.ts.net/";
-        };
-
-        database = {
-          type = "postgres";
-          host = "/run/postgresql";
-          user = "vikunja";
-          database = "vikunja";
-          sslmode = "disable";
-        };
+      database = {
+        type = "postgres";
+        host = "/run/postgresql";
+        user = "vikunja";
+        database = "vikunja";
+        sslmode = "disable";
       };
+
+      settings.database.sslmode = "disable";
     };
   };
 }
