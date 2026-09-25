@@ -32,7 +32,7 @@ Re-installing a machine automatically syncs data back from servers.
 ## Espresso
 - Desktop: Minisforum UM790 Pro
 - Fresh Install: July 14th, 2026
-- Updated: 2026-09-20
+- Updated: 2026-09-23
 
 ### TODO
 - [ ] Add razer mouse profile
@@ -59,7 +59,7 @@ Re-installing a machine automatically syncs data back from servers.
 ## Magrathea
 - Home server: Intel i5-2500k still kicking
 - Fresh Install: August 16th, 2024
-- Updated: 2026-09-20
+- Updated: 2026-09-23
 
 ### Services
 - Nextcloud (Remove soon)
@@ -75,15 +75,16 @@ Re-installing a machine automatically syncs data back from servers.
 ### TODO
 - [ ] Migrate drive definitions
 - [ ] Configure automatic snapshots
-- [ ] Install and configure AudioBookShelf
-- [ ] Install and configure Vikunja
-- [ ] Install and configure Immich
-- [ ] Install and configure Radicale
+- [ ] AudioBookShelf
+- [ ] Navidrome
+- [ ] Vikunja
+- [ ] Immich
+- [ ] Radicale
 
 ## Mjolnir
 - Laptop: First generation Framework 13
 - Fresh Install: July 16th, 2026
-- Updated: 2026-09-20
+- Updated: 2026-09-23
 
 ### Upgrades
 - Panther Lake Ultra x7 358H with B390 Mainboard
@@ -97,7 +98,7 @@ Re-installing a machine automatically syncs data back from servers.
 ## Normandy
 - Desktop: Ryzen 7 3700X, Radeon RX 7600
 - Fresh Install: September 2nd, 2026
-- Updated: 2026-09-20
+- Updated: 2026-09-23
 
 ### TODO
 - [ ] Stabilize OpenRGB
@@ -105,7 +106,7 @@ Re-installing a machine automatically syncs data back from servers.
 ## Serenity
 - Home server: Ryzen 2400g
 - Fresh Install: August 31st, 2026
-- Updated: 2026-09-20
+- Updated: 2026-09-23
 
 ### Services
 - Off-site backup

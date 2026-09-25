@@ -149,12 +149,6 @@
         devices = [ "normandy" ];
       };
 
-      shared-music = {
-        path = "/storage/media/Music";
-        devices = [ "gungnir" "mjolnir" ];
-        type = "sendonly";
-      };
-
       shared-roms = {
         path = "/storage/media/Roms";
         devices = [ "mjolnir" ];

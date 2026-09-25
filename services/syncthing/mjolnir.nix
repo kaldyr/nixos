@@ -1,8 +1,4 @@
 {
-  config,
-  ...
-}:
-{
   services.syncthing = {
     user = "matt";
     group = "users";
@@ -47,62 +43,11 @@
           devices = [ "gungnir" "installer" "magrathea" ];
         };
 
-        shared-music = {
-          path = "/home/matt/Music";
-          devices = [ "magrathea" ];
-          type = "receiveonly";
-        };
-
         shared-roms = {
           path = "/home/matt/Roms";
           devices = [ "magrathea" ];
           type = "receiveonly";
         };
-      };
-    };
-  };
-
-  sops.secrets = {
-    "syncthing/mjolnir/music-stignore" = {
-      owner = "matt";
-      group = "users";
-      mode = "0400";
-    };
-
-    "syncthing/mjolnir/roms-stignore" = {
-      owner = "matt";
-      group = "users";
-      mode = "0400";
-    };
-  };
-
-  systemd = {
-    services = {
-      syncthing-stignore-files = {
-        before = [ "syncthing.service" ];
-        wantedBy = [ "multi-user.target" ];
-
-        serviceConfig = {
-          Type = "oneshot";
-          RemainAfterExit = true;
-        };
-
-        script = ''
-          install -D -o matt -g users -m 0400 \
-            ${config.sops.secrets."syncthing/mjolnir/music-stignore".path} \
-            /home/matt/Music/.stignore
-          chown matt:users /home/matt/Music
-
-          install -D -o matt -g users -m 0400 \
-            ${config.sops.secrets."syncthing/mjolnir/roms-stignore".path} \
-            /home/matt/Roms/.stignore
-          chown matt:users /home/matt/Roms
-        '';
-      };
-
-      syncthing = {
-        wants = [ "syncthing-stignore-files.service" ];
-        after = [ "syncthing-stignore-files.service" ];
       };
     };
   };
