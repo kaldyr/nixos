@@ -17,6 +17,7 @@
     ../services/openstarbound
     ../services/syncthing
     ../services/technitium
+    ../services/vikunja
   ];
 
   boot = {
