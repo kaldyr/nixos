@@ -214,6 +214,8 @@
   };
 
   system.stateVersion = sysConfig.stateVersion;
-
   systemd.settings.Manager.DefaultTimeoutStopSec = "10s";
+
+  # Fixed group ID on all machines to keep consistent permissions to /nix/config
+  users.groups.nixconfig.gid = 2000;
 }

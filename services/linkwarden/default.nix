@@ -43,6 +43,7 @@
     };
 
     postgresql.ensureDatabases = [ "linkwarden" ];
+
     postgresql.ensureUsers = [
       {
         name = "linkwarden";

@@ -43,6 +43,12 @@
           devices = [ "gungnir" "installer" "magrathea" ];
         };
 
+        nix-config = {
+          path = "/nix/config";
+          devices = [ "magrathea" ];
+          ignorePatterns = [ "/.git" ];
+        };
+
         shared-roms = {
           path = "/home/matt/Roms";
           devices = [ "magrathea" ];

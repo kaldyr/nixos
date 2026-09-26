@@ -1,2 +1,4 @@
-programs/yazi/config/plugins/
-programs/quickshell/config/.qmlls.ini
+/.stfolder
+/.stignore
+/programs/yazi/config/plugins/
+/programs/quickshell/config/.qmlls.ini

@@ -149,6 +149,22 @@
         devices = [ "normandy" ];
       };
 
+      nix-config = {
+        path = "/nix/config";
+
+        devices = [
+         "aziraphale"
+         "espresso"
+         "installer"
+         "magrathea"
+         "mjolnir"
+         "normandy"
+         "serenity"
+        ];
+
+        ignorePatterns = [ "/.git" ];
+      };
+
       shared-roms = {
         path = "/storage/media/Roms";
         devices = [ "mjolnir" ];
@@ -165,5 +181,8 @@
     gui.insecureSkipHostcheck = true;
   };
 
-  users.users.syncthing.extraGroups = [ "media" ];
+  users.users.syncthing.extraGroups = [
+    "media"
+    "nixconfig"
+  ];
 }
