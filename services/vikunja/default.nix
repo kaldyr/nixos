@@ -1,4 +1,8 @@
 {
+  lib,
+  ...
+}:
+{
   environment.persistence."/state".directories = [
     {
       directory = "/var/lib/vikunja";
@@ -39,6 +43,12 @@
 
       settings.database.sslmode = "disable";
     };
+  };
+
+  systemd.services.vikunja.serviceConfig = {
+    DynamicUser = lib.mkForce false;
+    User = "vikunja";
+    Group = "vikunja";
   };
 
   users = {
