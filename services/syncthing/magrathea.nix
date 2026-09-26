@@ -181,11 +181,16 @@
     gui.insecureSkipHostcheck = true;
   };
 
-  users.users.syncthing = {
-    group = "syncthing";
-    extraGroups = [
-      "media"
-      "nixconfig"
-    ];
+  users = {
+    groups.syncthing = {};
+
+    users.syncthing = {
+      group = "syncthing";
+
+      extraGroups = [
+        "media"
+        "nixconfig"
+      ];
+    };
   };
 }
