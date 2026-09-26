@@ -163,6 +163,7 @@
         ];
 
         ignorePatterns = [ "/.git" ];
+        ignorePerms = true;
       };
 
       shared-roms = {

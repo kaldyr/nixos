@@ -32,6 +32,13 @@
         path = "/data/sync/janice/Passwords";
         devices = [ "aziraphale" "magrathea" ];
       };
+
+        nix-config = {
+          path = "/nix/config";
+          devices = [ "magrathea" ];
+          ignorePatterns = [ "/.git" ];
+          ignorePerms = true;
+        };
     };
 
     gui.insecureSkipHostcheck = true;
