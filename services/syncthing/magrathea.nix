@@ -186,6 +186,7 @@
 
     users.syncthing = {
       group = "syncthing";
+      isSystemUser = true;
 
       extraGroups = [
         "media"
