@@ -184,7 +184,7 @@
         "espresso".publicKey =
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICKugLnV4qqCMN5dhN4BWEx9Q7OG+BAk0a+2RzNmzFhr root@espresso";
         "installer".publicKey =
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILgMIAU60I/bs8AO0EJLpfWzHawpKwoq4WkohyPDzHX0 root@installer";
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPMi1M5cljxIMmx2D4KzPLWPjhm9x4JmATnRLOmyQOD5 root@installer";
         "magrathea".publicKey =
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKymXBmxO/Yb9lFRyW+w1O3mZ7I6iLgnxW0kgI/4e1O3 root@magrathea";
         "mjolnir".publicKey =
