@@ -65,23 +65,24 @@ Re-installing a machine automatically syncs data back from servers.
 
 ### Services
 - Nextcloud (Remove soon)
-- Immich (Will replace nextcloud)
-- Radicale (Will replace nextcloud)
-- Syncthing
-- Forgejo (Private Git) served to tailnet
-- Linkwarden served to tailnet (Bookmarks and Site Archiving)
+- AudioBookoShelf (Audiobooks and ebooks)
+- Forgejo (Private Git)
+- Linkwarden (Bookmarks and Site Archiving)
+- Navidrome (Music)
+- Syncthing Hub (with versioning and snapshot archives)
+- Technitium (DNS for tailnet with ad block)
+- Vikunja (Tasks and Project Management)
 - Kodi Media Center via HDMI to TV
-- Technitium dns for tailnet
 - Open Starbound
 
 ### TODO
-- [ ] Migrate drive definitions
-- [ ] Configure automatic snapshots
-- [ ] AudioBookShelf
-- [x] Navidrome
-- [ ] Vikunja
-- [ ] Immich
-- [ ] Radicale
+- Migrate drive definitions
+- Configure automatic snapshots
+- Radicale (service)
+- Immich (service)
+- Terraria server
+- RomM (service)
+- Look into Jellyfin
 
 ## Mjolnir
 - Laptop: First generation Framework 13
@@ -135,13 +136,18 @@ Caps+hjkl - arrow keys
 , - tab previous  
 . - tab next
 
+## Syncthing
+- Personal folders for desktop users are synced to file server.
+- Documents and Obsidian Vaults have simple file versioning for file server only.
+- btrfs snapshots sent to local RAID array and offsite RAID array.
+
 # TODO
 
 ## Replace Nextcloud
 
+- [x] Syncthing for file/folder syncing, browser profile backup
 - [ ] Radicale for CalDAV + CardDAV
 - [ ] Immich for photo management, sync from phones, sharing with family
-- [x] Syncthing for file/folder syncing, browser profile backup
 
 # Install
 
@@ -210,8 +216,6 @@ umount /storage
 
 Skip if machine is already defined.  
 
-### Add machine to flake.nix
-
 ### Configure User
 
 Create or update '/nix/config/users/<user>.nix'.  
@@ -219,13 +223,20 @@ Set preferences.
 
 ### Configure System
 
-Create '/nix/config/systems/<system>.nix'.  
+#### Add Machine to Main Flake
+
+/nix/config/flake.nix
+
+#### Create Machine Specific Config
+
+/nix/config/systems/<system>.nix
 
 #### Generate the hardware config
 ```fish
 sudo nixos-generate-config --root /mnt --show-hardware-config
 
 ```
+
 #### Merge into /nix/config/systems/<system>.nix
 
 - boot.initrd.availableKernelModules
@@ -264,13 +275,24 @@ Navigate to syncthing section
 
 ```vim
 :r! generate-syncthing-identity <system>
-17k
-dd
+```
+
+Cut the <system>.id line to the clipboard.
+
+```vim
 :e /nix/config/services/syncthing/magrathea.nix
-/dev<cr>
-p
-vi{gs
+```
+
+Paste the <system>.id line into the devices section and sort.  
+
+```vim
+:w
 <c-x>
+```
+
+Repeat for any other systems that will interact with the new system.  
+
+```vim
 :wq
 ```
 
@@ -279,10 +301,8 @@ sudo -E sops updatekeys secrets.yaml
 ```
 
 - Create /nix/config/services/syncthing/<system>.nix and populate its folders.
-- Add the new device ID to Magrathea.
 - Add the new device to Magrathea's folder sync list.
-- Update any other machines that need to know about the new system.
-- Rebuild affected existing machines.
+- Rebuild affected existing machines once Syncthing propagates config changes.
 
 ## Build the System
 
