@@ -44,5 +44,17 @@
     gui.insecureSkipHostcheck = true;
   };
 
-  users.users.syncthing.extraGroups = [ "media" ];
+  users = {
+    groups.syncthing = {};
+
+    users.syncthing = {
+      group = "syncthing";
+      isSystemUser = true;
+
+      extraGroups = [
+        "media"
+        "nixconfig"
+      ];
+    };
+  };
 }
