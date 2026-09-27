@@ -41,7 +41,6 @@
           devices = [ "magrathea" ];
           ignorePerms = true;
         };
-
       };
     };
   };

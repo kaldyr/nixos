@@ -26,6 +26,12 @@
           path = "/home/matt/.passwords";
           devices = [ "gungnir" "installer" "magrathea" ];
         };
+
+        nix-config = {
+          path = "/nix/config";
+          devices = [ "magrathea" ];
+          ignorePerms = true;
+        };
       };
     };
   };
