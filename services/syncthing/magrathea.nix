@@ -162,7 +162,6 @@
          "serenity"
         ];
 
-        ignorePatterns = [ "/.git" ];
         ignorePerms = true;
       };
 

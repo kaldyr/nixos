@@ -40,7 +40,7 @@
 
         matt-passwords = {
           path = "/home/matt/.passwords";
-          devices = [ "gungnir" "installer" "magrathea" ];
+          devices = [ "gungnir" "magrathea" ];
         };
 
         nix-config = {

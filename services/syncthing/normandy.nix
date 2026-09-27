@@ -39,7 +39,6 @@
         nix-config = {
           path = "/nix/config";
           devices = [ "magrathea" ];
-          ignorePatterns = [ "/.git" ];
           ignorePerms = true;
         };
 

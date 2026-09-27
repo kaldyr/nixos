@@ -17,9 +17,17 @@
         mjolnir.id = "2OH2UKZ-YUQIZKC-R3R3KUY-B3T7XDQ-4BPLA2J-LDV5YR4-S3SGBZA-CZ237AZ";
       };
 
-      folders.matt-passwords = {
-        path = "/home/matt/.passwords";
-        devices = [ "gungnir" "magrathea" "mjolnir" ];
+      folders = {
+        matt-passwords = {
+          path = "/home/matt/.passwords";
+          devices = [ "magrathea" ];
+        };
+
+        nix-config = {
+          path = "/nix/config";
+          devices = [ "magrathea" ];
+          ignorePerms = true;
+        };
       };
     };
   };
