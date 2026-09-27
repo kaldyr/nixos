@@ -8,7 +8,7 @@
 
   services.syncthing.settings = {
     devices = {
-      aziraphale.id = "FIP6JCJ-QMZ353Y-WIRJPKA-5S45S2S-GUZLT6X-EUJOSHT-DMSH6JF-W3FQCQ2";
+      # aziraphale.id = "FIP6JCJ-QMZ353Y-WIRJPKA-5S45S2S-GUZLT6X-EUJOSHT-DMSH6JF-W3FQCQ2";
       espresso.id = "GHB4M4V-LTDEJAT-K7RSH6B-J356MLT-OSIULSB-D5PVJAD-4K4EZUL-BHWBLAS";
       gungnir.id = "VLGBL5L-XAFQV3N-GHOFDLI-ZRC6BYT-C5LHRDR-DO4RF46-4TE6ILP-I32OHAT";
       installer.id = "EKEB4HK-5OVXUSI-WIYH3H3-EYCZUN5-FHU6X7V-LLNSNJB-QXCU7T5-LVT4VQK";
@@ -19,25 +19,25 @@
     };
 
     folders = {
-      janice-browser = {
-        path = "/data/sync/janice/Browser";
-        devices = [ "aziraphale" "serenity" ];
-      };
-
-      janice-documents = {
-        path = "/data/sync/janice/Documents";
-        devices = [ "aziraphale" "serenity" ];
-
-        versioning = {
-          type = "simple";
-          params.keep = "10";
-        };
-      };
-
-      janice-passwords = {
-        path = "/data/sync/janice/Passwords";
-        devices = [ "aziraphale" "serenity" ];
-      };
+      # janice-browser = {
+      #   path = "/data/sync/janice/Browser";
+      #   devices = [ "aziraphale" "serenity" ];
+      # };
+      #
+      # janice-documents = {
+      #   path = "/data/sync/janice/Documents";
+      #   devices = [ "aziraphale" "serenity" ];
+      #
+      #   versioning = {
+      #     type = "simple";
+      #     params.keep = "10";
+      #   };
+      # };
+      #
+      # janice-passwords = {
+      #   path = "/data/sync/janice/Passwords";
+      #   devices = [ "aziraphale" "serenity" ];
+      # };
 
       matshkas-browser = {
         path = "/data/sync/matshkas/Browser";
@@ -153,8 +153,8 @@
         path = "/nix/config";
 
         devices = [
-         "aziraphale"
-         "espresso"
+         # "aziraphale"
+         # "espresso"
          "installer"
          "magrathea"
          "mjolnir"
@@ -163,12 +163,6 @@
         ];
 
         ignorePerms = true;
-      };
-
-      shared-roms = {
-        path = "/storage/media/Roms";
-        devices = [ "mjolnir" ];
-        type = "sendonly";
       };
 
       shared-videos-offline = {
@@ -180,6 +174,8 @@
 
     gui.insecureSkipHostcheck = true;
   };
+
+  systemd.services.syncthing.serviceConfig.UMask = "0002";
 
   users = {
     groups.syncthing = {};

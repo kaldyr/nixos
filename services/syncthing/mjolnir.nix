@@ -47,12 +47,6 @@
           ignorePatterns = [ "/.git" ];
           ignorePerms = true;
         };
-
-        shared-roms = {
-          path = "/home/matt/Roms";
-          devices = [ "magrathea" ];
-          type = "receiveonly";
-        };
       };
     };
   };
