@@ -27,9 +27,7 @@
         emergencyAccess = true;
       };
 
-      availableKernelModules = [
-        "usb_storage"
-      ];
+      availableKernelModules = [ "usb_storage" ];
     };
 
     kernelParams = [
@@ -48,7 +46,6 @@
   environment = {
     shellAliases = {
       "disko" = "sudo nix run github:nix-community/disko/latest --";
-      "installnix" = "sudo nixos-install --no-root-password --flake";
     };
 
     systemPackages = with pkgs; [

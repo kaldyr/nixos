@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if (( $# != 1 )); then
+	echo "Usage: generate-syncthing-identity <hostname>" >&2
+	exit 2
+fi
+
+hostname="$1"
+tmpdir="$(mktemp -d)"
+
+cleanup() {
+	rm -rf "$tmpdir"
+}
+trap cleanup EXIT
+
+chmod 0700 "$tmpdir"
+
+syncthing generate --home="$tmpdir" >/dev/null
+
+device_id="$(syncthing device-id --home="$tmpdir")"
+
+# Device ID line to cut/paste into the nix files
+printf '    %s.id = "%s";\n' "$hostname" "$device_id"
+
+# Sops secrets.yaml content
+printf '  %s:\n' "$hostname"
+
+printf '    cert.pem: |\n'
+sed 's/^/      /' "$tmpdir/cert.pem"
+
+printf '    key.pem: |\n'
+sed 's/^/      /' "$tmpdir/key.pem"

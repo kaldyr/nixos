@@ -51,6 +51,7 @@
       ];
 
       shell = pkgs.fish;
+      uid = 1000;
     };
   };
 }

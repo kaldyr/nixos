@@ -36,19 +36,23 @@
 
   documentation.man.cache.enable = false;
 
-  environment.defaultPackages = lib.mkForce [ ];
+  environment = {
+    defaultPackages = lib.mkForce [ ];
 
-  environment.persistence."/state" = {
-    directories = [
-      "/etc/NetworkManager/system-connections"
-      "/var/lib/bluetooth"
-      "/var/lib/nixos"
-      { directory = "/var/lib/tailscale"; mode = "0700"; }
-      "/var/log"
-    ];
-    files = [ "/etc/machine-id" ];
+    persistence."/state" = {
+      directories = [
+        "/etc/NetworkManager/system-connections"
+        "/var/lib/bluetooth"
+        "/var/lib/nixos"
+        { directory = "/var/lib/tailscale"; mode = "0700"; }
+        "/var/log"
+      ];
+
+      files = [ "/etc/machine-id" ];
+    };
+
+    sessionVariables.PATH = [ "/nix/config/scripts" ];
   };
-
 
   fileSystems."/nix".neededForBoot = true;
   fileSystems."/state".neededForBoot = true;

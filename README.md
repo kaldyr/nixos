@@ -145,15 +145,29 @@ Caps+hjkl - arrow keys
 
 ## Boot Install Media
 
-## Partition the Drive
-
+## Identify the disk
 ```fish
-disko --mode destroy,format,mount /nix/config/disko/[system].nix
+lsblk -o NAME,SIZE,MODEL,SERIAL
+
+```
+
+## Edit the disko config
+```fish
+nvim /nix/config/disko/<system>.nix
+
+```
+
+Completions will suggest the disk, just start typing the path and choose the match.
+
+## Partition the disk
+```fish
+nix run github:nix-community/disko/latest -- --mode destroy,format,mount /nix/config/disko/<system>.nix
+
 ```
 
 ### Manual Interventions
 
-Disko does not manage raid arrays on purpose. Running the above command would wipe data.
+Disko should not manage raid arrays on purpose. Running the above command would wipe data.
 
 #### Magrathea
 
@@ -166,12 +180,14 @@ btrfs subvolume create @media
 btrfs subvolume create @snaps
 cd ..
 umount /storage
+
 ```
 
 After disko runs and mounts the SSD partitions, but before installing the system:
 
 ```fish
 chattr +C /var/lib/postgresql
+
 ```
 
 #### Serenity
@@ -179,53 +195,98 @@ chattr +C /var/lib/postgresql
 ```fish
 mkfs.btrfs -m raid1 -d raid1 /dev/sdY /dev/sdZ
 mkdir -p /storage
-mount /dev/sdW /storage
+mount /dev/sdY /storage
 cd /storage
 btrfs subvolume create @media
 btrfs subvolume create @snaps
 cd ..
 umount /storage
+
 ```
 
-## Setup the Config Folder
+## Add machine to flake.nix
 
-### Generate the default config (Just to get hardware config)
+## Configure User
+
+Create or update '/nix/config/users/<user>.nix'.  
+Set preferences.  
+
+## Configure System
+
+Create '/nix/config/systems/<system>.nix'.  
+
+### Generate the hardware config
+```fish
+sudo nixos-generate-config --root /mnt --show-hardware-config
+
+```
+### Merge into /nix/config/systems/<system>.nix
+
+- boot.initrd.availableKernelModules
+- boot.kernelModules
+- boot.extraModulePackages (if applicable)
+- Filesystems
+- Graphics/hardware configuration
+
+## Generate Machine Identity
 
 ```fish
-nixos-generate-config --root /mnt
+sudo -E sops /nix/config/secrets.yaml
 ```
 
-## Install the configuration
+Navigate to the age keys section and add a line for <system>
+
+```vim
+:r! age-keygen
+```
+
+Format correctly.  
+Yank the new public key to the clipboard.  
+
+```vim
+:e /nix/config/.sops.yaml
+```
+
+Add the new system and its public key
+
+```vim
+:w
+<c-x>
+```
+
+Navigate to syncthing section
+
+```vim
+:r! generate-syncthing-identity <system>
+17k
+dd
+:e /nix/config/services/syncthing/magrathea.nix
+/dev<cr>
+p
+vi{gs
+<c-x>
+:wq
+```
 
 ```fish
-mkdir /mnt/nix/config
-git clone https://github.com/kaldyr/nixos /mnt/nix/config
+sudo -E sops updatekeys secrets.yaml
 ```
 
-### Merge the generated hardware config
-
-- Make sure the correct graphics drivers are listed
-- Make sure the filesystems are correct
-- Make sure the state version is correct in system and home manager
-
-### Install or Generate Private Keys
-
-- Drop the keys in the /mnt system for system and user
-- Generate public keys and user sops key
-- If generating new keys, add them into the .sops.yaml and `sudo -E sops updatekeys secrets.yaml`
+- Create /nix/config/services/syncthing/<system>.nix and populate its folders.
+- Add the new device ID to Magrathea.
+- Add the new device to Magrathea's folder sync list.
+- Update any other machines that need to know about the new system.
+- Rebuild affected existing machines.
 
 ## Build the Base System
 
 ```fish
-cd /mnt
-nixos-install --no-root-password --flake /mnt/nix/config#[machine]
-nixos-enter
+install-system <system>
 ```
 
 ### Manual Interventions
 
 #### Virtual Machines
-
 If you don't need to snapshot the VMs, disable COW for the image folder BEFORE any files are in the folder
 
 ```fish

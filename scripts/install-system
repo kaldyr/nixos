@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if (( $# != 1 )); then
+	echo "Usage: install-system <hostname>" >&2
+	exit 2
+fi
+
+hostname="$1"
+
+case "$hostname" in
+	magrathea|serenity)
+		owner="syncthing"
+		;;
+	*)
+		owner="1000"
+		;;
+esac
+
+# Preflight checks
+
+## Installer has a /nix/config/flake.nix
+echo "Check for a nix config flake.nix in the expected location..."
+
+if [[ ! -f "/nix/config/flake.nix" ]]; then
+	echo "ERROR: /nix/config does not contain flake.nix." >&2
+	exit 1
+fi
+
+echo "Valid flake.nix found."
+
+## Valid Hostname
+echo "Check nix config for a valid system definition for $hostname..."
+
+if [[ ! -f "/nix/config/systems/$hostname.nix" ]]; then
+	echo "ERROR: No system configuration found for '$hostname'." >&2
+	echo "Expected: /nix/config/systems/$hostname.nix" >&2
+	exit 1
+fi
+
+echo "Valid machine defined in nix config."
+
+## Filesystems mounted
+echo "Check mount points for essential filesystems..."
+
+for path in /mnt/nix /mnt/state; do
+	if ! mountpoint -q "$path"; then
+		echo "ERROR: $path is not mounted." >&2
+		echo "Run disko and verify the filesystems are mounted first." >&2
+		exit 1
+	fi
+done
+
+echo "Essential filesystems have been mounted."
+
+## Age key can be extracted from secrets.yaml
+echo "Check the secrets for age key..."
+
+if ! sudo -E sops \
+	--decrypt \
+	--extract "[\"agekeys\"][\"$hostname\"]" \
+	/nix/config/secrets.yaml \
+	>/dev/null 2>&1
+then
+	echo "ERROR: No age key found for '$hostname'." >&2
+	exit 1
+fi
+
+echo "Valid key found in secrets.yaml."
+
+# Install age keys
+echo "Installing age key for '$hostname'..."
+
+sudo install -d -o root -g root -m 0700 /mnt/state/age
+sudo install -o root -g root -m 0600 /dev/null /mnt/state/age/keys.txt
+
+sudo -E sops \
+	--decrypt \
+	--extract "[\"agekeys\"][\"$hostname\"]" \
+	"/nix/config/secrets.yaml" |
+sudo tee "/mnt/state/age/keys.txt" >/dev/null
+
+echo "... Done."
+
+# Install nix config
+echo "Installing nix config..."
+
+sudo rsync -a --delete \
+	--exclude='/.git' \
+	--exclude='/.stfolder' \
+	--exclude='/.stignore' \
+	/nix/config/ \
+	/mnt/nix/config/
+
+echo "... Done."
+
+# Set ownership and permissions for nix config
+echo "Setting ownership and permissions for the nix config..."
+
+sudo chown root:nixconfig /mnt/nix/config
+sudo find /mnt/nix/config -mindepth 1 -exec chown "$owner:nixconfig" {} +
+sudo find /mnt/nix/config -type d -exec chmod 2775 {} +
+sudo chmod -R g+rwX /mnt/nix/config
+sudo find /mnt/nix/config/scripts -type f -exec chmod a+x {} +
+
+echo "... Done."
+
+# Install NixOS
+echo "Installing NixOS..."
+
+sudo nixos-install \
+	--no-root-password \
+	--flake "/nix/config#$hostname"
+
+echo "... Done."
