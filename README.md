@@ -16,10 +16,11 @@
 
 ## Description
 
-This is a multi-system and multi-user flake. It has laptops, desktops, and home server.  
+This is a multi-system and multi-user flake. It has laptops, desktops, and home servers.  
 The goal is a simple configuration where possible and application native config for more involved apps.  
 Syncthing is used to clone user data to the servers for snapshots.  
-Re-installing a machine automatically syncs data back from servers.
+Re-installing a machine automatically syncs user data back from servers on first boot.  
+Media is hosted by private services, most of which have offline cache available to clients.  
 
 # Machines
 
@@ -29,7 +30,7 @@ Re-installing a machine automatically syncs data back from servers.
 - Updated: 
 
 ### TODO
-- [ ] Get everything setup
+- Install
 
 ## Espresso
 - Desktop: Minisforum UM790 Pro
@@ -37,17 +38,17 @@ Re-installing a machine automatically syncs data back from servers.
 - Updated: 2026-09-23
 
 ### TODO
-- [ ] Add razer mouse profile
+- Migrate /nix/config to syncthing model
 
 ## Hofud
-- Desktop: Framework 13 11th Gen i5-1135G7 motherboard
-- Fresh Install: (Down, waiting on parts)
+- Desktop: Framework 13 11th Gen i5-1135G7 mainboard
+- Fresh Install:
 - Updated: 
 
 ### TODO
-- [ ] Figure out the HDMI issue
-- [ ] Fresh install
-- [ ] Configure as homeschool computer
+- Solder the new RTC Battery when it arrives
+- Figure out the HDMI/USB-C Monitor issue
+- Install
 
 ## Installer
 - USB Flash Drive (Actual install, not ISO)
@@ -55,8 +56,13 @@ Re-installing a machine automatically syncs data back from servers.
 - Updated: 2026-09-20
 
 ### Tools
-- Everything needed to install and troubleshoot machines
 - Memtest
+- Everything needed to install and troubleshoot machines
+
+### Features
+- Persisted networkmanager and tailscale autoconnect to services
+- Syncthing keeps keepass database and /nix/config current
+- Any changes made during the installation process auto-synced to other computers
 
 ## Magrathea
 - Home server: Intel i5-2500k still kicking
@@ -73,16 +79,20 @@ Re-installing a machine automatically syncs data back from servers.
 - Technitium (DNS for tailnet with ad block)
 - Vikunja (Tasks and Project Management)
 - Kodi Media Center via HDMI to TV
-- Open Starbound
+- Open Starbound Server
 
 ### TODO
 - Migrate drive definitions
 - Configure automatic snapshots
 - Radicale (service)
+- Give Vikunja access to a shared calendar on Radicale
 - Immich (service)
-- Terraria server
 - RomM (service)
+- Terraria server
 - Look into Jellyfin
+- Purge content from media folders we just don't consume anymore
+- Clean out old backup folders
+- Consolidate all the old files into new folder structures
 
 ## Mjolnir
 - Laptop: First generation Framework 13
@@ -90,13 +100,13 @@ Re-installing a machine automatically syncs data back from servers.
 - Updated: 2026-09-23
 
 ### Upgrades
-- Panther Lake Ultra x7 358H with B390 Mainboard
+- Panther Lake Ultra x7 358H Mainboard
 - 32GB LPCAMM2 7500 RAM
 - BE211 Wi-Fi 7 Module
 - 4.0kg Hinge Kit
 
 ### TODO
-- [ ] Work on Quickshell setup
+- Iterate Quickshell Setup
 
 ## Normandy
 - Desktop: Ryzen 7 3700X, Radeon RX 7600
@@ -104,7 +114,10 @@ Re-installing a machine automatically syncs data back from servers.
 - Updated: 2026-09-23
 
 ### TODO
-- [ ] Stabilize OpenRGB
+- Stabilize OpenRGB
+- Stabilize Epson Printer (perhaps a folder is not persisted correctly?)
+- WinStitch (May need Windows VM)
+- MacOS VM with printer drivers for borderless printing of 12x12 photo pages
 
 ## Serenity
 - Home server: Ryzen 2400g
@@ -117,8 +130,10 @@ Re-installing a machine automatically syncs data back from servers.
 - NAS with Samba
 
 ### TODO
-- [ ] Migrate drive definitions (In person, must use installer)
-- [ ] Set up snapshot archiving from Magrathea
+- Migrate drive definitions (In person, must use installer)
+- Setup snapshot archiving from Magrathea
+- Investigate viability of cloning media from Magrathea
+- Investigate moving to Jellyfin client
 
 # Notable customizations
 

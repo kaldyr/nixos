@@ -19,21 +19,18 @@ tags: []
 
 - Steam games (Download from Steam)
 - Wine games (Download and reinstall through Lutris)
-- Virtual Machines (nodatacow for folder, reinstall from ISOs)
+- Virtual Machines (reinstall from ISOs)
 
 ##### User data:
 
-- Books - Syncthing
 - Browser Profile - Syncthing
 - Documents - Syncthing
-- Keepass Database - Syncthing
-- Music - Syncthing
-- Notes - Syncthing
+- Password Database (Keepass) - Syncthing
 - Pictures - Syncthing
 - Projects - Git
-- Roms - Syncthing
-- Videos - Syncthing
-- User keyrings or keys - ?
+- Vaults (Obsidian) - Syncthing
+- Videos - Syncthing (Jellyfin?)
+- User keyrings or keys - Git/Syncthing
 
 ### @nix
 
@@ -44,18 +41,17 @@ tags: []
 
 Persistent machine state
 
-- Age key for unlocking secrets at boot - Archive copy into usb installer
-- NetworkManager connections
-- Bluetooth pairing
-- systemd
-- fprintd fingerprint images (mjolnir)
-- machine-id
+- Age key for unlocking secrets at boot (Stored in git via sops or generate new and update config)
+- NetworkManager connections (Just connect again)
+- Bluetooth pairing (Just pair again)
+- systemd (Disposable)
+- fprintd fingerprint images (Just scan again)
+- machine-id (Disposable)
 
 Features:
 - Persisted between boots
 - Needed for boot (Files will be there during boot process)
 - Desktops are not snapshotted as content is considered disposable if machine needs reinstall
-- Snapshots could be taken and sent to server RAID @snaps for archiving to preserve
 
 ### @swap (swap partition)
 
@@ -92,8 +88,8 @@ Folder Examples:
 - Canonical copy is on Server.
 
 Folder Examples:
-- Documents
-- Obsidian Vaults
+- Shared Documents
+- Shared Obsidian Vaults
 - Shared Project Folders
 
 ### @home
@@ -118,25 +114,25 @@ PostgreSQL live database
 Features:
 - COW disabled
 - Cannot be snapshotted
-- PostgresBackup files dumped to @state
+- PostgresBackup files dumped to @state for snapshots
 
 ### @state
 
 Persistent machine state and data needed for recovery
 
-- Content needs to be preserved between boots
-- Content is tied to machine state
 - Age key for unlocking secrets at boot
 - NetworkManager connections
 - systemd
 - machine-id
 - Config or Data folders for services (Radicale, Immich, linkwarden, etc)
 - Folder postgresql backups are sent to
+- Service state folders (/var/lib/<service>/, etc)
 
 Features:
 - Persisted between boots
 - Needed for boot (Files will be there during boot process)
 - Snapshot this subvolume and send it to RAID @snaps for backup
+- Send snapshots to off-site backup RAID
 
 ### @swap (swap partition)
 
@@ -144,15 +140,15 @@ Features:
 
 ### @media
 
-Immutable media library
+Immutable media library for services
 
-- Audiobooks
-- Books
-- Movies
-- Music
-- Radio
-- Roms
-- Shows
-- Videos
+- Audiobooks (AudioBookShelf)
+- Books (AudioBookShelf)
+- Movies (Kodi or Jellyfin)
+- Music (Navidrome)
+- Radio (AudioBookShelf)
+- Roms (RomM)
+- Shows (Kodi or Jellyfin)
+- Videos (Kodi or Jellyfin)
 
 ### @snaps (snapshot storage)
