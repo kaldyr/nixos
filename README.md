@@ -7,9 +7,11 @@
 1. [TODO](#todo)
 1. [Install](#install)
 1. [Boot Install Media](#boot-install-media)
-1. [Partition the Drive](#partition-the-drive)
-1. [Setup the Config Folder](#setup-the-config-folder)
-1. [Build the Base System](#build-the-base-system)
+1. [Identify Target Disk](#identify-target-disk)
+1. [Edit Disko Config](#edit-disko-config)
+1. [Partition Disk](#partition-disk)
+1. [Add New Machine](#add-new-machine)
+1. [Build the System](#build-the-system)
 1. [Reboot into the New System](#reboot-into-the-new-system)
 
 ## Description
@@ -145,13 +147,13 @@ Caps+hjkl - arrow keys
 
 ## Boot Install Media
 
-## Identify the disk
+## Identify Target Disk
 ```fish
 lsblk -o NAME,SIZE,MODEL,SERIAL
 
 ```
 
-## Edit the disko config
+## Edit Disko Config
 ```fish
 nvim /nix/config/disko/<system>.nix
 
@@ -159,7 +161,7 @@ nvim /nix/config/disko/<system>.nix
 
 Completions will suggest the disk, just start typing the path and choose the match.
 
-## Partition the disk
+## Partition Disk
 ```fish
 nix run github:nix-community/disko/latest -- --mode destroy,format,mount /nix/config/disko/<system>.nix
 
@@ -204,23 +206,27 @@ umount /storage
 
 ```
 
-## Add machine to flake.nix
+## Add New Machine
 
-## Configure User
+Skip if machine is already defined.  
+
+### Add machine to flake.nix
+
+### Configure User
 
 Create or update '/nix/config/users/<user>.nix'.  
 Set preferences.  
 
-## Configure System
+### Configure System
 
 Create '/nix/config/systems/<system>.nix'.  
 
-### Generate the hardware config
+#### Generate the hardware config
 ```fish
 sudo nixos-generate-config --root /mnt --show-hardware-config
 
 ```
-### Merge into /nix/config/systems/<system>.nix
+#### Merge into /nix/config/systems/<system>.nix
 
 - boot.initrd.availableKernelModules
 - boot.kernelModules
@@ -228,7 +234,7 @@ sudo nixos-generate-config --root /mnt --show-hardware-config
 - Filesystems
 - Graphics/hardware configuration
 
-## Generate Machine Identity
+### Generate Machine Identity
 
 ```fish
 sudo -E sops /nix/config/secrets.yaml
@@ -278,7 +284,7 @@ sudo -E sops updatekeys secrets.yaml
 - Update any other machines that need to know about the new system.
 - Rebuild affected existing machines.
 
-## Build the Base System
+## Build the System
 
 ```fish
 install-system <system>
