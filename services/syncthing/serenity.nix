@@ -43,8 +43,6 @@
     gui.insecureSkipHostcheck = true;
   };
 
-  systemd.services.syncthing.serviceConfig.UMask = "0002";
-
   users = {
     groups.syncthing = {};
 

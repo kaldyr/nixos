@@ -17,4 +17,6 @@
     "syncthing/${sysConfig.hostname}/cert.pem" = { };
     "syncthing/${sysConfig.hostname}/key.pem" = { };
   };
+
+  systemd.services.syncthing.serviceConfig.UMask = "0002";
 }

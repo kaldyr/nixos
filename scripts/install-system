@@ -8,6 +8,7 @@ fi
 
 hostname="$1"
 
+# Set the owner for machine's /nix/config
 case "$hostname" in
 	magrathea|serenity)
 		owner="syncthing"
@@ -85,7 +86,8 @@ echo "... Done."
 # Install nix config
 echo "Installing nix config..."
 
-sudo rsync -a --delete \
+sudo rsync -a \
+	--delete \
 	--exclude='/.git' \
 	--exclude='/.stfolder' \
 	--exclude='/.stignore' \
