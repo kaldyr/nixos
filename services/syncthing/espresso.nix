@@ -35,6 +35,12 @@
           path = "/home/matshkas/.passwords";
           devices = [ "magrathea" ];
         };
+
+        nix-config = {
+          path = "/nix/config";
+          devices = [ "magrathea" ];
+          ignorePerms = true;
+        };
       };
     };
   };

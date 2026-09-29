@@ -52,6 +52,9 @@
         mkdir = "mkdir -pv";
         mv = "mv -i";
         rm = "rm -i";
+        system-clean = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
+        system-update = "sudo nixos-rebuild switch --flake /nix/config#${sysConfig.hostname}";
+        system-verify = "sudo nix-store --verify --repair";
       };
 
       shellInit = /* fish */ ''

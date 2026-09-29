@@ -154,7 +154,7 @@
 
         devices = [
          # "aziraphale"
-         # "espresso"
+         "espresso"
          "installer"
          "magrathea"
          "mjolnir"

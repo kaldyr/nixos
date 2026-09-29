@@ -24,10 +24,17 @@ Media is hosted by private services, most of which have offline cache available 
 
 # Machines
 
+Update: 2026-09-28
+- [x] Espresso
+- [x] Installer
+- [x] Magrathea
+- [x] Mjolnir
+- [x] Normandy
+- [x] Serenity
+
 ## Aziraphale
 - Laptop: Dell 14 D14260 Intel Core Ultra 5 225U
 - Fresh Install: 
-- Updated: 
 
 ### TODO
 - Install
@@ -35,7 +42,6 @@ Media is hosted by private services, most of which have offline cache available 
 ## Espresso
 - Desktop: Minisforum UM790 Pro
 - Fresh Install: July 14th, 2026
-- Updated: 2026-09-23
 
 ### TODO
 - Migrate /nix/config to syncthing model
@@ -43,7 +49,6 @@ Media is hosted by private services, most of which have offline cache available 
 ## Hofud
 - Desktop: Framework 13 11th Gen i5-1135G7 mainboard
 - Fresh Install:
-- Updated: 
 
 ### TODO
 - Solder the new RTC Battery when it arrives
@@ -53,7 +58,6 @@ Media is hosted by private services, most of which have offline cache available 
 ## Installer
 - USB Flash Drive (Actual install, not ISO)
 - Fresh Install: September 5th, 2026
-- Updated: 2026-09-20
 
 ### Tools
 - Memtest
@@ -67,7 +71,6 @@ Media is hosted by private services, most of which have offline cache available 
 ## Magrathea
 - Home server: Intel i5-2500k still kicking
 - Fresh Install: August 16th, 2024
-- Updated: 2026-09-23
 
 ### Services
 - Nextcloud (Remove soon)
@@ -97,7 +100,6 @@ Media is hosted by private services, most of which have offline cache available 
 ## Mjolnir
 - Laptop: First generation Framework 13
 - Fresh Install: July 16th, 2026
-- Updated: 2026-09-23
 
 ### Upgrades
 - Panther Lake Ultra x7 358H Mainboard
@@ -111,7 +113,6 @@ Media is hosted by private services, most of which have offline cache available 
 ## Normandy
 - Desktop: Ryzen 7 3700X, Radeon RX 7600
 - Fresh Install: September 2nd, 2026
-- Updated: 2026-09-23
 
 ### TODO
 - Stabilize OpenRGB
@@ -122,7 +123,6 @@ Media is hosted by private services, most of which have offline cache available 
 ## Serenity
 - Home server: Ryzen 2400g
 - Fresh Install: August 31st, 2026
-- Updated: 2026-09-23
 
 ### Services
 - Off-site backup
