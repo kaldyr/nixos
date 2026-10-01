@@ -1,6 +1,6 @@
 {
   disko.devices.disk.main = {
-    device = "/dev/disk/by-id/";
+    device = "/dev/disk/by-id/nvme-BM9C1a_Samsung_512GB__S8A9NE1YB61830";
     type = "disk";
 
     content = {

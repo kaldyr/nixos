@@ -8,10 +8,27 @@
     }
   ];
 
-  services.audiobookshelf = {
-    enable = true;
-    host = "127.0.0.1";
-    port = 13378;
+  services = {
+    audiobookshelf = {
+      enable = true;
+      host = "127.0.0.1";
+      port = 13378;
+    };
+
+    nginx = {
+      enable = true;
+
+      virtualHosts.books-redirect = {
+        listen = [
+          {
+            addr = "127.0.0.1";
+            port = 13379;
+          }
+        ];
+
+        locations."/".return = "308 https://books.brill-godzilla.ts.net/audiobookshelf";
+      };
+    };
   };
 
   users.users.audiobookshelf.extraGroups = [ "media" ];

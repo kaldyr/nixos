@@ -43,9 +43,6 @@ Update: 2026-09-28
 - Desktop: Minisforum UM790 Pro
 - Fresh Install: July 14th, 2026
 
-### TODO
-- Migrate /nix/config to syncthing model
-
 ## Hofud
 - Desktop: Framework 13 11th Gen i5-1135G7 mainboard
 - Fresh Install:
@@ -90,6 +87,7 @@ Update: 2026-09-28
 - Radicale (service)
 - Give Vikunja access to a shared calendar on Radicale
 - Immich (service)
+- Miniflux (service)
 - RomM (service)
 - Terraria server
 - Look into Jellyfin
@@ -246,9 +244,11 @@ Set preferences.
 
 /nix/config/systems/<system>.nix
 
-#### Generate the hardware config
-```fish
-sudo nixos-generate-config --root /mnt --show-hardware-config
+#### Generate the hardware config in neovim
+```vim
+<c-w>v
+:e /tmp/hardware.nix<CR>
+r! sudo nixos-generate-config --root /mnt --show-hardware-config
 
 ```
 
@@ -259,6 +259,8 @@ sudo nixos-generate-config --root /mnt --show-hardware-config
 - boot.extraModulePackages (if applicable)
 - Filesystems
 - Graphics/hardware configuration
+
+#### Delete the buffer
 
 ### Generate Machine Identity
 

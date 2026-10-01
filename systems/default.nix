@@ -146,6 +146,7 @@
           ControlMaster auto
           ControlPersist 10m
       '') {
+        aziraphale = "janice";
         espresso = "matshkas";
         installer = "matt";
         magrathea = "matt";

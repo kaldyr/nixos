@@ -15,7 +15,6 @@
     ../programs/gedit
     ../programs/hyprland
     ../programs/lutris
-    ../programs/newsboat
     ../programs/openstarbound
     ../programs/plymouth
     ../programs/retroarch

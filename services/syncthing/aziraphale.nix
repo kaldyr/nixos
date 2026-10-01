@@ -23,13 +23,13 @@
         };
 
         janice-passwords = {
-          path = "/home/matt/.passwords";
-          devices = [ "gungnir" "installer" "magrathea" ];
+          path = "/home/janice/.passwords";
+          devices = [ "magrathea" ];
         };
 
         nix-config = {
           path = "/nix/config";
-          devices = [ "magrathea" ];
+          devices = [ "magrathea" "serenity" ];
           ignorePerms = true;
         };
       };

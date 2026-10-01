@@ -759,7 +759,7 @@ require('fzf-lua').setup({
 	buffers = { prompt = ' > ' },
 
 	file_ignore_patterns = {
-		'%.nextcloudsync.log',
+		'%.git',
 		'%.stfolder',
 		'%.obsidian/',
 		'%.sync_.*%.db.*',

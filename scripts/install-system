@@ -94,16 +94,25 @@ sudo rsync -a \
 	/nix/config/ \
 	/mnt/nix/config/
 
-echo "... Done."
-
 # Set ownership and permissions for nix config
-echo "Setting ownership and permissions for the nix config..."
-
 sudo chown root:nixconfig /mnt/nix/config
 sudo find /mnt/nix/config -mindepth 1 -exec chown "$owner:nixconfig" {} +
 sudo find /mnt/nix/config -type d -exec chmod 2775 {} +
 sudo chmod -R g+rwX /mnt/nix/config
 sudo find /mnt/nix/config/scripts -type f -exec chmod a+x {} +
+
+echo "... Done."
+
+# Install fonts
+echo "Installing fonts..."
+
+sudo mkdir -p /mnt/state/fonts
+sudo cp -a /state/fonts/. /mnt/state/fonts
+
+# Set ownership and permissions
+sudo chown -R root:root /mnt/state/fonts
+sudo find /mnt/state/fonts -type d -exec chmod 755 {} +
+sudo find /mnt/state/fonts -type f -exec chmod 644 {} +
 
 echo "... Done."
 

@@ -16,13 +16,13 @@
       "application/md" = [ "helium.desktop" ];
       "application/pdf" = [ "org.gnome.Evince.desktop" ];
       "application/video" = [ "mpv.desktop" ];
-      "default-web-browser" = [ "helium.desktop" ];
+      "default-web-browser" = [ "firefox.desktop" ];
       "inode/directory" = [ "nautilus.desktop" ];
-      "text/html" = [ "helium.desktop" ];
+      "text/html" = [ "firefox.desktop" ];
       "text/plain" = [ "org.gnome.gedit.desktop" ];
-      "x-scheme-handler/ftp" = [ "helium.desktop" ];
-      "x-scheme-handler/http" = [ "helium.desktop" ];
-      "x-scheme-handler/https" = [ "helium.desktop" ];
+      "x-scheme-handler/ftp" = [ "firefox.desktop" ];
+      "x-scheme-handler/http" = [ "firefox.desktop" ];
+      "x-scheme-handler/https" = [ "firefox.desktop" ];
     };
   };
 

@@ -66,6 +66,7 @@
         <?xml version='1.0'?>
         <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
         <fontconfig>
+            <dir>/state/fonts</dir>
             <match target="font">
                 <test qual="any" name="family" compare="contains"><string>Inter</string></test>
                 <!-- https://rsms.me/inter/#features -->

@@ -46,6 +46,8 @@
   environment = {
     shellAliases = {
       "disko" = "sudo nix run github:nix-community/disko/latest --";
+      "lsblk" = "sudo lsblk -o NAME,SIZE,MODEL,SERIAL";
+      "blkid" = "sudo blkid -s UUID";
     };
 
     systemPackages = with pkgs; [
@@ -66,6 +68,7 @@
       ntfs3g
       parted
       pciutils
+      rsync
       sops
       usbutils
       util-linux
