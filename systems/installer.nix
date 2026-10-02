@@ -30,17 +30,8 @@
       availableKernelModules = [ "usb_storage" ];
     };
 
-    kernelParams = [
-      "zswap.enabled=1"
-      "zswap.max_pool_percent=50"
-      "zswap.compressor=zstd"
-      "zswap.zpool.zsmalloc"
-    ];
-
-    loader.grub = {
-      enable = true;
-      memtest86.enable = true;
-    };
+    kernelParams = [ "zswap.max_pool_percent=50" ];
+    loader.grub.memtest86.enable = true;
   };
 
   environment = {

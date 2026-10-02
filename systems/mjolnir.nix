@@ -51,9 +51,8 @@
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
     kernelParams = [
-      "btrfs"
-      "quiet"
       "xe.enable_psr=0"
+      "zswap.max_pool_percent=20"
     ];
 
     loader.grub.gfxmodeEfi = "3440x1440,2256x1504,1920x1080";

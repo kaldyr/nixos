@@ -21,17 +21,26 @@
     ../programs/zoxide
   ];
 
-  boot.loader = {
-    efi.efiSysMountPoint = "/boot";
+  boot = {
+    loader = {
+      efi.efiSysMountPoint = "/boot";
 
-    grub = {
-      enable = true;
-      device = "nodev";
-      efiInstallAsRemovable = true;
-      efiSupport = true;
-      theme = pkgs.catppuccin-grub.override { flavor = "frappe"; };
-      useOSProber = false;
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiInstallAsRemovable = true;
+        efiSupport = true;
+        theme = pkgs.catppuccin-grub.override { flavor = "frappe"; };
+        useOSProber = false;
+      };
     };
+
+    kernelParams = [
+      "quiet"
+      "zswap.enabled=1"
+      "zswap.compressor=zstd"
+      "zswap.zpool=zsmalloc"
+    ];
   };
 
   documentation.man.cache.enable = false;

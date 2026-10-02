@@ -29,42 +29,45 @@
     kernel.sysctl."vm.max_map_count" = 16777216;
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-    kernelParams = [ "btrfs" ];
+    kernelParams = [ "zswap.max_pool_percent=25" ];
     loader.grub.gfxmodeEfi = "3840x2160,1920x1080";
   };
 
   environment.systemPackages = with pkgs; [ usbutils ];
 
-  fileSystems = {
+  fileSystems =
+    let
+      hddOptions = [ "defaults" "noatime" "compress=zstd:8" ];
+      # ssdOptions = [ "defaults" "noatime" "compress=zstd:3" ];
+    in
+  {
     "/" = {
       device = "none";
       fsType = "tmpfs";
       neededForBoot = true;
       options = [
         "defaults"
-        "size=6G"
+        "size=2G"
         "mode=755"
       ];
+    };
+
+    "/data" = {
+      device = "/dev/disk/by-uuid/27fb138d-b3c1-4b8f-9110-04a28bcda82c";
+      fsType = "btrfs";
+      options = [ "subvol=@data" ] ++ hddOptions;
     };
 
     "/media" = {
       device = "/dev/disk/by-uuid/27fb138d-b3c1-4b8f-9110-04a28bcda82c";
       fsType = "btrfs";
-      options = [
-        "subvol=@media"
-        "noatime"
-        "compress=zstd:8"
-      ];
+      options = [ "subvol=@media" ] ++ hddOptions;
     };
 
     "/snaps" = {
       device = "/dev/disk/by-uuid/27fb138d-b3c1-4b8f-9110-04a28bcda82c";
       fsType = "btrfs";
-      options = [
-        "subvol=@snaps"
-        "noatime"
-        "compress=zstd:8"
-      ];
+      options = [ "subvol=@snaps" ] + hddOptions;
     };
   };
 

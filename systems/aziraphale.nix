@@ -12,6 +12,7 @@
     ../programs/hyprland
     ../programs/plymouth
     ../services/syncthing
+    ../services/kmscon
   ];
 
   boot = {
@@ -35,12 +36,7 @@
     kernel.sysctl."vm.max_map_count" = 16777216;
     kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-
-    kernelParams = [
-      "btrfs"
-      "quiet"
-    ];
-
+    kernelParams = [ "zswap.max_pool_percent=25" ];
     loader.grub.gfxmodeEfi = "1920x1200";
   };
 

@@ -52,10 +52,9 @@
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
     kernelParams = [
-      "btrfs"
-      "quiet"
       "preempt=full"
       "iommu=pt"
+      "zswap.max_pool_percent=15"
     ];
 
     loader.grub.gfxmodeEfi = "2560x1440";

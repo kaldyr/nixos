@@ -33,7 +33,7 @@
     initrd.kernelModules = [ "i915" ];
     kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-    kernelParams = [ "btrfs" ];
+    kernelParams = [ "zswap.max_pool_percent=25" ];
     loader.grub.gfxmodeEfi = "1920x1080";
   };
 
@@ -51,14 +51,19 @@
     }
   ];
 
-  fileSystems = {
+  fileSystems =
+    let
+      hddOptions = [ "defaults" "noatime" "compress=zstd:8" ];
+      # ssdOptions = [ "defaults" "noatime" "compress=zstd:3" ];
+    in
+  {
     "/" = {
       device = "none";
       fsType = "tmpfs";
       neededForBoot = true;
       options = [
         "defaults"
-        "size=6G"
+        "size=2G"
         "mode=755"
       ];
     };
@@ -66,21 +71,13 @@
     "/storage/media" = {
       device = "/dev/disk/by-uuid/c3cb725e-8cee-4690-a44d-114100497133";
       fsType = "btrfs";
-      options = [
-        "subvol=@media"
-        "noatime"
-        "compress=zstd:8"
-      ];
+      options = [ "subvol=@media" ] ++ hddOptions;
     };
 
     "/storage/snaps" = {
       device = "/dev/disk/by-uuid/c3cb725e-8cee-4690-a44d-114100497133";
       fsType = "btrfs";
-      options = [
-        "subvol=@snaps"
-        "noatime"
-        "compress=zstd:8"
-      ];
+      options = [ "subvol=@snaps" ] ++ hddOptions;
     };
   };
 
