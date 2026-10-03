@@ -7,6 +7,7 @@
   imports = [
     ./desktop.nix
     ../programs/hyprland
+    ../programs/plymouth
     ../services/keyd
     ../services/kmscon
     ../services/pipewire
@@ -37,8 +38,6 @@
   environment = {
     shellAliases = {
       "disko" = "sudo nix run github:nix-community/disko/latest --";
-      "lsblk" = "sudo lsblk -o NAME,SIZE,MODEL,SERIAL";
-      "blkid" = "sudo blkid -s UUID";
     };
 
     systemPackages = with pkgs; [
@@ -70,6 +69,7 @@
 
   fileSystems =
     let
+      cryptedDrive = "/dev/disk/by-uuid/3a06b88b-5747-4f76-a4d8-8dc52bf284bc";
       driveOptions = [ "noatime" "discard=async" "compress=zstd:3" ];
     in
   {
@@ -86,21 +86,21 @@
     };
 
     "/nix" = {
-      device = "/dev/disk/by-uuid/3a06b88b-5747-4f76-a4d8-8dc52bf284bc";
+      device = cryptedDrive;
       fsType = "btrfs";
       neededForBoot = true;
       options = [ "subvol=@usbnix" ] ++ driveOptions;
     };
 
     "/state" = {
-      device = "/dev/disk/by-uuid/3a06b88b-5747-4f76-a4d8-8dc52bf284bc";
+      device = cryptedDrive;
       fsType = "btrfs";
       neededForBoot = true;
       options = [ "subvol=@usbstate" ] ++ driveOptions;
     };
 
     "/storage" = {
-      device = "/dev/disk/by-uuid/3a06b88b-5747-4f76-a4d8-8dc52bf284bc";
+      device = cryptedDrive;
       fsType = "btrfs";
       options = [ "subvol=@usbstorage" ] ++ driveOptions;
     };

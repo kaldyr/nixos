@@ -53,6 +53,7 @@
 
   fileSystems =
     let
+      hddDrive = "/dev/disk/by-uuid/c3cb725e-8cee-4690-a44d-114100497133";
       hddOptions = [ "defaults" "noatime" "compress=zstd:8" ];
       # ssdOptions = [ "defaults" "noatime" "compress=zstd:3" ];
     in
@@ -69,13 +70,13 @@
     };
 
     "/storage/media" = {
-      device = "/dev/disk/by-uuid/c3cb725e-8cee-4690-a44d-114100497133";
+      device = hddDrive;
       fsType = "btrfs";
       options = [ "subvol=@media" ] ++ hddOptions;
     };
 
     "/storage/snaps" = {
-      device = "/dev/disk/by-uuid/c3cb725e-8cee-4690-a44d-114100497133";
+      device = hddDrive;
       fsType = "btrfs";
       options = [ "subvol=@snaps" ] ++ hddOptions;
     };

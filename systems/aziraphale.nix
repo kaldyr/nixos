@@ -28,7 +28,7 @@
       kernelModules = [ ];
 
       luks.devices.crypted = {
-        device = "/dev/disk/by-uuid/00800c31-8e9d-438a-8a72-3a548a370e4f";
+        device = "/dev/disk/by-uuid/59814d16-fbfe-4343-b941-90d846693514";
         allowDiscards = true;
       };
     };
@@ -42,6 +42,7 @@
 
   fileSystems =
     let
+      cryptedDrive = "/dev/disk/by-uuid/56d29b6f-0c61-4bce-a2dc-f59bbce32165";
       driveOptions = [ "noatime" "discard=async" "compress=zstd:1" ];
     in
   {
@@ -49,36 +50,36 @@
       device = "none";
       fsType = "tmpfs";
       neededForBoot = true;
-      options = [ "defaults" "size=4G" "mode=755" ];
+      options = [ "defaults" "size=2G" "mode=755" ];
     };
 
     "/boot" = {
-      device = "/dev/disk/by-uuid/8B75-B44E";
+      device = "/dev/disk/by-uuid/2866-BA21";
       fsType = "vfat";
     };
 
     "/home" = {
-      device = "/dev/disk/by-uuid/ce1cdbac-9ff3-4df7-9ad1-40c8bdf29556";
+      device = cryptedDrive;
       fsType = "btrfs";
       options = [ "subvol=@home" ] ++ driveOptions;
     };
 
     "/nix" = {
-      device = "/dev/disk/by-uuid/ce1cdbac-9ff3-4df7-9ad1-40c8bdf29556";
+      device = cryptedDrive;
       fsType = "btrfs";
       neededForBoot = true;
       options = [ "subvol=@nix" ] ++ driveOptions;
     };
 
     "/state" = {
-      device = "/dev/disk/by-uuid/ce1cdbac-9ff3-4df7-9ad1-40c8bdf29556";
+      device = cryptedDrive;
       fsType = "btrfs";
       neededForBoot = true;
       options = [ "subvol=@state" ] ++ driveOptions;
     };
 
     "/swap" = {
-      device = "/dev/disk/by-uuid/ce1cdbac-9ff3-4df7-9ad1-40c8bdf29556";
+      device = cryptedDrive;
       fsType = "btrfs";
       options = [ "subvol=@swap" ] ++ driveOptions;
     };

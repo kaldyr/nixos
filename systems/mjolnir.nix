@@ -64,6 +64,7 @@
 
   fileSystems =
     let
+      cryptedDrive = "/dev/disk/by-uuid/8dbbf02f-0bc0-4833-b5cf-c05eb59a9221";
       driveOptions = [ "noatime" "discard=async" "compress=zstd:1" ];
     in
   {
@@ -80,27 +81,27 @@
     };
 
     "/home" = {
-      device = "/dev/disk/by-uuid/8dbbf02f-0bc0-4833-b5cf-c05eb59a9221";
+      device = cryptedDrive;
       fsType = "btrfs";
       options = [ "subvol=@home" ] ++ driveOptions;
     };
 
     "/nix" = {
-      device = "/dev/disk/by-uuid/8dbbf02f-0bc0-4833-b5cf-c05eb59a9221";
+      device = cryptedDrive;
       fsType = "btrfs";
       neededForBoot = true;
       options = [ "subvol=@nix" ] ++ driveOptions;
     };
 
     "/state" = {
-      device = "/dev/disk/by-uuid/8dbbf02f-0bc0-4833-b5cf-c05eb59a9221";
+      device = cryptedDrive;
       fsType = "btrfs";
       neededForBoot = true;
       options = [ "subvol=@state" ] ++ driveOptions;
     };
 
     "/swap" = {
-      device = "/dev/disk/by-uuid/8dbbf02f-0bc0-4833-b5cf-c05eb59a9221";
+      device = cryptedDrive;
       fsType = "btrfs";
       options = [ "subvol=@swap" ] ++ driveOptions;
     };

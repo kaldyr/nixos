@@ -195,6 +195,8 @@
 
 
       knownHosts = {
+        "aziraphale".publicKey =
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHWNXo2JMIWIBvruEhhUMun95Zi25/ObzQgX9tTDWdPF root@aziraphale";
         "espresso".publicKey =
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICKugLnV4qqCMN5dhN4BWEx9Q7OG+BAk0a+2RzNmzFhr root@espresso";
         "installer".publicKey =
