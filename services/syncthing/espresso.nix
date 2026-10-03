@@ -22,8 +22,10 @@
         };
 
         matshkas-guildwars2 = {
+          # path = "/state/guildwars2/addons";
           path = "/home/matshkas/.wine/guild-wars-2/drive_c/Program Files/Guild Wars 2/addons";
           devices = [ "magrathea" ];
+          ignorePatterns = [ "/Taimi/pathing" ];
         };
 
         matshkas-notes = {
@@ -41,7 +43,33 @@
           devices = [ "magrathea" ];
           ignorePerms = true;
         };
+
+        shared-guildwars2-pathing = {
+          path = "/state/guildwars2/pathing";
+          devices = [ "magrathea" ];
+        };
       };
     };
   };
+
+  systemd.tmpfiles.rules = [
+    # .config
+    "d /home/matshkas/.config 0755 matshkas users -"
+    # Syncthing home
+    "d /home/matshkas/.config/syncthing 0755 matshkas users -"
+    # Sync Folder: matshkas-browser
+    "d /home/matshkas/.config/net.imput.helium 0755 matshkas users -"
+    # Sync Folder: matshkas-documents
+    "d /home/matshkas/Documents 0755 matshkas users -"
+    # guildwars2
+    "d /state/guildwars2 0755 matshkas users -"
+    # Sync Folder: matshkas-guildwars2
+    "d /state/guildwars2/addons 0755 matshkas users -"
+    # Sync Folder: shared-guildwars2-pathing
+    "d /state/guildwars2/pathing 0755 matshkas users -"
+    # Sync Folder: matshkas-notes
+    "d /home/matshkas/Vaults/Notes 0755 matshkas users -"
+    # Sync Folder: matshkas-passwords
+    "d /home/matshkas/.passwords 0700 matshkas users -"
+  ];
 }

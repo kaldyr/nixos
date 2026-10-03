@@ -29,4 +29,9 @@
       };
     };
   };
+
+  systemd.tmpfiles.rules = [
+    # Sync Folder: matt-passwords
+    "d /home/matt/.passwords 0700 matt users -"
+  ];
 }

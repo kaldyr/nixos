@@ -35,4 +35,17 @@
       };
     };
   };
+
+  systemd.tmpfiles.rules = [
+    # .config
+    "d /home/janice/.config 0755 janice users -"
+    # Syncthing home
+    "d /home/janice/.config/syncthing 0755 janice users -"
+    # Sync Folder: janice-browser
+    "d /home/janice/.config/net.imput.helium 0755 janice users -"
+    # Sync Folder: janice-documents
+    "d /home/janice/Documents 0755 janice users -"
+    # Sync Folder: janice-passwords
+    "d /home/janice/.passwords 0700 janice users -"
+  ];
 }

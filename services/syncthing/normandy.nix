@@ -22,8 +22,15 @@
         };
 
         nic-enshrouded = {
+          # path = "/state/enshrouded";
           path = "/home/nic/.local/share/Steam/steamapps/compatdata/1203620/pfx/drive_c/users/steamuser/Saved Games/Enshrouded";
           devices = [ "magrathea" ];
+        };
+
+        nic-guildwars2 = {
+          path = "/state/guildwars2/addons";
+          devices = [ "magrathea" ];
+          ignorePatterns = [ "Taimi/pathing" ];
         };
 
         nic-notes = {
@@ -41,7 +48,40 @@
           devices = [ "magrathea" ];
           ignorePerms = true;
         };
+
+        shared-guildwars2-pathing = {
+          path = "/state/guildwars2/pathing";
+          devices = [ "magrathea" ];
+        };
       };
     };
   };
+
+  systemd.tmpfiles.rules = [
+    # .config
+    "d /home/nic/.config 0755 nic users -"
+    # Syncthing home
+    "d /home/nic/.config/syncthing 0755 nic users -"
+    # Sync Folder: nic-browser
+    "d /home/nic/.config/net.imput.helium 0755 nic users -"
+    # Sync Folder: nic-documents
+    "d /home/nic/Documents 0755 nic users -"
+    # Sync Folder: nic-enshrouded
+    "d /state/enshrouded 0755 nic users -"
+    # guildwars2
+    "d /state/guildwars2 0755 nic users -"
+    # Sync Folder: nic-guildwars2
+    "d /state/guildwars2/addons 0755 nic users -"
+    # Sync Folder: shared-guildwars2-pathing
+    "d /state/guildwars2/pathing 0755 nic users -"
+    # Sync Folder: nic-notes
+    "d /home/nic/Vaults/Notes 0755 nic users -"
+    # Sync Folder: nic-openstarbound
+    "d /home/nic/.local 0755 nic users -"
+    "d /home/nic/.local/state 0755 nic users -"
+    "d /home/nic/.local/state/openstarbound 0755 nic users -"
+    "d /home/nic/.local/state/openstarbound/storage 0755 nic users -"
+    # Sync Folder: nic-passwords
+    "d /home/nic/.passwords 0700 nic users -"
+  ];
 }

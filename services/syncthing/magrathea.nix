@@ -134,6 +134,11 @@
         devices = [ "normandy" ];
       };
 
+      nic-guildwars2 = {
+        path = "/data/sync/nic/GuildWars2";
+        devices = [ "normandy" ];
+      };
+
       nic-notes = {
         path = "/data/sync/nic/Notes";
         devices = [ "normandy" ];
@@ -165,6 +170,11 @@
         ignorePerms = true;
       };
 
+      shared-guildwars2-pathing = {
+        path = "/data/sync/shared/GuildWars2";
+        devices = [ "mjolnir" ];
+      };
+
       shared-videos-offline = {
         path = "/storage/media/Videos/Offline";
         devices = [ "gungnir" ];
@@ -174,6 +184,65 @@
 
     gui.insecureSkipHostcheck = true;
   };
+
+  systemd.tmpfiles.rules = [
+    # User janice
+    "d /data/sync/janice 2775 syncthing syncthing -"
+    # Sync Folder janice-browser
+    "d /data/sync/janice/Browser 2775 syncthing syncthing -"
+    # Sync Folder janice-documents
+    "d /data/sync/janice/Documents 2775 syncthing syncthing -"
+    # Sync Folder janice-passwords
+    "d /data/sync/janice/Passwords 2775 syncthing syncthing -"
+
+    # User matshkas
+    "d /data/sync/matshkas 2775 syncthing syncthing -"
+    # Sync Folder matshkas-browser
+    "d /data/sync/matshkas/Browser 2775 syncthing syncthing -"
+    # Sync Folder matshkas-documents
+    "d /data/sync/matshkas/Documents 2775 syncthing syncthing -"
+    # Sync Folder matshkas-guildwars2
+    "d /data/sync/matshkas/GuildWars2 2775 syncthing syncthing -"
+    # Sync Folder matshkas-notes
+    "d /data/sync/matshkas/Notes 2775 syncthing syncthing -"
+    # Sync Folder matshkas-passwords
+    "d /data/sync/matshkas/Passwords 2775 syncthing syncthing -"
+
+    # User matt
+    "d /data/sync/matt 2775 syncthing syncthing -"
+    # Sync Folder matt-browser
+    "d /data/sync/matt/Browser 2775 syncthing syncthing -"
+    # Sync Folder matt-documents
+    "d /data/sync/matt/Documents 2775 syncthing syncthing -"
+    # Sync Folder matt-guildwars2
+    "d /data/sync/matt/GuildWars2 2775 syncthing syncthing -"
+    # Sync Folder matt-notes
+    "d /data/sync/matt/Notes 2775 syncthing syncthing -"
+    # Sync Folder matt-openstarbound
+    "d /data/sync/matt/Openstarbound 2775 syncthing syncthing -"
+    # Sync Folder matt-passwords
+    "d /data/sync/matt/Passwords 2775 syncthing syncthing -"
+
+    # User nic
+    "d /data/sync/nic 2775 syncthing syncthing -"
+    # Sync Folder nic-browser
+    "d /data/sync/nic/Browser 2775 syncthing syncthing -"
+    # Sync Folder nic-documents
+    "d /data/sync/nic/Documents 2775 syncthing syncthing -"
+    # Sync Folder nic-enshrouded
+    "d /data/sync/nic/Enshrouded 2775 syncthing syncthing -"
+    # Sync Folder nic-guildwars2
+    "d /data/sync/nic/GuildWars2 2775 syncthing syncthing -"
+    # Sync Folder nic-notes
+    "d /data/sync/nic/Notes 2775 syncthing syncthing -"
+    # Sync Folder nic-openstarbound
+    "d /data/sync/nic/Openstarbound 2775 syncthing syncthing -"
+
+    # Shared Folders
+    "d /data/sync/shared 2775 syncthing syncthing -"
+    # Sync Folder shared-guildwars2-pathing
+    "d /data/sync/shared/GuildWars2 2775 syncthing syncthing -"
+  ];
 
   users = {
     groups.syncthing = {};

@@ -13,25 +13,25 @@
     };
 
     folders = {
-      # janice-browser = {
-      #   path = "/data/sync/janice/Browser";
-      #   devices = [ "aziraphale" "magrathea" ];
-      # };
-      #
-      # janice-documents = {
-      #   path = "/data/sync/janice/Documents";
-      #   devices = [ "aziraphale" "magrathea" ];
-      #
-      #   versioning = {
-      #     type = "simple";
-      #     params.keep = "10";
-      #   };
-      # };
-      #
-      # janice-passwords = {
-      #   path = "/data/sync/janice/Passwords";
-      #   devices = [ "aziraphale" "magrathea" ];
-      # };
+      janice-browser = {
+        path = "/data/sync/janice/Browser";
+        devices = [ "aziraphale" "magrathea" ];
+      };
+
+      janice-documents = {
+        path = "/data/sync/janice/Documents";
+        devices = [ "aziraphale" "magrathea" ];
+
+        versioning = {
+          type = "simple";
+          params.keep = "10";
+        };
+      };
+
+      janice-passwords = {
+        path = "/data/sync/janice/Passwords";
+        devices = [ "aziraphale" "magrathea" ];
+      };
 
       nix-config = {
         path = "/nix/config";
@@ -42,6 +42,17 @@
 
     gui.insecureSkipHostcheck = true;
   };
+
+  systemd.tmpfiles.rules = [
+    # User janice
+    "d /data/sync/janice 2775 syncthing syncthing -"
+    # Sync Folder janice-browser
+    "d /data/sync/janice/Browser 2775 syncthing syncthing -"
+    # Sync Folder janice-documents
+    "d /data/sync/janice/Documents 2775 syncthing syncthing -"
+    # Sync Folder janice-passwords
+    "d /data/sync/janice/Passwords 2775 syncthing syncthing -"
+  ];
 
   users = {
     groups.syncthing = {};
