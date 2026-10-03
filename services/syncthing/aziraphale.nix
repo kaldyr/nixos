@@ -14,17 +14,17 @@
       folders = {
         janice-browser = {
           path = "/home/janice/.config/net.imput.helium";
-          devices = [ "magrathea" ];
+          devices = [ "magrathea" "serenity" ];
         };
 
         janice-documents = {
           path = "/home/janice/Documents";
-          devices = [ "magrathea" ];
+          devices = [ "magrathea" "serenity" ];
         };
 
         janice-passwords = {
           path = "/home/janice/.passwords";
-          devices = [ "magrathea" ];
+          devices = [ "magrathea" "serenity" ];
         };
 
         nix-config = {

@@ -22,8 +22,7 @@
         };
 
         nic-enshrouded = {
-          # path = "/state/enshrouded";
-          path = "/home/nic/.local/share/Steam/steamapps/compatdata/1203620/pfx/drive_c/users/steamuser/Saved Games/Enshrouded";
+          path = "/state/enshrouded";
           devices = [ "magrathea" ];
         };
 

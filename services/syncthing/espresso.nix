@@ -22,8 +22,7 @@
         };
 
         matshkas-guildwars2 = {
-          # path = "/state/guildwars2/addons";
-          path = "/home/matshkas/.wine/guild-wars-2/drive_c/Program Files/Guild Wars 2/addons";
+          path = "/state/guildwars2/addons";
           devices = [ "magrathea" ];
           ignorePatterns = [ "/Taimi/pathing" ];
         };

@@ -67,7 +67,7 @@
     "/snaps" = {
       device = "/dev/disk/by-uuid/27fb138d-b3c1-4b8f-9110-04a28bcda82c";
       fsType = "btrfs";
-      options = [ "subvol=@snaps" ] + hddOptions;
+      options = [ "subvol=@snaps" ] ++ hddOptions;
     };
   };
 
