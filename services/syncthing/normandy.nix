@@ -30,7 +30,7 @@
         nic-guildwars2 = {
           path = "/state/guildwars2/addons";
           devices = [ "magrathea" ];
-          ignorePatterns = [ "Taimi/pathing" ];
+          ignorePatterns = [ "/Taimi/pathing" ];
         };
 
         nic-notes = {

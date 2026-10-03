@@ -172,7 +172,12 @@
 
       shared-guildwars2-pathing = {
         path = "/data/sync/shared/GuildWars2";
-        devices = [ "mjolnir" ];
+
+        devices = [
+          "espresso"
+          "mjolnir"
+          "normandy"
+        ];
       };
 
       shared-videos-offline = {
