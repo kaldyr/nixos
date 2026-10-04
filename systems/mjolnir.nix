@@ -123,6 +123,7 @@
     android-tools
     chroncal
     openscad
+    subtui
   ];
 
   security.sudo.extraRules = [

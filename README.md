@@ -25,6 +25,7 @@ Media is hosted by private services, most of which have offline cache available 
 # Machines
 
 Update: 2026-09-28
+- [x] Aziraphale
 - [x] Espresso
 - [x] Installer
 - [x] Magrathea
@@ -34,10 +35,7 @@ Update: 2026-09-28
 
 ## Aziraphale
 - Laptop: Dell 14 D14260 Intel Core Ultra 5 225U
-- Fresh Install: 
-
-### TODO
-- Install
+- Fresh Install: October 3rd, 2026
 
 ## Espresso
 - Desktop: Minisforum UM790 Pro
@@ -50,15 +48,10 @@ Update: 2026-09-28
 ### TODO
 - Solder the new RTC Battery when it arrives
 - Figure out the HDMI/USB-C Monitor issue
-- Install
 
 ## Installer
 - USB Flash Drive (Actual install, not ISO)
 - Fresh Install: September 5th, 2026
-
-### Tools
-- Memtest
-- Everything needed to install and troubleshoot machines
 
 ### Features
 - Persisted networkmanager and tailscale autoconnect to services
@@ -104,9 +97,6 @@ Update: 2026-09-28
 - 32GB LPCAMM2 7500 RAM
 - BE211 Wi-Fi 7 Module
 - 4.0kg Hinge Kit
-
-### TODO
-- Iterate Quickshell Setup
 
 ## Normandy
 - Desktop: Ryzen 7 3700X, Radeon RX 7600
@@ -168,7 +158,7 @@ Caps+hjkl - arrow keys
 
 ## Identify Target Disk
 ```fish
-lsblk -o NAME,SIZE,MODEL,SERIAL
+lsblk
 
 ```
 
@@ -182,7 +172,7 @@ Completions will suggest the disk, just start typing the path and choose the mat
 
 ## Partition Disk
 ```fish
-nix run github:nix-community/disko/latest -- --mode destroy,format,mount /nix/config/disko/<system>.nix
+disko --mode destroy,format,mount /nix/config/disko/<system>.nix
 
 ```
 
@@ -213,11 +203,14 @@ chattr +C /var/lib/postgresql
 
 #### Serenity
 
+Current SSD is too small to house @data so toss it on the array for now.
+
 ```fish
 mkfs.btrfs -m raid1 -d raid1 /dev/sdY /dev/sdZ
 mkdir -p /storage
 mount /dev/sdY /storage
 cd /storage
+btrfs subvolume create @data
 btrfs subvolume create @media
 btrfs subvolume create @snaps
 cd ..
@@ -337,3 +330,5 @@ chattr +C /local/Machines
 ```
 
 ## Reboot into the New System
+
+## Connect to Tailscale

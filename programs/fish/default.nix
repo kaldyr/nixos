@@ -49,7 +49,7 @@
         ll = "ls --long";
         lla = "ls --long --almost-all";
         lt = "ls -TL=3 --almost-all";
-        lsblk = "sudo lsblk -o NAME,SIZE,MODEL,SERIAL,UUID";
+        lsblk = "sudo lsblk -o NAME,SIZE,MODEL,UUID,MOUNTPOINTS";
         mkdir = "mkdir -pv";
         mv = "mv -i";
         rm = "rm -i";

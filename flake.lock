@@ -230,7 +230,8 @@
         "impermanence": "impermanence",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "subtui": "subtui"
       }
     },
     "sops-nix": {
@@ -250,6 +251,26 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
+        "type": "github"
+      }
+    },
+    "subtui": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790950576,
+        "narHash": "sha256-sX6I9fqbHP26526dIOECTpEkw8Zj+87YBxjlC2/2olw=",
+        "owner": "MattiaPun",
+        "repo": "SubTUI",
+        "rev": "6229111adcc8ba850f8c84bf0df0b1172c32817b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MattiaPun",
+        "repo": "SubTUI",
         "type": "github"
       }
     },

@@ -117,7 +117,6 @@
       options = "--delete-older-than 7d";
     };
 
-    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
     registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
 
     settings = {
@@ -128,6 +127,8 @@
         "nix-command"
         "flakes"
       ];
+
+      nix-path = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
     };
   };
 

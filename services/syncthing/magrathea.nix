@@ -114,6 +114,11 @@
         devices = [ "gungnir" "installer" "mjolnir" ];
       };
 
+      matt-phonesettings = {
+        path = "/data/sync/matt/PhoneSettings";
+        devices = [ "gungnir" ];
+      };
+
       nic-browser = {
         path = "/data/sync/nic/Browser";
         devices = [ "normandy" ];

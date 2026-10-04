@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! mountpoint -q /mnt/state; then
+  echo "Error: /mnt/state is not mounted." >&2
+  exit 1
+fi
+
+force=false
+
+while getopts ":f" opt; do
+  case "$opt" in
+    f)
+      force=true
+      ;;
+    *)
+      echo "Usage: $0 [-f] <hostname>" >&2
+      exit 2
+      ;;
+  esac
+done
+
+shift $((OPTIND - 1))
+
+hostname="${1:?Usage: $0 [-f] <hostname>}"
+
+ssh_dir="/mnt/state/ssh"
+key="${ssh_dir}/ssh_host_ed25519_key"
+
+sudo install -d -m 0700 -o root -g root "$ssh_dir"
+
+if [[ -e "$key" ]]; then
+  if [[ "$force" != true ]]; then
+    echo "SSH host key already exists at: $key" >&2
+    echo "Use -f to replace it." >&2
+    exit 1
+  fi
+
+  echo "Removing existing SSH host key..." >&2
+  sudo rm -f -- "$key" "$key.pub"
+elif [[ -e "$key.pub" ]]; then
+  echo "Removing stale public key without matching private key..." >&2
+  sudo rm -f -- "$key.pub"
+fi
+
+echo "Generating SSH host key for ${hostname}..." >&2
+
+sudo ssh-keygen -q -t ed25519 -N "" -C "$hostname" -f "$key"
+
+sudo chown root:root "$key" "$key.pub"
+sudo chmod 0600 "$key"
+sudo chmod 0644 "$key.pub"
+
+public_key="$(sudo cat "$key.pub")"
+
+printf '"%s".publicKey = "%s";\n' "$hostname" "$public_key"
