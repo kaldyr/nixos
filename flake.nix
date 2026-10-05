@@ -29,6 +29,10 @@
     helium.url = "github:schembriaiden/helium-browser-nix-flake";
     helium.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Openstarbound
+    openstarbound.url = "github:kaldyr/openstarbound";
+    openstarbound.inputs.nixpkgs.follows = "nixpkgs";
+
     # SubTUI - Navidrome TUI client
     subtui.url = "github:MattiaPun/SubTUI";
     subtui.inputs.nixpkgs.follows = "nixpkgs";
