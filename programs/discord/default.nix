@@ -14,14 +14,14 @@ let
   };
 in
 {
-  home-manager.users.${sysConfig.user} = {
-    home.packages = with pkgs; [
-      discord
-      libevdev
-      wayland-push-to-talk-fix
-      xdotool
-    ];
+  environment.systemPackages = with pkgs; [
+    discord
+    libevdev
+    wayland-push-to-talk-fix
+    xdotool
+  ];
 
+  home-manager.users.${sysConfig.user} = {
     xdg.configFile."Vencord/themes/frappe.theme.css".source =
       pkgs.fetchFromGitHub {
         owner = "catppuccin";

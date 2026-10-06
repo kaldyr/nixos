@@ -16,9 +16,31 @@
     ../services/pipewire
   ];
 
-  environment.etc."fuse.conf".text = /* bash */ ''
-    user_allow_other
-  '';
+  environment = {
+    etc."fuse.conf".text = /* bash */ ''
+      user_allow_other
+    '';
+
+    systemPackages = with pkgs; [
+      gimp
+      gnome-keyring
+      gnuplot
+      hunspell
+      hunspellDicts.en_US
+      imagemagick
+      inkscape
+      libreoffice
+      libsecret
+      loupe
+      networkmanagerapplet
+      obsidian
+      papirus-folders
+      telegram-desktop
+      vulkan-tools
+      xdg-user-dirs
+      xdg-utils
+    ];
+  };
 
   fonts = {
     enableDefaultPackages = false;
@@ -185,27 +207,6 @@
     };
 
     home = {
-      packages = with pkgs; [
-        gimp
-        gnome-keyring
-        gnuplot
-        hunspell
-        hunspellDicts.en_US
-        imagemagick
-        inkscape
-        kjv
-        libreoffice
-        libsecret
-        loupe
-        networkmanagerapplet
-        obsidian
-        papirus-folders
-        telegram-desktop
-        vulkan-tools
-        xdg-user-dirs
-        xdg-utils
-      ];
-
       pointerCursor = {
         enable = true;
         name = "catppuccin-frappe-sapphire-cursors";

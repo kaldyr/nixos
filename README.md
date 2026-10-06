@@ -24,7 +24,7 @@ Media is hosted by private services, most of which have offline cache available 
 
 # Machines
 
-Update: 2026-09-28
+Update: 2026-10-05
 - [x] Aziraphale
 - [x] Espresso
 - [x] Installer
@@ -172,7 +172,7 @@ Completions will suggest the disk, just start typing the path and choose the mat
 
 ## Partition Disk
 ```fish
-disko --mode destroy,format,mount /nix/config/disko/<system>.nix
+sudo disko --mode destroy,format,mount /nix/config/disko/<system>.nix
 
 ```
 

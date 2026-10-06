@@ -4,12 +4,12 @@
   ...
 }:
 {
-  home-manager.users.${sysConfig.user} = { config, ... }: {
-    home.packages = with pkgs; [
-      dotool
-      keepmenu
-    ];
+  environment.systemPackages = with pkgs; [
+    dotool
+    keepmenu
+  ];
 
+  home-manager.users.${sysConfig.user} = { config, ... }: {
     programs.keepassxc.enable = true;
 
     xdg.configFile."keepmenu/config.ini".source =

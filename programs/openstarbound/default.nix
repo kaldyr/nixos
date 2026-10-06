@@ -35,17 +35,15 @@ let
   };
 in
 {
-  home-manager.users.${sysConfig.user} = {
-    home.packages = [ openstarboundClient ];
+  environment.systemPackages = [ openstarboundClient ];
 
-    xdg.desktopEntries."Open Starbound" = {
-      name = "Open Starbound";
-      comment = "Open Starbound Client";
-      exec = "openstarbound";
-      icon = "steam_icon_211820";
-      terminal = false;
-      type = "Application";
-      categories = [ "Game" ];
-    };
+  home-manager.users.${sysConfig.user}.xdg.desktopEntries."Open Starbound" = {
+    name = "Open Starbound";
+    comment = "Open Starbound Client";
+    exec = "openstarbound";
+    icon = "steam_icon_211820";
+    terminal = false;
+    type = "Application";
+    categories = [ "Game" ];
   };
 }

@@ -1,7 +1,7 @@
 {
   inputs = {
     # Disko - Declarative partition management
-    disko.url = "github:nix-community/disko";
+    disko.url = "github:nix-community/disko/latest";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
     # Manage the home folder and user applications
@@ -32,10 +32,6 @@
     # Openstarbound
     openstarbound.url = "github:kaldyr/openstarbound";
     openstarbound.inputs.nixpkgs.follows = "nixpkgs";
-
-    # SubTUI - Navidrome TUI client
-    subtui.url = "github:MattiaPun/SubTUI";
-    subtui.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { nixpkgs, ... }@inputs:

@@ -16,13 +16,10 @@
     ../../services/udiskie
   ];
 
-  environment.sessionVariables."WLR_RENDERER" = "vulkan";
+  environment = {
+    sessionVariables."WLR_RENDERER" = "vulkan";
 
-  home-manager.users.${sysConfig.user} = { config, ... }: {
-    home.file.".local/share/nvim/stubs/hl.meta.lua".source =
-      "${pkgs.hyprland}/share/hypr/stubs/hl.meta.lua";
-
-    home.packages = with pkgs; [
+    systemPackages = with pkgs; [
       brightnessctl
       grim
       hyprpicker
@@ -35,6 +32,11 @@
       wl-screenrec
       xwayland
     ];
+  };
+
+  home-manager.users.${sysConfig.user} = { config, ... }: {
+    home.file.".local/share/nvim/stubs/hl.meta.lua".source =
+      "${pkgs.hyprland}/share/hypr/stubs/hl.meta.lua";
 
     home.pointerCursor.hyprcursor.enable = true;
 

@@ -4,6 +4,8 @@
   ...
 }:
 {
+  environment.systemPackages = with pkgs; [ gedit ];
+
   home-manager.users.${sysConfig.user} = { config, ... }: {
     dconf.settings."org/gnome/gedit/preferences/editor" = {
       auto-indent = true;
@@ -17,8 +19,6 @@
 
     home.file.".local/share/libgedit-gtksourceview-300/styles/catppuccin-frappe.xml".source =
       config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/gedit/config/catppuccin-frappe.xml";
-
-    home.packages = with pkgs; [ gedit ];
 
     xdg.mimeApps.associations.added."text/plain" = [ "org.gnome.gedit.desktop" ];
   };

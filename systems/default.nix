@@ -61,13 +61,8 @@
     };
 
     sessionVariables.PATH = [ "/nix/config/scripts" ];
-  };
 
-  fileSystems."/nix".neededForBoot = true;
-  fileSystems."/state".neededForBoot = true;
-
-  home-manager.users.${sysConfig.user} = {
-    home.packages = with pkgs; [
+    systemPackages = with pkgs; [
       age
       duf
       exiftool
@@ -86,9 +81,12 @@
       zip
       zmx
     ];
-
-    programs.man.generateCaches = false;
   };
+
+  fileSystems."/nix".neededForBoot = true;
+  fileSystems."/state".neededForBoot = true;
+
+  home-manager.users.${sysConfig.user}.programs.man.generateCaches = false;
 
   networking = {
     firewall.enable = true;

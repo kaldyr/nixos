@@ -35,37 +35,32 @@
     loader.grub.memtest86.enable = true;
   };
 
-  environment = {
-    shellAliases = {
-      "disko" = "sudo nix run github:nix-community/disko/latest --";
-    };
-
-    systemPackages = with pkgs; [
-      age
-      btrfs-progs
-      cryptsetup
-      dislocker
-      dosfstools
-      e2fsprogs
-      exfatprogs
-      git
-      gparted
-      gptfdisk
-      inxi
-      libva-utils
-      mesa-demos
-      nixos-install-tools
-      ntfs3g
-      parted
-      pciutils
-      rsync
-      sops
-      usbutils
-      util-linux
-      wimlib
-      xfsprogs
-    ];
-  };
+  environment.systemPackages = with pkgs; [
+    age
+    btrfs-progs
+    cryptsetup
+    disko
+    dislocker
+    dosfstools
+    e2fsprogs
+    exfatprogs
+    git
+    gparted
+    gptfdisk
+    inxi
+    libva-utils
+    mesa-demos
+    nixos-install-tools
+    ntfs3g
+    parted
+    pciutils
+    rsync
+    sops
+    usbutils
+    util-linux
+    wimlib
+    xfsprogs
+  ];
 
   fileSystems =
     let

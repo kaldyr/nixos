@@ -28,15 +28,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1789770686,
-        "narHash": "sha256-uZkBR7yHdIKUFB5SZdfgh1qkGfI3XmYmI/lTiquxbck=",
+        "lastModified": 1768920986,
+        "narHash": "sha256-CNzzBsRhq7gg4BMBuTDObiWDH/rFYHEuDRVOwCcwXw4=",
         "owner": "nix-community",
         "repo": "disko",
-        "rev": "725ea35e410ad83be4931d1bff7e090eacaf3563",
+        "rev": "de5708739256238fb912c62f03988815db89ec9a",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
+        "ref": "latest",
         "repo": "disko",
         "type": "github"
       }
@@ -228,14 +229,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1791193144,
-        "narHash": "sha256-CovK9bq2fHaKMKaBCGJ5x5o1WqF/8eOrhjP+rksf30c=",
-        "path": "/home/matt/Projects/openstarbound",
-        "type": "path"
+        "lastModified": 1791193816,
+        "narHash": "sha256-Va877axtf0t+KDosAX0cbM1OMFmDnR4kzucjfvxxBKI=",
+        "owner": "kaldyr",
+        "repo": "openstarbound",
+        "rev": "145288777165b9fa7647a3700ea62b04905c4bfe",
+        "type": "github"
       },
       "original": {
-        "path": "/home/matt/Projects/openstarbound",
-        "type": "path"
+        "owner": "kaldyr",
+        "repo": "openstarbound",
+        "type": "github"
       }
     },
     "root": {
@@ -248,8 +252,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
         "openstarbound": "openstarbound",
-        "sops-nix": "sops-nix",
-        "subtui": "subtui"
+        "sops-nix": "sops-nix"
       }
     },
     "sops-nix": {
@@ -269,26 +272,6 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
-        "type": "github"
-      }
-    },
-    "subtui": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1790950576,
-        "narHash": "sha256-sX6I9fqbHP26526dIOECTpEkw8Zj+87YBxjlC2/2olw=",
-        "owner": "MattiaPun",
-        "repo": "SubTUI",
-        "rev": "6229111adcc8ba850f8c84bf0df0b1172c32817b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "MattiaPun",
-        "repo": "SubTUI",
         "type": "github"
       }
     },

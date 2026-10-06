@@ -1,7 +1,6 @@
 {
   inputs,
   pkgs,
-  sysConfig,
   ...
 }:
 {
@@ -17,7 +16,6 @@
     ../programs/lutris
     ../programs/openstarbound
     ../programs/plymouth
-    ../programs/retroarch
     ../programs/steam
     ../programs/virtualmachines
     ../services/epson-et-8550
@@ -58,9 +56,20 @@
     loader.grub.gfxmodeEfi = "3440x1440,2256x1504,1920x1080";
   };
 
-  # environment.persistence."/state".directories = [ "/var/lib/fprint" ];
 
-  environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
+  environment = {
+    # persistence."/state".directories = [ "/var/lib/fprint" ];
+    sessionVariables.LIBVA_DRIVER_NAME = "iHD";
+
+    systemPackages = with pkgs; [
+      android-tools
+      chroncal
+      disko
+      nixos-install-tools
+      openscad
+      rsync
+    ];
+  };
 
   fileSystems =
     let
@@ -118,13 +127,6 @@
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
   };
-
-  home-manager.users.${sysConfig.user}.home.packages = with pkgs; [
-    android-tools
-    chroncal
-    openscad
-    subtui
-  ];
 
   security.sudo.extraRules = [
     {

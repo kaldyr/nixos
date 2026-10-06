@@ -40,6 +40,12 @@
     loader.grub.gfxmodeEfi = "1920x1200";
   };
 
+  environment.systemPackages = with pkgs; [
+    firefox
+    libation
+    onlyoffice-desktopeditors
+  ];
+
   fileSystems =
     let
       cryptedDrive = "/dev/disk/by-uuid/56d29b6f-0c61-4bce-a2dc-f59bbce32165";
@@ -95,12 +101,6 @@
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
   };
-
-  home-manager.users.${sysConfig.user}.home.packages = with pkgs; [
-    firefox
-    libation
-    onlyoffice-desktopeditors
-  ];
 
   services = {
     auto-cpufreq = {
