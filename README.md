@@ -329,6 +329,21 @@ If you don't need to snapshot the VMs, disable COW for the image folder BEFORE a
 chattr +C /local/Machines
 ```
 
+#### Radicale users
+
+```fish
+nix shell nixpkgs#apacheHttpd
+sudo htpasswd -B -c /var/lib/radicale/users <username>
+sudo chown root:radicale /var/lib/radicale/users
+sudo chmod 0640 /var/lib/radicale/users
+```
+
+Then for each other user:
+
+```fish
+sudo htpasswd -B /var/lib/radicale/users <username>
+```
+
 ## Reboot into the New System
 
 ## Connect to Tailscale

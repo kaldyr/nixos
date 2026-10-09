@@ -17,6 +17,7 @@
     ../programs/openstarbound
     ../programs/plymouth
     ../programs/steam
+    ../programs/thunderbird
     ../programs/virtualmachines
     ../services/epson-et-8550
     ../services/keyd

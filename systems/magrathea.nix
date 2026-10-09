@@ -15,6 +15,7 @@
     ../services/navidrome
     ../services/nextcloud
     ../services/openstarbound
+    ../services/radicale
     ../services/syncthing
     ../services/technitium
     ../services/vikunja
