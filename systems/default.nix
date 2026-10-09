@@ -194,20 +194,22 @@
 
 
       knownHosts = {
+        "amyrose".publicKey =
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKv6FBxXHiIJaKDekfshKaO/58f1H9nX/+KfbdGKpULE amyrose";
         "aziraphale".publicKey =
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHWNXo2JMIWIBvruEhhUMun95Zi25/ObzQgX9tTDWdPF root@aziraphale";
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHWNXo2JMIWIBvruEhhUMun95Zi25/ObzQgX9tTDWdPF aziraphale";
         "espresso".publicKey =
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICKugLnV4qqCMN5dhN4BWEx9Q7OG+BAk0a+2RzNmzFhr root@espresso";
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICKugLnV4qqCMN5dhN4BWEx9Q7OG+BAk0a+2RzNmzFhr espresso";
         "installer".publicKey =
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPMi1M5cljxIMmx2D4KzPLWPjhm9x4JmATnRLOmyQOD5 root@installer";
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPMi1M5cljxIMmx2D4KzPLWPjhm9x4JmATnRLOmyQOD5 installer";
         "magrathea".publicKey =
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKymXBmxO/Yb9lFRyW+w1O3mZ7I6iLgnxW0kgI/4e1O3 root@magrathea";
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKymXBmxO/Yb9lFRyW+w1O3mZ7I6iLgnxW0kgI/4e1O3 magrathea";
         "mjolnir".publicKey =
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEsWi8zGLMuMJM+2wawmRFEE6Qmnabq3kA4Rj3bLBBJ6 root@mjolnir";
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEsWi8zGLMuMJM+2wawmRFEE6Qmnabq3kA4Rj3bLBBJ6 mjolnir";
         "normandy".publicKey =
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL+4pqhI6R6TgwY8F3uuAQACprpNX1fl+MaFIVXy4KPY root@normandy";
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL+4pqhI6R6TgwY8F3uuAQACprpNX1fl+MaFIVXy4KPY normandy";
         "serenity".publicKey =
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIENWaDdqWL60ieh/i8at2PzhMPiCreBeKHYBQ5f0kNYA root@serenity";
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIENWaDdqWL60ieh/i8at2PzhMPiCreBeKHYBQ5f0kNYA serenity";
       };
 
       settings = {

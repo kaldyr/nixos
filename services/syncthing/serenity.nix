@@ -36,6 +36,12 @@
       nix-config = {
         path = "/nix/config";
         devices = [ "aziraphale" "magrathea" ];
+
+        ignorePatterns = [
+          "/programs/yazi/config/plugins"
+          "/programs/quickshell/config/.qmlls.ini"
+        ];
+
         ignorePerms = true;
       };
     };

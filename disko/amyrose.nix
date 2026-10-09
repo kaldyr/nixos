@@ -1,6 +1,6 @@
 {
   disko.devices.disk.main = {
-    device = "/dev/disk/by-id/"; # [MARK]
+    device = "/dev/disk/by-id/ata-SPCC_Solid_State_Disk_115E072A0C1800071116";
     type = "disk";
 
     content = {

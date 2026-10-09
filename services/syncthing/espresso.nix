@@ -40,6 +40,12 @@
         nix-config = {
           path = "/nix/config";
           devices = [ "magrathea" ];
+
+          ignorePatterns = [
+            "/programs/yazi/config/plugins"
+            "/programs/quickshell/config/.qmlls.ini"
+          ];
+
           ignorePerms = true;
         };
 

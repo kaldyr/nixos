@@ -1,5 +1,7 @@
 {
+  config,
   inputs,
+  lib,
   pkgs,
   ...
 }:
@@ -21,19 +23,24 @@
   boot = {
     initrd = {
       availableKernelModules = [
-        # [MARK]
+        "ehci_pci"
+        "ahci"
+        "xhci_pci"
+        "usbhid"
+        "usb_storage"
+        "sd_mod"
       ];
 
       kernelModules = [ "amdgpu" ];
 
       luks.devices.crypted = {
-        device = "/dev/disk/by-uuid/"; # [MARK]
+        device = "/dev/disk/by-uuid/e669d948-1c0d-4a3b-95d6-cb3543d84e2a";
         allowDiscards = true;
       };
     };
 
     kernel.sysctl."vm.max_map_count" = 16777216;
-    kernelModules = [ "" ]; # [MARK]
+    kernelModules = [ ];
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
     kernelParams = [
@@ -47,7 +54,7 @@
 
   fileSystems =
     let
-      cryptedDrive = "/dev/disk/by-uuid/"; # [MARK]
+      cryptedDrive = "/dev/disk/by-uuid/ec08a7ef-e6c2-4ae3-9229-d196e933f95c";
       driveOptions = [ "noatime" "discard=async" "compress=zstd:3" ];
     in
   {
@@ -59,7 +66,7 @@
     };
 
     "/boot" = {
-      device = "/dev/disk/by-uuid/"; # [MARK]
+      device = "/dev/disk/by-uuid/7584-2D95";
       fsType = "vfat";
     };
 
@@ -90,8 +97,12 @@
     };
   };
 
-  hardware.enableRedistributableFirmware = true;
-  hardware.enableAllFirmware = true;
+  hardware = {
+    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    enableAllFirmware = true;
+    enableRedistributableFirmware = true;
+  };
+
   swapDevices = [{ device = "/swap/swapfile"; }];
   time.timeZone = "America/Los_Angeles";
 }
