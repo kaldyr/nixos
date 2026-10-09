@@ -61,9 +61,6 @@ in
 
     xdg.configFile = lib.mkIf (sysConfig.user == "nic") {
       "keyd/app.conf".text = ''
-        [kitty]
-        capslock = esc
-
         [gw2-64-exe]
         capslock = leftalt
       '';

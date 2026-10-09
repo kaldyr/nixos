@@ -533,7 +533,6 @@ wr({ -- Discord
 	name         = 'discord',
 	match        = { class = 'discord' },
 	allows_input = true,
-	opacity      = '0.9',
 })
 
 wr({
@@ -546,7 +545,6 @@ wr({
 wr({
 	name = 'gedit',
 	match = { class = 'gedit' },
-	opacity = '0.9',
 	size = win_large_size()
 })
 
@@ -565,7 +563,6 @@ wr({ -- Guild Wars 2
 	-- suppress_event   = 'fullscreen maximize',
 })
 
-wr({ name = 'helium', match = { class = 'helium' },         opacity = '0.9' })
 wr({ name = 'kitty',  match = { class = 'kitty' },          opacity = '0.85' })
 wr({ name = 'satty',  match = { class = 'com.gabm.satty' }, float = true })
 
@@ -578,7 +575,6 @@ wr({ name = 'satty',  match = { class = 'com.gabm.satty' }, float = true })
 wr({
 	name = 'nautilus',
 	match = { class = 'org.gnome.Nautilus' },
-	opacity = '0.9',
 	size = win_large_size()
 })
 
@@ -598,7 +594,6 @@ wr({
 	name    = 'steam',
 	match   = { class = '^steam$', title = '^Steam$' },
 	float   = false,
-	opacity = '0.85',
 })
 
 wr({ -- Steam game
@@ -615,7 +610,6 @@ wr({ -- Steam game
 wr({
 	name = 'telegram',
 	match = { class = '.*telegram.*' },
-	opacity = '0.85',
 	size = win_large_size()
 })
 
@@ -624,5 +618,5 @@ wr({ name = 'udiskie', match = { class = 'udiskie' }, float = true })
 wr({
 	name = 'wlr-which-key',
 	match = { class = 'wlr-which-key' },
-	opacity = '0.85',
+	opacity = '0.95',
 })

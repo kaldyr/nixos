@@ -286,4 +286,10 @@
       xkb.variant = "";
     };
   };
+
+  systemd.tmpfiles.rules = [
+    "d /home/${sysConfig.user}/Pictures 0755 ${sysConfig.user} users -"
+    "d /home/${sysConfig.user}/Pictures/Wallpapers 0755 ${sysConfig.user} users -"
+    "d /home/${sysConfig.user}/Pictures/Screenshots 0755 ${sysConfig.user} users -"
+  ];
 }

@@ -114,7 +114,12 @@
         devices = [ "gungnir" "installer" "mjolnir" ];
       };
 
-      matt-phonesettings = {
+      matt-phone = {
+        path = "/data/sync/matt/Phone";
+        devices = [ "gungnir" ];
+      };
+
+      matt-phone-settings = {
         path = "/data/sync/matt/PhoneSettings";
         devices = [ "gungnir" ];
       };
@@ -188,7 +193,6 @@
       shared-videos-offline = {
         path = "/storage/media/Videos/Offline";
         devices = [ "gungnir" ];
-        type = "sendonly";
       };
     };
 
@@ -232,6 +236,10 @@
     "d /data/sync/matt/Openstarbound 2775 syncthing syncthing -"
     # Sync Folder matt-passwords
     "d /data/sync/matt/Passwords 2775 syncthing syncthing -"
+    # Sync Folder matt-phone
+    "d /data/sync/matt/Phone 2775 syncthing syncthing -"
+    # Sync Folder matt-phone-settings
+    "d /data/sync/matt/PhoneSettings 2775 syncthing syncthing -"
 
     # User nic
     "d /data/sync/nic 2775 syncthing syncthing -"
