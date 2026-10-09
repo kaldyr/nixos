@@ -4,7 +4,7 @@
   ...
 }:
 {
-  home-manager.users."matshkas" = {
+  home-manager.users."kaylee" = {
     home.sessionVariables = {
       EDITOR = "nano";
       VISUAL = "nano";
@@ -17,7 +17,7 @@
       "application/pdf" = [ "org.gnome.Evince.desktop" ];
       "application/video" = [ "mpv.desktop" ];
       "default-web-browser" = [ "helium.desktop" ];
-      "inode/directory" = [ "thunar.desktop" ];
+      "inode/directory" = [ "nautilus.desktop" ];
       "text/html" = [ "helium.desktop" ];
       "text/plain" = [ "org.gnome.gedit.desktop" ];
       "x-scheme-handler/ftp" = [ "helium.desktop" ];
@@ -26,10 +26,10 @@
     };
   };
 
-  sops.secrets.matshkas-password.neededForUsers = true;
+  sops.secrets.kaylee-password.neededForUsers = true;
 
-  users.users."matshkas" = {
-    description = "Matshkas";
-    hashedPasswordFile = config.sops.secrets.matshkas-password.path;
+  users.users."kaylee" = {
+    description = "Kaylee";
+    hashedPasswordFile = config.sops.secrets.kaylee-password.path;
   };
 }

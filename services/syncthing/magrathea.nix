@@ -8,6 +8,7 @@
 
   services.syncthing.settings = {
     devices = {
+      amyrose.id = "FAYMIWZ-TIPKLPB-NKORNPA-DD6AIS3-KC2TOU2-PUVGNH4-ONGKP25-BZAG5QR";
       aziraphale.id = "FIP6JCJ-QMZ353Y-WIRJPKA-5S45S2S-GUZLT6X-EUJOSHT-DMSH6JF-W3FQCQ2";
       espresso.id = "GHB4M4V-LTDEJAT-K7RSH6B-J356MLT-OSIULSB-D5PVJAD-4K4EZUL-BHWBLAS";
       gungnir.id = "VLGBL5L-XAFQV3N-GHOFDLI-ZRC6BYT-C5LHRDR-DO4RF46-4TE6ILP-I32OHAT";
@@ -37,6 +38,41 @@
       janice-passwords = {
         path = "/data/sync/janice/Passwords";
         devices = [ "aziraphale" "serenity" ];
+      };
+
+      kaylee-browser = {
+        path = "/data/sync/kaylee/Browser";
+        devices = [ "amyrose" ];
+      };
+
+      kaylee-documents = {
+        path = "/data/sync/kaylee/Documents";
+        devices = [ "amyrose" ];
+
+        versioning = {
+          type = "simple";
+          params.keep = "10";
+        };
+      };
+
+      kaylee-guildwars2 = {
+        path = "/data/sync/kaylee/GuildWars2";
+        devices = [ "amyrose" ];
+      };
+
+      kaylee-notes = {
+        path = "/data/sync/kaylee/Notes";
+        devices = [ "amyrose" ];
+
+        versioning = {
+          type = "simple";
+          params.keep = "10";
+        };
+      };
+
+      kaylee-openstarbound = {
+        path = "/data/sync/kaylee/Openstarbound";
+        devices = [ "amyrose" ];
       };
 
       matshkas-browser = {
@@ -168,13 +204,14 @@
         path = "/nix/config";
 
         devices = [
-         "aziraphale"
-         "espresso"
-         "installer"
-         "magrathea"
-         "mjolnir"
-         "normandy"
-         "serenity"
+          "amyrose"
+          "aziraphale"
+          "espresso"
+          "installer"
+          "magrathea"
+          "mjolnir"
+          "normandy"
+          "serenity"
         ];
 
         ignorePerms = true;

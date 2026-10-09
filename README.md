@@ -33,6 +33,10 @@ Update: 2026-10-05
 - [x] Normandy
 - [x] Serenity
 
+## Amyrose
+- Desktop: Intel i5-2500k, Radeon RX 5600 XT
+- Fresh Install: October 9th, 2026
+
 ## Aziraphale
 - Laptop: Dell 14 D14260 Intel Core Ultra 5 225U
 - Fresh Install: October 3rd, 2026
@@ -149,7 +153,8 @@ Caps+hjkl - arrow keys
 ## Replace Nextcloud
 
 - [x] Syncthing for file/folder syncing, browser profile backup
-- [ ] Radicale for CalDAV + CardDAV
+- [x] Radicale for CalDAV + CardDAV
+- [x] Vikunja for Tasks
 - [ ] Immich for photo management, sync from phones, sharing with family
 
 # Install

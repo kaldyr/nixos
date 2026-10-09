@@ -19,13 +19,13 @@
 
     xdg.mimeApps.defaultApplications = lib.mkForce {
       "application/audio" = [ "mpv.desktop" ];
-      "application/image" = [ "feh.desktop" ];
+      "application/image" = [ "org.gnome.Loupe.desktop" ];
       "application/md" = [ "helium.desktop" ];
       "application/pdf" = [ "org.pwmt.zathura.desktop" ];
       "application/video" = [ "mpv.desktop" ];
       "default-web-browser" = [ "helium.desktop" ];
       "text/html" = [ "helium.desktop" ];
-      "text/plain" = [ "nvim.desktop" ];
+      "text/plain" = [ "org.gnome.gedit.desktop" ];
       "x-scheme-handler/ftp" = [ "helium.desktop" ];
       "x-scheme-handler/http" = [ "helium.desktop" ];
       "x-scheme-handler/https" = [ "helium.desktop" ];

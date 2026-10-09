@@ -67,6 +67,16 @@
             };
         in
         {
+          "amyrose" =
+            let
+              sysConfig = {
+                hostname = "amyrose";
+                user = "kaylee";
+                stateVersion = "26.11";
+              };
+            in
+            buildSystem sysConfig;
+
           "aziraphale" =
             let
               sysConfig = {

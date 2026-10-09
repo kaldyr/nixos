@@ -12,7 +12,7 @@
 
     xdg.mimeApps.defaultApplications = lib.mkForce {
       "application/audio" = [ "mpv.desktop" ];
-      "application/image" = [ "feh.desktop" ];
+      "application/image" = [ "org.gnome.Loupe.desktop" ];
       "application/md" = [ "helium.desktop" ];
       "application/pdf" = [ "org.gnome.Evince.desktop" ];
       "application/video" = [ "mpv.desktop" ];
