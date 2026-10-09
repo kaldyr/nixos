@@ -40,6 +40,7 @@
                 "@data" = { mountpoint = "/data"; mountOptions = driveOptions; };
                 "@home" = { mountpoint = "/home"; mountOptions = driveOptions; };
                 "@nix" = { mountpoint = "/nix"; mountOptions = driveOptions; };
+                "@scratch" = { mountpoint = "/scratch"; mountOptions = driveOptions; };
                 "@state" = { mountpoint = "/state"; mountOptions = driveOptions; };
                 "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "16G"; };
 
