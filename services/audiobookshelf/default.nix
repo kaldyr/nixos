@@ -1,4 +1,8 @@
 {
+  sysConfig,
+  ...
+}:
+{
   environment.persistence."/state".directories = [
     {
       directory = "/var/lib/audiobookshelf";
@@ -18,7 +22,13 @@
     nginx = {
       enable = true;
 
-      virtualHosts.books-redirect = {
+      virtualHosts.books-redirect =
+        let
+          serviceHost = service:
+            if sysConfig.hostname == "magrathea" then service
+            else "${sysConfig.hostname}-${service}";
+        in
+      {
         listen = [
           {
             addr = "127.0.0.1";
@@ -26,7 +36,7 @@
           }
         ];
 
-        locations."/".return = "308 https://books.brill-godzilla.ts.net/audiobookshelf";
+        locations."/".return = "308 https://${serviceHost "books"}.brill-godzilla.ts.net/audiobookshelf";
       };
     };
   };

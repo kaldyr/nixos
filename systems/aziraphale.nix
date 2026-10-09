@@ -93,13 +93,36 @@
 
   hardware = {
     cpu.intel.updateMicrocode = true;
+
     graphics.extraPackages = with pkgs; [
       intel-media-driver
       intel-compute-runtime
       vpl-gpu-rt
     ];
+
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
+  };
+
+  home-manager.users.${sysConfig.user}.systemd.user.services.libation-cleanup =
+    let
+      libationCleanup = pkgs.writeShellScript "libation-cleanup" ''
+        if [[ -d "$HOME/Downloads/Libation" ]]; then
+          ${pkgs.findutils}/bin/find "$HOME/Downloads/Libation" \
+            -mindepth 1 \
+            -maxdepth 1 \
+            -exec ${pkgs.coreutils}/bin/rm -rf -- {} +
+        fi
+      '';
+    in
+  {
+    Install.WantedBy = [ "default.target" ];
+    Unit.Description = "Clean Libation staging directory";
+
+    Service = {
+      Type = "oneshot";
+      ExecStart = libationCleanup;
+    };
   };
 
   services = {

@@ -12,6 +12,7 @@
     inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     ../disko/serenity.nix
+    ../services/audiobookshelf
     ../services/kodi
     ../services/syncthing
   ];
@@ -121,5 +122,26 @@
     samba-wsdd.openFirewall = true;
   };
 
+  systemd = {
+    services.media-acl = {
+      description = "Set ACLs for media";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "local-fs.target" ];
+      serviceConfig.Type = "oneshot";
+
+      script = ''
+        ${pkgs.acl}/bin/setfacl -m g:media:rwx /media
+        ${pkgs.acl}/bin/setfacl -d -m g:media:rwx /media
+        ${pkgs.acl}/bin/setfacl -d -m m::rwx /media
+      '';
+    };
+
+    tmpfiles.rules = [
+      "d /media/Audiobooks 2775 root media -"
+    ];
+  };
+
+  users.groups."media" = { };
+  users.users.matt.extraGroups = [ "media" ];
   time.timeZone = "America/Los_Angeles";
 }
