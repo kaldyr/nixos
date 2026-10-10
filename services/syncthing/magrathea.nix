@@ -226,6 +226,7 @@
         path = "/data/sync/shared/GuildWars2";
 
         devices = [
+          "amyrose"
           "espresso"
           "mjolnir"
           "normandy"
