@@ -34,7 +34,7 @@
       kernelModules = [ "amdgpu" ];
 
       luks.devices.crypted = {
-        device = "/dev/disk/by-uuid/e669d948-1c0d-4a3b-95d6-cb3543d84e2a";
+        device = "/dev/disk/by-uuid/1f577724-db59-4ba2-a08e-2457a5a669b5";
         allowDiscards = true;
       };
     };
@@ -54,7 +54,7 @@
 
   fileSystems =
     let
-      cryptedDrive = "/dev/disk/by-uuid/ec08a7ef-e6c2-4ae3-9229-d196e933f95c";
+      cryptedDrive = "/dev/disk/by-uuid/d3846810-5870-4b83-8334-161280ac5632";
       driveOptions = [ "noatime" "discard=async" "compress=zstd:3" ];
     in
   {
@@ -66,7 +66,7 @@
     };
 
     "/boot" = {
-      device = "/dev/disk/by-uuid/7584-2D95";
+      device = "/dev/disk/by-uuid/93C7-AF7E";
       fsType = "vfat";
     };
 

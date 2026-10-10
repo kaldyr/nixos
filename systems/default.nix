@@ -154,6 +154,7 @@
           ControlMaster auto
           ControlPersist 10m
       '') {
+        amyrose = "kaylee";
         aziraphale = "janice";
         espresso = "matshkas";
         installer = "matt";
@@ -195,7 +196,7 @@
 
       knownHosts = {
         "amyrose".publicKey =
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKv6FBxXHiIJaKDekfshKaO/58f1H9nX/+KfbdGKpULE amyrose";
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+FUjwKCus4O7pgIZTw03RnNGy0PgGVLJD790VoqZaT amyrose";
         "aziraphale".publicKey =
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHWNXo2JMIWIBvruEhhUMun95Zi25/ObzQgX9tTDWdPF aziraphale";
         "espresso".publicKey =
