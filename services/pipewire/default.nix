@@ -16,14 +16,6 @@
     alsa.enable = true;
     pulse.enable = true;
 
-    extraConfig.pipewire."99-bt-latency" = {
-      "context.properties" = {
-        "default.clock.quantum" = 1024;
-        "default.clock.min-quantum" = 256;
-        "default.clock.max-quantum" = 2048;
-      };
-    };
-
     wireplumber = {
       enable = true;
 
@@ -33,12 +25,23 @@
           "bluez5.enable-msbc" = true;
           "bluez5.enable-hw-volume" = true;
 
-          "bluez5.codecs" = [
+          "override.bluez5.codecs" = [
             "aac"
             "sbc"
             "sbc_xq"
+            "ldac"
           ];
         };
+
+        "monitor.bluez.rules" = [
+          {
+            matches = [ { "device.name" = "~bluez_card.*"; } ];
+
+            actions."update-props" = {
+              "bluez5.a2dp.ldac.quality" = "sq";
+            };
+          }
+        ];
 
         "wireplumber.settings" = {
           "bluetooth.autoswitch-to-headset-profile" = false;
