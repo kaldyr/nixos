@@ -76,40 +76,31 @@
     let
       cryptedDrive = "/dev/disk/by-uuid/3a06b88b-5747-4f76-a4d8-8dc52bf284bc";
       driveOptions = [ "noatime" "discard=async" "compress=zstd:3" ];
+      driveSubvols = {
+        "/nix" = "@usbnix";
+        "/state" = "@usbstate";
+        "/storage" = "@usbstorage";
+      };
     in
-  {
-    "/" = {
-      device = "none";
-      fsType = "tmpfs";
-      neededForBoot = true;
-      options = [ "defaults" "size=4G" "mode=755" ];
-    };
+    {
+      "/" = {
+        device = "none";
+        fsType = "tmpfs";
+        neededForBoot = true;
+        options = [ "defaults" "size=2G" "mode=755" ];
+      };
 
-    "/boot" = {
-      device = "/dev/disk/by-uuid/7584-2D95";
-      fsType = "vfat";
-    };
-
-    "/nix" = {
+      "/boot" = {
+        device = "/dev/disk/by-uuid/7584-2D95";
+        fsType = "vfat";
+      };
+    }
+    // builtins.mapAttrs (mountpoint: subvol: {
       device = cryptedDrive;
       fsType = "btrfs";
-      neededForBoot = true;
-      options = [ "subvol=@usbnix" ] ++ driveOptions;
-    };
-
-    "/state" = {
-      device = cryptedDrive;
-      fsType = "btrfs";
-      neededForBoot = true;
-      options = [ "subvol=@usbstate" ] ++ driveOptions;
-    };
-
-    "/storage" = {
-      device = cryptedDrive;
-      fsType = "btrfs";
-      options = [ "subvol=@usbstorage" ] ++ driveOptions;
-    };
-  };
+      options = [ "subvol=${subvol}" ] ++ driveOptions;
+      neededForBoot = builtins.elem mountpoint [ "/nix" "/state" ];
+    }) driveSubvols;
 
   hardware = {
     graphics.enable = true;
@@ -126,13 +117,15 @@
     "Pictures/Wallpapers"
   ];
 
-  security.sudo.extraRules = [{
-    groups = [ "wheel" ];
-    commands = [{
-      command = "ALL";
-      options = [ "NOPASSWD" ];
-    }];
-  }];
+  security.sudo.extraRules = [
+    {
+      groups = [ "wheel" ];
+      commands = [ {
+        command = "ALL";
+        options = [ "NOPASSWD" ];
+      } ];
+    }
+  ];
 
   time.timeZone = "America/Los_Angeles";
 }

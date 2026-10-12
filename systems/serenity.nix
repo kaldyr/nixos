@@ -11,7 +11,6 @@
     inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
     inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
     inputs.nixos-hardware.nixosModules.common-gpu-amd
-    ../disko/serenity.nix
     ../services/audiobookshelf
     ../services/kodi
     ../services/syncthing
@@ -40,38 +39,46 @@
     let
       hddDrive = "/dev/disk/by-uuid/27fb138d-b3c1-4b8f-9110-04a28bcda82c";
       hddOptions = [ "defaults" "noatime" "compress=zstd:8" ];
-      # ssdOptions = [ "defaults" "noatime" "compress=zstd:3" ];
+      hddSubvols = {
+        "/data" = "@data";
+        "/media" = "@media";
+        "/snaps" = "@snaps";
+      };
+
+      ssdDrive = "/dev/disk/by-uuid/4af0da80-4c95-40a3-a98b-f5c157f9c8c3";
+      ssdOptions = [ "defaults" "noatime" "discard=async" "compress=zstd:3" ];
+      ssdSubvols = {
+        "/home" = "@home";
+        "/nix" = "@nix";
+        "/scratch" = "@scratch";
+        "/state" = "@state";
+        "/swap" = "@swap";
+      };
     in
-  {
-    "/" = {
-      device = "none";
-      fsType = "tmpfs";
-      neededForBoot = true;
-      options = [
-        "defaults"
-        "size=2G"
-        "mode=755"
-      ];
-    };
+    {
+      "/" = {
+        device = "none";
+        fsType = "tmpfs";
+        neededForBoot = true;
+        options = [ "defaults" "size=2G" "mode=755" ];
+      };
 
-    "/data" = {
+      "/boot" = {
+        device = "/dev/disk/by-uuid/8429-E6AD";
+        fsType = "vfat";
+      };
+    }
+    // builtins.mapAttrs (mountpoint: subvol: {
+      device = ssdDrive;
+      fsType = "btrfs";
+      options = [ "subvol=${subvol}" ] ++ ssdOptions;
+      neededForBoot = builtins.elem mountpoint [ "/nix" "/state" ];
+    }) ssdSubvols
+    // builtins.mapAttrs (mountpoint: subvol: {
       device = hddDrive;
       fsType = "btrfs";
-      options = [ "subvol=@data" ] ++ hddOptions;
-    };
-
-    "/media" = {
-      device = hddDrive;
-      fsType = "btrfs";
-      options = [ "subvol=@media" ] ++ hddOptions;
-    };
-
-    "/snaps" = {
-      device = hddDrive;
-      fsType = "btrfs";
-      options = [ "subvol=@snaps" ] ++ hddOptions;
-    };
-  };
+      options = [ "subvol=${subvol}" ] ++ hddOptions;
+    }) hddSubvols;
 
   hardware = {
     alsa.enable = true;

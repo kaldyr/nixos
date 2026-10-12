@@ -49,46 +49,32 @@
     let
       cryptedDrive = "/dev/disk/by-uuid/56d29b6f-0c61-4bce-a2dc-f59bbce32165";
       driveOptions = [ "noatime" "discard=async" "compress=zstd:1" ];
+      driveSubvols = {
+        "/home" = "@home";
+        "/nix" = "@nix";
+        "/state" = "@state";
+        "/swap" = "@swap";
+      };
     in
-  {
-    "/" = {
-      device = "none";
-      fsType = "tmpfs";
-      neededForBoot = true;
-      options = [ "defaults" "size=2G" "mode=755" ];
-    };
+    {
+      "/" = {
+        device = "none";
+        fsType = "tmpfs";
+        neededForBoot = true;
+        options = [ "defaults" "size=2G" "mode=755" ];
+      };
 
-    "/boot" = {
-      device = "/dev/disk/by-uuid/2866-BA21";
-      fsType = "vfat";
-    };
-
-    "/home" = {
+      "/boot" = {
+        device = "/dev/disk/by-uuid/2866-BA21";
+        fsType = "vfat";
+      };
+    }
+    // builtins.mapAttrs (mountpoint: subvol: {
       device = cryptedDrive;
       fsType = "btrfs";
-      options = [ "subvol=@home" ] ++ driveOptions;
-    };
-
-    "/nix" = {
-      device = cryptedDrive;
-      fsType = "btrfs";
-      neededForBoot = true;
-      options = [ "subvol=@nix" ] ++ driveOptions;
-    };
-
-    "/state" = {
-      device = cryptedDrive;
-      fsType = "btrfs";
-      neededForBoot = true;
-      options = [ "subvol=@state" ] ++ driveOptions;
-    };
-
-    "/swap" = {
-      device = cryptedDrive;
-      fsType = "btrfs";
-      options = [ "subvol=@swap" ] ++ driveOptions;
-    };
-  };
+      options = [ "subvol=${subvol}" ] ++ driveOptions;
+      neededForBoot = builtins.elem mountpoint [ "/nix" "/state" ];
+    }) driveSubvols;
 
   hardware = {
     cpu.intel.updateMicrocode = true;
@@ -114,15 +100,15 @@
         fi
       '';
     in
-  {
-    Install.WantedBy = [ "default.target" ];
-    Unit.Description = "Clean Libation staging directory";
+    {
+      Install.WantedBy = [ "default.target" ];
+      Unit.Description = "Clean Libation staging directory";
 
-    Service = {
-      Type = "oneshot";
-      ExecStart = libationCleanup;
+      Service = {
+        Type = "oneshot";
+        ExecStart = libationCleanup;
+      };
     };
-  };
 
   services = {
     auto-cpufreq = {
@@ -142,6 +128,6 @@
     xserver.videoDrivers = [ "modesetting" ];
   };
 
-  swapDevices = [{ device = "/swap/swapfile"; }];
+  swapDevices = [ { device = "/swap/swapfile"; } ];
   time.timeZone = "America/Los_Angeles";
 }

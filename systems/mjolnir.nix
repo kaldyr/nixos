@@ -57,7 +57,6 @@
     loader.grub.gfxmodeEfi = "3440x1440,2256x1504,1920x1080";
   };
 
-
   environment = {
     # persistence."/state".directories = [ "/var/lib/fprint" ];
     sessionVariables.LIBVA_DRIVER_NAME = "iHD";
@@ -75,46 +74,32 @@
     let
       cryptedDrive = "/dev/disk/by-uuid/8dbbf02f-0bc0-4833-b5cf-c05eb59a9221";
       driveOptions = [ "noatime" "discard=async" "compress=zstd:1" ];
+      driveSubvols = {
+        "/home" = "@home";
+        "/nix" = "@nix";
+        "/state" = "@state";
+        "/swap" = "@swap";
+      };
     in
-  {
-    "/" = {
-      device = "none";
-      fsType = "tmpfs";
-      neededForBoot = true;
-      options = [ "defaults" "size=16G" "mode=755" ];
-    };
+    {
+      "/" = {
+        device = "none";
+        fsType = "tmpfs";
+        neededForBoot = true;
+        options = [ "defaults" "size=16G" "mode=755" ];
+      };
 
-    "/boot" = {
-      device = "/dev/disk/by-uuid/70FD-B91F";
-      fsType = "vfat";
-    };
-
-    "/home" = {
+      "/boot" = {
+        device = "/dev/disk/by-uuid/70FD-B91F";
+        fsType = "vfat";
+      };
+    }
+    // builtins.mapAttrs (mountpoint: subvol: {
       device = cryptedDrive;
       fsType = "btrfs";
-      options = [ "subvol=@home" ] ++ driveOptions;
-    };
-
-    "/nix" = {
-      device = cryptedDrive;
-      fsType = "btrfs";
-      neededForBoot = true;
-      options = [ "subvol=@nix" ] ++ driveOptions;
-    };
-
-    "/state" = {
-      device = cryptedDrive;
-      fsType = "btrfs";
-      neededForBoot = true;
-      options = [ "subvol=@state" ] ++ driveOptions;
-    };
-
-    "/swap" = {
-      device = cryptedDrive;
-      fsType = "btrfs";
-      options = [ "subvol=@swap" ] ++ driveOptions;
-    };
-  };
+      options = [ "subvol=${subvol}" ] ++ driveOptions;
+      neededForBoot = builtins.elem mountpoint [ "/nix" "/state" ];
+    }) driveSubvols;
 
   hardware = {
     cpu.intel.npu.enable = true;
@@ -190,6 +175,6 @@
     xserver.videoDrivers = [ "modesetting" ];
   };
 
-  swapDevices = [{ device = "/swap/swapfile"; }];
+  swapDevices = [ { device = "/swap/swapfile"; } ];
   time.timeZone = "America/Los_Angeles";
 }

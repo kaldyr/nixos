@@ -69,49 +69,35 @@
     let
       cryptedDrive = "/dev/disk/by-uuid/d200e034-f61b-4e7e-8aa1-81e322690d28";
       driveOptions = [ "noatime" "discard=async" "compress=zstd:1" ];
+      driveSubvols = {
+        "/home" = "@home";
+        "/nix" = "@nix";
+        "/state" = "@state";
+        "/swap" = "@swap";
+      };
     in
-  {
-    "/" = {
-      device = "none";
-      fsType = "tmpfs";
-      neededForBoot = true;
-      options = [ "defaults" "size=16G" "mode=755" ];
-    };
+    {
+      "/" = {
+        device = "none";
+        fsType = "tmpfs";
+        neededForBoot = true;
+        options = [ "defaults" "size=2G" "mode=755" ];
+      };
 
-    "/boot" = {
-      device = "/dev/disk/by-uuid/80A9-6B15";
-      fsType = "vfat";
-    };
-
-    "/home" = {
+      "/boot" = {
+        device = "/dev/disk/by-uuid/80A9-6B15";
+        fsType = "vfat";
+      };
+    }
+    // builtins.mapAttrs (mountpoint: subvol: {
       device = cryptedDrive;
       fsType = "btrfs";
-      options = [ "subvol=@home" ] ++ driveOptions;
-    };
-
-    "/nix" = {
-      device = cryptedDrive;
-      fsType = "btrfs";
-      neededForBoot = true;
-      options = [ "subvol=@nix" ] ++ driveOptions;
-    };
-
-    "/state" = {
-      device = cryptedDrive;
-      fsType = "btrfs";
-      neededForBoot = true;
-      options = [ "subvol=@state" ] ++ driveOptions;
-    };
-
-    "/swap" = {
-      device = cryptedDrive;
-      fsType = "btrfs";
-      options = [ "subvol=@swap" ] ++ driveOptions;
-    };
-  };
+      options = [ "subvol=${subvol}" ] ++ driveOptions;
+      neededForBoot = builtins.elem mountpoint [ "/nix" "/state" ];
+    }) driveSubvols;
 
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;
-  swapDevices = [{ device = "/swap/swapfile"; }];
+  swapDevices = [ { device = "/swap/swapfile"; } ];
   time.timeZone = "America/Los_Angeles";
 }

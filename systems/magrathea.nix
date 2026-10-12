@@ -89,10 +89,7 @@
       device = ssdDrive;
       fsType = "btrfs";
       options = [ "subvol=${subvol}" ] ++ ssdOptions;
-      neededForBoot = builtins.elem mountpoint [
-        "/nix"
-        "/state"
-      ];
+      neededForBoot = builtins.elem mountpoint [ "/nix" "/state" ];
     }) ssdSubvols
     // builtins.mapAttrs (mountpoint: subvol: {
       device = hddDrive;
