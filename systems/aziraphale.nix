@@ -43,7 +43,6 @@
   environment.systemPackages = with pkgs; [
     firefox
     libation
-    onlyoffice-desktopeditors
   ];
 
   fileSystems =

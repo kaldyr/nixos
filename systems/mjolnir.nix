@@ -64,7 +64,6 @@
 
     systemPackages = with pkgs; [
       android-tools
-      chroncal
       disko
       nixos-install-tools
       openscad

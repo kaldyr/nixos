@@ -10,6 +10,7 @@
     ../programs/helium
     ../programs/keepass
     ../programs/kitty
+    ../programs/libreoffice
     ../programs/mpv
     ../programs/nautilus
     ../programs/zathura
@@ -29,7 +30,6 @@
       hunspellDicts.en_US
       imagemagick
       inkscape
-      libreoffice
       libsecret
       loupe
       networkmanagerapplet
