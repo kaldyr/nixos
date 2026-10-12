@@ -42,7 +42,7 @@
                   "@home" = { mountpoint = "/home"; mountOptions = driveOptions; };
                   "@nix" = { mountpoint = "/nix"; mountOptions = driveOptions; };
                   "@state" = { mountpoint = "/state"; mountOptions = driveOptions; };
-                  "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "48G"; };
+                  "@swap" = { mountpoint = "/swap"; swap.swapfile.size = "16G"; };
                 };
             };
           };

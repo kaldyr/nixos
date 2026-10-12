@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   sysConfig,
   ...
@@ -32,7 +33,15 @@
     };
 
     kernelParams = [ "zswap.max_pool_percent=50" ];
-    loader.grub.memtest86.enable = true;
+
+    loader = {
+      efi.canTouchEfiVariables = lib.mkForce false;
+
+      grub = {
+        efiInstallAsRemovable = lib.mkForce true;
+        memtest86.enable = true;
+      };
+    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -43,6 +52,7 @@
     dislocker
     dosfstools
     e2fsprogs
+    efibootmgr
     exfatprogs
     git
     gparted

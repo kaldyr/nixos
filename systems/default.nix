@@ -23,12 +23,15 @@
 
   boot = {
     loader = {
-      efi.efiSysMountPoint = "/boot";
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
 
       grub = {
         enable = true;
         device = "nodev";
-        efiInstallAsRemovable = true;
+        efiInstallAsRemovable = false;
         efiSupport = true;
         theme = pkgs.catppuccin-grub.override { flavor = "frappe"; };
         useOSProber = false;
@@ -232,7 +235,21 @@
   };
 
   system.stateVersion = sysConfig.stateVersion;
-  systemd.settings.Manager.DefaultTimeoutStopSec = "10s";
+  systemd = {
+    settings.Manager.DefaultTimeoutStopSec = "10s";
+
+    sleep.settings.Sleep = {
+      AllowHibernation = false;
+      AllowHybridSleep = false;
+      AllowSuspendThenHibernate = false;
+    };
+
+    targets = {
+      hibernate.enable = false;
+      hybrid-sleep.enable = false;
+      suspend-then-hibernate.enable = false;
+    };
+  };
 
   # Fixed group ID on all machines to keep consistent permissions to /nix/config
   users.groups.nixconfig.gid = 2000;
