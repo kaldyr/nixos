@@ -7,7 +7,6 @@
 {
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-intel
-    ../disko/magrathea.nix
     ../services/audiobookshelf
     ../services/forgejo
     ../services/kodi
@@ -56,32 +55,50 @@
     let
       hddDrive = "/dev/disk/by-uuid/c3cb725e-8cee-4690-a44d-114100497133";
       hddOptions = [ "defaults" "noatime" "compress=zstd:8" ];
-      # ssdOptions = [ "defaults" "noatime" "compress=zstd:3" ];
+      hddSubvols = {
+        "/storage/media" = "@media";
+        "/storage/snaps" = "@snaps";
+      };
+
+      ssdDrive = "/dev/disk/by-uuid/eff878ef-e2bf-4f0f-9d24-e60fd7c5ba6e";
+      ssdOptions = [ "defaults" "noatime" "discard=async" "compress=zstd:3" ];
+      ssdSubvols = {
+        "/data" = "@data";
+        "/home" = "@home";
+        "/nix" = "@nix";
+        "/scratch" = "@scratch";
+        "/state" = "@state";
+        "/swap" = "@swap";
+        "/var/lib/postgresql" = "@postgres";
+      };
     in
-  {
-    "/" = {
-      device = "none";
-      fsType = "tmpfs";
-      neededForBoot = true;
-      options = [
-        "defaults"
-        "size=2G"
-        "mode=755"
+    {
+      "/" = {
+        device = "none";
+        fsType = "tmpfs";
+        neededForBoot = true;
+        options = [ "defaults" "size=2G" "mode=755" ];
+      };
+
+      "/boot" = {
+        device = "/dev/disk/by-uuid/D57C-9547";
+        fsType = "vfat";
+      };
+    }
+    // builtins.mapAttrs (mountpoint: subvol: {
+      device = ssdDrive;
+      fsType = "btrfs";
+      options = [ "subvol=${subvol}" ] ++ ssdOptions;
+      neededForBoot = builtins.elem mountpoint [
+        "/nix"
+        "/state"
       ];
-    };
-
-    "/storage/media" = {
+    }) ssdSubvols
+    // builtins.mapAttrs (mountpoint: subvol: {
       device = hddDrive;
       fsType = "btrfs";
-      options = [ "subvol=@media" ] ++ hddOptions;
-    };
-
-    "/storage/snaps" = {
-      device = hddDrive;
-      fsType = "btrfs";
-      options = [ "subvol=@snaps" ] ++ hddOptions;
-    };
-  };
+      options = [ "subvol=${subvol}" ] ++ hddOptions;
+    }) hddSubvols;
 
   hardware = {
     alsa.enable = true;
@@ -158,4 +175,3 @@
   users.users.matt.extraGroups = [ "media" ];
   time.timeZone = "America/Los_Angeles";
 }
-
