@@ -762,8 +762,8 @@ require('fzf-lua').setup({
 		'%.git',
 		'%.stfolder',
 		'%.obsidian/',
-		'%.sync_.*%.db.*',
 		'%.trash/',
+		'programs/yazi/config/plugins/',
 	},
 
 	git = { bcommits = { prompt = ' > ' } },
@@ -1063,7 +1063,14 @@ vim.schedule( function()
 	t.option('relativenumber', { name = 'Relative Number' }):map('\\r')
 	t.option('spell', { name = 'Spelling' }):map('\\s')
 	t.option('wrap', { name = 'Wrap' }):map('\\w')
-	map( 'n', '<leader>z', function() Snacks.lazygit() end, { noremap = true, silent = true, desc = 'Lazygit' } )
+
+	map( 'n', '<leader>z', function()
+		if vim.fs.root(vim.fn.getcwd(), '.git') then
+			Snacks.lazygit()
+		else
+			vim.notify('Not a Git repository', vim.log.levels.WARN)
+		end
+	end, { noremap = true, silent = true, desc = 'Lazygit' } )
 end )
 
 --<-------------------------
