@@ -2,40 +2,46 @@ import Quickshell
 import QtQuick
 
 Rectangle {
-	implicitHeight: parent.height - 10
-	implicitWidth:  180
-	color:          Theme.bar.bg
-	border.color:   Theme.bar.border
-	border.width:   2
+    implicitHeight: parent.height - 10
+    implicitWidth: 180
+    color: Theme.colors.base
+    border.color: Theme.colors.crust
+    border.width: 2
 
-	Row {
-		anchors.centerIn: parent
+    Row {
+        anchors.centerIn: parent
 
-		Text { // Time
-			id: time
-			anchors.verticalCenter: parent.verticalCenter
+        Text { // Time
+            id: time
+            anchors.verticalCenter: parent.verticalCenter
 
-			font { family: Theme.font; pixelSize: 12; }
+            font {
+                family: Settings.appearance.font
+                pixelSize: Settings.appearance.fontSize
+            }
 
-			color: Theme.clock.text
-			text:  Qt.formatDateTime( sysClock.date, "h:mm ap" )
-		}
+            color: Theme.colors.text
+            text: Qt.formatDateTime(sysClock.date, "h:mm ap")
+        }
 
-		Rectangle { // Spacer
-			height: parent.height
-			implicitWidth:  22
-			color:  "transparent"
-		}
+        Rectangle { // Spacer
+            height: parent.height
+            implicitWidth: 22
+            color: "transparent"
+        }
 
-		Text { // Date
-			id: date
+        Text { // Date
+            id: date
 
-			anchors.verticalCenter: parent.verticalCenter
+            anchors.verticalCenter: parent.verticalCenter
 
-			font { family: Theme.font; pixelSize: 12; }
+            font {
+                family: Settings.appearance.font
+                pixelSize: Settings.appearance.fontSize
+            }
 
-			color: Theme.cal.text
-			text:  Qt.formatDateTime( sysClock.date, "ddd, MMM dd" )
-		}
-	}
+            color: Theme.colors.text
+            text: Qt.formatDateTime(sysClock.date, "ddd, MMM dd")
+        }
+    }
 }

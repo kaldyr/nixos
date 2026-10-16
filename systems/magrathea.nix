@@ -9,6 +9,7 @@
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     ../services/audiobookshelf
     ../services/forgejo
+    ../services/jellyfin
     ../services/kodi
     ../services/linkwarden
     ../services/navidrome
@@ -63,6 +64,7 @@
       ssdDrive = "/dev/disk/by-uuid/eff878ef-e2bf-4f0f-9d24-e60fd7c5ba6e";
       ssdOptions = [ "defaults" "noatime" "discard=async" "compress=zstd:3" ];
       ssdSubvols = {
+        "/cache" = "@cache";
         "/data" = "@data";
         "/home" = "@home";
         "/nix" = "@nix";
@@ -89,7 +91,7 @@
       device = ssdDrive;
       fsType = "btrfs";
       options = [ "subvol=${subvol}" ] ++ ssdOptions;
-      neededForBoot = builtins.elem mountpoint [ "/nix" "/state" ];
+      neededForBoot = builtins.elem mountpoint [ "/cache" "/nix" "/state" ];
     }) ssdSubvols
     // builtins.mapAttrs (mountpoint: subvol: {
       device = hddDrive;

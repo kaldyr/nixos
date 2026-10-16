@@ -18,7 +18,16 @@ in
     programs.quickshell.enable = true;
     programs.quickshell.systemd.enable = true;
 
-    xdg.configFile."quickshell".source =
-      config.lib.file.mkOutOfStoreSymlink "/nix/config/programs/quickshell/config";
+    xdg.configFile =
+      let
+        src = config.lib.file.mkOutOfStoreSymlink;
+        root = "/nix/config/programs/quickshell/config";
+      in
+      {
+        "quickshell/shell.qml".source = src "${root}/shell.qml";
+        "quickshell/ColorSchemes".source = src "${root}/ColorSchemes";
+        "quickshell/Components".source = src "${root}/Components";
+        "quickshell/settings.json".source = src "${root}/${sysConfig.hostname}.json";
+      };
   };
 }

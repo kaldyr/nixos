@@ -13,5 +13,5 @@ function Linemode:size_and_mtime()
 end
 
 require('full-border'):setup({ type = ui.Border.ROUNDED })
-require('sshfs'):setup()
+require('sshfs'):setup({ mount_dir = os.getenv("HOME") .. "/.remote" })
 require('starship'):setup()

@@ -1,0 +1,19 @@
+{
+    "name": "Catppuccin Frappé",
+    "mode": "dark",
+    "colors": {
+        "red": "#e78284",
+        "orange": "#ef9f76",
+        "yellow": "#e5c890",
+        "green": "#a6d189",
+        "teal": "#81c8be",
+        "blue": "#8caaee",
+        "purple": "#cba6f7",
+        "text": "#c6d0f5",
+        "subtext": "#838ba7",
+        "surface": "#414559",
+        "base": "#303446",
+        "mantle": "#292c3c",
+        "crust": "#232634"
+    }
+}

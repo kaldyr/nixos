@@ -1,0 +1,19 @@
+{
+	"name": "Rosé Pine Dawn",
+	"mode": "light",
+	"colors": {
+		"red": "#b4637a",
+		"orange": "#d6a46b",
+		"yellow": "#d3bb72",
+		"green": "#89a98a",
+		"teal": "#56949f",
+		"blue": "#286983",
+		"purple": "#907aa9",
+		"text": "#575279",
+		"subtext": "#797593",
+		"surface": "#fffaf3",
+		"base": "#f2eae4",
+		"mantle": "#dfdad9",
+		"crust": "#c9c1c3"
+	}
+}

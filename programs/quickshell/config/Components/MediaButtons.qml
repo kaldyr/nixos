@@ -3,148 +3,167 @@ import Quickshell.Services.Pipewire
 import QtQuick
 
 Rectangle {
-	id: mediaPanel
+    id: mediaPanel
 
-	implicitHeight:    parent.height - 12
-	implicitWidth:     mediaButtons.width + 24
-	color:             Theme.bar.bg
-	border.color:      Theme.bar.border
-	border.width:      2
+    implicitHeight: parent.height - 12
+    implicitWidth: mediaButtons.width + 24
+    color: Theme.colors.base
+    border.color: Theme.colors.crust
+    border.width: 2
 
-	Row {
-		id: mediaButtons
+    Row {
+        id: mediaButtons
 
-		anchors.centerIn:             parent
-		anchors.verticalCenterOffset: 1
+        anchors.centerIn: parent
+        anchors.verticalCenterOffset: 1
 
-		spacing: 6
+        spacing: 6
 
-		Rectangle {
-			anchors.verticalCenter: parent.verticalCenter
+        Rectangle {
+            anchors.verticalCenter: parent.verticalCenter
 
-			implicitHeight: parent.height
-			implicitWidth:  20
-			color:          "transparent"
+            implicitHeight: parent.height
+            implicitWidth: 20
+            color: "transparent"
 
-			Text { // Volume sink number
-				id: sinkVolume
-				anchors.centerIn: parent
+            Text { // Volume sink number
+                id: sinkVolume
+                anchors.centerIn: parent
 
-				property var sink: Pipewire.defaultAudioSink
+                property var sink: Pipewire.defaultAudioSink
 
-				PwObjectTracker { objects: [sinkVolume.sink] }
+                PwObjectTracker {
+                    objects: [sinkVolume.sink]
+                }
 
-				font { family: Theme.font; pixelSize: 9; }
-				property var volume: Math.round((sinkVolume.sink?.audio.volume ?? 0) * 100)
+                font {
+                    family: Settings.appearance.font
+                    pixelSize: Settings.appearance.fontSize - 3
+                }
+                property var volume: Math.round((sinkVolume.sink?.audio.volume ?? 0) * 100)
 
-				color: sinkVolume.sink.audio.muted ? Theme.ltgrey : Theme.white
-				text:  sinkVolume.sink.audio.muted ? "󰝟" : volume.toString() + "%"
-			}
-		}
+                color: sinkVolume.sink.audio.muted ? Theme.colors.subtext : Theme.colors.text
+                text: sinkVolume.sink.audio.muted ? "󰝟" : volume.toString() + "%"
+            }
+        }
 
-		Rectangle { // Prev
-			id: prevButton
+        Rectangle { // Prev
+            id: prevButton
 
-			implicitHeight:         mediaPanel.height
-			implicitWidth:          mediaPanel.height
-			color:                  "transparent"
+            implicitHeight: mediaPanel.height
+            implicitWidth: mediaPanel.height
+            color: "transparent"
 
-			Text {
-				anchors.centerIn: parent
+            Text {
+                anchors.centerIn: parent
 
-				property var player: Mpris.players.values.find(p => p.isPlaying) || Mpris.players.values[0]
+                property var player: Mpris.players.values.find(p => p.isPlaying) || Mpris.players.values[0]
 
-				font { family: Theme.font; pixelSize: 13; }
+                font {
+                    family: Settings.appearance.font
+                    pixelSize: Setting.appearance.fontSize + 1
+                }
 
-				color: Theme.white
-				text:  "󰒮"
+                color: Theme.colors.text
+                text: "󰒮"
 
-				MouseArea {
-					anchors.fill: parent
+                MouseArea {
+                    anchors.fill: parent
 
-					property var player: parent.player
+                    property var player: parent.player
 
-					onClicked: (player?.canGoPrevious) ? player.previous() : undefined
-				}
-			}
-		}
+                    onClicked: (player?.canGoPrevious) ? player.previous() : undefined
+                }
+            }
+        }
 
-		Rectangle { // Play/Pause
-			id: playButton
+        Rectangle { // Play/Pause
+            id: playButton
 
-			implicitHeight:   mediaPanel.height
-			implicitWidth:    mediaPanel.height
-			color:            "transparent"
+            implicitHeight: mediaPanel.height
+            implicitWidth: mediaPanel.height
+            color: "transparent"
 
-			Text {
-				anchors.centerIn: parent
+            Text {
+                anchors.centerIn: parent
 
-				property var player: Mpris.players.values.find(p => p.isPlaying) || Mpris.players.values[0]
+                property var player: Mpris.players.values.find(p => p.isPlaying) || Mpris.players.values[0]
 
-				font { family: Theme.font; pixelSize: 17; }
+                font {
+                    family: Theme.font
+                    pixelSize: 17
+                }
 
-				color: Theme.white
-				text:  (player.isPlaying) ? "󰏤" : "󰐊"
+                color: Theme.colors.text
+                text: (player.isPlaying) ? "󰏤" : "󰐊"
 
-				MouseArea {
-					anchors.fill: parent
+                MouseArea {
+                    anchors.fill: parent
 
-					property var player: parent.player
+                    property var player: parent.player
 
-					onClicked: player?.isPlaying ? player.pause() : player.play()
-				}
-			}
-		}
+                    onClicked: player?.isPlaying ? player.pause() : player.play()
+                }
+            }
+        }
 
-		Rectangle { // Next
-			id: nextButton
+        Rectangle { // Next
+            id: nextButton
 
-			implicitHeight:         mediaPanel.height
-			implicitWidth:          mediaPanel.height
-			color:                  "transparent"
+            implicitHeight: mediaPanel.height
+            implicitWidth: mediaPanel.height
+            color: "transparent"
 
-			Text {
-				anchors.centerIn: parent
+            Text {
+                anchors.centerIn: parent
 
-				property var player: Mpris.players.values.find(p => p.isPlaying) || Mpris.players.values[0]
+                property var player: Mpris.players.values.find(p => p.isPlaying) || Mpris.players.values[0]
 
-				font { family: Theme.font; pixelSize: 13; }
+                font {
+                    family: Theme.font
+                    pixelSize: 13
+                }
 
-				color: Theme.white
-				text:  "󰒭"
+                color: Theme.colors.text
+                text: "󰒭"
 
-				MouseArea {
-					anchors.fill: parent
+                MouseArea {
+                    anchors.fill: parent
 
-					property var player: parent.player
+                    property var player: parent.player
 
-					onClicked: (player?.canGoNext) ? player.next() : undefined
-				}
-			}
-		}
+                    onClicked: (player?.canGoNext) ? player.next() : undefined
+                }
+            }
+        }
 
-		Rectangle {
-			anchors.verticalCenter: parent.verticalCenter
+        Rectangle {
+            anchors.verticalCenter: parent.verticalCenter
 
-			implicitHeight: parent.height
-			implicitWidth:  20
-			color:          "transparent"
+            implicitHeight: parent.height
+            implicitWidth: 20
+            color: "transparent"
 
-			Text { // Volume source number
-				id: sourceVolume
+            Text { // Volume source number
+                id: sourceVolume
 
-				anchors.centerIn: parent
+                anchors.centerIn: parent
 
-				property var source: Pipewire.defaultAudioSource
-				property var volume: Math.round((sourceVolume.source?.audio.volume ?? 0) * 100)
+                property var source: Pipewire.defaultAudioSource
+                property var volume: Math.round((sourceVolume.source?.audio.volume ?? 0) * 100)
 
-				PwObjectTracker { objects: [sourceVolume.source] }
+                PwObjectTracker {
+                    objects: [sourceVolume.source]
+                }
 
-				font { family: Theme.font; pixelSize: 9; }
+                font {
+                    family: Theme.font
+                    pixelSize: 9
+                }
 
-				color: sourceVolume.source.audio.muted ? Theme.ltgrey : Theme.white
-				text:  sourceVolume.source.audio.muted ? "󰝟" : volume.toString() + "%"
-			}
-		}
-	}
+                color: sourceVolume.source.audio.muted ? Theme.colors.subtext : Theme.colors.text
+                text: sourceVolume.source.audio.muted ? "󰝟" : volume.toString() + "%"
+            }
+        }
+    }
 }

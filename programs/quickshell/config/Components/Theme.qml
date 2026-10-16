@@ -1,59 +1,53 @@
 pragma Singleton
+
 import QtQuick
+import Quickshell
+import Quickshell.Io
 
-QtObject {
-	readonly property string font: "Recursive Sans Casual Static"
+Singleton {
+    id: root
 
-	readonly property color red:    "#e78284"
-	readonly property color orange: "#ef9f76"
-	readonly property color yellow: "#e5c890"
-	readonly property color green:  "#a6d189"
-	readonly property color teal:   "#81c8be"
-	readonly property color sea:    "#7ec0ee"
-	readonly property color blue:   "#8caaee"
-	readonly property color indigo: "#9ca6f8"
-	readonly property color violet: "#cba6f7"
-	readonly property color white:  "#c6d0f5"
-	readonly property color ltgrey: "#414559"
-	readonly property color grey:   "#303446"
-	readonly property color dkgrey: "#292c3c"
-	readonly property color black:  "#232634"
+    readonly property string scheme: Settings.appearance.colorscheme
+    readonly property var colors: palette.colors
 
-	readonly property var bar: ({
-		 bg:     grey,
-		 alt:    dkgrey,
-		 border: black,
-		 fill:   white,
-	})
+    readonly property color primary: colors[Settings.appearance.primaryAccent]
+    readonly property color secondary: colors[Settings.appearance.secondaryAccent]
 
-	readonly property var ws: ({
-		active:   teal,
-		inactive: blue,
-		urgent:   red,
-		empty:    ltgrey,
-		overview: indigo,
-	})
+    FileView {
+        id: paletteFile
 
-	readonly property var clock: ({
-		face:   dkgrey,
-		border: violet,
-		hands:  blue,
-		text:   white,
-	})
+        path: Quickshell.env("HOME") + "/.config/quickshell/ColorSchemes/" + root.scheme + ".json"
 
-	readonly property var cal: ({
-		bg:     dkgrey,
-		border: orange,
-		text:   white,
-	})
+        adapter: JsonAdapter {
+            id: palette
 
-	readonly property var sunset: ({
-		active:   orange,
-		inactive: ltgrey,
-	})
+            property string name: ""
+            property string mode: "dark"
 
-	readonly property var idle: ({
-		active:   teal,
-		inactive: ltgrey,
-	})
+            property JsonObject colors: JsonObject {
+                property string red: "#e78284"
+                property string orange: "#ef9f76"
+                property string yellow: "#e5c890"
+                property string green: "#a6d189"
+                property string teal: "#81c8be"
+                property string blue: "#8caaee"
+                property string purple: "#cba6f7"
+
+                property string text: "#c6d0f5"
+                property string subtext: "#838ba7"
+                property string surface: "#414559"
+                property string base: "#303446"
+                property string mantle: "#292c3c"
+                property string crust: "#232634"
+            }
+        }
+    }
+
+    Connections {
+        target: palette.colors
+
+        function onBaseChanged() {
+            console.log("Palette base changed:", palette.colors.base);
+        }
+    }
 }

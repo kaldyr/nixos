@@ -141,7 +141,7 @@
 
     pipewire.wireplumber.extraConfig."50-device-priority" = {
       "wireplumber.settings" = {
-        "device.restore-profile" = false;
+        "device.restore-profile" = true;
         "node.restore-default-targets" = false;
       };
 

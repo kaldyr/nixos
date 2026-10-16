@@ -24,7 +24,8 @@ Media is hosted by private services, most of which have offline cache available 
 
 # Machines
 
-Update: 2026-10-05
+Update: 2026-10-16
+- [x] Amyrose
 - [x] Aziraphale
 - [x] Espresso
 - [x] Installer
@@ -70,6 +71,7 @@ Update: 2026-10-05
 - Nextcloud (Remove soon)
 - AudioBookoShelf (Audiobooks and ebooks)
 - Forgejo (Private Git)
+- Jellyfin (Movies, Shows, Music)
 - Linkwarden (Bookmarks and Site Archiving)
 - Navidrome (Music)
 - Syncthing Hub (with versioning and snapshot archives)
@@ -77,20 +79,6 @@ Update: 2026-10-05
 - Vikunja (Tasks and Project Management)
 - Kodi Media Center via HDMI to TV
 - Open Starbound Server
-
-### TODO
-- Migrate drive definitions
-- Configure automatic snapshots
-- Radicale (service)
-- Give Vikunja access to a shared calendar on Radicale
-- Immich (service)
-- Miniflux (service)
-- RomM (service)
-- Terraria server
-- Look into Jellyfin
-- Purge content from media folders we just don't consume anymore
-- Clean out old backup folders
-- Consolidate all the old files into new folder structures
 
 ## Mjolnir
 - Laptop: First generation Framework 13
@@ -106,12 +94,6 @@ Update: 2026-10-05
 - Desktop: Ryzen 7 3700X, Radeon RX 7600
 - Fresh Install: September 2nd, 2026
 
-### TODO
-- Stabilize OpenRGB
-- Stabilize Epson Printer (perhaps a folder is not persisted correctly?)
-- WinStitch (May need Windows VM)
-- MacOS VM with printer drivers for borderless printing of 12x12 photo pages
-
 ## Serenity
 - Home server: Ryzen 2400g
 - Fresh Install: August 31st, 2026
@@ -120,12 +102,6 @@ Update: 2026-10-05
 - Off-site backup
 - Kodi
 - NAS with Samba
-
-### TODO
-- Migrate drive definitions (In person, must use installer)
-- Setup snapshot archiving from Magrathea
-- Investigate viability of cloning media from Magrathea
-- Investigate moving to Jellyfin client
 
 # Notable customizations
 
@@ -148,14 +124,11 @@ Caps+hjkl - arrow keys
 - Documents and Obsidian Vaults have simple file versioning for file server only.
 - btrfs snapshots sent to local RAID array and offsite RAID array.
 
-# TODO
-
-## Replace Nextcloud
-
-- [x] Syncthing for file/folder syncing, browser profile backup
-- [x] Radicale for CalDAV + CardDAV
-- [x] Vikunja for Tasks
-- [ ] Immich for photo management, sync from phones, sharing with family
+## Custom Installer
+- Actual install to a USB drive
+- All utilities required to install and repair machines
+- Saved WiFi networks, Tailscale connection, syncthing folder shares
+- All changes made while setting up new machines are synced to all other machines via syncthing
 
 # Install
 
@@ -177,7 +150,7 @@ Completions will suggest the disk, just start typing the path and choose the mat
 
 ## Partition Disk
 ```fish
-sudo disko --mode destroy,format,mount /nix/config/disko/<system>.nix
+disko destroy,format,mount <system>
 
 ```
 

@@ -37,6 +37,7 @@
                 driveOptions = [ "noatime" "discard=async" "compress=zstd:3" ];
               in
               {
+                "@cache" = { mountpoint = "/cache"; mountOptions = driveOptions; };
                 "@data" = { mountpoint = "/data"; mountOptions = driveOptions; };
                 "@home" = { mountpoint = "/home"; mountOptions = driveOptions; };
                 "@nix" = { mountpoint = "/nix"; mountOptions = driveOptions; };

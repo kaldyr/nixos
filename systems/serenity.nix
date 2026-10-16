@@ -12,6 +12,7 @@
     inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     ../services/audiobookshelf
+    ../services/jellyfin
     ../services/kodi
     ../services/syncthing
   ];
@@ -48,6 +49,7 @@
       ssdDrive = "/dev/disk/by-uuid/4af0da80-4c95-40a3-a98b-f5c157f9c8c3";
       ssdOptions = [ "defaults" "noatime" "discard=async" "compress=zstd:3" ];
       ssdSubvols = {
+        "/cache" = "@cache";
         "/home" = "@home";
         "/nix" = "@nix";
         "/scratch" = "@scratch";
@@ -72,7 +74,7 @@
       device = ssdDrive;
       fsType = "btrfs";
       options = [ "subvol=${subvol}" ] ++ ssdOptions;
-      neededForBoot = builtins.elem mountpoint [ "/nix" "/state" ];
+      neededForBoot = builtins.elem mountpoint [ "/cache" "/nix" "/state" ];
     }) ssdSubvols
     // builtins.mapAttrs (mountpoint: subvol: {
       device = hddDrive;
@@ -150,5 +152,10 @@
 
   users.groups."media" = { };
   users.users.matt.extraGroups = [ "media" ];
+
+  users.users.matt.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBZaLmcX48cycOns/c0IKlxc3ftSdCT12pbkeUnmEBWd janice@aziraphale"
+  ];
+
   time.timeZone = "America/Los_Angeles";
 }

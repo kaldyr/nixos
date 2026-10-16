@@ -38,7 +38,7 @@
             matches = [ { "device.name" = "~bluez_card.*"; } ];
 
             actions."update-props" = {
-              "bluez5.a2dp.ldac.quality" = "sq";
+              "bluez5.a2dp.ldac.quality" = "hq";
             };
           }
         ];

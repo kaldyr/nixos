@@ -8,7 +8,10 @@
     programs.fish = {
       enable = true;
 
-      functions.fish_greeting = "";
+      functions = {
+        disko = "sudo ${pkgs.disko}/bin/disko --mode $argv[1] \"/nix/config/disko/$argv[2].nix\"";
+        fish_greeting = "";
+      };
 
       interactiveShellInit = /* fish */ ''
         fish_vi_key_bindings insert

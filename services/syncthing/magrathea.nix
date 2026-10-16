@@ -23,6 +23,7 @@
       janice-browser = {
         path = "/data/sync/janice/Browser";
         devices = [ "aziraphale" "serenity" ];
+        ignorePerms = true;
       };
 
       janice-documents = {
@@ -38,6 +39,17 @@
       janice-passwords = {
         path = "/data/sync/janice/Passwords";
         devices = [ "aziraphale" "serenity" ];
+      };
+
+      janice-phone-camera = {
+        path = "/data/sync/janice/Phone";
+        devices = [ "aziraphale" "serenity" ];
+      };
+
+      janice-windows = {
+        path = "/data/sync/janice/Windows";
+        devices = [ "aziraphale" "serenity" ];
+        ignorePerms = true;
       };
 
       kaylee-browser = {

@@ -3,21 +3,26 @@ import Quickshell.Widgets
 import QtQuick
 
 Rectangle {
-	id: calendar
+    id: calendar
 
-	implicitHeight: parent.height - 1
-	implicitWidth:  parent.height + 1
-	radius:         this.height / 2
-	color:          Theme.bar.alt
-	border.color:   Theme.bar.border
-	border.width:   2
-	z:              2
+    implicitHeight: parent.height - 1
+    implicitWidth: parent.height + 1
+    radius: this.height / 2
+    color: Theme.colors.mantle
+    border.color: Theme.colors.crust
+    border.width: 2
+    z: 2
 
-	IconImage {
-		anchors.centerIn: parent
+    IconImage {
+        anchors.centerIn: parent
 
-		height: 15
-		width:  15
-		source: Quickshell.iconPath('calendar')
-	}
+        height: 15
+        width: 15
+        source: Quickshell.iconPath('calendar')
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: Settings.toggleTheme()
+        }
+    }
 }

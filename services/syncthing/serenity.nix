@@ -8,7 +8,9 @@
 
   services.syncthing.settings = {
     devices = {
+      atuin.id = "WEI7LC7-7CKQPUW-NYVAJHX-A4V5VKG-ECLJQRM-IHKXGU2-7CADOAJ-T4J3PAS";
       aziraphale.id = "FIP6JCJ-QMZ353Y-WIRJPKA-5S45S2S-GUZLT6X-EUJOSHT-DMSH6JF-W3FQCQ2";
+      crowley.id = "SL5HLQF-CLGSSSY-LBWNU6R-3CL55XD-A7QAZSW-MWWRDR2-3LRXSHF-GXL6IQT";
       magrathea.id = "F2KB4T5-CFF752T-AWEUVKW-ZUC4JJF-4YZWTLF-KZZE4E6-ZJ3LU3Q-7JC7IQ6";
     };
 
@@ -31,6 +33,17 @@
       janice-passwords = {
         path = "/data/sync/janice/Passwords";
         devices = [ "aziraphale" "magrathea" ];
+      };
+
+      janice-phone-camera = {
+        path = "/data/sync/janice/Phone";
+        devices = [ "atuin" "aziraphale" "crowley" "magrathea" ];
+      };
+
+      janice-windows = {
+        path = "/data/sync/janice/Windows";
+        devices = [ "aziraphale" "crowley" "magrathea" ];
+        ignorePerms = true;
       };
 
       nix-config = {

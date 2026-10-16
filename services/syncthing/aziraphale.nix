@@ -27,6 +27,16 @@
           devices = [ "magrathea" "serenity" ];
         };
 
+        janice-phone-camera = {
+          path = "/home/janice/Phone";
+          devices = [ "magrathea" "serenity" ];
+        };
+
+        janice-windows = {
+          path = "/home/janice/Windows";
+          devices = [ "magrathea" "serenity" ];
+        };
+
         nix-config = {
           path = "/nix/config";
           devices = [ "magrathea" "serenity" ];
