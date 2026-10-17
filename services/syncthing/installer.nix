@@ -19,6 +19,7 @@
         matt-passwords = {
           path = "/home/matt/.passwords";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         nix-config = {

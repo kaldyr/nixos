@@ -6,7 +6,6 @@
 }:
 {
   imports = [
-    ../../programs/feh
     ../../programs/fuzzel
     ../../programs/quickshell
     ../../programs/satty

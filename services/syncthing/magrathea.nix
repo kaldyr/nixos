@@ -29,6 +29,7 @@
       janice-documents = {
         path = "/data/sync/janice/Documents";
         devices = [ "aziraphale" "serenity" ];
+        ignorePerms = true;
 
         versioning = {
           type = "simple";
@@ -39,11 +40,13 @@
       janice-passwords = {
         path = "/data/sync/janice/Passwords";
         devices = [ "aziraphale" "serenity" ];
+        ignorePerms = true;
       };
 
       janice-phone-camera = {
         path = "/data/sync/janice/Phone";
         devices = [ "aziraphale" "serenity" ];
+        ignorePerms = true;
       };
 
       janice-windows = {
@@ -55,11 +58,13 @@
       kaylee-browser = {
         path = "/data/sync/kaylee/Browser";
         devices = [ "amyrose" ];
+        ignorePerms = true;
       };
 
       kaylee-documents = {
         path = "/data/sync/kaylee/Documents";
         devices = [ "amyrose" ];
+        ignorePerms = true;
 
         versioning = {
           type = "simple";
@@ -70,11 +75,13 @@
       kaylee-guildwars2 = {
         path = "/data/sync/kaylee/GuildWars2";
         devices = [ "amyrose" ];
+        ignorePerms = true;
       };
 
       kaylee-notes = {
         path = "/data/sync/kaylee/Notes";
         devices = [ "amyrose" ];
+        ignorePerms = true;
 
         versioning = {
           type = "simple";
@@ -85,16 +92,19 @@
       kaylee-openstarbound = {
         path = "/data/sync/kaylee/Openstarbound";
         devices = [ "amyrose" ];
+        ignorePerms = true;
       };
 
       matshkas-browser = {
         path = "/data/sync/matshkas/Browser";
         devices = [ "espresso" ];
+        ignorePerms = true;
       };
 
       matshkas-documents = {
         path = "/data/sync/matshkas/Documents";
         devices = [ "espresso" ];
+        ignorePerms = true;
 
         versioning = {
           type = "simple";
@@ -105,11 +115,13 @@
       matshkas-guildwars2 = {
         path = "/data/sync/matshkas/GuildWars2";
         devices = [ "espresso" ];
+        ignorePerms = true;
       };
 
       matshkas-notes = {
         path = "/data/sync/matshkas/Notes";
         devices = [ "espresso" ];
+        ignorePerms = true;
 
         versioning = {
           type = "simple";
@@ -120,16 +132,19 @@
       matshkas-passwords = {
         path = "/data/sync/matshkas/Passwords";
         devices = [ "espresso" ];
+        ignorePerms = true;
       };
 
       matt-browser = {
         path = "/data/sync/matt/Browser";
         devices = [ "mjolnir" ];
+        ignorePerms = true;
       };
 
       matt-documents = {
         path = "/data/sync/matt/Documents";
         devices = [ "mjolnir" ];
+        ignorePerms = true;
 
         versioning = {
           type = "simple";
@@ -140,11 +155,13 @@
       matt-guildwars2 = {
         path = "/data/sync/matt/GuildWars2";
         devices = [ "mjolnir" ];
+        ignorePerms = true;
       };
 
       matt-notes = {
         path = "/data/sync/matt/Notes";
         devices = [ "gungnir" "mjolnir" ];
+        ignorePerms = true;
 
         versioning = {
           type = "simple";
@@ -155,31 +172,37 @@
       matt-openstarbound = {
         path = "/data/sync/matt/Openstarbound";
         devices = [ "mjolnir" ];
+        ignorePerms = true;
       };
 
       matt-passwords = {
         path = "/data/sync/matt/Passwords";
         devices = [ "gungnir" "installer" "mjolnir" ];
+        ignorePerms = true;
       };
 
       matt-phone = {
         path = "/data/sync/matt/Phone";
         devices = [ "gungnir" ];
+        ignorePerms = true;
       };
 
       matt-phone-settings = {
         path = "/data/sync/matt/PhoneSettings";
         devices = [ "gungnir" ];
+        ignorePerms = true;
       };
 
       nic-browser = {
         path = "/data/sync/nic/Browser";
         devices = [ "normandy" ];
+        ignorePerms = true;
       };
 
       nic-documents = {
         path = "/data/sync/nic/Documents";
         devices = [ "normandy" ];
+        ignorePerms = true;
 
         versioning = {
           type = "simple";
@@ -190,16 +213,19 @@
       nic-enshrouded = {
         path = "/data/sync/nic/Enshrouded";
         devices = [ "normandy" ];
+        ignorePerms = true;
       };
 
       nic-guildwars2 = {
         path = "/data/sync/nic/GuildWars2";
         devices = [ "normandy" ];
+        ignorePerms = true;
       };
 
       nic-notes = {
         path = "/data/sync/nic/Notes";
         devices = [ "normandy" ];
+        ignorePerms = true;
 
         versioning = {
           type = "simple";
@@ -210,6 +236,7 @@
       nic-openstarbound = {
         path = "/data/sync/nic/Openstarbound";
         devices = [ "normandy" ];
+        ignorePerms = true;
       };
 
       nix-config = {
@@ -243,11 +270,14 @@
           "mjolnir"
           "normandy"
         ];
+
+        ignorePerms = true;
       };
 
       shared-videos-offline = {
         path = "/storage/media/Videos/Offline";
         devices = [ "gungnir" ];
+        ignorePerms = true;
       };
     };
 

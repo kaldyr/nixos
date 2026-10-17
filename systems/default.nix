@@ -234,7 +234,18 @@
     secrets.ssh-config-extra-hosts.mode = "0444";
   };
 
-  system.stateVersion = sysConfig.stateVersion;
+  system = {
+    activationScripts.nixConfigScripts = ''
+      if [ -d /nix/config/scripts ]; then
+        ${pkgs.findutils}/bin/find /nix/config/scripts \
+          -type f \
+          -exec ${pkgs.coreutils}/bin/chmod +x {} +
+      fi
+    '';
+
+    stateVersion = sysConfig.stateVersion;
+  };
+
   systemd = {
     settings.Manager.DefaultTimeoutStopSec = "10s";
 

@@ -14,27 +14,32 @@
         matshkas-browser = {
           path = "/home/matshkas/.config/net.imput.helium";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         matshkas-documents = {
           path = "/home/matshkas/Documents";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         matshkas-guildwars2 = {
           path = "/state/guildwars2/addons";
           devices = [ "magrathea" ];
           ignorePatterns = [ "/Taimi/pathing" ];
+          ignorePerms = true;
         };
 
         matshkas-notes = {
           path = "/home/matshkas/Vaults/Notes";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         matshkas-passwords = {
           path = "/home/matshkas/.passwords";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         nix-config = {
@@ -52,6 +57,7 @@
         shared-guildwars2-pathing = {
           path = "/state/guildwars2/pathing";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
       };
     };

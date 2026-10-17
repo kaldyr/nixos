@@ -34,7 +34,7 @@ extract = [{ run = 'ouch d -y %s', desc = "Extract here with ouch" }]
 foldersize = [
   { run = 'du -hs %s; echo "Press enter to exit"; read _', desc = "Folder size", block = true },
 ]
-image = [{ run = 'feh -. -Z %s', desc = "Open with feh", orphan = true }]
+image = [{ run = 'loupe %s', desc = "Open with loupe", orphan = true }]
 office = [
   { run = 'libreoffice %s', desc = "Open with LibreOffice", orphan = true },
 ]

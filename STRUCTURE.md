@@ -144,11 +144,11 @@ Immutable media library for services
 
 - Audiobooks (AudioBookShelf)
 - Books (AudioBookShelf)
-- Movies (Kodi or Jellyfin)
-- Music (Navidrome)
+- Movies (Jellyfin)
+- Music (Jellyfin)
 - Radio (AudioBookShelf)
 - Roms (RomM)
-- Shows (Kodi or Jellyfin)
-- Videos (Kodi or Jellyfin)
+- Shows (Jellyfin)
+- Videos (Jellyfin)
 
 ### @snaps (snapshot storage)

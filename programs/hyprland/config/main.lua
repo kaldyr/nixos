@@ -533,13 +533,19 @@ wr({ -- Discord
 	name         = 'discord',
 	match        = { class = 'discord' },
 	allows_input = true,
+	size         = win_large_size(),
 })
 
-wr({
-	name    = 'feh',
-	match   = { class = 'feh' },
-	content = 'photo',
-	pseudo  =  true,
+wr({ -- Enshrouded
+	name             = 'enshrouded',
+	match            = { class = 'steam_app_1203620' },
+	border_size      = 0,
+	content          = 'game',
+	no_blur          = true,
+	no_shadow        = true,
+	opaque           = true,
+	render_unfocused = true,
+	suppress_event   = 'fullscreen maximize',
 })
 
 wr({

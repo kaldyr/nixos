@@ -4,7 +4,6 @@
 
 1. [Machines](#machines)
 1. [Notable Customizations](#notable-customizations)
-1. [TODO](#todo)
 1. [Install](#install)
 1. [Boot Install Media](#boot-install-media)
 1. [Identify Target Disk](#identify-target-disk)
@@ -35,19 +34,19 @@ Update: 2026-10-16
 - [x] Serenity
 
 ## Amyrose
-- Desktop: Intel i5-2500k, Radeon RX 5600 XT
+- Desktop: Intel i5-2500k, 16GB RAM, Radeon RX 5600 XT
 - Fresh Install: October 9th, 2026
 
 ## Aziraphale
-- Laptop: Dell 14 D14260 Intel Core Ultra 5 225U
+- Laptop: Dell 14 D14260 Intel Core Ultra 5 225U, 8GB RAM
 - Fresh Install: October 3rd, 2026
 
 ## Espresso
-- Desktop: Minisforum UM790 Pro
+- Desktop: Minisforum UM790 Pro, 32GB RAM
 - Fresh Install: July 14th, 2026
 
 ## Hofud
-- Desktop: Framework 13 11th Gen i5-1135G7 mainboard
+- Desktop: Framework 13 11th Gen i5-1135G7 mainboard, 16GB RAM
 - Fresh Install:
 
 ### TODO
@@ -64,7 +63,7 @@ Update: 2026-10-16
 - Any changes made during the installation process auto-synced to other computers
 
 ## Magrathea
-- Home server: Intel i5-2500k still kicking
+- Home server: Intel i5-2500k still kicking, 8GB RAM
 - Fresh Install: August 16th, 2024
 
 ### Services
@@ -73,12 +72,17 @@ Update: 2026-10-16
 - Forgejo (Private Git)
 - Jellyfin (Movies, Shows, Music)
 - Linkwarden (Bookmarks and Site Archiving)
-- Navidrome (Music)
 - Syncthing Hub (with versioning and snapshot archives)
 - Technitium (DNS for tailnet with ad block)
 - Vikunja (Tasks and Project Management)
-- Kodi Media Center via HDMI to TV
+- Kodi Media Center via HDMI to TV (Remove soon)
 - Open Starbound Server
+
+### Future Upgrade
+- Odroid H5
+- Mini Itx Kit
+- m.2 6 port SATA board
+- 16GB RAM
 
 ## Mjolnir
 - Laptop: First generation Framework 13
@@ -91,11 +95,11 @@ Update: 2026-10-16
 - 4.0kg Hinge Kit
 
 ## Normandy
-- Desktop: Ryzen 7 3700X, Radeon RX 7600
+- Desktop: Ryzen 7 3700X, 32GB RAM, Radeon RX 7600
 - Fresh Install: September 2nd, 2026
 
 ## Serenity
-- Home server: Ryzen 2400g
+- Home server: Ryzen 2400g, 8GB RAM
 - Fresh Install: August 31st, 2026
 
 ### Services

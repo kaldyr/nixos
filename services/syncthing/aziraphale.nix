@@ -15,26 +15,31 @@
         janice-browser = {
           path = "/home/janice/.config/net.imput.helium";
           devices = [ "magrathea" "serenity" ];
+          ignorePerms = true;
         };
 
         janice-documents = {
           path = "/home/janice/Documents";
           devices = [ "magrathea" "serenity" ];
+          ignorePerms = true;
         };
 
         janice-passwords = {
           path = "/home/janice/.passwords";
           devices = [ "magrathea" "serenity" ];
+          ignorePerms = true;
         };
 
         janice-phone-camera = {
           path = "/home/janice/Phone";
           devices = [ "magrathea" "serenity" ];
+          ignorePerms = true;
         };
 
         janice-windows = {
           path = "/home/janice/Windows";
           devices = [ "magrathea" "serenity" ];
+          ignorePerms = true;
         };
 
         nix-config = {

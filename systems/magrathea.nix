@@ -12,7 +12,6 @@
     ../services/jellyfin
     ../services/kodi
     ../services/linkwarden
-    ../services/navidrome
     ../services/nextcloud
     ../services/openstarbound
     ../services/radicale

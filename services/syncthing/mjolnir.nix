@@ -14,32 +14,38 @@
         matt-browser = {
           path = "/home/matt/.config/net.imput.helium";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         matt-documents = {
           path = "/home/matt/Documents";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         matt-guildwars2 = {
           path = "/state/guildwars2/addons";
           devices = [ "magrathea" ];
           ignorePatterns = [ "/Taimi/pathing" ];
+          ignorePerms = true;
         };
 
         matt-notes = {
           path = "/home/matt/Vaults/Notes";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         matt-openstarbound = {
           path = "/home/matt/.local/state/openstarbound/storage";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         matt-passwords = {
           path = "/home/matt/.passwords";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         nix-config = {
@@ -58,6 +64,7 @@
         shared-guildwars2-pathing = {
           path = "/state/guildwars2/pathing";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
       };
     };

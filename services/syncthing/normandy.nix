@@ -14,32 +14,38 @@
         nic-browser = {
           path = "/home/nic/.config/net.imput.helium";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         nic-documents = {
           path = "/home/nic/Documents";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         nic-enshrouded = {
           path = "/state/enshrouded";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         nic-guildwars2 = {
           path = "/state/guildwars2/addons";
           devices = [ "magrathea" ];
           ignorePatterns = [ "/Taimi/pathing" ];
+          ignorePerms = true;
         };
 
         nic-notes = {
           path = "/home/nic/Vaults/Notes";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         nic-openstarbound = {
           path = "/home/nic/.local/state/openstarbound/storage";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         nix-config = {
@@ -57,6 +63,7 @@
         shared-guildwars2-pathing = {
           path = "/state/guildwars2/pathing";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
       };
     };

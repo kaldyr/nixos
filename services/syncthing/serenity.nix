@@ -18,11 +18,13 @@
       janice-browser = {
         path = "/data/sync/janice/Browser";
         devices = [ "aziraphale" "magrathea" ];
+        ignorePerms = true;
       };
 
       janice-documents = {
         path = "/data/sync/janice/Documents";
         devices = [ "aziraphale" "magrathea" ];
+        ignorePerms = true;
 
         versioning = {
           type = "simple";
@@ -33,11 +35,13 @@
       janice-passwords = {
         path = "/data/sync/janice/Passwords";
         devices = [ "aziraphale" "magrathea" ];
+        ignorePerms = true;
       };
 
       janice-phone-camera = {
         path = "/data/sync/janice/Phone";
         devices = [ "atuin" "aziraphale" "crowley" "magrathea" ];
+        ignorePerms = true;
       };
 
       janice-windows = {

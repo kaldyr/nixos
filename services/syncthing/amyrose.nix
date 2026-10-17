@@ -14,27 +14,32 @@
         kaylee-browser = {
           path = "/home/kaylee/.config/net.imput.helium";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         kaylee-documents = {
           path = "/home/kaylee/Documents";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         kaylee-guildwars2 = {
           path = "/state/guildwars2/addons";
           devices = [ "magrathea" ];
           ignorePatterns = [ "/Taimi/pathing" ];
+          ignorePerms = true;
         };
 
         kaylee-notes = {
           path = "/home/kaylee/Vaults/Notes";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         kaylee-openstarbound = {
           path = "/home/kaylee/.local/state/openstarbound/storage";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
 
         nix-config = {
@@ -52,6 +57,7 @@
         shared-guildwars2-pathing = {
           path = "/state/guildwars2/pathing";
           devices = [ "magrathea" ];
+          ignorePerms = true;
         };
       };
     };
