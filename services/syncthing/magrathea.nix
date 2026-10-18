@@ -271,12 +271,6 @@
 
         ignorePerms = true;
       };
-
-      shared-videos-offline = {
-        path = "/storage/media/Videos/Offline";
-        devices = [ "gungnir" ];
-        ignorePerms = true;
-      };
     };
 
     gui.insecureSkipHostcheck = true;
@@ -297,11 +291,7 @@
     users.syncthing = {
       group = "syncthing";
       isSystemUser = true;
-
-      extraGroups = [
-        "media"
-        "nixconfig"
-      ];
+      extraGroups = [ "media" "nixconfig" ];
     };
   };
 }
