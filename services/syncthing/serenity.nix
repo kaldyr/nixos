@@ -61,20 +61,20 @@
 
         ignorePerms = true;
       };
+
+      shared-passwords = {
+        path = "/data/sync/shared/Passwords";
+        devices = [ "magrathea" ];
+        ignorePerms = true;
+      };
     };
 
     gui.insecureSkipHostcheck = true;
   };
 
   systemd.tmpfiles.rules = [
-    # User janice
     "d /data/sync/janice 2775 syncthing syncthing -"
-    # Sync Folder janice-browser
-    "d /data/sync/janice/Browser 2775 syncthing syncthing -"
-    # Sync Folder janice-documents
-    "d /data/sync/janice/Documents 2775 syncthing syncthing -"
-    # Sync Folder janice-passwords
-    "d /data/sync/janice/Passwords 2775 syncthing syncthing -"
+    "d /data/sync/shared 2775 syncthing syncthing -"
   ];
 
   users = {

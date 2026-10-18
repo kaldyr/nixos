@@ -36,12 +36,6 @@
           ignorePerms = true;
         };
 
-        matshkas-passwords = {
-          path = "/home/matshkas/.passwords";
-          devices = [ "magrathea" ];
-          ignorePerms = true;
-        };
-
         nix-config = {
           path = "/nix/config";
           devices = [ "magrathea" ];
@@ -56,6 +50,12 @@
 
         shared-guildwars2-pathing = {
           path = "/state/guildwars2/pathing";
+          devices = [ "magrathea" ];
+          ignorePerms = true;
+        };
+
+        shared-passwords = {
+          path = "/state/passwords";
           devices = [ "magrathea" ];
           ignorePerms = true;
         };
@@ -82,5 +82,7 @@
     "d /home/matshkas/Vaults/Notes 0755 matshkas users -"
     # Sync Folder: matshkas-passwords
     "d /home/matshkas/.passwords 0700 matshkas users -"
+    # Sync Folder: shared-passwords
+    "d /state/passwords 0755 matshkas users -"
   ];
 }

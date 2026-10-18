@@ -24,12 +24,6 @@
           ignorePerms = true;
         };
 
-        janice-passwords = {
-          path = "/home/janice/.passwords";
-          devices = [ "magrathea" "serenity" ];
-          ignorePerms = true;
-        };
-
         janice-phone-camera = {
           path = "/home/janice/Phone";
           devices = [ "magrathea" "serenity" ];
@@ -53,6 +47,12 @@
 
           ignorePerms = true;
         };
+
+        shared-passwords = {
+          path = "/state/passwords";
+          devices = [ "magrathea" ];
+          ignorePerms = true;
+        };
       };
     };
   };
@@ -66,7 +66,11 @@
     "d /home/janice/.config/net.imput.helium 0755 janice users -"
     # Sync Folder: janice-documents
     "d /home/janice/Documents 0755 janice users -"
-    # Sync Folder: janice-passwords
-    "d /home/janice/.passwords 0700 janice users -"
+    # Sync Folder: janice-phone-camera
+    "d /home/janice/Phone 0755 janice users -"
+    # Sync Folder: janice-windows
+    "d /home/janice/Windows 0755 janice users -"
+    # Sync Folder: shared-passwords
+    "d /state/passwords 0755 janice users -"
   ];
 }

@@ -112,7 +112,6 @@
     ".cache/yazi/packages"
     ".local/share/keyrings"
     ".local/share/nvim/site/pack/core/opt"
-    ".passwords"
     ".ssh"
     "Pictures/Wallpapers"
   ];

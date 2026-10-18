@@ -42,12 +42,6 @@
           ignorePerms = true;
         };
 
-        matt-passwords = {
-          path = "/home/matt/.passwords";
-          devices = [ "magrathea" ];
-          ignorePerms = true;
-        };
-
         nix-config = {
           path = "/nix/config";
           devices = [ "magrathea" ];
@@ -63,6 +57,12 @@
 
         shared-guildwars2-pathing = {
           path = "/state/guildwars2/pathing";
+          devices = [ "magrathea" ];
+          ignorePerms = true;
+        };
+
+        shared-passwords = {
+          path = "/state/passwords";
           devices = [ "magrathea" ];
           ignorePerms = true;
         };
@@ -94,5 +94,7 @@
     "d /home/matt/.local/state/openstarbound/storage 0755 matt users -"
     # Sync Folder: matt-passwords
     "d /home/matt/.passwords 0700 matt users -"
+    # Sync Folder: shared-passwords
+    "d /state/passwords 0755 matt users -"
   ];
 }

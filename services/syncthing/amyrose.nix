@@ -59,6 +59,12 @@
           devices = [ "magrathea" ];
           ignorePerms = true;
         };
+
+        shared-passwords = {
+          path = "/state/passwords";
+          devices = [ "magrathea" ];
+          ignorePerms = true;
+        };
       };
     };
   };
@@ -85,7 +91,7 @@
     "d /home/kaylee/.local/state 0755 kaylee users -"
     "d /home/kaylee/.local/state/openstarbound 0755 kaylee users -"
     "d /home/kaylee/.local/state/openstarbound/storage 0755 kaylee users -"
-    # Sync Folder: kaylee-passwords
-    "d /home/kaylee/.passwords 0700 kaylee users -"
+    # Sync Folder: shared-passwords
+    "d /state/passwords 0755 kaylee users -"
   ];
 }

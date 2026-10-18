@@ -65,6 +65,12 @@
           devices = [ "magrathea" ];
           ignorePerms = true;
         };
+
+        shared-passwords = {
+          path = "/state/passwords";
+          devices = [ "magrathea" ];
+          ignorePerms = true;
+        };
       };
     };
   };
@@ -93,7 +99,7 @@
     "d /home/nic/.local/state 0755 nic users -"
     "d /home/nic/.local/state/openstarbound 0755 nic users -"
     "d /home/nic/.local/state/openstarbound/storage 0755 nic users -"
-    # Sync Folder: nic-passwords
-    "d /home/nic/.passwords 0700 nic users -"
+    # Sync Folder: shared-passwords
+    "d /state/passwords 0755 nic users -"
   ];
 }

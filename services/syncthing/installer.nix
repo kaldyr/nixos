@@ -16,12 +16,6 @@
       };
 
       folders = {
-        matt-passwords = {
-          path = "/home/matt/.passwords";
-          devices = [ "magrathea" ];
-          ignorePerms = true;
-        };
-
         nix-config = {
           path = "/nix/config";
           devices = [ "magrathea" ];
@@ -33,12 +27,17 @@
 
           ignorePerms = true;
         };
+
+        shared-passwords = {
+          path = "/state/passwords";
+          devices = [ "magrathea" ];
+          ignorePerms = true;
+        };
       };
     };
   };
 
   systemd.tmpfiles.rules = [
-    # Sync Folder: matt-passwords
-    "d /home/matt/.passwords 0700 matt users -"
+    "d /state/passwords 0755 matt users -"
   ];
 }
