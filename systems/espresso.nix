@@ -109,6 +109,6 @@
   };
 
   services.tumbler.enable = true;
-
+  swapDevices = [ { device = "/swap/swapfile"; } ];
   time.timeZone = "America/Los_Angeles";
 }

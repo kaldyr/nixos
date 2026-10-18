@@ -131,6 +131,8 @@
     samba-wsdd.openFirewall = true;
   };
 
+  swapDevices = [ { device = "/swap/swapfile"; } ];
+
   systemd = {
     services.media-acl = {
       description = "Set ACLs for media";

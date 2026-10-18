@@ -116,6 +116,8 @@
     tailscale.useRoutingFeatures = "server";
   };
 
+  swapDevices = [ { device = "/swap/swapfile"; } ];
+
   systemd.services."tailscale-certs" = {
     description = "Automatic renewal of Tailscale certificates";
 
