@@ -35,13 +35,28 @@
   programs.nano.enable = false;
   sops.secrets.matt-password.neededForUsers = true;
 
-  security.polkit.extraConfig = ''
-    polkit.addRule(function(action, subject) {
-        if (subject.user == "matt" && action.id == "org.freedesktop.systemd1.manage-units") {
-            return polkit.Result.YES;
-        }
-    });
-  '';
+  security = {
+    polkit.extraConfig = ''
+      polkit.addRule(function(action, subject) {
+          if (subject.user == "matt" && action.id == "org.freedesktop.systemd1.manage-units") {
+              return polkit.Result.YES;
+          }
+      });
+    '';
+
+    sudo.extraRules = [ {
+      groups = [ "wheel" ];
+      commands = map
+        (name: {
+          command = "/run/current-system/sw/bin/${name}";
+          options = [ "NOPASSWD" ];
+        })
+        [
+          "framework_tool"
+          "lsblk"
+        ];
+    } ];
+  };
 
   users.users."matt" = {
     description = "Matt";

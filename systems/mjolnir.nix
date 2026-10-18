@@ -1,5 +1,6 @@
 {
   inputs,
+  lib,
   pkgs,
   sysConfig,
   ...
@@ -114,19 +115,8 @@
     enableRedistributableFirmware = true;
   };
 
-  home-manager.users.${sysConfig.user}.xdg.userDirs.projects = "/home/${sysConfig.user}/Projects";
-
-  security.sudo.extraRules = [
-    {
-      groups = [ "wheel" ];
-      commands = [
-        {
-          command = "/run/current-system/sw/bin/framework_tool";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-    }
-  ];
+  home-manager.users.${sysConfig.user}.xdg.userDirs.projects =
+    lib.mkForce "/home/${sysConfig.user}/Projects";
 
   services = {
     auto-cpufreq = {
