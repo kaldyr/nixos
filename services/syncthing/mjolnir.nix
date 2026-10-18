@@ -92,8 +92,6 @@
     "d /home/matt/.local/state 0755 matt users -"
     "d /home/matt/.local/state/openstarbound 0755 matt users -"
     "d /home/matt/.local/state/openstarbound/storage 0755 matt users -"
-    # Sync Folder: matt-passwords
-    "d /home/matt/.passwords 0700 matt users -"
     # Sync Folder: shared-passwords
     "d /state/passwords 0755 matt users -"
   ];

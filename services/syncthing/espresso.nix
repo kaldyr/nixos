@@ -80,8 +80,6 @@
     "d /state/guildwars2/pathing 0755 matshkas users -"
     # Sync Folder: matshkas-notes
     "d /home/matshkas/Vaults/Notes 0755 matshkas users -"
-    # Sync Folder: matshkas-passwords
-    "d /home/matshkas/.passwords 0700 matshkas users -"
     # Sync Folder: shared-passwords
     "d /state/passwords 0755 matshkas users -"
   ];
