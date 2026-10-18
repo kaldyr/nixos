@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  sysConfig,
   ...
 }:
 {
@@ -112,6 +113,8 @@
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
   };
+
+  home-manager.users.${sysConfig.user}.xdg.userDirs.projects = "/home/${sysConfig.user}/Projects";
 
   security.sudo.extraRules = [
     {

@@ -243,6 +243,7 @@
         enable = true;
         createDirectories = true;
         desktop = null;
+        projects = null;
         publicShare = null;
         setSessionVariables = true;
         templates = null;

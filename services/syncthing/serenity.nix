@@ -77,11 +77,7 @@
     users.syncthing = {
       group = "syncthing";
       isSystemUser = true;
-
-      extraGroups = [
-        "media"
-        "nixconfig"
-      ];
+      extraGroups = [ "media" "nixconfig" ];
     };
   };
 }
