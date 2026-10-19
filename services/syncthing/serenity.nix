@@ -68,6 +68,10 @@
 
   systemd.tmpfiles.rules = [
     "d /data/sync/janice 2775 syncthing syncthing -"
+    "d /data/sync/kaylee 2775 syncthing syncthing -"
+    "d /data/sync/matshkas 2775 syncthing syncthing -"
+    "d /data/sync/matt 2775 syncthing syncthing -"
+    "d /data/sync/nic 2775 syncthing syncthing -"
     "d /data/sync/shared 2775 syncthing syncthing -"
   ];
 
