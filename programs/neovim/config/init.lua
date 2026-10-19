@@ -25,8 +25,30 @@ o.rtp:append( vim.fn.stdpath('data') .. '/stubs' )
 
 -- Delay clipboard until UiEnter for startup time
 vim.schedule( function()
-	g.clipboard = 'osc52'
-	o.clipboard = 'unnamedplus'
+	if vim.env.SSH_CONNECTION then
+		-- remote instance, use remote clipboard provider
+		g.clipboard = 'osc52'
+
+		-- keep y and p local to neovim
+		o.clipboard = ''
+
+		-- Yank to the remote machine as well
+		vim.api.nvim_create_autocmd('TextYankPost', {
+			callback = function()
+				if vim.v.event.operator == 'y' then
+					vim.fn.setreg(
+						'+',
+						vim.v.event.regcontents,
+						vim.v.event.regtype
+					)
+				end
+			end,
+		})
+		-- Remote paste works from kitty's ctrl+shift+v
+	else
+		-- local instance, use wayland clipboard
+		o.clipboard = 'unnamedplus'
+	end
 end )
 
 --<-------------------------

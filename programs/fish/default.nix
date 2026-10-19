@@ -24,9 +24,11 @@
         bind -M insert \cA beginning-of-line
         bind -M insert \cE end-of-line
         bind yy fish_clipboard_copy
-        bind p fish_clipboard_paste
         bind -M visual y fish_clipboard_copy
-        bind -M visual p fish_clipboard_paste
+        if not set -q SSH_CONNECTION
+            bind p fish_clipboard_paste
+            bind -M visual p fish_clipboard_paste
+        end
         bind \cl 'clear -x ; tput cup $COLUMNS 0 ; commandline -f repaint'
         bind -M insert \cl 'clear -x ; tput cup $COLUMNS 0 ; commandline -f repaint'
         tput cup $COLUMNS 0
