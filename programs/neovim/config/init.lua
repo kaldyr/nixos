@@ -24,7 +24,10 @@ o.rtp:append( vim.fn.stdpath('data') .. '/grammars' )
 o.rtp:append( vim.fn.stdpath('data') .. '/stubs' )
 
 -- Delay clipboard until UiEnter for startup time
-vim.schedule( function() o.clipboard = 'unnamedplus' end )
+vim.schedule( function()
+	g.clipboard = 'osc52'
+	o.clipboard = 'unnamedplus'
+end )
 
 --<-------------------------
 -- Options                -->

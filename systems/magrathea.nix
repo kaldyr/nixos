@@ -12,6 +12,7 @@
     ../services/jellyfin
     ../services/kodi
     ../services/linkwarden
+    ../services/miniflux
     ../services/nextcloud
     ../services/openstarbound
     ../services/radicale

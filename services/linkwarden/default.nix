@@ -65,12 +65,14 @@
     after = [ "postgresql.service" ];
   };
 
-  users.extraUsers."linkwarden" = {
-    extraGroups = [ "webservice" ];
-    group = "linkwarden";
-    home = "/var/lib/linkwarden";
-    isSystemUser = true;
-  };
+  users = {
+    extraUsers."linkwarden" = {
+      extraGroups = [ "webservice" ];
+      group = "linkwarden";
+      home = "/var/lib/linkwarden";
+      isSystemUser = true;
+    };
 
-  users.groups."linkwarden" = { };
+    groups."linkwarden" = { };
+  };
 }
