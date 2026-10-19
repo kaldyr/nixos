@@ -52,52 +52,42 @@
     }
   ];
 
-  fileSystems =
-    let
-      hddDrive = "/dev/disk/by-uuid/c3cb725e-8cee-4690-a44d-114100497133";
-      hddOptions = [ "defaults" "noatime" "compress=zstd:8" ];
-      hddSubvols = {
-        "/storage/media" = "@media";
-        "/storage/snaps" = "@snaps";
-      };
+  fileSystems = {
+    "/" = {
+      device = "none";
+      fsType = "tmpfs";
+      neededForBoot = true;
+      options = [ "defaults" "size=2G" "mode=755" ];
+    };
 
-      ssdDrive = "/dev/disk/by-uuid/eff878ef-e2bf-4f0f-9d24-e60fd7c5ba6e";
-      ssdOptions = [ "defaults" "noatime" "discard=async" "compress=zstd:3" ];
-      ssdSubvols = {
-        "/cache" = "@cache";
-        "/data" = "@data";
-        "/home" = "@home";
-        "/nix" = "@nix";
-        "/scratch" = "@scratch";
-        "/state" = "@state";
-        "/swap" = "@swap";
-        "/var/lib/postgresql" = "@postgres";
-      };
-    in
-    {
-      "/" = {
-        device = "none";
-        fsType = "tmpfs";
-        neededForBoot = true;
-        options = [ "defaults" "size=2G" "mode=755" ];
-      };
-
-      "/boot" = {
-        device = "/dev/disk/by-uuid/D57C-9547";
-        fsType = "vfat";
-      };
-    }
-    // builtins.mapAttrs (mountpoint: subvol: {
-      device = ssdDrive;
-      fsType = "btrfs";
-      options = [ "subvol=${subvol}" ] ++ ssdOptions;
-      neededForBoot = builtins.elem mountpoint [ "/cache" "/nix" "/state" ];
-    }) ssdSubvols
-    // builtins.mapAttrs (mountpoint: subvol: {
-      device = hddDrive;
-      fsType = "btrfs";
-      options = [ "subvol=${subvol}" ] ++ hddOptions;
-    }) hddSubvols;
+    "/boot" = {
+      device = "/dev/disk/by-uuid/D57C-9547";
+      fsType = "vfat";
+    };
+  }
+  // builtins.mapAttrs (mountpoint: subvol: { # SSD
+    device = "/dev/disk/by-uuid/eff878ef-e2bf-4f0f-9d24-e60fd7c5ba6e";
+    fsType = "btrfs";
+    neededForBoot = builtins.elem mountpoint [ "/cache" "/nix" "/state" ];
+    options = [ "subvol=${subvol}" "defaults" "noatime" "discard=async" "compress=zstd:3" ];
+  }) {
+    "/cache" = "@cache";
+    "/data" = "@data";
+    "/home" = "@home";
+    "/nix" = "@nix";
+    "/scratch" = "@scratch";
+    "/state" = "@state";
+    "/swap" = "@swap";
+    "/var/lib/postgresql" = "@postgres";
+  }
+  // builtins.mapAttrs (mountpoint: subvol: { # HDD Array
+    device = "/dev/disk/by-uuid/c3cb725e-8cee-4690-a44d-114100497133";
+    fsType = "btrfs";
+    options = [ "subvol=${subvol}" "defaults" "noatime" "compress=zstd:8" ];
+  }) {
+    "/storage/media" = "@media";
+    "/storage/snaps" = "@snaps";
+  };
 
   hardware = {
     alsa.enable = true;

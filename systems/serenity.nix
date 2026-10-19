@@ -36,51 +36,41 @@
 
   environment.systemPackages = with pkgs; [ usbutils ];
 
-  fileSystems =
-    let
-      hddDrive = "/dev/disk/by-uuid/27fb138d-b3c1-4b8f-9110-04a28bcda82c";
-      hddOptions = [ "defaults" "noatime" "compress=zstd:8" ];
-      hddSubvols = {
-        "/data" = "@data";
-        "/media" = "@media";
-        "/snaps" = "@snaps";
-      };
+  fileSystems = {
+    "/" = {
+      device = "none";
+      fsType = "tmpfs";
+      neededForBoot = true;
+      options = [ "defaults" "size=2G" "mode=755" ];
+    };
 
-      ssdDrive = "/dev/disk/by-uuid/4af0da80-4c95-40a3-a98b-f5c157f9c8c3";
-      ssdOptions = [ "defaults" "noatime" "discard=async" "compress=zstd:3" ];
-      ssdSubvols = {
-        "/cache" = "@cache";
-        "/home" = "@home";
-        "/nix" = "@nix";
-        "/scratch" = "@scratch";
-        "/state" = "@state";
-        "/swap" = "@swap";
-      };
-    in
-    {
-      "/" = {
-        device = "none";
-        fsType = "tmpfs";
-        neededForBoot = true;
-        options = [ "defaults" "size=2G" "mode=755" ];
-      };
-
-      "/boot" = {
-        device = "/dev/disk/by-uuid/8429-E6AD";
-        fsType = "vfat";
-      };
-    }
-    // builtins.mapAttrs (mountpoint: subvol: {
-      device = ssdDrive;
-      fsType = "btrfs";
-      options = [ "subvol=${subvol}" ] ++ ssdOptions;
-      neededForBoot = builtins.elem mountpoint [ "/cache" "/nix" "/state" ];
-    }) ssdSubvols
-    // builtins.mapAttrs (mountpoint: subvol: {
-      device = hddDrive;
-      fsType = "btrfs";
-      options = [ "subvol=${subvol}" ] ++ hddOptions;
-    }) hddSubvols;
+    "/boot" = {
+      device = "/dev/disk/by-uuid/8429-E6AD";
+      fsType = "vfat";
+    };
+  }
+  // builtins.mapAttrs (mountpoint: subvol: { # SSD
+    device = "/dev/disk/by-uuid/4af0da80-4c95-40a3-a98b-f5c157f9c8c3";
+    fsType = "btrfs";
+    neededForBoot = builtins.elem mountpoint [ "/cache" "/nix" "/state" ];
+    options = [ "subvol=${subvol}" "defaults" "noatime" "discard=async" "compress=zstd:3" ];
+  }) {
+    "/cache" = "@cache";
+    "/home" = "@home";
+    "/nix" = "@nix";
+    "/scratch" = "@scratch";
+    "/state" = "@state";
+    "/swap" = "@swap";
+  }
+  // builtins.mapAttrs (mountpoint: subvol: { # HDD Array
+    device = "/dev/disk/by-uuid/27fb138d-b3c1-4b8f-9110-04a28bcda82c";
+    fsType = "btrfs";
+    options = [ "subvol=${subvol}" "defaults" "noatime" "compress=zstd:8" ];
+  }) {
+    "/data" = "@data";
+    "/media" = "@media";
+    "/snaps" = "@snaps";
+  };
 
   hardware = {
     alsa.enable = true;

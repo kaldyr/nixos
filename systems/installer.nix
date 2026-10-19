@@ -72,35 +72,29 @@
     xfsprogs
   ];
 
-  fileSystems =
-    let
-      cryptedDrive = "/dev/disk/by-uuid/3a06b88b-5747-4f76-a4d8-8dc52bf284bc";
-      driveOptions = [ "noatime" "discard=async" "compress=zstd:3" ];
-      driveSubvols = {
-        "/nix" = "@usbnix";
-        "/state" = "@usbstate";
-        "/storage" = "@usbstorage";
-      };
-    in
-    {
-      "/" = {
-        device = "none";
-        fsType = "tmpfs";
-        neededForBoot = true;
-        options = [ "defaults" "size=2G" "mode=755" ];
-      };
+  fileSystems = {
+    "/" = {
+      device = "none";
+      fsType = "tmpfs";
+      neededForBoot = true;
+      options = [ "defaults" "size=2G" "mode=755" ];
+    };
 
-      "/boot" = {
-        device = "/dev/disk/by-uuid/7584-2D95";
-        fsType = "vfat";
-      };
-    }
-    // builtins.mapAttrs (mountpoint: subvol: {
-      device = cryptedDrive;
-      fsType = "btrfs";
-      options = [ "subvol=${subvol}" ] ++ driveOptions;
-      neededForBoot = builtins.elem mountpoint [ "/nix" "/state" ];
-    }) driveSubvols;
+    "/boot" = {
+      device = "/dev/disk/by-uuid/7584-2D95";
+      fsType = "vfat";
+    };
+  }
+  // builtins.mapAttrs (mountpoint: subvol: {
+    device = "/dev/disk/by-uuid/3a06b88b-5747-4f76-a4d8-8dc52bf284bc";
+    fsType = "btrfs";
+    neededForBoot = builtins.elem mountpoint [ "/nix" "/state" ];
+    options = [ "subvol=${subvol}" "noatime" "discard=async" "compress=zstd:3" ];
+  }) {
+    "/nix" = "@usbnix";
+    "/state" = "@usbstate";
+    "/storage" = "@usbstorage";
+  };
 
   hardware = {
     graphics.enable = true;

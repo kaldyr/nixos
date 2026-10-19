@@ -1,7 +1,4 @@
 {
-  # Manual interventions required!!!
-  # Disko cannot yet handle multiple device btrfs
-  # The storage array should not be managed by Disko to preserve data
   disko.devices.disk.main = {
     device = "/dev/disk/by-id/wwn-0x500a0751e6e1bdd7";
     type = "disk";

@@ -45,36 +45,30 @@
     libation
   ];
 
-  fileSystems =
-    let
-      cryptedDrive = "/dev/disk/by-uuid/56d29b6f-0c61-4bce-a2dc-f59bbce32165";
-      driveOptions = [ "noatime" "discard=async" "compress=zstd:1" ];
-      driveSubvols = {
-        "/home" = "@home";
-        "/nix" = "@nix";
-        "/state" = "@state";
-        "/swap" = "@swap";
-      };
-    in
-    {
-      "/" = {
-        device = "none";
-        fsType = "tmpfs";
-        neededForBoot = true;
-        options = [ "defaults" "size=2G" "mode=755" ];
-      };
+  fileSystems = {
+    "/" = {
+      device = "none";
+      fsType = "tmpfs";
+      neededForBoot = true;
+      options = [ "defaults" "size=2G" "mode=755" ];
+    };
 
-      "/boot" = {
-        device = "/dev/disk/by-uuid/2866-BA21";
-        fsType = "vfat";
-      };
-    }
-    // builtins.mapAttrs (mountpoint: subvol: {
-      device = cryptedDrive;
-      fsType = "btrfs";
-      options = [ "subvol=${subvol}" ] ++ driveOptions;
-      neededForBoot = builtins.elem mountpoint [ "/nix" "/state" ];
-    }) driveSubvols;
+    "/boot" = {
+      device = "/dev/disk/by-uuid/2866-BA21";
+      fsType = "vfat";
+    };
+  }
+  // builtins.mapAttrs (mountpoint: subvol: {
+    device = "/dev/disk/by-uuid/56d29b6f-0c61-4bce-a2dc-f59bbce32165";
+    fsType = "btrfs";
+    neededForBoot = builtins.elem mountpoint [ "/nix" "/state" ];
+    options = [ "subvol=${subvol}" "noatime" "discard=async" "compress=zstd:1" ];
+  }) {
+    "/home" = "@home";
+    "/nix" = "@nix";
+    "/state" = "@state";
+    "/swap" = "@swap";
+  };
 
   hardware = {
     cpu.intel.updateMicrocode = true;

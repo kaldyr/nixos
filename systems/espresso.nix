@@ -62,36 +62,30 @@
     xarchiver
   ];
 
-  fileSystems =
-    let
-      cryptedDrive = "/dev/disk/by-uuid/804a850d-5c93-41a8-87fe-b88fcad48b6f";
-      driveOptions = [ "noatime" "discard=async" "compress=zstd:1" ];
-      driveSubvols = {
-        "/home" = "@home";
-        "/nix" = "@nix";
-        "/state" = "@state";
-        "/swap" = "@swap";
-      };
-    in
-    {
-      "/" = {
-        device = "none";
-        fsType = "tmpfs";
-        neededForBoot = true;
-        options = [ "defaults" "size=2G" "mode=755" ];
-      };
+  fileSystems = {
+    "/" = {
+      device = "none";
+      fsType = "tmpfs";
+      neededForBoot = true;
+      options = [ "defaults" "size=2G" "mode=755" ];
+    };
 
-      "/boot" = {
-        device = "/dev/disk/by-uuid/025C-BF4E";
-        fsType = "vfat";
-      };
-    }
-    // builtins.mapAttrs (mountpoint: subvol: {
-      device = cryptedDrive;
-      fsType = "btrfs";
-      options = [ "subvol=${subvol}" ] ++ driveOptions;
-      neededForBoot = builtins.elem mountpoint [ "/nix" "/state" ];
-    }) driveSubvols;
+    "/boot" = {
+      device = "/dev/disk/by-uuid/025C-BF4E";
+      fsType = "vfat";
+    };
+  }
+  // builtins.mapAttrs (mountpoint: subvol: {
+    device = "/dev/disk/by-uuid/804a850d-5c93-41a8-87fe-b88fcad48b6f";
+    fsType = "btrfs";
+    neededForBoot = builtins.elem mountpoint [ "/nix" "/state" ];
+    options = [ "subvol=${subvol}" "noatime" "discard=async" "compress=zstd:1" ];
+  }) {
+    "/home" = "@home";
+    "/nix" = "@nix";
+    "/state" = "@state";
+    "/swap" = "@swap";
+  };
 
   hardware.bluetooth.enable = lib.mkForce false;
   hardware.enableRedistributableFirmware = true;

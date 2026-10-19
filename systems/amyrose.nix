@@ -50,36 +50,30 @@
     loader.grub.gfxmodeEfi = "1920x1080";
   };
 
-  fileSystems =
-    let
-      cryptedDrive = "/dev/disk/by-uuid/d3846810-5870-4b83-8334-161280ac5632";
-      driveOptions = [ "noatime" "discard=async" "compress=zstd:3" ];
-      driveSubvols = {
-        "/home" = "@home";
-        "/nix" = "@nix";
-        "/state" = "@state";
-        "/swap" = "@swap";
-      };
-    in
-    {
-      "/" = {
-        device = "none";
-        fsType = "tmpfs";
-        neededForBoot = true;
-        options = [ "defaults" "size=2G" "mode=755" ];
-      };
+  fileSystems = {
+    "/" = {
+      device = "none";
+      fsType = "tmpfs";
+      neededForBoot = true;
+      options = [ "defaults" "size=2G" "mode=755" ];
+    };
 
-      "/boot" = {
-        device = "/dev/disk/by-uuid/93C7-AF7E";
-        fsType = "vfat";
-      };
-    }
-    // builtins.mapAttrs (mountpoint: subvol: {
-      device = cryptedDrive;
-      fsType = "btrfs";
-      options = [ "subvol=${subvol}" ] ++ driveOptions;
-      neededForBoot = builtins.elem mountpoint [ "/nix" "/state" ];
-    }) driveSubvols;
+    "/boot" = {
+      device = "/dev/disk/by-uuid/93C7-AF7E";
+      fsType = "vfat";
+    };
+  }
+  // builtins.mapAttrs (mountpoint: subvol: {
+    device = "/dev/disk/by-uuid/d3846810-5870-4b83-8334-161280ac5632";
+    fsType = "btrfs";
+    neededForBoot = builtins.elem mountpoint [ "/nix" "/state" ];
+    options = [ "subvol=${subvol}" "noatime" "discard=async" "compress=zstd:3" ];
+  }) {
+    "/home" = "@home";
+    "/nix" = "@nix";
+    "/state" = "@state";
+    "/swap" = "@swap";
+  };
 
   hardware = {
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
