@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-savefolder="$HOME/.local/share/Steam/steamapps/compatdata/1203620/pfx/drive_c/users/steamuser/Saved Games/Enshrouded"
+savefolder="$HOME/.local/share/Steam/steamapps/compatdata/1203620/pfx/drive_c/users/steamuser/Saved Games/keen games/Enshrouded"
 
 # Check Enshrouded has been initialized
 if [[ ! -d "$savefolder" ]]; then
