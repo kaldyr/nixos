@@ -26,7 +26,6 @@
   };
 
   users.extraUsers."technitium" = {
-    extraGroups = [ "webservice" ];
     group = "technitium";
     home = "/var/lib/technitium";
     isSystemUser = true;

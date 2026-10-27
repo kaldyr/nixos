@@ -13,43 +13,31 @@
     ../services/kodi
     ../services/linkwarden
     ../services/miniflux
-    ../services/nextcloud
     ../services/openstarbound
     ../services/radicale
     ../services/syncthing
     ../services/technitium
-    ../services/vikunja
   ];
 
   boot = {
     initrd.availableKernelModules = [
       "xhci_pci"
-      "ehci_pci"
-      "ahci"
-      "usbhid"
       "usb_storage"
+      "usbhid"
       "sd_mod"
+      "sdhci_pci"
     ];
 
-    initrd.kernelModules = [ "i915" ];
     kernelModules = [ "kvm-intel" ];
-    kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     kernelParams = [ "zswap.max_pool_percent=25" ];
     loader.grub.gfxmodeEfi = "1920x1080";
   };
 
   environment.systemPackages = with pkgs; [
-    picard
+    edac-utils
     flac
-  ];
-
-  environment.persistence."/state/system".directories = [
-    {
-      directory = "/var/lib/certs";
-      user = "root";
-      group = "webservice";
-      mode = "0750";
-    }
+    libcec
+    picard
   ];
 
   fileSystems = {
@@ -108,61 +96,7 @@
   };
 
   swapDevices = [ { device = "/swap/swapfile"; } ];
-
-  systemd.services."tailscale-certs" = {
-    description = "Automatic renewal of Tailscale certificates";
-
-    after = [
-      "network-pre.target"
-      "tailscale.service"
-    ];
-    wants = [
-      "network-pre.target"
-      "tailscale.service"
-    ];
-    wantedBy = [ "multi-user.target" ];
-
-    serviceConfig.type = "oneshot";
-
-    script = /* bash */ ''
-      status="Starting";
-
-      until [ $status = "Running" ]; do
-          sleep 2
-          status=$(${pkgs.tailscale}/bin/tailscale status -json | ${pkgs.jq}/bin/jq -r .BackendState)
-      done
-
-      ${pkgs.tailscale}/bin/tailscale cert \
-          --cert-file /var/lib/certs/magrathea.brill-godzilla.ts.net.crt \
-          --key-file /var/lib/certs/magrathea.brill-godzilla.ts.net.key \
-          magrathea.brill-godzilla.ts.net
-      chown :webservice /var/lib/certs/magrathea.brill-godzilla.ts.net.{crt,key}
-      chmod 0640 /var/lib/certs/magrathea.brill-godzilla.ts.net.{crt,key}
-    '';
-  };
-
-  systemd.timers."tailscale-certs" = {
-    description = "Automatic renewal of Tailscale certificates";
-
-    after = [
-      "network-pre.target"
-      "tailscale.service"
-    ];
-    wants = [
-      "network-pre.target"
-      "tailscale.service"
-    ];
-    wantedBy = [ "multi-user.target" ];
-
-    timerConfig = {
-      OnCalendar = "weekly";
-      Persistent = "true";
-      Unit = "tailscale-certs.service";
-    };
-  };
-
   users.groups."media" = { };
-  users.groups."webservice" = { };
   users.users.matt.extraGroups = [ "media" ];
   time.timeZone = "America/Los_Angeles";
 }

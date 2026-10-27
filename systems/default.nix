@@ -63,23 +63,30 @@
       files = [ "/etc/machine-id" ];
     };
 
-    sessionVariables.PATH = [ "/nix/config/scripts" ];
-
     systemPackages = with pkgs; [
       age
+      btrfs-progs
+      dmidecode
       duf
+      ethtool
       exiftool
       eza
       ffmpeg
       ffmpegthumbnailer
       gdu
+      git
       gnupg
       jq
+      lm_sensors
+      lsof
       p7zip
+      pciutils
+      smartmontools
       sops
       ssh-to-age
       unrar
       unzip
+      usbutils
       yt-dlp
       zip
       zmx

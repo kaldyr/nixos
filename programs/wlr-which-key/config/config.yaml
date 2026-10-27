@@ -168,7 +168,7 @@ menu:
         cmd: slurp | grim -g - - | tesseract - - | wl-copy
       - key: "r"
         desc: "[R]ecord Screen"
-        cmd: /nix/config/scripts/screenRecord.sh
+        cmd: /nix/config/desktop/scripts/screenRecord.sh
       - key: "BackSpace"
         desc: "Previous Menu"
         cmd: wlr-which-key
@@ -209,12 +209,6 @@ menu:
   - key: "c"
     desc: "[C]alculator"
     cmd: kitty --class "float-small" qalc
-  - key: "e"
-    desc: "Fil[e] Manager"
-    cmd: kitty --class "float-large" yazi
-  - key: "g"
-    desc: "Play Media in MPV"
-    cmd: /nix/config/scripts/yt-dlp.sh
   - key: "m"
     desc: "Password [M]anager"
     cmd: keepmenu

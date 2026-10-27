@@ -67,7 +67,6 @@
 
   users = {
     extraUsers."linkwarden" = {
-      extraGroups = [ "webservice" ];
       group = "linkwarden";
       home = "/var/lib/linkwarden";
       isSystemUser = true;

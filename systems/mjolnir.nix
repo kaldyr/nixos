@@ -9,18 +9,20 @@
   imports = [
     inputs.nixos-hardware.nixosModules.common-hidpi
     inputs.nixos-hardware.nixosModules.framework-intel-core-ultra-series3
-    ./desktop.nix
+    ../desktop
     ../programs/ageofempiresonline
     ../programs/discord
     ../programs/easyeffects
     ../programs/gedit
-    ../programs/hyprland
+    ../programs/lazygit
     ../programs/lutris
+    ../programs/openscad
     ../programs/openstarbound
     ../programs/plymouth
     ../programs/steam
     ../programs/thunderbird
     ../programs/virtualmachines
+    ../services/auto-cpufreq
     ../services/epson-et-8550
     ../services/keyd
     ../services/kmscon
@@ -61,13 +63,16 @@
 
   environment = {
     # persistence."/state".directories = [ "/var/lib/fprint" ];
-    sessionVariables.LIBVA_DRIVER_NAME = "iHD";
+
+    sessionVariables = {
+      LIBVA_DRIVER_NAME = "iHD";
+      PATH = [ "/nix/config/setup" ];
+    };
 
     systemPackages = with pkgs; [
       android-tools
       disko
       nixos-install-tools
-      openscad
       rsync
     ];
   };
@@ -113,16 +118,6 @@
     lib.mkForce "/home/${sysConfig.user}/Projects";
 
   services = {
-    auto-cpufreq = {
-      enable = true;
-      settings = {
-        battery.governor = "powersave";
-        battery.turbo = "never";
-        charger.governor = "performance";
-        charger.turbo = "auto";
-      };
-    };
-
     libinput.touchpad.scrollMethod = "twofinger";
     libinput.touchpad.accelSpeed = "-0.5";
 

@@ -7,10 +7,10 @@
 {
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-intel
-    ./desktop.nix
+    ../desktop
     ../programs/gedit
-    ../programs/hyprland
     ../programs/plymouth
+    ../services/auto-cpufreq
     ../services/syncthing
     ../services/kmscon
   ];
@@ -105,19 +105,8 @@
     };
 
   services = {
-    auto-cpufreq = {
-      enable = true;
-      settings = {
-        battery.governor = "powersave";
-        battery.turbo = "never";
-        charger.governor = "performance";
-        charger.turbo = "auto";
-      };
-    };
-
     libinput.touchpad.scrollMethod = "twofinger";
     libinput.touchpad.accelSpeed = "-0.5";
-
     thermald.enable = true;
     xserver.videoDrivers = [ "modesetting" ];
   };

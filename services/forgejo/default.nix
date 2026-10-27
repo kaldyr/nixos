@@ -76,7 +76,6 @@
   };
 
   users.extraUsers."forgejo" = {
-    extraGroups = [ "webservice" ];
     group = "forgejo";
     home = "/var/lib/forgejo";
     isSystemUser = true;

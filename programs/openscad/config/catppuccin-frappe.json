@@ -1,0 +1,43 @@
+{
+  "name": "Catppuccin Frappe",
+  "index": 2000,
+  "paper": "#303446",
+  "text": "#c6d0f5",
+  "caret": {
+    "width": 2,
+    "foreground": "#c6d0f5",
+    "line-background": "#414559"
+  },
+  "colors": {
+    "keyword1": "#ca9ee6",
+    "keyword2": "#81c8be",
+    "keyword3": "#ef9f76",
+    "commentline": "#626880",
+    "commentdoc": "#626880",
+    "commentdockeyword": "#ca9ee6",
+    "comment": "#626880",
+    "number": "#8caaee",
+    "string": "#a6d189",
+    "operator": "#ca9ee6",
+    "variables": "#c6d0f5",
+    "keywords": "#ca9ee6",
+    "transformations": "#81c8be",
+    "booleans": "#8caaee",
+    "functions": "#85c1dc",
+    "models": "#81c8be",
+    "special-variables": "#ca9ee6",
+    "whitespace-foreground": "#c6d0f5",
+    "selection-foreground": "#c6d0f5",
+    "selection-background": "#51576d",
+    "margin-background": "#303446",
+    "margin-foreground": "#949cbb",
+    "matched-brace-background": "#51576d",
+    "matched-brace-foreground": "#c6d0f5",
+    "unmatched-brace-background": "#e78284",
+    "unmatched-brace-foreground": "#c6d0f5",
+    "error-marker": "#e78284",
+    "error-indicator": "#e7828466",
+    "error-indicator-outline": "#e78284",
+    "edge": "#8caaee"
+  }
+}

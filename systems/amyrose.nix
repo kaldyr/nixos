@@ -9,9 +9,8 @@
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     inputs.nixos-hardware.nixosModules.common-gpu-amd
-    ./desktop.nix
+    ../desktop
     ../programs/gedit
-    ../programs/hyprland
     ../programs/lutris
     ../programs/openstarbound
     ../programs/plymouth

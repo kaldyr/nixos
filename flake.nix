@@ -22,7 +22,7 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     # Helium Browser
-    helium.url = "github:schembriaiden/helium-browser-nix-flake";
+    helium.url = "github:amaanq/helium-flake";
     helium.inputs.nixpkgs.follows = "nixpkgs";
 
     # Openstarbound

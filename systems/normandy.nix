@@ -9,12 +9,11 @@
     inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
     inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
     inputs.nixos-hardware.nixosModules.common-gpu-amd
-    ./desktop.nix
+    ../desktop
     ../programs/ageofempiresonline
     ../programs/discord
     ../programs/easyeffects
     ../programs/gedit
-    ../programs/hyprland
     ../programs/lutris
     ../programs/openstarbound
     ../programs/plymouth

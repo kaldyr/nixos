@@ -23,7 +23,7 @@ Media is hosted by private services, most of which have offline cache available 
 
 # Machines
 
-Update: 2026-10-16
+Update: 2026-10-26
 - [x] Amyrose
 - [x] Aziraphale
 - [x] Espresso
@@ -63,26 +63,19 @@ Update: 2026-10-16
 - Any changes made during the installation process auto-synced to other computers
 
 ## Magrathea
-- Home server: Intel i5-2500k still kicking, 8GB RAM
+- Home server: Odroid H5, 16GB RAM
 - Fresh Install: August 16th, 2024
 
 ### Services
-- Nextcloud (Remove soon)
 - AudioBookoShelf (Audiobooks and ebooks)
 - Forgejo (Private Git)
 - Jellyfin (Movies, Shows, Music)
 - Linkwarden (Bookmarks and Site Archiving)
+- Radicale (Contacts, Calendar, Todo)
 - Syncthing Hub (with versioning and snapshot archives)
 - Technitium (DNS for tailnet with ad block)
-- Vikunja (Tasks and Project Management)
 - Kodi Media Center via HDMI to TV (Remove soon)
 - Open Starbound Server
-
-### Future Upgrade
-- Odroid H5
-- Mini Itx Kit
-- m.2 6 port SATA board
-- 16GB RAM
 
 ## Mjolnir
 - Laptop: First generation Framework 13

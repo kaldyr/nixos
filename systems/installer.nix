@@ -6,8 +6,7 @@
 }:
 {
   imports = [
-    ./desktop.nix
-    ../programs/hyprland
+    ../desktop
     ../programs/plymouth
     ../services/keyd
     ../services/kmscon
@@ -19,17 +18,14 @@
     blacklistedKernelModules = [ "xe" ];
 
     initrd = {
+      availableKernelModules = [ "usb_storage" ];
+
       luks.devices.usbcrypted = {
         device = "/dev/disk/by-uuid/d92dbb21-4cc0-499a-ba4a-4068013b0d24";
         allowDiscards = true;
       };
 
-      systemd = {
-        enable = true;
-        emergencyAccess = true;
-      };
-
-      availableKernelModules = [ "usb_storage" ];
+      systemd.emergencyAccess = true;
     };
 
     kernelParams = [ "zswap.max_pool_percent=50" ];
@@ -44,33 +40,45 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    age
-    btrfs-progs
-    cryptsetup
-    disko
-    dislocker
-    dosfstools
-    e2fsprogs
-    efibootmgr
-    exfatprogs
-    git
-    gparted
-    gptfdisk
-    inxi
-    libva-utils
-    mesa-demos
-    nixos-install-tools
-    ntfs3g
-    parted
-    pciutils
-    rsync
-    sops
-    usbutils
-    util-linux
-    wimlib
-    xfsprogs
-  ];
+  environment = {
+    sessionVariables.PATH = [ "/nix/config/setup" ];
+
+    systemPackages = with pkgs; [
+      cryptsetup
+      disko
+      dislocker
+      dosfstools
+      e2fsprogs
+      efibootmgr
+      exfatprogs
+      fio
+      gparted
+      gptfdisk
+      hdparm
+      hwinfo
+      inxi
+      iperf3
+      libva-utils
+      lsscsi
+      mesa-demos
+      mtr
+      nixos-install-tools
+      nmap
+      ntfs3g
+      nvme-cli
+      parted
+      powertop
+      rsync
+      sg3_utils
+      strace
+      stress-ng
+      sysstat
+      tcpdump
+      util-linux
+      wimlib
+      xfsprogs
+    ];
+  };
 
   fileSystems = {
     "/" = {

@@ -10,6 +10,13 @@
 
     steam = {
       enable = true;
+
+      package = pkgs.steam.override {
+        extraProfile = ''
+          export XCURSOR_PATH="$HOME/.local/share/steam-cursors''${XCURSOR_PATH:+:$XCURSOR_PATH}"
+          '';
+      };
+
       dedicatedServer.openFirewall = true;
       remotePlay.openFirewall = true;
     };

@@ -4,8 +4,6 @@
 }:
 {
   boot = {
-    initrd.systemd.enable = true;
-
     kernelParams = [ "splash" ];
 
     plymouth = {

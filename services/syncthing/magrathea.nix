@@ -47,6 +47,11 @@
         path = "/data/sync/janice/Windows";
         devices = [ "aziraphale" "serenity" ];
         ignorePerms = true;
+
+        versioning = {
+          type = "simple";
+          params.keep = "10";
+        };
       };
 
       kaylee-browser = {
@@ -234,11 +239,7 @@
           "serenity"
         ];
 
-        ignorePatterns = [
-          "/programs/yazi/config/plugins"
-          "/programs/quickshell/config/.qmlls.ini"
-        ];
-
+        ignorePatterns = [ "/programs/yazi/config/plugins" ];
         ignorePerms = true;
       };
 
@@ -286,12 +287,13 @@
   ];
 
   users = {
-    groups.syncthing = {};
+    groups.syncthing.gid = 237;
 
     users.syncthing = {
+      extraGroups = [ "media" "nixconfig" ];
       group = "syncthing";
       isSystemUser = true;
-      extraGroups = [ "media" "nixconfig" ];
+      uid = 237;
     };
   };
 }

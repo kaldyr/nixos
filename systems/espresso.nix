@@ -11,11 +11,9 @@
     inputs.nixos-hardware.nixosModules.common-cpu-amd-raphael-igpu
     inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
     inputs.nixos-hardware.nixosModules.common-gpu-amd
-    ./desktop.nix
+    ../desktop
     ../programs/discord
-    ../programs/hyprland
     ../programs/lutris
-    ../programs/newsboat
     ../programs/plymouth
     ../programs/steam
     ../services/keyd

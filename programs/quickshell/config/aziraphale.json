@@ -1,9 +1,0 @@
-{
-    "appearance": {
-        "colorscheme": "catppuccin-frappe",
-        "font": "Recursive Sans Casual Static",
-        "fontSize": 13,
-        "primaryAccent": "teal",
-        "secondaryAccent": "blue"
-    }
-}
