@@ -69,13 +69,15 @@ Update: 2026-10-26
 ### Services
 - AudioBookoShelf (Audiobooks and ebooks)
 - Forgejo (Private Git)
+- Immich (SOON TM)
 - Jellyfin (Movies, Shows, Music)
+- Kodi Media Center via HDMI to TV (Remove soon)
 - Linkwarden (Bookmarks and Site Archiving)
+- Miniflux (RSS Feed Reader)
+- Open Starbound Server
 - Radicale (Contacts, Calendar, Todo)
 - Syncthing Hub (with versioning and snapshot archives)
 - Technitium (DNS for tailnet with ad block)
-- Kodi Media Center via HDMI to TV (Remove soon)
-- Open Starbound Server
 
 ## Mjolnir
 - Laptop: First generation Framework 13
