@@ -12,6 +12,7 @@
       aziraphale.id = "FIP6JCJ-QMZ353Y-WIRJPKA-5S45S2S-GUZLT6X-EUJOSHT-DMSH6JF-W3FQCQ2";
       crowley.id = "SL5HLQF-CLGSSSY-LBWNU6R-3CL55XD-A7QAZSW-MWWRDR2-3LRXSHF-GXL6IQT";
       magrathea.id = "F2KB4T5-CFF752T-AWEUVKW-ZUC4JJF-4YZWTLF-KZZE4E6-ZJ3LU3Q-7JC7IQ6";
+      mjolnir.id = "2OH2UKZ-YUQIZKC-R3R3KUY-B3T7XDQ-4BPLA2J-LDV5YR4-S3SGBZA-CZ237AZ";
     };
 
     folders = {
@@ -51,7 +52,7 @@
 
       nix-config = {
         path = "/nix/config";
-        devices = [ "aziraphale" "magrathea" ];
+        devices = [ "aziraphale" "magrathea" "mjolnir" ];
         ignorePatterns = [ "/programs/yazi/config/plugins" ];
         ignorePerms = true;
       };

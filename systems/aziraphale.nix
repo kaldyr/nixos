@@ -78,9 +78,6 @@
       intel-compute-runtime
       vpl-gpu-rt
     ];
-
-    enableAllFirmware = true;
-    enableRedistributableFirmware = true;
   };
 
   home-manager.users.${sysConfig.user}.systemd.user.services.libation-cleanup =

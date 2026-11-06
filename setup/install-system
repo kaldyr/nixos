@@ -11,10 +11,10 @@ hostname="$1"
 # Set the owner for machine's /nix/config
 case "$hostname" in
 	magrathea|serenity)
-		owner="237"
+		owner="237"  # syncthing uid
 		;;
 	*)
-		owner="1000"
+		owner="1000" # main user uid
 		;;
 esac
 

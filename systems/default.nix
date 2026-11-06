@@ -13,7 +13,6 @@
     ../programs/direnv
     ../programs/fish
     ../programs/fzf
-    ../programs/lazygit
     ../programs/neovim
     ../programs/qalculate
     ../programs/starship
@@ -95,7 +94,7 @@
 
   fileSystems."/nix".neededForBoot = true;
   fileSystems."/state".neededForBoot = true;
-
+  hardware.enableRedistributableFirmware = true;
   home-manager.users.${sysConfig.user}.programs.man.generateCaches = false;
 
   networking = {
@@ -202,7 +201,6 @@
         path = "/state/ssh/ssh_host_ed25519_key";
         type = "ed25519";
       }];
-
 
       knownHosts = {
         "amyrose".publicKey =

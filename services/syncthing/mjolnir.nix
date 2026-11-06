@@ -7,7 +7,10 @@
 
     settings = {
       devices = {
+        gungnir.id = "VLGBL5L-XAFQV3N-GHOFDLI-ZRC6BYT-C5LHRDR-DO4RF46-4TE6ILP-I32OHAT";
+        installer.id = "EKEB4HK-5OVXUSI-WIYH3H3-EYCZUN5-FHU6X7V-LLNSNJB-QXCU7T5-LVT4VQK";
         magrathea.id = "F2KB4T5-CFF752T-AWEUVKW-ZUC4JJF-4YZWTLF-KZZE4E6-ZJ3LU3Q-7JC7IQ6";
+        serenity.id = "YBFZRRR-7SVPJLB-CQ74YJK-WSAF62W-2IXVUY5-4GHHA77-5HPCM4B-GRHXQQJ";
       };
 
       folders = {
@@ -32,7 +35,7 @@
 
         matt-notes = {
           path = "/home/matt/Vaults/Notes";
-          devices = [ "magrathea" ];
+          devices = [ "gungnir" "magrathea" ];
           ignorePerms = true;
         };
 
@@ -44,7 +47,7 @@
 
         nix-config = {
           path = "/nix/config";
-          devices = [ "magrathea" ];
+          devices = [ "installer" "magrathea" "serenity" ];
 
           ignorePatterns = [
             "/.git"
@@ -62,7 +65,7 @@
 
         shared-passwords = {
           path = "/state/passwords";
-          devices = [ "magrathea" ];
+          devices = [ "gungnir" "installer" "magrathea" ];
           ignorePerms = true;
         };
       };

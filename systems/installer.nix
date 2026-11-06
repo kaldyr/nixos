@@ -104,11 +104,7 @@
     "/storage" = "@usbstorage";
   };
 
-  hardware = {
-    graphics.enable = true;
-    enableRedistributableFirmware = true;
-    enableAllFirmware = true;
-  };
+  hardware.graphics.enable = true;
 
   home-manager.users.${sysConfig.user}.home.persistence."/state".directories = [
     ".cache/yazi/packages"

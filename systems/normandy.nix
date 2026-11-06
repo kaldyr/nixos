@@ -18,6 +18,7 @@
     ../programs/openstarbound
     ../programs/plymouth
     ../programs/steam
+    ../programs/thunderbird
     ../programs/virtualmachines
     ../services/epson-et-8550
     ../services/keyd
@@ -89,8 +90,7 @@
     "/swap" = "@swap";
   };
 
-  hardware.enableRedistributableFirmware = true;
-  hardware.enableAllFirmware = true;
+  hardware.cpu.amd.updateMicrocode = true;
   swapDevices = [ { device = "/swap/swapfile"; } ];
   time.timeZone = "America/Los_Angeles";
 }

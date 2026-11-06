@@ -1,5 +1,4 @@
 {
-  config,
   inputs,
   lib,
   pkgs,
@@ -74,10 +73,8 @@
 
   hardware = {
     alsa.enable = true;
-    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    cpu.amd.updateMicrocode = true;
     graphics.enable = true;
-    enableRedistributableFirmware = true;
-    enableAllFirmware = true;
   };
 
   services = {
@@ -142,7 +139,7 @@
     ];
   };
 
-  users.groups."media" = { };
+  users.groups."media".gid = 987;
   users.users.matt.extraGroups = [ "media" ];
 
   users.users.matt.openssh.authorizedKeys.keys = [

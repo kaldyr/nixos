@@ -85,12 +85,14 @@
     "/swap" = "@swap";
   };
 
-  hardware.bluetooth.enable = lib.mkForce false;
-  hardware.enableRedistributableFirmware = true;
-  hardware.enableAllFirmware = true;
+  hardware = {
+    bluetooth.enable = lib.mkForce false;
+    cpu.amd.updateMicrocode = true;
+  };
 
   programs.thunar = {
     enable = true;
+
     plugins = with pkgs; [
       thunar-archive-plugin
       thunar-media-tags-plugin

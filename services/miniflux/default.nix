@@ -3,6 +3,8 @@
   ...
 }:
 {
+  imports = [ ../postgresql ];
+
   services = {
     miniflux = {
       enable = true;

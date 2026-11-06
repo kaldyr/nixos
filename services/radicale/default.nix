@@ -24,7 +24,11 @@
         htpasswd_encryption = "autodetect";
       };
 
-      rights.type = "owner_only";
+      rights = {
+        type = "owner_only";
+        permit_delete_collection = true;
+      };
+
       storage.filesystem_folder = "/var/lib/radicale/collections";
 
       sharing = {

@@ -40,9 +40,9 @@
 
     services = {
       cliphist.enable = true;
-      hypridle.enable = lib.mkIf (sysConfig.hostname != "espresso") true;
+      hypridle.enable = true;
       hyprpolkitagent.enable = true;
-      hyprsunset.enable = true;
+      hyprsunset.enable = lib.mkIf (sysConfig.hostname == "mjolnir") true;
       playerctld.enable = true;
       xembed-sni-proxy.enable = true;
     };

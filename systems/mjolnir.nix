@@ -18,6 +18,7 @@
     ../programs/lutris
     ../programs/openscad
     ../programs/openstarbound
+    ../programs/packagewatch
     ../programs/plymouth
     ../programs/steam
     ../programs/thunderbird
@@ -105,17 +106,18 @@
   hardware = {
     cpu.intel.npu.enable = true;
     cpu.intel.updateMicrocode = true;
+
     graphics.extraPackages = with pkgs; [
       intel-media-driver
       intel-compute-runtime
       vpl-gpu-rt
     ];
-    enableAllFirmware = true;
-    enableRedistributableFirmware = true;
   };
 
   home-manager.users.${sysConfig.user}.xdg.userDirs.projects =
     lib.mkForce "/home/${sysConfig.user}/Projects";
+
+  networking.firewall.allowedUDPPorts = [ 6666 ];
 
   services = {
     libinput.touchpad.scrollMethod = "twofinger";

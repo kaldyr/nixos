@@ -1,7 +1,5 @@
 {
-  config,
   inputs,
-  lib,
   pkgs,
   ...
 }:
@@ -74,12 +72,7 @@
     "/swap" = "@swap";
   };
 
-  hardware = {
-    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-    enableAllFirmware = true;
-    enableRedistributableFirmware = true;
-  };
-
+  hardware.cpu.intel.updateMicrocode = true;
   swapDevices = [ { device = "/swap/swapfile"; } ];
   time.timeZone = "America/Los_Angeles";
 }

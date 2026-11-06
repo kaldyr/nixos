@@ -1,35 +1,50 @@
 {
   inputs,
-  lib,
   pkgs,
   ...
 }:
 {
   imports = [
-    inputs.nixos-hardware.nixosModules.common-cpu-intel
+    inputs.nixos-hardware.nixosModules.hardkernel-odroid-h4
+    # ../desktop/jellyfin
     ../services/audiobookshelf
     ../services/forgejo
     ../services/jellyfin
-    ../services/kodi
+    # ../services/jellyfinssd
     ../services/linkwarden
     ../services/miniflux
     ../services/openstarbound
+    ../services/pipewire
     ../services/radicale
     ../services/syncthing
     ../services/technitium
+    ../services/transmission
   ];
 
   boot = {
-    initrd.availableKernelModules = [
-      "xhci_pci"
-      "usb_storage"
-      "usbhid"
-      "sd_mod"
-      "sdhci_pci"
+    blacklistedKernelModules = [ "xe" ];
+
+    initrd = {
+      availableKernelModules = [
+        "xhci_pci"
+        "usb_storage"
+        "usbhid"
+        "sd_mod"
+        "sdhci_pci"
+      ];
+
+      kernelModules = [ "i915" ];
+    };
+
+    kernel.sysctl."kernel.sysrq" = 1;
+    kernelModules = [ "kvm-intel" ];
+    kernelPackages = pkgs.linuxPackages_zen;
+
+    kernelParams = [
+      "i915.enable_dc=0"
+      "zswap.max_pool_percent=25"
     ];
 
-    kernelModules = [ "kvm-intel" ];
-    kernelParams = [ "zswap.max_pool_percent=25" ];
     loader.grub.gfxmodeEfi = "1920x1080";
   };
 
@@ -71,30 +86,27 @@
   // builtins.mapAttrs (mountpoint: subvol: { # HDD Array
     device = "/dev/disk/by-uuid/c3cb725e-8cee-4690-a44d-114100497133";
     fsType = "btrfs";
-    options = [ "subvol=${subvol}" "defaults" "noatime" "compress=zstd:8" ];
+    options = [ "subvol=${subvol}" "defaults" "noatime" "compress=zstd:8" "nofail" ];
   }) {
     "/storage/media" = "@media";
     "/storage/snaps" = "@snaps";
   };
 
   hardware = {
-    alsa.enable = true;
+    cpu.intel.updateMicrocode = true;
 
     graphics = {
       enable = true;
-      extraPackages = with pkgs; [ intel-media-driver ];
+
+      extraPackages = with pkgs; [
+        intel-compute-runtime
+        intel-media-driver
+        vpl-gpu-rt
+      ];
     };
-
-    enableRedistributableFirmware = true;
-    enableAllFirmware = true;
   };
 
-  services = {
-    pipewire.enable = lib.mkForce false;
-    pulseaudio.enable = lib.mkForce false;
-    tailscale.useRoutingFeatures = "server";
-  };
-
+  services.tailscale.useRoutingFeatures = "server";
   swapDevices = [ { device = "/swap/swapfile"; } ];
   users.groups."media" = { };
   users.users.matt.extraGroups = [ "media" ];
