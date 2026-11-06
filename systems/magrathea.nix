@@ -10,7 +10,6 @@
     ../services/audiobookshelf
     ../services/forgejo
     ../services/jellyfin
-    # ../services/jellyfinssd
     ../services/linkwarden
     ../services/miniflux
     ../services/openstarbound

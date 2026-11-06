@@ -26,7 +26,7 @@ Media is hosted by private services, most of which have offline cache available 
 Update: 2026-11-05
 - [x] Amyrose
 - [x] Aziraphale
-- [ ] Espresso
+- [x] Espresso
 - [x] Installer
 - [x] Magrathea
 - [x] Mjolnir
