@@ -37,6 +37,10 @@
       };
     };
 
+    kernelPackages = lib.mkForce (
+      inputs.nixpkgs-kernel.legacyPackages.${pkgs.stdenv.hostPlatform.system}.linuxKernel.packages.linux_zen
+    );
+
     kernelParams = [
       "quiet"
       "zswap.enabled=1"

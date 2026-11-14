@@ -16,6 +16,7 @@
 
     # Nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-kernel.url = "github:NixOS/nixpkgs/1d06008";
 
     # Sops - secret management
     sops-nix.url = "github:Mic92/sops-nix";
@@ -27,7 +28,6 @@
 
     # Openstarbound
     openstarbound.url = "github:kaldyr/openstarbound";
-    openstarbound.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { nixpkgs, ... }@inputs:

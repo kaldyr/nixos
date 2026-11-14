@@ -23,7 +23,7 @@ Media is hosted by private services, most of which have offline cache available 
 
 # Machines
 
-Update: 2026-11-05
+Update: 2026-11-13
 - [x] Amyrose
 - [x] Aziraphale
 - [x] Espresso

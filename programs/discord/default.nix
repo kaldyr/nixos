@@ -5,12 +5,15 @@
 }:
 let
   discord = pkgs.discord.override {
-    withVencord = true;
+    # withVencord = true;
 
     commandLineArgs =
-      "--enable-blink-features=MiddleClickAutoscroll "
-      + "--enable-features=WebRTCPipeWireCapturer,UseOzonePlatform "
-      + "--ozone-platform=x11";
+      "--enable-features=WebRTCPipeWireCapturer,UseOzonePlatform";
+    #   + "--ozone-platform=x11";
+    # commandLineArgs =
+    #   "--enable-blink-features=MiddleClickAutoscroll "
+    #   + "--enable-features=WebRTCPipeWireCapturer,UseOzonePlatform "
+    #   + "--ozone-platform=x11";
   };
 in
 {

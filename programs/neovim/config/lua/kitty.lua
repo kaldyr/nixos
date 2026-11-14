@@ -37,7 +37,8 @@ return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
 	o.cursorline = true
 	o.laststatus = 0
 	o.linebreak = true
-	o.number = true
+	o.number = false
+	o.numberwidth = 1
 	o.pumblend = 10
 	o.pumheight = 10
 	o.relativenumber = true
@@ -74,8 +75,9 @@ return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
 	map('n', 'A', '$', { silent = true })
 	map('n', 'I', '^', { silent = true })
 
-	map('n', 'r', '<Cmd>set relativenumber<CR>', { silent = true })
-	map('n', 'R', '<Cmd>set norelativenumber<CR>', { silent = true })
+	map('n', 'r', function()
+		o.relativenumber = not o.relativenumber:get()
+	end, { desc = "Toggle line numbers", silent = true })
 
 	-- Start
 	vim.cmd("hi Normal ctermbg=None ctermfg=None guibg=None guifg=None")

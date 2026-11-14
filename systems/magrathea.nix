@@ -6,7 +6,6 @@
 {
   imports = [
     inputs.nixos-hardware.nixosModules.hardkernel-odroid-h4
-    # ../desktop/jellyfin
     ../services/audiobookshelf
     ../services/forgejo
     ../services/jellyfin
@@ -85,7 +84,7 @@
   // builtins.mapAttrs (mountpoint: subvol: { # HDD Array
     device = "/dev/disk/by-uuid/c3cb725e-8cee-4690-a44d-114100497133";
     fsType = "btrfs";
-    options = [ "subvol=${subvol}" "defaults" "noatime" "compress=zstd:8" "nofail" ];
+    options = [ "subvol=${subvol}" "defaults" "noatime" "compress=zstd:8" ];
   }) {
     "/storage/media" = "@media";
     "/storage/snaps" = "@snaps";

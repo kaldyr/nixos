@@ -31,6 +31,12 @@ let
       "f" = "kpminus";
       "g" = "kpplus";
       "v" = "kpdot";
+      # Dungeon Defenders Tower Stacking
+      "6" = "macro(6 space)";
+      "7" = "macro(7 space)";
+      "8" = "macro(8 space)";
+      "9" = "macro(9 space)";
+      "0" = "macro(0 space)";
     };
 
     main = {

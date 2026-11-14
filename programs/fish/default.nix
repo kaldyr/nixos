@@ -10,7 +10,28 @@
 
       functions = {
         disko = "sudo ${pkgs.disko}/bin/disko --mode $argv[1] \"/nix/config/disko/$argv[2].nix\"";
+
+        flake-update = ''
+          set -l inputs (jq -r '
+              .nodes.root.inputs
+              | keys[]
+              | select(. != "openstarbound")
+          ' flake.lock)
+
+          nix flake update --flake /nix/config $inputs
+        '';
+
         fish_greeting = "";
+
+        system-update = ''
+          set -l action switch
+
+          if test "$argv[1]" = boot
+            set action boot
+          end
+
+          sudo nixos-rebuild $action --flake /nix/config#${sysConfig.hostname}
+        '';
       };
 
       interactiveShellInit = /* fish */ ''
@@ -59,7 +80,6 @@
         mv = "mv -i";
         rm = "rm -i";
         system-clean = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
-        system-update = "sudo nixos-rebuild switch --flake /nix/config#${sysConfig.hostname}";
         system-verify = "sudo nix-store --verify --repair";
       };
 
