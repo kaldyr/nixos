@@ -249,7 +249,7 @@ r! sudo nixos-generate-config --root /mnt --show-hardware-config
 sudo -E sops /nix/config/secrets.yaml
 ```
 
-Navigate to the age keys section and add a line for <system>
+Navigate to the age keys section and add a line for HOSTNAME
 
 ```vim
 :r! age-keygen
@@ -274,16 +274,16 @@ Navigate to syncthing section
 Script will generate keys and format output specifically for neovim  
 
 ```vim
-:r! generate-syncthing-identity <system>
+:r! generate-syncthing-identity HOSTNAME
 ```
 
-Cut the <system>.id line to the clipboard.
+Cut the HOSTNAME.id line to the clipboard.
 
 ```vim
 :e /nix/config/services/syncthing/magrathea.nix
 ```
 
-Paste the <system>.id line into the devices section and sort.  
+Paste the HOSTNAME.id line into the devices section and sort.  
 
 ```vim
 :w
@@ -300,7 +300,7 @@ Repeat for Serenity and any other systems that will interact with the new system
 sudo -E sops updatekeys secrets.yaml
 ```
 
-- Create /nix/config/services/syncthing/<system>.nix and populate its folders.
+- Create /nix/config/services/syncthing/HOSTNAME.nix and populate its folders.
 - Add the new device to Magrathea's folder sync list.
 - Rebuild affected existing machines once Syncthing propagates config changes.
 
