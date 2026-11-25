@@ -20,11 +20,11 @@
     ../programs/steam
     ../programs/thunderbird
     ../programs/virtualmachines
-    ../services/epson-et-8550
     ../services/keyd
     ../services/kmscon
     ../services/openrazer
     ../services/openrgb
+    ../services/printing
     ../services/syncthing
   ];
 

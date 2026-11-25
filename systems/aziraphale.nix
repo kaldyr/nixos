@@ -11,6 +11,8 @@
     ../programs/gedit
     ../programs/plymouth
     ../services/auto-cpufreq
+    ../services/printing
+    ../services/scanning
     ../services/syncthing
     ../services/kmscon
   ];

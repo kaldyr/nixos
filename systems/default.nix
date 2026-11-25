@@ -37,9 +37,10 @@
       };
     };
 
-    kernelPackages = lib.mkForce (
-      inputs.nixpkgs-kernel.legacyPackages.${pkgs.stdenv.hostPlatform.system}.linuxKernel.packages.linux_zen
-    );
+    kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_zen;
+    # kernelPackages = lib.mkForce (
+    #   inputs.nixpkgs-kernel.legacyPackages.${pkgs.stdenv.hostPlatform.system}.linuxKernel.packages.linux_zen
+    # );
 
     kernelParams = [
       "quiet"

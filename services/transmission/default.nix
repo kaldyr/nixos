@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   ...
 }:
@@ -8,8 +9,9 @@
     package = pkgs.transmission_4;
 
     downloadDirPermissions = "2775";
-    home = "/state/transmission";
     group = "media";
+    home = "/state/transmission";
+    openPeerPorts = true;
 
     settings = {
       download-dir = "/storage/media/Downloads";
@@ -19,7 +21,12 @@
       umask = 7;
     };
 
-    openPeerPorts = true;
+    webHome = pkgs.fetchFromGitHub {
+      owner = "killemov";
+      repo = "Shift";
+      rev = "cc70dabaab4b20bd938bb08a9ddb2fcdce07f42b";
+      hash = "sha256-vct2wrtpMir6SxsnMr6ICvjkdi9oMOYeSRAUVrrT4a4=";
+    };
   };
 
   systemd =
@@ -33,6 +40,7 @@
         transmission = {
           after = requiredMounts;
           requires = [ "transmission-setup.service" ] ++ requiredMounts;
+          serviceConfig.StateDirectory = lib.mkForce [ ];
         };
 
         transmission-setup = {

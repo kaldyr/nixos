@@ -3,15 +3,6 @@
   ...
 }:
 {
-  environment.persistence."/state".directories = [
-    {
-      directory = "/var/lib/radicale";
-      user = "radicale";
-      group = "radicale";
-      mode = "0750";
-    }
-  ];
-
   services.radicale = {
     enable = true;
 
@@ -20,7 +11,7 @@
 
       auth = {
         type = "htpasswd";
-        htpasswd_filename = "/var/lib/radicale/users";
+        htpasswd_filename = "/state/radicale/users";
         htpasswd_encryption = "autodetect";
       };
 
@@ -29,27 +20,31 @@
         permit_delete_collection = true;
       };
 
-      storage.filesystem_folder = "/var/lib/radicale/collections";
-
       sharing = {
         type = "files";
         collection_by_map = true;
         permit_create_map = true;
         default_permissions_create_map = "rw";
       };
+
+      storage.filesystem_folder = "/state/radicale/collections";
     };
   };
 
-  systemd.services.radicale.serviceConfig = {
-    DynamicUser = lib.mkForce false;
-    User = "radicale";
-    Group = "radicale";
-  };
+  systemd = {
+    services.radicale = {
+      serviceConfig = {
+        ReadWritePaths = [ "/state/radicale" ];
+        StateDirectory = lib.mkForce "";
+        WorkingDirectory = lib.mkForce "/state/radicale";
+      };
 
-  users.groups.radicale = { };
+      unitConfig.RequiresMountsFor = [ "/state/radicale" ];
+    };
 
-  users.users.radicale = {
-    isSystemUser = true;
-    group = "radicale";
+    tmpfiles.rules = [
+      "d /state/radicale 0750 radicale radicale -"
+      "d /state/radicale/collections 0750 radicale radicale -"
+    ];
   };
 }

@@ -23,7 +23,7 @@ Media is hosted by private services, most of which have offline cache available 
 
 # Machines
 
-Update: 2026-11-13
+Update: 2026-11-23
 - [x] Amyrose
 - [x] Aziraphale
 - [x] Espresso
@@ -71,13 +71,13 @@ Update: 2026-11-13
 - Forgejo (Private Git)
 - Immich (SOON TM)
 - Jellyfin (Movies, Shows, Music)
-- Kodi Media Center via HDMI to TV (Remove soon)
 - Linkwarden (Bookmarks and Site Archiving)
 - Miniflux (RSS Feed Reader)
 - Open Starbound Server
 - Radicale (Contacts, Calendar, Todo)
 - Syncthing Hub (with versioning and snapshot archives)
 - Technitium (DNS for tailnet with ad block)
+- Transmission (Downloads)
 
 ## Mjolnir
 - Laptop: First generation Framework 13
@@ -98,9 +98,10 @@ Update: 2026-11-13
 - Fresh Install: August 31st, 2026
 
 ### Services
+- Audiobookshelf (Library for Parents)
+- Jellyfin (Libraries for Parents)
 - Off-site backup
-- Kodi
-- NAS with Samba
+- TODO: Maintain sync of all media on Magrathea
 
 # Notable customizations
 
@@ -119,12 +120,12 @@ Caps+hjkl - arrow keys
 . - tab next
 
 ## Syncthing
-- Personal folders for desktop users are synced to file server.
+- Personal folders for desktop users are synced to file server
 - Documents and Obsidian Vaults have simple file versioning for file server only.
-- btrfs snapshots sent to local RAID array and offsite RAID array.
+- btrfs snapshots sent to local RAID array
 
 ## Custom Installer
-- Actual install to a USB drive
+- Actual install to a USB drive instead of being ISO image
 - All utilities required to install and repair machines
 - Saved WiFi networks, Tailscale connection, syncthing folder shares
 - All changes made while setting up new machines are synced to all other machines via syncthing
@@ -145,7 +146,7 @@ nvim /nix/config/disko/<system>.nix
 
 ```
 
-Completions will suggest the disk, just start typing the path and choose the match.
+Neovim completions will suggest the disk, just start typing the path and choose the match.
 
 ## Partition Disk
 ```fish
@@ -155,9 +156,13 @@ disko destroy,format,mount <system>
 
 ### Manual Interventions
 
-Disko should not manage raid arrays on purpose. Running the above command would wipe data.
+Disko should not manage raid arrays on purpose. Running the above command would wipe data on arrays.
 
 #### Magrathea
+
+Only run these on a completely fresh install of Magrathea
+
+##### Construct the Array
 
 ```fish
 mkfs.btrfs -m raid10 -d raid10 /dev/sdW /dev/sdX /dev/sdY /dev/sdZ
@@ -171,6 +176,8 @@ umount /storage
 
 ```
 
+##### Configure the postgres database folder
+
 After disko runs and mounts the SSD partitions, but before installing the system:
 
 ```fish
@@ -179,6 +186,10 @@ chattr +C /var/lib/postgresql
 ```
 
 #### Serenity
+
+Only run these on a completely fresh install of Magrathea
+
+##### Construct the Array
 
 Current SSD is too small to house @data so toss it on the array for now.
 
@@ -201,8 +212,8 @@ Skip if machine is already defined.
 
 ### Configure User
 
-Create or update '/nix/config/users/<user>.nix'.  
-Set preferences.  
+Create or update '/nix/config/users/<user>.nix'  
+Set preferences (copy from another user and tweak)
 
 ### Configure System
 
@@ -258,7 +269,9 @@ Add the new system and its public key
 <c-x>
 ```
 
-Navigate to syncthing section
+Navigate to syncthing section  
+
+Script will generate keys and format output specifically for neovim  
 
 ```vim
 :r! generate-syncthing-identity <system>
@@ -277,7 +290,7 @@ Paste the <system>.id line into the devices section and sort.
 <c-x>
 ```
 
-Repeat for any other systems that will interact with the new system.  
+Repeat for Serenity and any other systems that will interact with the new system.  
 
 ```vim
 :wq

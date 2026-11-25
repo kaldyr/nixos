@@ -973,7 +973,7 @@ ac( 'Filetype', 'markdown', function()
 		ui = { enable = false },
 
 		workspaces = {
-			{ name = 'Notes', path = vim.fn.expand '~' .. '/Notes' },
+			{ name = 'Notes', path = vim.fn.expand '~' .. '/Vaults/Notes' },
 			{
 				name = "no-vault",
 				path = function()

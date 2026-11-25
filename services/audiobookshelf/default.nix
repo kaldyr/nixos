@@ -1,47 +1,39 @@
 {
-  sysConfig,
+  lib,
   ...
 }:
 {
-  environment.persistence."/state".directories = [
-    {
-      directory = "/var/lib/audiobookshelf";
-      user = "audiobookshelf";
-      group = "audiobookshelf";
-      mode = "0750";
-    }
-  ];
-
   networking.firewall.allowedTCPPorts = [ 13378 ];
 
-  services = {
-    audiobookshelf = {
-      enable = true;
-      host = "0.0.0.0";
-      port = 13378;
-    };
-
-    nginx = {
-      enable = true;
-
-      virtualHosts.books-redirect =
-        let
-          serviceHost = service:
-            if sysConfig.hostname == "magrathea" then service
-            else "${sysConfig.hostname}-${service}";
-        in
-      {
-        listen = [
-          {
-            addr = "127.0.0.1";
-            port = 13379;
-          }
-        ];
-
-        locations."/".return = "308 https://${serviceHost "books"}.brill-godzilla.ts.net/audiobookshelf";
-      };
-    };
+  services.audiobookshelf = {
+    enable = true;
+    host = "0.0.0.0";
+    port = 13378;
   };
 
-  users.users.audiobookshelf.extraGroups = [ "media" ];
+  systemd = {
+    services.audiobookshelf = {
+      after = [ "systemd-tmpfiles-setup.service" ];
+      requires = [ "systemd-tmpfiles-setup.service" ];
+
+      environment.BACKUP_PATH = "/state/audiobookshelf/metadata/backups";
+
+      serviceConfig = {
+        WorkingDirectory = lib.mkForce "/state/audiobookshelf";
+        StateDirectory = lib.mkForce "";
+      };
+
+      unitConfig.RequiresMountsFor = [ "/state/audiobookshelf" ];
+    };
+
+    tmpfiles.rules = [
+      "d /state/audiobookshelf 0750 audiobookshelf audiobookshelf -"
+    ];
+
+  };
+
+  users.users.audiobookshelf = {
+    home = lib.mkForce "/state/audiobookshelf";
+    extraGroups = [ "media" ];
+  };
 }

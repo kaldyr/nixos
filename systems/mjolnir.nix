@@ -24,11 +24,11 @@
     ../programs/thunderbird
     ../programs/virtualmachines
     ../services/auto-cpufreq
-    ../services/epson-et-8550
     ../services/keyd
     ../services/kmscon
     ../services/llama-cpp
     ../services/openrazer
+    ../services/printing
     ../services/syncthing
   ];
 
