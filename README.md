@@ -142,7 +142,7 @@ lsblk
 
 ## Edit Disko Config
 ```fish
-nvim /nix/config/disko/<system>.nix
+nvim /nix/config/disko/HOSTNAME.nix
 
 ```
 
@@ -150,7 +150,7 @@ Neovim completions will suggest the disk, just start typing the path and choose 
 
 ## Partition Disk
 ```fish
-disko destroy,format,mount <system>
+disko destroy,format,mount HOSTNAME
 
 ```
 
@@ -212,7 +212,7 @@ Skip if machine is already defined.
 
 ### Configure User
 
-Create or update '/nix/config/users/<user>.nix'  
+Create or update '/nix/config/users/USER.nix'  
 Set preferences (copy from another user and tweak)
 
 ### Configure System
@@ -223,7 +223,7 @@ Set preferences (copy from another user and tweak)
 
 #### Create Machine Specific Config
 
-/nix/config/systems/<system>.nix
+/nix/config/systems/HOSTNAME.nix
 
 #### Generate the hardware config in neovim
 ```vim
@@ -233,7 +233,7 @@ r! sudo nixos-generate-config --root /mnt --show-hardware-config
 
 ```
 
-#### Merge into /nix/config/systems/<system>.nix
+#### Merge into /nix/config/systems/HOSTNAME.nix
 
 - boot.initrd.availableKernelModules
 - boot.kernelModules
@@ -307,7 +307,7 @@ sudo -E sops updatekeys secrets.yaml
 ## Build the System
 
 ```fish
-install-system <system>
+install-system HOSTNAME
 ```
 
 ### Manual Interventions
@@ -323,7 +323,7 @@ chattr +C /local/Machines
 
 ```fish
 nix shell nixpkgs#apacheHttpd
-sudo htpasswd -B -c /var/lib/radicale/users <username>
+sudo htpasswd -B -c /var/lib/radicale/users USER
 sudo chown root:radicale /var/lib/radicale/users
 sudo chmod 0640 /var/lib/radicale/users
 ```
@@ -331,7 +331,7 @@ sudo chmod 0640 /var/lib/radicale/users
 Then for each other user:
 
 ```fish
-sudo htpasswd -B /var/lib/radicale/users <username>
+sudo htpasswd -B /var/lib/radicale/users USER
 ```
 
 ## Reboot into the New System
